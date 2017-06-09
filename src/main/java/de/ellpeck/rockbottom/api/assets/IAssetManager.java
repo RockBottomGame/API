@@ -33,8 +33,6 @@ public interface IAssetManager{
 
     void reloadCursor(IGameInstance game);
 
-    void addAssetProp(IMod mod, String path);
-
     Map<IResourceName, IAsset> getAllOfType(Class<? extends IAsset> type);
 
     <T> T getAssetWithFallback(IResourceName path, IAsset<T> fallback);

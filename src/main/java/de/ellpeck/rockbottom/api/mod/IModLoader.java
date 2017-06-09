@@ -35,8 +35,6 @@ public interface IModLoader{
 
     void postInit();
 
-    void makeAssets();
-
     IMod getMod(String id);
 
     IResourceName createResourceName(IMod mod, String resource);
