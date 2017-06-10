@@ -22,6 +22,7 @@ import de.ellpeck.rockbottom.api.IApiHandler;
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.event.IEventHandler;
+import de.ellpeck.rockbottom.api.gui.Gui;
 
 /**
  * This is the class that describes a mod main class
@@ -77,6 +78,17 @@ public interface IMod{
      */
     default int getSortingPriority(){
         return 0;
+    }
+
+    /**
+     * If desired, returns a class for a {@link Gui} that is opened from a button that is
+     * displayed in the mods menu on the title screen of the game automatically
+     * <br> Gui class must have one-argument constructor taking a {@link Gui} parent
+     *
+     * @return The gui class
+     */
+    default Class<? extends Gui> getModGuiClass(){
+        return null;
     }
 
     /**
