@@ -62,7 +62,11 @@ public class Entity extends MovableWorldObject{
         RockBottomAPI.getApiHandler().doDefaultEntityUpdate(this);
     }
 
-    public int getUpdateFrequency(){
+    public boolean doesSync(){
+        return true;
+    }
+
+    public int getSyncFrequency(){
         return 40;
     }
 
