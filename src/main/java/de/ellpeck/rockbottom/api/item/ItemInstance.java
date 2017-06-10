@@ -29,6 +29,7 @@ public class ItemInstance{
     private final short meta;
 
     private int amount;
+    private DataSet additionalData;
 
     public ItemInstance(Tile tile){
         this(tile, 1);
@@ -71,7 +72,13 @@ public class ItemInstance{
             int amount = set.getInt("amount");
             short meta = set.getShort("meta");
 
-            return new ItemInstance(item, amount, meta);
+            ItemInstance instance = new ItemInstance(item, amount, meta);
+
+            if(set.hasKey("data")){
+                instance.additionalData = set.getDataSet("data");
+            }
+
+            return instance;
         }
         else{
             Log.info("Could not load item instance from data set "+set+" because name "+name+" is missing!");
@@ -84,6 +91,9 @@ public class ItemInstance{
         set.addString("item_name", RockBottomAPI.ITEM_REGISTRY.getId(this.item).toString());
         set.addInt("amount", this.amount);
         set.addShort("meta", this.meta);
+        if(this.additionalData != null){
+            set.addDataSet("data", this.additionalData);
+        }
     }
 
     public Item getItem(){
@@ -123,6 +133,34 @@ public class ItemInstance{
         return new ItemInstance(this.item, this.amount, this.meta);
     }
 
+    public DataSet getAdditionalData(){
+        return this.additionalData;
+    }
+
+    public void setAdditionalData(DataSet set){
+        this.additionalData = set;
+    }
+
+    public boolean canStack(ItemInstance instance){
+        return this.equals(instance);
+    }
+
+    public boolean isEffectivelyEqual(ItemInstance instance){
+        return this.isSameItemAndMeta(instance) && ((!this.item.isDataSensitive(this) && !instance.item.isDataSensitive(instance)) || (this.additionalData == null ? instance.additionalData == null : this.additionalData.equals(instance.additionalData)));
+    }
+
+    public boolean isSameItemAndMeta(ItemInstance instance){
+        return this.isSameItem(instance) && this.meta == instance.meta;
+    }
+
+    public boolean isSameItem(ItemInstance instance){
+        return this.item == instance.item;
+    }
+
+    public String getDisplayName(){
+        return RockBottomAPI.getGame().getAssetManager().localize(this.item.getUnlocalizedName(this));
+    }
+
     @Override
     public boolean equals(Object o){
         if(this == o){
@@ -132,23 +170,16 @@ public class ItemInstance{
             return false;
         }
 
-        ItemInstance that = (ItemInstance)o;
-        return this.meta == that.meta && this.amount == that.amount && this.item.equals(that.item);
-    }
-
-    public boolean isItemEqual(ItemInstance other){
-        return other.getItem() == this.getItem();
-    }
-
-    public String getDisplayName(){
-        return RockBottomAPI.getGame().getAssetManager().localize(this.item.getUnlocalizedName(this));
+        ItemInstance instance = (ItemInstance)o;
+        return this.meta == instance.meta && this.amount == instance.amount && this.item.equals(instance.item) && (this.additionalData != null ? this.additionalData.equals(instance.additionalData) : instance.additionalData == null);
     }
 
     @Override
     public int hashCode(){
         int result = this.item.hashCode();
-        result = 31*result+this.meta;
+        result = 31*result+(int)this.meta;
         result = 31*result+this.amount;
+        result = 31*result+(this.additionalData != null ? this.additionalData.hashCode() : 0);
         return result;
     }
 }

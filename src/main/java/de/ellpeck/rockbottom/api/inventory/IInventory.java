@@ -45,7 +45,7 @@ public interface IInventory{
     default int getItemIndex(ItemInstance inst){
         for(int i = 0; i < this.getSlotAmount(); i++){
             ItemInstance instance = this.get(i);
-            if(instance != null && instance.isItemEqual(inst) && instance.getAmount() >= inst.getAmount()){
+            if(instance != null && instance.isEffectivelyEqual(inst) && instance.getAmount() >= inst.getAmount()){
                 return i;
             }
         }

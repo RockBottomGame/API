@@ -38,6 +38,10 @@ public class DataSet{
         this.data.put(part.getName(), part);
     }
 
+    public boolean hasKey(String key){
+        return this.data.containsKey(key);
+    }
+
     public <T> T getPartContent(String key, Class<? extends DataPart<T>> typeClass, T defaultValue){
         DataPart part = this.data.get(key);
 
@@ -174,5 +178,23 @@ public class DataSet{
 
     public boolean isEmpty(){
         return this.data.isEmpty();
+    }
+
+    @Override
+    public boolean equals(Object o){
+        if(this == o){
+            return true;
+        }
+        if(o == null || this.getClass() != o.getClass()){
+            return false;
+        }
+
+        DataSet dataSet = (DataSet)o;
+        return this.data.equals(dataSet.data);
+    }
+
+    @Override
+    public int hashCode(){
+        return this.data.hashCode();
     }
 }

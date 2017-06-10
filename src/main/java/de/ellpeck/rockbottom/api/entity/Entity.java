@@ -45,6 +45,8 @@ public class Entity extends MovableWorldObject{
     protected boolean dead;
     protected UUID uniqueId;
 
+    private DataSet additionalData;
+
     public Entity(IWorld world){
         super(world);
         this.uniqueId = UUID.randomUUID();
@@ -119,6 +121,14 @@ public class Entity extends MovableWorldObject{
         this.chunkY = chunk.getGridY();
     }
 
+    public DataSet getAdditionalData(){
+        return this.additionalData;
+    }
+
+    public void setAdditionalData(DataSet set){
+        this.additionalData = set;
+    }
+
     public void save(DataSet set){
         set.addDouble("x", this.x);
         set.addDouble("y", this.y);
@@ -127,6 +137,10 @@ public class Entity extends MovableWorldObject{
         set.addInt("ticks", this.ticksExisted);
         set.addBoolean("dead", this.isDead());
         set.addUniqueId("uuid", this.uniqueId);
+
+        if(this.additionalData != null){
+            set.addDataSet("data", this.additionalData);
+        }
     }
 
     public void load(DataSet set){
@@ -137,6 +151,10 @@ public class Entity extends MovableWorldObject{
         this.ticksExisted = set.getInt("ticks");
         this.setDead(set.getBoolean("dead"));
         this.uniqueId = set.getUniqueId("uuid");
+
+        if(set.hasKey("data")){
+            this.additionalData = set.getDataSet("data");
+        }
     }
 
     public boolean doesSave(){

@@ -76,6 +76,10 @@ public class Item{
         return 24000;
     }
 
+    public boolean isDataSensitive(ItemInstance instance){
+        return false;
+    }
+
     public Map<ToolType, Integer> getToolTypes(ItemInstance instance){
         return Collections.emptyMap();
     }

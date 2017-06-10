@@ -120,7 +120,7 @@ public class Inventory implements IInventory{
 
         for(int i = 0; i < 2; i++){
             for(int j = 0; j < this.slots.length; j++){
-                if(i == 1 || (this.slots[j] != null && this.slots[j].isItemEqual(instance))){
+                if(i == 1 || (this.slots[j] != null && this.slots[j].isEffectivelyEqual(instance))){
                     copy = this.addToSlot(j, copy, simulate);
 
                     if(copy == null){
@@ -142,7 +142,7 @@ public class Inventory implements IInventory{
             }
             return null;
         }
-        else if(slotInst.isItemEqual(instance)){
+        else if(slotInst.isEffectivelyEqual(instance)){
             int space = slotInst.getMaxAmount()-slotInst.getAmount();
 
             if(space >= instance.getAmount()){
