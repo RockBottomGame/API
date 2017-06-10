@@ -152,7 +152,7 @@ public class Tile{
 
     public void onDestroyed(IWorld world, int x, int y, Entity destroyer, TileLayer layer, boolean shouldDrop){
         if(shouldDrop){
-            List<ItemInstance> drops = this.getDrops(world, x, y, destroyer);
+            List<ItemInstance> drops = this.getDrops(world, x, y, layer, destroyer);
             if(drops != null && !drops.isEmpty()){
                 for(ItemInstance inst : drops){
                     EntityItem.spawn(world, inst, x+0.5, y+0.5, RockBottomAPI.RANDOM.nextGaussian()*0.1, RockBottomAPI.RANDOM.nextGaussian()*0.1);
@@ -161,7 +161,7 @@ public class Tile{
         }
     }
 
-    public List<ItemInstance> getDrops(IWorld world, int x, int y, Entity destroyer){
+    public List<ItemInstance> getDrops(IWorld world, int x, int y, TileLayer layer, Entity destroyer){
         Item item = this.getItem();
         if(item != null){
             return Collections.singletonList(new ItemInstance(item));
