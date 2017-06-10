@@ -98,33 +98,37 @@ public interface IGameInstance extends IMod{
      */
     GameContainer getContainer();
 
+    int getGuiScale();
+
+    int getWorldScale();
+
     /**
-     * @return The width of the current visible screen area when applying {@link Settings#renderScale}
+     * @return The width of the current visible screen area when applying {@link #getWorldScale()}
      */
     double getWidthInWorld();
 
     /**
-     * @return The height of the current visible screen area when applying {@link Settings#renderScale}
+     * @return The height of the current visible screen area when applying {@link #getWorldScale()}
      */
     double getHeightInWorld();
 
     /**
-     * @return The width of the current visible screen area when applying {@link Settings#guiScale}
+     * @return The width of the current visible screen area when applying {@link #getGuiScale()}
      */
     double getWidthInGui();
 
     /**
-     * @return The height of the current visible screen area when applying {@link Settings#guiScale}
+     * @return The height of the current visible screen area when applying {@link #getGuiScale()}
      */
     double getHeightInGui();
 
     /**
-     * @return The x coordinate of the {@link org.lwjgl.input.Mouse} when applying {@link Settings#guiScale}
+     * @return The x coordinate of the {@link org.lwjgl.input.Mouse} when applying {@link #getGuiScale()}
      */
     float getMouseInGuiX();
 
     /**
-     * @return The y coordinate of the {@link org.lwjgl.input.Mouse} when applying {@link Settings#guiScale}
+     * @return The y coordinate of the {@link org.lwjgl.input.Mouse} when applying {@link #getGuiScale()}
      */
     float getMouseInGuiY();
 
