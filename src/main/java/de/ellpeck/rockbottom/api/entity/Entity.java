@@ -144,8 +144,7 @@ public class Entity extends MovableWorldObject{
     }
 
     public void load(DataSet set){
-        this.x = set.getDouble("x");
-        this.y = set.getDouble("y");
+        this.setPos(set.getDouble("x"), set.getDouble("y"));
         this.motionX = set.getDouble("motion_x");
         this.motionY = set.getDouble("motion_y");
         this.ticksExisted = set.getInt("ticks");
