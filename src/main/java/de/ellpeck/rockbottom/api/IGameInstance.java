@@ -183,24 +183,29 @@ public interface IGameInstance extends IMod{
     UUID getUniqueId();
 
     /**
-     * @return If the game is in debug mode making the debug menu show
+     * @return If the game is in debug mode making the debug menu show (F1)
      */
     boolean isDebug();
 
     /**
-     * @return If the game is in light debug mode making all lighting be equally bright
+     * @return If the game is in light debug mode making all lighting be equally bright (F2)
      */
     boolean isLightDebug();
 
     /**
-     * @return If the game is in foreground debug making the foreground layer disappear
+     * @return If the game is in foreground debug making the foreground layer disappear (F3)
      */
     boolean isForegroundDebug();
 
     /**
-     * @return If the game is in background debug making the background layer disappear
+     * @return If the game is in background debug making the background layer disappear (F4)
      */
     boolean isBackgroundDebug();
+
+    /**
+     * @return If the game is in item info debug making the id and data of items show on the tooltip (F5)
+     */
+    boolean isItemInfoDebug();
 
     /**
      * @return The average TPS (ticks per second) out of {@link Constants#TARGET_TPS} over the last second

@@ -197,4 +197,10 @@ public class DataSet{
     public int hashCode(){
         return this.data.hashCode();
     }
+
+    public DataSet copy(){
+        DataSet set = new DataSet();
+        set.data.putAll(this.data);
+        return set;
+    }
 }

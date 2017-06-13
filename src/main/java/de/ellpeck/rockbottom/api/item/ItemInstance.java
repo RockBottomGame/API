@@ -130,7 +130,11 @@ public class ItemInstance{
     }
 
     public ItemInstance copy(){
-        return new ItemInstance(this.item, this.amount, this.meta);
+        ItemInstance instance = new ItemInstance(this.item, this.amount, this.meta);
+        if(this.additionalData != null){
+            instance.additionalData = this.additionalData.copy();
+        }
+        return instance;
     }
 
     public DataSet getAdditionalData(){
