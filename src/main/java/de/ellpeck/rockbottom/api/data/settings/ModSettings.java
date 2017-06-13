@@ -21,28 +21,29 @@ package de.ellpeck.rockbottom.api.data.settings;
 import de.ellpeck.rockbottom.api.data.IDataManager;
 
 import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 public class ModSettings implements IPropSettings{
 
-    private final Map<String, Boolean> disabledMods = new HashMap<>();
+    private final List<String> disabledMods = new ArrayList<>();
 
     @Override
     public void load(Properties props){
         this.disabledMods.clear();
 
         for(String key : props.stringPropertyNames()){
-            boolean disabled = Boolean.parseBoolean(props.getProperty(key));
-            this.disabledMods.put(key, disabled);
+            if("disabled".equals(props.getProperty(key))){
+                this.disabledMods.add(key);
+            }
         }
     }
 
     @Override
     public void save(Properties props){
-        for(Map.Entry<String, Boolean> entry : this.disabledMods.entrySet()){
-            props.setProperty(entry.getKey(), entry.getValue().toString());
+        for(String id : this.disabledMods){
+            props.setProperty(id, "disabled");
         }
     }
 
@@ -57,10 +58,15 @@ public class ModSettings implements IPropSettings{
     }
 
     public boolean isDisabled(String modid){
-        return this.disabledMods.containsKey(modid);
+        return this.disabledMods.contains(modid);
     }
 
     public void setDisabled(String modid, boolean disabled){
-        this.disabledMods.put(modid, disabled);
+        if(disabled){
+            this.disabledMods.add(modid);
+        }
+        else{
+            this.disabledMods.remove(modid);
+        }
     }
 }
