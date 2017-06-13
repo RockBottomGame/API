@@ -42,11 +42,11 @@ public abstract class EntityLiving extends Entity{
             this.jumping = false;
         }
 
-        if(this.health <= 0){
-            this.kill();
-        }
-        else{
-            if(!RockBottomAPI.getNet().isClient()){
+        if(!RockBottomAPI.getNet().isClient()){
+            if(this.health <= 0){
+                this.kill();
+            }
+            else{
                 if(this.health < this.getMaxHealth()){
                     if(this.world.getWorldInfo().totalTimeInWorld%this.getRegenRate() == 0){
                         this.health++;

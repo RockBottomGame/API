@@ -19,6 +19,7 @@
 package de.ellpeck.rockbottom.api.entity;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
+import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.data.set.DataSet;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.render.entity.IEntityRenderer;
@@ -65,8 +66,10 @@ public class EntityItem extends Entity{
             this.pickupDelay--;
         }
 
-        if(this.ticksExisted >= this.item.getItem().getDespawnTime(this.item)){
-            this.kill();
+        if(!RockBottomAPI.getNet().isClient()){
+            if(this.ticksExisted >= this.item.getItem().getDespawnTime(this.item)){
+                this.kill();
+            }
         }
     }
 

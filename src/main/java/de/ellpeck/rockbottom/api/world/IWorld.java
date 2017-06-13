@@ -168,11 +168,6 @@ public interface IWorld extends IChunkOrWorld{
     void unloadChunk(IChunk chunk);
 
     /**
-     * @return {@code true} if this world is a client world, else returns {@code false}
-     */
-    boolean isClient();
-
-    /**
      * Saves the specified player to disk
      * <br> Not supposed to be used by mods
      *
