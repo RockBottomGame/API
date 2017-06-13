@@ -27,7 +27,7 @@ import org.newdawn.slick.Graphics;
 public class ComponentButton extends GuiComponent{
 
     public final int id;
-    protected final String text;
+    protected String text;
     private final String[] hover;
 
     public boolean hasBackground = true;
@@ -38,6 +38,10 @@ public class ComponentButton extends GuiComponent{
         this.id = id;
         this.text = text;
         this.hover = hover;
+    }
+
+    public void setText(String text){
+        this.text = text;
     }
 
     public ComponentButton setHasBackground(boolean has){

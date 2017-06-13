@@ -18,6 +18,7 @@
 
 package de.ellpeck.rockbottom.api.mod;
 
+import de.ellpeck.rockbottom.api.data.settings.ModSettings;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 
 import java.io.File;
@@ -42,4 +43,10 @@ public interface IModLoader{
     IResourceName createResourceName(String combined);
 
     List<IMod> getAllMods();
+
+    List<IMod> getActiveMods();
+
+    List<IMod> getDisabledMods();
+
+    ModSettings getModSettings();
 }

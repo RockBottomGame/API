@@ -92,6 +92,13 @@ public interface IMod{
     }
 
     /**
+     * @return If this mod can be disabled from being loaded next time the game starts in the mods menu on the title screen
+     */
+    default boolean isDisableable(){
+        return true;
+    }
+
+    /**
      * Override this method to do any actions that should happen before the initialization of the base game
      *
      * @param game         The current game instance

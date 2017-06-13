@@ -36,6 +36,8 @@ public interface IDataManager{
 
     File getCommandPermsFile();
 
+    File getModSettingsFile();
+
     void loadPropSettings(IPropSettings settings);
 
     void savePropSettings(IPropSettings settings);
