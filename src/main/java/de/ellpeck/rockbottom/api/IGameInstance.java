@@ -221,4 +221,6 @@ public interface IGameInstance extends IMod{
      * @return The {@link ClassLoader} used to load vanilla game and {@link IMod} classes
      */
     URLClassLoader getClassLoader();
+
+    void setFullscreen(boolean fullscreen);
 }
