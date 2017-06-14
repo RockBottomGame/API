@@ -26,7 +26,9 @@ import java.util.List;
 
 public interface IModLoader{
 
-    void loadModsFromDir(File dir);
+    void loadJarMods(File dir);
+
+    void loadUnpackedMods(File dir);
 
     void sortMods();
 
