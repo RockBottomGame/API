@@ -3,9 +3,14 @@ version '0.0.1'
 
 apply plugin: 'java'
 apply plugin: 'idea'
+apply plugin: 'maven-publish'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
+
+if (hasProperty('buildnumber')) {
+    version = "${version}-${this.properties['buildnumber']}"
+}
 
 repositories {
     mavenCentral()
@@ -14,4 +19,24 @@ repositories {
 dependencies {
     compile group: 'org.slick2d', name: 'slick2d-core', version: '1.0.2'
     compile group: 'io.netty', name: 'netty-all', version: '4.1.11.Final'
+    compile group: 'net.sf.jopt-simple', name: 'jopt-simple', version: '4.9'
+}
+
+task sourcesJar(type: Jar) {
+    from sourceSets.main.java
+    classifier = 'sources'
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifact jar
+            artifact sourcesJar
+        }
+    }
+    repositories {
+        maven {
+            url "file:///srv/nginx/maven"
+        }
+    }
 }
