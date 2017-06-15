@@ -3,7 +3,6 @@ version '0.0.1'
 
 apply plugin: 'java'
 apply plugin: 'idea'
-apply plugin: 'maven-publish'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -26,6 +25,8 @@ task sourcesJar(type: Jar) {
     from sourceSets.main.java
     classifier = 'sources'
 }
+
+apply plugin: 'maven-publish'
 
 publishing {
     publications {
