@@ -28,7 +28,7 @@ import org.newdawn.slick.Image;
 
 public interface ITileRenderer<T extends Tile>{
 
-    void render(IGameInstance game, IAssetManager manager, Graphics g, IWorld world, T tile, int x, int y, float renderX, float renderY, Color filter);
+    void render(IGameInstance game, IAssetManager manager, Graphics g, IWorld world, T tile, int x, int y, float renderX, float renderY, float scale, Color filter);
 
     void renderItem(IGameInstance game, IAssetManager manager, Graphics g, T tile, int meta, float x, float y, float scale, Color filter);
 

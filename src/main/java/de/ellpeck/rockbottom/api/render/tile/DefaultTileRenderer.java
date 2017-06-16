@@ -36,8 +36,8 @@ public class DefaultTileRenderer<T extends Tile> implements ITileRenderer<T>{
     }
 
     @Override
-    public void render(IGameInstance game, IAssetManager manager, Graphics g, IWorld world, T tile, int x, int y, float renderX, float renderY, Color filter){
-        manager.getImage(this.texture).draw(renderX, renderY, 1F, 1F, filter);
+    public void render(IGameInstance game, IAssetManager manager, Graphics g, IWorld world, T tile, int x, int y, float renderX, float renderY, float scale, Color filter){
+        manager.getImage(this.texture).draw(renderX, renderY, scale, scale, filter);
     }
 
     @Override

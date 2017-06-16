@@ -50,9 +50,9 @@ public class MultiTileRenderer<T extends MultiTile> extends DefaultTileRenderer<
     }
 
     @Override
-    public void render(IGameInstance game, IAssetManager manager, Graphics g, IWorld world, T tile, int x, int y, float renderX, float renderY, Color filter){
+    public void render(IGameInstance game, IAssetManager manager, Graphics g, IWorld world, T tile, int x, int y, float renderX, float renderY, float scale, Color filter){
         Pos2 innerCoord = tile.getInnerCoord(world.getMeta(x, y));
-        manager.getImage(this.textures.get(innerCoord)).draw(renderX, renderY, 1F, 1F, filter);
+        manager.getImage(this.textures.get(innerCoord)).draw(renderX, renderY, scale, scale, filter);
     }
 
     @Override
