@@ -152,10 +152,12 @@ public class Tile{
 
     public void onDestroyed(IWorld world, int x, int y, Entity destroyer, TileLayer layer, boolean shouldDrop){
         if(shouldDrop){
-            List<ItemInstance> drops = this.getDrops(world, x, y, layer, destroyer);
-            if(drops != null && !drops.isEmpty()){
-                for(ItemInstance inst : drops){
-                    EntityItem.spawn(world, inst, x+0.5, y+0.5, RockBottomAPI.RANDOM.nextGaussian()*0.1, RockBottomAPI.RANDOM.nextGaussian()*0.1);
+            if(!RockBottomAPI.getNet().isClient()){
+                List<ItemInstance> drops = this.getDrops(world, x, y, layer, destroyer);
+                if(drops != null && !drops.isEmpty()){
+                    for(ItemInstance inst : drops){
+                        EntityItem.spawn(world, inst, x+0.5, y+0.5, RockBottomAPI.RANDOM.nextGaussian()*0.1, RockBottomAPI.RANDOM.nextGaussian()*0.1);
+                    }
                 }
             }
         }
