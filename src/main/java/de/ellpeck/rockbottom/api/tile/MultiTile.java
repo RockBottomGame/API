@@ -18,6 +18,9 @@
 
 package de.ellpeck.rockbottom.api.tile;
 
+import de.ellpeck.rockbottom.api.RockBottomAPI;
+import de.ellpeck.rockbottom.api.assets.IAssetManager;
+import de.ellpeck.rockbottom.api.assets.font.FormattingCode;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.render.tile.ITileRenderer;
@@ -26,6 +29,8 @@ import de.ellpeck.rockbottom.api.util.Pos2;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 import de.ellpeck.rockbottom.api.world.IWorld;
 import de.ellpeck.rockbottom.api.world.TileLayer;
+
+import java.util.List;
 
 public abstract class MultiTile extends TileBasic{
 
@@ -154,5 +159,15 @@ public abstract class MultiTile extends TileBasic{
             }
         }
         return this.isStructurePart(this.getMainX(), this.getMainY());
+    }
+
+    @Override
+    public void describeItem(IAssetManager manager, ItemInstance instance, List<String> desc, boolean isAdvanced){
+        super.describeItem(manager, instance, desc, isAdvanced);
+
+        if(isAdvanced){
+            desc.add("");
+            desc.add(FormattingCode.GRAY+manager.localize(RockBottomAPI.createInternalRes("info.size"), this.getWidth(), this.getHeight()));
+        }
     }
 }
