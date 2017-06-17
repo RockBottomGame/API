@@ -66,6 +66,8 @@ public class Settings implements IPropSettings{
 
     public int[] keysItemSelection = new int[8];
 
+    public String lastServerIp;
+
     public static String getRandomChatName(){
         return DEFAULT_NAMES[RockBottomAPI.RANDOM.nextInt(DEFAULT_NAMES.length)];
     }
@@ -111,6 +113,8 @@ public class Settings implements IPropSettings{
         for(int i = 0; i < this.keysItemSelection.length; i++){
             this.keysItemSelection[i] = this.getProp(props, "key_item_select_"+i, defaultKeys[i]);
         }
+
+        this.lastServerIp = this.getProp(props, "last_server_ip", "");
     }
 
     @Override
@@ -146,6 +150,8 @@ public class Settings implements IPropSettings{
         for(int i = 0; i < this.keysItemSelection.length; i++){
             this.setProp(props, "key_item_select_"+i, this.keysItemSelection[i]);
         }
+
+        this.setProp(props, "last_server_ip", this.lastServerIp);
     }
 
     @Override
