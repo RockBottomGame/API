@@ -223,4 +223,6 @@ public interface IGameInstance extends IMod{
     URLClassLoader getClassLoader();
 
     void setFullscreen(boolean fullscreen);
+
+    int getTotalTicks();
 }

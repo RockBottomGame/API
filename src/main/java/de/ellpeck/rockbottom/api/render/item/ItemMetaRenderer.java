@@ -1,5 +1,5 @@
 /*
- * This file ("DefaultItemRenderer.java") is part of the RockBottomAPI by Ellpeck.
+ * This file ("ItemMetaRenderer.java") is part of the RockBottomAPI by Ellpeck.
  * View the source code at <https://github.com/Ellpeck/RockBottomAPI>.
  *
  * The RockBottomAPI is free software: you can redistribute it and/or modify
@@ -20,22 +20,27 @@ package de.ellpeck.rockbottom.api.render.item;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
-import de.ellpeck.rockbottom.api.item.Item;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
+import de.ellpeck.rockbottom.api.item.ItemMeta;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 
-public class DefaultItemRenderer<T extends Item> implements IItemRenderer<T>{
+public class ItemMetaRenderer extends DefaultItemRenderer<ItemMeta>{
 
-    protected final IResourceName texture;
-
-    public DefaultItemRenderer(IResourceName texture){
-        this.texture = texture.addPrefix("items.");
+    public ItemMetaRenderer(IResourceName texture){
+        super(texture);
     }
 
     @Override
-    public void render(IGameInstance game, IAssetManager manager, Graphics g, T item, ItemInstance instance, float x, float y, float scale, Color filter){
-        manager.getImage(this.texture).draw(x, y, 1F*scale, 1F*scale, filter);
+    public void render(IGameInstance game, IAssetManager manager, Graphics g, ItemMeta item, ItemInstance instance, float x, float y, float scale, Color filter){
+        int meta = instance.getMeta();
+
+        if(meta >= 0 && item.subResourceNames.size() > meta){
+            manager.getImage(item.subResourceNames.get(meta)).draw(x, y, 1F*scale, 1F*scale, filter);
+        }
+        else{
+            super.render(game, manager, g, item, instance, x, y, scale, filter);
+        }
     }
 }

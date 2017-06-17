@@ -87,4 +87,8 @@ public class Item{
     public float getMiningSpeed(IWorld world, int x, int y, TileLayer layer, Tile tile, boolean isRightTool){
         return 1F;
     }
+
+    public int getHighestPossibleMeta(){
+        return 0;
+    }
 }

@@ -18,6 +18,7 @@
 
 package de.ellpeck.rockbottom.api.item;
 
+import de.ellpeck.rockbottom.api.Constants;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.data.set.DataSet;
 import de.ellpeck.rockbottom.api.tile.Tile;
@@ -26,8 +27,8 @@ import org.newdawn.slick.util.Log;
 public class ItemInstance{
 
     private final Item item;
-    private final short meta;
 
+    private short meta;
     private int amount;
     private DataSet additionalData;
 
@@ -55,7 +56,7 @@ public class ItemInstance{
         if(item == null){
             throw new NullPointerException("Tried to create an ItemInstance with null item!");
         }
-        if(meta < 0 || meta > Short.MAX_VALUE){
+        if((meta < 0 || meta > Short.MAX_VALUE) && meta != Constants.META_WILDCARD){
             throw new IndexOutOfBoundsException("Tried assigning meta "+meta+" to item instance with item "+item+" and amount "+amount+" which is less than 0 or greater than max "+Short.MAX_VALUE+"!");
         }
 
@@ -107,6 +108,10 @@ public class ItemInstance{
         return this.amount;
     }
 
+    public void setMeta(int meta){
+        this.meta = (short)meta;
+    }
+
     public boolean fitsAmount(int amount){
         return this.getAmount()+amount <= this.getMaxAmount();
     }
@@ -144,20 +149,51 @@ public class ItemInstance{
         this.additionalData = set;
     }
 
-    public boolean canStack(ItemInstance instance){
-        return this.equals(instance);
-    }
-
     public boolean isEffectivelyEqual(ItemInstance instance){
-        return this.isSameItemAndMeta(instance) && ((!this.item.isDataSensitive(this) && !instance.item.isDataSensitive(instance)) || (this.additionalData == null ? instance.additionalData == null : this.additionalData.equals(instance.additionalData)));
+        return compare(this, instance, true, true, true, false);
     }
 
-    public boolean isSameItemAndMeta(ItemInstance instance){
-        return this.isSameItem(instance) && this.meta == instance.meta;
+    public boolean isEffectivelyEqualWithWildcard(ItemInstance instance){
+        return compare(this, instance, true, true, true, true);
     }
 
-    public boolean isSameItem(ItemInstance instance){
-        return this.item == instance.item;
+    public static boolean compare(ItemInstance one, ItemInstance other, boolean item, boolean meta, boolean data, boolean wildcard){
+        if(one == null && other == null){
+            return true;
+        }
+        else if(one == null || other == null){
+            return false;
+        }
+        else{
+            if(item){
+                if(one.item != other.item){
+                    return false;
+                }
+            }
+
+            if(meta){
+                if(one.meta != other.meta){
+                    if(wildcard){
+                        if(one.meta != Constants.META_WILDCARD && other.meta != Constants.META_WILDCARD){
+                            return false;
+                        }
+                    }
+                    else{
+                        return false;
+                    }
+                }
+            }
+
+            if(data){
+                if(one.item.isDataSensitive(one) || other.item.isDataSensitive(other)){
+                    if(one.additionalData == null ? other.additionalData != null : !one.additionalData.equals(other.additionalData)){
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        }
     }
 
     public String getDisplayName(){
