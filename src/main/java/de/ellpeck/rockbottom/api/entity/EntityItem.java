@@ -67,7 +67,12 @@ public class EntityItem extends Entity{
         }
 
         if(!RockBottomAPI.getNet().isClient()){
-            if(this.ticksExisted >= this.item.getItem().getDespawnTime(this.item)){
+            if(this.item != null){
+                if(this.ticksExisted >= this.item.getItem().getDespawnTime(this.item)){
+                    this.kill();
+                }
+            }
+            else{
                 this.kill();
             }
         }
@@ -112,11 +117,6 @@ public class EntityItem extends Entity{
 
         DataSet itemSet = set.getDataSet("item");
         this.item = ItemInstance.load(itemSet);
-        if(this.item == null){
-            this.kill();
-            return;
-        }
-
         this.pickupDelay = set.getInt("pickup_delay");
     }
 }

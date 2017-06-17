@@ -82,7 +82,6 @@ public class ItemInstance{
         }
         else{
             Log.info("Could not load item instance from data set "+set+" because name "+name+" is missing!");
-
             return null;
         }
     }
