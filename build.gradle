@@ -26,6 +26,11 @@ task sourcesJar(type: Jar) {
     classifier = 'sources'
 }
 
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    from 'build/docs/javadoc'
+    classifier 'javadoc'
+}
+
 apply plugin: 'maven-publish'
 
 publishing {
@@ -33,6 +38,7 @@ publishing {
         mavenJava(MavenPublication) {
             artifact jar
             artifact sourcesJar
+	    artifact javadocJar
         }
     }
     repositories {
