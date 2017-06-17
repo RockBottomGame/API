@@ -21,10 +21,12 @@ package de.ellpeck.rockbottom.api.gui;
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.gui.component.GuiComponent;
+import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 
+import java.security.Key;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,11 +53,11 @@ public class Gui{
     }
 
     public void onOpened(IGameInstance game){
-
+        Keyboard.enableRepeatEvents(true);
     }
 
     public void onClosed(IGameInstance game){
-
+        Keyboard.enableRepeatEvents(false);
     }
 
     public void initGui(IGameInstance game){
