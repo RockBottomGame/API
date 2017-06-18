@@ -35,6 +35,7 @@ import de.ellpeck.rockbottom.api.tile.Tile;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 import de.ellpeck.rockbottom.api.util.reg.IndexRegistry;
 import de.ellpeck.rockbottom.api.util.reg.NameRegistry;
+import de.ellpeck.rockbottom.api.world.gen.IWorldGenerator;
 
 import java.util.*;
 
@@ -105,6 +106,11 @@ public final class RockBottomAPI{
      * <br> Use this to register recipes for the separator
      */
     public static final List<SeparatorRecipe> SEPARATOR_RECIPES = new ArrayList<>();
+    /**
+     * The registry for {@link IWorldGenerator}
+     * <br> Use this to register custom world generators
+     */
+    public static final List<IWorldGenerator> WORLD_GENERATORS = new ArrayList<>();
 
     private static IApiHandler apiHandler;
     private static INetHandler netHandler;
