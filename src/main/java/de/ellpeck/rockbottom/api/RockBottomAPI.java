@@ -18,10 +18,14 @@
 
 package de.ellpeck.rockbottom.api;
 
+import de.ellpeck.rockbottom.api.construction.BasicRecipe;
+import de.ellpeck.rockbottom.api.construction.SeparatorRecipe;
+import de.ellpeck.rockbottom.api.construction.SmelterRecipe;
 import de.ellpeck.rockbottom.api.data.set.part.DataPart;
 import de.ellpeck.rockbottom.api.entity.Entity;
 import de.ellpeck.rockbottom.api.event.IEventHandler;
 import de.ellpeck.rockbottom.api.item.Item;
+import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.mod.IMod;
 import de.ellpeck.rockbottom.api.mod.IModLoader;
 import de.ellpeck.rockbottom.api.net.INetHandler;
@@ -32,9 +36,7 @@ import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 import de.ellpeck.rockbottom.api.util.reg.IndexRegistry;
 import de.ellpeck.rockbottom.api.util.reg.NameRegistry;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 /**
  * The main API class
@@ -82,6 +84,27 @@ public final class RockBottomAPI{
      * <br> Use this to register custom commands
      */
     public static final Map<String, Command> COMMAND_REGISTRY = new HashMap<>();
+    /**
+     * The registry for {@link BasicRecipe}
+     * <br> Use this to register construction recipes that can be used in the inventory {@link de.ellpeck.rockbottom.api.gui.Gui}
+     */
+    public static final List<BasicRecipe> MANUAL_CONSTRUCTION_RECIPES = new ArrayList<>();
+    /**
+     * The registry for {@link ItemInstance}s that can be used in machines as a fuel.
+     * The {@link Integer} specified is the amount of time the fuel will burn for
+     * <br> Use this to register custom fuels
+     */
+    public static final Map<ItemInstance, Integer> FUEL_REGISTRY = new HashMap<>();
+    /**
+     * The registry for {@link SmelterRecipe}
+     * <br> Use this to register recipes for the smelter
+     */
+    public static final List<SmelterRecipe> SMELTER_RECIPES = new ArrayList<>();
+    /**
+     * The registry for {@link SeparatorRecipe}
+     * <br> Use this to register recipes for the separator
+     */
+    public static final List<SeparatorRecipe> SEPARATOR_RECIPES = new ArrayList<>();
 
     private static IApiHandler apiHandler;
     private static INetHandler netHandler;
@@ -159,9 +182,9 @@ public final class RockBottomAPI{
      * Creates an {@link IResourceName} out of a combined string of the mod id
      * and the resource itself
      *
-     * @throws IllegalArgumentException if the specified string cannot be parsed as an {@link IResourceName}
      * @param combined The combined name
      * @return The parsed {@link IResourceName}
+     * @throws IllegalArgumentException if the specified string cannot be parsed as an {@link IResourceName}
      */
     public static IResourceName createRes(String combined){
         return modLoader.createResourceName(combined);
@@ -210,6 +233,33 @@ public final class RockBottomAPI{
         if(modLoader == null){
             modLoader = mod;
         }
+    }
+
+    public static int getFuelValue(ItemInstance instance){
+        for(Map.Entry<ItemInstance, Integer> entry : FUEL_REGISTRY.entrySet()){
+            if(instance.isEffectivelyEqualWithWildcard(entry.getKey())){
+                return entry.getValue();
+            }
+        }
+        return 0;
+    }
+
+    public static SmelterRecipe getSmelterRecipe(ItemInstance input){
+        for(SmelterRecipe recipe : SMELTER_RECIPES){
+            if(input.isEffectivelyEqualWithWildcard(recipe.getInput())){
+                return recipe;
+            }
+        }
+        return null;
+    }
+
+    public static SeparatorRecipe getSeparatorRecipe(ItemInstance input){
+        for(SeparatorRecipe recipe : SEPARATOR_RECIPES){
+            if(input.isEffectivelyEqualWithWildcard(recipe.getInput())){
+                return recipe;
+            }
+        }
+        return null;
     }
 }
 
