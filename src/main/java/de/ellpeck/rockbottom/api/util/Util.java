@@ -89,4 +89,13 @@ public final class Util{
             return null;
         }
     }
+
+    public static String trimString(String s, int length){
+        if(s.length() <= length){
+            return s;
+        }
+        else{
+            return s.substring(0, length);
+        }
+    }
 }

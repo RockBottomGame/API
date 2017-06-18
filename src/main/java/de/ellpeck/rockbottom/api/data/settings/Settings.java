@@ -20,6 +20,7 @@ package de.ellpeck.rockbottom.api.data.settings;
 
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.data.IDataManager;
+import de.ellpeck.rockbottom.api.util.Util;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Input;
 
@@ -72,22 +73,13 @@ public class Settings implements IPropSettings{
         return DEFAULT_NAMES[RockBottomAPI.RANDOM.nextInt(DEFAULT_NAMES.length)];
     }
 
-    public static String trimString(String s, int length){
-        if(s.length() <= length){
-            return s;
-        }
-        else{
-            return s.substring(0, length);
-        }
-    }
-
     @Override
     public void load(Properties props){
         for(Keybind bind : this.keybinds){
             bind.key = this.getProp(props, "key_"+bind.name, bind.def);
         }
 
-        this.chatName = trimString(this.getProp(props, "chat_name", getRandomChatName()), 24).trim();
+        this.chatName = Util.trimString(this.getProp(props, "chat_name", getRandomChatName()), 24).trim();
 
         this.targetFps = this.getProp(props, "target_fps", 60);
         this.autosaveIntervalSeconds = this.getProp(props, "autosave_interval", 60);
