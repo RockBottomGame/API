@@ -57,6 +57,7 @@ public class Settings implements IPropSettings{
     public boolean hardwareCursor;
     public boolean cursorInfos;
     public boolean fullscreen;
+    public boolean vsync;
 
     public int buttonDestroy;
     public int buttonPlace;
@@ -93,6 +94,7 @@ public class Settings implements IPropSettings{
         this.hardwareCursor = this.getProp(props, "hardware_cursor", false);
         this.cursorInfos = this.getProp(props, "cursor_infos", true);
         this.fullscreen = this.getProp(props, "fullscreen", false);
+        this.vsync = this.getProp(props, "vsync", false);
 
         this.buttonDestroy = this.getProp(props, "button_destroy", Input.MOUSE_LEFT_BUTTON);
         this.buttonPlace = this.getProp(props, "button_place", Input.MOUSE_RIGHT_BUTTON);
@@ -131,6 +133,7 @@ public class Settings implements IPropSettings{
         this.setProp(props, "hardware_cursor", this.hardwareCursor);
         this.setProp(props, "cursor_infos", this.cursorInfos);
         this.setProp(props, "fullscreen", this.fullscreen);
+        this.setProp(props, "vsync", this.vsync);
 
         this.setProp(props, "button_destroy", this.buttonDestroy);
         this.setProp(props, "button_place", this.buttonPlace);
