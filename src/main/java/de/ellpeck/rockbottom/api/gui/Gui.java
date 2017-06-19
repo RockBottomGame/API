@@ -26,13 +26,12 @@ import org.lwjgl.input.Mouse;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 
-import java.security.Key;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Gui{
 
-    public static final Color GRADIENT = new Color(0F, 0F, 0F, 0.5F);
+    public static final Color GRADIENT = new Color(0F, 0F, 0F, 0.7F);
     public static final Color HOVER_INFO_BACKGROUND = new Color(0F, 0F, 0F, 0.8F);
     protected final Gui parent;
     public int sizeX;
