@@ -36,6 +36,7 @@ import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 import de.ellpeck.rockbottom.api.util.reg.IndexRegistry;
 import de.ellpeck.rockbottom.api.util.reg.NameRegistry;
 import de.ellpeck.rockbottom.api.world.gen.IWorldGenerator;
+import de.ellpeck.rockbottom.api.world.gen.biome.Biome;
 
 import java.util.*;
 
@@ -111,6 +112,11 @@ public final class RockBottomAPI{
      * <br> Use this to register custom world generators
      */
     public static final List<IWorldGenerator> WORLD_GENERATORS = new ArrayList<>();
+    /**
+     * The registry for {@link Biome}
+     * <br> Use this to register custom biomes
+     */
+    public static final NameRegistry<Biome> BIOME_REGISTRY = new NameRegistry<>("biome_registry");
 
     private static IApiHandler apiHandler;
     private static INetHandler netHandler;

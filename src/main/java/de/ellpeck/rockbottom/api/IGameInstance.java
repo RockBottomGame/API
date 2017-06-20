@@ -70,7 +70,7 @@ public interface IGameInstance extends IMod{
      * @param info        The world info
      * @param tileRegInfo The tile registry info
      */
-    void joinWorld(DataSet playerSet, WorldInfo info, NameToIndexInfo tileRegInfo);
+    void joinWorld(DataSet playerSet, WorldInfo info, NameToIndexInfo tileRegInfo, NameToIndexInfo biomeRegInfo);
 
     /**
      * Quits the current {@link IWorld}

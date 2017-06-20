@@ -23,6 +23,7 @@ import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.tile.Tile;
 import de.ellpeck.rockbottom.api.util.BoundBox;
 import de.ellpeck.rockbottom.api.util.reg.NameToIndexInfo;
+import de.ellpeck.rockbottom.api.world.gen.biome.Biome;
 import io.netty.channel.Channel;
 
 import java.util.List;
@@ -95,16 +96,22 @@ public interface IWorld extends IChunkOrWorld{
     Tile getTileForId(int id);
 
     /**
-     * @return Information like the seed and time of the world
-     */
-    WorldInfo getWorldInfo();
-
-    /**
      * @return Information about which ids tiles are saved with in the world file
      * @see #getIdForTile(Tile)
      * @see #getTileForId(int)
      */
     NameToIndexInfo getTileRegInfo();
+
+    int getIdForBiome(Biome biome);
+
+    Biome getBiomeForId(int id);
+
+    NameToIndexInfo getBiomeRegInfo();
+
+    /**
+     * @return Information like the seed and time of the world
+     */
+    WorldInfo getWorldInfo();
 
     /**
      * Notifies neighboring tiles that a change or an update has occured, calling their

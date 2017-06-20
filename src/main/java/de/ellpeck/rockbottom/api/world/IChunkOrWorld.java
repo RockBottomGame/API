@@ -22,6 +22,7 @@ import de.ellpeck.rockbottom.api.entity.Entity;
 import de.ellpeck.rockbottom.api.tile.Tile;
 import de.ellpeck.rockbottom.api.tile.entity.TileEntity;
 import de.ellpeck.rockbottom.api.util.BoundBox;
+import de.ellpeck.rockbottom.api.world.gen.biome.Biome;
 
 import java.util.List;
 import java.util.UUID;
@@ -312,4 +313,8 @@ public interface IChunkOrWorld{
      * @return The lowest y coordinate upwards
      */
     int getLowestAirUpwards(TileLayer layer, int x, int y);
+
+    Biome getBiome(int x, int y);
+
+    void setBiome(int x, int y, Biome biome);
 }

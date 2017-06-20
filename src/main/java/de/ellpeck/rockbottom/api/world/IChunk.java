@@ -23,6 +23,7 @@ import de.ellpeck.rockbottom.api.data.set.DataSet;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.tile.Tile;
 import de.ellpeck.rockbottom.api.util.MutableInt;
+import de.ellpeck.rockbottom.api.world.gen.biome.Biome;
 
 import java.util.List;
 import java.util.Map;
@@ -277,4 +278,8 @@ public interface IChunk extends IChunkOrWorld{
      * @see #scheduleUpdate(int, int, TileLayer, int)
      */
     int getScheduledUpdateAmount();
+
+    Biome getBiomeInner(int x, int y);
+
+    void setBiomeInner(int x, int y, Biome biome);
 }
