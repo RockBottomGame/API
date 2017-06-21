@@ -29,7 +29,7 @@ public class WorldInfo{
 
     public long seed;
     public int totalTimeInWorld;
-    public int currentWorldTime;
+    public int currentWorldTime = 3000;
 
     public WorldInfo(File worldDirectory){
         this.dataFile = new File(worldDirectory, "world_info.dat");
