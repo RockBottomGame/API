@@ -44,6 +44,7 @@ public class Settings implements IPropSettings{
     public Keybind keyBackground = new Keybind("background", Input.KEY_LSHIFT);
     public Keybind keyChat = new Keybind("chat", Input.KEY_ENTER);
     public Keybind keyAdvancedInfo = new Keybind("advanced_info", Input.KEY_LSHIFT);
+    public Keybind keyScreenshot = new Keybind("screenshot", Input.KEY_F10);
     public String chatName;
 
     public int targetFps;

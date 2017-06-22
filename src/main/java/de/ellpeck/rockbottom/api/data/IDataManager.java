@@ -30,6 +30,8 @@ public interface IDataManager{
 
     File getWorldsDir();
 
+    File getScreenshotDir();
+
     File getGameDataFile();
 
     File getSettingsFile();
