@@ -21,6 +21,10 @@ package de.ellpeck.rockbottom.api.event.impl;
 import de.ellpeck.rockbottom.api.event.Event;
 import de.ellpeck.rockbottom.api.tile.entity.TileEntity;
 
+/**
+ * This event is fired when a {@link TileEntity} is trying to tick
+ * <br> Cancelling the event will cancel the tick
+ */
 public class TileEntityTickEvent extends Event{
 
     public final TileEntity tileEntity;

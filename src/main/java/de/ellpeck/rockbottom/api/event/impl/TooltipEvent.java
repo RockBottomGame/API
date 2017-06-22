@@ -26,6 +26,10 @@ import org.newdawn.slick.Graphics;
 
 import java.util.List;
 
+/**
+ * This event is fired when a tooltip is being rendered
+ * <br> Cancelling the event will stop the tooltip from rendering
+ */
 public class TooltipEvent extends Event{
 
     public final ItemInstance instance;

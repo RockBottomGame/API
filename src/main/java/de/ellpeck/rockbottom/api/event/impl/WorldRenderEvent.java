@@ -25,6 +25,10 @@ import de.ellpeck.rockbottom.api.event.Event;
 import de.ellpeck.rockbottom.api.world.IWorld;
 import org.newdawn.slick.Graphics;
 
+/**
+ * This event is fired after the world is rendered
+ * <br> It is not cancellable
+ */
 public class WorldRenderEvent extends Event{
 
     public final IGameInstance game;

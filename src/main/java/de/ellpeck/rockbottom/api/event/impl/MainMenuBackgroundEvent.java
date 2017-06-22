@@ -1,5 +1,5 @@
 /*
- * This file ("WorldTickEvent.java") is part of the RockBottomAPI by Ellpeck.
+ * This file ("MainMenuBackgroundEvent.java") is part of the RockBottomAPI by Ellpeck.
  * View the source code at <https://github.com/Ellpeck/RockBottomAPI>.
  *
  * The RockBottomAPI is free software: you can redistribute it and/or modify
@@ -19,17 +19,21 @@
 package de.ellpeck.rockbottom.api.event.impl;
 
 import de.ellpeck.rockbottom.api.event.Event;
-import de.ellpeck.rockbottom.api.world.IWorld;
+import de.ellpeck.rockbottom.api.tile.Tile;
 
 /**
- * This event is fired when the {@link IWorld} is trying to tick
- * <br> Cancelling it will cancel the tick
+ * This event is fired when the main menu background tries to place
+ * a new {@link Tile} in the background
+ * <br> It is not cancellable
+ * <br>
+ * <br> Note: Only tiles that use {@link de.ellpeck.rockbottom.api.render.tile.DefaultTileRenderer}
+ * will be able to render in the main menu background
  */
-public class WorldTickEvent extends Event{
+public class MainMenuBackgroundEvent extends Event{
 
-    public final IWorld world;
+    public Tile tileToPlace;
 
-    public WorldTickEvent(IWorld world){
-        this.world = world;
+    public MainMenuBackgroundEvent(Tile tileToPlace){
+        this.tileToPlace = tileToPlace;
     }
 }

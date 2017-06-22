@@ -21,6 +21,10 @@ package de.ellpeck.rockbottom.api.event.impl;
 import de.ellpeck.rockbottom.api.entity.Entity;
 import de.ellpeck.rockbottom.api.event.Event;
 
+/**
+ * This event is fired when an {@link Entity} is trying to tick
+ * <br> Cancelling this event will cancel the tick
+ */
 public class EntityTickEvent extends Event{
 
     public final Entity entity;

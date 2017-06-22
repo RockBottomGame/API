@@ -26,6 +26,10 @@ import de.ellpeck.rockbottom.api.gui.Gui;
 import de.ellpeck.rockbottom.api.gui.IGuiManager;
 import org.newdawn.slick.Graphics;
 
+/**
+ * This event is fired after the game overlay is rendered
+ * <br> It is not cancellable
+ */
 public class OverlayRenderEvent extends Event{
 
     public final IGameInstance game;
