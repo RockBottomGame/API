@@ -131,7 +131,7 @@ public interface IWorld extends IChunkOrWorld{
      * @param channel A channel if it is a connected player
      * @return The created player
      */
-    AbstractEntityPlayer createPlayer(UUID id, Channel channel);
+    AbstractEntityPlayer createPlayer(UUID id, String name, Channel channel);
 
     /**
      * Gets a player with the specified {@link UUID} from the world
@@ -140,6 +140,8 @@ public interface IWorld extends IChunkOrWorld{
      * @return The player, or {@code null} if there is no player with the id
      */
     AbstractEntityPlayer getPlayer(UUID id);
+
+    AbstractEntityPlayer getPlayer(String name);
 
     /**
      * Helper method to remove a tile, spawn its particles and spawn its drops

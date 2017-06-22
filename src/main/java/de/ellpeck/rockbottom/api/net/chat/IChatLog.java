@@ -31,7 +31,7 @@ public interface IChatLog{
 
     void displayMessage(String message);
 
-    void sendPlayerMessage(String message, AbstractEntityPlayer player, String playerName);
+    void sendPlayerMessage(String message, AbstractEntityPlayer player);
 
     void sendMessageToPlayer(AbstractEntityPlayer player, String message);
 

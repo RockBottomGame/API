@@ -27,6 +27,7 @@ import de.ellpeck.rockbottom.api.inventory.Inventory;
 import de.ellpeck.rockbottom.api.net.packet.IPacket;
 import de.ellpeck.rockbottom.api.world.IChunk;
 import de.ellpeck.rockbottom.api.world.IWorld;
+import org.newdawn.slick.Color;
 
 import java.util.List;
 
@@ -67,4 +68,10 @@ public abstract class AbstractEntityPlayer extends EntityLiving implements IInvC
     public abstract void setSelectedSlot(int slot);
 
     public abstract String getChatColorFormat();
+
+    public abstract void setName(String name);
+
+    public abstract String getName();
+
+    public abstract Color getColor();
 }
