@@ -25,6 +25,7 @@ import de.ellpeck.rockbottom.api.entity.Entity;
 import de.ellpeck.rockbottom.api.gui.component.ComponentSlot;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.world.IWorld;
+import de.ellpeck.rockbottom.api.world.TileLayer;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -208,4 +209,10 @@ public interface IApiHandler{
      * @param color The filter to be applied
      */
     void drawScaledImage(Graphics g, Image image, float x, float y, float scale, Color color);
+
+    int[] interpolateLight(IWorld world, int x, int y);
+
+    Color[] interpolateWorldColor(int[] interpolatedLight, TileLayer layer);
+
+    Color getColorByLight(int light, TileLayer layer);
 }

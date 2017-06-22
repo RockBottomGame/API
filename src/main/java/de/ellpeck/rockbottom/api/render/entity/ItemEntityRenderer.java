@@ -31,12 +31,12 @@ import org.newdawn.slick.Graphics;
 public class ItemEntityRenderer implements IEntityRenderer<EntityItem>{
 
     @Override
-    public void render(IGameInstance game, IAssetManager manager, Graphics g, IWorld world, EntityItem entity, float x, float y, Color[] light){
+    public void render(IGameInstance game, IAssetManager manager, Graphics g, IWorld world, EntityItem entity, float x, float y, Color light){
         Item item = entity.item.getItem();
         IItemRenderer renderer = item.getRenderer();
         if(renderer != null){
             float bob = (float)Math.sin(entity.ticksExisted/20D%(2*Math.PI))*0.1F;
-            renderer.render(game, manager, g, item, entity.item, x-0.25F, y+bob-0.45F, 0.5F, Util.getLightAtClosestCorner(entity.x, entity.y, light));
+            renderer.render(game, manager, g, item, entity.item, x-0.25F, y+bob-0.45F, 0.5F, light);
         }
     }
 }

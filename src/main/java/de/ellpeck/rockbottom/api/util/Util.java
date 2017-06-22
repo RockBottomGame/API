@@ -102,25 +102,4 @@ public final class Util{
             return s.substring(0, length);
         }
     }
-
-    public static Color getLightAtClosestCorner(double x, double y, Color[] light){
-        boolean ySmaller = (y-(int)y) <= 0.5;
-
-        if((x-(int)x) >= 0.5){
-            if(ySmaller){
-                return light[Image.TOP_RIGHT];
-            }
-            else{
-                return light[Image.BOTTOM_RIGHT];
-            }
-        }
-        else{
-            if(ySmaller){
-                return light[Image.TOP_LEFT];
-            }
-            else{
-                return light[Image.BOTTOM_RIGHT];
-            }
-        }
-    }
 }
