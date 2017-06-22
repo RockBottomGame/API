@@ -18,7 +18,6 @@
 
 package de.ellpeck.rockbottom.api.data.settings;
 
-import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.data.IDataManager;
 import de.ellpeck.rockbottom.api.util.Util;
 import org.newdawn.slick.Color;
@@ -72,7 +71,7 @@ public class Settings implements IPropSettings{
     public String lastServerIp;
 
     public static String getRandomChatName(){
-        return DEFAULT_NAMES[RockBottomAPI.RANDOM.nextInt(DEFAULT_NAMES.length)];
+        return DEFAULT_NAMES[Util.RANDOM.nextInt(DEFAULT_NAMES.length)];
     }
 
     @Override

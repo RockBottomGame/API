@@ -25,6 +25,7 @@ import de.ellpeck.rockbottom.api.entity.EntityItem;
 import de.ellpeck.rockbottom.api.inventory.IInventory;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.net.packet.toclient.PacketTileEntityData;
+import de.ellpeck.rockbottom.api.util.Util;
 import de.ellpeck.rockbottom.api.world.IWorld;
 import io.netty.buffer.ByteBuf;
 
@@ -95,7 +96,7 @@ public class TileEntity{
         for(int i = 0; i < inventory.getSlotAmount(); i++){
             ItemInstance inst = inventory.get(i);
             if(inst != null){
-                EntityItem.spawn(this.world, inst, this.x+0.5, this.y+0.5, RockBottomAPI.RANDOM.nextGaussian()*0.1, RockBottomAPI.RANDOM.nextGaussian()*0.1);
+                EntityItem.spawn(this.world, inst, this.x+0.5, this.y+0.5, Util.RANDOM.nextGaussian()*0.1, Util.RANDOM.nextGaussian()*0.1);
             }
         }
     }

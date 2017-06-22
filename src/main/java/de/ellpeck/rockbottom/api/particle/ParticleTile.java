@@ -19,10 +19,10 @@
 package de.ellpeck.rockbottom.api.particle;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
-import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.render.tile.ITileRenderer;
 import de.ellpeck.rockbottom.api.tile.Tile;
+import de.ellpeck.rockbottom.api.util.Util;
 import de.ellpeck.rockbottom.api.world.IWorld;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
@@ -35,7 +35,7 @@ public class ParticleTile extends Particle{
     private Color renderPixel;
 
     public ParticleTile(IWorld world, double x, double y, double motionX, double motionY, Tile tile, int meta){
-        super(world, x, y, motionX, motionY, RockBottomAPI.RANDOM.nextInt(30)+10);
+        super(world, x, y, motionX, motionY, Util.RANDOM.nextInt(30)+10);
         this.tile = tile;
         this.meta = meta;
     }
@@ -50,8 +50,8 @@ public class ParticleTile extends Particle{
                     int width = texture.getWidth();
                     int height = texture.getHeight();
 
-                    int pixelX = RockBottomAPI.RANDOM.nextInt(width);
-                    int pixelY = RockBottomAPI.RANDOM.nextInt(height);
+                    int pixelX = Util.RANDOM.nextInt(width);
+                    int pixelY = Util.RANDOM.nextInt(height);
                     this.renderPixel = texture.getColor(pixelX, pixelY).multiply(filter);
                 }
             }

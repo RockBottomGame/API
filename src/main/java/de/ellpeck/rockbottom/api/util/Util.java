@@ -31,7 +31,10 @@ import java.util.Random;
 
 public final class Util{
 
-    public static final Random RANDOM = RockBottomAPI.RANDOM;
+    /**
+     * An unseeded {@link Random} for general use
+     */
+    public static final Random RANDOM = new Random();
 
     public static double distance(double x1, double y1, double x2, double y2){
         return Math.sqrt(distanceSq(x1, y1, x2, y2));
