@@ -69,7 +69,7 @@ public final class GameContent{
         T thing = registry.get(res);
 
         if(thing == null){
-            throw new RuntimeException("Object with name "+res+" was not found in registry "+registry+"! This is probably due to GameContent being accessed before the game has initialized!");
+            throw new IllegalStateException("Object with name "+res+" was not found in registry "+registry+"! This is probably due to GameContent being accessed before the game has initialized!");
         }
         else{
             return thing;
