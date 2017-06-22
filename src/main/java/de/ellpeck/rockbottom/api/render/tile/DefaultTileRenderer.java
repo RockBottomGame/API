@@ -36,17 +36,17 @@ public class DefaultTileRenderer<T extends Tile> implements ITileRenderer<T>{
     }
 
     @Override
-    public void render(IGameInstance game, IAssetManager manager, Graphics g, IWorld world, T tile, int x, int y, float renderX, float renderY, float scale, Color filter){
-        manager.getImage(this.texture).draw(renderX, renderY, scale, scale, filter);
+    public void render(IGameInstance game, IAssetManager manager, Graphics g, IWorld world, T tile, int x, int y, float renderX, float renderY, float scale, Color[] light){
+        manager.getTexture(this.texture).drawWithLight(renderX, renderY, scale, scale, light);
     }
 
     @Override
     public void renderItem(IGameInstance game, IAssetManager manager, Graphics g, T tile, int meta, float x, float y, float scale, Color filter){
-        manager.getImage(this.texture).draw(x, y, scale, scale, filter);
+        manager.getTexture(this.texture).draw(x, y, scale, scale, filter);
     }
 
     @Override
     public Image getParticleTexture(IGameInstance game, IAssetManager manager, Graphics g, T tile, int meta){
-        return manager.getImage(this.texture);
+        return manager.getTexture(this.texture);
     }
 }

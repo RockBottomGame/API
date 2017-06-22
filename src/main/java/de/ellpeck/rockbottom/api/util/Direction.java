@@ -33,6 +33,8 @@ public enum Direction{
 
     public static final Direction[] ADJACENT = new Direction[]{UP, RIGHT, DOWN, LEFT};
     public static final Direction[] ADJACENT_INCLUDING_NONE = new Direction[]{NONE, UP, RIGHT, DOWN, LEFT};
+    public static final Direction[] DIAGONAL = new Direction[]{LEFT_UP, RIGHT_UP, RIGHT_DOWN, LEFT_DOWN};
+    public static final Direction[] DIAGONAL_INCLUDING_NONE = new Direction[]{NONE, LEFT_UP, RIGHT_UP, RIGHT_DOWN, LEFT_DOWN};
     public static final Direction[] SURROUNDING = new Direction[]{LEFT_UP, UP, RIGHT_UP, RIGHT, RIGHT_DOWN, DOWN, LEFT_DOWN, LEFT};
     public static final Direction[] SURROUNDING_INCLUDING_NONE = new Direction[]{NONE, LEFT_UP, UP, RIGHT_UP, RIGHT, RIGHT_DOWN, DOWN, LEFT_DOWN, LEFT};
     public final int x;

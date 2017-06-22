@@ -50,19 +50,19 @@ public class MultiTileRenderer<T extends MultiTile> extends DefaultTileRenderer<
     }
 
     @Override
-    public void render(IGameInstance game, IAssetManager manager, Graphics g, IWorld world, T tile, int x, int y, float renderX, float renderY, float scale, Color filter){
+    public void render(IGameInstance game, IAssetManager manager, Graphics g, IWorld world, T tile, int x, int y, float renderX, float renderY, float scale, Color[] light){
         Pos2 innerCoord = tile.getInnerCoord(world.getMeta(x, y));
-        manager.getImage(this.textures.get(innerCoord)).draw(renderX, renderY, scale, scale, filter);
+        manager.getTexture(this.textures.get(innerCoord)).drawWithLight(renderX, renderY, scale, scale, light);
     }
 
     @Override
     public Image getParticleTexture(IGameInstance game, IAssetManager manager, Graphics g, T tile, int meta){
         Pos2 innerCoord = tile.getInnerCoord(meta);
-        return manager.getImage(this.textures.get(innerCoord));
+        return manager.getTexture(this.textures.get(innerCoord));
     }
 
     @Override
     public void renderItem(IGameInstance game, IAssetManager manager, Graphics g, T tile, int meta, float x, float y, float scale, Color filter){
-        manager.getImage(this.texItem).draw(x, y, scale, scale, filter);
+        manager.getTexture(this.texItem).draw(x, y, scale, scale, filter);
     }
 }

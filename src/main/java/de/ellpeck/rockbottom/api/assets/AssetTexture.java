@@ -18,19 +18,19 @@
 
 package de.ellpeck.rockbottom.api.assets;
 
-import org.newdawn.slick.Image;
+import de.ellpeck.rockbottom.api.render.Texture;
 
-public class AssetImage implements IAsset<Image>{
+public class AssetTexture implements IAsset<Texture>{
 
-    private final Image image;
+    private final Texture texture;
 
-    public AssetImage(Image image){
-        this.image = image;
-        this.image.setFilter(Image.FILTER_NEAREST);
+    public AssetTexture(Texture texture){
+        this.texture = texture;
+        this.texture.setFilter(Texture.FILTER_NEAREST);
     }
 
     @Override
-    public Image get(){
-        return this.image;
+    public Texture get(){
+        return this.texture;
     }
 }

@@ -37,7 +37,7 @@ public class ItemMetaRenderer extends DefaultItemRenderer<ItemMeta>{
         int meta = instance.getMeta();
 
         if(meta >= 0 && item.subResourceNames.size() > meta){
-            manager.getImage(item.subResourceNames.get(meta)).draw(x, y, 1F*scale, 1F*scale, filter);
+            manager.getTexture(item.subResourceNames.get(meta)).draw(x, y, 1F*scale, 1F*scale, filter);
         }
         else{
             super.render(game, manager, g, item, instance, x, y, scale, filter);
