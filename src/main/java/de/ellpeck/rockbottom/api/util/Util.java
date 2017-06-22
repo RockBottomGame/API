@@ -104,9 +104,9 @@ public final class Util{
     }
 
     public static Color getLightAtClosestCorner(double x, double y, Color[] light){
-        boolean ySmaller = (y-(int)y) <= 0.5;
+        boolean ySmaller = (y % 1) <= 0.5;
 
-        if((x-(int)x) >= 0.5){
+        if((x % 1) >= 0.5){
             if(ySmaller){
                 return light[Image.TOP_RIGHT];
             }
