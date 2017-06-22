@@ -101,7 +101,7 @@ public class ComponentButton extends GuiComponent{
             return false;
         }
         else{
-            return true;
+            return false;
         }
     }
 
