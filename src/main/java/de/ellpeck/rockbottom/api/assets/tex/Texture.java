@@ -120,7 +120,7 @@ public class Texture extends Image{
         }
 
         GL.glBegin(SGL.GL_QUADS);
-        this.drawEmbeddedWithLight(0, 0, width, height, light, filter == null ? Color.transparent : filter);
+        this.drawEmbeddedWithLight(0, 0, width, height, light, filter == null ? Color.white : filter);
         GL.glEnd();
 
         if(this.angle != 0){
@@ -134,25 +134,25 @@ public class Texture extends Image{
     public void drawEmbeddedWithLight(float x, float y, float width, float height, Color[] light, Color filter){
         this.init();
 
-        this.bindCombinedColor(light[TOP_LEFT], filter);
+        this.bindMultipliedColor(light[TOP_LEFT], filter);
         GL.glTexCoord2f(this.textureOffsetX, this.textureOffsetY);
         GL.glVertex3f(x, y, 0);
-        this.bindCombinedColor(light[BOTTOM_LEFT], filter);
+        this.bindMultipliedColor(light[BOTTOM_LEFT], filter);
         GL.glTexCoord2f(this.textureOffsetX, this.textureOffsetY+this.textureHeight);
         GL.glVertex3f(x, y+height, 0);
-        this.bindCombinedColor(light[BOTTOM_RIGHT], filter);
+        this.bindMultipliedColor(light[BOTTOM_RIGHT], filter);
         GL.glTexCoord2f(this.textureOffsetX+this.textureWidth, this.textureOffsetY+this.textureHeight);
         GL.glVertex3f(x+width, y+height, 0);
-        this.bindCombinedColor(light[TOP_RIGHT], filter);
+        this.bindMultipliedColor(light[TOP_RIGHT], filter);
         GL.glTexCoord2f(this.textureOffsetX+this.textureWidth, this.textureOffsetY);
         GL.glVertex3f(x+width, y, 0);
     }
 
-    private void bindCombinedColor(Color first, Color second){
-        float r = Math.min(1F, first.r+second.r);
-        float g = Math.min(1F, first.g+second.g);
-        float b = Math.min(1F, first.b+second.b);
-        float a = Math.min(1F, first.a+second.a);
+    private void bindMultipliedColor(Color first, Color second){
+        float r = first.r*second.r;
+        float g = first.g*second.g;
+        float b = first.b*second.b;
+        float a = first.a*second.a;
 
         Renderer.get().glColor4f(r, g, b, a);
     }
