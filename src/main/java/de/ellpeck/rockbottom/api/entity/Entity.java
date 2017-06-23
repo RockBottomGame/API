@@ -21,6 +21,8 @@ package de.ellpeck.rockbottom.api.entity;
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.data.set.DataSet;
+import de.ellpeck.rockbottom.api.event.EventResult;
+import de.ellpeck.rockbottom.api.event.impl.EntityDeathEvent;
 import de.ellpeck.rockbottom.api.net.packet.toclient.PacketDeath;
 import de.ellpeck.rockbottom.api.render.entity.IEntityRenderer;
 import de.ellpeck.rockbottom.api.util.BoundBox;
@@ -97,10 +99,12 @@ public class Entity extends MovableWorldObject{
     }
 
     public void setDead(boolean dead){
-        this.dead = dead;
+        if(RockBottomAPI.getEventHandler().fireEvent(new EntityDeathEvent(this)) != EventResult.CANCELLED){
+            this.dead = dead;
 
-        if(RockBottomAPI.getNet().isServer()){
-            RockBottomAPI.getNet().sendToAllPlayers(this.world, new PacketDeath(this.getUniqueId()));
+            if(RockBottomAPI.getNet().isServer()){
+                RockBottomAPI.getNet().sendToAllPlayers(this.world, new PacketDeath(this.getUniqueId()));
+            }
         }
     }
 

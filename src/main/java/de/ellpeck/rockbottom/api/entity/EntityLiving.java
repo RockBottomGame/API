@@ -21,11 +21,13 @@ package de.ellpeck.rockbottom.api.entity;
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.data.set.DataSet;
+import de.ellpeck.rockbottom.api.event.EventResult;
+import de.ellpeck.rockbottom.api.event.impl.EntityDamageEvent;
 import de.ellpeck.rockbottom.api.world.IWorld;
 
 public abstract class EntityLiving extends Entity{
 
-    protected int health;
+    private int health;
     protected boolean jumping;
 
     public EntityLiving(IWorld world){
@@ -69,6 +71,13 @@ public abstract class EntityLiving extends Entity{
 
     public void setHealth(int health){
         this.health = health;
+    }
+
+    public void takeDamage(int amount){
+        EntityDamageEvent event = new EntityDamageEvent(this, amount);
+        if(RockBottomAPI.getEventHandler().fireEvent(event) != EventResult.CANCELLED){
+            this.setHealth(this.getHealth()-event.amount);
+        }
     }
 
     public abstract int getMaxHealth();

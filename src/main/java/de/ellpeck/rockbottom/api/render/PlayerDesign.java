@@ -22,7 +22,6 @@ import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.anim.Animation;
 import de.ellpeck.rockbottom.api.data.set.DataSet;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
-import io.netty.buffer.ByteBuf;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -62,10 +61,6 @@ public class PlayerDesign{
     public final Animation[] animations = new Animation[LAYERS.size()];
 
     public PlayerDesign(){
-        this.setAllAnimations();
-    }
-
-    public void setAllAnimations(){
         for(int i = 0; i < LAYERS.size(); i++){
             this.setAnimation(i);
         }

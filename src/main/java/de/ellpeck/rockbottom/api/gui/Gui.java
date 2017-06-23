@@ -19,7 +19,10 @@
 package de.ellpeck.rockbottom.api.gui;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
+import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
+import de.ellpeck.rockbottom.api.event.EventResult;
+import de.ellpeck.rockbottom.api.event.impl.ComponentRenderEvent;
 import de.ellpeck.rockbottom.api.gui.component.GuiComponent;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
@@ -102,7 +105,11 @@ public class Gui{
     }
 
     public void render(IGameInstance game, IAssetManager manager, Graphics g){
-        this.components.forEach(component -> component.render(game, manager, g));
+        for(GuiComponent component : this.components){
+            if(RockBottomAPI.getEventHandler().fireEvent(new ComponentRenderEvent(this, component)) != EventResult.CANCELLED){
+                component.render(game, manager, g);
+            }
+        }
     }
 
     public void renderOverlay(IGameInstance game, IAssetManager manager, Graphics g){
