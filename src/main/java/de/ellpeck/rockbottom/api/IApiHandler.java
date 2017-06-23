@@ -198,18 +198,6 @@ public interface IApiHandler{
      */
     void drawHoverInfo(IGameInstance game, IAssetManager manager, Graphics g, float x, float y, float scale, boolean firstLineOffset, boolean canLeaveScreen, int maxLength, List<String> text);
 
-    /**
-     * Draws an {@link Image} at the specified coordinates with the specified scale
-     *
-     * @param g     The current graphics context
-     * @param image The image to draw
-     * @param x     The x coordinate
-     * @param y     The y coordinate
-     * @param scale The scale
-     * @param color The filter to be applied
-     */
-    void drawScaledImage(Graphics g, Image image, float x, float y, float scale, Color color);
-
     int[] interpolateLight(IWorld world, int x, int y);
 
     Color[] interpolateWorldColor(int[] interpolatedLight, TileLayer layer);

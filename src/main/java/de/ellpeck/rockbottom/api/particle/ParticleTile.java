@@ -58,15 +58,8 @@ public class ParticleTile extends Particle{
         }
 
         if(this.renderPixel != null){
-            float scale = 0.4F;
-
-            g.pushTransform();
-            g.scale(scale, scale);
-
             g.setColor(this.renderPixel);
-            g.fillRect(x/scale-0.5F*scale, y/scale-0.5F*scale, 1F*scale, 1F*scale);
-
-            g.popTransform();
+            g.fillRect(x, y, 0.16F, 0.16F);
         }
     }
 }

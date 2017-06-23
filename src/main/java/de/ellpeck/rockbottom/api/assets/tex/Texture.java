@@ -16,12 +16,13 @@
  * along with the RockBottomAPI. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.ellpeck.rockbottom.api.render;
+package de.ellpeck.rockbottom.api.assets.tex;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.opengl.ImageData;
+import org.newdawn.slick.opengl.renderer.Renderer;
 import org.newdawn.slick.opengl.renderer.SGL;
 
 import java.io.InputStream;
@@ -109,10 +110,6 @@ public class Texture extends Image{
     }
 
     public void drawWithLight(float x, float y, float width, float height, Color[] light, Color filter){
-        if(filter != null){
-            filter.bind();
-        }
-
         this.texture.bind();
 
         GL.glTranslatef(x, y, 0);
@@ -123,7 +120,7 @@ public class Texture extends Image{
         }
 
         GL.glBegin(SGL.GL_QUADS);
-        this.drawEmbeddedWithLight(0, 0, width, height, light);
+        this.drawEmbeddedWithLight(0, 0, width, height, light, filter == null ? Color.transparent : filter);
         GL.glEnd();
 
         if(this.angle != 0){
@@ -134,20 +131,29 @@ public class Texture extends Image{
         GL.glTranslatef(-x, -y, 0);
     }
 
-    public void drawEmbeddedWithLight(float x, float y, float width, float height, Color[] light){
+    public void drawEmbeddedWithLight(float x, float y, float width, float height, Color[] light, Color filter){
         this.init();
 
-        light[TOP_LEFT].bind();
+        this.bindCombinedColor(light[TOP_LEFT], filter);
         GL.glTexCoord2f(this.textureOffsetX, this.textureOffsetY);
         GL.glVertex3f(x, y, 0);
-        light[BOTTOM_LEFT].bind();
+        this.bindCombinedColor(light[BOTTOM_LEFT], filter);
         GL.glTexCoord2f(this.textureOffsetX, this.textureOffsetY+this.textureHeight);
         GL.glVertex3f(x, y+height, 0);
-        light[BOTTOM_RIGHT].bind();
+        this.bindCombinedColor(light[BOTTOM_RIGHT], filter);
         GL.glTexCoord2f(this.textureOffsetX+this.textureWidth, this.textureOffsetY+this.textureHeight);
         GL.glVertex3f(x+width, y+height, 0);
-        light[TOP_RIGHT].bind();
+        this.bindCombinedColor(light[TOP_RIGHT], filter);
         GL.glTexCoord2f(this.textureOffsetX+this.textureWidth, this.textureOffsetY);
         GL.glVertex3f(x+width, y, 0);
+    }
+
+    private void bindCombinedColor(Color first, Color second){
+        float r = Math.min(1F, first.r+second.r);
+        float g = Math.min(1F, first.g+second.g);
+        float b = Math.min(1F, first.b+second.b);
+        float a = Math.min(1F, first.a+second.a);
+
+        Renderer.get().glColor4f(r, g, b, a);
     }
 }

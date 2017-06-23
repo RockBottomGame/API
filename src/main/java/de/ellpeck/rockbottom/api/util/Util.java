@@ -25,6 +25,7 @@ import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 import de.ellpeck.rockbottom.api.world.IWorld;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.opengl.renderer.Renderer;
 import org.newdawn.slick.util.Log;
 
 import java.io.File;
@@ -102,4 +103,5 @@ public final class Util{
             return s.substring(0, length);
         }
     }
+
 }

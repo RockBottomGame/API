@@ -1,5 +1,5 @@
 /*
- * This file ("AssetImage.java") is part of the RockBottomAPI by Ellpeck.
+ * This file ("AssetTexture.java") is part of the RockBottomAPI by Ellpeck.
  * View the source code at <https://github.com/Ellpeck/RockBottomAPI>.
  *
  * The RockBottomAPI is free software: you can redistribute it and/or modify
@@ -16,9 +16,9 @@
  * along with the RockBottomAPI. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.ellpeck.rockbottom.api.assets;
+package de.ellpeck.rockbottom.api.assets.tex;
 
-import de.ellpeck.rockbottom.api.render.Texture;
+import de.ellpeck.rockbottom.api.assets.IAsset;
 
 public class AssetTexture implements IAsset<Texture>{
 
