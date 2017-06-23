@@ -105,8 +105,9 @@ public class Gui{
     }
 
     public void render(IGameInstance game, IAssetManager manager, Graphics g){
-        for(GuiComponent component : this.components){
-            if(RockBottomAPI.getEventHandler().fireEvent(new ComponentRenderEvent(this, component)) != EventResult.CANCELLED){
+        for(int i = 0; i < this.components.size(); i++){
+            GuiComponent component = this.components.get(i);
+            if(RockBottomAPI.getEventHandler().fireEvent(new ComponentRenderEvent(this, i, component)) != EventResult.CANCELLED){
                 component.render(game, manager, g);
             }
         }

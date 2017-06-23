@@ -29,10 +29,12 @@ import de.ellpeck.rockbottom.api.gui.component.GuiComponent;
 public class ComponentRenderEvent extends Event{
 
     public final Gui gui;
+    public final int id;
     public final GuiComponent component;
 
-    public ComponentRenderEvent(Gui gui, GuiComponent component){
+    public ComponentRenderEvent(Gui gui, int id, GuiComponent component){
         this.gui = gui;
+        this.id = id;
         this.component = component;
     }
 }
