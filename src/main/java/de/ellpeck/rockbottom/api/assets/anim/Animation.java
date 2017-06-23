@@ -18,6 +18,8 @@
 
 package de.ellpeck.rockbottom.api.assets.anim;
 
+import de.ellpeck.rockbottom.api.Constants;
+import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.tex.Texture;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.SlickException;
@@ -28,6 +30,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class Animation{
 
@@ -88,18 +91,18 @@ public class Animation{
             frame = 0;
         }
 
-        float srcX= frame*this.frameWidth;
+        float srcX = frame*this.frameWidth;
         float srcY = row*this.frameHeight;
-        this.texture.draw(x, y, x+this.frameWidth*scale, y+this.frameHeight*scale, srcX, srcY, srcX+this.frameWidth, srcY+this.frameHeight, filter);
+        this.texture.draw(x, y, x+1F, y+(this.frameHeight/this.frameWidth), srcX, srcY, srcX+this.frameWidth, srcY+this.frameHeight, filter);
     }
 
-    public void drawRow(int row, float x, float y, float scale, Color filter){
+    public void drawRow(int timer, int row, float x, float y, float scale, Color filter){
         if(row < 0 || row >= this.rows.size()){
             row = 0;
         }
         AnimationRow theRow = this.rows.get(row);
 
-        int frame = (int)(System.currentTimeMillis()/(theRow.getFrameTime()*1000))%theRow.getFrameAmount();
+        int frame = (int)((timer/(theRow.getFrameTime()*Constants.TARGET_TPS))%theRow.getFrameAmount());
         this.drawFrame(row, frame, x, y, scale, filter);
     }
 }
