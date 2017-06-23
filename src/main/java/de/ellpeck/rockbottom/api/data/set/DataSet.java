@@ -42,7 +42,7 @@ public class DataSet{
         return this.data.containsKey(key);
     }
 
-    private <T> T getPartContent(String key, Class<? extends DataPart<T>> typeClass, T defaultValue){
+    public <T> T getPartContent(String key, Class<? extends DataPart<T>> typeClass, T defaultValue){
         DataPart part = this.data.get(key);
 
         if(part != null && part.getClass() == typeClass){
