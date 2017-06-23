@@ -25,7 +25,7 @@ import de.ellpeck.rockbottom.api.gui.container.ItemContainer;
 import de.ellpeck.rockbottom.api.inventory.IInvChangeCallback;
 import de.ellpeck.rockbottom.api.inventory.Inventory;
 import de.ellpeck.rockbottom.api.net.packet.IPacket;
-import de.ellpeck.rockbottom.api.render.PlayerDesign;
+import de.ellpeck.rockbottom.api.render.IPlayerDesign;
 import de.ellpeck.rockbottom.api.world.IChunk;
 import de.ellpeck.rockbottom.api.world.IWorld;
 import org.newdawn.slick.Color;
@@ -70,11 +70,9 @@ public abstract class AbstractEntityPlayer extends EntityLiving implements IInvC
 
     public abstract String getChatColorFormat();
 
-    public abstract void setName(String name);
-
     public abstract String getName();
 
     public abstract Color getColor();
 
-    public abstract PlayerDesign getDesign();
+    public abstract IPlayerDesign getDesign();
 }

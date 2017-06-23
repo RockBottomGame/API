@@ -20,6 +20,7 @@ package de.ellpeck.rockbottom.api.world;
 
 import de.ellpeck.rockbottom.api.entity.Entity;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
+import de.ellpeck.rockbottom.api.render.IPlayerDesign;
 import de.ellpeck.rockbottom.api.tile.Tile;
 import de.ellpeck.rockbottom.api.util.BoundBox;
 import de.ellpeck.rockbottom.api.util.reg.NameToIndexInfo;
@@ -131,7 +132,7 @@ public interface IWorld extends IChunkOrWorld{
      * @param channel A channel if it is a connected player
      * @return The created player
      */
-    AbstractEntityPlayer createPlayer(UUID id, String name, Channel channel);
+    AbstractEntityPlayer createPlayer(UUID id, IPlayerDesign design, Channel channel);
 
     /**
      * Gets a player with the specified {@link UUID} from the world

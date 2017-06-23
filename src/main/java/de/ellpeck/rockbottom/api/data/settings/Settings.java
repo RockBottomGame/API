@@ -33,7 +33,6 @@ public class Settings implements IPropSettings{
     public static final float DEFAULT_GUI_R = 0.32156864F;
     public static final float DEFAULT_GUI_G = 0.5882353F;
     public static final float DEFAULT_GUI_B = 0.32156864F;
-    private static final String[] DEFAULT_NAMES = new String[]{"Bob", "Doley", "Jason", "Huffelpuff", "Megan", "Jennifer", "Bottle", "Bus Stop", "ThePlayer99", "Genelele", "Karina", "Heinz", "Ketchup", "Dan", "David", "Penguin", "Hubert", "Penny", "Vinny", "Xx_TheBestLP_xX", "Bozo", "Patrick", "InigoMontoya", "Pebbles", "Noodles", "Milkshake"};
     public List<Keybind> keybinds = new ArrayList<>();
     public Keybind keyInventory = new Keybind("inventory", Input.KEY_E);
     public Keybind keyMenu = new Keybind("menu", Input.KEY_ESCAPE);
@@ -44,7 +43,6 @@ public class Settings implements IPropSettings{
     public Keybind keyChat = new Keybind("chat", Input.KEY_ENTER);
     public Keybind keyAdvancedInfo = new Keybind("advanced_info", Input.KEY_LSHIFT);
     public Keybind keyScreenshot = new Keybind("screenshot", Input.KEY_F10);
-    public String chatName;
 
     public int targetFps;
     public int autosaveIntervalSeconds;
@@ -71,17 +69,11 @@ public class Settings implements IPropSettings{
 
     public String lastServerIp;
 
-    public static String getRandomChatName(){
-        return DEFAULT_NAMES[Util.RANDOM.nextInt(DEFAULT_NAMES.length)];
-    }
-
     @Override
     public void load(Properties props){
         for(Keybind bind : this.keybinds){
             bind.key = this.getProp(props, "key_"+bind.name, bind.def);
         }
-
-        this.chatName = Util.trimString(this.getProp(props, "chat_name", getRandomChatName()), 24).trim();
 
         this.targetFps = this.getProp(props, "target_fps", 60);
         this.autosaveIntervalSeconds = this.getProp(props, "autosave_interval", 60);
@@ -118,8 +110,6 @@ public class Settings implements IPropSettings{
         for(Keybind bind : this.keybinds){
             this.setProp(props, "key_"+bind.name, bind.key);
         }
-
-        this.setProp(props, "chat_name", this.chatName);
 
         this.setProp(props, "target_fps", this.targetFps);
         this.setProp(props, "autosave_interval", this.autosaveIntervalSeconds);
