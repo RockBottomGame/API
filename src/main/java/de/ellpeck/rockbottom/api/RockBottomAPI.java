@@ -68,7 +68,8 @@ public final class RockBottomAPI{
     public static final NameRegistry<Class<? extends Entity>> ENTITY_REGISTRY = new NameRegistry<>("entity_registry");
     /**
      * The registry for {@link de.ellpeck.rockbottom.api.data.set.DataSet} parts
-     * <br> Use {@link IndexRegistry#getNextFreeId} to register a custom part
+     * <br> DO NOT use {@link IndexRegistry#getNextFreeId} to register a custom part
+     * and try not to register new {@link DataPart} types in general
      */
     public static final IndexRegistry<Class<? extends DataPart>> PART_REGISTRY = new IndexRegistry<>("part_registry", Byte.MAX_VALUE);
     /**
