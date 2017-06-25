@@ -21,6 +21,18 @@ dependencies {
     compile group: 'net.sf.jopt-simple', name: 'jopt-simple', version: '4.9'
 }
 
+task processSources(type: Copy) {
+    from sourceSets.main.allSource
+    into 'build/processedSrc'
+    filter(ReplaceTokens, tokens: ["VERSION": version])
+}
+
+compileJava {
+    source = processSources.destinationDir
+}
+
+compileJava.dependsOn(processSources)
+
 task sourcesJar(type: Jar) {
     from sourceSets.main.java
     classifier = 'sources'
