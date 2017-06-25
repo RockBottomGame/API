@@ -24,8 +24,6 @@ import de.ellpeck.rockbottom.api.entity.Entity;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 import de.ellpeck.rockbottom.api.world.IWorld;
 import org.newdawn.slick.Color;
-import org.newdawn.slick.Image;
-import org.newdawn.slick.opengl.renderer.Renderer;
 import org.newdawn.slick.util.Log;
 
 import java.io.File;
@@ -81,6 +79,10 @@ public final class Util{
 
     public static Color randomColor(Random rand){
         return new Color(rand.nextFloat(), rand.nextFloat(), rand.nextFloat());
+    }
+
+    public static int toIntColor(Color color){
+        return (color.getRedByte() << 24)+(color.getGreenByte() << 16)+(color.getBlueByte() << 8)+color.getAlphaByte();
     }
 
     public static Entity createEntity(IResourceName name, IWorld world){

@@ -19,7 +19,6 @@
 package de.ellpeck.rockbottom.api.render;
 
 import de.ellpeck.rockbottom.api.RockBottomAPI;
-import de.ellpeck.rockbottom.api.assets.anim.Animation;
 import de.ellpeck.rockbottom.api.data.set.DataSet;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 import io.netty.buffer.ByteBuf;
@@ -31,52 +30,124 @@ import java.util.List;
 
 public interface IPlayerDesign{
 
-    List<IResourceName> BASE = new ArrayList<>(Arrays.asList(
-            RockBottomAPI.createInternalRes("male_white")
-    ));
-    List<IResourceName> SHIRT = new ArrayList<>(Arrays.asList(
-            RockBottomAPI.createInternalRes("basic")
-    ));
-    List<IResourceName> ARMS = new ArrayList<>(Arrays.asList(
-            RockBottomAPI.createInternalRes("hanging_white")
-    ));
-    List<IResourceName> SLEEVES = new ArrayList<>(Arrays.asList(
-            RockBottomAPI.createInternalRes("hanging_basic")
-    ));
-    List<IResourceName> PANTS = new ArrayList<>(Arrays.asList(
-            RockBottomAPI.createInternalRes("null")
-    ));
-    List<IResourceName> BOOTS = new ArrayList<>(Arrays.asList(
-            RockBottomAPI.createInternalRes("basic")
-    ));
-    List<IResourceName> HAIR = new ArrayList<>(Arrays.asList(
-            RockBottomAPI.createInternalRes("null")
-    ));
-    List<IResourceName> ACCESSORY = new ArrayList<>(Arrays.asList(
-            RockBottomAPI.createInternalRes("sunglasses")
-    ));
-    List<List<IResourceName>> LAYERS = Arrays.asList(BASE, SHIRT, ARMS, SLEEVES, PANTS, BOOTS, HAIR, ACCESSORY);
-    List<String> LAYER_NAMES = Arrays.asList("base", "shirt", "arm", "sleeve", "pants", "boot", "hair", "accessory");
+    IResourceName EYES = RockBottomAPI.createInternalRes("player.base.eyes");
 
-    void setAnimation(int layer);
+    List<IResourceName> BASE = Arrays.asList(
+            RockBottomAPI.createInternalRes("player.base.male_skin_1"),
+            RockBottomAPI.createInternalRes("player.base.male_skin_2"),
+            RockBottomAPI.createInternalRes("player.base.male_skin_3"),
+            RockBottomAPI.createInternalRes("player.base.male_skin_4"),
+            RockBottomAPI.createInternalRes("player.base.male_skin_5")
+    );
+
+    List<IResourceName> SHIRT = new ArrayList<>(Arrays.asList(
+            RockBottomAPI.createInternalRes("player.shirt.1"),
+            RockBottomAPI.createInternalRes("player.shirt.2"),
+            RockBottomAPI.createInternalRes("player.shirt.3"),
+            RockBottomAPI.createInternalRes("player.shirt.4")
+    ));
+
+    List<IResourceName> ARMS = Arrays.asList(
+            RockBottomAPI.createInternalRes("player.arm.skin_1"),
+            RockBottomAPI.createInternalRes("player.arm.skin_2"),
+            RockBottomAPI.createInternalRes("player.arm.skin_3"),
+            RockBottomAPI.createInternalRes("player.arm.skin_4"),
+            RockBottomAPI.createInternalRes("player.arm.skin_5")
+    );
+
+    List<IResourceName> SLEEVES = new ArrayList<>(Arrays.asList(
+            RockBottomAPI.createInternalRes("player.sleeve.1"),
+            RockBottomAPI.createInternalRes("player.sleeve.2"),
+            RockBottomAPI.createInternalRes("player.sleeve.3")
+    ));
+
+    List<IResourceName> PANTS = new ArrayList<>(Arrays.asList(
+            RockBottomAPI.createInternalRes("player.pants.1"),
+            RockBottomAPI.createInternalRes("player.pants.2")
+    ));
+
+    List<IResourceName> FOOTWEAR = new ArrayList<>(Arrays.asList(
+            RockBottomAPI.createInternalRes("player.footwear.boots"),
+            RockBottomAPI.createInternalRes("player.footwear.flip_flops"),
+            RockBottomAPI.createInternalRes("player.footwear.shoes_1"),
+            RockBottomAPI.createInternalRes("player.footwear.shoes_2"),
+            RockBottomAPI.createInternalRes("player.footwear.slippers")
+    ));
+
+    List<IResourceName> HAIR = new ArrayList<>(Arrays.asList(
+            RockBottomAPI.createInternalRes("player.hair.1"),
+            RockBottomAPI.createInternalRes("player.hair.2")
+    ));
+
+    List<IResourceName> ACCESSORIES = new ArrayList<>(Arrays.asList(
+            RockBottomAPI.createInternalRes("player.accessory.monocle_1"),
+            RockBottomAPI.createInternalRes("player.accessory.monocle_2"),
+            RockBottomAPI.createInternalRes("player.accessory.sunglasses_1"),
+            RockBottomAPI.createInternalRes("player.accessory.sunglasses_2"),
+            RockBottomAPI.createInternalRes("player.accessory.sunglasses_3")
+    ));
 
     void save(DataSet set);
 
     void load(DataSet set);
 
-    void toBuf(ByteBuf buf);
+    Color getFavoriteColor();
 
-    void fromBuf(ByteBuf buf);
-
-    int[] getIndices();
-
-    Animation[] getAnimations();
-
-    Color getColor();
-
-    void setColor(Color color);
+    void setFavoriteColor(Color color);
 
     String getName();
 
     void setName(String name);
+
+    int getBase();
+
+    Color getEyeColor();
+
+    int getShirt();
+
+    Color getShirtColor();
+
+    int getSleeves();
+
+    Color getSleevesColor();
+
+    int getPants();
+
+    Color getPantsColor();
+
+    int getFootwear();
+
+    Color getFootwearColor();
+
+    int getHair();
+
+    Color getHairColor();
+
+    int getAccessory();
+
+    void setBase(int base);
+
+    void setEyeColor(Color eyeColor);
+
+    void setShirt(int shirt);
+
+    void setShirtColor(Color shirtColor);
+
+    void setSleeves(int sleeves);
+
+    void setSleevesColor(Color sleevesColor);
+
+    void setPants(int pants);
+
+    void setPantsColor(Color pantsColor);
+
+    void setFootwear(int footwear);
+
+    void setFootwearColor(Color footwearColor);
+
+    void setHair(int hair);
+
+    void setHairColor(Color hairColor);
+
+    void setAccessory(int accessory);
 }

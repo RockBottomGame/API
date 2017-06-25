@@ -19,7 +19,6 @@
 package de.ellpeck.rockbottom.api.data.settings;
 
 import de.ellpeck.rockbottom.api.data.IDataManager;
-import de.ellpeck.rockbottom.api.util.Util;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Input;
 
