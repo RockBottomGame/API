@@ -48,10 +48,8 @@ public final class RockBottomAPI{
 
     /**
      * The current API version
-     * <br> Is defined on compile by the gradle build script
-     * Check the build.gradle file for the version in dev
      */
-    public static final String VERSION = "@VERSION@";
+    public static final String VERSION = "0.0.5";
 
     /**
      * The registry for {@link Tile}
