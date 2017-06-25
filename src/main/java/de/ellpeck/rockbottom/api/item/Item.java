@@ -63,6 +63,10 @@ public class Item{
         return this.unlocName;
     }
 
+    public String getLocalizedName(ItemInstance instance){
+        return RockBottomAPI.getGame().getAssetManager().localize(this.getUnlocalizedName(instance));
+    }
+
     public void describeItem(IAssetManager manager, ItemInstance instance, List<String> desc, boolean isAdvanced){
         desc.add(instance.getDisplayName());
     }
