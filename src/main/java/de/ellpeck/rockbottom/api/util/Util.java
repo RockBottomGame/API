@@ -82,7 +82,11 @@ public final class Util{
     }
 
     public static int toIntColor(Color color){
-        return (color.getRedByte() << 24)+(color.getGreenByte() << 16)+(color.getBlueByte() << 8)+color.getAlphaByte();
+        return (color.getRedByte() << 16)+(color.getGreenByte() << 8)+color.getBlueByte()+(color.getAlphaByte() << 24);
+    }
+
+    public static String colorToFormattingCode(Color color){
+        return "&("+color.r+","+color.g+","+color.b+")";
     }
 
     public static Entity createEntity(IResourceName name, IWorld world){

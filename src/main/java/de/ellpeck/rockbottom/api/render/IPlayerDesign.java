@@ -21,7 +21,6 @@ package de.ellpeck.rockbottom.api.render;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.data.set.DataSet;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
-import io.netty.buffer.ByteBuf;
 import org.newdawn.slick.Color;
 
 import java.util.ArrayList;
@@ -44,7 +43,8 @@ public interface IPlayerDesign{
             RockBottomAPI.createInternalRes("player.shirt.1"),
             RockBottomAPI.createInternalRes("player.shirt.2"),
             RockBottomAPI.createInternalRes("player.shirt.3"),
-            RockBottomAPI.createInternalRes("player.shirt.4")
+            RockBottomAPI.createInternalRes("player.shirt.4"),
+            null
     ));
 
     List<IResourceName> ARMS = Arrays.asList(
@@ -58,12 +58,14 @@ public interface IPlayerDesign{
     List<IResourceName> SLEEVES = new ArrayList<>(Arrays.asList(
             RockBottomAPI.createInternalRes("player.sleeve.1"),
             RockBottomAPI.createInternalRes("player.sleeve.2"),
-            RockBottomAPI.createInternalRes("player.sleeve.3")
+            RockBottomAPI.createInternalRes("player.sleeve.3"),
+            null
     ));
 
     List<IResourceName> PANTS = new ArrayList<>(Arrays.asList(
             RockBottomAPI.createInternalRes("player.pants.1"),
-            RockBottomAPI.createInternalRes("player.pants.2")
+            RockBottomAPI.createInternalRes("player.pants.2"),
+            null
     ));
 
     List<IResourceName> FOOTWEAR = new ArrayList<>(Arrays.asList(
@@ -71,21 +73,28 @@ public interface IPlayerDesign{
             RockBottomAPI.createInternalRes("player.footwear.flip_flops"),
             RockBottomAPI.createInternalRes("player.footwear.shoes_1"),
             RockBottomAPI.createInternalRes("player.footwear.shoes_2"),
-            RockBottomAPI.createInternalRes("player.footwear.slippers")
+            RockBottomAPI.createInternalRes("player.footwear.slippers"),
+            null
     ));
 
     List<IResourceName> HAIR = new ArrayList<>(Arrays.asList(
             RockBottomAPI.createInternalRes("player.hair.1"),
-            RockBottomAPI.createInternalRes("player.hair.2")
+            RockBottomAPI.createInternalRes("player.hair.2"),
+            null
     ));
 
     List<IResourceName> ACCESSORIES = new ArrayList<>(Arrays.asList(
+            null,
             RockBottomAPI.createInternalRes("player.accessory.monocle_1"),
             RockBottomAPI.createInternalRes("player.accessory.monocle_2"),
             RockBottomAPI.createInternalRes("player.accessory.sunglasses_1"),
             RockBottomAPI.createInternalRes("player.accessory.sunglasses_2"),
             RockBottomAPI.createInternalRes("player.accessory.sunglasses_3")
     ));
+
+    void saveToFile();
+
+    void loadFromFile();
 
     void save(DataSet set);
 

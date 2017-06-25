@@ -184,7 +184,7 @@ public class Font{
                 float x2 = x+(float)this.charWidth*scale;
                 float y2 = y+(float)this.charHeight*scale;
 
-                float shadowOffset = 2.5F*scale;
+                float shadowOffset = 2F*scale;
                 this.image.draw(x+shadowOffset, y+shadowOffset, x2+shadowOffset, y2+shadowOffset, srcX, srcY, srcX+this.charWidth, srcY+this.charHeight, Color.black);
 
                 this.image.draw(x, y, x2, y2, srcX, srcY, srcX+this.charWidth, srcY+this.charHeight, color);

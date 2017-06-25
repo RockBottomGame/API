@@ -103,6 +103,10 @@ public class ComponentInputField extends GuiComponent{
         return this.text;
     }
 
+    public String getDisplayText(){
+        return this.getText();
+    }
+
     @Override
     public void render(IGameInstance game, IAssetManager manager, Graphics g){
         if(this.renderBox){
@@ -113,15 +117,17 @@ public class ComponentInputField extends GuiComponent{
             g.drawRect(this.x, this.y, this.sizeX, this.sizeY);
         }
 
-        String text = this.text+(this.isActive ? ((this.counter/15)%2 == 0 ? "|" : " ") : "");
-
         Font font = manager.getFont();
-        font.drawCutOffString(this.x+3, this.y+this.sizeY/2F-font.getHeight(0.35F)/2F, text, 0.35F, this.sizeX-6, true, false);
+        String text = this.getDisplayText();
+
+        String display = text+(this.isActive ? ((this.counter/15)%2 == 0 ? "|" : " ") : "");
+        font.drawCutOffString(this.x+3, this.y+this.sizeY/2F-font.getHeight(0.35F)/2F, display, 0.35F, this.sizeX-6, true, false);
 
         if(this.displaxMaxLength){
-            int diff = this.maxLength-this.text.length();
+            String textWithoutFormatting = font.removeFormatting(text);
+            int diff = this.maxLength-textWithoutFormatting.length();
             FormattingCode format = diff <= 0 ? FormattingCode.RED : (diff <= this.maxLength/8 ? FormattingCode.ORANGE : (diff <= this.maxLength/4 ? FormattingCode.YELLOW : FormattingCode.NONE));
-            font.drawStringFromRight(this.x+this.sizeX-1, this.y+this.sizeY-font.getHeight(0.2F), format.toString()+this.text.length()+"/"+this.maxLength, 0.2F);
+            font.drawStringFromRight(this.x+this.sizeX-1, this.y+this.sizeY-font.getHeight(0.2F), format.toString()+textWithoutFormatting.length()+"/"+this.maxLength, 0.2F);
         }
     }
 
