@@ -1,3 +1,5 @@
+import org.apache.tools.ant.filters.ReplaceTokens
+
 group 'de.ellpeck.rockbottom'
 version '0.0.5'
 
@@ -19,6 +21,16 @@ dependencies {
     compile group: 'org.slick2d', name: 'slick2d-core', version: '1.0.2'
     compile group: 'io.netty', name: 'netty-all', version: '4.1.11.Final'
     compile group: 'net.sf.jopt-simple', name: 'jopt-simple', version: '4.9'
+}
+
+task processSources(type: Copy) {
+    from sourceSets.main.allSource
+    into 'build/processedSrc'
+    filter(ReplaceTokens, tokens: ["VERSION": version])
+}
+
+compileJava {
+    source = processSources.destinationDir
 }
 
 task sourcesJar(type: Jar) {
