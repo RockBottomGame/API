@@ -48,7 +48,7 @@ apply plugin: 'maven-publish'
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            artifact jar
+            from components.java
             artifact sourcesJar
 	    artifact javadocJar
         }
