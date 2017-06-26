@@ -20,9 +20,9 @@ package de.ellpeck.rockbottom.api.world.gen;
 
 public interface INoiseGen{
 
-    double make2dNoise(double xin, double yin);
+    double make2dNoise(double x, double y);
 
-    double make3dNoise(double xin, double yin, double zin);
+    double make3dNoise(double x, double y, double z);
 
     double make4dNoise(double x, double y, double z, double w);
 }
