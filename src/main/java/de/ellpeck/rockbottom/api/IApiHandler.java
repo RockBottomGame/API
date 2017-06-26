@@ -26,6 +26,7 @@ import de.ellpeck.rockbottom.api.gui.component.ComponentSlot;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.world.IWorld;
 import de.ellpeck.rockbottom.api.world.TileLayer;
+import de.ellpeck.rockbottom.api.world.gen.INoiseGen;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -34,6 +35,7 @@ import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.File;
 import java.util.List;
+import java.util.Random;
 
 /**
  * The API handler can be used for executing code that is not part
@@ -203,4 +205,6 @@ public interface IApiHandler{
     Color[] interpolateWorldColor(int[] interpolatedLight, TileLayer layer);
 
     Color getColorByLight(int light, TileLayer layer);
+
+    INoiseGen makeSimplexNoise(Random random);
 }

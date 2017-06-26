@@ -24,6 +24,7 @@ import de.ellpeck.rockbottom.api.render.IPlayerDesign;
 import de.ellpeck.rockbottom.api.tile.Tile;
 import de.ellpeck.rockbottom.api.util.BoundBox;
 import de.ellpeck.rockbottom.api.util.reg.NameToIndexInfo;
+import de.ellpeck.rockbottom.api.world.gen.IWorldGenerator;
 import de.ellpeck.rockbottom.api.world.gen.biome.Biome;
 import io.netty.channel.Channel;
 
@@ -184,4 +185,6 @@ public interface IWorld extends IChunkOrWorld{
      * @param player The player
      */
     void savePlayer(AbstractEntityPlayer player);
+
+    List<IWorldGenerator> getSortedGenerators();
 }

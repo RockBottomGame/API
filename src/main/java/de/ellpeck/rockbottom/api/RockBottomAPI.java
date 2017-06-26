@@ -106,8 +106,10 @@ public final class RockBottomAPI{
     /**
      * The registry for {@link IWorldGenerator}
      * <br> Use this to register custom world generators
+     * <br> Every world generator class needs to have an empty constructor to be able
+     * to be initialized for the appropriate world
      */
-    public static final List<IWorldGenerator> WORLD_GENERATORS = new ArrayList<>();
+    public static final List<Class<? extends IWorldGenerator>> WORLD_GENERATORS = new ArrayList<>();
     /**
      * The registry for {@link Biome}
      * <br> Use this to register custom biomes

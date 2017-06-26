@@ -1,5 +1,5 @@
 /*
- * This file ("IWorldGenerator.java") is part of the RockBottomAPI by Ellpeck.
+ * This file ("INoiseGen.java") is part of the RockBottomAPI by Ellpeck.
  * View the source code at <https://github.com/Ellpeck/RockBottomAPI>.
  *
  * The RockBottomAPI is free software: you can redistribute it and/or modify
@@ -18,21 +18,11 @@
 
 package de.ellpeck.rockbottom.api.world.gen;
 
-import de.ellpeck.rockbottom.api.world.IChunk;
-import de.ellpeck.rockbottom.api.world.IWorld;
+public interface INoiseGen{
 
-import java.util.Random;
+    double make2dNoise(double xin, double yin);
 
-public interface IWorldGenerator{
+    double make3dNoise(double xin, double yin, double zin);
 
-    default void initWorld(IWorld world, Random rand){
-
-    }
-
-    boolean shouldGenerate(IWorld world, IChunk chunk, Random rand);
-
-    void generate(IWorld world, IChunk chunk, Random rand);
-
-    int getPriority();
-
+    double make4dNoise(double x, double y, double z, double w);
 }

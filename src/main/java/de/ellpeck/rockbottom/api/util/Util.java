@@ -60,10 +60,6 @@ public final class Util{
         return floor(worldPos/(double)Constants.CHUNK_SIZE);
     }
 
-    public static int toGridAlignedWorldPos(double worldPos){
-        return toGridPos(worldPos)*Constants.CHUNK_SIZE;
-    }
-
     public static int toWorldPos(int gridPos){
         return gridPos*Constants.CHUNK_SIZE;
     }
