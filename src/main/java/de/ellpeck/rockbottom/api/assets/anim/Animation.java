@@ -19,7 +19,6 @@
 package de.ellpeck.rockbottom.api.assets.anim;
 
 import de.ellpeck.rockbottom.api.Constants;
-import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.tex.Texture;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.SlickException;
@@ -30,7 +29,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class Animation{
 

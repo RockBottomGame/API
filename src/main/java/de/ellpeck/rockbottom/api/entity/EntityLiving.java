@@ -28,7 +28,7 @@ import de.ellpeck.rockbottom.api.world.IWorld;
 public abstract class EntityLiving extends Entity{
 
     private int health;
-    protected boolean jumping;
+    public boolean jumping;
 
     public EntityLiving(IWorld world){
         super(world);
