@@ -107,6 +107,7 @@ public interface IPlayerDesign{
     ));
 
     List<IResourceName> MOUTH = new ArrayList<>(Arrays.asList(
+            null,
             RockBottomAPI.createInternalRes("player.mouth.1"),
             RockBottomAPI.createInternalRes("player.mouth.2"),
             RockBottomAPI.createInternalRes("player.mouth.3"),
@@ -165,8 +166,6 @@ public interface IPlayerDesign{
 
     int getMouth();
 
-    Color getMouthColor();
-
     Color getEyebrowsColor();
 
     void setBase(int base);
@@ -198,8 +197,6 @@ public interface IPlayerDesign{
     void setEyebrows(int eyebrows);
 
     void setMouth(int mouth);
-
-    void setMouthColor(Color mouthColor);
 
     void setEyebrowsColor(Color eyebrowsColor);
 }
