@@ -19,7 +19,6 @@
 package de.ellpeck.rockbottom.api.net.chat;
 
 import de.ellpeck.rockbottom.api.RockBottomAPI;
-import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 
 import java.util.List;
 
@@ -31,9 +30,9 @@ public interface IChatLog{
 
     void displayMessage(String message);
 
-    void sendPlayerMessage(String message, AbstractEntityPlayer player);
+    void sendCommandSenderMessage(String message, ICommandSender sender);
 
-    void sendMessageToPlayer(AbstractEntityPlayer player, String message);
+    void sendMessageTo(ICommandSender sender, String message);
 
     void broadcastMessage(String message);
 

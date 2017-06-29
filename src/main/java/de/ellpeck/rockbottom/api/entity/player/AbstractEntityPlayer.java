@@ -24,6 +24,7 @@ import de.ellpeck.rockbottom.api.gui.Gui;
 import de.ellpeck.rockbottom.api.gui.container.ItemContainer;
 import de.ellpeck.rockbottom.api.inventory.IInvChangeCallback;
 import de.ellpeck.rockbottom.api.inventory.Inventory;
+import de.ellpeck.rockbottom.api.net.chat.ICommandSender;
 import de.ellpeck.rockbottom.api.net.packet.IPacket;
 import de.ellpeck.rockbottom.api.render.IPlayerDesign;
 import de.ellpeck.rockbottom.api.world.IChunk;
@@ -32,7 +33,7 @@ import org.newdawn.slick.Color;
 
 import java.util.List;
 
-public abstract class AbstractEntityPlayer extends EntityLiving implements IInvChangeCallback{
+public abstract class AbstractEntityPlayer extends EntityLiving implements IInvChangeCallback, ICommandSender{
 
     public AbstractEntityPlayer(IWorld world){
         super(world);
