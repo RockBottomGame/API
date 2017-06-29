@@ -46,5 +46,5 @@ public abstract class Command{
         return this.level;
     }
 
-    public abstract String execute(String[] args, AbstractEntityPlayer player, String playerName, IGameInstance game, IAssetManager manager, IChatLog chat);
+    public abstract String execute(String[] args, AbstractEntityPlayer player, String playerName, IGameInstance game, IChatLog chat);
 }
