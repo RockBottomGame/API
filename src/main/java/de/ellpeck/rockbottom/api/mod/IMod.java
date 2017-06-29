@@ -130,4 +130,16 @@ public interface IMod{
     default void postInit(IGameInstance game, IApiHandler apiHandler, IEventHandler eventHandler){
 
     }
+
+    /**
+     * Override this method to do any actions involving registering assets
+     * <br> This method is not called on the dedicated server
+     *
+     * @param game         The current game instance
+     * @param assetManager The asset manager
+     * @param apiHandler   The API handler
+     */
+    default void initAssets(IGameInstance game, IAssetManager assetManager, IApiHandler apiHandler){
+
+    }
 }

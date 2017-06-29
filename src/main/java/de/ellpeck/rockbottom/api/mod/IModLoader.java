@@ -36,6 +36,8 @@ public interface IModLoader{
 
     void init();
 
+    void initAssets();
+
     void postInit();
 
     IMod getMod(String id);
