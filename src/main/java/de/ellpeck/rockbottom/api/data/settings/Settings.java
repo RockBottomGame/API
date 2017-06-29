@@ -62,8 +62,6 @@ public class Settings implements IPropSettings{
     public int buttonGuiAction1;
     public int buttonGuiAction2;
 
-    public int serverStartPort;
-
     public int[] keysItemSelection = new int[8];
 
     public String lastServerIp;
@@ -93,8 +91,6 @@ public class Settings implements IPropSettings{
         this.buttonPlace = this.getProp(props, "button_place", Input.MOUSE_RIGHT_BUTTON);
         this.buttonGuiAction1 = this.getProp(props, "button_gui_1", Input.MOUSE_LEFT_BUTTON);
         this.buttonGuiAction2 = this.getProp(props, "button_gui_2", Input.MOUSE_RIGHT_BUTTON);
-
-        this.serverStartPort = this.getProp(props, "server_port", 8000);
 
         int[] defaultKeys = new int[]{Input.KEY_1, Input.KEY_2, Input.KEY_3, Input.KEY_4, Input.KEY_5, Input.KEY_6, Input.KEY_7, Input.KEY_8};
         for(int i = 0; i < this.keysItemSelection.length; i++){
@@ -131,8 +127,6 @@ public class Settings implements IPropSettings{
         this.setProp(props, "button_place", this.buttonPlace);
         this.setProp(props, "button_gui_1", this.buttonGuiAction1);
         this.setProp(props, "button_gui_2", this.buttonGuiAction2);
-
-        this.setProp(props, "server_port", this.serverStartPort);
 
         for(int i = 0; i < this.keysItemSelection.length; i++){
             this.setProp(props, "key_item_select_"+i, this.keysItemSelection[i]);

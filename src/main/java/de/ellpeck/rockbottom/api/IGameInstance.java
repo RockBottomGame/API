@@ -46,12 +46,6 @@ import java.util.UUID;
 public interface IGameInstance extends IMod{
 
     /**
-     * @return {@code true} if the game is currently in a world,
-     * {@code false} if on the title or loading screen
-     */
-    boolean isInWorld();
-
-    /**
      * Starts up a {@link IWorld} from a specified {@link File} and {@link WorldInfo}
      * and puts the player into it
      * <br> Not supposed to be used by mods
@@ -228,4 +222,8 @@ public interface IGameInstance extends IMod{
     int getTotalTicks();
 
     IPlayerDesign getPlayerDesign();
+
+    boolean isDedicatedServer();
+
+    void setUniqueId(UUID id);
 }

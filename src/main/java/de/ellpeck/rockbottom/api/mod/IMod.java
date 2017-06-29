@@ -113,11 +113,10 @@ public interface IMod{
      * Override this method to do any actions that should happen during the initialization of the base game
      *
      * @param game         The current game instance
-     * @param assetManager The asset manager
      * @param apiHandler   The API handler
      * @param eventHandler The event handler
      */
-    default void init(IGameInstance game, IAssetManager assetManager, IApiHandler apiHandler, IEventHandler eventHandler){
+    default void init(IGameInstance game, IApiHandler apiHandler, IEventHandler eventHandler){
 
     }
 
@@ -125,11 +124,10 @@ public interface IMod{
      * Override this method to do any actions that should happen after the initialization of the base game
      *
      * @param game         The current game instance
-     * @param assetManager The asset manager
      * @param apiHandler   The API handler
      * @param eventHandler The event handler
      */
-    default void postInit(IGameInstance game, IAssetManager assetManager, IApiHandler apiHandler, IEventHandler eventHandler){
+    default void postInit(IGameInstance game, IApiHandler apiHandler, IEventHandler eventHandler){
 
     }
 }
