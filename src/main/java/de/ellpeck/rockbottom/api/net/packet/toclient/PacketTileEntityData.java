@@ -30,6 +30,7 @@ import java.io.IOException;
 
 public class PacketTileEntityData implements IPacket{
 
+    private TileEntity tile;
     private final ByteBuf tileBuf = Unpooled.buffer();
     private int x;
     private int y;
@@ -37,13 +38,7 @@ public class PacketTileEntityData implements IPacket{
     public PacketTileEntityData(int x, int y, TileEntity tile){
         this.x = x;
         this.y = y;
-
-        try{
-            tile.toBuf(this.tileBuf);
-        }
-        catch(Exception e){
-            Log.error("Couldn't write TileEntity "+tile.getClass()+" at "+x+", "+y+" to packet", e);
-        }
+        this.tile = tile;
     }
 
     public PacketTileEntityData(){
@@ -54,6 +49,13 @@ public class PacketTileEntityData implements IPacket{
     public void toBuffer(ByteBuf buf) throws IOException{
         buf.writeInt(this.x);
         buf.writeInt(this.y);
+
+        try{
+            this.tile.toBuf(this.tileBuf);
+        }
+        catch(Exception e){
+            Log.error("Couldn't write TileEntity "+this.tile.getClass()+" at "+this.x+", "+this.y+" to packet", e);
+        }
 
         buf.writeInt(this.tileBuf.readableBytes());
         buf.writeBytes(this.tileBuf);
