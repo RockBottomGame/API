@@ -54,19 +54,11 @@ public class TileEntity{
         return false;
     }
 
-    public void save(DataSet set){
+    public void save(DataSet set, boolean forSync){
 
     }
 
-    public void load(DataSet set){
-
-    }
-
-    public void toBuf(ByteBuf buf) throws Exception{
-
-    }
-
-    public void fromBuf(ByteBuf buf) throws Exception{
+    public void load(DataSet set, boolean forSync){
 
     }
 

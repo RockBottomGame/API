@@ -101,26 +101,14 @@ public abstract class TileEntityFueled extends TileEntity{
     protected abstract void onActiveChange(boolean active);
 
     @Override
-    public void save(DataSet set){
+    public void save(DataSet set, boolean forSync){
         set.addInt("coal", this.coalTime);
         set.addInt("max_coal", this.maxCoalTime);
     }
 
     @Override
-    public void load(DataSet set){
+    public void load(DataSet set, boolean forSync){
         this.coalTime = set.getInt("coal");
         this.maxCoalTime = set.getInt("max_coal");
-    }
-
-    @Override
-    public void toBuf(ByteBuf buf){
-        buf.writeInt(this.coalTime);
-        buf.writeInt(this.maxCoalTime);
-    }
-
-    @Override
-    public void fromBuf(ByteBuf buf){
-        this.coalTime = buf.readInt();
-        this.maxCoalTime = buf.readInt();
     }
 }

@@ -19,6 +19,8 @@
 package de.ellpeck.rockbottom.api.net.packet.toclient;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
+import de.ellpeck.rockbottom.api.data.set.DataSet;
+import de.ellpeck.rockbottom.api.net.NetUtil;
 import de.ellpeck.rockbottom.api.net.packet.IPacket;
 import de.ellpeck.rockbottom.api.tile.entity.TileEntity;
 import io.netty.buffer.ByteBuf;
@@ -30,15 +32,14 @@ import java.io.IOException;
 
 public class PacketTileEntityData implements IPacket{
 
-    private TileEntity tile;
-    private final ByteBuf tileBuf = Unpooled.buffer();
+    private final DataSet set = new DataSet();
     private int x;
     private int y;
 
     public PacketTileEntityData(int x, int y, TileEntity tile){
         this.x = x;
         this.y = y;
-        this.tile = tile;
+        tile.save(this.set, true);
     }
 
     public PacketTileEntityData(){
@@ -49,25 +50,14 @@ public class PacketTileEntityData implements IPacket{
     public void toBuffer(ByteBuf buf) throws IOException{
         buf.writeInt(this.x);
         buf.writeInt(this.y);
-
-        try{
-            this.tile.toBuf(this.tileBuf);
-        }
-        catch(Exception e){
-            Log.error("Couldn't write TileEntity "+this.tile.getClass()+" at "+this.x+", "+this.y+" to packet", e);
-        }
-
-        buf.writeInt(this.tileBuf.readableBytes());
-        buf.writeBytes(this.tileBuf);
+        NetUtil.writeSetToBuffer(this.set, buf);
     }
 
     @Override
     public void fromBuffer(ByteBuf buf) throws IOException{
         this.x = buf.readInt();
         this.y = buf.readInt();
-
-        int readable = buf.readInt();
-        buf.readBytes(this.tileBuf, readable);
+        NetUtil.readSetFromBuffer(this.set, buf);
     }
 
     @Override
@@ -76,12 +66,7 @@ public class PacketTileEntityData implements IPacket{
             if(game.getWorld() != null){
                 TileEntity tile = game.getWorld().getTileEntity(this.x, this.y);
                 if(tile != null){
-                    try{
-                        tile.fromBuf(this.tileBuf);
-                    }
-                    catch(Exception e){
-                        Log.error("Couldn't read TileEntity "+tile.getClass()+" at "+this.x+", "+this.y+" from packet", e);
-                    }
+                    tile.load(this.set, true);
                 }
                 return true;
             }

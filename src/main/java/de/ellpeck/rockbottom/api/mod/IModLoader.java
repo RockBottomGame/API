@@ -46,7 +46,7 @@ public interface IModLoader{
 
     IResourceName createResourceName(String combined);
 
-    List<IMod> getAllMods();
+    List<IMod> getAllTheMods();
 
     List<IMod> getActiveMods();
 
