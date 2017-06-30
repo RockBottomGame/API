@@ -62,11 +62,11 @@ public class TileEntity{
 
     }
 
-    public void toBuf(ByteBuf buf){
+    public void toBuf(ByteBuf buf) throws Exception{
 
     }
 
-    public void fromBuf(ByteBuf buf){
+    public void fromBuf(ByteBuf buf) throws Exception{
 
     }
 

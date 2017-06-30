@@ -24,6 +24,7 @@ import de.ellpeck.rockbottom.api.tile.entity.TileEntity;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
+import org.newdawn.slick.util.Log;
 
 import java.io.IOException;
 
@@ -36,7 +37,13 @@ public class PacketTileEntityData implements IPacket{
     public PacketTileEntityData(int x, int y, TileEntity tile){
         this.x = x;
         this.y = y;
-        tile.toBuf(this.tileBuf);
+
+        try{
+            tile.toBuf(this.tileBuf);
+        }
+        catch(Exception e){
+            Log.error("Couldn't write TileEntity "+tile.getClass()+" at "+x+", "+y+" to packet", e);
+        }
     }
 
     public PacketTileEntityData(){
@@ -67,7 +74,12 @@ public class PacketTileEntityData implements IPacket{
             if(game.getWorld() != null){
                 TileEntity tile = game.getWorld().getTileEntity(this.x, this.y);
                 if(tile != null){
-                    tile.fromBuf(this.tileBuf);
+                    try{
+                        tile.fromBuf(this.tileBuf);
+                    }
+                    catch(Exception e){
+                        Log.error("Couldn't read TileEntity "+tile.getClass()+" at "+this.x+", "+this.y+" from packet", e);
+                    }
                 }
                 return true;
             }
