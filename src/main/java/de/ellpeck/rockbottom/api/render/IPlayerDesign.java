@@ -70,11 +70,11 @@ public interface IPlayerDesign{
     ));
 
     List<IResourceName> FOOTWEAR = new ArrayList<>(Arrays.asList(
-            RockBottomAPI.createInternalRes("player.footwear.boots"),
-            RockBottomAPI.createInternalRes("player.footwear.flip_flops"),
-            RockBottomAPI.createInternalRes("player.footwear.shoes_1"),
-            RockBottomAPI.createInternalRes("player.footwear.shoes_2"),
-            RockBottomAPI.createInternalRes("player.footwear.slippers"),
+            RockBottomAPI.createInternalRes("player.footwear.1"),
+            RockBottomAPI.createInternalRes("player.footwear.2"),
+            RockBottomAPI.createInternalRes("player.footwear.3"),
+            RockBottomAPI.createInternalRes("player.footwear.4"),
+            RockBottomAPI.createInternalRes("player.footwear.5"),
             null
     ));
 
@@ -82,6 +82,10 @@ public interface IPlayerDesign{
             RockBottomAPI.createInternalRes("player.hair.1"),
             RockBottomAPI.createInternalRes("player.hair.2"),
             RockBottomAPI.createInternalRes("player.hair.3"),
+            RockBottomAPI.createInternalRes("player.hair.4"),
+            RockBottomAPI.createInternalRes("player.hair.5"),
+            RockBottomAPI.createInternalRes("player.hair.6"),
+            RockBottomAPI.createInternalRes("player.hair.7"),
             null
     ));
 
@@ -93,7 +97,8 @@ public interface IPlayerDesign{
             RockBottomAPI.createInternalRes("player.accessory.sunglasses_2"),
             RockBottomAPI.createInternalRes("player.accessory.sunglasses_3"),
             RockBottomAPI.createInternalRes("player.accessory.glasses_1"),
-            RockBottomAPI.createInternalRes("player.accessory.glasses_2")
+            RockBottomAPI.createInternalRes("player.accessory.glasses_2"),
+            RockBottomAPI.createInternalRes("player.accessory.glasses_3")
     ));
 
     List<IResourceName> EYEBROWS = new ArrayList<>(Arrays.asList(
@@ -118,6 +123,12 @@ public interface IPlayerDesign{
             RockBottomAPI.createInternalRes("player.mouth.8"),
             RockBottomAPI.createInternalRes("player.mouth.9"),
             RockBottomAPI.createInternalRes("player.mouth.10")
+    ));
+
+    List<IResourceName> BEARD = new ArrayList<>(Arrays.asList(
+        null,
+        RockBottomAPI.createInternalRes("player.beard.1"),
+        RockBottomAPI.createInternalRes("player.beard.2")
     ));
 
     void saveToFile();
@@ -166,6 +177,10 @@ public interface IPlayerDesign{
 
     int getMouth();
 
+    int getBeard();
+
+    Color getBeardColor();
+
     Color getEyebrowsColor();
 
     void setBase(int base);
@@ -199,4 +214,8 @@ public interface IPlayerDesign{
     void setMouth(int mouth);
 
     void setEyebrowsColor(Color eyebrowsColor);
+
+    void setBeard(int beard);
+
+    void setBeardColor(Color beardColor);
 }
