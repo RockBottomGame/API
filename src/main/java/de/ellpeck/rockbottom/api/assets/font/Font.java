@@ -18,6 +18,7 @@
 
 package de.ellpeck.rockbottom.api.assets.font;
 
+import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.util.Pos2;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Image;
@@ -171,13 +172,13 @@ public class Font{
             Pos2 pos = this.characters.get(character);
 
             if(pos == null){
-                pos = this.characters.get('?');
+                pos = new Pos2(-1, -1);
                 this.characters.put(character, pos);
 
                 Log.warn("Character "+character+" is missing from font with name "+this.name+"!");
             }
 
-            if(pos != null){
+            if(pos.getX() >= 0 && pos.getY() >= 0){
                 int srcX = pos.getX()*this.charWidth;
                 int srcY = pos.getY()*this.charHeight;
 
@@ -188,6 +189,9 @@ public class Font{
                 this.image.draw(x+shadowOffset, y+shadowOffset, x2+shadowOffset, y2+shadowOffset, srcX, srcY, srcX+this.charWidth, srcY+this.charHeight, Color.black);
 
                 this.image.draw(x, y, x2, y2, srcX, srcY, srcX+this.charWidth, srcY+this.charHeight, color);
+            }
+            else{
+                RockBottomAPI.getGame().getAssetManager().getMissingTexture().draw(x, y, this.charWidth*scale, this.charHeight*scale);
             }
         }
     }

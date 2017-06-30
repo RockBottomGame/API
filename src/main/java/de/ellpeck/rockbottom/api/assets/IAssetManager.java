@@ -52,4 +52,6 @@ public interface IAssetManager{
     Font getFont();
 
     InputStream getResourceStream(String s);
+
+    Texture getMissingTexture();
 }
