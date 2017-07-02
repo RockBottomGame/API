@@ -101,7 +101,7 @@ public abstract class MultiTile extends TileBasic{
             for(int addY = 0; addY < this.getHeight(); addY++){
                 if(this.isStructurePart(addX, addY)){
                     int meta = this.getMeta(addX, addY);
-                    world.setTile(startX+addX, startY+addY, this, meta);
+                    world.setTile(layer, startX+addX, startY+addY, this, meta);
                 }
             }
         }
@@ -109,7 +109,7 @@ public abstract class MultiTile extends TileBasic{
 
     @Override
     public void doBreak(IWorld world, int x, int y, TileLayer layer, AbstractEntityPlayer breaker, boolean isRightTool){
-        Pos2 start = this.getBottomLeft(x, y, world.getMeta(x, y));
+        Pos2 start = this.getBottomLeft(x, y, world.getMeta(layer, x, y));
 
         for(int addX = 0; addX < this.getWidth(); addX++){
             for(int addY = 0; addY < this.getHeight(); addY++){
