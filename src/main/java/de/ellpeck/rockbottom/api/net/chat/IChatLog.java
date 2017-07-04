@@ -37,4 +37,6 @@ public interface IChatLog{
     void broadcastMessage(String message);
 
     List<String> getMessages();
+
+    void clear();
 }
