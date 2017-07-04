@@ -78,7 +78,7 @@ public class ComponentSlider extends ComponentButton{
             float mouseX = game.getMouseInGuiX();
             float mouseY = game.getMouseInGuiY();
 
-            if(game.getContainer().getInput().isMouseButtonDown(game.getSettings().buttonGuiAction1)){
+            if(game.getInput().isMouseButtonDown(game.getSettings().buttonGuiAction1)){
                 this.onClickOrMove(mouseX, mouseY);
             }
             else{

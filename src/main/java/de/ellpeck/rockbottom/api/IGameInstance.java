@@ -33,7 +33,7 @@ import de.ellpeck.rockbottom.api.util.IAction;
 import de.ellpeck.rockbottom.api.util.reg.NameToIndexInfo;
 import de.ellpeck.rockbottom.api.world.IWorld;
 import de.ellpeck.rockbottom.api.world.WorldInfo;
-import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Input;
 
 import java.io.File;
 import java.net.URLClassLoader;
@@ -87,11 +87,6 @@ public interface IGameInstance extends IMod{
      * @param action The action to be executed
      */
     void scheduleAction(IAction action);
-
-    /**
-     * @return The current {@link GameContainer}
-     */
-    GameContainer getContainer();
 
     int getGuiScale();
 
@@ -226,4 +221,8 @@ public interface IGameInstance extends IMod{
     boolean isDedicatedServer();
 
     void setUniqueId(UUID id);
+
+    Input getInput();
+
+    void exit();
 }

@@ -65,7 +65,7 @@ public class ComponentInputField extends GuiComponent{
                 }
             }
             else{
-                Input input = game.getContainer().getInput();
+                Input input = game.getInput();
                 if(input.isKeyDown(Input.KEY_LCONTROL) || input.isKeyDown(Input.KEY_RCONTROL)){
                     if(button == Input.KEY_V){
                         if(this.text.length() < this.maxLength){
