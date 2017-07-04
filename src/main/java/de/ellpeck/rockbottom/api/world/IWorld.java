@@ -189,4 +189,6 @@ public interface IWorld extends IChunkOrWorld{
     List<IWorldGenerator> getSortedGenerators();
 
     void save();
+
+    List<AbstractEntityPlayer> getAllPlayers();
 }
