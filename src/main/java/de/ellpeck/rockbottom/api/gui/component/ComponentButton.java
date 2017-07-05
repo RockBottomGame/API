@@ -53,7 +53,7 @@ public class ComponentButton extends GuiComponent{
     public void render(IGameInstance game, IAssetManager manager, Graphics g){
         if(this.isVisible){
             if(this.hasBackground){
-                g.setColor(this.isMouseOver(game) ? this.colorButton : this.colorButtonUnselected);
+                g.setColor(this.isMouseOverPrioritized(game) ? this.colorButton : this.colorButtonUnselected);
                 g.fillRect(this.x, this.y, this.sizeX, this.sizeY);
 
                 g.setColor(this.colorOutline);
@@ -78,7 +78,7 @@ public class ComponentButton extends GuiComponent{
     @Override
     public void renderOverlay(IGameInstance game, IAssetManager manager, Graphics g){
         if(this.isVisible){
-            if(this.isMouseOver(game)){
+            if(this.isMouseOverPrioritized(game)){
                 String[] hover = this.getHover();
                 if(hover != null && hover.length > 0){
                     RockBottomAPI.getApiHandler().drawHoverInfoAtMouse(game, manager, g, false, 100, hover);

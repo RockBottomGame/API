@@ -51,7 +51,7 @@ public class ComponentSlot extends GuiComponent{
 
     @Override
     public void renderOverlay(IGameInstance game, IAssetManager manager, Graphics g){
-        if(this.container.holdingInst == null && this.isMouseOver(game)){
+        if(this.container.holdingInst == null && this.isMouseOverPrioritized(game)){
             ItemInstance instance = this.slot.get();
             if(instance != null){
                 RockBottomAPI.getApiHandler().describeItem(game, manager, g, instance);

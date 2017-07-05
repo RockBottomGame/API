@@ -156,4 +156,23 @@ public class Gui{
     public boolean hasGradient(){
         return true;
     }
+
+    public void prioritize(GuiComponent component){
+        this.components.remove(component);
+        this.components.add(0, component);
+    }
+
+    public boolean isMouseOverPrioritized(IGameInstance game, GuiComponent component){
+        if(component.isMouseOver(game)){
+            for(GuiComponent comp : this.components){
+                if(comp == component){
+                    return true;
+                }
+                else if(comp.isMouseOver(game)){
+                    break;
+                }
+            }
+        }
+        return false;
+    }
 }

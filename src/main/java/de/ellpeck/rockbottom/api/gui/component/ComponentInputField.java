@@ -110,7 +110,7 @@ public class ComponentInputField extends GuiComponent{
     @Override
     public void render(IGameInstance game, IAssetManager manager, Graphics g){
         if(this.renderBox){
-            g.setColor(this.isMouseOver(game) ? this.colorButton : this.colorButtonUnselected);
+            g.setColor(this.isMouseOverPrioritized(game) ? this.colorButton : this.colorButtonUnselected);
             g.fillRect(this.x, this.y, this.sizeX, this.sizeY);
 
             g.setColor(this.colorOutline);

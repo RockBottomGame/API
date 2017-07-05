@@ -52,7 +52,7 @@ public class ComponentSlider extends ComponentButton{
         float percentage = (float)(this.number-this.min)/(float)(this.max-this.min);
         float x = this.x+percentage*(this.sizeX-5);
 
-        g.setColor(this.isMouseOver(game) ? this.colorButton : this.colorButtonUnselected);
+        g.setColor(this.isMouseOverPrioritized(game) ? this.colorButton : this.colorButtonUnselected);
         g.fillRect(x, this.y, 5F, this.sizeY);
 
         g.setColor(this.colorOutline);

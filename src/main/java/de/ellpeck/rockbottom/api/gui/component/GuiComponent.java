@@ -32,8 +32,8 @@ public class GuiComponent{
     public final Color colorButton = this.guiColor.multiply(new Color(1F, 1F, 1F, 0.5F));
     public final Color colorButtonUnselected = this.colorButton.darker(0.4F);
     public final Color colorOutline = this.guiColor.darker(0.3F);
-    public final int sizeX;
-    public final int sizeY;
+    public int sizeX;
+    public int sizeY;
     public Gui gui;
     public int x;
     public int y;
@@ -56,6 +56,10 @@ public class GuiComponent{
 
     public void renderOverlay(IGameInstance game, IAssetManager manager, Graphics g){
 
+    }
+
+    public boolean isMouseOverPrioritized(IGameInstance game){
+        return this.gui.isMouseOverPrioritized(game, this);
     }
 
     public boolean isMouseOver(IGameInstance game){
