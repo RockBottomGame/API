@@ -20,19 +20,28 @@ package de.ellpeck.rockbottom.api.assets.anim;
 
 public class AnimationRow{
 
-    private final float frameTime;
-    private final int frameAmount;
+    private final float[] frameTimes;
+    private final float totalTime;
 
-    public AnimationRow(int frameAmount, float frameTime){
-        this.frameTime = frameTime;
-        this.frameAmount = frameAmount;
-    }
+    public AnimationRow(float[] frameTimes){
+        this.frameTimes = frameTimes;
 
-    public float getFrameTime(){
-        return this.frameTime;
+        float accumulator = 0F;
+        for(float f : frameTimes){
+            accumulator += f;
+        }
+        this.totalTime = accumulator;
     }
 
     public int getFrameAmount(){
-        return this.frameAmount;
+        return this.frameTimes.length;
+    }
+
+    public float getTotalTime(){
+        return this.totalTime;
+    }
+
+    public float getTime(int frame){
+        return this.frameTimes[frame];
     }
 }
