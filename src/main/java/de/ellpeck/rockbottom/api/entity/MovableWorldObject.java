@@ -18,6 +18,8 @@
 
 package de.ellpeck.rockbottom.api.entity;
 
+import de.ellpeck.rockbottom.api.RockBottomAPI;
+import de.ellpeck.rockbottom.api.event.impl.WorldObjectCollisionEvent;
 import de.ellpeck.rockbottom.api.util.BoundBox;
 import de.ellpeck.rockbottom.api.world.IWorld;
 
@@ -54,6 +56,8 @@ public abstract class MovableWorldObject{
             BoundBox ownBox = this.getBoundingBox();
             BoundBox tempBox = ownBox.copy().add(this.x+motionX, this.y+motionY);
             List<BoundBox> boxes = this.world.getCollisions(tempBox);
+
+            RockBottomAPI.getEventHandler().fireEvent(new WorldObjectCollisionEvent(this, tempBox, boxes));
 
             if(motionY != 0){
                 if(!boxes.isEmpty()){
