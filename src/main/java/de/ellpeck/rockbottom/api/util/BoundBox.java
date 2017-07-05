@@ -58,6 +58,16 @@ public class BoundBox{
         return this;
     }
 
+    public BoundBox expand(double amount){
+        this.minX -= amount;
+        this.minY -= amount;
+
+        this.maxX += amount;
+        this.maxY += amount;
+
+        return this;
+    }
+
     public boolean intersects(BoundBox other){
         return this.intersects(other.minX, other.minY, other.maxX, other.maxY);
     }
