@@ -59,7 +59,7 @@ public class GuiComponent{
     }
 
     public boolean isMouseOverPrioritized(IGameInstance game){
-        return this.gui.isMouseOverPrioritized(game, this);
+        return this.gui == null ? this.isMouseOver(game) : this.gui.isMouseOverPrioritized(game, this);
     }
 
     public boolean isMouseOver(IGameInstance game){
