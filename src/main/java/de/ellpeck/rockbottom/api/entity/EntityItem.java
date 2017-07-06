@@ -79,6 +79,11 @@ public class EntityItem extends Entity{
     }
 
     @Override
+    public int getSyncFrequency(){
+        return 5;
+    }
+
+    @Override
     public int getRenderPriority(){
         return 1;
     }
