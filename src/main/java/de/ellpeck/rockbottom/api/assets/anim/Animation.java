@@ -91,7 +91,7 @@ public class Animation{
 
         float srcX = frame*this.frameWidth;
         float srcY = row*this.frameHeight;
-        this.texture.draw(x, y, x+1F*scale, y+(this.frameHeight/this.frameWidth)*scale, srcX, srcY, srcX+this.frameWidth, srcY+this.frameHeight, filter);
+        this.texture.draw(x, y, x+scale, y+(this.frameHeight/this.frameWidth)*scale, srcX, srcY, srcX+this.frameWidth, srcY+this.frameHeight, filter);
     }
 
     public void drawRow(int row, float x, float y, float scale, Color filter){
