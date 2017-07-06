@@ -183,7 +183,13 @@ public class Tile{
     }
 
     public void onChangeAround(IWorld world, int x, int y, TileLayer layer, int changedX, int changedY, TileLayer changedLayer){
+        if(!this.canStay(world,x,y,layer,changedX,changedY,changedLayer)){
+            world.destroyTile(x, y, layer, null, true);
+        }
+    }
 
+    public boolean canStay(IWorld world, int x, int y, TileLayer layer, int changedX, int changedY, TileLayer changedLayer){
+        return true;
     }
 
     public boolean isFullTile(){
@@ -242,8 +248,13 @@ public class Tile{
         return 0;
     }
 
-    public float getTranslucentModifier(IWorld world, int x, int y, TileLayer layer){
-        return layer == TileLayer.BACKGROUND ? 0.9F : 0.8F;
+    public float getTranslucentModifier(IWorld world, int x, int y, TileLayer layer, boolean skylight){
+        if(!this.isFullTile() && skylight){
+            return 1F;
+        }
+        else{
+            return layer == TileLayer.BACKGROUND ? 0.9F : 0.8F;
+        }
     }
 
     public boolean isAir(){

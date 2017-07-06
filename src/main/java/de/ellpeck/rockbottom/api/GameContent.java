@@ -39,6 +39,7 @@ public final class GameContent{
     public static final Tile TILE_COPPER_ORE = getTile("copper_ore");
     public static final Tile TILE_SMELTER = getTile("smelter");
     public static final Tile TILE_SEPARATOR = getTile("separator");
+    public static final Tile TILE_SAPLING = getTile("sapling");
 
     public static final Item ITEM_SUPER_TOOL = getItem("super_tool");
     public static final Item ITEM_WOOD_PICK = getItem("pick_wood");
