@@ -59,7 +59,7 @@ public class ParticleTile extends Particle{
 
         if(this.renderPixel != null){
             g.setColor(this.renderPixel);
-            g.fillRect(x, y, 0.16F, 0.16F);
+            g.fillRect(x, y, 0.12F, 0.12F);
         }
     }
 }
