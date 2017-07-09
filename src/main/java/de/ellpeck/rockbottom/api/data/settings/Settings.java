@@ -37,6 +37,8 @@ public class Settings implements IPropSettings{
     public Keybind keyMenu = new Keybind("menu", Input.KEY_ESCAPE);
     public Keybind keyLeft = new Keybind("left", Input.KEY_A);
     public Keybind keyRight = new Keybind("right", Input.KEY_D);
+    public Keybind keyUp = new Keybind("up", Input.KEY_W);
+    public Keybind keyDown = new Keybind("down", Input.KEY_S);
     public Keybind keyJump = new Keybind("jump", Input.KEY_SPACE);
     public Keybind keyBackground = new Keybind("background", Input.KEY_LSHIFT);
     public Keybind keyChat = new Keybind("chat", Input.KEY_ENTER);

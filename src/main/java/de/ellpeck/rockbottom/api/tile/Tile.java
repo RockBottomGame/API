@@ -274,6 +274,10 @@ public class Tile{
 
     }
 
+    public boolean canClimb(IWorld world, int x, int y, TileLayer layer){
+        return false;
+    }
+
     public void describeItem(IAssetManager manager, ItemInstance instance, List<String> desc, boolean isAdvanced){
         if(isAdvanced){
             for(TileLayer layer : TileLayer.LAYERS){

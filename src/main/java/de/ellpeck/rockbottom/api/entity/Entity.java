@@ -47,6 +47,7 @@ public class Entity extends MovableWorldObject{
     public double lastY;
     protected boolean dead;
     protected UUID uniqueId;
+    public boolean isClimbing;
 
     private DataSet additionalData;
 
@@ -76,10 +77,12 @@ public class Entity extends MovableWorldObject{
     }
 
     public void applyMotion(){
-        this.motionY -= 0.025;
+        if(!this.isClimbing){
+            this.motionY -= 0.025;
+        }
 
         this.motionX *= 0.5;
-        this.motionY *= 0.98;
+        this.motionY *= this.isClimbing ? 0.5 : 0.98;
     }
 
     public boolean isDead(){

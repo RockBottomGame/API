@@ -51,7 +51,7 @@ public abstract class AbstractEntityPlayer extends EntityLiving implements IInvC
 
     public abstract void sendPacket(IPacket packet);
 
-    public abstract void move(int type);
+    public abstract boolean move(int type);
 
     public abstract void onChunkLoaded(IChunk chunk);
 
