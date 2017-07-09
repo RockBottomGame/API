@@ -20,6 +20,7 @@ package de.ellpeck.rockbottom.api.item;
 
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
+import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.render.item.IItemRenderer;
 import de.ellpeck.rockbottom.api.tile.Tile;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
@@ -69,6 +70,10 @@ public class Item{
 
     public void describeItem(IAssetManager manager, ItemInstance instance, List<String> desc, boolean isAdvanced){
         desc.add(instance.getDisplayName());
+    }
+
+    public boolean onInteractWith(IWorld world, int x, int y, TileLayer layer, AbstractEntityPlayer player, ItemInstance instance){
+        return false;
     }
 
     @Override

@@ -14,13 +14,11 @@ public class InteractionEvent extends Event{
     public TileLayer layer;
     public int x;
     public int y;
-    public boolean simulate;
 
-    public InteractionEvent(AbstractEntityPlayer player, TileLayer layer, int x, int y, boolean simulate){
+    public InteractionEvent(AbstractEntityPlayer player, TileLayer layer, int x, int y){
         this.player = player;
         this.layer = layer;
         this.x = x;
         this.y = y;
-        this.simulate = simulate;
     }
 }

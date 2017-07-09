@@ -20,10 +20,13 @@ package de.ellpeck.rockbottom.api.item;
 
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
+import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.render.item.IItemRenderer;
 import de.ellpeck.rockbottom.api.render.item.ItemTileRenderer;
 import de.ellpeck.rockbottom.api.tile.Tile;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
+import de.ellpeck.rockbottom.api.world.IWorld;
+import de.ellpeck.rockbottom.api.world.TileLayer;
 
 import java.util.List;
 
@@ -47,5 +50,10 @@ public class ItemTile extends ItemBasic{
         super.describeItem(manager, instance, desc, isAdvanced);
 
         this.getTile().describeItem(manager, instance, desc, isAdvanced);
+    }
+
+    @Override
+    public boolean onInteractWith(IWorld world, int x, int y, TileLayer layer, AbstractEntityPlayer player, ItemInstance instance){
+        return RockBottomAPI.getApiHandler().placeTile(x, y,layer, player, instance, this.getTile());
     }
 }
