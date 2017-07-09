@@ -274,8 +274,12 @@ public class Tile{
 
     }
 
-    public boolean canClimb(IWorld world, int x, int y, TileLayer layer){
+    public boolean canClimb(IWorld world, int x, int y, TileLayer layer, Entity entity){
         return false;
+    }
+
+    public void onCollideWithEntity(IWorld world, int x, int y, TileLayer layer, Entity entity){
+
     }
 
     public void describeItem(IAssetManager manager, ItemInstance instance, List<String> desc, boolean isAdvanced){

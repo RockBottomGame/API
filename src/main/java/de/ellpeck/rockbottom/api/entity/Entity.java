@@ -25,10 +25,12 @@ import de.ellpeck.rockbottom.api.event.EventResult;
 import de.ellpeck.rockbottom.api.event.impl.EntityDeathEvent;
 import de.ellpeck.rockbottom.api.net.packet.toclient.PacketDeath;
 import de.ellpeck.rockbottom.api.render.entity.IEntityRenderer;
+import de.ellpeck.rockbottom.api.tile.Tile;
 import de.ellpeck.rockbottom.api.util.BoundBox;
 import de.ellpeck.rockbottom.api.util.Direction;
 import de.ellpeck.rockbottom.api.world.IChunk;
 import de.ellpeck.rockbottom.api.world.IWorld;
+import de.ellpeck.rockbottom.api.world.TileLayer;
 
 import java.util.UUID;
 
@@ -170,5 +172,9 @@ public class Entity extends MovableWorldObject{
 
     public boolean doesSave(){
         return true;
+    }
+
+    public void onCollideWithTile(int x, int y, TileLayer layer, Tile tile){
+
     }
 }
