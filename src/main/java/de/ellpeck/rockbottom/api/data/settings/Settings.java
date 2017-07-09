@@ -67,6 +67,7 @@ public class Settings implements IPropSettings{
     public int[] keysItemSelection = new int[8];
 
     public String lastServerIp;
+    public String currentLocale;
 
     @Override
     public void load(Properties props){
@@ -100,6 +101,7 @@ public class Settings implements IPropSettings{
         }
 
         this.lastServerIp = this.getProp(props, "last_server_ip", "");
+        this.currentLocale = this.getProp(props, "locale", "us_english");
     }
 
     @Override
@@ -135,6 +137,7 @@ public class Settings implements IPropSettings{
         }
 
         this.setProp(props, "last_server_ip", this.lastServerIp);
+        this.setProp(props, "locale", this.currentLocale);
     }
 
     @Override

@@ -70,11 +70,17 @@ public class Locale{
         }
     }
 
-    public String localize(IResourceName unloc, Object... format){
+    public String localize(Locale fallback, IResourceName unloc, Object... format){
         String loc = this.localization.get(unloc);
 
         if(loc == null){
-            loc = unloc.toString();
+            if(fallback != null && fallback != this){
+                loc = fallback.localize(null, unloc, format);
+            }
+            else{
+                loc = unloc.toString();
+            }
+
             this.localization.put(unloc, loc);
 
             Log.warn("Localization with name "+unloc+" is missing from locale with name "+this.name+"!");
