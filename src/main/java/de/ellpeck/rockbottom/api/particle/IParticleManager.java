@@ -27,5 +27,7 @@ public interface IParticleManager{
 
     void addTileParticles(IWorld world, int x, int y, Tile tile, int meta);
 
+    void addSmokeParticle(IWorld world, double x, double y, double motionX, double motionY, float scale);
+
     int getAmount();
 }
