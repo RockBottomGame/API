@@ -67,6 +67,13 @@ public class Tile{
         return DEFAULT_BOUNDS;
     }
 
+    public void getBoundBoxes(IWorld world, int x, int y, List<BoundBox> list){
+        BoundBox box = this.getBoundBox(world, x, y);
+        if(box != null && !box.isEmpty()){
+            list.add(box.copy().add(x, y));
+        }
+    }
+
     public boolean canBreak(IWorld world, int x, int y, TileLayer layer){
         if(layer == TileLayer.MAIN){
             return true;
@@ -183,7 +190,7 @@ public class Tile{
     }
 
     public void onChangeAround(IWorld world, int x, int y, TileLayer layer, int changedX, int changedY, TileLayer changedLayer){
-        if(!this.canStay(world,x,y,layer,changedX,changedY,changedLayer)){
+        if(!this.canStay(world, x, y, layer, changedX, changedY, changedLayer)){
             world.destroyTile(x, y, layer, null, true);
         }
     }
