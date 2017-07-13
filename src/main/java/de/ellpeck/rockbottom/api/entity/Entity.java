@@ -50,7 +50,9 @@ public class Entity extends MovableWorldObject{
     public double lastY;
     protected boolean dead;
     protected UUID uniqueId;
+
     public boolean isClimbing;
+    public boolean canClimb;
 
     private DataSet additionalData;
 
