@@ -59,6 +59,7 @@ public abstract class AbstractEntityPlayer extends EntityLiving implements IInvC
 
     public abstract List<IChunk> getChunksInRange();
 
+    @Override
     public abstract int getCommandLevel();
 
     public abstract ItemContainer getInvContainer();
@@ -69,8 +70,10 @@ public abstract class AbstractEntityPlayer extends EntityLiving implements IInvC
 
     public abstract void setSelectedSlot(int slot);
 
+    @Override
     public abstract String getChatColorFormat();
 
+    @Override
     public abstract String getName();
 
     public abstract Color getColor();

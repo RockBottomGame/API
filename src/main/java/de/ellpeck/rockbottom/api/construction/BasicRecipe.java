@@ -18,7 +18,6 @@
 
 package de.ellpeck.rockbottom.api.construction;
 
-import de.ellpeck.rockbottom.api.construction.IRecipe;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 
 import java.util.Arrays;

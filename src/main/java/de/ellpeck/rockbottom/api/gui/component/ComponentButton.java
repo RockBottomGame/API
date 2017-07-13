@@ -27,11 +27,10 @@ import org.newdawn.slick.Graphics;
 public class ComponentButton extends GuiComponent{
 
     public final int id;
-    protected String text;
     private final String[] hover;
-
     public boolean hasBackground = true;
     public boolean isVisible = true;
+    protected String text;
 
     public ComponentButton(Gui gui, int id, int x, int y, int sizeX, int sizeY, String text, String... hover){
         super(gui, x, y, sizeX, sizeY);

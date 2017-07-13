@@ -48,12 +48,10 @@ public class Entity extends MovableWorldObject{
     public int fallAmount;
     public double lastX;
     public double lastY;
-    protected boolean dead;
-    protected UUID uniqueId;
-
     public boolean isClimbing;
     public boolean canClimb;
-
+    protected boolean dead;
+    protected UUID uniqueId;
     private DataSet additionalData;
 
     public Entity(IWorld world){

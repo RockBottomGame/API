@@ -126,9 +126,9 @@ public interface IPlayerDesign{
     ));
 
     List<IResourceName> BEARD = new ArrayList<>(Arrays.asList(
-        null,
-        RockBottomAPI.createInternalRes("player.beard.1"),
-        RockBottomAPI.createInternalRes("player.beard.2")
+            null,
+            RockBottomAPI.createInternalRes("player.beard.1"),
+            RockBottomAPI.createInternalRes("player.beard.2")
     ));
 
     void saveToFile();

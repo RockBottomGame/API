@@ -23,7 +23,6 @@ import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.entity.EntityItem;
 import de.ellpeck.rockbottom.api.item.Item;
 import de.ellpeck.rockbottom.api.render.item.IItemRenderer;
-import de.ellpeck.rockbottom.api.util.Util;
 import de.ellpeck.rockbottom.api.world.IWorld;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;

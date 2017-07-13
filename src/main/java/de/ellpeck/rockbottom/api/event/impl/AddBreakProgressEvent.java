@@ -7,7 +7,7 @@ import de.ellpeck.rockbottom.api.world.TileLayer;
 /**
  * This event is fired when break progress is added to an {@link AbstractEntityPlayer} breaking a tile
  * <br> It is not cancellable
- *
+ * <p>
  * <br> Note: It is only fired on the client
  */
 public class AddBreakProgressEvent extends Event{

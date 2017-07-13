@@ -87,6 +87,45 @@ public class ItemInstance{
         }
     }
 
+    public static boolean compare(ItemInstance one, ItemInstance other, boolean item, boolean meta, boolean data, boolean wildcard){
+        if(one == null && other == null){
+            return true;
+        }
+        else if(one == null || other == null){
+            return false;
+        }
+        else{
+            if(item){
+                if(one.item != other.item){
+                    return false;
+                }
+            }
+
+            if(meta){
+                if(one.meta != other.meta){
+                    if(wildcard){
+                        if(one.meta != Constants.META_WILDCARD && other.meta != Constants.META_WILDCARD){
+                            return false;
+                        }
+                    }
+                    else{
+                        return false;
+                    }
+                }
+            }
+
+            if(data){
+                if(one.item.isDataSensitive(one) || other.item.isDataSensitive(other)){
+                    if(one.additionalData == null ? other.additionalData != null : !one.additionalData.equals(other.additionalData)){
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        }
+    }
+
     public void save(DataSet set){
         set.addString("item_name", RockBottomAPI.ITEM_REGISTRY.getId(this.item).toString());
         set.addInt("amount", this.amount);
@@ -155,45 +194,6 @@ public class ItemInstance{
 
     public boolean isEffectivelyEqualWithWildcard(ItemInstance instance){
         return compare(this, instance, true, true, true, true);
-    }
-
-    public static boolean compare(ItemInstance one, ItemInstance other, boolean item, boolean meta, boolean data, boolean wildcard){
-        if(one == null && other == null){
-            return true;
-        }
-        else if(one == null || other == null){
-            return false;
-        }
-        else{
-            if(item){
-                if(one.item != other.item){
-                    return false;
-                }
-            }
-
-            if(meta){
-                if(one.meta != other.meta){
-                    if(wildcard){
-                        if(one.meta != Constants.META_WILDCARD && other.meta != Constants.META_WILDCARD){
-                            return false;
-                        }
-                    }
-                    else{
-                        return false;
-                    }
-                }
-            }
-
-            if(data){
-                if(one.item.isDataSensitive(one) || other.item.isDataSensitive(other)){
-                    if(one.additionalData == null ? other.additionalData != null : !one.additionalData.equals(other.additionalData)){
-                        return false;
-                    }
-                }
-            }
-
-            return true;
-        }
     }
 
     public String getDisplayName(){

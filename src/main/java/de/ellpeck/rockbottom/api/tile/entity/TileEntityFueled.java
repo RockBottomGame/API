@@ -23,7 +23,6 @@ import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.data.set.DataSet;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.world.IWorld;
-import io.netty.buffer.ByteBuf;
 
 public abstract class TileEntityFueled extends TileEntity{
 

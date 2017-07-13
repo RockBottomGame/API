@@ -27,7 +27,6 @@ import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.net.packet.toclient.PacketTileEntityData;
 import de.ellpeck.rockbottom.api.util.Util;
 import de.ellpeck.rockbottom.api.world.IWorld;
-import io.netty.buffer.ByteBuf;
 
 public class TileEntity{
 
