@@ -53,7 +53,7 @@ public class ItemTile extends ItemBasic{
     }
 
     @Override
-    public boolean onInteractWith(IWorld world, int x, int y, TileLayer layer, AbstractEntityPlayer player, ItemInstance instance){
-        return RockBottomAPI.getApiHandler().placeTile(x, y,layer, player, instance, this.getTile());
+    public boolean onInteractWith(IWorld world, int x, int y, TileLayer layer, double mouseX, double mouseY, AbstractEntityPlayer player, ItemInstance instance){
+        return RockBottomAPI.getApiHandler().placeTile(x, y, layer, player, instance, this.getTile());
     }
 }

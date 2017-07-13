@@ -21,6 +21,7 @@ package de.ellpeck.rockbottom.api.entity;
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.data.set.DataSet;
+import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.event.EventResult;
 import de.ellpeck.rockbottom.api.event.impl.EntityDeathEvent;
 import de.ellpeck.rockbottom.api.net.packet.toclient.PacketDeath;
@@ -176,5 +177,9 @@ public class Entity extends MovableWorldObject{
 
     public void onCollideWithTile(int x, int y, TileLayer layer, Tile tile){
 
+    }
+
+    public boolean onInteractWith(AbstractEntityPlayer player, double mouseX, double mouseY){
+        return false;
     }
 }

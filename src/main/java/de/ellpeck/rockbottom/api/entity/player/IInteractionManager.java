@@ -32,7 +32,7 @@ public interface IInteractionManager{
 
     int getPlaceCooldown();
 
-    int getMousedTileX();
+    double getMousedTileX();
 
-    int getMousedTileY();
+    double getMousedTileY();
 }

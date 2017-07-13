@@ -72,7 +72,7 @@ public class Item{
         desc.add(instance.getDisplayName());
     }
 
-    public boolean onInteractWith(IWorld world, int x, int y, TileLayer layer, AbstractEntityPlayer player, ItemInstance instance){
+    public boolean onInteractWith(IWorld world, int x, int y, TileLayer layer, double mouseX, double mouseY, AbstractEntityPlayer player, ItemInstance instance){
         return false;
     }
 
