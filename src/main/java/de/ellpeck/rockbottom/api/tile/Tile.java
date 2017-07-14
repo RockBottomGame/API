@@ -211,8 +211,8 @@ public class Tile{
 
     }
 
-    public void doBreak(IWorld world, int x, int y, TileLayer layer, AbstractEntityPlayer breaker, boolean isRightTool){
-        world.destroyTile(x, y, layer, breaker, this.forceDrop || isRightTool);
+    public void doBreak(IWorld world, int x, int y, TileLayer layer, AbstractEntityPlayer breaker, boolean isRightTool, boolean allowDrop){
+        world.destroyTile(x, y, layer, breaker, allowDrop && (this.forceDrop || isRightTool));
     }
 
     public void doPlace(IWorld world, int x, int y, TileLayer layer, ItemInstance instance, AbstractEntityPlayer placer){
