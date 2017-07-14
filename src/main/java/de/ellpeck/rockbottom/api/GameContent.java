@@ -41,6 +41,7 @@ public final class GameContent{
     public static final Tile TILE_SEPARATOR = getTile("separator");
     public static final Tile TILE_SAPLING = getTile("sapling");
     public static final Tile TILE_LADDER = getTile("ladder");
+    public static final Tile TILE_GLOW_ORE = getTile("glow_ore");
 
     public static final Item ITEM_SUPER_TOOL = getItem("super_tool");
     public static final Item ITEM_WOOD_PICK = getItem("pick_wood");
@@ -50,6 +51,7 @@ public final class GameContent{
     public static final Item ITEM_COPPER_GRIT = getItem("copper_grit");
     public static final Item ITEM_COPPER_INGOT = getItem("copper_ingot");
     public static final Item ITEM_SLAG = getItem("slag");
+    public static final Item ITEM_GLOW_CLUSTER = getItem("glow_cluster");
 
     public static final Biome BIOME_SKY = getBiome("sky");
     public static final Biome BIOME_GRASSLAND = getBiome("grassland");
