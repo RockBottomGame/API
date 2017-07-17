@@ -164,6 +164,10 @@ public class ItemInstance{
         return this;
     }
 
+    public ItemInstance multiplyAmount(int modifier){
+        return this.setAmount(this.amount*modifier);
+    }
+
     public ItemInstance addAmount(int amount){
         return this.setAmount(this.amount+amount);
     }

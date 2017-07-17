@@ -73,7 +73,7 @@ public class TileEntity{
         return 10;
     }
 
-    protected void sendToClients(){
+    public void sendToClients(){
         if(RockBottomAPI.getNet().isServer()){
             RockBottomAPI.getNet().sendToAllPlayers(this.world, new PacketTileEntityData(this.x, this.y, this));
         }

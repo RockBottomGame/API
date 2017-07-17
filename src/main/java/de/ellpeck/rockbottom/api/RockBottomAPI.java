@@ -21,6 +21,7 @@ package de.ellpeck.rockbottom.api;
 import de.ellpeck.rockbottom.api.construction.BasicRecipe;
 import de.ellpeck.rockbottom.api.construction.SeparatorRecipe;
 import de.ellpeck.rockbottom.api.construction.SmelterRecipe;
+import de.ellpeck.rockbottom.api.construction.StamperRecipe;
 import de.ellpeck.rockbottom.api.data.set.part.DataPart;
 import de.ellpeck.rockbottom.api.entity.Entity;
 import de.ellpeck.rockbottom.api.event.IEventHandler;
@@ -90,6 +91,7 @@ public final class RockBottomAPI{
      * <br> Use this to register construction recipes that can be used in the inventory {@link de.ellpeck.rockbottom.api.gui.Gui}
      */
     public static final List<BasicRecipe> MANUAL_CONSTRUCTION_RECIPES = new ArrayList<>();
+    public static final List<StamperRecipe> STAMPER_RECIPES = new ArrayList<>();
     /**
      * The registry for {@link ItemInstance}s that can be used in machines as a fuel.
      * The {@link Integer} specified is the amount of time the fuel will burn for
@@ -268,6 +270,15 @@ public final class RockBottomAPI{
 
     public static SeparatorRecipe getSeparatorRecipe(ItemInstance input){
         for(SeparatorRecipe recipe : SEPARATOR_RECIPES){
+            if(input.isEffectivelyEqualWithWildcard(recipe.getInput())){
+                return recipe;
+            }
+        }
+        return null;
+    }
+
+    public static StamperRecipe getStamperRecipe(ItemInstance input){
+        for(StamperRecipe recipe : STAMPER_RECIPES){
             if(input.isEffectivelyEqualWithWildcard(recipe.getInput())){
                 return recipe;
             }
