@@ -83,10 +83,10 @@ public class Texture extends Image{
     public Texture getSubTexture(int x, int y, int width, int height){
         this.init();
 
-        float newTextureOffsetX = ((x/(float)this.width)*this.textureWidth)+this.textureOffsetX;
-        float newTextureOffsetY = ((y/(float)this.height)*this.textureHeight)+this.textureOffsetY;
-        float newTextureWidth = ((width/(float)this.width)*this.textureWidth);
-        float newTextureHeight = ((height/(float)this.height)*this.textureHeight);
+        float newTextureOffsetX = x/(float)this.width*this.textureWidth+this.textureOffsetX;
+        float newTextureOffsetY = y/(float)this.height*this.textureHeight+this.textureOffsetY;
+        float newTextureWidth = width/(float)this.width*this.textureWidth;
+        float newTextureHeight = height/(float)this.height*this.textureHeight;
 
         Texture sub = new Texture();
         sub.inited = true;
@@ -110,9 +110,12 @@ public class Texture extends Image{
     }
 
     public void drawWithLight(float x, float y, float width, float height, Color[] light, Color filter){
+        this.drawWithLight(x, y, x+width, y+height, 0, 0, this.width, this.height, light, filter);
+    }
+
+    public void drawWithLight(float x, float y, float x2, float y2, float srcX, float srcY, float srcX2, float srcY2, Color[] light, Color filter){
         this.texture.bind();
 
-        GL.glTranslatef(x, y, 0);
         if(this.angle != 0){
             GL.glTranslatef(this.centerX, this.centerY, 0F);
             GL.glRotatef(this.angle, 0F, 0F, 1F);
@@ -120,7 +123,7 @@ public class Texture extends Image{
         }
 
         GL.glBegin(SGL.GL_QUADS);
-        this.drawEmbeddedWithLight(0, 0, width, height, light, filter == null ? Color.white : filter);
+        this.drawEmbeddedWithLight(x, y, x2, y2, srcX, srcY, srcX2, srcY2, light, filter == null ? Color.white : filter);
         GL.glEnd();
 
         if(this.angle != 0){
@@ -128,23 +131,30 @@ public class Texture extends Image{
             GL.glRotatef(-this.angle, 0F, 0F, 1F);
             GL.glTranslatef(-this.centerX, -this.centerY, 0F);
         }
-        GL.glTranslatef(-x, -y, 0);
     }
 
-    public void drawEmbeddedWithLight(float x, float y, float width, float height, Color[] light, Color filter){
+    public void drawEmbeddedWithLight(float x, float y, float x2, float y2, float srcX, float srcY, float srcX2, float srcY2, Color[] light, Color filter){
         this.init();
 
+        float width = x2-x;
+        float height = y2-y;
+
+        float texOffX = srcX/this.width*this.textureWidth+this.textureOffsetX;
+        float texOffY = srcY/this.height*this.textureHeight+this.textureOffsetY;
+        float texWidth = (srcX2-srcX)/this.width*this.textureWidth;
+        float texHeight = (srcY2-srcY)/this.height*this.textureHeight;
+
         this.bindMultipliedColor(light[TOP_LEFT], filter);
-        GL.glTexCoord2f(this.textureOffsetX, this.textureOffsetY);
+        GL.glTexCoord2f(texOffX, texOffY);
         GL.glVertex3f(x, y, 0);
         this.bindMultipliedColor(light[BOTTOM_LEFT], filter);
-        GL.glTexCoord2f(this.textureOffsetX, this.textureOffsetY+this.textureHeight);
+        GL.glTexCoord2f(texOffX, texOffY+texHeight);
         GL.glVertex3f(x, y+height, 0);
         this.bindMultipliedColor(light[BOTTOM_RIGHT], filter);
-        GL.glTexCoord2f(this.textureOffsetX+this.textureWidth, this.textureOffsetY+this.textureHeight);
+        GL.glTexCoord2f(texOffX+texWidth, texOffY+texHeight);
         GL.glVertex3f(x+width, y+height, 0);
         this.bindMultipliedColor(light[TOP_RIGHT], filter);
-        GL.glTexCoord2f(this.textureOffsetX+this.textureWidth, this.textureOffsetY);
+        GL.glTexCoord2f(texOffX+texWidth, texOffY);
         GL.glVertex3f(x+width, y, 0);
     }
 

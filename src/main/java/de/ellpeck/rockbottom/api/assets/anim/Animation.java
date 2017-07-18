@@ -80,6 +80,10 @@ public class Animation{
     }
 
     public void drawFrame(int row, int frame, float x, float y, float scale, Color filter){
+        this.drawFrame(row, frame, x, y, scale, null, filter);
+    }
+
+    public void drawFrame(int row, int frame, float x, float y, float scale, Color[] light, Color filter){
         if(row < 0 || row >= this.rows.size()){
             row = 0;
         }
@@ -91,10 +95,20 @@ public class Animation{
 
         float srcX = frame*this.frameWidth;
         float srcY = row*this.frameHeight;
-        this.texture.draw(x, y, x+scale, y+(this.frameHeight/this.frameWidth)*scale, srcX, srcY, srcX+this.frameWidth, srcY+this.frameHeight, filter);
+
+        if(light != null){
+            this.texture.drawWithLight(x, y, x+scale, y+(this.frameHeight/this.frameWidth)*scale, srcX, srcY, srcX+this.frameWidth, srcY+this.frameHeight, light, filter);
+        }
+        else{
+            this.texture.draw(x, y, x+scale, y+(this.frameHeight/this.frameWidth)*scale, srcX, srcY, srcX+this.frameWidth, srcY+this.frameHeight, filter);
+        }
     }
 
     public void drawRow(int row, float x, float y, float scale, Color filter){
+        this.drawRow(row, x, y, scale, null, filter);
+    }
+
+    public void drawRow(int row, float x, float y, float scale, Color[] light, Color filter){
         if(row < 0 || row >= this.rows.size()){
             row = 0;
         }
@@ -106,7 +120,7 @@ public class Animation{
         for(int i = 0; i < theRow.getFrameAmount(); i++){
             accum += theRow.getTime(i)*1000;
             if(accum >= runningTime){
-                this.drawFrame(row, i, x, y, scale, filter);
+                this.drawFrame(row, i, x, y, scale, light, filter);
                 break;
             }
         }
