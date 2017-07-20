@@ -76,7 +76,9 @@ public class Gui{
     }
 
     public void update(IGameInstance game){
-        this.components.forEach(component -> component.update(game));
+        for(GuiComponent component : this.components){
+            component.update(game);
+        }
     }
 
     public boolean onMouseAction(IGameInstance game, int button, float x, float y){
