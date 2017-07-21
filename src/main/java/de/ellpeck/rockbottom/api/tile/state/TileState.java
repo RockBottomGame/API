@@ -97,7 +97,7 @@ public class TileState{
         return this.properties;
     }
 
-    public <T extends Comparable> TileState withProperty(TileProp<T> prop, T value){
+    public <T extends Comparable> TileState prop(TileProp<T> prop, T value){
         if(value.equals(this.properties.get(prop))){
             return this;
         }
@@ -112,7 +112,7 @@ public class TileState{
         }
     }
 
-    public <T extends Comparable> T getProperty(TileProp<T> prop){
+    public <T extends Comparable> T get(TileProp<T> prop){
         return (T)this.properties.get(prop);
     }
 

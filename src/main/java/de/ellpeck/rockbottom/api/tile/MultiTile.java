@@ -142,7 +142,7 @@ public abstract class MultiTile extends TileBasic{
     }
 
     public Pos2 getInnerCoord(TileState state){
-        return new Pos2(state.getProperty(this.propSubX), state.getProperty(this.propSubY));
+        return new Pos2(state.get(this.propSubX), state.get(this.propSubY));
     }
 
     public TileState getState(Pos2 coord){
@@ -150,7 +150,7 @@ public abstract class MultiTile extends TileBasic{
     }
 
     public TileState getState(int x, int y){
-        return this.getDefState().withProperty(this.propSubX, x).withProperty(this.propSubY, y);
+        return this.getDefState().prop(this.propSubX, x).prop(this.propSubY, y);
     }
 
     public Pos2 getMainPos(int x, int y, TileState state){

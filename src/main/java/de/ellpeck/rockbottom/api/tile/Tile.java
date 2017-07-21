@@ -319,7 +319,7 @@ public class Tile{
     }
 
     public <T extends Comparable> TileState getDefStateWithProp(TileProp<T> prop, T value){
-        return this.getDefState().withProperty(prop, value);
+        return this.getDefState().prop(prop, value);
     }
 
     protected void createNonStaticProps(){
