@@ -21,6 +21,7 @@ package de.ellpeck.rockbottom.api.render.tile;
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.tile.Tile;
+import de.ellpeck.rockbottom.api.tile.state.TileState;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 import de.ellpeck.rockbottom.api.world.IWorld;
 import de.ellpeck.rockbottom.api.world.TileLayer;
@@ -37,7 +38,7 @@ public class DefaultTileRenderer<T extends Tile> implements ITileRenderer<T>{
     }
 
     @Override
-    public void render(IGameInstance game, IAssetManager manager, Graphics g, IWorld world, T tile, int x, int y, TileLayer layer, float renderX, float renderY, float scale, Color[] light){
+    public void render(IGameInstance game, IAssetManager manager, Graphics g, IWorld world, T tile, TileState state, int x, int y, TileLayer layer, float renderX, float renderY, float scale, Color[] light){
         manager.getTexture(this.texture).drawWithLight(renderX, renderY, scale, scale, light);
     }
 
@@ -47,7 +48,7 @@ public class DefaultTileRenderer<T extends Tile> implements ITileRenderer<T>{
     }
 
     @Override
-    public Image getParticleTexture(IGameInstance game, IAssetManager manager, Graphics g, T tile, int meta){
+    public Image getParticleTexture(IGameInstance game, IAssetManager manager, Graphics g, T tile, TileState state){
         return manager.getTexture(this.texture);
     }
 }

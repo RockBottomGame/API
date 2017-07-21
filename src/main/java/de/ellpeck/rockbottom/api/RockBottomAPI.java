@@ -33,6 +33,7 @@ import de.ellpeck.rockbottom.api.net.INetHandler;
 import de.ellpeck.rockbottom.api.net.chat.Command;
 import de.ellpeck.rockbottom.api.net.packet.IPacket;
 import de.ellpeck.rockbottom.api.tile.Tile;
+import de.ellpeck.rockbottom.api.tile.state.TileState;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 import de.ellpeck.rockbottom.api.util.reg.IndexRegistry;
 import de.ellpeck.rockbottom.api.util.reg.NameRegistry;
@@ -53,7 +54,7 @@ public final class RockBottomAPI{
     /**
      * The current API version
      */
-    public static final String VERSION = "0.0.12";
+    public static final String VERSION = "0.0.13";
 
     /**
      * The registry for {@link Tile}
@@ -120,6 +121,11 @@ public final class RockBottomAPI{
      * <br> Use this to register custom biomes
      */
     public static final NameRegistry<Biome> BIOME_REGISTRY = new NameRegistry<>("biome_registry");
+    /**
+     * The registry for {@link TileState}
+     * <br> DO NOT manually register states into this registry, it is populated automatically
+     */
+    public static final NameRegistry<TileState> TILE_STATE_REGISTRY = new NameRegistry<>("tile_state_registry");
 
     private static IApiHandler apiHandler;
     private static INetHandler netHandler;

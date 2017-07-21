@@ -1,5 +1,5 @@
 /*
- * This file ("IParticleManager.java") is part of the RockBottomAPI by Ellpeck.
+ * This file ("StateCollection.java") is part of the RockBottomAPI by Ellpeck.
  * View the source code at <https://github.com/Ellpeck/RockBottomAPI>.
  *
  * The RockBottomAPI is free software: you can redistribute it and/or modify
@@ -16,19 +16,28 @@
  * along with the RockBottomAPI. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.ellpeck.rockbottom.api.particle;
+package de.ellpeck.rockbottom.api.tile.state;
 
 import de.ellpeck.rockbottom.api.tile.Tile;
-import de.ellpeck.rockbottom.api.tile.state.TileState;
-import de.ellpeck.rockbottom.api.world.IWorld;
 
-public interface IParticleManager{
+import java.util.HashMap;
+import java.util.Map;
 
-    void addParticle(Particle particle);
+public class StateHandler{
 
-    void addTileParticles(IWorld world, int x, int y, TileState state);
+    private final TileState defaultState;
 
-    void addSmokeParticle(IWorld world, double x, double y, double motionX, double motionY, float scale);
+    public StateHandler(Tile tile){
+        TileProp[] props = tile.getProperties();
 
-    int getAmount();
+        Map<TileProp, Comparable> defMap = new HashMap<>();
+        for(TileProp prop : props){
+            defMap.put(prop, prop.getDefault());
+        }
+        this.defaultState = new TileState(tile, defMap);
+    }
+
+    public TileState getDefault(){
+        return this.defaultState;
+    }
 }

@@ -21,6 +21,7 @@ package de.ellpeck.rockbottom.api.render.tile;
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.tile.MultiTile;
+import de.ellpeck.rockbottom.api.tile.state.TileState;
 import de.ellpeck.rockbottom.api.util.Pos2;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 import de.ellpeck.rockbottom.api.world.IWorld;
@@ -51,14 +52,14 @@ public class MultiTileRenderer<T extends MultiTile> extends DefaultTileRenderer<
     }
 
     @Override
-    public void render(IGameInstance game, IAssetManager manager, Graphics g, IWorld world, T tile, int x, int y, TileLayer layer, float renderX, float renderY, float scale, Color[] light){
-        Pos2 innerCoord = tile.getInnerCoord(world.getMeta(x, y));
+    public void render(IGameInstance game, IAssetManager manager, Graphics g, IWorld world, T tile, TileState state, int x, int y, TileLayer layer, float renderX, float renderY, float scale, Color[] light){
+        Pos2 innerCoord = tile.getInnerCoord(state);
         manager.getTexture(this.textures.get(innerCoord)).drawWithLight(renderX, renderY, scale, scale, light);
     }
 
     @Override
-    public Image getParticleTexture(IGameInstance game, IAssetManager manager, Graphics g, T tile, int meta){
-        Pos2 innerCoord = tile.getInnerCoord(meta);
+    public Image getParticleTexture(IGameInstance game, IAssetManager manager, Graphics g, T tile, TileState state){
+        Pos2 innerCoord = tile.getInnerCoord(state);
         return manager.getTexture(this.textures.get(innerCoord));
     }
 

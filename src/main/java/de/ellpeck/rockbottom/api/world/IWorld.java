@@ -22,6 +22,7 @@ import de.ellpeck.rockbottom.api.entity.Entity;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.render.IPlayerDesign;
 import de.ellpeck.rockbottom.api.tile.Tile;
+import de.ellpeck.rockbottom.api.tile.state.TileState;
 import de.ellpeck.rockbottom.api.util.BoundBox;
 import de.ellpeck.rockbottom.api.util.reg.NameToIndexInfo;
 import de.ellpeck.rockbottom.api.world.gen.IWorldGenerator;
@@ -85,23 +86,10 @@ public interface IWorld extends IChunkOrWorld{
      */
     List<BoundBox> getCollisions(BoundBox area);
 
-    /**
-     * @param tile The tile
-     * @return The id that the specified tile is saved as in the world's save files
-     */
-    int getIdForTile(Tile tile);
+    int getIdForState(TileState state);
 
-    /**
-     * @param id The id
-     * @return The tile that is saved in the world's save files using the specified id
-     */
-    Tile getTileForId(int id);
+    TileState getStateForId(int id);
 
-    /**
-     * @return Information about which ids tiles are saved with in the world file
-     * @see #getIdForTile(Tile)
-     * @see #getTileForId(int)
-     */
     NameToIndexInfo getTileRegInfo();
 
     int getIdForBiome(Biome biome);

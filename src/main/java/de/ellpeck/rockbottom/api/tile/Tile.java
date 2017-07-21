@@ -30,6 +30,9 @@ import de.ellpeck.rockbottom.api.item.ItemTile;
 import de.ellpeck.rockbottom.api.item.ToolType;
 import de.ellpeck.rockbottom.api.render.tile.ITileRenderer;
 import de.ellpeck.rockbottom.api.tile.entity.TileEntity;
+import de.ellpeck.rockbottom.api.tile.state.StateHandler;
+import de.ellpeck.rockbottom.api.tile.state.TileProp;
+import de.ellpeck.rockbottom.api.tile.state.TileState;
 import de.ellpeck.rockbottom.api.util.BoundBox;
 import de.ellpeck.rockbottom.api.util.Direction;
 import de.ellpeck.rockbottom.api.util.Util;
@@ -55,8 +58,13 @@ public class Tile{
     protected boolean forceDrop;
     protected float hardness = 1F;
 
+    protected final StateHandler possibleStates;
+
     public Tile(IResourceName name){
         this.name = name;
+
+        this.createNonStaticProps();
+        this.possibleStates = new StateHandler(this);
     }
 
     public ITileRenderer getRenderer(){
@@ -79,9 +87,9 @@ public class Tile{
             return true;
         }
         else{
-            if(!world.getTile(x, y).isFullTile()){
+            if(!world.getState(x, y).getTile().isFullTile()){
                 for(Direction dir : Direction.ADJACENT){
-                    Tile tile = world.getTile(layer, x+dir.x, y+dir.y);
+                    Tile tile = world.getState(layer, x+dir.x, y+dir.y).getTile();
                     if(!tile.isFullTile()){
                         return true;
                     }
@@ -96,13 +104,13 @@ public class Tile{
             return false;
         }
 
-        if(!world.getTile(layer.getOpposite(), x, y).isAir()){
+        if(!world.getState(layer.getOpposite(), x, y).getTile().isAir()){
             return true;
         }
 
         for(TileLayer testLayer : TileLayer.LAYERS){
             for(Direction dir : Direction.ADJACENT){
-                Tile tile = world.getTile(testLayer, x+dir.x, y+dir.y);
+                Tile tile = world.getState(testLayer, x+dir.x, y+dir.y).getTile();
                 if(!tile.isAir()){
                     return true;
                 }
@@ -216,11 +224,11 @@ public class Tile{
     }
 
     public void doPlace(IWorld world, int x, int y, TileLayer layer, ItemInstance instance, AbstractEntityPlayer placer){
-        world.setTile(layer, x, y, this, this.getPlacementMeta(world, x, y, layer, instance));
+        world.setState(layer, x, y, this.getPlacementState(world, x, y, layer, instance, placer));
     }
 
-    public int getPlacementMeta(IWorld world, int x, int y, TileLayer layer, ItemInstance instance){
-        return instance.getMeta();
+    public TileState getPlacementState(IWorld world, int x, int y, TileLayer layer, ItemInstance instance, AbstractEntityPlayer placer){
+        return this.getDefState();
     }
 
     public float getHardness(IWorld world, int x, int y, TileLayer layer){
@@ -300,5 +308,21 @@ public class Tile{
         else{
             desc.add(FormattingCode.DARK_GRAY+manager.localize(LOC_ADVANCED, Input.getKeyName(RockBottomAPI.getGame().getSettings().keyAdvancedInfo.key)));
         }
+    }
+
+    public TileProp[] getProperties(){
+        return new TileProp[0];
+    }
+
+    public TileState getDefState(){
+        return this.possibleStates.getDefault();
+    }
+
+    public <T extends Comparable> TileState getDefStateWithProp(TileProp<T> prop, T value){
+        return this.getDefState().withProperty(prop, value);
+    }
+
+    protected void createNonStaticProps(){
+
     }
 }

@@ -25,6 +25,9 @@ import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.render.tile.ITileRenderer;
 import de.ellpeck.rockbottom.api.render.tile.MultiTileRenderer;
+import de.ellpeck.rockbottom.api.tile.state.IntProp;
+import de.ellpeck.rockbottom.api.tile.state.TileProp;
+import de.ellpeck.rockbottom.api.tile.state.TileState;
 import de.ellpeck.rockbottom.api.util.Pos2;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 import de.ellpeck.rockbottom.api.world.IWorld;
@@ -34,10 +37,23 @@ import java.util.List;
 
 public abstract class MultiTile extends TileBasic{
 
+    public IntProp propSubX;
+    public IntProp propSubY;
     private boolean[][] structure;
 
     public MultiTile(IResourceName name){
         super(name);
+    }
+
+    @Override
+    public TileProp[] getProperties(){
+        return new TileProp[]{this.propSubX, this.propSubY};
+    }
+
+    @Override
+    protected void createNonStaticProps(){
+        this.propSubX = new IntProp("subX", 0, this.getWidth());
+        this.propSubY = new IntProp("subY", 0, this.getHeight());
     }
 
     @Override
@@ -79,7 +95,7 @@ public abstract class MultiTile extends TileBasic{
                         int theX = startX+addX;
                         int theY = startY+addY;
 
-                        if(!world.getTile(layer, theX, theY).canReplace(world, theX, theY, layer, this)){
+                        if(!world.getState(layer, theX, theY).getTile().canReplace(world, theX, theY, layer, this)){
                             return false;
                         }
                     }
@@ -100,8 +116,7 @@ public abstract class MultiTile extends TileBasic{
         for(int addX = 0; addX < this.getWidth(); addX++){
             for(int addY = 0; addY < this.getHeight(); addY++){
                 if(this.isStructurePart(addX, addY)){
-                    int meta = this.getMeta(addX, addY);
-                    world.setTile(layer, startX+addX, startY+addY, this, meta);
+                    world.setState(layer, startX+addX, startY+addY, this.getState(addX, addY));
                 }
             }
         }
@@ -109,7 +124,7 @@ public abstract class MultiTile extends TileBasic{
 
     @Override
     public void doBreak(IWorld world, int x, int y, TileLayer layer, AbstractEntityPlayer breaker, boolean isRightTool, boolean allowDrop){
-        Pos2 start = this.getBottomLeft(x, y, world.getMeta(layer, x, y));
+        Pos2 start = this.getBottomLeft(x, y, world.getState(layer, x, y));
 
         for(int addX = 0; addX < this.getWidth(); addX++){
             for(int addY = 0; addY < this.getHeight(); addY++){
@@ -121,29 +136,29 @@ public abstract class MultiTile extends TileBasic{
         }
     }
 
-    public boolean isMainPos(int x, int y, int meta){
-        Pos2 main = this.getMainPos(x, y, meta);
+    public boolean isMainPos(int x, int y, TileState state){
+        Pos2 main = this.getMainPos(x, y, state);
         return main.getX() == x && main.getY() == y;
     }
 
-    public Pos2 getInnerCoord(int meta){
-        return new Pos2(meta%this.getWidth(), meta/this.getWidth());
+    public Pos2 getInnerCoord(TileState state){
+        return new Pos2(state.getProperty(this.propSubX), state.getProperty(this.propSubY));
     }
 
-    public int getMeta(Pos2 coord){
-        return this.getMeta(coord.getX(), coord.getY());
+    public TileState getState(Pos2 coord){
+        return this.getState(coord.getX(), coord.getY());
     }
 
-    public int getMeta(int x, int y){
-        return y*this.getWidth()+x;
+    public TileState getState(int x, int y){
+        return this.getDefState().withProperty(this.propSubX, x).withProperty(this.propSubY, y);
     }
 
-    public Pos2 getMainPos(int x, int y, int meta){
-        return this.getBottomLeft(x, y, meta).add(this.getMainX(), this.getMainY());
+    public Pos2 getMainPos(int x, int y, TileState state){
+        return this.getBottomLeft(x, y, state).add(this.getMainX(), this.getMainY());
     }
 
-    public Pos2 getBottomLeft(int x, int y, int meta){
-        Pos2 inner = this.getInnerCoord(meta);
+    public Pos2 getBottomLeft(int x, int y, TileState state){
+        Pos2 inner = this.getInnerCoord(state);
         return inner.set(x-inner.getX(), y-inner.getY());
     }
 

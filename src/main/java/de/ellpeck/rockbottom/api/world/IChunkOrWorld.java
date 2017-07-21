@@ -21,6 +21,7 @@ package de.ellpeck.rockbottom.api.world;
 import de.ellpeck.rockbottom.api.entity.Entity;
 import de.ellpeck.rockbottom.api.tile.Tile;
 import de.ellpeck.rockbottom.api.tile.entity.TileEntity;
+import de.ellpeck.rockbottom.api.tile.state.TileState;
 import de.ellpeck.rockbottom.api.util.BoundBox;
 import de.ellpeck.rockbottom.api.world.gen.biome.Biome;
 
@@ -33,98 +34,13 @@ import java.util.function.Predicate;
  */
 public interface IChunkOrWorld{
 
-    /**
-     * Gets the Tile on {@link TileLayer#MAIN} at the specified coordinates
-     *
-     * @param x The x coordinate
-     * @param y The y coordinate
-     * @return The tile
-     */
-    Tile getTile(int x, int y);
+    TileState getState(int x, int y);
 
-    /**
-     * @param layer The layer
-     * @param x     The x coordinate
-     * @param y     The y coordinate
-     * @return The tile at the specified coordinates
-     */
-    Tile getTile(TileLayer layer, int x, int y);
+    TileState getState(TileLayer layer, int x, int y);
 
-    /**
-     * Gets the metadata on {@link TileLayer#MAIN} at the specified coordinates
-     *
-     * @param x The x coordinate
-     * @param y The y coordinate
-     * @return The metadata
-     */
-    int getMeta(int x, int y);
+    void setState(int x, int y, TileState tile);
 
-    /**
-     * @param layer The layer
-     * @param x     The x coordinate
-     * @param y     The y coordinate
-     * @return The metadata at the specified coordinates
-     */
-    int getMeta(TileLayer layer, int x, int y);
-
-    /**
-     * Sets the tile at the specified coordinates on {@link TileLayer#MAIN} to the specified {@link Tile}
-     *
-     * @param x    The x coordinate
-     * @param y    The y coordinate
-     * @param tile The tile to set
-     */
-    void setTile(int x, int y, Tile tile);
-
-    /**
-     * Sets the tile at the specified coordinates and the specified {@link TileLayer} to the specified {@link Tile}
-     *
-     * @param layer The layer
-     * @param x     The x coordinate
-     * @param y     The y coordinate
-     * @param tile  The tile
-     */
-    void setTile(TileLayer layer, int x, int y, Tile tile);
-
-    /**
-     * Sets the tile at the specified coordinates on {@link TileLayer#MAIN} to the specified {@link Tile}
-     * with the specified metadata
-     *
-     * @param x    The x coordinate
-     * @param y    The y coordinate
-     * @param tile The tile to set
-     */
-    void setTile(int x, int y, Tile tile, int meta);
-
-    /**
-     * Sets the tile at the specified coordinates and the specified {@link TileLayer} to the specified {@link Tile}
-     * with the specified metadata
-     *
-     * @param layer The layer
-     * @param x     The x coordinate
-     * @param y     The y coordinate
-     * @param tile  The tile
-     */
-    void setTile(TileLayer layer, int x, int y, Tile tile, int meta);
-
-    /**
-     * Sets the metadata at the specified coordinates on {@link TileLayer#MAIN} to the specified metadata
-     *
-     * @param x    The x coordinate
-     * @param y    The y coordinate
-     * @param meta The metadata
-     */
-    void setMeta(int x, int y, int meta);
-
-    /**
-     * Sets the metadata at the specified coordinates on the specified {@link TileLayer} to the specified metadata
-     *
-     * @param layer The layer
-     * @param x     The x coordinate
-     * @param y     The y coordinate
-     * @param meta  The metadata
-     */
-    void setMeta(TileLayer layer, int x, int y, int meta);
+    void setState(TileLayer layer, int x, int y, TileState tile);
 
     /**
      * Adds the specified {@link Entity} to the world

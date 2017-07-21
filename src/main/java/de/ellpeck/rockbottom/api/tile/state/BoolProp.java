@@ -1,5 +1,5 @@
 /*
- * This file ("IParticleManager.java") is part of the RockBottomAPI by Ellpeck.
+ * This file ("BoolProp.java") is part of the RockBottomAPI by Ellpeck.
  * View the source code at <https://github.com/Ellpeck/RockBottomAPI>.
  *
  * The RockBottomAPI is free software: you can redistribute it and/or modify
@@ -16,19 +16,39 @@
  * along with the RockBottomAPI. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.ellpeck.rockbottom.api.particle;
+package de.ellpeck.rockbottom.api.tile.state;
 
-import de.ellpeck.rockbottom.api.tile.Tile;
-import de.ellpeck.rockbottom.api.tile.state.TileState;
-import de.ellpeck.rockbottom.api.world.IWorld;
+public class BoolProp extends TileProp<Boolean>{
 
-public interface IParticleManager{
+    private final boolean def;
 
-    void addParticle(Particle particle);
+    public BoolProp(String name, boolean def){
+        super(name);
+        this.def = def;
+    }
 
-    void addTileParticles(IWorld world, int x, int y, TileState state);
+    @Override
+    public int getVariants(){
+        return 2;
+    }
 
-    void addSmokeParticle(IWorld world, double x, double y, double motionX, double motionY, float scale);
+    @Override
+    public Boolean makeValue(int variant){
+        return variant == 1;
+    }
 
-    int getAmount();
+    @Override
+    public int getVariant(Boolean value){
+        return value ? 1 : 0;
+    }
+
+    @Override
+    public Boolean getDefault(){
+        return this.def;
+    }
+
+    @Override
+    public String toString(){
+        return this.name;
+    }
 }

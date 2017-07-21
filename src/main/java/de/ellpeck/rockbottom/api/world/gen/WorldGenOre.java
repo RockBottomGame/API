@@ -20,6 +20,7 @@ package de.ellpeck.rockbottom.api.world.gen;
 
 import de.ellpeck.rockbottom.api.Constants;
 import de.ellpeck.rockbottom.api.tile.Tile;
+import de.ellpeck.rockbottom.api.tile.state.TileState;
 import de.ellpeck.rockbottom.api.util.Util;
 import de.ellpeck.rockbottom.api.world.IChunk;
 import de.ellpeck.rockbottom.api.world.IWorld;
@@ -52,7 +53,7 @@ public abstract class WorldGenOre implements IWorldGenerator{
                 for(int x = -thisRadX; x <= thisRadX; x++){
                     for(int y = -thisRadY; y <= thisRadY; y++){
                         if(rand.nextInt(thisRadX) == x || rand.nextInt(thisRadY) == y){
-                            world.setTile(startX+x, startY+y, this.getOreTile(), this.getOreMeta());
+                            world.setState(startX+x, startY+y, this.getOreState());
                         }
                     }
                 }
@@ -72,7 +73,5 @@ public abstract class WorldGenOre implements IWorldGenerator{
 
     public abstract int getClusterRadiusY();
 
-    public abstract Tile getOreTile();
-
-    public abstract int getOreMeta();
+    public abstract TileState getOreState();
 }

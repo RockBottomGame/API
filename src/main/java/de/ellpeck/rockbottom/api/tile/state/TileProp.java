@@ -1,5 +1,5 @@
 /*
- * This file ("IParticleManager.java") is part of the RockBottomAPI by Ellpeck.
+ * This file ("TileProp.java") is part of the RockBottomAPI by Ellpeck.
  * View the source code at <https://github.com/Ellpeck/RockBottomAPI>.
  *
  * The RockBottomAPI is free software: you can redistribute it and/or modify
@@ -16,19 +16,25 @@
  * along with the RockBottomAPI. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.ellpeck.rockbottom.api.particle;
+package de.ellpeck.rockbottom.api.tile.state;
 
-import de.ellpeck.rockbottom.api.tile.Tile;
-import de.ellpeck.rockbottom.api.tile.state.TileState;
-import de.ellpeck.rockbottom.api.world.IWorld;
+public abstract class TileProp<T extends Comparable>{
 
-public interface IParticleManager{
+    protected final String name;
 
-    void addParticle(Particle particle);
+    public TileProp(String name){
+        this.name = name;
+    }
 
-    void addTileParticles(IWorld world, int x, int y, TileState state);
+    public String getName(){
+        return this.name;
+    }
 
-    void addSmokeParticle(IWorld world, double x, double y, double motionX, double motionY, float scale);
+    public abstract int getVariants();
 
-    int getAmount();
+    public abstract T makeValue(int variant);
+
+    public abstract int getVariant(T value);
+
+    public abstract T getDefault();
 }

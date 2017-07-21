@@ -22,6 +22,7 @@ import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.data.set.DataSet;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.tile.Tile;
+import de.ellpeck.rockbottom.api.tile.state.TileState;
 import de.ellpeck.rockbottom.api.util.MutableInt;
 import de.ellpeck.rockbottom.api.world.gen.biome.Biome;
 
@@ -106,56 +107,11 @@ public interface IChunk extends IChunkOrWorld{
      */
     int getY();
 
-    /**
-     * Gets a tile at the specified coordinates inside of the chunk rather
-     * than the tile coordinates in the world
-     *
-     * @param layer The layer
-     * @param x     The x coordinate
-     * @param y     The y coordinate
-     * @return The tile
-     */
-    Tile getTileInner(TileLayer layer, int x, int y);
+    TileState getStateInner(TileLayer layer, int x, int y);
 
-    /**
-     * Gets a tile at the specified coordinates inside of the chunk rather
-     * than the tile coordinates in the world
-     *
-     * @param x The x coordinate
-     * @param y The y coordinate
-     * @return The tile
-     */
-    Tile getTileInner(int x, int y);
+    TileState getStateInner(int x, int y);
 
-    /**
-     * Gets metadata at the specified coordinates inside of the chunk rather
-     * than the tile coordinates in the world
-     *
-     * @param layer The layer
-     * @param x     The x coordinate
-     * @param y     The y coordinate
-     * @return The metadata
-     */
-    byte getMetaInner(TileLayer layer, int x, int y);
-
-    /**
-     * Sets a tile at the specified coordinates inside of the chunk rather
-     * than the tile coordinates in the world
-     *
-     * @param x    The x coordinate
-     * @param y    The y coordinate
-     * @param meta The metadata
-     */
-    void setTileInner(int x, int y, Tile tile, int meta);
-
-    /**
-     * Sets a tile at the specified coordinates inside of the chunk rather
-     * than the tile coordinates in the world
-     *
-     * @param x The x coordinate
-     * @param y The y coordinate
-     */
-    void setTileInner(int x, int y, Tile tile);
+    void setStateInner(int x, int y, TileState tile);
 
     /**
      * Sets a tile at the specified coordinates inside of the chunk rather
@@ -165,29 +121,7 @@ public interface IChunk extends IChunkOrWorld{
      * @param x     The x coordinate
      * @param y     The y coordinate
      */
-    void setTileInner(TileLayer layer, int x, int y, Tile tile);
-
-    /**
-     * Sets a tile at the specified coordinates inside of the chunk rather
-     * than the tile coordinates in the world
-     *
-     * @param layer The layer
-     * @param x     The x coordinate
-     * @param y     The y coordinate
-     * @param meta  The metadata
-     */
-    void setTileInner(TileLayer layer, int x, int y, Tile tile, int meta);
-
-    /**
-     * Sets the metadata at the specified coordinates inside of the chunk rather
-     * than the tile coordinates in the world
-     *
-     * @param layer The layer
-     * @param x     The x coordinate
-     * @param y     The y coordinate
-     * @param meta  The metadata
-     */
-    void setMetaInner(TileLayer layer, int x, int y, int meta);
+    void setStateInner(TileLayer layer, int x, int y, TileState tile);
 
     /**
      * Gets the skylight at the specified coordinates inside of the chunk rather
