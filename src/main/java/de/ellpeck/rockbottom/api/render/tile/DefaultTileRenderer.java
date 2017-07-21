@@ -23,6 +23,7 @@ import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.tile.Tile;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 import de.ellpeck.rockbottom.api.world.IWorld;
+import de.ellpeck.rockbottom.api.world.TileLayer;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -36,7 +37,7 @@ public class DefaultTileRenderer<T extends Tile> implements ITileRenderer<T>{
     }
 
     @Override
-    public void render(IGameInstance game, IAssetManager manager, Graphics g, IWorld world, T tile, int x, int y, float renderX, float renderY, float scale, Color[] light){
+    public void render(IGameInstance game, IAssetManager manager, Graphics g, IWorld world, T tile, int x, int y, TileLayer layer, float renderX, float renderY, float scale, Color[] light){
         manager.getTexture(this.texture).drawWithLight(renderX, renderY, scale, scale, light);
     }
 

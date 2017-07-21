@@ -24,6 +24,7 @@ import de.ellpeck.rockbottom.api.tile.MultiTile;
 import de.ellpeck.rockbottom.api.util.Pos2;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 import de.ellpeck.rockbottom.api.world.IWorld;
+import de.ellpeck.rockbottom.api.world.TileLayer;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -50,7 +51,7 @@ public class MultiTileRenderer<T extends MultiTile> extends DefaultTileRenderer<
     }
 
     @Override
-    public void render(IGameInstance game, IAssetManager manager, Graphics g, IWorld world, T tile, int x, int y, float renderX, float renderY, float scale, Color[] light){
+    public void render(IGameInstance game, IAssetManager manager, Graphics g, IWorld world, T tile, int x, int y, TileLayer layer, float renderX, float renderY, float scale, Color[] light){
         Pos2 innerCoord = tile.getInnerCoord(world.getMeta(x, y));
         manager.getTexture(this.textures.get(innerCoord)).drawWithLight(renderX, renderY, scale, scale, light);
     }
