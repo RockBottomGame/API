@@ -18,23 +18,23 @@
 
 package de.ellpeck.rockbottom.api.tile.state;
 
-import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
+import com.google.common.collect.TreeBasedTable;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.tile.Tile;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.TreeMap;
 
 public class TileState{
 
     private final Tile tile;
     private final IResourceName name;
     private final Map<TileProp, Comparable> properties;
-    private final Table<TileProp, Comparable, TileState> subStates = HashBasedTable.create();
+    private final Table<TileProp, Comparable, TileState> subStates = TreeBasedTable.create();
 
     private TileState(IResourceName name, Tile tile, Map<TileProp, Comparable> properties){
         this.tile = tile;
@@ -47,7 +47,7 @@ public class TileState{
             for(int i = 0; i < prop.getVariants(); i++){
                 Comparable value = prop.makeValue(i);
                 if(!properties.get(prop).equals(value)){
-                    Map<TileProp, Comparable> subProps = new HashMap<>(properties);
+                    Map<TileProp, Comparable> subProps = new TreeMap<>(properties);
                     subProps.put(prop, value);
 
                     IResourceName subName = generateName(tile, subProps);

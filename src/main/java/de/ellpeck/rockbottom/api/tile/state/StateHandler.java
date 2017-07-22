@@ -20,8 +20,8 @@ package de.ellpeck.rockbottom.api.tile.state;
 
 import de.ellpeck.rockbottom.api.tile.Tile;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class StateHandler{
 
@@ -30,7 +30,7 @@ public class StateHandler{
     public StateHandler(Tile tile){
         TileProp[] props = tile.getProperties();
 
-        Map<TileProp, Comparable> defMap = new HashMap<>();
+        Map<TileProp, Comparable> defMap = new TreeMap<>();
         for(TileProp prop : props){
             defMap.put(prop, prop.getDefault());
         }
