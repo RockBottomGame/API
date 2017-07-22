@@ -68,10 +68,10 @@ public class TileState{
     }
 
     private static IResourceName generateName(Tile tile, Map<TileProp, Comparable> properties){
-        IResourceName name = tile.getName();
+        String suffix = "";
 
         if(!properties.isEmpty()){
-            name = name.addSuffix(";");
+            suffix += ";";
 
             Iterator<Entry<TileProp, Comparable>> iterator = properties.entrySet().iterator();
             while(iterator.hasNext()){
@@ -82,11 +82,11 @@ public class TileState{
                     append += ",";
                 }
 
-                name = name.addSuffix(append);
+                suffix += append;
             }
         }
 
-        return name;
+        return tile.getName().addSuffix(suffix);
     }
 
     public IResourceName getName(){
