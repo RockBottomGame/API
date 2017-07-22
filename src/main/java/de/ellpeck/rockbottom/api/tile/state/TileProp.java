@@ -48,8 +48,8 @@ public abstract class TileProp<T extends Comparable> implements Comparable<TileP
         if(this == o){
             return true;
         }
-        else if(o instanceof TileProp<?>){
-            TileProp<?> tileProp = (TileProp<?>)o;
+        else if(o instanceof TileProp){
+            TileProp tileProp = (TileProp)o;
             return this.name.equals(tileProp.name);
         }
         else{

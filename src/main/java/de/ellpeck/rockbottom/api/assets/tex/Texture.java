@@ -83,18 +83,18 @@ public class Texture extends Image{
     public Texture getSubTexture(int x, int y, int width, int height){
         this.init();
 
-        float newTextureOffsetX = x/(float)this.width*this.textureWidth+this.textureOffsetX;
-        float newTextureOffsetY = y/(float)this.height*this.textureHeight+this.textureOffsetY;
-        float newTextureWidth = width/(float)this.width*this.textureWidth;
-        float newTextureHeight = height/(float)this.height*this.textureHeight;
+        float texOffX = x/(float)this.width*this.textureWidth+this.textureOffsetX;
+        float texOffY = y/(float)this.height*this.textureHeight+this.textureOffsetY;
+        float texWidth = width/(float)this.width*this.textureWidth;
+        float texHeight = height/(float)this.height*this.textureHeight;
 
         Texture sub = new Texture();
         sub.inited = true;
         sub.texture = this.texture;
-        sub.textureOffsetX = newTextureOffsetX;
-        sub.textureOffsetY = newTextureOffsetY;
-        sub.textureWidth = newTextureWidth;
-        sub.textureHeight = newTextureHeight;
+        sub.textureOffsetX = texOffX;
+        sub.textureOffsetY = texOffY;
+        sub.textureWidth = texWidth;
+        sub.textureHeight = texHeight;
 
         sub.width = width;
         sub.height = height;
