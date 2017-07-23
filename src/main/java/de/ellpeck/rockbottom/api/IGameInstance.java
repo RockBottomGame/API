@@ -197,6 +197,8 @@ public interface IGameInstance extends IMod{
      */
     boolean isItemInfoDebug();
 
+    boolean isChunkBorderDebug();
+
     /**
      * @return The average TPS (ticks per second) out of {@link Constants#TARGET_TPS} over the last second
      */
