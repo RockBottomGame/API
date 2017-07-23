@@ -113,7 +113,13 @@ public class TileState{
     }
 
     public <T extends Comparable> T get(TileProp<T> prop){
-        return (T)this.properties.get(prop);
+        Comparable value = this.properties.get(prop);
+        if(value == null){
+            throw new IllegalArgumentException("The tile "+this.tile.getName()+" does not support property "+prop);
+        }
+        else{
+            return (T)value;
+        }
     }
 
     public Tile getTile(){
