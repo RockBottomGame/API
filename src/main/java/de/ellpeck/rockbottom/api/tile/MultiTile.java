@@ -21,6 +21,7 @@ package de.ellpeck.rockbottom.api.tile;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.assets.font.FormattingCode;
+import de.ellpeck.rockbottom.api.entity.Entity;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.render.tile.ITileRenderer;
@@ -116,7 +117,8 @@ public abstract class MultiTile extends TileBasic{
         for(int addX = 0; addX < this.getWidth(); addX++){
             for(int addY = 0; addY < this.getHeight(); addY++){
                 if(this.isStructurePart(addX, addY)){
-                    world.setState(layer, startX+addX, startY+addY, this.getState(addX, addY));
+                    TileState state = this.getPlacementState(world, x, y, layer, instance, placer);
+                    world.setState(layer, startX+addX, startY+addY, state.overrideProps(this.getState(addX, addY), this.propSubX, this.propSubY));
                 }
             }
         }
@@ -129,11 +131,15 @@ public abstract class MultiTile extends TileBasic{
         for(int addX = 0; addX < this.getWidth(); addX++){
             for(int addY = 0; addY < this.getHeight(); addY++){
                 if(this.isStructurePart(addX, addY)){
-                    boolean isMain = addX == this.getMainX() && addY == this.getMainY();
-                    world.destroyTile(start.getX()+addX, start.getY()+addY, layer, breaker, isMain && allowDrop && (this.forceDrop || isRightTool));
+                    world.destroyTile(start.getX()+addX, start.getY()+addY, layer, breaker, allowDrop && (this.forceDrop || isRightTool));
                 }
             }
         }
+    }
+
+    @Override
+    public void onDestroyed(IWorld world, int x, int y, Entity destroyer, TileLayer layer, boolean shouldDrop){
+        super.onDestroyed(world, x, y, destroyer, layer, shouldDrop && this.isMainPos(x, y, world.getState(x, y)));
     }
 
     public boolean isMainPos(int x, int y, TileState state){

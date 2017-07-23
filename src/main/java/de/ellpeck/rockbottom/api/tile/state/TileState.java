@@ -122,6 +122,19 @@ public class TileState{
         }
     }
 
+    public TileState overrideProps(TileState other, TileProp... props){
+        if(other.tile != this.tile){
+            throw new IllegalArgumentException("Cannot override properties of state "+this+" with "+other+" because they are not the same tile");
+        }
+        else{
+            TileState overriden = this;
+            for(TileProp prop : props){
+                overriden = overriden.prop(prop, other.get(prop));
+            }
+            return overriden;
+        }
+    }
+
     public Tile getTile(){
         return this.tile;
     }
