@@ -33,12 +33,12 @@ public class BoolProp extends TileProp<Boolean>{
     }
 
     @Override
-    public Boolean makeValue(int variant){
-        return variant == 1;
+    public Boolean getValue(int index){
+        return index == 1;
     }
 
     @Override
-    public int getVariant(Boolean value){
+    public int getIndex(Boolean value){
         return value ? 1 : 0;
     }
 

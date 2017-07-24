@@ -32,9 +32,9 @@ public abstract class TileProp<T extends Comparable> implements Comparable<TileP
 
     public abstract int getVariants();
 
-    public abstract T makeValue(int variant);
+    public abstract T getValue(int index);
 
-    public abstract int getVariant(T value);
+    public abstract int getIndex(T value);
 
     public abstract T getDefault();
 

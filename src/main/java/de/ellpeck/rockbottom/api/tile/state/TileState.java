@@ -45,7 +45,7 @@ public class TileState{
 
         for(TileProp prop : tile.getProperties()){
             for(int i = 0; i < prop.getVariants(); i++){
-                Comparable value = prop.makeValue(i);
+                Comparable value = prop.getValue(i);
                 if(!properties.get(prop).equals(value)){
                     Map<TileProp, Comparable> subProps = new TreeMap<>(properties);
                     subProps.put(prop, value);
@@ -93,12 +93,8 @@ public class TileState{
         return this.name;
     }
 
-    public Map<TileProp, Comparable> getProperties(){
-        return this.properties;
-    }
-
     public <T extends Comparable> TileState prop(TileProp<T> prop, T value){
-        if(value.equals(this.properties.get(prop))){
+        if(value.equals(this.get(prop))){
             return this;
         }
         else{
@@ -110,6 +106,14 @@ public class TileState{
                 return state;
             }
         }
+    }
+
+    public <T extends Comparable> TileState cycleProp(TileProp<T> prop){
+        int index = prop.getIndex(this.get(prop))+1;
+        if(index >= prop.getVariants()){
+            index = 0;
+        }
+        return this.prop(prop, prop.getValue(index));
     }
 
     public <T extends Comparable> T get(TileProp<T> prop){
@@ -162,6 +166,6 @@ public class TileState{
 
     @Override
     public String toString(){
-        return this.tile.getName()+"@"+this.getProperties();
+        return this.tile.getName()+"@"+this.properties;
     }
 }

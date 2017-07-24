@@ -35,12 +35,12 @@ public class IntProp extends TileProp<Integer>{
     }
 
     @Override
-    public Integer makeValue(int variant){
-        return variant;
+    public Integer getValue(int index){
+        return index;
     }
 
     @Override
-    public int getVariant(Integer value){
+    public int getIndex(Integer value){
         return value;
     }
 
