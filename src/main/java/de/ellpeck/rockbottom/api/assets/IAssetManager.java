@@ -51,6 +51,12 @@ public interface IAssetManager{
 
     Font getFont();
 
+    void setFont(Font font);
+
+    Locale getLocale();
+
+    void setLocale(Locale locale);
+
     InputStream getResourceStream(String s);
 
     Texture getMissingTexture();

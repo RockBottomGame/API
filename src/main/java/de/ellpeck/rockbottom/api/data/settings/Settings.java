@@ -101,7 +101,7 @@ public class Settings implements IPropSettings{
         }
 
         this.lastServerIp = this.getProp(props, "last_server_ip", "");
-        this.currentLocale = this.getProp(props, "locale", "us_english");
+        this.currentLocale = this.getProp(props, "curr_locale", "rockbottom/loc.us_english");
     }
 
     @Override
@@ -137,7 +137,7 @@ public class Settings implements IPropSettings{
         }
 
         this.setProp(props, "last_server_ip", this.lastServerIp);
-        this.setProp(props, "locale", this.currentLocale);
+        this.setProp(props, "curr_locale", this.currentLocale);
     }
 
     @Override
