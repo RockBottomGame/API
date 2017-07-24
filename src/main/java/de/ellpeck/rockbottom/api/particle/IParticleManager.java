@@ -18,7 +18,6 @@
 
 package de.ellpeck.rockbottom.api.particle;
 
-import de.ellpeck.rockbottom.api.tile.Tile;
 import de.ellpeck.rockbottom.api.tile.state.TileState;
 import de.ellpeck.rockbottom.api.world.IWorld;
 

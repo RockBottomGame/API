@@ -1,5 +1,5 @@
 /*
- * This file ("StateCollection.java") is part of the RockBottomAPI by Ellpeck.
+ * This file ("StateHandler.java") is part of the RockBottomAPI by Ellpeck.
  * View the source code at <https://github.com/Ellpeck/RockBottomAPI>.
  *
  * The RockBottomAPI is free software: you can redistribute it and/or modify

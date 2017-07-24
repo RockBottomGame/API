@@ -19,7 +19,6 @@
 package de.ellpeck.rockbottom.api.world.gen;
 
 import de.ellpeck.rockbottom.api.Constants;
-import de.ellpeck.rockbottom.api.tile.Tile;
 import de.ellpeck.rockbottom.api.tile.state.TileState;
 import de.ellpeck.rockbottom.api.util.Util;
 import de.ellpeck.rockbottom.api.world.IChunk;

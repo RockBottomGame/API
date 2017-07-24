@@ -53,12 +53,10 @@ public class Tile{
     private static final IResourceName LOC_LAYER = RockBottomAPI.createInternalRes("info.layer_placement");
 
     protected final IResourceName name;
-
+    protected final StateHandler possibleStates;
     protected Map<ToolType, Integer> effectiveTools = new HashMap<>();
     protected boolean forceDrop;
     protected float hardness = 1F;
-
-    protected final StateHandler possibleStates;
 
     public Tile(IResourceName name){
         this.name = name;
