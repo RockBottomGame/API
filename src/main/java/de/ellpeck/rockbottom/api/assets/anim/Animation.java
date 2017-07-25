@@ -84,6 +84,10 @@ public class Animation{
     }
 
     public void drawFrame(int row, int frame, float x, float y, float scale, Color[] light, Color filter){
+        this.drawFrame(row, frame, x, y, x+scale, y+(this.frameHeight/this.frameWidth)*scale, 0, 0, this.frameWidth, this.frameHeight, light, filter);
+    }
+
+    public void drawFrame(int row, int frame, float x1, float y1, float x2, float y2, float srcX1, float srcY1, float srcX2, float srcY2, Color[] light, Color filter){
         if(row < 0 || row >= this.rows.size()){
             row = 0;
         }
@@ -97,10 +101,10 @@ public class Animation{
         float srcY = row*this.frameHeight;
 
         if(light != null){
-            this.texture.drawWithLight(x, y, x+scale, y+(this.frameHeight/this.frameWidth)*scale, srcX, srcY, srcX+this.frameWidth, srcY+this.frameHeight, light, filter);
+            this.texture.drawWithLight(x1, y1, x2, y2, srcX+srcX1, srcY+srcY1, srcX+srcX2, srcY+srcY2, light, filter);
         }
         else{
-            this.texture.draw(x, y, x+scale, y+(this.frameHeight/this.frameWidth)*scale, srcX, srcY, srcX+this.frameWidth, srcY+this.frameHeight, filter);
+            this.texture.draw(x1, y1, x2, y2, srcX+srcX1, srcY+srcY1, srcX+srcX2, srcY+srcY2, filter);
         }
     }
 
@@ -109,6 +113,10 @@ public class Animation{
     }
 
     public void drawRow(int row, float x, float y, float scale, Color[] light, Color filter){
+        this.drawRow(row, x, y, x+scale, y+(this.frameHeight/this.frameWidth)*scale, 0, 0, this.frameWidth, this.frameHeight, light, filter);
+    }
+
+    public void drawRow(int row, float x1, float y1, float x2, float y2, float srcX1, float srcY1, float srcX2, float srcY2, Color[] light, Color filter){
         if(row < 0 || row >= this.rows.size()){
             row = 0;
         }
@@ -120,7 +128,7 @@ public class Animation{
         for(int i = 0; i < theRow.getFrameAmount(); i++){
             accum += theRow.getTime(i)*1000;
             if(accum >= runningTime){
-                this.drawFrame(row, i, x, y, scale, light, filter);
+                this.drawFrame(row, i, x1, y1, x2, y2, srcX1, srcY1, srcX2, srcY2, light, filter);
                 break;
             }
         }
