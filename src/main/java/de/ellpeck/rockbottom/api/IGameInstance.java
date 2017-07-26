@@ -31,6 +31,7 @@ import de.ellpeck.rockbottom.api.particle.IParticleManager;
 import de.ellpeck.rockbottom.api.render.IPlayerDesign;
 import de.ellpeck.rockbottom.api.util.IAction;
 import de.ellpeck.rockbottom.api.util.reg.NameToIndexInfo;
+import de.ellpeck.rockbottom.api.world.DynamicRegistryInfo;
 import de.ellpeck.rockbottom.api.world.IWorld;
 import de.ellpeck.rockbottom.api.world.WorldInfo;
 import org.newdawn.slick.Input;
@@ -63,9 +64,8 @@ public interface IGameInstance extends IMod{
      *
      * @param playerSet   The player data
      * @param info        The world info
-     * @param tileRegInfo The tile registry info
      */
-    void joinWorld(DataSet playerSet, WorldInfo info, NameToIndexInfo tileRegInfo, NameToIndexInfo biomeRegInfo);
+    void joinWorld(DataSet playerSet, WorldInfo info, DynamicRegistryInfo regInfo);
 
     /**
      * Quits the current {@link IWorld}

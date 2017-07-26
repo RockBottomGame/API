@@ -98,6 +98,8 @@ public interface IWorld extends IChunkOrWorld{
 
     NameToIndexInfo getBiomeRegInfo();
 
+    DynamicRegistryInfo getRegInfo();
+
     /**
      * @return Information like the seed and time of the world
      */
