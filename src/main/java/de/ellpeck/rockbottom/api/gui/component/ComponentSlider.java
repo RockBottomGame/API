@@ -19,8 +19,10 @@
 package de.ellpeck.rockbottom.api.gui.component;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
+import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.gui.Gui;
+import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 import org.newdawn.slick.Graphics;
 
 public class ComponentSlider extends ComponentButton{
@@ -97,6 +99,11 @@ public class ComponentSlider extends ComponentButton{
 
             this.callback.onNumberChange(mouseX, mouseY, this.min, this.max, this.number);
         }
+    }
+
+    @Override
+    public IResourceName getName(){
+        return RockBottomAPI.createInternalRes("slider");
     }
 
     public interface ICallback{

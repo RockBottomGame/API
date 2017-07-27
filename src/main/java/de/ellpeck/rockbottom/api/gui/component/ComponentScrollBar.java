@@ -19,9 +19,11 @@
 package de.ellpeck.rockbottom.api.gui.component;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
+import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.gui.Gui;
 import de.ellpeck.rockbottom.api.util.BoundBox;
+import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.Graphics;
 
@@ -144,6 +146,11 @@ public class ComponentScrollBar extends ComponentButton{
             this.number = number;
             this.callback.onNumberChange(this.min, this.max, this.number);
         }
+    }
+
+    @Override
+    public IResourceName getName(){
+        return RockBottomAPI.createInternalRes("scroll_bar");
     }
 
     public interface ICallback{
