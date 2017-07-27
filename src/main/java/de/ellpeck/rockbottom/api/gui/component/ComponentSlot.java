@@ -24,6 +24,7 @@ import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.gui.GuiContainer;
 import de.ellpeck.rockbottom.api.gui.container.ContainerSlot;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
+import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 import org.newdawn.slick.Graphics;
 
 public class ComponentSlot extends GuiComponent{
@@ -42,6 +43,11 @@ public class ComponentSlot extends GuiComponent{
     @Override
     public boolean onMouseAction(IGameInstance game, int button, float x, float y){
         return RockBottomAPI.getApiHandler().doDefaultSlotMovement(game, button, x, y, this);
+    }
+
+    @Override
+    public IResourceName getName(){
+        return RockBottomAPI.createInternalRes("slot");
     }
 
     @Override

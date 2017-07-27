@@ -25,6 +25,7 @@ import de.ellpeck.rockbottom.api.data.settings.Settings;
 import de.ellpeck.rockbottom.api.event.EventResult;
 import de.ellpeck.rockbottom.api.event.impl.ComponentRenderEvent;
 import de.ellpeck.rockbottom.api.gui.component.GuiComponent;
+import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.Color;
@@ -33,7 +34,7 @@ import org.newdawn.slick.Graphics;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Gui{
+public abstract class Gui{
 
     public static final Color GRADIENT = new Color(0F, 0F, 0F, 0.7F);
     public static final Color HOVER_INFO_BACKGROUND = new Color(0F, 0F, 0F, 0.8F);
@@ -178,4 +179,15 @@ public class Gui{
         }
         return false;
     }
+
+    public List<GuiComponent> getComponents(){
+        return this.components;
+    }
+
+    @Override
+    public String toString(){
+        return this.getName().toString();
+    }
+
+    public abstract IResourceName getName();
 }

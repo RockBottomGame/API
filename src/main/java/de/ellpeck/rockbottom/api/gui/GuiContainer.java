@@ -28,10 +28,11 @@ import de.ellpeck.rockbottom.api.gui.container.ContainerSlot;
 import de.ellpeck.rockbottom.api.gui.container.ItemContainer;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.net.packet.toserver.PacketDropItem;
+import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 
-public class GuiContainer extends Gui{
+public abstract class GuiContainer extends Gui{
 
     public static final Color PROGRESS_COLOR = new Color(0.1F, 0.5F, 0.1F);
     public static final Color FIRE_COLOR = new Color(0.5F, 0.1F, 0.1F);

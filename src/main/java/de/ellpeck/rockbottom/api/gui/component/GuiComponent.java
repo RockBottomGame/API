@@ -22,11 +22,12 @@ import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.gui.Gui;
+import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 
-public class GuiComponent{
+public abstract class GuiComponent{
 
     public final Color guiColor = RockBottomAPI.getGame().getSettings().guiColor;
     public final Color colorButton = this.guiColor.multiply(new Color(1F, 1F, 1F, 0.5F));
@@ -81,4 +82,11 @@ public class GuiComponent{
     public boolean onKeyboardAction(IGameInstance game, int button, char character){
         return false;
     }
+
+    @Override
+    public String toString(){
+        return this.getName().toString();
+    }
+
+    public abstract IResourceName getName();
 }
