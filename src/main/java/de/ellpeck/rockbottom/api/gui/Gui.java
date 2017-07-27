@@ -21,6 +21,7 @@ package de.ellpeck.rockbottom.api.gui;
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
+import de.ellpeck.rockbottom.api.data.settings.Settings;
 import de.ellpeck.rockbottom.api.event.EventResult;
 import de.ellpeck.rockbottom.api.event.impl.ComponentRenderEvent;
 import de.ellpeck.rockbottom.api.gui.component.GuiComponent;
@@ -97,7 +98,7 @@ public class Gui{
             }
         }
 
-        if(button == game.getSettings().keyMenu.key || (button == game.getSettings().keyInventory.key && this instanceof GuiContainer)){
+        if(Settings.KEY_MENU.isKey(button) || (Settings.KEY_INVENTORY.isKey(button) && this instanceof GuiContainer)){
             if(this.tryEscape(game)){
                 return true;
             }

@@ -28,10 +28,15 @@ import java.util.Map.Entry;
 public class NameRegistry<T> implements IRegistry<IResourceName, T>{
 
     protected final String name;
-    protected final Map<IResourceName, T> map = new HashMap<>();
+    protected final Map<IResourceName, T> map;
+
+    public NameRegistry(String name, Map<IResourceName, T> map){
+        this.name = name;
+        this.map = map;
+    }
 
     public NameRegistry(String name){
-        this.name = name;
+        this(name, new HashMap<>());
     }
 
     @Override

@@ -32,4 +32,24 @@ public interface IPropSettings{
     File getFile(IDataManager manager);
 
     String getName();
+
+    default <T> void setProp(Properties props, String name, T val){
+        props.setProperty(name, String.valueOf(val));
+    }
+
+    default int getProp(Properties props, String name, int def){
+        return Integer.parseInt(props.getProperty(name, String.valueOf(def)));
+    }
+
+    default boolean getProp(Properties props, String name, boolean def){
+        return Boolean.parseBoolean(props.getProperty(name, String.valueOf(def)));
+    }
+
+    default float getProp(Properties props, String name, float def){
+        return Float.parseFloat(props.getProperty(name, String.valueOf(def)));
+    }
+
+    default String getProp(Properties props, String name, String def){
+        return props.getProperty(name, def);
+    }
 }

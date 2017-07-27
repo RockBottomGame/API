@@ -23,6 +23,7 @@ import de.ellpeck.rockbottom.api.construction.SeparatorRecipe;
 import de.ellpeck.rockbottom.api.construction.SmelterRecipe;
 import de.ellpeck.rockbottom.api.construction.StamperRecipe;
 import de.ellpeck.rockbottom.api.data.set.part.DataPart;
+import de.ellpeck.rockbottom.api.data.settings.Keybind;
 import de.ellpeck.rockbottom.api.entity.Entity;
 import de.ellpeck.rockbottom.api.event.IEventHandler;
 import de.ellpeck.rockbottom.api.item.Item;
@@ -40,10 +41,7 @@ import de.ellpeck.rockbottom.api.util.reg.NameRegistry;
 import de.ellpeck.rockbottom.api.world.gen.IWorldGenerator;
 import de.ellpeck.rockbottom.api.world.gen.biome.Biome;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * The main API class
@@ -126,6 +124,11 @@ public final class RockBottomAPI{
      * <br> DO NOT manually register states into this registry, it is populated automatically
      */
     public static final NameRegistry<TileState> TILE_STATE_REGISTRY = new NameRegistry<>("tile_state_registry");
+    /**
+     * The registry for {@link Keybind}
+     * <br> Use this to register custom keybinds
+     */
+    public static final NameRegistry<Keybind> KEYBIND_REGISTRY = new NameRegistry<>("keybind_registry", new TreeMap<>());
 
     private static IApiHandler apiHandler;
     private static INetHandler netHandler;

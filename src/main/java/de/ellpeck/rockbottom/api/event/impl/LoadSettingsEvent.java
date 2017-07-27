@@ -1,5 +1,5 @@
 /*
- * This file ("IResourceName.java") is part of the RockBottomAPI by Ellpeck.
+ * This file ("KeybindRegisterEvent.java") is part of the RockBottomAPI by Ellpeck.
  * View the source code at <https://github.com/Ellpeck/RockBottomAPI>.
  *
  * The RockBottomAPI is free software: you can redistribute it and/or modify
@@ -16,17 +16,22 @@
  * along with the RockBottomAPI. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.ellpeck.rockbottom.api.util.reg;
+package de.ellpeck.rockbottom.api.event.impl;
 
-public interface IResourceName extends Comparable<IResourceName>{
+import de.ellpeck.rockbottom.api.data.settings.Settings;
+import de.ellpeck.rockbottom.api.event.Event;
 
-    String getDomain();
+/**
+ * This event is fired when {@link Settings} are loaded
+ * <br> You should use this event to register your {@link de.ellpeck.rockbottom.api.data.settings.Keybind}s as doing it
+ * later will make them not be loaded using the settings file
+ * <br> This event is not cancellable.
+ */
+public class LoadSettingsEvent extends Event{
 
-    String getResourceName();
+    public final Settings settings;
 
-    boolean isEmpty();
-
-    IResourceName addPrefix(String prefix);
-
-    IResourceName addSuffix(String suffix);
+    public LoadSettingsEvent(Settings settings){
+        this.settings = settings;
+    }
 }

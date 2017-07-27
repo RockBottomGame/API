@@ -34,7 +34,7 @@ public class ComponentScrollBar extends ComponentButton{
     protected int number;
 
     private boolean wasMouseDown;
-    private boolean locked;
+    private boolean locked = false;
 
     public ComponentScrollBar(Gui gui, int id, int x, int y, int sizeX, int sizeY, int initialNumber, int min, int max, BoundBox scrollArea, ICallback callback){
         super(gui, id, x, y, sizeX, sizeY, null);
@@ -83,6 +83,18 @@ public class ComponentScrollBar extends ComponentButton{
 
     public void setLocked(boolean locked){
         this.locked = locked;
+    }
+
+    public int getMin(){
+        return this.min;
+    }
+
+    public int getMax(){
+        return this.max;
+    }
+
+    public int getNumber(){
+        return this.number;
     }
 
     @Override

@@ -18,32 +18,40 @@
 
 package de.ellpeck.rockbottom.api.data.settings;
 
+import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.data.IDataManager;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Input;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Properties;
 
 public class Settings implements IPropSettings{
 
+    public static final Keybind KEY_INVENTORY = new Keybind(RockBottomAPI.createInternalRes("inventory"), Input.KEY_E, false).register();
+    public static final Keybind KEY_MENU = new Keybind(RockBottomAPI.createInternalRes("menu"), Input.KEY_ESCAPE, false).register();
+    public static final Keybind KEY_LEFT = new Keybind(RockBottomAPI.createInternalRes("left"), Input.KEY_A, false).register();
+    public static final Keybind KEY_RIGHT = new Keybind(RockBottomAPI.createInternalRes("right"), Input.KEY_D, false).register();
+    public static final Keybind KEY_UP = new Keybind(RockBottomAPI.createInternalRes("up"), Input.KEY_W, false).register();
+    public static final Keybind KEY_DOWN = new Keybind(RockBottomAPI.createInternalRes("down"), Input.KEY_S, false).register();
+    public static final Keybind KEY_JUMP = new Keybind(RockBottomAPI.createInternalRes("jump"), Input.KEY_SPACE, false).register();
+    public static final Keybind KEY_BACKGROUND = new Keybind(RockBottomAPI.createInternalRes("background"), Input.KEY_LSHIFT, false).register();
+    public static final Keybind KEY_CHAT = new Keybind(RockBottomAPI.createInternalRes("chat"), Input.KEY_ENTER, false).register();
+    public static final Keybind KEY_ADVANCED_INFO = new Keybind(RockBottomAPI.createInternalRes("advanced_info"), Input.KEY_LSHIFT, false).register();
+    public static final Keybind KEY_SCREENSHOT = new Keybind(RockBottomAPI.createInternalRes("screenshot"), Input.KEY_F10, false).register();
+    public static final Keybind[] KEYS_ITEM_SELECTION = new Keybind[8];
+
+    static{
+        int[] defKeys = new int[]{Input.KEY_1, Input.KEY_2, Input.KEY_3, Input.KEY_4, Input.KEY_5, Input.KEY_6, Input.KEY_7, Input.KEY_8};
+
+        for(int i = 0; i < KEYS_ITEM_SELECTION.length; i++){
+            KEYS_ITEM_SELECTION[i] = new Keybind(RockBottomAPI.createInternalRes("item_selection_"+i), defKeys[i], false).register();
+        }
+    }
+
     public static final float DEFAULT_GUI_R = 0.32156864F;
     public static final float DEFAULT_GUI_G = 0.5882353F;
     public static final float DEFAULT_GUI_B = 0.32156864F;
-    public List<Keybind> keybinds = new ArrayList<>();
-    public Keybind keyInventory = new Keybind("inventory", Input.KEY_E);
-    public Keybind keyMenu = new Keybind("menu", Input.KEY_ESCAPE);
-    public Keybind keyLeft = new Keybind("left", Input.KEY_A);
-    public Keybind keyRight = new Keybind("right", Input.KEY_D);
-    public Keybind keyUp = new Keybind("up", Input.KEY_W);
-    public Keybind keyDown = new Keybind("down", Input.KEY_S);
-    public Keybind keyJump = new Keybind("jump", Input.KEY_SPACE);
-    public Keybind keyBackground = new Keybind("background", Input.KEY_LSHIFT);
-    public Keybind keyChat = new Keybind("chat", Input.KEY_ENTER);
-    public Keybind keyAdvancedInfo = new Keybind("advanced_info", Input.KEY_LSHIFT);
-    public Keybind keyScreenshot = new Keybind("screenshot", Input.KEY_F10);
 
     public int targetFps;
     public int autosaveIntervalSeconds;
@@ -64,17 +72,11 @@ public class Settings implements IPropSettings{
     public int buttonGuiAction1;
     public int buttonGuiAction2;
 
-    public int[] keysItemSelection = new int[8];
-
     public String lastServerIp;
     public String currentLocale;
 
     @Override
     public void load(Properties props){
-        for(Keybind bind : this.keybinds){
-            bind.key = this.getProp(props, "key_"+bind.name, bind.def);
-        }
-
         this.targetFps = this.getProp(props, "target_fps", 60);
         this.autosaveIntervalSeconds = this.getProp(props, "autosave_interval", 60);
 
@@ -95,21 +97,12 @@ public class Settings implements IPropSettings{
         this.buttonGuiAction1 = this.getProp(props, "button_gui_1", Input.MOUSE_LEFT_BUTTON);
         this.buttonGuiAction2 = this.getProp(props, "button_gui_2", Input.MOUSE_RIGHT_BUTTON);
 
-        int[] defaultKeys = new int[]{Input.KEY_1, Input.KEY_2, Input.KEY_3, Input.KEY_4, Input.KEY_5, Input.KEY_6, Input.KEY_7, Input.KEY_8};
-        for(int i = 0; i < this.keysItemSelection.length; i++){
-            this.keysItemSelection[i] = this.getProp(props, "key_item_select_"+i, defaultKeys[i]);
-        }
-
         this.lastServerIp = this.getProp(props, "last_server_ip", "");
         this.currentLocale = this.getProp(props, "curr_locale", "rockbottom/loc.us_english");
     }
 
     @Override
     public void save(Properties props){
-        for(Keybind bind : this.keybinds){
-            this.setProp(props, "key_"+bind.name, bind.key);
-        }
-
         this.setProp(props, "target_fps", this.targetFps);
         this.setProp(props, "autosave_interval", this.autosaveIntervalSeconds);
 
@@ -132,10 +125,6 @@ public class Settings implements IPropSettings{
         this.setProp(props, "button_gui_1", this.buttonGuiAction1);
         this.setProp(props, "button_gui_2", this.buttonGuiAction2);
 
-        for(int i = 0; i < this.keysItemSelection.length; i++){
-            this.setProp(props, "key_item_select_"+i, this.keysItemSelection[i]);
-        }
-
         this.setProp(props, "last_server_ip", this.lastServerIp);
         this.setProp(props, "curr_locale", this.currentLocale);
     }
@@ -150,37 +139,4 @@ public class Settings implements IPropSettings{
         return "Game settings";
     }
 
-    private <T> void setProp(Properties props, String name, T val){
-        props.setProperty(name, String.valueOf(val));
-    }
-
-    private int getProp(Properties props, String name, int def){
-        return Integer.parseInt(props.getProperty(name, String.valueOf(def)));
-    }
-
-    private boolean getProp(Properties props, String name, boolean def){
-        return Boolean.parseBoolean(props.getProperty(name, String.valueOf(def)));
-    }
-
-    private float getProp(Properties props, String name, float def){
-        return Float.parseFloat(props.getProperty(name, String.valueOf(def)));
-    }
-
-    private String getProp(Properties props, String name, String def){
-        return props.getProperty(name, def);
-    }
-
-    public class Keybind{
-
-        public final String name;
-        private final int def;
-        public int key;
-
-        public Keybind(String name, int def){
-            this.def = def;
-            this.name = name;
-
-            Settings.this.keybinds.add(this);
-        }
-    }
 }
