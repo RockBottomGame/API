@@ -63,4 +63,8 @@ public class WorldInfo{
         this.totalTimeInWorld = buf.readInt();
         this.currentWorldTime = buf.readInt();
     }
+
+    public static boolean exists(File directory){
+        return new File(directory, "world_info.dat").exists();
+    }
 }

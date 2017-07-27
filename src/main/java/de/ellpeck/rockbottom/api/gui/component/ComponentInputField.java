@@ -139,13 +139,7 @@ public class ComponentInputField extends GuiComponent{
     public boolean onMouseAction(IGameInstance game, int button, float x, float y){
         if(button == game.getSettings().buttonGuiAction1){
             if(this.selectable){
-                if(this.isMouseOver(game)){
-                    this.isActive = true;
-                    return true;
-                }
-                else{
-                    this.isActive = false;
-                }
+                this.isActive = this.isMouseOver(game);
             }
         }
         else if(button == game.getSettings().buttonGuiAction2){
