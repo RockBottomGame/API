@@ -24,6 +24,7 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.Input;
 
 import java.io.File;
+import java.security.Key;
 import java.util.Properties;
 
 public class Settings implements IPropSettings{
@@ -77,6 +78,10 @@ public class Settings implements IPropSettings{
 
     @Override
     public void load(Properties props){
+        for(Keybind keybind : RockBottomAPI.KEYBIND_REGISTRY.getUnmodifiable().values()){
+            keybind.setBind(this.getProp(props, keybind.getName().toString(), keybind.getKey()));
+        }
+
         this.targetFps = this.getProp(props, "target_fps", 60);
         this.autosaveIntervalSeconds = this.getProp(props, "autosave_interval", 60);
 
@@ -103,6 +108,10 @@ public class Settings implements IPropSettings{
 
     @Override
     public void save(Properties props){
+        for(Keybind keybind : RockBottomAPI.KEYBIND_REGISTRY.getUnmodifiable().values()){
+            this.setProp(props, keybind.getName().toString(), keybind.getKey());
+        }
+
         this.setProp(props, "target_fps", this.targetFps);
         this.setProp(props, "autosave_interval", this.autosaveIntervalSeconds);
 
