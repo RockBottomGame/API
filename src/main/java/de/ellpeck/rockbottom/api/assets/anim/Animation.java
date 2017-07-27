@@ -19,7 +19,7 @@
 package de.ellpeck.rockbottom.api.assets.anim;
 
 import de.ellpeck.rockbottom.api.assets.tex.Texture;
-import org.lwjgl.Sys;
+import de.ellpeck.rockbottom.api.util.Util;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.SlickException;
 
@@ -123,7 +123,7 @@ public class Animation{
         }
         AnimationRow theRow = this.rows.get(row);
 
-        int runningTime = (int)((Sys.getTime()*1000)/Sys.getTimerResolution())%(int)(theRow.getTotalTime()*1000);
+        int runningTime = (int)Util.getTimeMillis()%(int)(theRow.getTotalTime()*1000);
 
         int accum = 0;
         for(int i = 0; i < theRow.getFrameAmount(); i++){

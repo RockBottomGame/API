@@ -18,6 +18,7 @@
 
 package de.ellpeck.rockbottom.api.assets.font;
 
+import de.ellpeck.rockbottom.api.util.Util;
 import org.newdawn.slick.Color;
 
 public class FormattingCode{
@@ -73,7 +74,7 @@ public class FormattingCode{
                 }
             }
             else if(formatChar == 'r'){
-                return new FormattingCode('r', getWheelColor((System.currentTimeMillis()/10)%256), 2);
+                return new FormattingCode('r', getWheelColor((Util.getTimeMillis()/10)%256), 2);
             }
             else{
                 for(FormattingCode code : DEFAULT_CODES){
