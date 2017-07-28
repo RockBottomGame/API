@@ -202,6 +202,8 @@ public interface IChunkOrWorld{
     /**
      * Schedules an update in the world that will cause {@link Tile#onScheduledUpdate(IWorld, int, int, TileLayer)}
      * to be called for the tile at the specified coordinates after the specified time has run out
+     * <br> Note: {@link Tile#onScheduledUpdate(IWorld, int, int, TileLayer)} will be called on the server and
+     * on the client, even when only scheduling an update on the server
      *
      * @param x     The x coordinate
      * @param y     The y coordinate
