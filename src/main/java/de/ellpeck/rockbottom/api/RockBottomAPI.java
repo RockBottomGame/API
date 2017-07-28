@@ -90,6 +90,7 @@ public final class RockBottomAPI{
      * <br> Use this to register construction recipes that can be used in the inventory {@link de.ellpeck.rockbottom.api.gui.Gui}
      */
     public static final List<BasicRecipe> MANUAL_CONSTRUCTION_RECIPES = new ArrayList<>();
+    public static final List<BasicRecipe> CONSTRUCTION_TABLE_RECIPES = new ArrayList<>();
     public static final List<StamperRecipe> STAMPER_RECIPES = new ArrayList<>();
     /**
      * The registry for {@link ItemInstance}s that can be used in machines as a fuel.
