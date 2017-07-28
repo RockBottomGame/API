@@ -24,6 +24,7 @@ import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.data.settings.Settings;
 import de.ellpeck.rockbottom.api.event.EventResult;
 import de.ellpeck.rockbottom.api.event.impl.ComponentRenderEvent;
+import de.ellpeck.rockbottom.api.event.impl.ComponentRenderOverlayEvent;
 import de.ellpeck.rockbottom.api.gui.component.GuiComponent;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 import org.lwjgl.input.Keyboard;
@@ -118,7 +119,12 @@ public abstract class Gui{
     }
 
     public void renderOverlay(IGameInstance game, IAssetManager manager, Graphics g){
-        this.components.forEach(component -> component.renderOverlay(game, manager, g));
+        for(int i = 0; i < this.components.size(); i++){
+            GuiComponent component = this.components.get(i);
+            if(RockBottomAPI.getEventHandler().fireEvent(new ComponentRenderOverlayEvent(this, i, component)) != EventResult.CANCELLED){
+                component.renderOverlay(game, manager, g);
+            }
+        }
     }
 
     protected boolean tryEscape(IGameInstance game){
