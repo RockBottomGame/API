@@ -38,23 +38,13 @@ import java.util.List;
 
 public abstract class MultiTile extends TileBasic{
 
-    public IntProp propSubX;
-    public IntProp propSubY;
+    public IntProp propSubX = new IntProp("subX", 0, this.getWidth());
+    public IntProp propSubY = new IntProp("subY", 0, this.getHeight());
     private boolean[][] structure;
 
     public MultiTile(IResourceName name){
         super(name);
-    }
-
-    @Override
-    public TileProp[] getProperties(){
-        return new TileProp[]{this.propSubX, this.propSubY};
-    }
-
-    @Override
-    protected void createNonStaticProps(){
-        this.propSubX = new IntProp("subX", 0, this.getWidth());
-        this.propSubY = new IntProp("subY", 0, this.getHeight());
+        this.addProps(this.propSubX, this.propSubY);
     }
 
     @Override

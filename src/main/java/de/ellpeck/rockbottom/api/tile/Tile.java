@@ -54,16 +54,14 @@ public class Tile{
     private static final IResourceName LOC_LAYER = RockBottomAPI.createInternalRes("info.layer_placement");
 
     protected final IResourceName name;
-    protected final StateHandler possibleStates;
+    private final StateHandler stateHandler;
     protected Map<ToolType, Integer> effectiveTools = new HashMap<>();
     protected boolean forceDrop;
     protected float hardness = 1F;
 
     public Tile(IResourceName name){
         this.name = name;
-
-        this.createNonStaticProps();
-        this.possibleStates = new StateHandler(this);
+        this.stateHandler = new StateHandler(this);
     }
 
     public ITileRenderer getRenderer(){
@@ -128,6 +126,8 @@ public class Tile{
         if(this.hasItem()){
             this.createItemTile().register();
         }
+
+        this.stateHandler.init();
 
         return this;
     }
@@ -309,19 +309,18 @@ public class Tile{
         }
     }
 
-    public TileProp[] getProperties(){
-        return new TileProp[0];
-    }
-
     public TileState getDefState(){
-        return this.possibleStates.getDefault();
+        return this.stateHandler.getDefault();
     }
 
-    public <T extends Comparable> TileState getDefStateWithProp(TileProp<T> prop, T value){
-        return this.getDefState().prop(prop, value);
+    public Tile addProps(TileProp... props){
+        for(TileProp prop : props){
+            this.stateHandler.addProp(prop);
+        }
+        return this;
     }
 
-    protected void createNonStaticProps(){
-
+    public List<TileProp> getProps(){
+        return this.stateHandler.getProps();
     }
 }

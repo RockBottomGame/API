@@ -43,7 +43,7 @@ public class TileState{
 
         RockBottomAPI.TILE_STATE_REGISTRY.register(name, this);
 
-        for(TileProp prop : tile.getProperties()){
+        for(TileProp prop : tile.getProps()){
             for(int i = 0; i < prop.getVariants(); i++){
                 Comparable value = prop.getValue(i);
                 if(!properties.get(prop).equals(value)){

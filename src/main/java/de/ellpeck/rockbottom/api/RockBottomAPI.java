@@ -56,12 +56,12 @@ public final class RockBottomAPI{
 
     /**
      * The registry for {@link Tile}
-     * <br> Use this to register custom tiles
+     * <br> Use {@link Tile#register()} to register your tiles
      */
     public static final NameRegistry<Tile> TILE_REGISTRY = new NameRegistry<>("tile_registry");
     /**
      * The registry for {@link Item}
-     * <br> Use this to register custom items
+     * <br> Use {@link Item#register()} to register your items
      */
     public static final NameRegistry<Item> ITEM_REGISTRY = new NameRegistry<>("item_registry");
     /**
