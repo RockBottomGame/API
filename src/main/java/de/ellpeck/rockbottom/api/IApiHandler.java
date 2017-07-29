@@ -133,7 +133,7 @@ public interface IApiHandler{
      * @param y       The y coordinate
      * @param scale   The scale
      */
-    void renderSlotInGui(IGameInstance game, IAssetManager manager, Graphics g, ItemInstance slot, float x, float y, float scale);
+    void renderSlotInGui(IGameInstance game, IAssetManager manager, Graphics g, ItemInstance slot, float x, float y, float scale, boolean hovered);
 
     /**
      * Renders an {@link ItemInstance} in a {@link de.ellpeck.rockbottom.api.gui.Gui} at the specified x and y coordinates

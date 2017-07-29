@@ -52,7 +52,7 @@ public class ComponentSlot extends GuiComponent{
 
     @Override
     public void render(IGameInstance game, IAssetManager manager, Graphics g){
-        RockBottomAPI.getApiHandler().renderSlotInGui(game, manager, g, this.slot.get(), this.x, this.y, 1F);
+        RockBottomAPI.getApiHandler().renderSlotInGui(game, manager, g, this.slot.get(), this.x, this.y, 1F, this.isMouseOver(game));
     }
 
     @Override
