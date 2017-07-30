@@ -44,10 +44,7 @@ import de.ellpeck.rockbottom.api.world.IWorld;
 import de.ellpeck.rockbottom.api.world.TileLayer;
 import org.newdawn.slick.Input;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Tile{
 
@@ -170,7 +167,7 @@ public class Tile{
     public void onDestroyed(IWorld world, int x, int y, Entity destroyer, TileLayer layer, boolean shouldDrop){
         if(shouldDrop){
             if(!RockBottomAPI.getNet().isClient()){
-                List<ItemInstance> drops = this.getDrops(world, x, y, layer, destroyer);
+                List<ItemInstance> drops = new ArrayList<>(this.getDrops(world, x, y, layer, destroyer));
 
                 if(RockBottomAPI.getEventHandler().fireEvent(new TileDropsEvent(this, drops, world, x, y, layer, destroyer)) != EventResult.CANCELLED){
                     if(drops != null && !drops.isEmpty()){
