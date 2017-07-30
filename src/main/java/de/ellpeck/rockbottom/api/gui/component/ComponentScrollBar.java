@@ -64,9 +64,8 @@ public class ComponentScrollBar extends ComponentButton{
     }
 
     public void setMin(int min){
-        this.min = min;
-
-        if(this.number < min){
+        if(this.min != min){
+            this.min = min;
             this.number = min;
         }
     }
@@ -76,10 +75,9 @@ public class ComponentScrollBar extends ComponentButton{
     }
 
     public void setMax(int max){
-        this.max = max;
-
-        if(this.number > max){
-            this.number = max;
+        if(this.max != max){
+            this.max = max;
+            this.number = this.getMin();
         }
     }
 
