@@ -115,7 +115,8 @@ public class Texture extends Image{
 
     public void drawWithLight(float x, float y, float x2, float y2, float srcX, float srcY, float srcX2, float srcY2, Color[] light, Color filter){
         this.texture.bind();
-
+        
+        GL.glTranslatef(x, y, 0);
         if(this.angle != 0){
             GL.glTranslatef(this.centerX, this.centerY, 0F);
             GL.glRotatef(this.angle, 0F, 0F, 1F);
@@ -131,31 +132,32 @@ public class Texture extends Image{
             GL.glRotatef(-this.angle, 0F, 0F, 1F);
             GL.glTranslatef(-this.centerX, -this.centerY, 0F);
         }
+        GL.glTranslatef(-x, -y, 0);
     }
 
     public void drawEmbeddedWithLight(float x, float y, float x2, float y2, float srcX, float srcY, float srcX2, float srcY2, Color[] light, Color filter){
-        this.init();
+        super.init();
 
-        float width = x2-x;
-        float height = y2-y;
+        float width = x2 - x;
+        float height = y2 - y;
 
-        float texOffX = srcX/this.width*this.textureWidth+this.textureOffsetX;
-        float texOffY = srcY/this.height*this.textureHeight+this.textureOffsetY;
-        float texWidth = (srcX2-srcX)/this.width*this.textureWidth;
-        float texHeight = (srcY2-srcY)/this.height*this.textureHeight;
+        float texOffX = srcX / this.width * this.textureWidth + this.textureOffsetX;
+        float texOffY = srcY / this.height * this.textureHeight + this.textureOffsetY;
+        float texWidth = (srcX2 - srcX) / this.width * this.textureWidth;
+        float texHeight = (srcY2 - srcY) / this.height * this.textureHeight;
 
         this.bindMultipliedColor(light[TOP_LEFT], filter);
         GL.glTexCoord2f(texOffX, texOffY);
-        GL.glVertex3f(x, y, 0);
+        GL.glVertex3f(0, 0, 0);
         this.bindMultipliedColor(light[BOTTOM_LEFT], filter);
-        GL.glTexCoord2f(texOffX, texOffY+texHeight);
-        GL.glVertex3f(x, y+height, 0);
+        GL.glTexCoord2f(texOffX, texOffY + texHeight);
+        GL.glVertex3f(0, height, 0);
         this.bindMultipliedColor(light[BOTTOM_RIGHT], filter);
-        GL.glTexCoord2f(texOffX+texWidth, texOffY+texHeight);
-        GL.glVertex3f(x+width, y+height, 0);
+        GL.glTexCoord2f(texOffX + texWidth, texOffY + texHeight);
+        GL.glVertex3f(width, height, 0);
         this.bindMultipliedColor(light[TOP_RIGHT], filter);
-        GL.glTexCoord2f(texOffX+texWidth, texOffY);
-        GL.glVertex3f(x+width, y, 0);
+        GL.glTexCoord2f(texOffX + texWidth, texOffY);
+        GL.glVertex3f(width, 0, 0);
     }
 
     private void bindMultipliedColor(Color first, Color second){
