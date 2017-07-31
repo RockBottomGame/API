@@ -42,10 +42,14 @@ public final class ResourceRegistry{
         List<ResInfo> resList = RESOURCES.computeIfAbsent(name, k -> new ArrayList<>());
 
         for(ResInfo res : resources){
-            resList.add(res);
+            if(!resList.contains(res)){
+                resList.add(res);
+            }
 
             List<String> nameList = RESOURCE_NAMES.computeIfAbsent(res, k -> new ArrayList<>());
-            nameList.add(name);
+            if(!nameList.contains(name)){
+                nameList.add(name);
+            }
         }
 
         Log.info("Registered resources "+Arrays.toString(resources)+" for resource name "+name);
