@@ -197,12 +197,13 @@ public class ItemInstance{
         if(this == o){
             return true;
         }
-        if(o == null || this.getClass() != o.getClass()){
+        if(o instanceof ItemInstance){
+            ItemInstance instance = (ItemInstance)o;
+            return this.meta == instance.meta && this.amount == instance.amount && this.item.equals(instance.item) && (this.additionalData != null ? this.additionalData.equals(instance.additionalData) : instance.additionalData == null);
+        }
+        else{
             return false;
         }
-
-        ItemInstance instance = (ItemInstance)o;
-        return this.meta == instance.meta && this.amount == instance.amount && this.item.equals(instance.item) && (this.additionalData != null ? this.additionalData.equals(instance.additionalData) : instance.additionalData == null);
     }
 
     @Override

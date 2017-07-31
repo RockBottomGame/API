@@ -18,52 +18,71 @@
 
 package de.ellpeck.rockbottom.api.construction.resource;
 
+import de.ellpeck.rockbottom.api.item.Item;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
-
-import java.util.List;
+import de.ellpeck.rockbottom.api.tile.Tile;
 
 public class ResourceInfo{
 
-    private final String name;
-    private int amount;
+    private final Item item;
+    private final int meta;
 
-    public ResourceInfo(String name){
-        this(name, 1);
+    public ResourceInfo(ItemInstance instance){
+        this(instance.getItem(), instance.getMeta());
     }
 
-    public ResourceInfo(String name, int amount){
-        this.name = name;
-        this.amount = amount;
+    public ResourceInfo(Tile tile){
+        this(tile, 0);
     }
 
-    public String getName(){
-        return this.name;
+    public ResourceInfo(Item item){
+        this(item, 0);
     }
 
-    public int getAmount(){
-        return this.amount;
+    public ResourceInfo(Tile tile, int meta){
+        this(tile.getItem(), meta);
     }
 
-    public ResourceInfo setAmount(int amount){
-        this.amount = amount;
-        return this;
+    public ResourceInfo(Item item, int meta){
+        this.item = item;
+        this.meta = meta;
     }
 
-    public List<ItemInstance> getItems(){
-        List<ItemInstance> list = ResourceRegistry.getResources(this.name);
-        for(ItemInstance inst : list){
-            inst.setAmount(this.amount);
+    public Item getItem(){
+        return this.item;
+    }
+
+    public int getMeta(){
+        return this.meta;
+    }
+
+    public ItemInstance asInstance(int amount){
+        return new ItemInstance(this.item, amount, this.meta);
+    }
+
+    @Override
+    public boolean equals(Object o){
+        if(this == o){
+            return true;
         }
-        return list;
-    }
-
-    public boolean containsItem(ItemInstance instance){
-        if(instance.getAmount() >= this.amount){
-            List<String> names = ResourceRegistry.getNames(instance);
-            return names.contains(this.name);
+        else if(o instanceof ResourceInfo){
+            ResourceInfo that = (ResourceInfo)o;
+            return this.meta == that.meta && this.item.equals(that.item);
         }
         else{
             return false;
         }
+    }
+
+    @Override
+    public int hashCode(){
+        int result = this.item.hashCode();
+        result = 31*result+this.meta;
+        return result;
+    }
+
+    @Override
+    public String toString(){
+        return this.item+"@"+this.meta;
     }
 }
