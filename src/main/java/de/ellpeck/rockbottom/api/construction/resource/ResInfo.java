@@ -22,28 +22,28 @@ import de.ellpeck.rockbottom.api.item.Item;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.tile.Tile;
 
-public class ResourceInfo{
+public class ResInfo{
 
     private final Item item;
     private final int meta;
 
-    public ResourceInfo(ItemInstance instance){
+    public ResInfo(ItemInstance instance){
         this(instance.getItem(), instance.getMeta());
     }
 
-    public ResourceInfo(Tile tile){
+    public ResInfo(Tile tile){
         this(tile, 0);
     }
 
-    public ResourceInfo(Item item){
+    public ResInfo(Item item){
         this(item, 0);
     }
 
-    public ResourceInfo(Tile tile, int meta){
+    public ResInfo(Tile tile, int meta){
         this(tile.getItem(), meta);
     }
 
-    public ResourceInfo(Item item, int meta){
+    public ResInfo(Item item, int meta){
         this.item = item;
         this.meta = meta;
     }
@@ -65,8 +65,8 @@ public class ResourceInfo{
         if(this == o){
             return true;
         }
-        else if(o instanceof ResourceInfo){
-            ResourceInfo that = (ResourceInfo)o;
+        else if(o instanceof ResInfo){
+            ResInfo that = (ResInfo)o;
             return this.meta == that.meta && this.item.equals(that.item);
         }
         else{

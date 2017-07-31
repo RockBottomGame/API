@@ -21,7 +21,7 @@ package de.ellpeck.rockbottom.api.tile;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.assets.font.FormattingCode;
-import de.ellpeck.rockbottom.api.construction.resource.ResourceInfo;
+import de.ellpeck.rockbottom.api.construction.resource.ResInfo;
 import de.ellpeck.rockbottom.api.construction.resource.ResourceRegistry;
 import de.ellpeck.rockbottom.api.data.settings.Settings;
 import de.ellpeck.rockbottom.api.entity.Entity;
@@ -134,7 +134,7 @@ public class Tile{
     }
 
     public Tile addResource(String name){
-        ResourceRegistry.addResources(name, new ResourceInfo(this));
+        ResourceRegistry.addResources(name, new ResInfo(this));
         return this;
     }
 

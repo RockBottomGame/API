@@ -23,16 +23,16 @@ import de.ellpeck.rockbottom.api.item.ItemInstance;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ResourceUsageInfo{
+public class ResUseInfo{
 
     private final String name;
     private int amount;
 
-    public ResourceUsageInfo(String name){
+    public ResUseInfo(String name){
         this(name, 1);
     }
 
-    public ResourceUsageInfo(String name, int amount){
+    public ResUseInfo(String name, int amount){
         this.name = name;
         this.amount = amount;
     }
@@ -45,14 +45,14 @@ public class ResourceUsageInfo{
         return this.amount;
     }
 
-    public ResourceUsageInfo setAmount(int amount){
+    public ResUseInfo setAmount(int amount){
         this.amount = amount;
         return this;
     }
 
     public List<ItemInstance> getItems(){
         List<ItemInstance> list = new ArrayList<>();
-        for(ResourceInfo info : ResourceRegistry.getResources(this.name)){
+        for(ResInfo info : ResourceRegistry.getResources(this.name)){
             list.add(info.asInstance(this.amount));
         }
         return list;
@@ -60,7 +60,7 @@ public class ResourceUsageInfo{
 
     public boolean containsItem(ItemInstance instance){
         if(instance.getAmount() >= this.amount){
-            List<String> names = ResourceRegistry.getNames(new ResourceInfo(instance));
+            List<String> names = ResourceRegistry.getNames(new ResInfo(instance));
             return names.contains(this.name);
         }
         else{
@@ -73,8 +73,8 @@ public class ResourceUsageInfo{
         if(this == o){
             return true;
         }
-        else if(o instanceof ResourceUsageInfo){
-            ResourceUsageInfo that = (ResourceUsageInfo)o;
+        else if(o instanceof ResUseInfo){
+            ResUseInfo that = (ResUseInfo)o;
             return this.amount == that.amount && this.name.equals(that.name);
         }
         else{

@@ -35,13 +35,13 @@ public final class ResourceRegistry{
     public static final String PROCESSED_COPPER = "processed_copper";
     public static final String SLAG = "slag";
 
-    private static final Map<String, List<ResourceInfo>> RESOURCES = new HashMap<>();
-    private static final Map<ResourceInfo, List<String>> RESOURCE_NAMES = new HashMap<>();
+    private static final Map<String, List<ResInfo>> RESOURCES = new HashMap<>();
+    private static final Map<ResInfo, List<String>> RESOURCE_NAMES = new HashMap<>();
 
-    public static void addResources(String name, ResourceInfo... resources){
-        List<ResourceInfo> resList = RESOURCES.computeIfAbsent(name, k -> new ArrayList<>());
+    public static void addResources(String name, ResInfo... resources){
+        List<ResInfo> resList = RESOURCES.computeIfAbsent(name, k -> new ArrayList<>());
 
-        for(ResourceInfo res : resources){
+        for(ResInfo res : resources){
             resList.add(res);
 
             List<String> nameList = RESOURCE_NAMES.computeIfAbsent(res, k -> new ArrayList<>());
@@ -51,12 +51,12 @@ public final class ResourceRegistry{
         Log.info("Registered resources "+Arrays.toString(resources)+" for resource name "+name);
     }
 
-    public static List<ResourceInfo> getResources(String name){
-        List<ResourceInfo> resources = RESOURCES.get(name);
+    public static List<ResInfo> getResources(String name){
+        List<ResInfo> resources = RESOURCES.get(name);
         return resources == null ? Collections.emptyList() : Collections.unmodifiableList(resources);
     }
 
-    public static List<String> getNames(ResourceInfo resource){
+    public static List<String> getNames(ResInfo resource){
         List<String> names = RESOURCE_NAMES.get(resource);
         return names == null ? Collections.emptyList() : Collections.unmodifiableList(names);
     }
