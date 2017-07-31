@@ -18,21 +18,22 @@
 
 package de.ellpeck.rockbottom.api.construction;
 
+import de.ellpeck.rockbottom.api.construction.resource.ResourceInfo;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 
 public class SmelterRecipe{
 
-    private final ItemInstance input;
+    private final ResourceInfo input;
     private final ItemInstance output;
     private final int time;
 
-    public SmelterRecipe(ItemInstance output, ItemInstance input, int time){
+    public SmelterRecipe(ItemInstance output, ResourceInfo input, int time){
         this.input = input;
         this.output = output;
         this.time = time;
     }
 
-    public ItemInstance getInput(){
+    public ResourceInfo getInput(){
         return this.input;
     }
 

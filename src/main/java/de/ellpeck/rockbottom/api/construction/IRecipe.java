@@ -18,6 +18,7 @@
 
 package de.ellpeck.rockbottom.api.construction;
 
+import de.ellpeck.rockbottom.api.construction.resource.ResourceInfo;
 import de.ellpeck.rockbottom.api.inventory.IInventory;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 
@@ -26,15 +27,15 @@ import java.util.List;
 public interface IRecipe{
 
     static boolean matchesInv(IRecipe recipe, IInventory inventory){
-        for(ItemInstance inst : recipe.getInputs()){
-            if(!inventory.containsItem(inst)){
+        for(ResourceInfo info : recipe.getInputs()){
+            if(!inventory.containsResource(info)){
                 return false;
             }
         }
         return true;
     }
 
-    List<ItemInstance> getInputs();
+    List<ResourceInfo> getInputs();
 
     List<ItemInstance> getOutputs();
 }

@@ -22,6 +22,7 @@ import de.ellpeck.rockbottom.api.construction.BasicRecipe;
 import de.ellpeck.rockbottom.api.construction.SeparatorRecipe;
 import de.ellpeck.rockbottom.api.construction.SmelterRecipe;
 import de.ellpeck.rockbottom.api.construction.StamperRecipe;
+import de.ellpeck.rockbottom.api.construction.resource.ResourceInfo;
 import de.ellpeck.rockbottom.api.data.set.part.DataPart;
 import de.ellpeck.rockbottom.api.data.settings.Keybind;
 import de.ellpeck.rockbottom.api.entity.Entity;
@@ -52,7 +53,7 @@ public final class RockBottomAPI{
     /**
      * The current API version
      */
-    public static final String VERSION = "0.0.16";
+    public static final String VERSION = "0.0.17";
 
     /**
      * The registry for {@link Tile}
@@ -93,11 +94,11 @@ public final class RockBottomAPI{
     public static final List<BasicRecipe> CONSTRUCTION_TABLE_RECIPES = new ArrayList<>();
     public static final List<StamperRecipe> STAMPER_RECIPES = new ArrayList<>();
     /**
-     * The registry for {@link ItemInstance}s that can be used in machines as a fuel.
+     * The registry for {@link ResourceInfo}s that can be used in machines as a fuel.
      * The {@link Integer} specified is the amount of time the fuel will burn for
      * <br> Use this to register custom fuels
      */
-    public static final Map<ItemInstance, Integer> FUEL_REGISTRY = new HashMap<>();
+    public static final Map<ResourceInfo, Integer> FUEL_REGISTRY = new HashMap<>();
     /**
      * The registry for {@link SmelterRecipe}
      * <br> Use this to register recipes for the smelter
@@ -261,8 +262,8 @@ public final class RockBottomAPI{
     }
 
     public static int getFuelValue(ItemInstance instance){
-        for(Map.Entry<ItemInstance, Integer> entry : FUEL_REGISTRY.entrySet()){
-            if(instance.isEffectivelyEqualWithWildcard(entry.getKey())){
+        for(Map.Entry<ResourceInfo, Integer> entry : FUEL_REGISTRY.entrySet()){
+            if(entry.getKey().containsItem(instance)){
                 return entry.getValue();
             }
         }
@@ -271,7 +272,7 @@ public final class RockBottomAPI{
 
     public static SmelterRecipe getSmelterRecipe(ItemInstance input){
         for(SmelterRecipe recipe : SMELTER_RECIPES){
-            if(input.isEffectivelyEqualWithWildcard(recipe.getInput())){
+            if(recipe.getInput().containsItem(input)){
                 return recipe;
             }
         }
@@ -280,7 +281,7 @@ public final class RockBottomAPI{
 
     public static SeparatorRecipe getSeparatorRecipe(ItemInstance input){
         for(SeparatorRecipe recipe : SEPARATOR_RECIPES){
-            if(input.isEffectivelyEqualWithWildcard(recipe.getInput())){
+            if(recipe.getInput().containsItem(input)){
                 return recipe;
             }
         }
@@ -289,7 +290,7 @@ public final class RockBottomAPI{
 
     public static StamperRecipe getStamperRecipe(ItemInstance input){
         for(StamperRecipe recipe : STAMPER_RECIPES){
-            if(input.isEffectivelyEqualWithWildcard(recipe.getInput())){
+            if(recipe.getInput().containsItem(input)){
                 return recipe;
             }
         }

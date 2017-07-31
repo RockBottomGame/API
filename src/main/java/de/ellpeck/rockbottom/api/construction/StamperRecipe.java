@@ -18,19 +18,20 @@
 
 package de.ellpeck.rockbottom.api.construction;
 
+import de.ellpeck.rockbottom.api.construction.resource.ResourceInfo;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 
 public class StamperRecipe{
 
-    private final ItemInstance input;
+    private final ResourceInfo input;
     private final ItemInstance[] outputs;
 
-    public StamperRecipe(ItemInstance input, ItemInstance... outputs){
+    public StamperRecipe(ResourceInfo input, ItemInstance... outputs){
         this.input = input;
         this.outputs = outputs;
     }
 
-    public ItemInstance getInput(){
+    public ResourceInfo getInput(){
         return this.input;
     }
 

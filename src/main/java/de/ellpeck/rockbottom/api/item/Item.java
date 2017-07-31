@@ -20,6 +20,7 @@ package de.ellpeck.rockbottom.api.item;
 
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
+import de.ellpeck.rockbottom.api.construction.resource.ResourceRegistry;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.render.item.IItemRenderer;
 import de.ellpeck.rockbottom.api.tile.Tile;
@@ -49,6 +50,13 @@ public class Item{
 
     public Item register(){
         RockBottomAPI.ITEM_REGISTRY.register(this.getName(), this);
+        return this;
+    }
+
+    public Item addResource(String name){
+        for(int i = 0; i <= this.getHighestPossibleMeta(); i++){
+            ResourceRegistry.addResources(name, new ItemInstance(this, 1, i));
+        }
         return this;
     }
 

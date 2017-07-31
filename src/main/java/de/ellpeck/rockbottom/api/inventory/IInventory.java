@@ -18,6 +18,7 @@
 
 package de.ellpeck.rockbottom.api.inventory;
 
+import de.ellpeck.rockbottom.api.construction.resource.ResourceInfo;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 
 public interface IInventory{
@@ -38,6 +39,15 @@ public interface IInventory{
 
     void removeChangeCallback(IInvChangeCallback callback);
 
+    default boolean containsResource(ResourceInfo info){
+        for(ItemInstance inst : info.getItems()){
+            if(this.containsItem(inst)){
+                return true;
+            }
+        }
+        return false;
+    }
+
     default boolean containsItem(ItemInstance inst){
         return this.getItemIndex(inst) >= 0;
     }
@@ -45,7 +55,7 @@ public interface IInventory{
     default int getItemIndex(ItemInstance inst){
         for(int i = 0; i < this.getSlotAmount(); i++){
             ItemInstance instance = this.get(i);
-            if(instance != null && instance.isEffectivelyEqualWithWildcard(inst) && instance.getAmount() >= inst.getAmount()){
+            if(instance != null && instance.getAmount() >= inst.getAmount() && instance.isEffectivelyEqual(inst)){
                 return i;
             }
         }

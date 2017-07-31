@@ -18,7 +18,6 @@
 
 package de.ellpeck.rockbottom.api.item;
 
-import de.ellpeck.rockbottom.api.Constants;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.data.set.DataSet;
 import de.ellpeck.rockbottom.api.tile.Tile;
@@ -56,7 +55,7 @@ public class ItemInstance{
         if(item == null){
             throw new NullPointerException("Tried to create an ItemInstance with null item!");
         }
-        if((meta < 0 || meta > Short.MAX_VALUE) && meta != Constants.META_WILDCARD){
+        if(meta < 0 || meta > Short.MAX_VALUE){
             throw new IndexOutOfBoundsException("Tried assigning meta "+meta+" to item instance with item "+item+" and amount "+amount+" which is less than 0 or greater than max "+Short.MAX_VALUE+"!");
         }
 
@@ -87,7 +86,7 @@ public class ItemInstance{
         }
     }
 
-    public static boolean compare(ItemInstance one, ItemInstance other, boolean item, boolean meta, boolean data, boolean wildcard){
+    public static boolean compare(ItemInstance one, ItemInstance other, boolean item, boolean meta, boolean data){
         if(one == null && other == null){
             return true;
         }
@@ -103,14 +102,7 @@ public class ItemInstance{
 
             if(meta){
                 if(one.meta != other.meta){
-                    if(wildcard){
-                        if(one.meta != Constants.META_WILDCARD && other.meta != Constants.META_WILDCARD){
-                            return false;
-                        }
-                    }
-                    else{
-                        return false;
-                    }
+                    return false;
                 }
             }
 
@@ -193,11 +185,7 @@ public class ItemInstance{
     }
 
     public boolean isEffectivelyEqual(ItemInstance instance){
-        return compare(this, instance, true, true, true, false);
-    }
-
-    public boolean isEffectivelyEqualWithWildcard(ItemInstance instance){
-        return compare(this, instance, true, true, true, true);
+        return compare(this, instance, true, true, true);
     }
 
     public String getDisplayName(){
@@ -224,5 +212,10 @@ public class ItemInstance{
         result = 31*result+this.amount;
         result = 31*result+(this.additionalData != null ? this.additionalData.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString(){
+        return this.item.getName()+"@"+this.meta+" x"+this.amount+(this.additionalData != null ? this.additionalData : "");
     }
 }
