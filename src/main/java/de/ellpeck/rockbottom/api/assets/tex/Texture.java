@@ -136,15 +136,15 @@ public class Texture extends Image{
     }
 
     public void drawEmbeddedWithLight(float x, float y, float x2, float y2, float srcX, float srcY, float srcX2, float srcY2, Color[] light, Color filter){
-        super.init();
+        this.init();
 
-        float width = x2 - x;
-        float height = y2 - y;
+        float width = x2-x;
+        float height = y2-y;
 
-        float texOffX = srcX / this.width * this.textureWidth + this.textureOffsetX;
-        float texOffY = srcY / this.height * this.textureHeight + this.textureOffsetY;
-        float texWidth = (srcX2 - srcX) / this.width * this.textureWidth;
-        float texHeight = (srcY2 - srcY) / this.height * this.textureHeight;
+        float texOffX = srcX/this.width*this.textureWidth+this.textureOffsetX;
+        float texOffY = srcY/this.height*this.textureHeight+this.textureOffsetY;
+        float texWidth = (srcX2-srcX)/this.width*this.textureWidth;
+        float texHeight = (srcY2-srcY)/this.height*this.textureHeight;
 
         this.bindMultipliedColor(light[TOP_LEFT], filter);
         GL.glTexCoord2f(texOffX, texOffY);
