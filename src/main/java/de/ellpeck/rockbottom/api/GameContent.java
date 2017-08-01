@@ -28,7 +28,7 @@ public final class GameContent{
 
     public static final Tile TILE_AIR = getTile("air");
     public static final Tile TILE_DIRT = getTile("dirt");
-    public static final Tile TILE_ROCK = getTile("rock");
+    public static final Tile TILE_STONE = getTile("stone");
     public static final Tile TILE_GRASS = getTile("grass");
     public static final Tile TILE_WOOD_BOARDS = getTile("wood_boards");
     public static final Tile TILE_TORCH = getTile("torch");
@@ -43,13 +43,13 @@ public final class GameContent{
     public static final Tile TILE_LADDER = getTile("ladder");
     public static final Tile TILE_GLOW_ORE = getTile("glow_ore");
     public static final Tile TILE_STAMPER = getTile("stamper");
-    public static final Tile TILE_HARDENED_STONE = getTile("stone");
+    public static final Tile TILE_HARDENED_STONE = getTile("hardened_stone");
     public static final Tile TILE_DOOR = getTile("door");
     public static final Tile TILE_CONSTRUCTION_TABLE = getTile("construction_table");
 
     public static final Item ITEM_SUPER_TOOL = getItem("super_tool");
-    public static final Item ITEM_WOOD_PICK = getItem("pick_wood");
-    public static final Item ITEM_ROCK_PICK = getItem("pick_rock");
+    public static final Item ITEM_WOOD_PICK = getItem("wood_pickaxe");
+    public static final Item ITEM_ROCK_PICK = getItem("stone_pickaxe");
     public static final Item ITEM_COAL = getItem("coal");
     public static final Item ITEM_COPPER_CLUSTER = getItem("copper_cluster");
     public static final Item ITEM_COPPER_GRIT = getItem("copper_grit");
