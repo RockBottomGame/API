@@ -54,11 +54,18 @@ public class ResUseInfo implements IUseInfo{
 
     @Override
     public List<ItemInstance> getItems(){
-        List<ItemInstance> list = new ArrayList<>();
-        for(ResInfo info : ResourceRegistry.getResources(this.name)){
-            list.add(info.asInstance(this.amount));
+        List<ResInfo> resources = ResourceRegistry.getResources(this.name);
+
+        if(!resources.isEmpty()){
+            List<ItemInstance> list = new ArrayList<>();
+            for(ResInfo info : resources){
+                list.add(info.asInstance(this.amount));
+            }
+            return list;
         }
-        return list;
+        else{
+            throw new IllegalStateException("Found resource usage info "+this+" that uses resource "+this.name+" that does not have any resource items assigned to it. This is not allowed!");
+        }
     }
 
     @Override
