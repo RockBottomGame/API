@@ -38,7 +38,7 @@ public final class ResourceRegistry{
     private static final Map<String, List<ResInfo>> RESOURCES = new HashMap<>();
     private static final Map<ResInfo, List<String>> RESOURCE_NAMES = new HashMap<>();
 
-    public static void addResources(String name, ResInfo... resources){
+    public static String addResources(String name, ResInfo... resources){
         List<ResInfo> resList = RESOURCES.computeIfAbsent(name, k -> new ArrayList<>());
 
         for(ResInfo res : resources){
@@ -53,6 +53,7 @@ public final class ResourceRegistry{
         }
 
         Log.info("Registered resources "+Arrays.toString(resources)+" for resource name "+name);
+        return name;
     }
 
     public static List<ResInfo> getResources(String name){

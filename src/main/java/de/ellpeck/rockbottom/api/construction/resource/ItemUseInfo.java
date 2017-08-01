@@ -1,5 +1,5 @@
 /*
- * This file ("SmelterRecipe.java") is part of the RockBottomAPI by Ellpeck.
+ * This file ("ItemUseInfo.java") is part of the RockBottomAPI by Ellpeck.
  * View the source code at <https://github.com/Ellpeck/RockBottomAPI>.
  *
  * The RockBottomAPI is free software: you can redistribute it and/or modify
@@ -16,33 +16,39 @@
  * along with the RockBottomAPI. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.ellpeck.rockbottom.api.construction;
+package de.ellpeck.rockbottom.api.construction.resource;
 
-import de.ellpeck.rockbottom.api.construction.resource.IResUseInfo;
-import de.ellpeck.rockbottom.api.construction.resource.ResUseInfo;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 
-public class SmelterRecipe{
+import java.util.Collections;
+import java.util.List;
 
-    private final IResUseInfo input;
-    private final ItemInstance output;
-    private final int time;
+public class ItemUseInfo implements IResUseInfo{
 
-    public SmelterRecipe(ItemInstance output, IResUseInfo input, int time){
-        this.input = input;
-        this.output = output;
-        this.time = time;
+    private final ItemInstance instance;
+
+    public ItemUseInfo(ItemInstance instance){
+        this.instance = instance;
     }
 
-    public IResUseInfo getInput(){
-        return this.input;
+    @Override
+    public int getAmount(){
+        return this.instance.getAmount();
     }
 
-    public ItemInstance getOutput(){
-        return this.output;
+    @Override
+    public ItemUseInfo setAmount(int amount){
+        this.instance.setAmount(amount);
+        return this;
     }
 
-    public int getTime(){
-        return this.time;
+    @Override
+    public List<ItemInstance> getItems(){
+        return Collections.singletonList(this.instance);
+    }
+
+    @Override
+    public boolean containsItem(ItemInstance instance){
+        return this.instance.isEffectivelyEqual(instance);
     }
 }

@@ -18,6 +18,7 @@
 
 package de.ellpeck.rockbottom.api.construction;
 
+import de.ellpeck.rockbottom.api.construction.resource.IResUseInfo;
 import de.ellpeck.rockbottom.api.construction.resource.ResUseInfo;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 
@@ -27,16 +28,16 @@ import java.util.List;
 
 public class BasicRecipe implements IRecipe{
 
-    private final List<ResUseInfo> inputs;
+    private final List<IResUseInfo> inputs;
     private final List<ItemInstance> outputs;
 
-    public BasicRecipe(ItemInstance output, ResUseInfo... inputs){
+    public BasicRecipe(ItemInstance output, IResUseInfo... inputs){
         this.inputs = Arrays.asList(inputs);
         this.outputs = Collections.singletonList(output);
     }
 
     @Override
-    public List<ResUseInfo> getInputs(){
+    public List<IResUseInfo> getInputs(){
         return this.inputs;
     }
 

@@ -18,18 +18,19 @@
 
 package de.ellpeck.rockbottom.api.construction;
 
+import de.ellpeck.rockbottom.api.construction.resource.IResUseInfo;
 import de.ellpeck.rockbottom.api.construction.resource.ResUseInfo;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 
 public class SeparatorRecipe{
 
-    private final ResUseInfo input;
+    private final IResUseInfo input;
     private final ItemInstance output;
     private final ItemInstance byproduct;
     private final int time;
     private final float byproductChance;
 
-    public SeparatorRecipe(ItemInstance output, ResUseInfo input, int time, ItemInstance byproduct, float byproductChance){
+    public SeparatorRecipe(ItemInstance output, IResUseInfo input, int time, ItemInstance byproduct, float byproductChance){
         this.input = input;
         this.output = output;
         this.byproduct = byproduct;
@@ -41,7 +42,7 @@ public class SeparatorRecipe{
         }
     }
 
-    public ResUseInfo getInput(){
+    public IResUseInfo getInput(){
         return this.input;
     }
 

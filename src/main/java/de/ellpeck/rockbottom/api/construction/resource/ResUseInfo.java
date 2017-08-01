@@ -23,7 +23,7 @@ import de.ellpeck.rockbottom.api.item.ItemInstance;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ResUseInfo{
+public class ResUseInfo implements IResUseInfo{
 
     private final String name;
     private int amount;
@@ -41,15 +41,18 @@ public class ResUseInfo{
         return this.name;
     }
 
+    @Override
     public int getAmount(){
         return this.amount;
     }
 
+    @Override
     public ResUseInfo setAmount(int amount){
         this.amount = amount;
         return this;
     }
 
+    @Override
     public List<ItemInstance> getItems(){
         List<ItemInstance> list = new ArrayList<>();
         for(ResInfo info : ResourceRegistry.getResources(this.name)){
@@ -58,6 +61,7 @@ public class ResUseInfo{
         return list;
     }
 
+    @Override
     public boolean containsItem(ItemInstance instance){
         if(instance.getAmount() >= this.amount){
             List<String> names = ResourceRegistry.getNames(new ResInfo(instance));
