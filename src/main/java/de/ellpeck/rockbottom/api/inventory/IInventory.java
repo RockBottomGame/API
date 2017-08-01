@@ -18,8 +18,7 @@
 
 package de.ellpeck.rockbottom.api.inventory;
 
-import de.ellpeck.rockbottom.api.construction.resource.IResUseInfo;
-import de.ellpeck.rockbottom.api.construction.resource.ResUseInfo;
+import de.ellpeck.rockbottom.api.construction.resource.IUseInfo;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 
 public interface IInventory{
@@ -40,7 +39,7 @@ public interface IInventory{
 
     void removeChangeCallback(IInvChangeCallback callback);
 
-    default boolean containsResource(IResUseInfo info){
+    default boolean containsResource(IUseInfo info){
         for(ItemInstance inst : info.getItems()){
             if(this.containsItem(inst)){
                 return true;

@@ -23,7 +23,7 @@ import de.ellpeck.rockbottom.api.item.ItemInstance;
 import java.util.Collections;
 import java.util.List;
 
-public class ItemUseInfo implements IResUseInfo{
+public class ItemUseInfo implements IUseInfo{
 
     private final ItemInstance instance;
 

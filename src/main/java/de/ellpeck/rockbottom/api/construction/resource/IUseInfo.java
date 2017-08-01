@@ -22,11 +22,11 @@ import de.ellpeck.rockbottom.api.item.ItemInstance;
 
 import java.util.List;
 
-public interface IResUseInfo{
+public interface IUseInfo{
 
     int getAmount();
 
-    IResUseInfo setAmount(int amount);
+    IUseInfo setAmount(int amount);
 
     List<ItemInstance> getItems();
 

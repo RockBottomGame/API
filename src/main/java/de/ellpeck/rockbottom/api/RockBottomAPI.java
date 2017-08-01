@@ -22,8 +22,7 @@ import de.ellpeck.rockbottom.api.construction.BasicRecipe;
 import de.ellpeck.rockbottom.api.construction.SeparatorRecipe;
 import de.ellpeck.rockbottom.api.construction.SmelterRecipe;
 import de.ellpeck.rockbottom.api.construction.StamperRecipe;
-import de.ellpeck.rockbottom.api.construction.resource.IResUseInfo;
-import de.ellpeck.rockbottom.api.construction.resource.ResUseInfo;
+import de.ellpeck.rockbottom.api.construction.resource.IUseInfo;
 import de.ellpeck.rockbottom.api.data.set.part.DataPart;
 import de.ellpeck.rockbottom.api.data.settings.Keybind;
 import de.ellpeck.rockbottom.api.entity.Entity;
@@ -95,11 +94,11 @@ public final class RockBottomAPI{
     public static final List<BasicRecipe> CONSTRUCTION_TABLE_RECIPES = new ArrayList<>();
     public static final List<StamperRecipe> STAMPER_RECIPES = new ArrayList<>();
     /**
-     * The registry for {@link IResUseInfo}s that can be used in machines as a fuel.
+     * The registry for {@link IUseInfo}s that can be used in machines as a fuel.
      * The {@link Integer} specified is the amount of time the fuel will burn for
      * <br> Use this to register custom fuels
      */
-    public static final Map<IResUseInfo, Integer> FUEL_REGISTRY = new HashMap<>();
+    public static final Map<IUseInfo, Integer> FUEL_REGISTRY = new HashMap<>();
     /**
      * The registry for {@link SmelterRecipe}
      * <br> Use this to register recipes for the smelter
@@ -263,7 +262,7 @@ public final class RockBottomAPI{
     }
 
     public static int getFuelValue(ItemInstance instance){
-        for(Map.Entry<IResUseInfo, Integer> entry : FUEL_REGISTRY.entrySet()){
+        for(Map.Entry<IUseInfo, Integer> entry : FUEL_REGISTRY.entrySet()){
             if(entry.getKey().containsItem(instance)){
                 return entry.getValue();
             }
