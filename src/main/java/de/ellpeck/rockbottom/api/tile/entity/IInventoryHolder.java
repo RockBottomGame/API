@@ -19,13 +19,16 @@
 package de.ellpeck.rockbottom.api.tile.entity;
 
 import de.ellpeck.rockbottom.api.inventory.IInventory;
+import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.util.Direction;
+
+import java.util.List;
 
 public interface IInventoryHolder{
 
     IInventory getInventory();
 
-    int[] getInputSlots(Direction dir);
+    List<Integer> getInputSlots(ItemInstance instance, Direction dir);
 
-    int[] getOutputSlots(Direction dir);
+    List<Integer> getOutputSlots(Direction dir);
 }
