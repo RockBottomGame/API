@@ -51,4 +51,28 @@ public class ItemUseInfo implements IUseInfo{
     public boolean containsItem(ItemInstance instance){
         return this.instance.isEffectivelyEqual(instance);
     }
+
+    @Override
+    public boolean equals(Object o){
+        if(this == o){
+            return true;
+        }
+        else if(o instanceof ItemUseInfo){
+            ItemUseInfo that = (ItemUseInfo)o;
+            return this.instance.equals(that.instance);
+        }
+        else{
+            return false;
+        }
+    }
+
+    @Override
+    public int hashCode(){
+        return this.instance.hashCode();
+    }
+
+    @Override
+    public String toString(){
+        return this.instance.toString();
+    }
 }
