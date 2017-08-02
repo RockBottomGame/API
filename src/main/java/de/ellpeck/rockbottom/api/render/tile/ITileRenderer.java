@@ -20,6 +20,7 @@ package de.ellpeck.rockbottom.api.render.tile;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
+import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.tile.Tile;
 import de.ellpeck.rockbottom.api.tile.state.TileState;
 import de.ellpeck.rockbottom.api.world.IWorld;
@@ -32,7 +33,7 @@ public interface ITileRenderer<T extends Tile>{
 
     void render(IGameInstance game, IAssetManager manager, Graphics g, IWorld world, T tile, TileState state, int x, int y, TileLayer layer, float renderX, float renderY, float scale, Color[] light);
 
-    void renderItem(IGameInstance game, IAssetManager manager, Graphics g, T tile, int meta, float x, float y, float scale, Color filter);
+    void renderItem(IGameInstance game, IAssetManager manager, Graphics g, T tile, ItemInstance instance, float x, float y, float scale, Color filter);
 
     Image getParticleTexture(IGameInstance game, IAssetManager manager, Graphics g, T tile, TileState state);
 }

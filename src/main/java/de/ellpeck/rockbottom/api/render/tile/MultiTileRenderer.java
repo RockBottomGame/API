@@ -20,6 +20,7 @@ package de.ellpeck.rockbottom.api.render.tile;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
+import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.tile.MultiTile;
 import de.ellpeck.rockbottom.api.tile.state.TileState;
 import de.ellpeck.rockbottom.api.util.Pos2;
@@ -64,7 +65,7 @@ public class MultiTileRenderer<T extends MultiTile> extends DefaultTileRenderer<
     }
 
     @Override
-    public void renderItem(IGameInstance game, IAssetManager manager, Graphics g, T tile, int meta, float x, float y, float scale, Color filter){
+    public void renderItem(IGameInstance game, IAssetManager manager, Graphics g, T tile, ItemInstance instance, float x, float y, float scale, Color filter){
         manager.getTexture(this.texItem).draw(x, y, scale, scale, filter);
     }
 }

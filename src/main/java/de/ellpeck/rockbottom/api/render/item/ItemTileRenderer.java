@@ -35,7 +35,7 @@ public class ItemTileRenderer implements IItemRenderer<ItemTile>{
         if(tile != null){
             ITileRenderer renderer = tile.getRenderer();
             if(renderer != null){
-                renderer.renderItem(game, manager, g, tile, instance.getMeta(), x, y, scale, filter);
+                renderer.renderItem(game, manager, g, tile, instance, x, y, scale, filter);
             }
         }
     }
