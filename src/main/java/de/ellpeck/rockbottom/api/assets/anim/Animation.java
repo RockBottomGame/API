@@ -20,6 +20,7 @@ package de.ellpeck.rockbottom.api.assets.anim;
 
 import de.ellpeck.rockbottom.api.assets.tex.Texture;
 import de.ellpeck.rockbottom.api.util.Util;
+import org.lwjgl.Sys;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.SlickException;
 
@@ -121,21 +122,22 @@ public class Animation{
         this.drawRow(0, row, x1, y1, x2, y2, srcX1, srcY1, srcX2, srcY2, light, filter);
     }
 
-    public void drawRow(int timeOffsetMillis, int row, float x, float y, float scale, Color filter){
+    public void drawRow(long timeOffsetMillis, int row, float x, float y, float scale, Color filter){
         this.drawRow(timeOffsetMillis, row, x, y, scale, null, filter);
     }
 
-    public void drawRow(int timeOffsetMillis, int row, float x, float y, float scale, Color[] light, Color filter){
+    public void drawRow(long timeOffsetMillis, int row, float x, float y, float scale, Color[] light, Color filter){
         this.drawRow(timeOffsetMillis, row, x, y, x+scale, y+(this.frameHeight/this.frameWidth)*scale, 0, 0, this.frameWidth, this.frameHeight, light, filter);
     }
 
-    public void drawRow(int timeOffsetMillis, int row, float x1, float y1, float x2, float y2, float srcX1, float srcY1, float srcX2, float srcY2, Color[] light, Color filter){
+    public void drawRow(long timeOffsetMillis, int row, float x1, float y1, float x2, float y2, float srcX1, float srcY1, float srcX2, float srcY2, Color[] light, Color filter){
         if(row < 0 || row >= this.rows.size()){
             row = 0;
         }
         AnimationRow theRow = this.rows.get(row);
 
-        int runningTime = ((int)Util.getTimeMillis()+timeOffsetMillis)%(int)(theRow.getTotalTime()*1000);
+        long time = Util.getTimeMillis()+timeOffsetMillis;
+        long runningTime = time%(long)(theRow.getTotalTime()*1000);
 
         int accum = 0;
         for(int i = 0; i < theRow.getFrameAmount(); i++){

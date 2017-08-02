@@ -21,6 +21,7 @@ package de.ellpeck.rockbottom.api.gui.component;
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
+import de.ellpeck.rockbottom.api.data.settings.Settings;
 import de.ellpeck.rockbottom.api.gui.Gui;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 import org.newdawn.slick.Graphics;
@@ -80,7 +81,7 @@ public class ComponentSlider extends ComponentButton{
             float mouseX = game.getMouseInGuiX();
             float mouseY = game.getMouseInGuiY();
 
-            if(game.getInput().isMouseButtonDown(game.getSettings().buttonGuiAction1)){
+            if(Settings.KEY_GUI_ACTION_1.isDown()){
                 this.onClickOrMove(mouseX, mouseY);
             }
             else{

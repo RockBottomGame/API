@@ -62,7 +62,7 @@ public class Locale{
         if(this.name.equals(otherLocale.name)){
             this.localization.putAll(otherLocale.localization);
 
-            Log.info("Merged locale "+this.name+" with "+otherLocale.localization.size()+" bits of additional localization information");
+            Log.debug("Merged locale "+this.name+" with "+otherLocale.localization.size()+" bits of additional localization information");
             return true;
         }
         else{

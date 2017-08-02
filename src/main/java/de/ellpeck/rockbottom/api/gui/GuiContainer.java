@@ -21,6 +21,7 @@ package de.ellpeck.rockbottom.api.gui;
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
+import de.ellpeck.rockbottom.api.data.settings.Settings;
 import de.ellpeck.rockbottom.api.entity.EntityItem;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.gui.component.ComponentSlot;
@@ -62,7 +63,7 @@ public abstract class GuiContainer extends Gui{
             return true;
         }
 
-        if(this.holdingInst != null && button == game.getSettings().buttonGuiAction1){
+        if(this.holdingInst != null && Settings.KEY_GUI_ACTION_1.isKey(button)){
             if(!this.isMouseOver(game)){
                 this.dropHeldItem();
                 this.holdingInst = null;

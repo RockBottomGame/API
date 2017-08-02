@@ -25,18 +25,19 @@ import org.newdawn.slick.Input;
 public class Keybind{
 
     private final IResourceName name;
-    private final boolean isMouse;
 
     private int key;
+    private boolean isMouse;
 
-    public Keybind(IResourceName name, int defKey, boolean isMouse){
+    public Keybind(IResourceName name, int defKey, boolean defIsMouse){
         this.name = name;
         this.key = defKey;
-        this.isMouse = isMouse;
+        this.isMouse = defIsMouse;
     }
 
-    public void setBind(int key){
+    public void setBind(int key, boolean isMouse){
         this.key = key;
+        this.isMouse = isMouse;
     }
 
     public boolean isDown(){
@@ -71,6 +72,10 @@ public class Keybind{
 
     public int getKey(){
         return this.key;
+    }
+
+    public boolean isMouse(){
+        return this.isMouse;
     }
 
     public Keybind register(){

@@ -108,6 +108,6 @@ public final class Util{
     }
 
     public static long getTimeMillis(){
-        return Sys.getTime()*1000/Sys.getTimerResolution();
+        return System.currentTimeMillis();
     }
 }

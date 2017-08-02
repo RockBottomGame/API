@@ -50,7 +50,7 @@ public class NameRegistry<T> implements IRegistry<IResourceName, T>{
 
         this.map.put(name, value);
 
-        Log.info("Registered "+value+" with name "+name+" into registry "+this);
+        Log.debug("Registered "+value+" with name "+name+" into registry "+this);
     }
 
     @Override
