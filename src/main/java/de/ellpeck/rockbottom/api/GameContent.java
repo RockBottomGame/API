@@ -49,11 +49,16 @@ public final class GameContent{
 
     public static final Item ITEM_SUPER_TOOL = getItem("super_tool");
     public static final Item ITEM_WOOD_PICK = getItem("wood_pickaxe");
-    public static final Item ITEM_ROCK_PICK = getItem("stone_pickaxe");
+    public static final Item ITEM_STONE_PICK = getItem("stone_pickaxe");
+    public static final Item ITEM_STONE_AXE = getItem("stone_axe");
+    public static final Item ITEM_STONE_SHOVEL = getItem("stone_shovel");
     public static final Item ITEM_COAL = getItem("coal");
     public static final Item ITEM_COPPER_CLUSTER = getItem("copper_cluster");
     public static final Item ITEM_COPPER_GRIT = getItem("copper_grit");
     public static final Item ITEM_COPPER_INGOT = getItem("copper_ingot");
+    public static final Item ITEM_COPPER_PICKAXE = getItem("copper_pickaxe");
+    public static final Item ITEM_COPPER_AXE = getItem("copper_axe");
+    public static final Item ITEM_COPPER_SHOVEL = getItem("copper_shovel");
     public static final Item ITEM_SLAG = getItem("slag");
     public static final Item ITEM_GLOW_CLUSTER = getItem("glow_cluster");
 
