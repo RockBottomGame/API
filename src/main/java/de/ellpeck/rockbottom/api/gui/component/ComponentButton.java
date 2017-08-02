@@ -21,6 +21,7 @@ package de.ellpeck.rockbottom.api.gui.component;
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
+import de.ellpeck.rockbottom.api.data.settings.Settings;
 import de.ellpeck.rockbottom.api.gui.Gui;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 import org.newdawn.slick.Graphics;
@@ -90,7 +91,7 @@ public class ComponentButton extends GuiComponent{
     @Override
     public boolean onMouseAction(IGameInstance game, int button, float x, float y){
         if(this.isVisible){
-            if(button == game.getSettings().buttonGuiAction1 && this.isMouseOver(game)){
+            if(Settings.KEY_GUI_ACTION_1.isKey(button) && this.isMouseOver(game)){
                 if(this.onPressed(game)){
                     return true;
                 }

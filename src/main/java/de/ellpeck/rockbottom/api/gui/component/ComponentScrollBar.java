@@ -21,6 +21,7 @@ package de.ellpeck.rockbottom.api.gui.component;
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
+import de.ellpeck.rockbottom.api.data.settings.Settings;
 import de.ellpeck.rockbottom.api.gui.Gui;
 import de.ellpeck.rockbottom.api.util.BoundBox;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
@@ -115,7 +116,7 @@ public class ComponentScrollBar extends ComponentButton{
             float mouseY = game.getMouseInGuiY();
 
             if(this.wasMouseDown){
-                if(game.getInput().isMouseButtonDown(game.getSettings().buttonGuiAction1)){
+                if(Settings.KEY_GUI_ACTION_1.isDown()){
                     this.onClickOrMove(mouseY);
                 }
                 else{

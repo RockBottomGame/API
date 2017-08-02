@@ -23,6 +23,7 @@ import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.assets.font.Font;
 import de.ellpeck.rockbottom.api.assets.font.FormattingCode;
+import de.ellpeck.rockbottom.api.data.settings.Settings;
 import de.ellpeck.rockbottom.api.gui.Gui;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 import org.newdawn.slick.Graphics;
@@ -144,12 +145,12 @@ public class ComponentInputField extends GuiComponent{
 
     @Override
     public boolean onMouseAction(IGameInstance game, int button, float x, float y){
-        if(button == game.getSettings().buttonGuiAction1){
+        if(Settings.KEY_GUI_ACTION_1.isKey(button)){
             if(this.selectable){
                 this.isActive = this.isMouseOver(game);
             }
         }
-        else if(button == game.getSettings().buttonGuiAction2){
+        else if(Settings.KEY_GUI_ACTION_2.isKey(button)){
             if(this.isMouseOver(game)){
                 this.text = "";
 

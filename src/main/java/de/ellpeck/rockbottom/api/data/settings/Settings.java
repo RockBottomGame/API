@@ -29,6 +29,11 @@ import java.util.Properties;
 
 public class Settings implements IPropSettings{
 
+    public static final Keybind KEY_PLACE = new Keybind(RockBottomAPI.createInternalRes("place"), Input.MOUSE_RIGHT_BUTTON, true).register();
+    public static final Keybind KEY_DESTROY = new Keybind(RockBottomAPI.createInternalRes("destroy"), Input.MOUSE_LEFT_BUTTON, true).register();
+    public static final Keybind KEY_GUI_ACTION_1 = new Keybind(RockBottomAPI.createInternalRes("gui_action_1"), Input.MOUSE_LEFT_BUTTON, true).register();
+    public static final Keybind KEY_GUI_ACTION_2 = new Keybind(RockBottomAPI.createInternalRes("gui_action_2"), Input.MOUSE_RIGHT_BUTTON, true).register();
+
     public static final Keybind KEY_INVENTORY = new Keybind(RockBottomAPI.createInternalRes("inventory"), Input.KEY_E, false).register();
     public static final Keybind KEY_MENU = new Keybind(RockBottomAPI.createInternalRes("menu"), Input.KEY_ESCAPE, false).register();
     public static final Keybind KEY_LEFT = new Keybind(RockBottomAPI.createInternalRes("left"), Input.KEY_A, false).register();
@@ -68,18 +73,17 @@ public class Settings implements IPropSettings{
     public boolean vsync;
     public boolean smoothLighting;
 
-    public int buttonDestroy;
-    public int buttonPlace;
-    public int buttonGuiAction1;
-    public int buttonGuiAction2;
-
     public String lastServerIp;
     public String currentLocale;
 
     @Override
     public void load(Properties props){
         for(Keybind keybind : RockBottomAPI.KEYBIND_REGISTRY.getUnmodifiable().values()){
-            keybind.setBind(this.getProp(props, keybind.getName().toString(), keybind.getKey()));
+            String name = keybind.getName().toString();
+
+            int key = this.getProp(props, name, keybind.getKey());
+            boolean mouse = this.getProp(props, name+"_is_mouse", keybind.isMouse());
+            keybind.setBind(key, mouse);
         }
 
         this.targetFps = this.getProp(props, "target_fps", 60);
@@ -97,11 +101,6 @@ public class Settings implements IPropSettings{
         this.vsync = this.getProp(props, "vsync", false);
         this.smoothLighting = this.getProp(props, "smooth_lighting", true);
 
-        this.buttonDestroy = this.getProp(props, "button_destroy", Input.MOUSE_LEFT_BUTTON);
-        this.buttonPlace = this.getProp(props, "button_place", Input.MOUSE_RIGHT_BUTTON);
-        this.buttonGuiAction1 = this.getProp(props, "button_gui_1", Input.MOUSE_LEFT_BUTTON);
-        this.buttonGuiAction2 = this.getProp(props, "button_gui_2", Input.MOUSE_RIGHT_BUTTON);
-
         this.lastServerIp = this.getProp(props, "last_server_ip", "");
         this.currentLocale = this.getProp(props, "curr_locale", "rockbottom/loc.us_english");
     }
@@ -109,7 +108,10 @@ public class Settings implements IPropSettings{
     @Override
     public void save(Properties props){
         for(Keybind keybind : RockBottomAPI.KEYBIND_REGISTRY.getUnmodifiable().values()){
-            this.setProp(props, keybind.getName().toString(), keybind.getKey());
+            String name = keybind.getName().toString();
+
+            this.setProp(props, name, keybind.getKey());
+            this.setProp(props, name+"_is_mouse", keybind.isMouse());
         }
 
         this.setProp(props, "target_fps", this.targetFps);
@@ -128,11 +130,6 @@ public class Settings implements IPropSettings{
         this.setProp(props, "fullscreen", this.fullscreen);
         this.setProp(props, "vsync", this.vsync);
         this.setProp(props, "smooth_lighting", this.smoothLighting);
-
-        this.setProp(props, "button_destroy", this.buttonDestroy);
-        this.setProp(props, "button_place", this.buttonPlace);
-        this.setProp(props, "button_gui_1", this.buttonGuiAction1);
-        this.setProp(props, "button_gui_2", this.buttonGuiAction2);
 
         this.setProp(props, "last_server_ip", this.lastServerIp);
         this.setProp(props, "curr_locale", this.currentLocale);
