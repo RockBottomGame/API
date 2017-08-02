@@ -52,7 +52,7 @@ public final class ResourceRegistry{
             }
         }
 
-        Log.info("Registered resources "+Arrays.toString(resources)+" for resource name "+name);
+        Log.debug("Registered resources "+Arrays.toString(resources)+" for resource name "+name);
         return name;
     }
 

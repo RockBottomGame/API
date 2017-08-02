@@ -47,7 +47,7 @@ public class IndexRegistry<T> implements IRegistry<Integer, T>{
 
         this.map.put(id, value);
 
-        Log.info("Registered "+value+" with id "+id+" into registry "+this);
+        Log.debug("Registered "+value+" with id "+id+" into registry "+this);
     }
 
     @Override
