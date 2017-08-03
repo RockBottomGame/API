@@ -19,6 +19,7 @@
 package de.ellpeck.rockbottom.api.net.chat;
 
 import de.ellpeck.rockbottom.api.RockBottomAPI;
+import de.ellpeck.rockbottom.api.net.chat.component.ChatComponent;
 
 import java.util.List;
 
@@ -28,15 +29,15 @@ public interface IChatLog{
         RockBottomAPI.COMMAND_REGISTRY.put(command.getName(), command);
     }
 
-    void displayMessage(String message);
+    void displayMessage(ChatComponent message);
 
     void sendCommandSenderMessage(String message, ICommandSender sender);
 
-    void sendMessageTo(ICommandSender sender, String message);
+    void sendMessageTo(ICommandSender sender, ChatComponent message);
 
-    void broadcastMessage(String message);
+    void broadcastMessage(ChatComponent message);
 
-    List<String> getMessages();
+    List<ChatComponent> getMessages();
 
     void clear();
 }

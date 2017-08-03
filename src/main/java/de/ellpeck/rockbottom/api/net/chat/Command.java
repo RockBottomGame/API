@@ -19,6 +19,7 @@
 package de.ellpeck.rockbottom.api.net.chat;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
+import de.ellpeck.rockbottom.api.net.chat.component.ChatComponent;
 
 public abstract class Command{
 
@@ -44,5 +45,5 @@ public abstract class Command{
         return this.level;
     }
 
-    public abstract String execute(String[] args, ICommandSender sender, String playerName, IGameInstance game, IChatLog chat);
+    public abstract ChatComponent execute(String[] args, ICommandSender sender, String playerName, IGameInstance game, IChatLog chat);
 }

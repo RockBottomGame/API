@@ -18,6 +18,8 @@
 
 package de.ellpeck.rockbottom.api.net.chat;
 
+import de.ellpeck.rockbottom.api.net.chat.component.ChatComponent;
+
 import java.util.UUID;
 
 public interface ICommandSender{
@@ -30,5 +32,5 @@ public interface ICommandSender{
 
     String getChatColorFormat();
 
-    void sendMessageTo(IChatLog chat, String message);
+    void sendMessageTo(IChatLog chat, ChatComponent message);
 }

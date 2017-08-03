@@ -33,6 +33,7 @@ import de.ellpeck.rockbottom.api.mod.IMod;
 import de.ellpeck.rockbottom.api.mod.IModLoader;
 import de.ellpeck.rockbottom.api.net.INetHandler;
 import de.ellpeck.rockbottom.api.net.chat.Command;
+import de.ellpeck.rockbottom.api.net.chat.component.ChatComponent;
 import de.ellpeck.rockbottom.api.net.packet.IPacket;
 import de.ellpeck.rockbottom.api.tile.Tile;
 import de.ellpeck.rockbottom.api.tile.state.TileState;
@@ -53,7 +54,7 @@ public final class RockBottomAPI{
     /**
      * The current API version
      */
-    public static final String VERSION = "0.0.20";
+    public static final String VERSION = "0.0.21";
 
     /**
      * The registry for {@link Tile}
@@ -131,6 +132,11 @@ public final class RockBottomAPI{
      * <br> Use this to register custom keybinds
      */
     public static final NameRegistry<Keybind> KEYBIND_REGISTRY = new NameRegistry<>("keybind_registry", new TreeMap<>());
+    /**
+     * The registry for {@link ChatComponent}
+     * <br> Use {@link IndexRegistry#getNextFreeId()} to register a custom component
+     */
+    public static final IndexRegistry<Class<? extends ChatComponent>> CHAT_COMPONENT_REGISTRY = new IndexRegistry<>("chat_component_registry", Byte.MAX_VALUE);
 
     private static IApiHandler apiHandler;
     private static INetHandler netHandler;
