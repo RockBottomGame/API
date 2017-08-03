@@ -17,7 +17,7 @@ public class ChatComponentText extends ChatComponent{
     }
 
     @Override
-    public String getRawString(){
+    public String getUnformattedString(){
         return this.text;
     }
 

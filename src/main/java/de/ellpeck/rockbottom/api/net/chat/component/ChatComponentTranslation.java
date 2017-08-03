@@ -67,7 +67,7 @@ public class ChatComponentTranslation extends ChatComponent{
     }
 
     @Override
-    public String getRawString(){
+    public String getUnformattedString(){
         return "Locale("+this.key+", "+Arrays.toString(this.formatting)+")";
     }
 }

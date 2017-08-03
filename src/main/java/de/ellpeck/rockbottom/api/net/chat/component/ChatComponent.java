@@ -31,7 +31,7 @@ public abstract class ChatComponent{
 
     public abstract String getDisplayString(IGameInstance game, IAssetManager manager);
 
-    public abstract String getRawString();
+    public abstract String getUnformattedString();
 
     public String getDisplayWithChildren(IGameInstance game, IAssetManager manager){
         String s = this.getDisplayString(game, manager);
@@ -41,10 +41,10 @@ public abstract class ChatComponent{
         return s;
     }
 
-    public String getRawWithChildren(){
-        String s = this.getRawString();
+    public String getUnformattedWithChildren(){
+        String s = this.getUnformattedString();
         if(this.child != null){
-            s += this.child.getRawWithChildren();
+            s += this.child.getUnformattedWithChildren();
         }
         return s;
     }
