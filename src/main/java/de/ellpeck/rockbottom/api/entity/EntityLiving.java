@@ -46,7 +46,9 @@ public abstract class EntityLiving extends Entity{
 
         if(!RockBottomAPI.getNet().isClient()){
             if(this.health <= 0){
-                this.kill();
+                if(!this.dead){
+                    this.kill();
+                }
             }
             else{
                 if(this.health < this.getMaxHealth()){
