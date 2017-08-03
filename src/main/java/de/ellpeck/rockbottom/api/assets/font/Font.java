@@ -148,13 +148,20 @@ public class Font{
     }
 
     private void drawString(float x, float y, String s, int drawStart, int drawEnd, float scale, Color color){
+        float initialAlpha = color.a;
         float xOffset = 0F;
 
         char[] characters = s.toCharArray();
         for(int i = 0; i < Math.min(drawEnd, characters.length); i++){
             FormattingCode code = FormattingCode.getFormat(s, i);
             if(code != FormattingCode.NONE){
-                color = code.getColor();
+                Color formatColor = code.getColor();
+                if(initialAlpha != formatColor.a){
+                    color = new Color(formatColor.r, formatColor.g, formatColor.b, initialAlpha);
+                }
+                else{
+                    color = formatColor;
+                }
 
                 i += code.getLength()-1;
                 continue;
