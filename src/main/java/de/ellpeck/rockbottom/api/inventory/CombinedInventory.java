@@ -4,9 +4,6 @@ import de.ellpeck.rockbottom.api.item.ItemInstance;
 
 import java.util.function.BiFunction;
 
-import static java.util.Arrays.stream;
-import static java.util.stream.IntStream.range;
-
 public class CombinedInventory implements IInventory {
     private final IInventory[] inventories;
 
@@ -22,7 +19,7 @@ public class CombinedInventory implements IInventory {
         });
     }
 
-    private <T> T executeOnSlot(int id, BiFunction<IInventory, Integer, T> function) {
+    public <T> T executeOnSlot(int id, BiFunction<IInventory, Integer, T> function) {
         for (int i = 0; i < inventories.length; i++) {
             int offset = id - offset(i);
             if (inventories[i].getSlotAmount() > offset) {
@@ -33,7 +30,12 @@ public class CombinedInventory implements IInventory {
     }
 
     private int offset(int i) {
-        return range(0, i).map(j -> inventories[j].getSlotAmount()).sum();
+        int sum = 0;
+        for (int j = 0; j < i; j++) {
+            int slotAmount = inventories[j].getSlotAmount();
+            sum += slotAmount;
+        }
+        return sum;
     }
 
     @Override
@@ -53,7 +55,12 @@ public class CombinedInventory implements IInventory {
 
     @Override
     public int getSlotAmount() {
-        return stream(inventories).mapToInt(IInventory::getSlotAmount).sum();
+        int sum = 0;
+        for (IInventory inventory : inventories) {
+            int slotAmount = inventory.getSlotAmount();
+            sum += slotAmount;
+        }
+        return sum;
     }
 
     @Override
