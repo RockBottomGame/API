@@ -31,6 +31,7 @@ public enum Direction{
     RIGHT_UP(1, 1),
     RIGHT_DOWN(1, -1);
 
+    public static final Direction[] DIRECTIONS = values();
     public static final Direction[] ADJACENT = new Direction[]{UP, RIGHT, DOWN, LEFT};
     public static final Direction[] ADJACENT_INCLUDING_NONE = new Direction[]{NONE, UP, RIGHT, DOWN, LEFT};
     public static final Direction[] DIAGONAL = new Direction[]{LEFT_UP, RIGHT_UP, RIGHT_DOWN, LEFT_DOWN};

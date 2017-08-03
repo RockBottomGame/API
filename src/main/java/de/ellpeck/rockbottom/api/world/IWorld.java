@@ -181,4 +181,6 @@ public interface IWorld extends IChunkOrWorld{
     void save();
 
     List<AbstractEntityPlayer> getAllPlayers();
+
+    void removeEntity(Entity entity, IChunk chunk);
 }
