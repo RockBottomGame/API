@@ -82,4 +82,9 @@ public abstract class ChatComponent{
             return null;
         }
     }
+
+    @Override
+    public String toString(){
+        return this.getUnformattedWithChildren();
+    }
 }
