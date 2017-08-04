@@ -98,6 +98,18 @@ public interface IMod{
         return true;
     }
 
+    default boolean isRequiredOnClient(){
+        return true;
+    }
+
+    default boolean isRequiredOnServer(){
+        return false;
+    }
+
+    default boolean isCompatibleWithModVersion(String version){
+        return version.equals(this.getVersion());
+    }
+
     /**
      * Override this method to do any actions that should happen before the initialization of the base game
      *
