@@ -70,13 +70,8 @@ public class ResUseInfo implements IUseInfo{
 
     @Override
     public boolean containsItem(ItemInstance instance){
-        if(instance.getAmount() >= this.amount){
-            List<String> names = ResourceRegistry.getNames(new ResInfo(instance));
-            return names.contains(this.name);
-        }
-        else{
-            return false;
-        }
+        List<String> names = ResourceRegistry.getNames(new ResInfo(instance));
+        return names.contains(this.name);
     }
 
     @Override
