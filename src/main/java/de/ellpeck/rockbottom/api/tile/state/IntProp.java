@@ -48,9 +48,4 @@ public class IntProp extends TileProp<Integer>{
     public Integer getDefault(){
         return this.def;
     }
-
-    @Override
-    public String toString(){
-        return this.name;
-    }
 }

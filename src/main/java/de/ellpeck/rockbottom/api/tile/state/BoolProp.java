@@ -46,9 +46,4 @@ public class BoolProp extends TileProp<Boolean>{
     public Boolean getDefault(){
         return this.def;
     }
-
-    @Override
-    public String toString(){
-        return this.name;
-    }
 }

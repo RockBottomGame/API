@@ -61,4 +61,9 @@ public abstract class TileProp<T extends Comparable> implements Comparable<TileP
     public int hashCode(){
         return this.name.hashCode();
     }
+
+    @Override
+    public String toString(){
+        return this.getName();
+    }
 }
