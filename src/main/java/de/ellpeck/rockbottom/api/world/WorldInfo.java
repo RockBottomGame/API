@@ -67,4 +67,8 @@ public class WorldInfo{
     public static boolean exists(File directory){
         return new File(directory, "world_info.dat").exists();
     }
+
+    public static long lastModified(File directory){
+        return new File(directory, "world_info.dat").lastModified();
+    }
 }

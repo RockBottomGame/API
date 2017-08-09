@@ -112,6 +112,10 @@ public class Font{
     public void drawCutOffString(float x, float y, String s, float scale, int length, boolean fromRight, boolean basedOnCharAmount){
         int strgLength = s.length();
 
+        if((basedOnCharAmount ? strgLength : this.getWidth(s, scale)) <= length){
+            this.drawString(x, y, s, scale);
+        }
+
         int amount = 0;
         String accumulated = "";
 
