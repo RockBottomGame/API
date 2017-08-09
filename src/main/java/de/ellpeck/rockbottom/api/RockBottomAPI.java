@@ -27,6 +27,7 @@ import de.ellpeck.rockbottom.api.data.set.part.DataPart;
 import de.ellpeck.rockbottom.api.data.settings.Keybind;
 import de.ellpeck.rockbottom.api.entity.Entity;
 import de.ellpeck.rockbottom.api.event.IEventHandler;
+import de.ellpeck.rockbottom.api.gui.IMainMenuTheme;
 import de.ellpeck.rockbottom.api.item.Item;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.mod.IMod;
@@ -137,6 +138,7 @@ public final class RockBottomAPI{
      * <br> Use {@link IndexRegistry#getNextFreeId()} to register a custom component
      */
     public static final IndexRegistry<Class<? extends ChatComponent>> CHAT_COMPONENT_REGISTRY = new IndexRegistry<>("chat_component_registry", Byte.MAX_VALUE);
+    public static final List<IMainMenuTheme> MAIN_MENU_THEMES = new ArrayList<>();
 
     private static IApiHandler apiHandler;
     private static INetHandler netHandler;

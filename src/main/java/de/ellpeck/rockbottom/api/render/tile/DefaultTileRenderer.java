@@ -52,4 +52,9 @@ public class DefaultTileRenderer<T extends Tile> implements ITileRenderer<T>{
     public Image getParticleTexture(IGameInstance game, IAssetManager manager, Graphics g, T tile, TileState state){
         return manager.getTexture(this.texture);
     }
+
+    @Override
+    public void renderInMainMenuBackground(IGameInstance game, IAssetManager manager, Graphics g, T tile, TileState state, float x, float y, float scale){
+        manager.getTexture(this.texture).draw(x, y, scale, scale);
+    }
 }

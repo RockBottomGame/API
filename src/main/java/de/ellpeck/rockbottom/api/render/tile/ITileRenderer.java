@@ -36,4 +36,8 @@ public interface ITileRenderer<T extends Tile>{
     void renderItem(IGameInstance game, IAssetManager manager, Graphics g, T tile, ItemInstance instance, float x, float y, float scale, Color filter);
 
     Image getParticleTexture(IGameInstance game, IAssetManager manager, Graphics g, T tile, TileState state);
+
+    default void renderInMainMenuBackground(IGameInstance game, IAssetManager manager, Graphics g, T tile, TileState state, float x, float y, float scale){
+
+    }
 }
