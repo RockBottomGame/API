@@ -29,6 +29,7 @@ import de.ellpeck.rockbottom.api.mod.IMod;
 import de.ellpeck.rockbottom.api.net.chat.IChatLog;
 import de.ellpeck.rockbottom.api.particle.IParticleManager;
 import de.ellpeck.rockbottom.api.render.IPlayerDesign;
+import de.ellpeck.rockbottom.api.toast.IToaster;
 import de.ellpeck.rockbottom.api.util.IAction;
 import de.ellpeck.rockbottom.api.util.reg.NameToIndexInfo;
 import de.ellpeck.rockbottom.api.world.DynamicRegistryInfo;
@@ -227,4 +228,6 @@ public interface IGameInstance extends IMod{
     Input getInput();
 
     void exit();
+
+    IToaster getToaster();
 }
