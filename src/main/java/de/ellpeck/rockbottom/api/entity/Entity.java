@@ -45,7 +45,8 @@ public class Entity extends MovableWorldObject{
     public Direction facing = Direction.NONE;
 
     public int ticksExisted;
-    public int fallAmount;
+    public double fallStartY;
+    public boolean isFalling;
     public double lastX;
     public double lastY;
     public boolean isClimbing;
@@ -122,7 +123,7 @@ public class Entity extends MovableWorldObject{
         return 0;
     }
 
-    public void onGroundHit(){
+    public void onGroundHit(double fallDistance){
 
     }
 
@@ -152,6 +153,8 @@ public class Entity extends MovableWorldObject{
         set.addInt("ticks", this.ticksExisted);
         set.addBoolean("dead", this.isDead());
         set.addUniqueId("uuid", this.uniqueId);
+        set.addBoolean("falling",this.isFalling);
+        set.addDouble("fall_start_y", this.fallStartY);
 
         if(this.additionalData != null){
             set.addDataSet("data", this.additionalData);
@@ -165,6 +168,8 @@ public class Entity extends MovableWorldObject{
         this.ticksExisted = set.getInt("ticks");
         this.setDead(set.getBoolean("dead"));
         this.uniqueId = set.getUniqueId("uuid");
+        this.isFalling = set.getBoolean("falling");
+        this.fallStartY = set.getDouble("fall_start_y");
 
         if(set.hasKey("data")){
             this.additionalData = set.getDataSet("data");
