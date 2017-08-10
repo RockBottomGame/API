@@ -32,11 +32,11 @@ public interface IPlayerDesign{
     IResourceName EYES = RockBottomAPI.createInternalRes("player.base.eyes");
 
     List<IResourceName> BASE = Arrays.asList(
-            RockBottomAPI.createInternalRes("player.base.male_skin_1"),
-            RockBottomAPI.createInternalRes("player.base.male_skin_2"),
-            RockBottomAPI.createInternalRes("player.base.male_skin_3"),
-            RockBottomAPI.createInternalRes("player.base.male_skin_4"),
-            RockBottomAPI.createInternalRes("player.base.male_skin_5")
+            RockBottomAPI.createInternalRes("player.base.1"),
+            RockBottomAPI.createInternalRes("player.base.2"),
+            RockBottomAPI.createInternalRes("player.base.3"),
+            RockBottomAPI.createInternalRes("player.base.4"),
+            RockBottomAPI.createInternalRes("player.base.5")
     );
 
     List<IResourceName> SHIRT = new ArrayList<>(Arrays.asList(
@@ -86,6 +86,8 @@ public interface IPlayerDesign{
             RockBottomAPI.createInternalRes("player.hair.5"),
             RockBottomAPI.createInternalRes("player.hair.6"),
             RockBottomAPI.createInternalRes("player.hair.7"),
+            RockBottomAPI.createInternalRes("player.hair.8"),
+            RockBottomAPI.createInternalRes("player.hair.9"),
             null
     ));
 
@@ -98,7 +100,8 @@ public interface IPlayerDesign{
             RockBottomAPI.createInternalRes("player.accessory.sunglasses_3"),
             RockBottomAPI.createInternalRes("player.accessory.glasses_1"),
             RockBottomAPI.createInternalRes("player.accessory.glasses_2"),
-            RockBottomAPI.createInternalRes("player.accessory.glasses_3")
+            RockBottomAPI.createInternalRes("player.accessory.glasses_3"),
+            RockBottomAPI.createInternalRes("player.accessory.eyeliner")
     ));
 
     List<IResourceName> EYEBROWS = new ArrayList<>(Arrays.asList(
@@ -183,6 +186,8 @@ public interface IPlayerDesign{
 
     Color getEyebrowsColor();
 
+    boolean isFemale();
+
     void setBase(int base);
 
     void setEyeColor(Color eyeColor);
@@ -218,4 +223,6 @@ public interface IPlayerDesign{
     void setBeard(int beard);
 
     void setBeardColor(Color beardColor);
+
+    void setFemale(boolean female);
 }
