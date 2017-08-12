@@ -99,7 +99,7 @@ public interface IApiHandler{
     /**
      * Updates an {@link Entity}'s {@link Entity#x} and {@link Entity#y} values
      * depending on its {@link Entity#motionX} and {@link Entity#motionY}, increases
-     * its {@link Entity#ticksExisted} value and updates its {@link Entity#fallAmount}
+     * its {@link Entity#ticksExisted} value and so on
      * <br> Not supposed to be used by mods
      *
      * @param entity The entity
