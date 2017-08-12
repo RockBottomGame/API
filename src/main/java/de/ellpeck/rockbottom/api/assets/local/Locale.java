@@ -18,14 +18,19 @@
 
 package de.ellpeck.rockbottom.api.assets.local;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+import de.ellpeck.rockbottom.api.Constants;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 import org.newdawn.slick.util.Log;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Properties;
 
 public class Locale{
@@ -37,25 +42,30 @@ public class Locale{
         this.name = name;
     }
 
-    public static Locale fromStream(InputStream stream, String name) throws IOException{
+    public static Locale fromStream(InputStream stream, String name) throws Exception{
         Locale locale = new Locale(name);
 
-        Properties props = new Properties();
-        props.load(stream);
+        JsonParser parser = new JsonParser();
+        JsonElement main = parser.parse(new InputStreamReader(stream));
 
-        for(String key : props.stringPropertyNames()){
-            String value = props.getProperty(key);
-
-            try{
-                locale.localization.put(RockBottomAPI.createRes(key), value);
-                Log.debug("Added localization "+key+" -> "+value+" to locale "+name);
-            }
-            catch(IllegalArgumentException e){
-                Log.error("Cannot add "+value+" to locale "+name+" because key "+key+" cannot be parsed", e);
-            }
+        for(Entry<String, JsonElement> entry : main.getAsJsonObject().entrySet()){
+            recurseLoad(locale, entry.getKey(), "", entry.getValue());
         }
 
         return locale;
+    }
+
+    private static void recurseLoad(Locale locale, String domain, String name, JsonElement element){
+        if(element.isJsonPrimitive()){
+            String value = element.getAsJsonPrimitive().getAsString();
+            locale.localization.put(RockBottomAPI.createRes(domain+Constants.RESOURCE_SEPARATOR+name), value);
+        }
+        else{
+            for(Entry<String, JsonElement> entry : element.getAsJsonObject().entrySet()){
+                String key = entry.getKey();
+                recurseLoad(locale, domain, name.isEmpty() ? key : name+"."+key, entry.getValue());
+            }
+        }
     }
 
     public boolean merge(Locale otherLocale){
