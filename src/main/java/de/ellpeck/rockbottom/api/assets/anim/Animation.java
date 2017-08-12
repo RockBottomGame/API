@@ -18,6 +18,10 @@
 
 package de.ellpeck.rockbottom.api.assets.anim;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import de.ellpeck.rockbottom.api.assets.tex.Texture;
 import de.ellpeck.rockbottom.api.util.Util;
 import org.lwjgl.Sys;
@@ -46,36 +50,27 @@ public class Animation{
         this.rows = rows;
     }
 
-    public static Animation fromStream(InputStream textureStream, InputStream infoStream, String name) throws IOException, SlickException{
+    public static Animation fromStream(InputStream textureStream, InputStream infoStream, String name) throws Exception{
         Texture texture = new Texture(textureStream, name, false);
         texture.setFilter(Texture.FILTER_NEAREST);
 
-        BufferedReader reader = new BufferedReader(new InputStreamReader(infoStream));
-
-        String line = reader.readLine();
-
-        String[] aspect = line.split(",");
-        int frameWidth = Integer.parseInt(aspect[0]);
-        int frameHeight = Integer.parseInt(aspect[1]);
-
         List<AnimationRow> rows = new ArrayList<>();
 
-        while(true){
-            line = reader.readLine();
+        JsonObject main = new JsonParser().parse(new InputStreamReader(infoStream)).getAsJsonObject();
+        JsonArray dims = main.getAsJsonArray("size");
+        int frameWidth = dims.get(0).getAsInt();
+        int frameHeight = dims.get(1).getAsInt();
 
-            if(line != null && !line.isEmpty()){
-                String[] split = line.split(",");
+        JsonArray data = main.getAsJsonArray("data");
+        for(JsonElement element : data){
+            JsonArray array = element.getAsJsonArray();
+            float[] times = new float[array.size()];
 
-                float[] times = new float[split.length];
-                for(int i = 0; i < times.length; i++){
-                    times[i] = Float.parseFloat(split[i]);
-                }
-
-                rows.add(new AnimationRow(times));
+            for(int i = 0; i < times.length; i++){
+                times[i] = array.get(i).getAsFloat();
             }
-            else{
-                break;
-            }
+
+            rows.add(new AnimationRow(times));
         }
 
         return new Animation(texture, frameWidth, frameHeight, rows);

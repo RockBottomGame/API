@@ -49,13 +49,8 @@ public interface IMod{
     /**
      * Returns the location in the jar file that mod-related {@link de.ellpeck.rockbottom.api.assets.IAsset}s
      * are stored (images, sounds, language files etc.)
-     * <br> The location must contain a file named "assets.info" containg a mapping
+     * <br> The location must contain a file named "assets.json" containg a mapping
      * of all the asset names to their locations in the jar file
-     * <br>
-     * <br> For instance, RockBottom uses the resource location "/assets/rockbottom", meaning
-     * the "assets.info" file has to be at "/assets/rockbottom/assets.info". For the game to then load a
-     * png resource at "/assets/rockbottom/example/test.png" with the resource name "test", the assets.info
-     * file must contain the following line: "tex.text=/example/test.png"
      *
      * @return The location
      */
