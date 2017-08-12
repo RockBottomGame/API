@@ -57,8 +57,11 @@ public class Locale{
 
     private static void recurseLoad(Locale locale, String domain, String name, JsonElement element){
         if(element.isJsonPrimitive()){
+            String key = domain+Constants.RESOURCE_SEPARATOR+name;
             String value = element.getAsJsonPrimitive().getAsString();
-            locale.localization.put(RockBottomAPI.createRes(domain+Constants.RESOURCE_SEPARATOR+name), value);
+
+            locale.localization.put(RockBottomAPI.createRes(key), value);
+            Log.debug("Added localization "+key+" -> "+value+" to locale with name "+locale.name);
         }
         else{
             for(Entry<String, JsonElement> entry : element.getAsJsonObject().entrySet()){
