@@ -18,7 +18,7 @@
 
 package de.ellpeck.rockbottom.api.util.reg;
 
-import java.util.Map;
+import com.google.common.collect.BiMap;
 
 public interface IRegistry<T, U>{
 
@@ -30,6 +30,6 @@ public interface IRegistry<T, U>{
 
     int getSize();
 
-    Map<T, U> getUnmodifiable();
+    BiMap<T, U> getUnmodifiable();
 
 }

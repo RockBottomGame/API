@@ -18,18 +18,19 @@
 
 package de.ellpeck.rockbottom.api.util.reg;
 
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
+import com.google.common.collect.Maps;
 import org.newdawn.slick.util.Log;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
 
 public class IndexRegistry<T> implements IRegistry<Integer, T>{
 
     protected final int max;
     protected final String name;
-    protected final Map<Integer, T> map = new HashMap<>();
+    protected final BiMap<Integer, T> map = HashBiMap.create();
 
     public IndexRegistry(String name, int max){
         this.name = name;
@@ -63,12 +64,7 @@ public class IndexRegistry<T> implements IRegistry<Integer, T>{
 
     @Override
     public Integer getId(T value){
-        for(Entry<Integer, T> entry : this.map.entrySet()){
-            if(value.equals(entry.getValue())){
-                return entry.getKey();
-            }
-        }
-        return -1;
+        return this.map.inverse().get(value);
     }
 
     public int getNextFreeId(){
@@ -86,8 +82,8 @@ public class IndexRegistry<T> implements IRegistry<Integer, T>{
     }
 
     @Override
-    public Map<Integer, T> getUnmodifiable(){
-        return Collections.unmodifiableMap(this.map);
+    public BiMap<Integer, T> getUnmodifiable(){
+        return Maps.unmodifiableBiMap(this.map);
     }
 
     @Override

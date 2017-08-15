@@ -18,6 +18,9 @@
 
 package de.ellpeck.rockbottom.api.util.reg;
 
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
+import com.google.common.collect.Maps;
 import org.newdawn.slick.util.Log;
 
 import java.util.Collections;
@@ -28,15 +31,10 @@ import java.util.Map.Entry;
 public class NameRegistry<T> implements IRegistry<IResourceName, T>{
 
     protected final String name;
-    protected final Map<IResourceName, T> map;
-
-    public NameRegistry(String name, Map<IResourceName, T> map){
-        this.name = name;
-        this.map = map;
-    }
+    protected final BiMap<IResourceName, T> map = HashBiMap.create();
 
     public NameRegistry(String name){
-        this(name, new HashMap<>());
+        this.name = name;
     }
 
     @Override
@@ -66,12 +64,7 @@ public class NameRegistry<T> implements IRegistry<IResourceName, T>{
 
     @Override
     public IResourceName getId(T value){
-        for(Entry<IResourceName, T> entry : this.map.entrySet()){
-            if(value.equals(entry.getValue())){
-                return entry.getKey();
-            }
-        }
-        return null;
+        return this.map.inverse().get(value);
     }
 
     @Override
@@ -80,8 +73,8 @@ public class NameRegistry<T> implements IRegistry<IResourceName, T>{
     }
 
     @Override
-    public Map<IResourceName, T> getUnmodifiable(){
-        return Collections.unmodifiableMap(this.map);
+    public BiMap<IResourceName, T> getUnmodifiable(){
+        return Maps.unmodifiableBiMap(this.map);
     }
 
     @Override

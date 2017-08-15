@@ -132,7 +132,7 @@ public final class RockBottomAPI{
      * The registry for {@link Keybind}
      * <br> Use this to register custom keybinds
      */
-    public static final NameRegistry<Keybind> KEYBIND_REGISTRY = new NameRegistry<>("keybind_registry", new TreeMap<>());
+    public static final NameRegistry<Keybind> KEYBIND_REGISTRY = new NameRegistry<>("keybind_registry");
     /**
      * The registry for {@link ChatComponent}
      * <br> Use {@link IndexRegistry#getNextFreeId()} to register a custom component
