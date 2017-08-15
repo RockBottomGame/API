@@ -64,7 +64,7 @@ public class IndexRegistry<T> implements IRegistry<Integer, T>{
 
     @Override
     public Integer getId(T value){
-        return this.map.inverse().get(value);
+        return this.map.inverse().getOrDefault(value, -1);
     }
 
     public int getNextFreeId(){
