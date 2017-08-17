@@ -66,7 +66,7 @@ public class Locale{
         else{
             for(Entry<String, JsonElement> entry : element.getAsJsonObject().entrySet()){
                 String key = entry.getKey();
-                recurseLoad(locale, domain, name.isEmpty() ? key : name+"."+key, entry.getValue());
+                recurseLoad(locale, domain, name.isEmpty() ? key : ("*".equals(key) ? name : name+"."+key), entry.getValue());
             }
         }
     }
