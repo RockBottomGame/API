@@ -116,7 +116,7 @@ public abstract class Gui{
     }
 
     public void render(IGameInstance game, IAssetManager manager, Graphics g){
-        for(int i = 0; i < this.components.size(); i++){
+        for(int i = this.components.size()-1; i >= 0; i--){
             GuiComponent component = this.components.get(i);
             if(component.isActive){
                 if(RockBottomAPI.getEventHandler().fireEvent(new ComponentRenderEvent(this, i, component)) != EventResult.CANCELLED){
@@ -127,7 +127,7 @@ public abstract class Gui{
     }
 
     public void renderOverlay(IGameInstance game, IAssetManager manager, Graphics g){
-        for(int i = 0; i < this.components.size(); i++){
+        for(int i = this.components.size()-1; i >= 0; i--){
             GuiComponent component = this.components.get(i);
             if(component.isActive){
                 if(RockBottomAPI.getEventHandler().fireEvent(new ComponentRenderOverlayEvent(this, i, component)) != EventResult.CANCELLED){
