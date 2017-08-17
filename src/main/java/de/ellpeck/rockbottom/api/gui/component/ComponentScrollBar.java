@@ -28,10 +28,12 @@ import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.Graphics;
 
+import java.util.function.Consumer;
+
 public class ComponentScrollBar extends ComponentButton{
 
     protected final BoundBox scrollArea;
-    protected final ICallback callback;
+    protected final Consumer<Integer> consumer;
     protected int min;
     protected int max;
     protected int number;
@@ -39,13 +41,13 @@ public class ComponentScrollBar extends ComponentButton{
     private boolean wasMouseDown;
     private boolean locked = false;
 
-    public ComponentScrollBar(Gui gui, int id, int x, int y, int sizeX, int sizeY, int initialNumber, int min, int max, BoundBox scrollArea, ICallback callback){
-        super(gui, id, x, y, sizeX, sizeY, null);
+    public ComponentScrollBar(Gui gui, int x, int y, int sizeX, int sizeY, int initialNumber, int min, int max, BoundBox scrollArea, Consumer<Integer> consumer){
+        super(gui, x, y, sizeX, sizeY, null, null);
         this.min = min;
         this.max = max;
         this.number = initialNumber;
         this.scrollArea = scrollArea;
-        this.callback = callback;
+        this.consumer = consumer;
     }
 
     @Override
@@ -130,7 +132,7 @@ public class ComponentScrollBar extends ComponentButton{
 
                     if(number != this.number){
                         this.number = number;
-                        this.callback.onNumberChange(this.min, this.max, this.number);
+                        this.consumer.accept(this.number);
                     }
                 }
             }
@@ -143,17 +145,12 @@ public class ComponentScrollBar extends ComponentButton{
 
         if(number != this.number){
             this.number = number;
-            this.callback.onNumberChange(this.min, this.max, this.number);
+            this.consumer.accept(this.number);
         }
     }
 
     @Override
     public IResourceName getName(){
         return RockBottomAPI.createInternalRes("scroll_bar");
-    }
-
-    public interface ICallback{
-
-        void onNumberChange(int min, int max, int number);
     }
 }

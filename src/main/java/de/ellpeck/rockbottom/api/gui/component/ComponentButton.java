@@ -26,19 +26,21 @@ import de.ellpeck.rockbottom.api.gui.Gui;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 import org.newdawn.slick.Graphics;
 
+import java.util.function.Supplier;
+
 public class ComponentButton extends GuiComponent{
 
-    public final int id;
     private final String[] hover;
     public boolean hasBackground = true;
     public boolean isVisible = true;
     protected String text;
+    private final Supplier<Boolean> supplier;
 
-    public ComponentButton(Gui gui, int id, int x, int y, int sizeX, int sizeY, String text, String... hover){
+    public ComponentButton(Gui gui, int x, int y, int sizeX, int sizeY, Supplier<Boolean> supplier, String text, String... hover){
         super(gui, x, y, sizeX, sizeY);
-        this.id = id;
         this.text = text;
         this.hover = hover;
+        this.supplier = supplier;
     }
 
     public void setText(String text){
@@ -95,7 +97,7 @@ public class ComponentButton extends GuiComponent{
                 if(this.onPressed(game)){
                     return true;
                 }
-                else if(this.gui != null && this.gui.onButtonActivated(game, this.id)){
+                else if(this.supplier != null && this.supplier.get()){
                     return true;
                 }
             }

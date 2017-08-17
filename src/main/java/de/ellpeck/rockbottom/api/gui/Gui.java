@@ -159,10 +159,6 @@ public abstract class Gui{
         }
     }
 
-    public boolean onButtonActivated(IGameInstance game, int button){
-        return false;
-    }
-
     public boolean hasGradient(){
         return true;
     }

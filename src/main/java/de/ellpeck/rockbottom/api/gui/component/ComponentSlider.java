@@ -26,21 +26,23 @@ import de.ellpeck.rockbottom.api.gui.Gui;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 import org.newdawn.slick.Graphics;
 
+import java.util.function.BiConsumer;
+
 public class ComponentSlider extends ComponentButton{
 
-    protected final ICallback callback;
+    protected final BiConsumer<Integer, Boolean> consumer;
     protected final int min;
     protected final int max;
     protected int number;
 
     private boolean wasMouseDown;
 
-    public ComponentSlider(Gui gui, int id, int x, int y, int sizeX, int sizeY, int initialNumber, int min, int max, ICallback callback, String text, String... hover){
-        super(gui, id, x, y, sizeX, sizeY, text, hover);
+    public ComponentSlider(Gui gui, int x, int y, int sizeX, int sizeY, int initialNumber, int min, int max, BiConsumer<Integer, Boolean> consumer, String text, String... hover){
+        super(gui, x, y, sizeX, sizeY, null, text, hover);
         this.min = min;
         this.max = max;
         this.number = initialNumber;
-        this.callback = callback;
+        this.consumer = consumer;
     }
 
     @Override
@@ -66,7 +68,7 @@ public class ComponentSlider extends ComponentButton{
     public boolean onMouseAction(IGameInstance game, int button, float x, float y){
         if(this.isMouseOver(game)){
             if(!this.wasMouseDown){
-                this.callback.onFirstClick(game.getMouseInGuiX(), game.getMouseInGuiY(), this.min, this.max, this.number);
+                this.consumer.accept(this.number, false);
                 this.wasMouseDown = true;
 
                 return true;
@@ -79,46 +81,29 @@ public class ComponentSlider extends ComponentButton{
     public void update(IGameInstance game){
         if(this.wasMouseDown){
             float mouseX = game.getMouseInGuiX();
-            float mouseY = game.getMouseInGuiY();
 
             if(Settings.KEY_GUI_ACTION_1.isDown()){
-                this.onClickOrMove(mouseX, mouseY);
+                this.onClickOrMove(mouseX);
             }
             else{
-                this.callback.onLetGo(mouseX, mouseY, this.min, this.max, this.number);
+                this.consumer.accept(this.number, true);
                 this.wasMouseDown = false;
             }
         }
     }
 
-    private void onClickOrMove(float mouseX, float mouseY){
+    private void onClickOrMove(float mouseX){
         float clickPercentage = (mouseX-this.x)/(float)this.sizeX;
         int number = Math.max(this.min, Math.min(this.max, (int)(clickPercentage*(this.max-this.min+1)+this.min)));
 
         if(number != this.number){
             this.number = number;
-
-            this.callback.onNumberChange(mouseX, mouseY, this.min, this.max, this.number);
+            this.consumer.accept(this.number, false);
         }
     }
 
     @Override
     public IResourceName getName(){
         return RockBottomAPI.createInternalRes("slider");
-    }
-
-    public interface ICallback{
-
-        default void onNumberChange(float mouseX, float mouseY, int min, int max, int number){
-
-        }
-
-        default void onFirstClick(float mouseX, float mouseY, int min, int max, int number){
-
-        }
-
-        default void onLetGo(float mouseX, float mouseY, int min, int max, int number){
-
-        }
     }
 }

@@ -26,17 +26,19 @@ import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 
+import java.util.function.Supplier;
+
 public class ComponentProgressBar extends GuiComponent{
 
     private final Color progressColor;
     private final Color backgroundColor;
 
-    private final ICallback callback;
+    private final Supplier<Float> supplier;
     private final boolean isVertical;
 
-    public ComponentProgressBar(Gui gui, int x, int y, int sizeX, int sizeY, Color progressColor, boolean isVertical, ICallback callback){
+    public ComponentProgressBar(Gui gui, int x, int y, int sizeX, int sizeY, Color progressColor, boolean isVertical, Supplier<Float> supplier){
         super(gui, x, y, sizeX, sizeY);
-        this.callback = callback;
+        this.supplier = supplier;
         this.isVertical = isVertical;
         this.progressColor = progressColor;
         this.backgroundColor = progressColor.multiply(new Color(0.5F, 0.5F, 0.5F, 0.35F));
@@ -46,7 +48,7 @@ public class ComponentProgressBar extends GuiComponent{
     public void render(IGameInstance game, IAssetManager manager, Graphics g){
         super.render(game, manager, g);
 
-        float percent = this.callback.getProgress();
+        float percent = this.supplier.get();
 
         g.setColor(this.backgroundColor);
         g.fillRect(this.x, this.y, this.sizeX, this.sizeY);
@@ -68,10 +70,5 @@ public class ComponentProgressBar extends GuiComponent{
     @Override
     public IResourceName getName(){
         return RockBottomAPI.createInternalRes("progress_bar");
-    }
-
-    public interface ICallback{
-
-        float getProgress();
     }
 }
