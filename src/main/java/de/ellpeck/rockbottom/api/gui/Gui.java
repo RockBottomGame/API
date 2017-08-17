@@ -80,14 +80,18 @@ public abstract class Gui{
 
     public void update(IGameInstance game){
         for(GuiComponent component : this.components){
-            component.update(game);
+            if(component.isActive){
+                component.update(game);
+            }
         }
     }
 
     public boolean onMouseAction(IGameInstance game, int button, float x, float y){
         for(GuiComponent component : this.components){
-            if(component.onMouseAction(game, button, x, y)){
-                return true;
+            if(component.isActive){
+                if(component.onMouseAction(game, button, x, y)){
+                    return true;
+                }
             }
         }
         return false;
@@ -95,8 +99,10 @@ public abstract class Gui{
 
     public boolean onKeyboardAction(IGameInstance game, int button, char character){
         for(GuiComponent component : this.components){
-            if(component.onKeyboardAction(game, button, character)){
-                return true;
+            if(component.isActive){
+                if(component.onKeyboardAction(game, button, character)){
+                    return true;
+                }
             }
         }
 
@@ -112,8 +118,10 @@ public abstract class Gui{
     public void render(IGameInstance game, IAssetManager manager, Graphics g){
         for(int i = 0; i < this.components.size(); i++){
             GuiComponent component = this.components.get(i);
-            if(RockBottomAPI.getEventHandler().fireEvent(new ComponentRenderEvent(this, i, component)) != EventResult.CANCELLED){
-                component.render(game, manager, g);
+            if(component.isActive){
+                if(RockBottomAPI.getEventHandler().fireEvent(new ComponentRenderEvent(this, i, component)) != EventResult.CANCELLED){
+                    component.render(game, manager, g);
+                }
             }
         }
     }
@@ -121,8 +129,10 @@ public abstract class Gui{
     public void renderOverlay(IGameInstance game, IAssetManager manager, Graphics g){
         for(int i = 0; i < this.components.size(); i++){
             GuiComponent component = this.components.get(i);
-            if(RockBottomAPI.getEventHandler().fireEvent(new ComponentRenderOverlayEvent(this, i, component)) != EventResult.CANCELLED){
-                component.renderOverlay(game, manager, g);
+            if(component.isActive){
+                if(RockBottomAPI.getEventHandler().fireEvent(new ComponentRenderOverlayEvent(this, i, component)) != EventResult.CANCELLED){
+                    component.renderOverlay(game, manager, g);
+                }
             }
         }
     }
@@ -143,7 +153,7 @@ public abstract class Gui{
     }
 
     public boolean isMouseOverComponent(IGameInstance game){
-        return this.components.stream().anyMatch(component -> component.isMouseOver(game));
+        return this.components.stream().anyMatch(component -> component.isActive && component.isMouseOver(game));
     }
 
     public boolean isMouseOver(IGameInstance game){
@@ -171,11 +181,13 @@ public abstract class Gui{
     public boolean isMouseOverPrioritized(IGameInstance game, GuiComponent component){
         if(component.isMouseOver(game)){
             for(GuiComponent comp : this.components){
-                if(comp == component){
-                    return true;
-                }
-                else if(comp.isMouseOver(game)){
-                    break;
+                if(comp.isActive){
+                    if(comp == component){
+                        return true;
+                    }
+                    else if(comp.isMouseOver(game)){
+                        break;
+                    }
                 }
             }
         }

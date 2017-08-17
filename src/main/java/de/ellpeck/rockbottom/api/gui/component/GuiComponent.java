@@ -38,6 +38,7 @@ public abstract class GuiComponent{
     public Gui gui;
     public int x;
     public int y;
+    public boolean isActive = true;
 
     public GuiComponent(Gui gui, int x, int y, int sizeX, int sizeY){
         this.gui = gui;
