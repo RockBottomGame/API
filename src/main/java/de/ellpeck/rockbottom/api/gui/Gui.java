@@ -181,13 +181,11 @@ public abstract class Gui{
     public boolean isMouseOverPrioritized(IGameInstance game, GuiComponent component){
         if(component.isMouseOver(game)){
             for(GuiComponent comp : this.components){
-                if(comp.isActive){
-                    if(comp == component){
-                        return true;
-                    }
-                    else if(comp.isMouseOver(game)){
-                        break;
-                    }
+                if(comp == component){
+                    return true;
+                }
+                else if(comp.isMouseOver(game)){
+                    break;
                 }
             }
         }

@@ -59,9 +59,21 @@ public class ComponentScrollMenu extends ComponentButton{
         this.gui.getComponents().remove(component);
     }
 
+    public void clear(){
+        if(!this.contents.isEmpty()){
+            this.gui.getComponents().removeAll(this.contents);
+            this.contents.clear();
+        }
+    }
+
+    public boolean isEmpty(){
+        return this.contents.isEmpty();
+    }
+
     @Override
     public void render(IGameInstance game, IAssetManager manager, Graphics g){
-        float percentage = (float)this.number/(float)this.getMax();
+        int max = this.getMax();
+        float percentage = max <= 0 ? 0 : (float)this.number/(float)max;
         float y = this.y+percentage*(this.sizeY-10);
 
         g.setColor(this.isMouseOverPrioritized(game) || this.hoverArea.contains(game.getMouseInGuiX(), game.getMouseInGuiY()) ? this.colorButton : this.colorButtonUnselected);
@@ -74,8 +86,10 @@ public class ComponentScrollMenu extends ComponentButton{
     }
 
     public void organize(){
+        this.number = Math.max(0, Math.min(this.getMax(), this.number));
+
         int index = 0;
-        while(index < this.number*this.contentsX){
+        while(index < this.contents.size() && index < this.number*this.contentsX){
             this.contents.get(index).isActive = false;
             index++;
         }

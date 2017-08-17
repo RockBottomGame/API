@@ -32,7 +32,6 @@ public class ComponentButton extends GuiComponent{
 
     private final String[] hover;
     public boolean hasBackground = true;
-    public boolean isVisible = true;
     protected String text;
     private final Supplier<Boolean> supplier;
 
@@ -54,19 +53,17 @@ public class ComponentButton extends GuiComponent{
 
     @Override
     public void render(IGameInstance game, IAssetManager manager, Graphics g){
-        if(this.isVisible){
-            if(this.hasBackground){
-                g.setColor(this.isMouseOverPrioritized(game) ? this.colorButton : this.colorButtonUnselected);
-                g.fillRect(this.x, this.y, this.sizeX, this.sizeY);
+        if(this.hasBackground){
+            g.setColor(this.isMouseOverPrioritized(game) ? this.colorButton : this.colorButtonUnselected);
+            g.fillRect(this.x, this.y, this.sizeX, this.sizeY);
 
-                g.setColor(this.colorOutline);
-                g.drawRect(this.x, this.y, this.sizeX, this.sizeY);
-            }
+            g.setColor(this.colorOutline);
+            g.drawRect(this.x, this.y, this.sizeX, this.sizeY);
+        }
 
-            String text = this.getText();
-            if(text != null){
-                manager.getFont().drawCenteredString(this.x+this.sizeX/2F, this.y+this.sizeY/2F+0.5F, text, 0.35F, true);
-            }
+        String text = this.getText();
+        if(text != null){
+            manager.getFont().drawCenteredString(this.x+this.sizeX/2F, this.y+this.sizeY/2F+0.5F, text, 0.35F, true);
         }
     }
 
@@ -80,32 +77,25 @@ public class ComponentButton extends GuiComponent{
 
     @Override
     public void renderOverlay(IGameInstance game, IAssetManager manager, Graphics g){
-        if(this.isVisible){
-            if(this.isMouseOverPrioritized(game)){
-                String[] hover = this.getHover();
-                if(hover != null && hover.length > 0){
-                    RockBottomAPI.getApiHandler().drawHoverInfoAtMouse(game, manager, g, false, 100, hover);
-                }
+        if(this.isMouseOverPrioritized(game)){
+            String[] hover = this.getHover();
+            if(hover != null && hover.length > 0){
+                RockBottomAPI.getApiHandler().drawHoverInfoAtMouse(game, manager, g, false, 100, hover);
             }
         }
     }
 
     @Override
     public boolean onMouseAction(IGameInstance game, int button, float x, float y){
-        if(this.isVisible){
-            if(Settings.KEY_GUI_ACTION_1.isKey(button) && this.isMouseOver(game)){
-                if(this.onPressed(game)){
-                    return true;
-                }
-                else if(this.supplier != null && this.supplier.get()){
-                    return true;
-                }
+        if(Settings.KEY_GUI_ACTION_1.isKey(button) && this.isMouseOver(game)){
+            if(this.onPressed(game)){
+                return true;
             }
-            return false;
+            else if(this.supplier != null && this.supplier.get()){
+                return true;
+            }
         }
-        else{
-            return false;
-        }
+        return false;
     }
 
     @Override

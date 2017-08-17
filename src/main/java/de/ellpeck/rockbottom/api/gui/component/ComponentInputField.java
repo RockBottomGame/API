@@ -31,6 +31,7 @@ import org.newdawn.slick.Input;
 
 import java.awt.*;
 import java.awt.datatransfer.DataFlavor;
+import java.util.function.Consumer;
 
 public class ComponentInputField extends GuiComponent{
 
@@ -42,14 +43,20 @@ public class ComponentInputField extends GuiComponent{
     private String text = "";
     private boolean isActive;
     private int counter;
+    private final Consumer<String> consumer;
 
     public ComponentInputField(Gui gui, int x, int y, int sizeX, int sizeY, boolean renderBox, boolean selectable, boolean defaultActive, int maxLength, boolean displayMaxLength){
+        this(gui, x, y, sizeX, sizeY, renderBox, selectable, defaultActive, maxLength, displayMaxLength, null);
+    }
+
+    public ComponentInputField(Gui gui, int x, int y, int sizeX, int sizeY, boolean renderBox, boolean selectable, boolean defaultActive, int maxLength, boolean displayMaxLength, Consumer<String> consumer){
         super(gui, x, y, sizeX, sizeY);
         this.renderBox = renderBox;
         this.selectable = selectable;
         this.isActive = defaultActive;
         this.maxLength = maxLength;
         this.displaxMaxLength = displayMaxLength;
+        this.consumer = consumer;
     }
 
     @Override
@@ -58,6 +65,9 @@ public class ComponentInputField extends GuiComponent{
             if(button == Input.KEY_BACK){
                 if(!this.text.isEmpty()){
                     this.text = this.text.substring(0, this.text.length()-1);
+                    if(this.consumer != null){
+                        this.consumer.accept(this.text);
+                    }
                 }
                 return true;
             }
@@ -82,6 +92,9 @@ public class ComponentInputField extends GuiComponent{
                                 this.text = this.text.substring(0, this.maxLength);
                             }
 
+                            if(this.consumer != null){
+                                this.consumer.accept(this.text);
+                            }
                             return true;
                         }
                     }
@@ -89,6 +102,9 @@ public class ComponentInputField extends GuiComponent{
                 else if(!Character.isISOControl(character)){
                     if(this.text.length() < this.maxLength){
                         this.text += character;
+                        if(this.consumer != null){
+                            this.consumer.accept(this.text);
+                        }
                         return true;
                     }
                 }
@@ -141,6 +157,9 @@ public class ComponentInputField extends GuiComponent{
 
     public void setText(String text){
         this.text = text;
+        if(this.consumer != null){
+            this.consumer.accept(text);
+        }
     }
 
     @Override
@@ -153,6 +172,9 @@ public class ComponentInputField extends GuiComponent{
         else if(Settings.KEY_GUI_ACTION_2.isKey(button)){
             if(this.isMouseOver(game)){
                 this.text = "";
+                if(this.consumer != null){
+                    this.consumer.accept(this.text);
+                }
 
                 if(this.selectable){
                     this.isActive = true;
