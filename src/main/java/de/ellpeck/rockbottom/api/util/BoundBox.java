@@ -81,7 +81,7 @@ public class BoundBox{
     }
 
     public boolean isEmpty(){
-        return this.minX >= this.maxX || this.minY >= this.maxY;
+        return this.getWidth() <= 0 || this.getHeight() <= 0;
     }
 
     @Override
@@ -126,6 +126,14 @@ public class BoundBox{
 
     public double getMaxY(){
         return this.maxY;
+    }
+
+    public double getWidth(){
+        return this.maxX-this.minX;
+    }
+
+    public double getHeight(){
+        return this.maxY-this.minY;
     }
 
     public double getXDistanceWithMax(BoundBox other, double offsetX){
