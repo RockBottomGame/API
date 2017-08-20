@@ -30,7 +30,6 @@ import de.ellpeck.rockbottom.api.net.chat.IChatLog;
 import de.ellpeck.rockbottom.api.particle.IParticleManager;
 import de.ellpeck.rockbottom.api.render.IPlayerDesign;
 import de.ellpeck.rockbottom.api.toast.IToaster;
-import de.ellpeck.rockbottom.api.util.IAction;
 import de.ellpeck.rockbottom.api.util.reg.NameToIndexInfo;
 import de.ellpeck.rockbottom.api.world.DynamicRegistryInfo;
 import de.ellpeck.rockbottom.api.world.IWorld;
@@ -40,6 +39,7 @@ import org.newdawn.slick.Input;
 import java.io.File;
 import java.net.URLClassLoader;
 import java.util.UUID;
+import java.util.function.Supplier;
 
 /**
  * The current instance of the game
@@ -81,13 +81,13 @@ public interface IGameInstance extends IMod{
     void openIngameMenu();
 
     /**
-     * Schedules an {@link IAction} to be executed next tick
+     * Schedules a {@link Supplier<Boolean>} to be executed next tick
      * <br> Useful for use with {@link de.ellpeck.rockbottom.api.net.packet.IPacket} as
      * it prevents concurrent modification
      *
      * @param action The action to be executed
      */
-    void scheduleAction(IAction action);
+    void scheduleAction(Supplier<Boolean> action);
 
     int getGuiScale();
 
