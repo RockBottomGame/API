@@ -81,7 +81,7 @@ public interface IGameInstance extends IMod{
     void openIngameMenu();
 
     /**
-     * Schedules a {@link Supplier<Boolean>} to be executed next tick
+     * Schedules a {@link Supplier} to be executed next tick
      * <br> Useful for use with {@link de.ellpeck.rockbottom.api.net.packet.IPacket} as
      * it prevents concurrent modification
      *
