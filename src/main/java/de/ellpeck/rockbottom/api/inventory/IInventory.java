@@ -21,6 +21,8 @@ package de.ellpeck.rockbottom.api.inventory;
 import de.ellpeck.rockbottom.api.construction.resource.IUseInfo;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 
+import java.util.function.BiConsumer;
+
 public interface IInventory{
 
     void set(int id, ItemInstance instance);
@@ -35,9 +37,9 @@ public interface IInventory{
 
     void notifyChange(int slot);
 
-    void addChangeCallback(IInvChangeCallback callback);
+    void addChangeCallback(BiConsumer<IInventory, Integer> callback);
 
-    void removeChangeCallback(IInvChangeCallback callback);
+    void removeChangeCallback(BiConsumer<IInventory, Integer> callback);
 
     default boolean containsResource(IUseInfo info){
         for(ItemInstance inst : info.getItems()){

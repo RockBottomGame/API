@@ -23,10 +23,11 @@ import de.ellpeck.rockbottom.api.item.ItemInstance;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.BiConsumer;
 
 public class Inventory implements IInventory{
 
-    protected final List<IInvChangeCallback> callbacks = new ArrayList<>();
+    protected final List<BiConsumer<IInventory, Integer>> callbacks = new ArrayList<>();
     protected final ItemInstance[] slots;
 
     public Inventory(int slotAmount){
@@ -84,20 +85,20 @@ public class Inventory implements IInventory{
 
     @Override
     public void notifyChange(int slot){
-        for(IInvChangeCallback callback : this.callbacks){
-            callback.onChange(this, slot, this.get(slot));
+        for(BiConsumer<IInventory, Integer> callback : this.callbacks){
+            callback.accept(this, slot);
         }
     }
 
     @Override
-    public void addChangeCallback(IInvChangeCallback callback){
+    public void addChangeCallback(BiConsumer<IInventory, Integer> callback){
         if(!this.callbacks.contains(callback)){
             this.callbacks.add(callback);
         }
     }
 
     @Override
-    public void removeChangeCallback(IInvChangeCallback callback){
+    public void removeChangeCallback(BiConsumer<IInventory, Integer> callback){
         this.callbacks.remove(callback);
     }
 

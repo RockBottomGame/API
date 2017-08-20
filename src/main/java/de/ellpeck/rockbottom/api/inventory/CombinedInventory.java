@@ -2,6 +2,7 @@ package de.ellpeck.rockbottom.api.inventory;
 
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 
+import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 
 public class CombinedInventory implements IInventory{
@@ -68,14 +69,14 @@ public class CombinedInventory implements IInventory{
     }
 
     @Override
-    public void addChangeCallback(IInvChangeCallback callback){
+    public void addChangeCallback(BiConsumer<IInventory, Integer> callback){
         for(IInventory inventory : this.inventories){
             inventory.addChangeCallback(callback);
         }
     }
 
     @Override
-    public void removeChangeCallback(IInvChangeCallback callback){
+    public void removeChangeCallback(BiConsumer<IInventory, Integer> callback){
         for(IInventory inventory : this.inventories){
             inventory.removeChangeCallback(callback);
         }
