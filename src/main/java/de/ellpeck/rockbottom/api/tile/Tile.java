@@ -207,7 +207,7 @@ public class Tile{
 
     public void onChangeAround(IWorld world, int x, int y, TileLayer layer, int changedX, int changedY, TileLayer changedLayer){
         if(!this.canStay(world, x, y, layer, changedX, changedY, changedLayer)){
-            world.destroyTile(x, y, layer, null, true);
+            world.destroyTile(x, y, layer, null, this.forceDrop);
         }
     }
 
