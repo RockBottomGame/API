@@ -160,11 +160,13 @@ public class Font{
             FormattingCode code = FormattingCode.getFormat(s, i);
             if(code != FormattingCode.NONE){
                 Color formatColor = code.getColor();
-                if(initialAlpha != formatColor.a){
-                    color = new Color(formatColor.r, formatColor.g, formatColor.b, initialAlpha);
-                }
-                else{
-                    color = formatColor;
+                if(formatColor != null){
+                    if(initialAlpha != formatColor.a){
+                        color = new Color(formatColor.r, formatColor.g, formatColor.b, initialAlpha);
+                    }
+                    else{
+                        color = formatColor;
+                    }
                 }
 
                 i += code.getLength()-1;
@@ -241,7 +243,7 @@ public class Font{
         for(String line : lines){
             FormattingCode trailingCode = FormattingCode.NONE;
 
-            for(String subLine : line.split("\n")){
+            for(String subLine : line.split("[\\\\&]n")){
                 String[] words = subLine.split(" ");
 
                 for(String word : words){

@@ -106,12 +106,16 @@ public abstract class Gui{
             }
         }
 
-        if(Settings.KEY_MENU.isKey(button) || (Settings.KEY_INVENTORY.isKey(button) && this instanceof GuiContainer)){
+        if(Settings.KEY_MENU.isKey(button) || (this.canCloseWithInvKey() && Settings.KEY_INVENTORY.isKey(button))){
             if(this.tryEscape(game)){
                 return true;
             }
         }
 
+        return false;
+    }
+
+    public boolean canCloseWithInvKey(){
         return false;
     }
 

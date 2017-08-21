@@ -38,11 +38,13 @@ public abstract class AbstractEntityPlayer extends EntityLiving implements IComm
         super(world);
     }
 
-    public abstract void openGuiContainer(Gui gui, ItemContainer container);
+    public abstract boolean openGui(Gui gui);
 
-    public abstract void openContainer(ItemContainer container);
+    public abstract boolean openGuiContainer(Gui gui, ItemContainer container);
 
-    public abstract void closeContainer();
+    public abstract boolean openContainer(ItemContainer container);
+
+    public abstract boolean closeContainer();
 
     public abstract ItemContainer getContainer();
 

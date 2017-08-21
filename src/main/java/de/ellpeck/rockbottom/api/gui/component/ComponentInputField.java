@@ -59,6 +59,10 @@ public class ComponentInputField extends GuiComponent{
         this.consumer = consumer;
     }
 
+    public boolean isActive(){
+        return this.isActive;
+    }
+
     @Override
     public boolean onKeyboardAction(IGameInstance game, int button, char character){
         if(this.isActive){

@@ -40,4 +40,8 @@ public interface ITileRenderer<T extends Tile>{
     default void renderInMainMenuBackground(IGameInstance game, IAssetManager manager, Graphics g, T tile, TileState state, float x, float y, float scale){
 
     }
+
+    default void renderOnMouseOver(IGameInstance game, IAssetManager manager, Graphics g, IWorld world, T tile, TileState state, int x, int y, TileLayer layer, float mouseX, float mouseY){
+
+    }
 }

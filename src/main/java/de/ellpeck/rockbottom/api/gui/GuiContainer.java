@@ -76,6 +76,11 @@ public abstract class GuiContainer extends Gui{
     }
 
     @Override
+    public boolean canCloseWithInvKey(){
+        return true;
+    }
+
+    @Override
     public void initGui(IGameInstance game){
         super.initGui(game);
 
