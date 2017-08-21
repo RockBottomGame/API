@@ -152,10 +152,9 @@ public class ComponentInputField extends GuiComponent{
         font.drawCutOffString(this.x+3, this.y+this.sizeY/2F-font.getHeight(0.35F)/2F, display, 0.35F, this.sizeX-6, true, false);
 
         if(this.displaxMaxLength){
-            String textWithoutFormatting = font.removeFormatting(text);
-            int diff = this.maxLength-textWithoutFormatting.length();
+            int diff = this.maxLength-text.length();
             FormattingCode format = diff <= 0 ? FormattingCode.RED : (diff <= this.maxLength/8 ? FormattingCode.ORANGE : (diff <= this.maxLength/4 ? FormattingCode.YELLOW : FormattingCode.NONE));
-            font.drawStringFromRight(this.x+this.sizeX-1, this.y+this.sizeY-font.getHeight(0.2F), format.toString()+textWithoutFormatting.length()+"/"+this.maxLength, 0.2F);
+            font.drawStringFromRight(this.x+this.sizeX-1, this.y+this.sizeY-font.getHeight(0.2F), format.toString()+text.length()+"/"+this.maxLength, 0.2F);
         }
     }
 
