@@ -52,7 +52,9 @@ public final class GameContent{
     public static final Tile TILE_GRASS_TUFT = getTile("grass_tuft");
 
     public static final Item ITEM_SUPER_TOOL = getItem("super_tool");
-    public static final Item ITEM_WOOD_PICK = getItem("wood_pickaxe");
+    public static final Item ITEM_BRITTLE_PICKAXE = getItem("brittle_pickaxe");
+    public static final Item ITEM_BRITTLE_AXE = getItem("brittle_axe");
+    public static final Item ITEM_BRITTLE_SHOVEL = getItem("brittle_shovel");
     public static final Item ITEM_STONE_PICKAXE = getItem("stone_pickaxe");
     public static final Item ITEM_STONE_AXE = getItem("stone_axe");
     public static final Item ITEM_STONE_SHOVEL = getItem("stone_shovel");

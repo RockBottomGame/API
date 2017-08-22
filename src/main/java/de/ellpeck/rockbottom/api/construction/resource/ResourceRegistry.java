@@ -34,6 +34,7 @@ public final class ResourceRegistry{
     public static final String PARTLY_PROCESSED_COPPER = "partly_processed_copper";
     public static final String PROCESSED_COPPER = "processed_copper";
     public static final String SLAG = "slag";
+    public static final String PEBBLES = "pebbles";
 
     private static final Map<String, List<ResInfo>> RESOURCES = new HashMap<>();
     private static final Map<ResInfo, List<String>> RESOURCE_NAMES = new HashMap<>();
