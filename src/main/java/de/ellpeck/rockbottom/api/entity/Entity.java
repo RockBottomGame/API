@@ -155,6 +155,7 @@ public class Entity extends MovableWorldObject{
         set.addUniqueId("uuid", this.uniqueId);
         set.addBoolean("falling",this.isFalling);
         set.addDouble("fall_start_y", this.fallStartY);
+        set.addInt("facing", this.facing.ordinal());
 
         if(this.additionalData != null){
             set.addDataSet("data", this.additionalData);
@@ -170,6 +171,7 @@ public class Entity extends MovableWorldObject{
         this.uniqueId = set.getUniqueId("uuid");
         this.isFalling = set.getBoolean("falling");
         this.fallStartY = set.getDouble("fall_start_y");
+        this.facing = Direction.DIRECTIONS[set.getInt("facing")];
 
         if(set.hasKey("data")){
             this.additionalData = set.getDataSet("data");
