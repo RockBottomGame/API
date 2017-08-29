@@ -32,6 +32,8 @@ public interface IModLoader{
 
     void sortMods();
 
+    void prePreInit();
+
     void preInit();
 
     void init();
@@ -39,6 +41,8 @@ public interface IModLoader{
     void initAssets();
 
     void postInit();
+
+    void postPostInit();
 
     IMod getMod(String id);
 

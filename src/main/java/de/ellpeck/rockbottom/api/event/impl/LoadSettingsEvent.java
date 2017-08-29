@@ -23,8 +23,6 @@ import de.ellpeck.rockbottom.api.event.Event;
 
 /**
  * This event is fired when {@link Settings} are loaded
- * <br> You should use this event to register your {@link de.ellpeck.rockbottom.api.data.settings.Keybind}s as doing it
- * later will make them not be loaded using the settings file
  * <br> This event is not cancellable.
  */
 public class LoadSettingsEvent extends Event{

@@ -105,6 +105,10 @@ public interface IMod{
         return version.equals(this.getVersion());
     }
 
+    default void prePreInit(IGameInstance game, IApiHandler apiHandler, IEventHandler eventHandler){
+
+    }
+
     /**
      * Override this method to do any actions that should happen before the initialization of the base game
      *
@@ -135,6 +139,10 @@ public interface IMod{
      * @param eventHandler The event handler
      */
     default void postInit(IGameInstance game, IApiHandler apiHandler, IEventHandler eventHandler){
+
+    }
+
+    default void postPostInit(IGameInstance game, IApiHandler apiHandler, IEventHandler eventHandler){
 
     }
 
