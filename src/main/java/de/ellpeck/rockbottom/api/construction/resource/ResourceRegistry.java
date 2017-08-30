@@ -33,6 +33,11 @@ public final class ResourceRegistry{
     public static final String RAW_COPPER = "raw_copper";
     public static final String PARTLY_PROCESSED_COPPER = "partly_processed_copper";
     public static final String PROCESSED_COPPER = "processed_copper";
+    public static final String RAW_TIN = "raw_tin";
+    public static final String PARTLY_PROCESSED_TIN = "partly_processed_tin";
+    public static final String PROCESSED_TIN = "processed_tin";
+    public static final String PARTLY_PROCESSED_BRONZE = "partly_processed_bronze";
+    public static final String PROCESSED_BRONZE = "processed_bronze";
     public static final String SLAG = "slag";
     public static final String PEBBLES = "pebbles";
 
