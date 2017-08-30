@@ -1,5 +1,5 @@
 /*
- * This file ("PartByteByteArray.java") is part of the RockBottomAPI by Ellpeck.
+ * This file ("PartByteArray.java") is part of the RockBottomAPI by Ellpeck.
  * View the source code at <https://github.com/Ellpeck/RockBottomAPI>.
  *
  * The RockBottomAPI is free software: you can redistribute it and/or modify
@@ -24,46 +24,36 @@ import java.io.DataInput;
 import java.io.DataOutput;
 import java.util.Arrays;
 
-public class PartByteByteArray extends BasicDataPart<byte[][]>{
+public class PartByteArray extends BasicDataPart<byte[]>{
 
-    public PartByteByteArray(String name){
+    public PartByteArray(String name){
         super(name);
     }
 
-    public PartByteByteArray(String name, byte[][] data){
+    public PartByteArray(String name, byte[] data){
         super(name, data);
     }
 
     @Override
     public void write(DataOutput stream) throws Exception{
         stream.writeInt(this.data.length);
-
-        for(byte[] array : this.data){
-            stream.writeInt(array.length);
-
-            for(byte b : array){
-                stream.writeByte(b);
-            }
+        for(int i : this.data){
+            stream.writeByte(i);
         }
     }
 
     @Override
     public void read(DataInput stream) throws Exception{
         int amount = stream.readInt();
-        this.data = new byte[amount][];
+        this.data = new byte[amount];
 
         for(int i = 0; i < amount; i++){
-            int innerAmount = stream.readInt();
-            this.data[i] = new byte[innerAmount];
-
-            for(int j = 0; j < innerAmount; j++){
-                this.data[i][j] = stream.readByte();
-            }
+            this.data[i] = stream.readByte();
         }
     }
 
     @Override
     public String toString(){
-        return Arrays.deepToString(this.data);
+        return Arrays.toString(this.data);
     }
 }

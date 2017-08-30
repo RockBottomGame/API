@@ -21,9 +21,9 @@ package de.ellpeck.rockbottom.api.data.set;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.data.set.part.*;
 import de.ellpeck.rockbottom.api.data.set.part.num.*;
-import de.ellpeck.rockbottom.api.data.set.part.num.array.PartByteByteArray;
+import de.ellpeck.rockbottom.api.data.set.part.num.array.PartByteArray;
 import de.ellpeck.rockbottom.api.data.set.part.num.array.PartIntArray;
-import de.ellpeck.rockbottom.api.data.set.part.num.array.PartShortShortArray;
+import de.ellpeck.rockbottom.api.data.set.part.num.array.PartShortArray;
 
 import java.io.File;
 import java.util.HashMap;
@@ -95,12 +95,12 @@ public class DataSet{
         this.addPart(new PartDataSet(key, set));
     }
 
-    public byte[][] getByteByteArray(String key, int defaultSize){
-        return this.getPartContent(key, PartByteByteArray.class, new byte[defaultSize][defaultSize]);
+    public byte[] getByteArray(String key, int defaultSize){
+        return this.getPartContent(key, PartByteArray.class, new byte[defaultSize]);
     }
 
-    public void addByteByteArray(String key, byte[][] array){
-        this.addPart(new PartByteByteArray(key, array));
+    public void addByteArray(String key, byte[] array){
+        this.addPart(new PartByteArray(key, array));
     }
 
     public int[] getIntArray(String key, int defaultSize){
@@ -111,12 +111,12 @@ public class DataSet{
         this.addPart(new PartIntArray(key, array));
     }
 
-    public short[][] getShortShortArray(String key, int defaultSize){
-        return this.getPartContent(key, PartShortShortArray.class, new short[defaultSize][defaultSize]);
+    public short[] getShortArray(String key, int defaultSize){
+        return this.getPartContent(key, PartShortArray.class, new short[defaultSize]);
     }
 
-    public void addShortShortArray(String key, short[][] array){
-        this.addPart(new PartShortShortArray(key, array));
+    public void addShortArray(String key, short[] array){
+        this.addPart(new PartShortArray(key, array));
     }
 
     public UUID getUniqueId(String key){

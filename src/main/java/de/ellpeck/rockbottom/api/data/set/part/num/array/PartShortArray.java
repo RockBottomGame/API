@@ -1,5 +1,5 @@
 /*
- * This file ("PartShortShortArray.java") is part of the RockBottomAPI by Ellpeck.
+ * This file ("PartShortArray.java") is part of the RockBottomAPI by Ellpeck.
  * View the source code at <https://github.com/Ellpeck/RockBottomAPI>.
  *
  * The RockBottomAPI is free software: you can redistribute it and/or modify
@@ -24,46 +24,36 @@ import java.io.DataInput;
 import java.io.DataOutput;
 import java.util.Arrays;
 
-public class PartShortShortArray extends BasicDataPart<short[][]>{
+public class PartShortArray extends BasicDataPart<short[]>{
 
-    public PartShortShortArray(String name){
+    public PartShortArray(String name){
         super(name);
     }
 
-    public PartShortShortArray(String name, short[][] data){
+    public PartShortArray(String name, short[] data){
         super(name, data);
     }
 
     @Override
     public void write(DataOutput stream) throws Exception{
         stream.writeInt(this.data.length);
-
-        for(short[] array : this.data){
-            stream.writeInt(array.length);
-
-            for(int b : array){
-                stream.writeShort(b);
-            }
+        for(int i : this.data){
+            stream.writeShort(i);
         }
     }
 
     @Override
     public void read(DataInput stream) throws Exception{
         int amount = stream.readInt();
-        this.data = new short[amount][];
+        this.data = new short[amount];
 
         for(int i = 0; i < amount; i++){
-            int innerAmount = stream.readInt();
-            this.data[i] = new short[innerAmount];
-
-            for(int j = 0; j < innerAmount; j++){
-                this.data[i][j] = stream.readShort();
-            }
+            this.data[i] = stream.readShort();
         }
     }
 
     @Override
     public String toString(){
-        return Arrays.deepToString(this.data);
+        return Arrays.toString(this.data);
     }
 }

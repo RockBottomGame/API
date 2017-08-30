@@ -55,7 +55,7 @@ public final class RockBottomAPI{
     /**
      * The current API version
      */
-    public static final String VERSION = "0.0.27";
+    public static final String VERSION = "0.0.28";
 
     /**
      * The registry for {@link Tile}
