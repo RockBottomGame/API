@@ -20,10 +20,7 @@ package de.ellpeck.rockbottom.api.tile.state;
 
 import de.ellpeck.rockbottom.api.tile.Tile;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 public class StateHandler{
 
@@ -67,7 +64,7 @@ public class StateHandler{
     }
 
     public List<TileProp> getProps(){
-        return this.properties;
+        return Collections.unmodifiableList(this.properties);
     }
 
     public TileState getDefault(){

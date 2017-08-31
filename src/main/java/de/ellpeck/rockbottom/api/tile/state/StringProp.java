@@ -1,5 +1,5 @@
 /*
- * This file ("IntProp.java") is part of the RockBottomAPI by Ellpeck.
+ * This file ("StringProp.java") is part of the RockBottomAPI by Ellpeck.
  * View the source code at <https://github.com/Ellpeck/RockBottomAPI>.
  *
  * The RockBottomAPI is free software: you can redistribute it and/or modify
@@ -18,38 +18,45 @@
 
 package de.ellpeck.rockbottom.api.tile.state;
 
-public class IntProp extends TileProp<Integer>{
+import java.util.Arrays;
+import java.util.List;
 
-    private final int def;
-    private final int possibilities;
+public class StringProp extends TileProp<String>{
 
-    public IntProp(String name, int def, int possibilities){
+    private final String def;
+    private final List<String> allowedValues;
+
+    public StringProp(String name, String def, String... allowedValues){
+        this(name, def, Arrays.asList(allowedValues));
+    }
+
+    public StringProp(String name,String def, List<String> allowedValues){
         super(name);
         this.def = def;
-        this.possibilities = possibilities;
+        this.allowedValues = allowedValues;
 
-        if(this.def >= this.possibilities){
+        if(!this.allowedValues.contains(this.def)){
             throw new IllegalArgumentException();
         }
     }
 
     @Override
     public int getVariants(){
-        return this.possibilities;
+        return this.allowedValues.size();
     }
 
     @Override
-    public Integer getValue(int index){
-        return index;
+    public String getValue(int index){
+        return this.allowedValues.get(index);
     }
 
     @Override
-    public int getIndex(Integer value){
-        return value;
+    public int getIndex(String value){
+        return this.allowedValues.indexOf(value);
     }
 
     @Override
-    public Integer getDefault(){
+    public String getDefault(){
         return this.def;
     }
 }

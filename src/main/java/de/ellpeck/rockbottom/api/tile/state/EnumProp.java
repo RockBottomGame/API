@@ -19,6 +19,7 @@
 package de.ellpeck.rockbottom.api.tile.state;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class EnumProp<T extends Enum<T>> extends TileProp<T>{
@@ -37,7 +38,11 @@ public class EnumProp<T extends Enum<T>> extends TileProp<T>{
     public EnumProp(String name, T def, List<T> allowedValues){
         super(name);
         this.def = def;
-        this.allowedValues = allowedValues;
+        this.allowedValues = Collections.unmodifiableList(allowedValues);
+
+        if(!this.allowedValues.contains(this.def)){
+            throw new IllegalArgumentException();
+        }
     }
 
     @Override
