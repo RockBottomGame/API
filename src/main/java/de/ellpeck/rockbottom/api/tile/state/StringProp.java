@@ -19,6 +19,7 @@
 package de.ellpeck.rockbottom.api.tile.state;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class StringProp extends TileProp<String>{
@@ -33,7 +34,7 @@ public class StringProp extends TileProp<String>{
     public StringProp(String name,String def, List<String> allowedValues){
         super(name);
         this.def = def;
-        this.allowedValues = allowedValues;
+        this.allowedValues = Collections.unmodifiableList(allowedValues);
 
         if(!this.allowedValues.contains(this.def)){
             throw new IllegalArgumentException();
