@@ -5,4 +5,6 @@ public interface IToaster{
     void displayToast(Toast toast);
 
     void cancelToast(Toast toast);
+
+    void cancelAllToasts();
 }
