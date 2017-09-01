@@ -89,29 +89,33 @@ public interface IGameInstance extends IMod{
      */
     void scheduleAction(Supplier<Boolean> action);
 
-    int getGuiScale();
+    void calcScales();
 
-    int getWorldScale();
+    float getDisplayRatio();
+
+    float getGuiScale();
+
+    float getWorldScale();
 
     /**
      * @return The width of the current visible screen area when applying {@link #getWorldScale()}
      */
-    double getWidthInWorld();
+    float getWidthInWorld();
 
     /**
      * @return The height of the current visible screen area when applying {@link #getWorldScale()}
      */
-    double getHeightInWorld();
+    float getHeightInWorld();
 
     /**
      * @return The width of the current visible screen area when applying {@link #getGuiScale()}
      */
-    double getWidthInGui();
+    float getWidthInGui();
 
     /**
      * @return The height of the current visible screen area when applying {@link #getGuiScale()}
      */
-    double getHeightInGui();
+    float getHeightInGui();
 
     /**
      * @return The x coordinate of the {@link org.lwjgl.input.Mouse} when applying {@link #getGuiScale()}

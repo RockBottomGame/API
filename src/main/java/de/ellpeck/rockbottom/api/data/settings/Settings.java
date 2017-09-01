@@ -63,8 +63,8 @@ public class Settings implements IPropSettings{
     public int autosaveIntervalSeconds;
 
     public float textSpeed;
-    public int guiScale;
-    public int renderScale;
+    public float guiScale;
+    public float renderScale;
     public Color guiColor;
 
     public boolean hardwareCursor;
@@ -90,8 +90,8 @@ public class Settings implements IPropSettings{
         this.autosaveIntervalSeconds = this.getProp(props, "autosave_interval", 60);
 
         this.textSpeed = this.getProp(props, "text_speed", 0.5F);
-        this.guiScale = this.getProp(props, "gui_scale", 4);
-        this.renderScale = this.getProp(props, "render_scale", 48);
+        this.guiScale = this.getProp(props, "scale_gui", 1F);
+        this.renderScale = this.getProp(props, "scale_world", 1F);
 
         this.guiColor = new Color(this.getProp(props, "gui_r", DEFAULT_GUI_R), this.getProp(props, "gui_g", DEFAULT_GUI_G), this.getProp(props, "gui_b", DEFAULT_GUI_B));
 
@@ -118,8 +118,8 @@ public class Settings implements IPropSettings{
         this.setProp(props, "autosave_interval", this.autosaveIntervalSeconds);
 
         this.setProp(props, "text_speed", this.textSpeed);
-        this.setProp(props, "gui_scale", this.guiScale);
-        this.setProp(props, "render_scale", this.renderScale);
+        this.setProp(props, "scale_gui", this.guiScale);
+        this.setProp(props, "scale_world", this.renderScale);
 
         this.setProp(props, "gui_r", this.guiColor.r);
         this.setProp(props, "gui_g", this.guiColor.g);

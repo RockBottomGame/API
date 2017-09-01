@@ -28,7 +28,7 @@ public class IntProp extends TileProp<Integer>{
         this.def = def;
         this.possibilities = possibilities;
 
-        if(this.def >= this.possibilities){
+        if(this.def < 0 || this.def >= this.possibilities){
             throw new IllegalArgumentException();
         }
     }
