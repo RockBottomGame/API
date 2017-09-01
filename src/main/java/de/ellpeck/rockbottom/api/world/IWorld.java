@@ -183,4 +183,8 @@ public interface IWorld extends IChunkOrWorld{
     List<AbstractEntityPlayer> getAllPlayers();
 
     void removeEntity(Entity entity, IChunk chunk);
+
+    boolean isDaytime();
+
+    boolean isNightTime();
 }
