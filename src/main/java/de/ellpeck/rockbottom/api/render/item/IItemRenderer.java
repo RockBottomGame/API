@@ -29,7 +29,7 @@ public interface IItemRenderer<T extends Item>{
 
     void render(IGameInstance game, IAssetManager manager, Graphics g, T item, ItemInstance instance, float x, float y, float scale, Color filter);
 
-    default void renderOnMouseCursor(IGameInstance game, IAssetManager manager, Graphics g, T item, ItemInstance instance, float x, float y, float scale, Color filter){
+    default void renderOnMouseCursor(IGameInstance game, IAssetManager manager, Graphics g, T item, ItemInstance instance, float x, float y, float scale, Color filter, boolean isInPlayerRange){
 
     }
 }

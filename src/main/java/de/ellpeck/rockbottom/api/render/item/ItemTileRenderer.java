@@ -41,7 +41,9 @@ public class ItemTileRenderer implements IItemRenderer<ItemTile>{
     }
 
     @Override
-    public void renderOnMouseCursor(IGameInstance game, IAssetManager manager, Graphics g, ItemTile item, ItemInstance instance, float x, float y, float scale, Color filter){
-        this.render(game, manager, g, item, instance, x+0.1F*scale, y, scale*0.75F, filter);
+    public void renderOnMouseCursor(IGameInstance game, IAssetManager manager, Graphics g, ItemTile item, ItemInstance instance, float x, float y, float scale, Color filter, boolean isInPlayerRange){
+        if(isInPlayerRange){
+            this.render(game, manager, g, item, instance, x+0.1F*scale, y, scale*0.75F, filter);
+        }
     }
 }

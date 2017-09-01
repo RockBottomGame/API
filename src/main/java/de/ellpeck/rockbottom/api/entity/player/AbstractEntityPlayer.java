@@ -34,6 +34,10 @@ import java.util.List;
 
 public abstract class AbstractEntityPlayer extends EntityLiving implements ICommandSender{
 
+    public static final float MOVE_SPEED = 0.2F;
+    public static final float CLIMB_SPEED = 0.15F;
+    public static final float RANGE = 5;
+
     public AbstractEntityPlayer(IWorld world){
         super(world);
     }
@@ -80,4 +84,6 @@ public abstract class AbstractEntityPlayer extends EntityLiving implements IComm
     public abstract Color getColor();
 
     public abstract IPlayerDesign getDesign();
+
+    public abstract boolean isInRange(double x, double y);
 }
