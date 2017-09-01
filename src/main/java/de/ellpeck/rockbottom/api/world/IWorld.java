@@ -186,5 +186,5 @@ public interface IWorld extends IChunkOrWorld{
 
     boolean isDaytime();
 
-    boolean isNightTime();
+    boolean isNighttime();
 }
