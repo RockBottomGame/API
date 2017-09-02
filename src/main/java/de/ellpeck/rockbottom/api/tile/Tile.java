@@ -306,15 +306,16 @@ public class Tile{
     }
 
     public void describeItem(IAssetManager manager, ItemInstance instance, List<String> desc, boolean isAdvanced){
-        if(isAdvanced){
-            for(TileLayer layer : TileLayer.LAYERS){
-                if(this.canPlaceInLayer(layer)){
+        for(TileLayer layer : TileLayer.LAYERS){
+            if(this.canPlaceInLayer(layer)){
+                if(isAdvanced){
                     desc.add(FormattingCode.GRAY+manager.localize(LOC_LAYER, manager.localize(layer.name)));
                 }
+                else{
+                    desc.add(FormattingCode.DARK_GRAY+manager.localize(LOC_ADVANCED, Input.getKeyName(Settings.KEY_ADVANCED_INFO.getKey())));
+                    break;
+                }
             }
-        }
-        else{
-            desc.add(FormattingCode.DARK_GRAY+manager.localize(LOC_ADVANCED, Input.getKeyName(Settings.KEY_ADVANCED_INFO.getKey())));
         }
     }
 
