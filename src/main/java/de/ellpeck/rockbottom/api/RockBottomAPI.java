@@ -18,10 +18,7 @@
 
 package de.ellpeck.rockbottom.api;
 
-import de.ellpeck.rockbottom.api.construction.BasicRecipe;
-import de.ellpeck.rockbottom.api.construction.SeparatorRecipe;
-import de.ellpeck.rockbottom.api.construction.SmelterRecipe;
-import de.ellpeck.rockbottom.api.construction.StamperRecipe;
+import de.ellpeck.rockbottom.api.construction.*;
 import de.ellpeck.rockbottom.api.construction.resource.IUseInfo;
 import de.ellpeck.rockbottom.api.data.set.part.DataPart;
 import de.ellpeck.rockbottom.api.data.settings.Keybind;
@@ -44,7 +41,10 @@ import de.ellpeck.rockbottom.api.util.reg.NameRegistry;
 import de.ellpeck.rockbottom.api.world.gen.IWorldGenerator;
 import de.ellpeck.rockbottom.api.world.gen.biome.Biome;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * The main API class
@@ -95,6 +95,7 @@ public final class RockBottomAPI{
     public static final List<BasicRecipe> MANUAL_CONSTRUCTION_RECIPES = new ArrayList<>();
     public static final List<BasicRecipe> CONSTRUCTION_TABLE_RECIPES = new ArrayList<>();
     public static final List<StamperRecipe> STAMPER_RECIPES = new ArrayList<>();
+    public static final List<CombinerRecipe> COMBINER_RECIPES = new ArrayList<>();
     /**
      * The registry for {@link IUseInfo}s that can be used in machines as a fuel.
      * The {@link Integer} specified is the amount of time the fuel will burn for
@@ -303,6 +304,32 @@ public final class RockBottomAPI{
             }
         }
         return null;
+    }
+
+    public static CombinerRecipe getCombinerRecipe(ItemInstance inputOne, ItemInstance inputTwo){
+        for(CombinerRecipe recipe : COMBINER_RECIPES){
+            if(recipe.getInputOne().containsItem(inputOne) && recipe.getInputTwo().containsItem(inputTwo)){
+                return recipe;
+            }
+            else if(recipe.getInputOne().containsItem(inputTwo) && recipe.getInputTwo().containsItem(inputOne)){
+                return recipe;
+            }
+        }
+        return null;
+    }
+
+    public static boolean isCombinerInput(ItemInstance instance, ItemInstance other){
+        if(other == null){
+            for(CombinerRecipe recipe : COMBINER_RECIPES){
+                if(recipe.getInputOne().containsItem(instance) || recipe.getInputTwo().containsItem(instance)){
+                    return true;
+                }
+            }
+            return false;
+        }
+        else{
+            return getCombinerRecipe(instance, other) != null;
+        }
     }
 }
 
