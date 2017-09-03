@@ -18,7 +18,9 @@
 
 package de.ellpeck.rockbottom.api.construction.resource;
 
+import de.ellpeck.rockbottom.api.item.Item;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
+import de.ellpeck.rockbottom.api.tile.Tile;
 
 import java.util.Collections;
 import java.util.List;
@@ -26,6 +28,30 @@ import java.util.List;
 public class ItemUseInfo implements IUseInfo{
 
     private final ItemInstance instance;
+
+    public ItemUseInfo(Tile tile, int amount, int meta){
+        this(new ItemInstance(tile, amount, meta));
+    }
+
+    public ItemUseInfo(Tile tile, int amount){
+        this(new ItemInstance(tile, amount));
+    }
+
+    public ItemUseInfo(Tile tile){
+        this(new ItemInstance(tile));
+    }
+
+    public ItemUseInfo(Item item, int amount, int meta){
+        this(new ItemInstance(item, amount, meta));
+    }
+
+    public ItemUseInfo(Item item, int amount){
+        this(new ItemInstance(item, amount));
+    }
+
+    public ItemUseInfo(Item item){
+        this(new ItemInstance(item));
+    }
 
     public ItemUseInfo(ItemInstance instance){
         this.instance = instance;
