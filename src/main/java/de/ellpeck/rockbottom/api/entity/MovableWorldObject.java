@@ -61,12 +61,12 @@ public abstract class MovableWorldObject{
 
             if(motionY != 0){
                 if(!boxes.isEmpty()){
-                    BoundBox currBox = tempBox.set(ownBox).add(this.x, this.y);
+                    tempBox.set(ownBox).add(this.x, this.y);
 
                     for(BoundBox box : boxes){
                         if(motionY != 0){
                             if(!box.isEmpty()){
-                                motionY = box.getYDistanceWithMax(currBox, motionY);
+                                motionY = box.getYDistanceWithMax(tempBox, motionY);
                             }
                         }
                         else{
@@ -80,12 +80,12 @@ public abstract class MovableWorldObject{
 
             if(motionX != 0){
                 if(!boxes.isEmpty()){
-                    BoundBox currBox = tempBox.set(ownBox).add(this.x, this.y);
+                    tempBox.set(ownBox).add(this.x, this.y);
 
                     for(BoundBox box : boxes){
                         if(motionX != 0){
                             if(!box.isEmpty()){
-                                motionX = box.getXDistanceWithMax(currBox, motionX);
+                                motionX = box.getXDistanceWithMax(tempBox, motionX);
                             }
                         }
                         else{

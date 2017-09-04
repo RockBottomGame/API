@@ -28,7 +28,7 @@ import org.newdawn.slick.Graphics;
 
 public class Particle extends MovableWorldObject{
 
-    protected final BoundBox boundingBox = new BoundBox(-0.1, -0.1, 0.1, 0.1);
+    protected final BoundBox boundingBox = new BoundBox(-0.125, -0.125, 0.125, 0.125);
 
     protected int maxLife;
     protected int life;
@@ -63,16 +63,12 @@ public class Particle extends MovableWorldObject{
         if(this.onGround){
             this.motionY = 0;
         }
-
-        if(this.onGround || this.collidedHor){
-            this.motionX = 0;
-        }
     }
 
     protected void applyMotion(){
         this.motionY -= 0.02;
 
-        this.motionX *= 0.99;
+        this.motionX *= this.onGround ? 0.8 : 0.98;
         this.motionY *= 0.99;
     }
 
