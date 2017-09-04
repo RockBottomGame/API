@@ -112,6 +112,11 @@ public class BoundBox{
         return result;
     }
 
+    @Override
+    public String toString(){
+        return "{"+this.minX+", "+this.minY+" -> "+this.maxX+", "+this.maxY+"}";
+    }
+
     public double getMinX(){
         return this.minX;
     }

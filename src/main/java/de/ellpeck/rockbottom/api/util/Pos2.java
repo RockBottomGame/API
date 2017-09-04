@@ -69,4 +69,9 @@ public class Pos2{
         result = 31*result+this.y;
         return result;
     }
+
+    @Override
+    public String toString(){
+        return "{"+this.x+", "+this.y+"}";
+    }
 }

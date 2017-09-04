@@ -18,15 +18,16 @@
 
 package de.ellpeck.rockbottom.api.assets.font;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.util.Pos2;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Image;
-import org.newdawn.slick.SlickException;
 import org.newdawn.slick.util.Log;
 
-import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.*;
@@ -50,34 +51,35 @@ public class Font{
         this.charHeight = image.getHeight()/heightInChars;
     }
 
-    public static Font fromStream(InputStream imageStream, InputStream infoStream, String name) throws IOException, SlickException{
+    public static Font fromStream(InputStream imageStream, InputStream infoStream, String name) throws Exception{
         Image image = new Image(imageStream, name, false);
         image.setFilter(Image.FILTER_NEAREST);
 
-        BufferedReader reader = new BufferedReader(new InputStreamReader(infoStream));
+        JsonParser parser = new JsonParser();
+        JsonObject main = parser.parse(new InputStreamReader(infoStream)).getAsJsonObject();
 
         int width = 0;
-        int heightIndex = 0;
         Map<Character, Pos2> characters = new HashMap<>();
 
-        String line = reader.readLine();
-        while(line != null){
-            if(!line.isEmpty()){
-                char[] chars = line.toCharArray();
-                if(chars.length > width){
-                    width = chars.length;
-                }
+        JsonArray rows = main.getAsJsonArray("data");
+        for(int y = 0; y < rows.size(); y++){
+            JsonArray row = rows.get(y).getAsJsonArray();
 
-                for(int i = 0; i < chars.length; i++){
-                    characters.put(chars[i], new Pos2(i, heightIndex));
-                }
+            int length = row.size();
+            if(length > width){
+                width = length;
             }
-            heightIndex++;
 
-            line = reader.readLine();
+            for(int x = 0; x < length; x++){
+                char c = row.get(x).getAsCharacter();
+                characters.put(c, new Pos2(x, y));
+            }
         }
 
-        return new Font(name, image, width, heightIndex, characters);
+        int height = rows.size();
+        Log.debug("Loaded font "+name+" with dimensions "+width+"x"+height+" and the following character map: "+characters);
+
+        return new Font(name, image, width, height, characters);
     }
 
     public void drawStringFromRight(float x, float y, String s, float scale){
