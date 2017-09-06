@@ -41,6 +41,8 @@ public interface IInventory{
 
     void removeChangeCallback(BiConsumer<IInventory, Integer> callback);
 
+    ItemInstance addToSlot(int slot, ItemInstance instance, boolean simulate);
+
     default boolean containsResource(IUseInfo info){
         for(ItemInstance inst : info.getItems()){
             if(this.containsItem(inst)){

@@ -134,6 +134,7 @@ public class Inventory implements IInventory{
         return copy;
     }
 
+    @Override
     public ItemInstance addToSlot(int slot, ItemInstance instance, boolean simulate){
         ItemInstance slotInst = this.slots[slot];
 
