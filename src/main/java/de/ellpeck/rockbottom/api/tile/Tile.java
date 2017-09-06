@@ -219,6 +219,10 @@ public class Tile{
         return true;
     }
 
+    public boolean obscuresBackground(){
+        return this.isFullTile();
+    }
+
     public void updateRandomly(IWorld world, int x, int y){
 
     }
