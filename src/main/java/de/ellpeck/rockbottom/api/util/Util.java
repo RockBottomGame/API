@@ -98,15 +98,6 @@ public final class Util{
         }
     }
 
-    public static String trimString(String s, int length){
-        if(s.length() <= length){
-            return s;
-        }
-        else{
-            return s.substring(0, length);
-        }
-    }
-
     public static long getTimeMillis(){
         return System.currentTimeMillis();
     }

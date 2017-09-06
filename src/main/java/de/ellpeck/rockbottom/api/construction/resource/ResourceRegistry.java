@@ -71,4 +71,12 @@ public final class ResourceRegistry{
         List<String> names = RESOURCE_NAMES.get(resource);
         return names == null ? Collections.emptyList() : Collections.unmodifiableList(names);
     }
+
+    public static Set<ResInfo> getAllResources(){
+        return Collections.unmodifiableSet(RESOURCE_NAMES.keySet());
+    }
+
+    public static Set<String> getAllResourceNames(){
+        return Collections.unmodifiableSet(RESOURCES.keySet());
+    }
 }
