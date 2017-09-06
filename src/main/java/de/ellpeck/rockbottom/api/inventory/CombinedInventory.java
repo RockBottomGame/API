@@ -81,4 +81,9 @@ public class CombinedInventory implements IInventory{
             inventory.removeChangeCallback(callback);
         }
     }
+
+    @Override
+    public ItemInstance addToSlot(int slot, ItemInstance instance, boolean simulate){
+        return this.executeOnInv(slot, (inv, i) -> inv.addToSlot(i, instance, simulate));
+    }
 }
