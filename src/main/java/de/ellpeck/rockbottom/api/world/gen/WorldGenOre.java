@@ -35,7 +35,7 @@ public abstract class WorldGenOre implements IWorldGenerator{
 
     @Override
     public void generate(IWorld world, IChunk chunk, Random rand){
-        int amount = rand.nextInt(this.getMaxAmount());
+        int amount = rand.nextInt(this.getMaxAmount() + 1);
         if(amount > 0){
             int radX = this.getClusterRadiusX();
             int radY = this.getClusterRadiusY();
