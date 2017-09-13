@@ -24,23 +24,6 @@ import java.util.*;
 
 public final class ResourceRegistry{
 
-    public static final String COAL = "coal";
-    public static final String WOOD_BOARDS = "wood_boards";
-    public static final String WOOD_LOG = "wood_logs";
-    public static final String LEAVES = "leaves";
-    public static final String RAW_STONE = "raw_stone";
-    public static final String PROCESSED_STONE = "processed_stone";
-    public static final String RAW_COPPER = "raw_copper";
-    public static final String PARTLY_PROCESSED_COPPER = "partly_processed_copper";
-    public static final String PROCESSED_COPPER = "processed_copper";
-    public static final String RAW_TIN = "raw_tin";
-    public static final String PARTLY_PROCESSED_TIN = "partly_processed_tin";
-    public static final String PROCESSED_TIN = "processed_tin";
-    public static final String PARTLY_PROCESSED_BRONZE = "partly_processed_bronze";
-    public static final String PROCESSED_BRONZE = "processed_bronze";
-    public static final String SLAG = "slag";
-    public static final String PEBBLES = "pebbles";
-
     private static final Map<String, List<ResInfo>> RESOURCES = new HashMap<>();
     private static final Map<ResInfo, List<String>> RESOURCE_NAMES = new HashMap<>();
 

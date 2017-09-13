@@ -27,56 +27,8 @@ import de.ellpeck.rockbottom.api.world.gen.biome.Biome;
 public final class GameContent{
 
     public static final Tile TILE_AIR = getTile("air");
-    public static final Tile TILE_DIRT = getTile("dirt");
-    public static final Tile TILE_STONE = getTile("stone");
-    public static final Tile TILE_GRASS = getTile("grass");
-    public static final Tile TILE_WOOD_BOARDS = getTile("wood_boards");
-    public static final Tile TILE_TORCH = getTile("torch");
-    public static final Tile TILE_CHEST = getTile("chest");
-    public static final Tile TILE_LOG = getTile("log");
-    public static final Tile TILE_LEAVES = getTile("leaves");
-    public static final Tile TILE_COAL_ORE = getTile("coal_ore");
-    public static final Tile TILE_COPPER_ORE = getTile("copper_ore");
-    public static final Tile TILE_SMELTER = getTile("smelter");
-    public static final Tile TILE_SEPARATOR = getTile("separator");
-    public static final Tile TILE_SAPLING = getTile("sapling");
-    public static final Tile TILE_LADDER = getTile("ladder");
-    public static final Tile TILE_GLOW_ORE = getTile("glow_ore");
-    public static final Tile TILE_STAMPER = getTile("stamper");
-    public static final Tile TILE_HARDENED_STONE = getTile("hardened_stone");
-    public static final Tile TILE_DOOR = getTile("door");
-    public static final Tile TILE_CONSTRUCTION_TABLE = getTile("construction_table");
-    public static final Tile TILE_LAMP = getTile("lamp");
-    public static final Tile TILE_PEBBLES = getTile("pebbles");
-    public static final Tile TILE_SIGN = getTile("sign");
-    public static final Tile TILE_GRASS_TUFT = getTile("grass_tuft");
-    public static final Tile TILE_TIN_ORE = getTile("tin_ore");
-    public static final Tile TILE_COMBINER = getTile("combiner");
-
-    public static final Item ITEM_SUPER_TOOL = getItem("super_tool");
-    public static final Item ITEM_BRITTLE_PICKAXE = getItem("brittle_pickaxe");
-    public static final Item ITEM_BRITTLE_AXE = getItem("brittle_axe");
-    public static final Item ITEM_BRITTLE_SHOVEL = getItem("brittle_shovel");
-    public static final Item ITEM_STONE_PICKAXE = getItem("stone_pickaxe");
-    public static final Item ITEM_STONE_AXE = getItem("stone_axe");
-    public static final Item ITEM_STONE_SHOVEL = getItem("stone_shovel");
-    public static final Item ITEM_COAL = getItem("coal");
-    public static final Item ITEM_COPPER_CLUSTER = getItem("copper_cluster");
-    public static final Item ITEM_COPPER_GRIT = getItem("copper_grit");
-    public static final Item ITEM_COPPER_INGOT = getItem("copper_ingot");
-    public static final Item ITEM_COPPER_PICKAXE = getItem("copper_pickaxe");
-    public static final Item ITEM_COPPER_AXE = getItem("copper_axe");
-    public static final Item ITEM_COPPER_SHOVEL = getItem("copper_shovel");
-    public static final Item ITEM_SLAG = getItem("slag");
-    public static final Item ITEM_GLOW_CLUSTER = getItem("glow_cluster");
-    public static final Item ITEM_TIN_CLUSTER = getItem("tin_cluster");
-    public static final Item ITEM_TIN_GRIT = getItem("tin_grit");
-    public static final Item ITEM_TIN_INGOT = getItem("tin_ingot");
-    public static final Item ITEM_BRONZE_GRIT = getItem("bronze_grit");
-    public static final Item ITEM_BRONZE_INGOT = getItem("bronze_ingot");
 
     public static final Biome BIOME_SKY = getBiome("sky");
-    public static final Biome BIOME_GRASSLAND = getBiome("grassland");
 
     private static Biome getBiome(String name){
         return get(name, RockBottomAPI.BIOME_REGISTRY);
