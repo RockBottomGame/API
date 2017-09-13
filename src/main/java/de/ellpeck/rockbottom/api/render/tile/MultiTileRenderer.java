@@ -20,6 +20,7 @@ package de.ellpeck.rockbottom.api.render.tile;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
+import de.ellpeck.rockbottom.api.assets.tex.Texture;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.tile.MultiTile;
 import de.ellpeck.rockbottom.api.tile.state.TileState;
@@ -59,7 +60,7 @@ public class MultiTileRenderer<T extends MultiTile> extends DefaultTileRenderer<
     }
 
     @Override
-    public Image getParticleTexture(IGameInstance game, IAssetManager manager, Graphics g, T tile, TileState state){
+    public Texture getParticleTexture(IGameInstance game, IAssetManager manager, Graphics g, T tile, TileState state){
         Pos2 innerCoord = tile.getInnerCoord(state);
         return manager.getTexture(this.textures.get(innerCoord));
     }

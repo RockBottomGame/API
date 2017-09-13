@@ -20,6 +20,7 @@ package de.ellpeck.rockbottom.api.render.tile;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
+import de.ellpeck.rockbottom.api.assets.tex.Texture;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.tile.Tile;
 import de.ellpeck.rockbottom.api.tile.state.TileState;
@@ -49,7 +50,7 @@ public class DefaultTileRenderer<T extends Tile> implements ITileRenderer<T>{
     }
 
     @Override
-    public Image getParticleTexture(IGameInstance game, IAssetManager manager, Graphics g, T tile, TileState state){
+    public Texture getParticleTexture(IGameInstance game, IAssetManager manager, Graphics g, T tile, TileState state){
         return manager.getTexture(this.texture);
     }
 

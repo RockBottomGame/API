@@ -26,7 +26,7 @@ public class TileMetaRenderer implements ITileRenderer<TileMeta>{
     }
 
     @Override
-    public Image getParticleTexture(IGameInstance game, IAssetManager manager, Graphics g, TileMeta tile, TileState state){
+    public Texture getParticleTexture(IGameInstance game, IAssetManager manager, Graphics g, TileMeta tile, TileState state){
         return this.getTexture(manager, tile, state.get(tile.metaProp));
     }
 

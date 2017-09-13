@@ -23,6 +23,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
+import de.ellpeck.rockbottom.api.assets.tex.Texture;
 import de.ellpeck.rockbottom.api.util.Pos2;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Image;
@@ -35,14 +36,14 @@ import java.util.*;
 public class Font{
 
     private final String name;
-    private final Image image;
+    private final Texture image;
 
     private final Map<Character, Pos2> characters;
 
     private final int charWidth;
     private final int charHeight;
 
-    public Font(String name, Image image, int widthInChars, int heightInChars, Map<Character, Pos2> characters){
+    public Font(String name, Texture image, int widthInChars, int heightInChars, Map<Character, Pos2> characters){
         this.name = name;
         this.image = image;
         this.characters = characters;
@@ -52,8 +53,8 @@ public class Font{
     }
 
     public static Font fromStream(InputStream imageStream, InputStream infoStream, String name) throws Exception{
-        Image image = new Image(imageStream, name, false);
-        image.setFilter(Image.FILTER_NEAREST);
+        Texture image = new Texture(imageStream, name, false);
+        image.setFilter(Texture.FILTER_NEAREST);
 
         JsonParser parser = new JsonParser();
         JsonObject main = parser.parse(new InputStreamReader(infoStream)).getAsJsonObject();

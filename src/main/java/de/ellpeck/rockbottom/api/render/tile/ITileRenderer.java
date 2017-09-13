@@ -20,6 +20,7 @@ package de.ellpeck.rockbottom.api.render.tile;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
+import de.ellpeck.rockbottom.api.assets.tex.Texture;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.tile.Tile;
 import de.ellpeck.rockbottom.api.tile.state.TileState;
@@ -35,7 +36,7 @@ public interface ITileRenderer<T extends Tile>{
 
     void renderItem(IGameInstance game, IAssetManager manager, Graphics g, T tile, ItemInstance instance, float x, float y, float scale, Color filter);
 
-    Image getParticleTexture(IGameInstance game, IAssetManager manager, Graphics g, T tile, TileState state);
+    Texture getParticleTexture(IGameInstance game, IAssetManager manager, Graphics g, T tile, TileState state);
 
     default void renderInMainMenuBackground(IGameInstance game, IAssetManager manager, Graphics g, T tile, TileState state, float x, float y, float scale){
 

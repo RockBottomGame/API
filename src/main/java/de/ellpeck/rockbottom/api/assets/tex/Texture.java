@@ -29,7 +29,7 @@ import java.io.InputStream;
 
 public class Texture extends Image{
 
-    public Texture(Image other){
+    public Texture(Texture other){
         super(other);
     }
 
