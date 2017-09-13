@@ -20,6 +20,7 @@ package de.ellpeck.rockbottom.api.data.settings;
 
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.data.IDataManager;
+import de.ellpeck.rockbottom.api.util.Colors;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Input;
 
@@ -55,9 +56,7 @@ public class Settings implements IPropSettings{
         }
     }
 
-    public static final float DEFAULT_GUI_R = 0.32156864F;
-    public static final float DEFAULT_GUI_G = 0.5882353F;
-    public static final float DEFAULT_GUI_B = 0.32156864F;
+    public static final int DEFAULT_GUI_COLOR = 0x30704E;
 
     public int targetFps;
     public int autosaveIntervalSeconds;
@@ -65,7 +64,7 @@ public class Settings implements IPropSettings{
     public float textSpeed;
     public float guiScale;
     public float renderScale;
-    public Color guiColor;
+    public int guiColor;
 
     public boolean hardwareCursor;
     public boolean cursorInfos;
@@ -92,8 +91,7 @@ public class Settings implements IPropSettings{
         this.textSpeed = this.getProp(props, "text_speed", 0.5F);
         this.guiScale = this.getProp(props, "scale_gui", 1F);
         this.renderScale = this.getProp(props, "scale_world", 1F);
-
-        this.guiColor = new Color(this.getProp(props, "gui_r", DEFAULT_GUI_R), this.getProp(props, "gui_g", DEFAULT_GUI_G), this.getProp(props, "gui_b", DEFAULT_GUI_B));
+        this.guiColor = this.getProp(props, "gui_color", DEFAULT_GUI_COLOR);
 
         this.hardwareCursor = this.getProp(props, "hardware_cursor", false);
         this.cursorInfos = this.getProp(props, "cursor_infos", true);
@@ -120,10 +118,7 @@ public class Settings implements IPropSettings{
         this.setProp(props, "text_speed", this.textSpeed);
         this.setProp(props, "scale_gui", this.guiScale);
         this.setProp(props, "scale_world", this.renderScale);
-
-        this.setProp(props, "gui_r", this.guiColor.r);
-        this.setProp(props, "gui_g", this.guiColor.g);
-        this.setProp(props, "gui_b", this.guiColor.b);
+        this.setProp(props, "gui_color", this.guiColor);
 
         this.setProp(props, "hardware_cursor", this.hardwareCursor);
         this.setProp(props, "cursor_infos", this.cursorInfos);

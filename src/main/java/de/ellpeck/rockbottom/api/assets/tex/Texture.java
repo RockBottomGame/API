@@ -18,11 +18,11 @@
 
 package de.ellpeck.rockbottom.api.assets.tex;
 
+import de.ellpeck.rockbottom.api.util.Colors;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.opengl.ImageData;
-import org.newdawn.slick.opengl.renderer.Renderer;
 import org.newdawn.slick.opengl.renderer.SGL;
 
 import java.io.InputStream;
@@ -105,17 +105,29 @@ public class Texture extends Image{
         return sub;
     }
 
-    public void drawWithLight(float x, float y, float width, float height, Color[] light){
-        this.drawWithLight(x, y, width, height, light, null);
+    public void draw(float x, float y, float width, float height, int[] light){
+        this.draw(x, y, width, height, light, Colors.WHITE);
     }
 
-    public void drawWithLight(float x, float y, float width, float height, Color[] light, Color filter){
-        this.drawWithLight(x, y, x+width, y+height, 0, 0, this.width, this.height, light, filter);
+    public void draw(float x, float y, float width, float height, int filter){
+        this.draw(x, y, x+width, y+height, 0, 0, this.width, this.height, null, filter);
     }
 
-    public void drawWithLight(float x, float y, float x2, float y2, float srcX, float srcY, float srcX2, float srcY2, Color[] light, Color filter){
+    public void draw(float x, float y, float width, float height, int[] light, int filter){
+        this.draw(x, y, x+width, y+height, 0, 0, this.width, this.height, light, filter);
+    }
+
+    public void draw(float x, float y, float x2, float y2, float srcX, float srcY, float srcX2, float srcY2, int[] light){
+        this.draw(x, y, x2, y2, srcX, srcY, srcX2, srcY2, light, Colors.WHITE);
+    }
+
+    public void draw(float x, float y, float x2, float y2, float srcX, float srcY, float srcX2, float srcY2, int filter){
+        this.draw(x, y, x2, y2, srcX, srcY, srcX2, srcY2, null, filter);
+    }
+
+    public void draw(float x, float y, float x2, float y2, float srcX, float srcY, float srcX2, float srcY2, int[] light, int filter){
         this.texture.bind();
-        
+
         GL.glTranslatef(x, y, 0);
         if(this.angle != 0){
             GL.glTranslatef(this.centerX, this.centerY, 0F);
@@ -124,7 +136,7 @@ public class Texture extends Image{
         }
 
         GL.glBegin(SGL.GL_QUADS);
-        this.drawEmbeddedWithLight(x, y, x2, y2, srcX, srcY, srcX2, srcY2, light, filter == null ? Color.white : filter);
+        this.drawEmbedded(x, y, x2, y2, srcX, srcY, srcX2, srcY2, light, filter);
         GL.glEnd();
 
         if(this.angle != 0){
@@ -135,7 +147,7 @@ public class Texture extends Image{
         GL.glTranslatef(-x, -y, 0);
     }
 
-    public void drawEmbeddedWithLight(float x, float y, float x2, float y2, float srcX, float srcY, float srcX2, float srcY2, Color[] light, Color filter){
+    public void drawEmbedded(float x, float y, float x2, float y2, float srcX, float srcY, float srcX2, float srcY2, int[] light, int filter){
         this.init();
 
         float width = x2-x;
@@ -146,26 +158,26 @@ public class Texture extends Image{
         float texWidth = (srcX2-srcX)/this.width*this.textureWidth;
         float texHeight = (srcY2-srcY)/this.height*this.textureHeight;
 
-        this.bindMultipliedColor(light[TOP_LEFT], filter);
+        this.bindLight(light, TOP_LEFT, filter);
         GL.glTexCoord2f(texOffX, texOffY);
         GL.glVertex3f(0, 0, 0);
-        this.bindMultipliedColor(light[BOTTOM_LEFT], filter);
-        GL.glTexCoord2f(texOffX, texOffY + texHeight);
+        this.bindLight(light, BOTTOM_LEFT, filter);
+        GL.glTexCoord2f(texOffX, texOffY+texHeight);
         GL.glVertex3f(0, height, 0);
-        this.bindMultipliedColor(light[BOTTOM_RIGHT], filter);
-        GL.glTexCoord2f(texOffX + texWidth, texOffY + texHeight);
+        this.bindLight(light, BOTTOM_RIGHT, filter);
+        GL.glTexCoord2f(texOffX+texWidth, texOffY+texHeight);
         GL.glVertex3f(width, height, 0);
-        this.bindMultipliedColor(light[TOP_RIGHT], filter);
-        GL.glTexCoord2f(texOffX + texWidth, texOffY);
+        this.bindLight(light, TOP_RIGHT, filter);
+        GL.glTexCoord2f(texOffX+texWidth, texOffY);
         GL.glVertex3f(width, 0, 0);
     }
 
-    private void bindMultipliedColor(Color first, Color second){
-        float r = first.r*second.r;
-        float g = first.g*second.g;
-        float b = first.b*second.b;
-        float a = first.a*second.a;
-
-        Renderer.get().glColor4f(r, g, b, a);
+    private void bindLight(int[] light, int index, int filter){
+        if(light != null){
+            Colors.bind(Colors.multiply(light[index], filter));
+        }
+        else{
+            Colors.bind(filter);
+        }
     }
 }

@@ -29,7 +29,6 @@ import de.ellpeck.rockbottom.api.tile.Tile;
 import de.ellpeck.rockbottom.api.world.IWorld;
 import de.ellpeck.rockbottom.api.world.TileLayer;
 import de.ellpeck.rockbottom.api.world.gen.INoiseGen;
-import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 
 import java.io.DataInput;
@@ -147,7 +146,7 @@ public interface IApiHandler{
      * @param scale   The scale
      * @param color   The filter to be applied to the {@link de.ellpeck.rockbottom.api.item.Item} renderer
      */
-    void renderItemInGui(IGameInstance game, IAssetManager manager, Graphics g, ItemInstance slot, float x, float y, float scale, Color color);
+    void renderItemInGui(IGameInstance game, IAssetManager manager, Graphics g, ItemInstance slot, float x, float y, float scale, int color);
 
     /**
      * Describes an item using a hovering info ({@link #drawHoverInfo(IGameInstance, IAssetManager, Graphics, float, float, float, boolean, boolean, int, List)})
@@ -203,9 +202,9 @@ public interface IApiHandler{
 
     int[] interpolateLight(IWorld world, int x, int y);
 
-    Color[] interpolateWorldColor(int[] interpolatedLight, TileLayer layer);
+    int[] interpolateWorldColor(int[] interpolatedLight, TileLayer layer);
 
-    Color getColorByLight(int light, TileLayer layer);
+    int getColorByLight(int light, TileLayer layer);
 
     INoiseGen makeSimplexNoise(Random random);
 

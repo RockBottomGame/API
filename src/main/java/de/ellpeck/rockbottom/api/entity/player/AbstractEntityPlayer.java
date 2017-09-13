@@ -81,7 +81,7 @@ public abstract class AbstractEntityPlayer extends EntityLiving implements IComm
     @Override
     public abstract String getName();
 
-    public abstract Color getColor();
+    public abstract int getColor();
 
     public abstract IPlayerDesign getDesign();
 

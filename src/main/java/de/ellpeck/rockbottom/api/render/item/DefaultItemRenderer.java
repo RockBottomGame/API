@@ -23,7 +23,6 @@ import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.item.Item;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
-import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 
 public class DefaultItemRenderer<T extends Item> implements IItemRenderer<T>{
@@ -35,7 +34,7 @@ public class DefaultItemRenderer<T extends Item> implements IItemRenderer<T>{
     }
 
     @Override
-    public void render(IGameInstance game, IAssetManager manager, Graphics g, T item, ItemInstance instance, float x, float y, float scale, Color filter){
+    public void render(IGameInstance game, IAssetManager manager, Graphics g, T item, ItemInstance instance, float x, float y, float scale, int filter){
         manager.getTexture(this.texture).draw(x, y, 1F*scale, 1F*scale, filter);
     }
 }

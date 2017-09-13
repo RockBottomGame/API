@@ -13,7 +13,7 @@ import org.newdawn.slick.Graphics;
 
 public class Toast{
 
-    private final Color guiColor = RockBottomAPI.getGame().getSettings().guiColor;
+    private final Color guiColor = new Color(RockBottomAPI.getGame().getSettings().guiColor);
     private final Color color = this.guiColor.multiply(new Color(1F, 1F, 1F, 0.5F));
     private final Color colorOutline = this.guiColor.darker(0.25F);
 

@@ -21,7 +21,6 @@ package de.ellpeck.rockbottom.api.render;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.data.set.DataSet;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
-import org.newdawn.slick.Color;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -142,9 +141,9 @@ public interface IPlayerDesign{
 
     void load(DataSet set);
 
-    Color getFavoriteColor();
+    int getFavoriteColor();
 
-    void setFavoriteColor(Color color);
+    void setFavoriteColor(int color);
 
     String getName();
 
@@ -152,27 +151,27 @@ public interface IPlayerDesign{
 
     int getBase();
 
-    Color getEyeColor();
+    int getEyeColor();
 
     int getShirt();
 
-    Color getShirtColor();
+    int getShirtColor();
 
     int getSleeves();
 
-    Color getSleevesColor();
+    int getSleevesColor();
 
     int getPants();
 
-    Color getPantsColor();
+    int getPantsColor();
 
     int getFootwear();
 
-    Color getFootwearColor();
+    int getFootwearColor();
 
     int getHair();
 
-    Color getHairColor();
+    int getHairColor();
 
     int getAccessory();
 
@@ -182,35 +181,35 @@ public interface IPlayerDesign{
 
     int getBeard();
 
-    Color getBeardColor();
+    int getBeardColor();
 
-    Color getEyebrowsColor();
+    int getEyebrowsColor();
 
     boolean isFemale();
 
     void setBase(int base);
 
-    void setEyeColor(Color eyeColor);
+    void setEyeColor(int eyeColor);
 
     void setShirt(int shirt);
 
-    void setShirtColor(Color shirtColor);
+    void setShirtColor(int shirtColor);
 
     void setSleeves(int sleeves);
 
-    void setSleevesColor(Color sleevesColor);
+    void setSleevesColor(int sleevesColor);
 
     void setPants(int pants);
 
-    void setPantsColor(Color pantsColor);
+    void setPantsColor(int pantsColor);
 
     void setFootwear(int footwear);
 
-    void setFootwearColor(Color footwearColor);
+    void setFootwearColor(int footwearColor);
 
     void setHair(int hair);
 
-    void setHairColor(Color hairColor);
+    void setHairColor(int hairColor);
 
     void setAccessory(int accessory);
 
@@ -218,11 +217,11 @@ public interface IPlayerDesign{
 
     void setMouth(int mouth);
 
-    void setEyebrowsColor(Color eyebrowsColor);
+    void setEyebrowsColor(int eyebrowsColor);
 
     void setBeard(int beard);
 
-    void setBeardColor(Color beardColor);
+    void setBeardColor(int beardColor);
 
     void setFemale(boolean female);
 }

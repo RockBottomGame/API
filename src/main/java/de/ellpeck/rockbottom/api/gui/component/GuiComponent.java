@@ -29,10 +29,11 @@ import org.newdawn.slick.Graphics;
 
 public abstract class GuiComponent{
 
-    public final Color guiColor = RockBottomAPI.getGame().getSettings().guiColor;
+    public final Color guiColor = new Color(RockBottomAPI.getGame().getSettings().guiColor);
     public final Color colorButton = this.guiColor.multiply(new Color(1F, 1F, 1F, 0.5F));
     public final Color colorButtonUnselected = this.colorButton.darker(0.4F);
     public final Color colorOutline = this.guiColor.darker(0.3F);
+
     public int sizeX;
     public int sizeY;
     public Gui gui;

@@ -19,14 +19,12 @@
 package de.ellpeck.rockbottom.api.assets.font;
 
 import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.tex.Texture;
+import de.ellpeck.rockbottom.api.util.Colors;
 import de.ellpeck.rockbottom.api.util.Pos2;
-import org.newdawn.slick.Color;
-import org.newdawn.slick.Image;
 import org.newdawn.slick.util.Log;
 
 import java.io.InputStream;
@@ -36,20 +34,20 @@ import java.util.*;
 public class Font{
 
     private final String name;
-    private final Texture image;
+    private final Texture texture;
 
     private final Map<Character, Pos2> characters;
 
     private final int charWidth;
     private final int charHeight;
 
-    public Font(String name, Texture image, int widthInChars, int heightInChars, Map<Character, Pos2> characters){
+    public Font(String name, Texture texture, int widthInChars, int heightInChars, Map<Character, Pos2> characters){
         this.name = name;
-        this.image = image;
+        this.texture = texture;
         this.characters = characters;
 
-        this.charWidth = image.getWidth()/widthInChars;
-        this.charHeight = image.getHeight()/heightInChars;
+        this.charWidth = texture.getWidth()/widthInChars;
+        this.charHeight = texture.getHeight()/heightInChars;
     }
 
     public static Font fromStream(InputStream imageStream, InputStream infoStream, String name) throws Exception{
@@ -92,23 +90,23 @@ public class Font{
     }
 
     public void drawFadingString(float x, float y, String s, float scale, float fadeTotal, float fadeInEnd, float fadeOutStart){
-        Color color = new Color(Color.white);
+        int color = Colors.WHITE;
 
         if(fadeTotal <= fadeInEnd){
-            color.a *= fadeTotal/fadeInEnd;
+            color = Colors.multiplyA(color, fadeTotal/fadeInEnd);
         }
         else if(fadeTotal >= fadeOutStart){
-            color.a *= 1F-(fadeTotal-fadeOutStart)/(1F-fadeOutStart);
+            color = Colors.multiplyA(color, 1F-(fadeTotal-fadeOutStart)/(1F-fadeOutStart));
         }
 
         this.drawString(x, y, s, scale, color);
     }
 
     public void drawString(float x, float y, String s, float scale){
-        this.drawString(x, y, s, scale, Color.white);
+        this.drawString(x, y, s, scale, Colors.WHITE);
     }
 
-    public void drawString(float x, float y, String s, float scale, Color color){
+    public void drawString(float x, float y, String s, float scale, int color){
         this.drawString(x, y, s, 0, s.length(), scale, color);
     }
 
@@ -138,10 +136,10 @@ public class Font{
         }
 
         if(fromRight){
-            this.drawString(x, y, s, strgLength-amount, strgLength, scale, Color.white);
+            this.drawString(x, y, s, strgLength-amount, strgLength, scale, Colors.WHITE);
         }
         else{
-            this.drawString(x, y, s, 0, amount, scale, Color.white);
+            this.drawString(x, y, s, 0, amount, scale, Colors.WHITE);
         }
     }
 
@@ -154,18 +152,19 @@ public class Font{
         }
     }
 
-    private void drawString(float x, float y, String s, int drawStart, int drawEnd, float scale, Color color){
-        float initialAlpha = color.a;
+    private void drawString(float x, float y, String s, int drawStart, int drawEnd, float scale, int color){
+        float initialAlpha = Colors.getA(color);
         float xOffset = 0F;
 
         char[] characters = s.toCharArray();
         for(int i = 0; i < Math.min(drawEnd, characters.length); i++){
             FormattingCode code = FormattingCode.getFormat(s, i);
             if(code != FormattingCode.NONE){
-                Color formatColor = code.getColor();
-                if(formatColor != null){
-                    if(initialAlpha != formatColor.a){
-                        color = new Color(formatColor.r, formatColor.g, formatColor.b, initialAlpha);
+                int formatColor = code.getColor();
+                if(formatColor != -1){
+                    float formatAlpha = Colors.getA(formatColor);
+                    if(initialAlpha != formatAlpha){
+                        color = Colors.setA(color, formatAlpha);
                     }
                     else{
                         color = formatColor;
@@ -183,7 +182,7 @@ public class Font{
         }
     }
 
-    public void drawCharacter(float x, float y, char character, float scale, Color color){
+    public void drawCharacter(float x, float y, char character, float scale, int color){
         if(character != ' '){
             Pos2 pos = this.characters.get(character);
 
@@ -202,10 +201,9 @@ public class Font{
                 float y2 = y+(float)this.charHeight*scale;
 
                 float shadowOffset = 2F*scale;
-                Color shadowColor = color.a != 1F ? new Color(0F, 0F, 0F, color.a) : Color.black;
-                this.image.draw(x+shadowOffset, y+shadowOffset, x2+shadowOffset, y2+shadowOffset, srcX, srcY, srcX+this.charWidth, srcY+this.charHeight, shadowColor);
+                this.texture.draw(x+shadowOffset, y+shadowOffset, x2+shadowOffset, y2+shadowOffset, srcX, srcY, srcX+this.charWidth, srcY+this.charHeight, Colors.setA(Colors.BLACK, Colors.getA(color)));
 
-                this.image.draw(x, y, x2, y2, srcX, srcY, srcX+this.charWidth, srcY+this.charHeight, color);
+                this.texture.draw(x, y, x2, y2, srcX, srcY, srcX+this.charWidth, srcY+this.charHeight, color);
             }
             else{
                 RockBottomAPI.getGame().getAssetManager().getMissingTexture().draw(x, y, this.charWidth*scale, this.charHeight*scale);

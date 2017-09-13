@@ -29,14 +29,10 @@ import de.ellpeck.rockbottom.api.gui.container.ContainerSlot;
 import de.ellpeck.rockbottom.api.gui.container.ItemContainer;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.net.packet.toserver.PacketDropItem;
-import de.ellpeck.rockbottom.api.util.reg.IResourceName;
-import org.newdawn.slick.Color;
+import de.ellpeck.rockbottom.api.util.Colors;
 import org.newdawn.slick.Graphics;
 
 public abstract class GuiContainer extends Gui{
-
-    public static final Color PROGRESS_COLOR = new Color(0.1F, 0.5F, 0.1F);
-    public static final Color FIRE_COLOR = new Color(0.5F, 0.1F, 0.1F);
 
     public final AbstractEntityPlayer player;
     public ItemInstance holdingInst;
@@ -99,7 +95,7 @@ public abstract class GuiContainer extends Gui{
             float mouseX = game.getMouseInGuiX();
             float mouseY = game.getMouseInGuiY();
 
-            RockBottomAPI.getApiHandler().renderItemInGui(game, manager, g, this.holdingInst, mouseX-4F, mouseY-4F, 0.8F, Color.white);
+            RockBottomAPI.getApiHandler().renderItemInGui(game, manager, g, this.holdingInst, mouseX-4F, mouseY-4F, 0.8F, Colors.WHITE);
         }
     }
 

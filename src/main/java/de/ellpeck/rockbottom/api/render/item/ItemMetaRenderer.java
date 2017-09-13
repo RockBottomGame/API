@@ -33,7 +33,7 @@ public class ItemMetaRenderer extends DefaultItemRenderer<ItemMeta>{
     }
 
     @Override
-    public void render(IGameInstance game, IAssetManager manager, Graphics g, ItemMeta item, ItemInstance instance, float x, float y, float scale, Color filter){
+    public void render(IGameInstance game, IAssetManager manager, Graphics g, ItemMeta item, ItemInstance instance, float x, float y, float scale, int filter){
         int meta = instance.getMeta();
 
         if(meta >= 0 && item.subResourceNames.size() > meta){

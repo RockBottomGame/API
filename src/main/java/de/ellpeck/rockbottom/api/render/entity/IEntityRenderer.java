@@ -27,6 +27,6 @@ import org.newdawn.slick.Graphics;
 
 public interface IEntityRenderer<T extends Entity>{
 
-    void render(IGameInstance game, IAssetManager manager, Graphics g, IWorld world, T entity, float x, float y, Color light);
+    void render(IGameInstance game, IAssetManager manager, Graphics g, IWorld world, T entity, float x, float y, int light);
 
 }

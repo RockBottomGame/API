@@ -54,9 +54,9 @@ public class MultiTileRenderer<T extends MultiTile> extends DefaultTileRenderer<
     }
 
     @Override
-    public void render(IGameInstance game, IAssetManager manager, Graphics g, IWorld world, T tile, TileState state, int x, int y, TileLayer layer, float renderX, float renderY, float scale, Color[] light){
+    public void render(IGameInstance game, IAssetManager manager, Graphics g, IWorld world, T tile, TileState state, int x, int y, TileLayer layer, float renderX, float renderY, float scale, int[] light){
         Pos2 innerCoord = tile.getInnerCoord(state);
-        manager.getTexture(this.textures.get(innerCoord)).drawWithLight(renderX, renderY, scale, scale, light);
+        manager.getTexture(this.textures.get(innerCoord)).draw(renderX, renderY, scale, scale, light);
     }
 
     @Override
@@ -66,7 +66,7 @@ public class MultiTileRenderer<T extends MultiTile> extends DefaultTileRenderer<
     }
 
     @Override
-    public void renderItem(IGameInstance game, IAssetManager manager, Graphics g, T tile, ItemInstance instance, float x, float y, float scale, Color filter){
+    public void renderItem(IGameInstance game, IAssetManager manager, Graphics g, T tile, ItemInstance instance, float x, float y, float scale, int filter){
         manager.getTexture(this.texItem).draw(x, y, scale, scale, filter);
     }
 }

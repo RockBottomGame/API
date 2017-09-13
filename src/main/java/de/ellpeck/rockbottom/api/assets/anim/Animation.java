@@ -24,12 +24,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import de.ellpeck.rockbottom.api.assets.tex.Texture;
 import de.ellpeck.rockbottom.api.util.Util;
-import org.lwjgl.Sys;
-import org.newdawn.slick.Color;
-import org.newdawn.slick.SlickException;
 
-import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -76,15 +71,15 @@ public class Animation{
         return new Animation(texture, frameWidth, frameHeight, rows);
     }
 
-    public void drawFrame(int row, int frame, float x, float y, float scale, Color filter){
+    public void drawFrame(int row, int frame, float x, float y, float scale, int filter){
         this.drawFrame(row, frame, x, y, scale, null, filter);
     }
 
-    public void drawFrame(int row, int frame, float x, float y, float scale, Color[] light, Color filter){
+    public void drawFrame(int row, int frame, float x, float y, float scale, int[] light, int filter){
         this.drawFrame(row, frame, x, y, x+scale, y+(this.frameHeight/this.frameWidth)*scale, 0, 0, this.frameWidth, this.frameHeight, light, filter);
     }
 
-    public void drawFrame(int row, int frame, float x1, float y1, float x2, float y2, float srcX1, float srcY1, float srcX2, float srcY2, Color[] light, Color filter){
+    public void drawFrame(int row, int frame, float x1, float y1, float x2, float y2, float srcX1, float srcY1, float srcX2, float srcY2, int[] light, int filter){
         if(row < 0 || row >= this.rows.size()){
             row = 0;
         }
@@ -97,35 +92,30 @@ public class Animation{
         float srcX = frame*this.frameWidth;
         float srcY = row*this.frameHeight;
 
-        if(light != null){
-            this.texture.drawWithLight(x1, y1, x2, y2, srcX+srcX1, srcY+srcY1, srcX+srcX2, srcY+srcY2, light, filter);
-        }
-        else{
-            this.texture.draw(x1, y1, x2, y2, srcX+srcX1, srcY+srcY1, srcX+srcX2, srcY+srcY2, filter);
-        }
+        this.texture.draw(x1, y1, x2, y2, srcX+srcX1, srcY+srcY1, srcX+srcX2, srcY+srcY2, light, filter);
     }
 
-    public void drawRow(int row, float x, float y, float scale, Color filter){
+    public void drawRow(int row, float x, float y, float scale, int filter){
         this.drawRow(0, row, x, y, scale, null, filter);
     }
 
-    public void drawRow(int row, float x, float y, float scale, Color[] light, Color filter){
+    public void drawRow(int row, float x, float y, float scale, int[] light, int filter){
         this.drawRow(0, row, x, y, x+scale, y+(this.frameHeight/this.frameWidth)*scale, 0, 0, this.frameWidth, this.frameHeight, light, filter);
     }
 
-    public void drawRow(int row, float x1, float y1, float x2, float y2, float srcX1, float srcY1, float srcX2, float srcY2, Color[] light, Color filter){
+    public void drawRow(int row, float x1, float y1, float x2, float y2, float srcX1, float srcY1, float srcX2, float srcY2, int[] light, int filter){
         this.drawRow(0, row, x1, y1, x2, y2, srcX1, srcY1, srcX2, srcY2, light, filter);
     }
 
-    public void drawRow(long timeOffsetMillis, int row, float x, float y, float scale, Color filter){
+    public void drawRow(long timeOffsetMillis, int row, float x, float y, float scale, int filter){
         this.drawRow(timeOffsetMillis, row, x, y, scale, null, filter);
     }
 
-    public void drawRow(long timeOffsetMillis, int row, float x, float y, float scale, Color[] light, Color filter){
+    public void drawRow(long timeOffsetMillis, int row, float x, float y, float scale, int[] light, int filter){
         this.drawRow(timeOffsetMillis, row, x, y, x+scale, y+(this.frameHeight/this.frameWidth)*scale, 0, 0, this.frameWidth, this.frameHeight, light, filter);
     }
 
-    public void drawRow(long timeOffsetMillis, int row, float x1, float y1, float x2, float y2, float srcX1, float srcY1, float srcX2, float srcY2, Color[] light, Color filter){
+    public void drawRow(long timeOffsetMillis, int row, float x1, float y1, float x2, float y2, float srcX1, float srcY1, float srcX2, float srcY2, int[] light, int filter){
         if(row < 0 || row >= this.rows.size()){
             row = 0;
         }

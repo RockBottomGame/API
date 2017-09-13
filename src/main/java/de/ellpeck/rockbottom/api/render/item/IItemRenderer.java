@@ -27,9 +27,9 @@ import org.newdawn.slick.Graphics;
 
 public interface IItemRenderer<T extends Item>{
 
-    void render(IGameInstance game, IAssetManager manager, Graphics g, T item, ItemInstance instance, float x, float y, float scale, Color filter);
+    void render(IGameInstance game, IAssetManager manager, Graphics g, T item, ItemInstance instance, float x, float y, float scale, int filter);
 
-    default void renderOnMouseCursor(IGameInstance game, IAssetManager manager, Graphics g, T item, ItemInstance instance, float x, float y, float scale, Color filter, boolean isInPlayerRange){
+    default void renderOnMouseCursor(IGameInstance game, IAssetManager manager, Graphics g, T item, ItemInstance instance, float x, float y, float scale, int filter, boolean isInPlayerRange){
 
     }
 }

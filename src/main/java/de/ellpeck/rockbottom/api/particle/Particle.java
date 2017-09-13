@@ -72,7 +72,7 @@ public class Particle extends MovableWorldObject{
         this.motionY *= 0.99;
     }
 
-    public void render(IGameInstance game, IAssetManager manager, Graphics g, float x, float y, Color filter){
+    public void render(IGameInstance game, IAssetManager manager, Graphics g, float x, float y, int filter){
 
     }
 
