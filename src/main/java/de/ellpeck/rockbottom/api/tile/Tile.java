@@ -173,7 +173,7 @@ public class Tile{
 
     public void onDestroyed(IWorld world, int x, int y, Entity destroyer, TileLayer layer, boolean shouldDrop){
         if(shouldDrop){
-            if(!RockBottomAPI.getNet().isClient()){
+            if(!world.isClient()){
                 List<ItemInstance> drops = new ArrayList<>(this.getDrops(world, x, y, layer, destroyer));
 
                 if(RockBottomAPI.getEventHandler().fireEvent(new TileDropsEvent(this, drops, world, x, y, layer, destroyer)) != EventResult.CANCELLED){

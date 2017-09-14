@@ -237,4 +237,6 @@ public interface IChunkOrWorld{
     void setBiome(int x, int y, Biome biome);
 
     boolean isClient();
+
+    boolean isServer();
 }

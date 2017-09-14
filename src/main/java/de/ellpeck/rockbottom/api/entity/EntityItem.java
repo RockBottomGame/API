@@ -66,7 +66,7 @@ public class EntityItem extends Entity{
             this.pickupDelay--;
         }
 
-        if(!RockBottomAPI.getNet().isClient()){
+        if(!this.world.isClient()){
             if(this.item != null){
                 if(this.ticksExisted >= this.item.getItem().getDespawnTime(this.item)){
                     this.kill();

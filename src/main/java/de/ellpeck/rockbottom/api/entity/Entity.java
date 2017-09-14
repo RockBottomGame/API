@@ -109,7 +109,7 @@ public class Entity extends MovableWorldObject{
         if(RockBottomAPI.getEventHandler().fireEvent(new EntityDeathEvent(this)) != EventResult.CANCELLED){
             this.dead = dead;
 
-            if(RockBottomAPI.getNet().isServer()){
+            if(this.world.isServer()){
                 RockBottomAPI.getNet().sendToAllPlayers(this.world, new PacketDeath(this.getUniqueId()));
             }
         }

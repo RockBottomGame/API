@@ -40,7 +40,7 @@ public abstract class TileEntityFueled extends TileEntity{
     public void update(IGameInstance game){
         super.update(game);
 
-        if(!RockBottomAPI.getNet().isClient()){
+        if(!this.world.isClient()){
             boolean smelted = this.tryTickAction();
 
             if(this.coalTime > 0){

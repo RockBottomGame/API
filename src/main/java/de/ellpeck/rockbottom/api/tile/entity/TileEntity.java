@@ -41,7 +41,7 @@ public class TileEntity{
     }
 
     public void update(IGameInstance game){
-        if(RockBottomAPI.getNet().isServer()){
+        if(this.world.isServer()){
             if(this.world.getWorldInfo().totalTimeInWorld%this.getSyncInterval() == 0 && this.needsSync()){
                 this.sendToClients();
                 this.onSync();
@@ -74,7 +74,7 @@ public class TileEntity{
     }
 
     public void sendToClients(){
-        if(RockBottomAPI.getNet().isServer()){
+        if(this.world.isServer()){
             RockBottomAPI.getNet().sendToAllPlayers(this.world, new PacketTileEntityData(this.x, this.y, this));
         }
     }

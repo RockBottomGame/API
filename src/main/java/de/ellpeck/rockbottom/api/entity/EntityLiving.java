@@ -44,7 +44,7 @@ public abstract class EntityLiving extends Entity{
             this.jumping = false;
         }
 
-        if(!RockBottomAPI.getNet().isClient()){
+        if(!this.world.isClient()){
             if(this.health <= 0){
                 if(!this.dead){
                     this.kill();
