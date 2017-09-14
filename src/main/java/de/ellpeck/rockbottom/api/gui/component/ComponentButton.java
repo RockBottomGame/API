@@ -19,6 +19,7 @@
 package de.ellpeck.rockbottom.api.gui.component;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
+import de.ellpeck.rockbottom.api.IGraphics;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.data.settings.Settings;
@@ -52,13 +53,10 @@ public class ComponentButton extends GuiComponent{
     }
 
     @Override
-    public void render(IGameInstance game, IAssetManager manager, Graphics g){
+    public void render(IGameInstance game, IAssetManager manager, IGraphics g){
         if(this.hasBackground){
-            g.setColor(this.isMouseOverPrioritized(game) ? this.colorButton : this.colorButtonUnselected);
-            g.fillRect(this.x, this.y, this.sizeX, this.sizeY);
-
-            g.setColor(this.colorOutline);
-            g.drawRect(this.x, this.y, this.sizeX, this.sizeY);
+            g.fillRect(this.x, this.y, this.sizeX, this.sizeY, this.isMouseOverPrioritized(game) ? this.colorButton : this.colorButtonUnselected);
+            g.drawRect(this.x, this.y, this.sizeX, this.sizeY, this.colorOutline);
         }
 
         String text = this.getText();
@@ -76,11 +74,11 @@ public class ComponentButton extends GuiComponent{
     }
 
     @Override
-    public void renderOverlay(IGameInstance game, IAssetManager manager, Graphics g){
+    public void renderOverlay(IGameInstance game, IAssetManager manager, IGraphics g){
         if(this.isMouseOverPrioritized(game)){
             String[] hover = this.getHover();
             if(hover != null && hover.length > 0){
-                RockBottomAPI.getApiHandler().drawHoverInfoAtMouse(game, manager, g, false, 100, hover);
+                g.drawHoverInfoAtMouse(game, manager, false, 100, hover);
             }
         }
     }

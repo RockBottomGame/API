@@ -19,6 +19,7 @@
 package de.ellpeck.rockbottom.api.gui.component;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
+import de.ellpeck.rockbottom.api.IGraphics;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.assets.font.Font;
@@ -136,13 +137,10 @@ public class ComponentInputField extends GuiComponent{
     }
 
     @Override
-    public void render(IGameInstance game, IAssetManager manager, Graphics g){
+    public void render(IGameInstance game, IAssetManager manager, IGraphics g){
         if(this.renderBox){
-            g.setColor(this.isMouseOverPrioritized(game) ? this.colorButton : this.colorButtonUnselected);
-            g.fillRect(this.x, this.y, this.sizeX, this.sizeY);
-
-            g.setColor(this.colorOutline);
-            g.drawRect(this.x, this.y, this.sizeX, this.sizeY);
+            g.fillRect(this.x, this.y, this.sizeX, this.sizeY, this.isMouseOverPrioritized(game) ? this.colorButton : this.colorButtonUnselected);
+            g.drawRect(this.x, this.y, this.sizeX, this.sizeY, this.colorOutline);
         }
 
         Font font = manager.getFont();

@@ -22,9 +22,11 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import de.ellpeck.rockbottom.api.assets.tex.Texture;
+import de.ellpeck.rockbottom.api.assets.tex.ITexture;
 import de.ellpeck.rockbottom.api.util.Util;
 
+import javax.xml.soap.Text;
+import java.awt.*;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -35,20 +37,17 @@ public class Animation{
     private final int frameWidth;
     private final int frameHeight;
 
-    private final Texture texture;
+    private final ITexture texture;
     private final List<AnimationRow> rows;
 
-    public Animation(Texture texture, int frameWidth, int frameHeight, List<AnimationRow> rows){
+    public Animation(ITexture texture, int frameWidth, int frameHeight, List<AnimationRow> rows){
         this.texture = texture;
         this.frameWidth = frameWidth;
         this.frameHeight = frameHeight;
         this.rows = rows;
     }
 
-    public static Animation fromStream(InputStream textureStream, InputStream infoStream, String name) throws Exception{
-        Texture texture = new Texture(textureStream, name, false);
-        texture.setFilter(Texture.FILTER_NEAREST);
-
+    public static Animation fromStream(ITexture texture, InputStream infoStream) throws Exception{
         List<AnimationRow> rows = new ArrayList<>();
 
         JsonObject main = new JsonParser().parse(new InputStreamReader(infoStream)).getAsJsonObject();

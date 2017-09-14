@@ -20,17 +20,16 @@ package de.ellpeck.rockbottom.api.assets.tex;
 
 import de.ellpeck.rockbottom.api.assets.IAsset;
 
-public class AssetTexture implements IAsset<Texture>{
+public class AssetTexture implements IAsset<ITexture>{
 
-    private final Texture texture;
+    private final ITexture texture;
 
-    public AssetTexture(Texture texture){
+    public AssetTexture(ITexture texture){
         this.texture = texture;
-        this.texture.setFilter(Texture.FILTER_NEAREST);
     }
 
     @Override
-    public Texture get(){
+    public ITexture get(){
         return this.texture;
     }
 }

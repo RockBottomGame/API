@@ -19,6 +19,7 @@
 package de.ellpeck.rockbottom.api.gui;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
+import de.ellpeck.rockbottom.api.IGraphics;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.data.settings.Settings;
@@ -26,19 +27,19 @@ import de.ellpeck.rockbottom.api.event.EventResult;
 import de.ellpeck.rockbottom.api.event.impl.ComponentRenderEvent;
 import de.ellpeck.rockbottom.api.event.impl.ComponentRenderOverlayEvent;
 import de.ellpeck.rockbottom.api.gui.component.GuiComponent;
+import de.ellpeck.rockbottom.api.util.Colors;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.Color;
-import org.newdawn.slick.Graphics;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Gui{
 
-    public static final Color GRADIENT = new Color(0F, 0F, 0F, 0.7F);
-    public static final Color HOVER_INFO_BACKGROUND = new Color(0F, 0F, 0F, 0.8F);
+    public static final int GRADIENT_COLOR = Colors.rgb(0F, 0F, 0F, 0.7F);
+    public static final int HOVER_INFO_BACKGROUND = Colors.rgb(0F, 0F, 0F, 0.8F);
     protected final Gui parent;
     public int sizeX;
     public int sizeY;
@@ -119,7 +120,7 @@ public abstract class Gui{
         return false;
     }
 
-    public void render(IGameInstance game, IAssetManager manager, Graphics g){
+    public void render(IGameInstance game, IAssetManager manager, IGraphics g){
         for(int i = this.components.size()-1; i >= 0; i--){
             GuiComponent component = this.components.get(i);
             if(component.isActive){
@@ -130,7 +131,7 @@ public abstract class Gui{
         }
     }
 
-    public void renderOverlay(IGameInstance game, IAssetManager manager, Graphics g){
+    public void renderOverlay(IGameInstance game, IAssetManager manager, IGraphics g){
         for(int i = this.components.size()-1; i >= 0; i--){
             GuiComponent component = this.components.get(i);
             if(component.isActive){

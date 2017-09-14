@@ -19,6 +19,7 @@
 package de.ellpeck.rockbottom.api.gui.component;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
+import de.ellpeck.rockbottom.api.IGraphics;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.data.settings.Settings;
@@ -51,17 +52,14 @@ public class ComponentSlider extends ComponentButton{
     }
 
     @Override
-    public void render(IGameInstance game, IAssetManager manager, Graphics g){
+    public void render(IGameInstance game, IAssetManager manager, IGraphics g){
         super.render(game, manager, g);
 
         float percentage = (float)(this.number-this.min)/(float)(this.max-this.min);
         float x = this.x+percentage*(this.sizeX-5);
 
-        g.setColor(this.isMouseOverPrioritized(game) ? this.colorButton : this.colorButtonUnselected);
-        g.fillRect(x, this.y, 5F, this.sizeY);
-
-        g.setColor(this.colorOutline);
-        g.drawRect(x, this.y, 5F, this.sizeY);
+        g.fillRect(x, this.y, 5F, this.sizeY,this.isMouseOverPrioritized(game) ? this.colorButton : this.colorButtonUnselected);
+        g.drawRect(x, this.y, 5F, this.sizeY,this.colorOutline);
     }
 
     @Override

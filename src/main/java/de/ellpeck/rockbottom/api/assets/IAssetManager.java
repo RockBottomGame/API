@@ -22,7 +22,7 @@ import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.assets.anim.Animation;
 import de.ellpeck.rockbottom.api.assets.font.Font;
 import de.ellpeck.rockbottom.api.assets.local.Locale;
-import de.ellpeck.rockbottom.api.assets.tex.Texture;
+import de.ellpeck.rockbottom.api.assets.tex.ITexture;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 import org.newdawn.slick.Sound;
 
@@ -37,7 +37,7 @@ public interface IAssetManager{
 
     <T> T getAssetWithFallback(IResourceName path, IAsset<T> fallback);
 
-    Texture getTexture(IResourceName path);
+    ITexture getTexture(IResourceName path);
 
     Animation getAnimation(IResourceName path);
 
@@ -59,5 +59,5 @@ public interface IAssetManager{
 
     InputStream getResourceStream(String s);
 
-    Texture getMissingTexture();
+    ITexture getMissingTexture();
 }

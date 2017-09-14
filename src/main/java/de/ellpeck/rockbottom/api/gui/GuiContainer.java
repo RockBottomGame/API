@@ -19,6 +19,7 @@
 package de.ellpeck.rockbottom.api.gui;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
+import de.ellpeck.rockbottom.api.IGraphics;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.data.settings.Settings;
@@ -88,14 +89,14 @@ public abstract class GuiContainer extends Gui{
     }
 
     @Override
-    public void render(IGameInstance game, IAssetManager manager, Graphics g){
+    public void render(IGameInstance game, IAssetManager manager, IGraphics g){
         super.render(game, manager, g);
 
         if(this.holdingInst != null){
             float mouseX = game.getMouseInGuiX();
             float mouseY = game.getMouseInGuiY();
 
-            RockBottomAPI.getApiHandler().renderItemInGui(game, manager, g, this.holdingInst, mouseX-4F, mouseY-4F, 0.8F, Colors.WHITE);
+            g.renderItemInGui(game, manager, this.holdingInst, mouseX-4F, mouseY-4F, 0.8F, Colors.WHITE);
         }
     }
 

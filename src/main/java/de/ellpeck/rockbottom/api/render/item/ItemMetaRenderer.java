@@ -19,12 +19,11 @@
 package de.ellpeck.rockbottom.api.render.item;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
+import de.ellpeck.rockbottom.api.IGraphics;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.item.ItemMeta;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
-import org.newdawn.slick.Color;
-import org.newdawn.slick.Graphics;
 
 public class ItemMetaRenderer extends DefaultItemRenderer<ItemMeta>{
 
@@ -33,7 +32,7 @@ public class ItemMetaRenderer extends DefaultItemRenderer<ItemMeta>{
     }
 
     @Override
-    public void render(IGameInstance game, IAssetManager manager, Graphics g, ItemMeta item, ItemInstance instance, float x, float y, float scale, int filter){
+    public void render(IGameInstance game, IAssetManager manager, IGraphics g, ItemMeta item, ItemInstance instance, float x, float y, float scale, int filter){
         int meta = instance.getMeta();
 
         if(meta >= 0 && item.subResourceNames.size() > meta){

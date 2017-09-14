@@ -10,5 +10,5 @@ public interface IMainMenuTheme{
 
     TileState getState(int x, int y);
 
-    Color getBackgroundColor();
+    int getBackgroundColor();
 }

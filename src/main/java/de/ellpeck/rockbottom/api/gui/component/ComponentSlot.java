@@ -19,13 +19,13 @@
 package de.ellpeck.rockbottom.api.gui.component;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
+import de.ellpeck.rockbottom.api.IGraphics;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.gui.GuiContainer;
 import de.ellpeck.rockbottom.api.gui.container.ContainerSlot;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
-import org.newdawn.slick.Graphics;
 
 public class ComponentSlot extends GuiComponent{
 
@@ -51,16 +51,16 @@ public class ComponentSlot extends GuiComponent{
     }
 
     @Override
-    public void render(IGameInstance game, IAssetManager manager, Graphics g){
-        RockBottomAPI.getApiHandler().renderSlotInGui(game, manager, g, this.slot.get(), this.x, this.y, 1F, this.isMouseOver(game));
+    public void render(IGameInstance game, IAssetManager manager, IGraphics g){
+        g.renderSlotInGui(game, manager, this.slot.get(), this.x, this.y, 1F, this.isMouseOver(game));
     }
 
     @Override
-    public void renderOverlay(IGameInstance game, IAssetManager manager, Graphics g){
+    public void renderOverlay(IGameInstance game, IAssetManager manager, IGraphics g){
         if(this.container.holdingInst == null && this.isMouseOverPrioritized(game)){
             ItemInstance instance = this.slot.get();
             if(instance != null){
-                RockBottomAPI.getApiHandler().describeItem(game, manager, g, instance);
+                g.describeItem(game, manager, instance);
             }
         }
     }

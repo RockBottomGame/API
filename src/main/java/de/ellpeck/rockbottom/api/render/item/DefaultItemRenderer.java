@@ -19,6 +19,7 @@
 package de.ellpeck.rockbottom.api.render.item;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
+import de.ellpeck.rockbottom.api.IGraphics;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.item.Item;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
@@ -34,7 +35,7 @@ public class DefaultItemRenderer<T extends Item> implements IItemRenderer<T>{
     }
 
     @Override
-    public void render(IGameInstance game, IAssetManager manager, Graphics g, T item, ItemInstance instance, float x, float y, float scale, int filter){
+    public void render(IGameInstance game, IAssetManager manager, IGraphics g, T item, ItemInstance instance, float x, float y, float scale, int filter){
         manager.getTexture(this.texture).draw(x, y, 1F*scale, 1F*scale, filter);
     }
 }

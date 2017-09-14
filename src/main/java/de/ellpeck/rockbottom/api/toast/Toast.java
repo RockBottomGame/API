@@ -1,21 +1,21 @@
 package de.ellpeck.rockbottom.api.toast;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
+import de.ellpeck.rockbottom.api.IGraphics;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.assets.font.Font;
 import de.ellpeck.rockbottom.api.assets.font.FormattingCode;
-import de.ellpeck.rockbottom.api.assets.tex.Texture;
+import de.ellpeck.rockbottom.api.assets.tex.ITexture;
 import de.ellpeck.rockbottom.api.net.chat.component.ChatComponent;
+import de.ellpeck.rockbottom.api.util.Colors;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
-import org.newdawn.slick.Color;
-import org.newdawn.slick.Graphics;
 
 public class Toast{
 
-    private final Color guiColor = new Color(RockBottomAPI.getGame().getSettings().guiColor);
-    private final Color color = this.guiColor.multiply(new Color(1F, 1F, 1F, 0.5F));
-    private final Color colorOutline = this.guiColor.darker(0.25F);
+    protected final int guiColor = RockBottomAPI.getGame().getSettings().guiColor;
+    protected final int color = Colors.multiplyA(this.guiColor, 0.5F);
+    protected final int colorOutline = Colors.multiply(this.guiColor, 0.75F);
 
     private final IResourceName icon;
     private final ChatComponent title;
@@ -33,15 +33,12 @@ public class Toast{
         this.displayTime = displayTime;
     }
 
-    public void render(IGameInstance game, IAssetManager manager, Graphics g, float x, float y){
+    public void render(IGameInstance game, IAssetManager manager, IGraphics g, float x, float y){
         float width = this.getWidth();
         float height = this.getHeight();
 
-        g.setColor(this.color);
-        g.fillRect(x, y, width, height);
-
-        g.setColor(this.colorOutline);
-        g.drawRect(x, y, width, height);
+        g.fillRect(x, y, width, height, this.color);
+        g.drawRect(x, y, width, height, this.colorOutline);
 
         float textX = x;
         float textWidth = width;
@@ -52,7 +49,7 @@ public class Toast{
             textX += size+1;
             textWidth -= size+1;
 
-            Texture tex = manager.getTexture(this.icon);
+            ITexture tex = manager.getTexture(this.icon);
             tex.draw(x+1, y+1, size, ((float)tex.getWidth()/(float)tex.getHeight())*size);
         }
 

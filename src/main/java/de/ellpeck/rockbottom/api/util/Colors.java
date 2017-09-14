@@ -18,7 +18,6 @@
 
 package de.ellpeck.rockbottom.api.util;
 
-import org.newdawn.slick.Color;
 import org.newdawn.slick.opengl.renderer.Renderer;
 
 import java.util.Random;
@@ -110,6 +109,10 @@ public final class Colors{
         return rgb(r1*r2, g1*g2, b1*b2);
     }
 
+    public static int multiply(int color, float r, float g, float b, float a){
+        return rgb(getR(color)*r, getG(color)*g, getB(color)*b, getA(color)*a);
+    }
+
     public static int rainbow(float pos){
         if(pos < 85F){
             return rgb((pos*3F)/255F, (255F-pos*3F)/255F, 0F);
@@ -120,9 +123,5 @@ public final class Colors{
         else{
             return rgb(0F, ((pos -= 170F)*3F)/255F, (255F-pos*3F)/255F);
         }
-    }
-
-    public static int fromColor(Color color){
-        return rgb(color.r, color.g, color.b, color.a);
     }
 }

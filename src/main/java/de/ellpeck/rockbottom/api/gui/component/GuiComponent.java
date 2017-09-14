@@ -19,20 +19,20 @@
 package de.ellpeck.rockbottom.api.gui.component;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
+import de.ellpeck.rockbottom.api.IGraphics;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.gui.Gui;
+import de.ellpeck.rockbottom.api.util.Colors;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 import org.lwjgl.input.Mouse;
-import org.newdawn.slick.Color;
-import org.newdawn.slick.Graphics;
 
 public abstract class GuiComponent{
 
-    public final Color guiColor = new Color(RockBottomAPI.getGame().getSettings().guiColor);
-    public final Color colorButton = this.guiColor.multiply(new Color(1F, 1F, 1F, 0.5F));
-    public final Color colorButtonUnselected = this.colorButton.darker(0.4F);
-    public final Color colorOutline = this.guiColor.darker(0.3F);
+    protected final int guiColor = RockBottomAPI.getGame().getSettings().guiColor;
+    protected final int colorButton = Colors.multiplyA(this.guiColor, 0.5F);
+    protected final int colorOutline = Colors.multiply(this.guiColor, 0.75F);
+    protected final int colorButtonUnselected = Colors.multiplyA(this.colorButton, 0.6F);
 
     public int sizeX;
     public int sizeY;
@@ -53,11 +53,11 @@ public abstract class GuiComponent{
 
     }
 
-    public void render(IGameInstance game, IAssetManager manager, Graphics g){
+    public void render(IGameInstance game, IAssetManager manager, IGraphics g){
 
     }
 
-    public void renderOverlay(IGameInstance game, IAssetManager manager, Graphics g){
+    public void renderOverlay(IGameInstance game, IAssetManager manager, IGraphics g){
 
     }
 

@@ -19,6 +19,7 @@
 package de.ellpeck.rockbottom.api.event.impl;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
+import de.ellpeck.rockbottom.api.IGraphics;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.event.Event;
@@ -32,12 +33,12 @@ public class PlayerRenderEvent extends Event{
 
     public final IGameInstance game;
     public final IAssetManager assetManager;
-    public final Graphics graphics;
+    public final IGraphics graphics;
     public final AbstractEntityPlayer player;
     public final float x;
     public final float y;
 
-    public PlayerRenderEvent(IGameInstance game, IAssetManager assetManager, Graphics graphics, AbstractEntityPlayer player, float x, float y){
+    public PlayerRenderEvent(IGameInstance game, IAssetManager assetManager, IGraphics graphics, AbstractEntityPlayer player, float x, float y){
         this.game = game;
         this.assetManager = assetManager;
         this.graphics = graphics;

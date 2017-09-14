@@ -19,6 +19,7 @@
 package de.ellpeck.rockbottom.api.gui.component;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
+import de.ellpeck.rockbottom.api.IGraphics;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.data.settings.Settings;
@@ -27,7 +28,6 @@ import de.ellpeck.rockbottom.api.util.BoundBox;
 import de.ellpeck.rockbottom.api.util.Util;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 import org.lwjgl.input.Mouse;
-import org.newdawn.slick.Graphics;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,18 +71,17 @@ public class ComponentScrollMenu extends ComponentButton{
     }
 
     @Override
-    public void render(IGameInstance game, IAssetManager manager, Graphics g){
+    public void render(IGameInstance game, IAssetManager manager, IGraphics g){
         int max = this.getMax();
         float percentage = max <= 0 ? 0 : (float)this.number/(float)max;
         float y = this.y+percentage*(this.sizeY-10);
+        int color = this.isMouseOverPrioritized(game) || this.hoverArea.contains(game.getMouseInGuiX(), game.getMouseInGuiY()) ? this.colorButton : this.colorButtonUnselected;
 
-        g.setColor(this.isMouseOverPrioritized(game) || this.hoverArea.contains(game.getMouseInGuiX(), game.getMouseInGuiY()) ? this.colorButton : this.colorButtonUnselected);
-        g.fillRect(this.x, this.y, 6F, this.sizeY);
-        g.fillRect(this.x, y, 6F, 10F);
+        g.fillRect(this.x, this.y, 6F, this.sizeY, color);
+        g.drawRect(this.x, y, 6F, 10F, this.colorOutline);
 
-        g.setColor(this.colorOutline);
-        g.drawRect(this.x, y, 6F, 10F);
-        g.drawRect(this.x, this.y, 6F, this.sizeY);
+        g.fillRect(this.x, y, 6F, 10F, color);
+        g.drawRect(this.x, this.y, 6F, this.sizeY, this.colorOutline);
     }
 
     public void organize(){

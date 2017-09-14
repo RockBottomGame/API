@@ -19,10 +19,10 @@
 package de.ellpeck.rockbottom.api.event.impl;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
+import de.ellpeck.rockbottom.api.IGraphics;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.event.Event;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
-import org.newdawn.slick.Graphics;
 
 import java.util.List;
 
@@ -35,10 +35,10 @@ public class TooltipEvent extends Event{
     public final ItemInstance instance;
     public final IGameInstance game;
     public final IAssetManager assetManager;
-    public final Graphics graphics;
+    public final IGraphics graphics;
     public final List<String> description;
 
-    public TooltipEvent(ItemInstance instance, IGameInstance game, IAssetManager assetManager, Graphics graphics, List<String> description){
+    public TooltipEvent(ItemInstance instance, IGameInstance game, IAssetManager assetManager, IGraphics graphics, List<String> description){
         this.instance = instance;
         this.game = game;
         this.assetManager = assetManager;

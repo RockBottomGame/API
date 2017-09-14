@@ -19,6 +19,7 @@
 package de.ellpeck.rockbottom.api.particle;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
+import de.ellpeck.rockbottom.api.IGraphics;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.entity.MovableWorldObject;
 import de.ellpeck.rockbottom.api.util.BoundBox;
@@ -72,7 +73,7 @@ public class Particle extends MovableWorldObject{
         this.motionY *= 0.99;
     }
 
-    public void render(IGameInstance game, IAssetManager manager, Graphics g, float x, float y, int filter){
+    public void render(IGameInstance game, IAssetManager manager, IGraphics g, float x, float y, int filter){
 
     }
 

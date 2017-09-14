@@ -19,15 +19,15 @@
 package de.ellpeck.rockbottom.api.gui.component;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
+import de.ellpeck.rockbottom.api.IGraphics;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.assets.font.Font;
-import de.ellpeck.rockbottom.api.assets.tex.Texture;
+import de.ellpeck.rockbottom.api.assets.tex.ITexture;
 import de.ellpeck.rockbottom.api.data.settings.Settings;
 import de.ellpeck.rockbottom.api.gui.Gui;
 import de.ellpeck.rockbottom.api.util.BoundBox;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
-import org.newdawn.slick.Graphics;
 
 import java.util.function.Consumer;
 
@@ -55,8 +55,8 @@ public class ComponentConfirmationPopup extends GuiComponent{
     }
 
     @Override
-    public void render(IGameInstance game, IAssetManager manager, Graphics g){
-        Texture tex = manager.getTexture(RES);
+    public void render(IGameInstance game, IAssetManager manager, IGraphics g){
+        ITexture tex = manager.getTexture(RES);
         Font font = manager.getFont();
         String text = "Are you sure?";
 
@@ -74,11 +74,8 @@ public class ComponentConfirmationPopup extends GuiComponent{
         int width = (int)this.buttonArea.getWidth();
         int height = (int)this.buttonArea.getHeight();
 
-        g.setColor(this.isMouseOverPrioritized(game) && this.buttonArea.contains(game.getMouseInGuiX(), game.getMouseInGuiY()) ? this.colorButton : this.colorButtonUnselected);
-        g.fillRect(x, y, width, height);
-
-        g.setColor(this.colorOutline);
-        g.drawRect(x, y, width, height);
+        g.fillRect(x, y, width, height, this.isMouseOverPrioritized(game) && this.buttonArea.contains(game.getMouseInGuiX(), game.getMouseInGuiY()) ? this.colorButton : this.colorButtonUnselected);
+        g.drawRect(x, y, width, height, this.colorOutline);
 
         font.drawCenteredString(x+width/2F, y+height/2F+0.5F, "Yes", 0.35F, true);
     }

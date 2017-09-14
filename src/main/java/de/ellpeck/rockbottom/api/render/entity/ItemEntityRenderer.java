@@ -19,17 +19,17 @@
 package de.ellpeck.rockbottom.api.render.entity;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
+import de.ellpeck.rockbottom.api.IGraphics;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.entity.EntityItem;
 import de.ellpeck.rockbottom.api.item.Item;
 import de.ellpeck.rockbottom.api.render.item.IItemRenderer;
 import de.ellpeck.rockbottom.api.world.IWorld;
-import org.newdawn.slick.Graphics;
 
 public class ItemEntityRenderer implements IEntityRenderer<EntityItem>{
 
     @Override
-    public void render(IGameInstance game, IAssetManager manager, Graphics g, IWorld world, EntityItem entity, float x, float y, int light){
+    public void render(IGameInstance game, IAssetManager manager, IGraphics g, IWorld world, EntityItem entity, float x, float y, int light){
         if(entity.item != null){
             Item item = entity.item.getItem();
             IItemRenderer renderer = item.getRenderer();

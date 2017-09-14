@@ -22,7 +22,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
-import de.ellpeck.rockbottom.api.assets.tex.Texture;
+import de.ellpeck.rockbottom.api.assets.tex.ITexture;
 import de.ellpeck.rockbottom.api.util.Colors;
 import de.ellpeck.rockbottom.api.util.Pos2;
 import org.newdawn.slick.util.Log;
@@ -34,14 +34,14 @@ import java.util.*;
 public class Font{
 
     private final String name;
-    private final Texture texture;
+    private final ITexture texture;
 
     private final Map<Character, Pos2> characters;
 
     private final int charWidth;
     private final int charHeight;
 
-    public Font(String name, Texture texture, int widthInChars, int heightInChars, Map<Character, Pos2> characters){
+    public Font(String name, ITexture texture, int widthInChars, int heightInChars, Map<Character, Pos2> characters){
         this.name = name;
         this.texture = texture;
         this.characters = characters;
@@ -50,10 +50,7 @@ public class Font{
         this.charHeight = texture.getHeight()/heightInChars;
     }
 
-    public static Font fromStream(InputStream imageStream, InputStream infoStream, String name) throws Exception{
-        Texture image = new Texture(imageStream, name, false);
-        image.setFilter(Texture.FILTER_NEAREST);
-
+    public static Font fromStream(ITexture texture, InputStream infoStream, String name) throws Exception{
         JsonParser parser = new JsonParser();
         JsonObject main = parser.parse(new InputStreamReader(infoStream)).getAsJsonObject();
 
@@ -78,7 +75,7 @@ public class Font{
         int height = rows.size();
         Log.debug("Loaded font "+name+" with dimensions "+width+"x"+height+" and the following character map: "+characters);
 
-        return new Font(name, image, width, height, characters);
+        return new Font(name, texture, width, height, characters);
     }
 
     public void drawStringFromRight(float x, float y, String s, float scale){
