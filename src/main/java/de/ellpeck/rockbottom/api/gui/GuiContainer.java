@@ -31,7 +31,6 @@ import de.ellpeck.rockbottom.api.gui.container.ItemContainer;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.net.packet.toserver.PacketDropItem;
 import de.ellpeck.rockbottom.api.util.Colors;
-import org.newdawn.slick.Graphics;
 
 public abstract class GuiContainer extends Gui{
 

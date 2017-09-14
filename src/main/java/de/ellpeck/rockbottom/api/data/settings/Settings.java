@@ -20,12 +20,9 @@ package de.ellpeck.rockbottom.api.data.settings;
 
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.data.IDataManager;
-import de.ellpeck.rockbottom.api.util.Colors;
-import org.newdawn.slick.Color;
 import org.newdawn.slick.Input;
 
 import java.io.File;
-import java.security.Key;
 import java.util.Properties;
 
 public class Settings implements IPropSettings{
@@ -47,6 +44,7 @@ public class Settings implements IPropSettings{
     public static final Keybind KEY_ADVANCED_INFO = new Keybind(RockBottomAPI.createInternalRes("advanced_info"), Input.KEY_LSHIFT, false).register();
     public static final Keybind KEY_SCREENSHOT = new Keybind(RockBottomAPI.createInternalRes("screenshot"), Input.KEY_F10, false).register();
     public static final Keybind[] KEYS_ITEM_SELECTION = new Keybind[8];
+    public static final int DEFAULT_GUI_COLOR = 0x30704E;
 
     static{
         int[] defKeys = new int[]{Input.KEY_1, Input.KEY_2, Input.KEY_3, Input.KEY_4, Input.KEY_5, Input.KEY_6, Input.KEY_7, Input.KEY_8};
@@ -55,8 +53,6 @@ public class Settings implements IPropSettings{
             KEYS_ITEM_SELECTION[i] = new Keybind(RockBottomAPI.createInternalRes("item_selection_"+i), defKeys[i], false).register();
         }
     }
-
-    public static final int DEFAULT_GUI_COLOR = 0x30704E;
 
     public int targetFps;
     public int autosaveIntervalSeconds;

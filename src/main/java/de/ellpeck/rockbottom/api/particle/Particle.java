@@ -24,8 +24,6 @@ import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.entity.MovableWorldObject;
 import de.ellpeck.rockbottom.api.util.BoundBox;
 import de.ellpeck.rockbottom.api.world.IWorld;
-import org.newdawn.slick.Color;
-import org.newdawn.slick.Graphics;
 
 public class Particle extends MovableWorldObject{
 

@@ -27,7 +27,6 @@ import de.ellpeck.rockbottom.api.assets.font.FormattingCode;
 import de.ellpeck.rockbottom.api.data.settings.Settings;
 import de.ellpeck.rockbottom.api.gui.Gui;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
-import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 
 import java.awt.*;
@@ -40,11 +39,10 @@ public class ComponentInputField extends GuiComponent{
     private final boolean selectable;
     private final int maxLength;
     private final boolean displaxMaxLength;
-
+    private final Consumer<String> consumer;
     private String text = "";
     private boolean isActive;
     private int counter;
-    private final Consumer<String> consumer;
 
     public ComponentInputField(Gui gui, int x, int y, int sizeX, int sizeY, boolean renderBox, boolean selectable, boolean defaultActive, int maxLength, boolean displayMaxLength){
         this(gui, x, y, sizeX, sizeY, renderBox, selectable, defaultActive, maxLength, displayMaxLength, null);

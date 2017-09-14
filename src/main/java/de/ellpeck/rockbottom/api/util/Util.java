@@ -23,8 +23,6 @@ import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.entity.Entity;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 import de.ellpeck.rockbottom.api.world.IWorld;
-import org.lwjgl.Sys;
-import org.newdawn.slick.Color;
 import org.newdawn.slick.util.Log;
 
 import java.io.File;

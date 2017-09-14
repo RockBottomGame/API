@@ -24,7 +24,6 @@ import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.item.Item;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
-import org.newdawn.slick.Graphics;
 
 public class DefaultItemRenderer<T extends Item> implements IItemRenderer<T>{
 

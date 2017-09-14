@@ -8,6 +8,7 @@ import de.ellpeck.rockbottom.api.world.IWorld;
  * <br> It is not cancellable
  */
 public class WorldUnloadEvent extends Event{
+
     public final IWorld world;
 
     public WorldUnloadEvent(IWorld world){

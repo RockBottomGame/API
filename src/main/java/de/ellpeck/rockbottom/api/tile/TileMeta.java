@@ -3,7 +3,6 @@ package de.ellpeck.rockbottom.api.tile;
 import de.ellpeck.rockbottom.api.entity.Entity;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
-import de.ellpeck.rockbottom.api.item.ItemMeta;
 import de.ellpeck.rockbottom.api.item.ItemTile;
 import de.ellpeck.rockbottom.api.render.tile.ITileRenderer;
 import de.ellpeck.rockbottom.api.render.tile.TileMetaRenderer;
@@ -76,6 +75,6 @@ public class TileMeta extends TileBasic{
 
     @Override
     public List<ItemInstance> getDrops(IWorld world, int x, int y, TileLayer layer, Entity destroyer){
-        return Collections.singletonList(new ItemInstance(this, 1, world.getState(layer, x,y).get(this.metaProp)));
+        return Collections.singletonList(new ItemInstance(this, 1, world.getState(layer, x, y).get(this.metaProp)));
     }
 }

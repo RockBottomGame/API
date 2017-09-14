@@ -23,11 +23,6 @@ import com.google.common.collect.HashBiMap;
 import com.google.common.collect.Maps;
 import org.newdawn.slick.util.Log;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-
 public class NameRegistry<T> implements IRegistry<IResourceName, T>{
 
     protected final String name;

@@ -23,7 +23,6 @@ import de.ellpeck.rockbottom.api.IGraphics;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.event.Event;
-import org.newdawn.slick.Graphics;
 
 /**
  * This event is fired when an {@link AbstractEntityPlayer} is rendered

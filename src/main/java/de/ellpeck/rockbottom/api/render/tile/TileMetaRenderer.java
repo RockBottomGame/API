@@ -9,7 +9,6 @@ import de.ellpeck.rockbottom.api.tile.TileMeta;
 import de.ellpeck.rockbottom.api.tile.state.TileState;
 import de.ellpeck.rockbottom.api.world.IWorld;
 import de.ellpeck.rockbottom.api.world.TileLayer;
-import org.newdawn.slick.Graphics;
 
 public class TileMetaRenderer implements ITileRenderer<TileMeta>{
 

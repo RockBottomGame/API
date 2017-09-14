@@ -31,7 +31,7 @@ public class StringProp extends TileProp<String>{
         this(name, def, Arrays.asList(allowedValues));
     }
 
-    public StringProp(String name,String def, List<String> allowedValues){
+    public StringProp(String name, String def, List<String> allowedValues){
         super(name);
         this.def = def;
         this.allowedValues = Collections.unmodifiableList(allowedValues);

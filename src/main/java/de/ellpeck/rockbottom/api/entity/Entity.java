@@ -153,7 +153,7 @@ public class Entity extends MovableWorldObject{
         set.addInt("ticks", this.ticksExisted);
         set.addBoolean("dead", this.isDead());
         set.addUniqueId("uuid", this.uniqueId);
-        set.addBoolean("falling",this.isFalling);
+        set.addBoolean("falling", this.isFalling);
         set.addDouble("fall_start_y", this.fallStartY);
         set.addInt("facing", this.facing.ordinal());
 

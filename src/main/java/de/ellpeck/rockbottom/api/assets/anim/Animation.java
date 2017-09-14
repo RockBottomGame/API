@@ -25,8 +25,6 @@ import com.google.gson.JsonParser;
 import de.ellpeck.rockbottom.api.assets.tex.ITexture;
 import de.ellpeck.rockbottom.api.util.Util;
 
-import javax.xml.soap.Text;
-import java.awt.*;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;

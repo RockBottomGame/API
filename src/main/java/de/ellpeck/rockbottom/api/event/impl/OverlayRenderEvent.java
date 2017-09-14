@@ -25,7 +25,6 @@ import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.event.Event;
 import de.ellpeck.rockbottom.api.gui.Gui;
 import de.ellpeck.rockbottom.api.gui.IGuiManager;
-import org.newdawn.slick.Graphics;
 
 /**
  * This event is fired after the game overlay is rendered

@@ -25,7 +25,6 @@ import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.item.ItemTile;
 import de.ellpeck.rockbottom.api.render.tile.ITileRenderer;
 import de.ellpeck.rockbottom.api.tile.Tile;
-import org.newdawn.slick.Graphics;
 
 public class ItemTileRenderer implements IItemRenderer<ItemTile>{
 

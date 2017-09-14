@@ -11,6 +11,10 @@ public class ChatComponentText extends ChatComponent{
     public ChatComponentText(){
     }
 
+    public ChatComponentText(String text){
+        this.text = text;
+    }
+
     @Override
     public String getDisplayString(IGameInstance game, IAssetManager manager){
         return this.text;
@@ -19,10 +23,6 @@ public class ChatComponentText extends ChatComponent{
     @Override
     public String getUnformattedString(){
         return this.text;
-    }
-
-    public ChatComponentText(String text){
-        this.text = text;
     }
 
     @Override

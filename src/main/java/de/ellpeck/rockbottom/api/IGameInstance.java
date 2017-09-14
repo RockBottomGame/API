@@ -63,8 +63,8 @@ public interface IGameInstance extends IMod{
      * to their ids on disk.
      * <br> Not supposed to be used by mods
      *
-     * @param playerSet   The player data
-     * @param info        The world info
+     * @param playerSet The player data
+     * @param info      The world info
      */
     void joinWorld(DataSet playerSet, WorldInfo info, DynamicRegistryInfo regInfo);
 

@@ -25,16 +25,15 @@ import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.data.settings.Settings;
 import de.ellpeck.rockbottom.api.gui.Gui;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
-import org.newdawn.slick.Graphics;
 
 import java.util.function.Supplier;
 
 public class ComponentButton extends GuiComponent{
 
     private final String[] hover;
+    private final Supplier<Boolean> supplier;
     public boolean hasBackground = true;
     protected String text;
-    private final Supplier<Boolean> supplier;
 
     public ComponentButton(Gui gui, int x, int y, int sizeX, int sizeY, Supplier<Boolean> supplier, String text, String... hover){
         super(gui, x, y, sizeX, sizeY);

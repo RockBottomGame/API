@@ -14,6 +14,23 @@ public abstract class ChatComponent{
 
     }
 
+    public static ChatComponent createFromSet(DataSet set){
+        int id = set.getInt("id");
+
+        try{
+            Class<? extends ChatComponent> theClass = RockBottomAPI.CHAT_COMPONENT_REGISTRY.get(id);
+
+            ChatComponent component = theClass.newInstance();
+            component.load(set);
+
+            return component;
+        }
+        catch(Exception e){
+            Log.error("Couldn't read chat component with id "+id+" from data set "+set+"! Does it have a default constructor?", e);
+            return null;
+        }
+    }
+
     public ChatComponent append(ChatComponent component){
         if(this.child != null){
             this.child.append(component);
@@ -63,23 +80,6 @@ public abstract class ChatComponent{
         if(set.hasKey("child")){
             DataSet subSet = set.getDataSet("child");
             this.child = createFromSet(subSet);
-        }
-    }
-
-    public static ChatComponent createFromSet(DataSet set){
-        int id = set.getInt("id");
-
-        try{
-            Class<? extends ChatComponent> theClass = RockBottomAPI.CHAT_COMPONENT_REGISTRY.get(id);
-
-            ChatComponent component = theClass.newInstance();
-            component.load(set);
-
-            return component;
-        }
-        catch(Exception e){
-            Log.error("Couldn't read chat component with id "+id+" from data set "+set+"! Does it have a default constructor?", e);
-            return null;
         }
     }
 

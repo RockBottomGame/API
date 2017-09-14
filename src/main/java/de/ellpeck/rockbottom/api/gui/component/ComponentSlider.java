@@ -25,7 +25,6 @@ import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.data.settings.Settings;
 import de.ellpeck.rockbottom.api.gui.Gui;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
-import org.newdawn.slick.Graphics;
 
 import java.util.function.BiConsumer;
 
@@ -58,8 +57,8 @@ public class ComponentSlider extends ComponentButton{
         float percentage = (float)(this.number-this.min)/(float)(this.max-this.min);
         float x = this.x+percentage*(this.sizeX-5);
 
-        g.fillRect(x, this.y, 5F, this.sizeY,this.isMouseOverPrioritized(game) ? this.colorButton : this.colorButtonUnselected);
-        g.drawRect(x, this.y, 5F, this.sizeY,this.colorOutline);
+        g.fillRect(x, this.y, 5F, this.sizeY, this.isMouseOverPrioritized(game) ? this.colorButton : this.colorButtonUnselected);
+        g.drawRect(x, this.y, 5F, this.sizeY, this.colorOutline);
     }
 
     @Override

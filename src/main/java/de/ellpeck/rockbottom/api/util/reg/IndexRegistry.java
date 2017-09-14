@@ -23,9 +23,6 @@ import com.google.common.collect.HashBiMap;
 import com.google.common.collect.Maps;
 import org.newdawn.slick.util.Log;
 
-import java.util.Collections;
-import java.util.Map;
-
 public class IndexRegistry<T> implements IRegistry<Integer, T>{
 
     protected final int max;

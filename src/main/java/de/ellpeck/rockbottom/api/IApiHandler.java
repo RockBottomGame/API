@@ -18,7 +18,6 @@
 
 package de.ellpeck.rockbottom.api;
 
-import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.data.set.DataSet;
 import de.ellpeck.rockbottom.api.data.set.part.DataPart;
 import de.ellpeck.rockbottom.api.entity.Entity;
@@ -29,12 +28,10 @@ import de.ellpeck.rockbottom.api.tile.Tile;
 import de.ellpeck.rockbottom.api.world.IWorld;
 import de.ellpeck.rockbottom.api.world.TileLayer;
 import de.ellpeck.rockbottom.api.world.gen.INoiseGen;
-import org.newdawn.slick.Graphics;
 
 import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.File;
-import java.util.List;
 import java.util.Random;
 
 /**

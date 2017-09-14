@@ -2,7 +2,6 @@ package de.ellpeck.rockbottom.api;
 
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
-import org.newdawn.slick.opengl.renderer.Renderer;
 
 import java.util.List;
 

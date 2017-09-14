@@ -35,6 +35,14 @@ public class WorldInfo{
         this.dataFile = new File(worldDirectory, "world_info.dat");
     }
 
+    public static boolean exists(File directory){
+        return new File(directory, "world_info.dat").exists();
+    }
+
+    public static long lastModified(File directory){
+        return new File(directory, "world_info.dat").lastModified();
+    }
+
     public void load(){
         DataSet dataSet = new DataSet();
         dataSet.read(this.dataFile);
@@ -62,13 +70,5 @@ public class WorldInfo{
         this.seed = buf.readLong();
         this.totalTimeInWorld = buf.readInt();
         this.currentWorldTime = buf.readInt();
-    }
-
-    public static boolean exists(File directory){
-        return new File(directory, "world_info.dat").exists();
-    }
-
-    public static long lastModified(File directory){
-        return new File(directory, "world_info.dat").lastModified();
     }
 }
