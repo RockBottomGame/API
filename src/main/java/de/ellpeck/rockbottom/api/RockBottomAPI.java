@@ -141,11 +141,7 @@ public final class RockBottomAPI{
     public static final IndexRegistry<Class<? extends ChatComponent>> CHAT_COMPONENT_REGISTRY = new IndexRegistry<>("chat_component_registry", Byte.MAX_VALUE);
     public static final List<IMainMenuTheme> MAIN_MENU_THEMES = new ArrayList<>();
 
-    private static IApiHandler apiHandler;
-    private static INetHandler netHandler;
-    private static IEventHandler eventHandler;
-    private static IGameInstance gameInstance;
-    private static IModLoader modLoader;
+    private static Internals internals;
 
     /**
      * See {@link IApiHandler} for more information
@@ -153,7 +149,7 @@ public final class RockBottomAPI{
      * @return The {@link IApiHandler}
      */
     public static IApiHandler getApiHandler(){
-        return apiHandler;
+        return internals.getApi();
     }
 
     /**
@@ -162,7 +158,7 @@ public final class RockBottomAPI{
      * @return The {@link INetHandler}
      */
     public static INetHandler getNet(){
-        return netHandler;
+        return internals.getNet();
     }
 
     /**
@@ -171,7 +167,7 @@ public final class RockBottomAPI{
      * @return The {@link IEventHandler}
      */
     public static IEventHandler getEventHandler(){
-        return eventHandler;
+        return internals.getEvent();
     }
 
     /**
@@ -180,7 +176,7 @@ public final class RockBottomAPI{
      * @return The {@link IGameInstance}
      */
     public static IGameInstance getGame(){
-        return gameInstance;
+        return internals.getGame();
     }
 
     /**
@@ -189,7 +185,7 @@ public final class RockBottomAPI{
      * @return The {@link IModLoader}
      */
     public static IModLoader getModLoader(){
-        return modLoader;
+        return internals.getMod();
     }
 
     /**
@@ -199,7 +195,7 @@ public final class RockBottomAPI{
      * @return The {@link IResourceName}
      */
     public static IResourceName createInternalRes(String resource){
-        return createRes(gameInstance, resource);
+        return createRes(getGame(), resource);
     }
 
     /**
@@ -210,7 +206,7 @@ public final class RockBottomAPI{
      * @return The {@link IResourceName}
      */
     public static IResourceName createRes(IMod mod, String resource){
-        return modLoader.createResourceName(mod, resource);
+        return getModLoader().createResourceName(mod, resource);
     }
 
     /**
@@ -222,52 +218,7 @@ public final class RockBottomAPI{
      * @throws IllegalArgumentException if the specified string cannot be parsed as an {@link IResourceName}
      */
     public static IResourceName createRes(String combined){
-        return modLoader.createResourceName(combined);
-    }
-
-    /**
-     * For game internal use only
-     */
-    public static void setApiHandler(IApiHandler api){
-        if(apiHandler == null){
-            apiHandler = api;
-        }
-    }
-
-    /**
-     * For game internal use only
-     */
-    public static void setNetHandler(INetHandler net){
-        if(netHandler == null){
-            netHandler = net;
-        }
-    }
-
-    /**
-     * For game internal use only
-     */
-    public static void setEventHandler(IEventHandler event){
-        if(eventHandler == null){
-            eventHandler = event;
-        }
-    }
-
-    /**
-     * For game internal use only
-     */
-    public static void setGameInstance(IGameInstance game){
-        if(gameInstance == null){
-            gameInstance = game;
-        }
-    }
-
-    /**
-     * For game internal use only
-     */
-    public static void setModLoader(IModLoader mod){
-        if(modLoader == null){
-            modLoader = mod;
-        }
+        return getModLoader().createResourceName(combined);
     }
 
     public static int getFuelValue(ItemInstance instance){
@@ -329,6 +280,15 @@ public final class RockBottomAPI{
         }
         else{
             return getCombinerRecipe(instance, other) != null;
+        }
+    }
+
+    public static void setInternals(Internals intern){
+        if(internals == null){
+            internals = intern;
+        }
+        else{
+            throw new RuntimeException("Mod tried to modify internal handlers - This is not allowed!");
         }
     }
 }
