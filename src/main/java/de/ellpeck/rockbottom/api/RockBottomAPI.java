@@ -94,24 +94,6 @@ public final class RockBottomAPI{
      */
     public static final List<BasicRecipe> MANUAL_CONSTRUCTION_RECIPES = new ArrayList<>();
     public static final List<BasicRecipe> CONSTRUCTION_TABLE_RECIPES = new ArrayList<>();
-    public static final List<StamperRecipe> STAMPER_RECIPES = new ArrayList<>();
-    public static final List<CombinerRecipe> COMBINER_RECIPES = new ArrayList<>();
-    /**
-     * The registry for {@link IUseInfo}s that can be used in machines as a fuel.
-     * The {@link Integer} specified is the amount of time the fuel will burn for
-     * <br> Use this to register custom fuels
-     */
-    public static final Map<IUseInfo, Integer> FUEL_REGISTRY = new HashMap<>();
-    /**
-     * The registry for {@link SmelterRecipe}
-     * <br> Use this to register recipes for the smelter
-     */
-    public static final List<SmelterRecipe> SMELTER_RECIPES = new ArrayList<>();
-    /**
-     * The registry for {@link SeparatorRecipe}
-     * <br> Use this to register recipes for the separator
-     */
-    public static final List<SeparatorRecipe> SEPARATOR_RECIPES = new ArrayList<>();
     /**
      * The registry for {@link IWorldGenerator}
      * <br> Use this to register custom world generators
@@ -219,68 +201,6 @@ public final class RockBottomAPI{
      */
     public static IResourceName createRes(String combined){
         return getModLoader().createResourceName(combined);
-    }
-
-    public static int getFuelValue(ItemInstance instance){
-        for(Map.Entry<IUseInfo, Integer> entry : FUEL_REGISTRY.entrySet()){
-            if(entry.getKey().containsItem(instance)){
-                return entry.getValue();
-            }
-        }
-        return 0;
-    }
-
-    public static SmelterRecipe getSmelterRecipe(ItemInstance input){
-        for(SmelterRecipe recipe : SMELTER_RECIPES){
-            if(recipe.getInput().containsItem(input)){
-                return recipe;
-            }
-        }
-        return null;
-    }
-
-    public static SeparatorRecipe getSeparatorRecipe(ItemInstance input){
-        for(SeparatorRecipe recipe : SEPARATOR_RECIPES){
-            if(recipe.getInput().containsItem(input)){
-                return recipe;
-            }
-        }
-        return null;
-    }
-
-    public static StamperRecipe getStamperRecipe(ItemInstance input){
-        for(StamperRecipe recipe : STAMPER_RECIPES){
-            if(recipe.getInput().containsItem(input)){
-                return recipe;
-            }
-        }
-        return null;
-    }
-
-    public static CombinerRecipe getCombinerRecipe(ItemInstance inputOne, ItemInstance inputTwo){
-        for(CombinerRecipe recipe : COMBINER_RECIPES){
-            if(recipe.getInputOne().containsItem(inputOne) && recipe.getInputTwo().containsItem(inputTwo)){
-                return recipe;
-            }
-            else if(recipe.getInputOne().containsItem(inputTwo) && recipe.getInputTwo().containsItem(inputOne)){
-                return recipe;
-            }
-        }
-        return null;
-    }
-
-    public static boolean isCombinerInput(ItemInstance instance, ItemInstance other){
-        if(other == null){
-            for(CombinerRecipe recipe : COMBINER_RECIPES){
-                if(recipe.getInputOne().containsItem(instance) || recipe.getInputTwo().containsItem(instance)){
-                    return true;
-                }
-            }
-            return false;
-        }
-        else{
-            return getCombinerRecipe(instance, other) != null;
-        }
     }
 
     public static void setInternals(Internals intern){
