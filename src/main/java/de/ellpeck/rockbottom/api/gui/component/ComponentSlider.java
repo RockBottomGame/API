@@ -51,14 +51,14 @@ public class ComponentSlider extends ComponentButton{
     }
 
     @Override
-    public void render(IGameInstance game, IAssetManager manager, IGraphics g){
-        super.render(game, manager, g);
+    public void render(IGameInstance game, IAssetManager manager, IGraphics g, int x, int y){
+        super.render(game, manager, g, x, y);
 
         float percentage = (float)(this.number-this.min)/(float)(this.max-this.min);
-        float x = this.x+percentage*(this.sizeX-5);
+        float renderX = x+percentage*(this.width-5);
 
-        g.fillRect(x, this.y, 5F, this.sizeY, this.isMouseOverPrioritized(game) ? this.colorButton : this.colorButtonUnselected);
-        g.drawRect(x, this.y, 5F, this.sizeY, this.colorOutline);
+        g.fillRect(renderX, y, 5F, this.height, this.isMouseOverPrioritized(game) ? this.colorButton : this.colorButtonUnselected);
+        g.drawRect(renderX, y, 5F, this.height, this.colorOutline);
     }
 
     @Override
@@ -90,7 +90,7 @@ public class ComponentSlider extends ComponentButton{
     }
 
     private void onClickOrMove(float mouseX){
-        float clickPercentage = (mouseX-this.x)/(float)this.sizeX;
+        float clickPercentage = (mouseX-this.x)/(float)this.width;
         int number = Math.max(this.min, Math.min(this.max, (int)(clickPercentage*(this.max-this.min+1)+this.min)));
 
         if(number != this.number){

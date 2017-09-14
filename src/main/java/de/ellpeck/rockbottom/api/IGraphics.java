@@ -95,6 +95,8 @@ public interface IGraphics{
 
     void scale(float scaleX, float scaleY);
 
+    void translate(float x, float y);
+
     void drawRect(float x, float y, float width, float height, int color);
 
     void drawRect(float x, float y, float width, float height, float lineWidth, int color);

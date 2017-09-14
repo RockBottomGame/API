@@ -28,6 +28,7 @@ import de.ellpeck.rockbottom.api.event.impl.ComponentRenderEvent;
 import de.ellpeck.rockbottom.api.event.impl.ComponentRenderOverlayEvent;
 import de.ellpeck.rockbottom.api.gui.component.GuiComponent;
 import de.ellpeck.rockbottom.api.util.Colors;
+import de.ellpeck.rockbottom.api.util.Util;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
@@ -40,21 +41,31 @@ public abstract class Gui{
     public static final int GRADIENT_COLOR = Colors.rgb(0F, 0F, 0F, 0.7F);
     public static final int HOVER_INFO_BACKGROUND = Colors.rgb(0F, 0F, 0F, 0.8F);
     protected final Gui parent;
-    public int sizeX;
-    public int sizeY;
+    protected final boolean hasUnspecifiedBounds;
+    protected int width;
+    protected int height;
 
-    public int guiLeft;
-    public int guiTop;
+    protected int x;
+    protected int y;
     protected List<GuiComponent> components = new ArrayList<>();
 
-    public Gui(int sizeX, int sizeY){
-        this(sizeX, sizeY, null);
+    public Gui(){
+        this(null);
     }
 
-    public Gui(int sizeX, int sizeY, Gui parent){
-        this.sizeX = sizeX;
-        this.sizeY = sizeY;
+    public Gui(Gui parent){
+        this(-1, -1, parent);
+    }
+
+    public Gui(int width, int height){
+        this(width, height, null);
+    }
+
+    public Gui(int width, int height, Gui parent){
+        this.width = width;
+        this.height = height;
         this.parent = parent;
+        this.hasUnspecifiedBounds = this.width <= 0 || this.height <= 0;
     }
 
     public void onOpened(IGameInstance game){
@@ -74,8 +85,17 @@ public abstract class Gui{
     }
 
     protected void initGuiVars(IGameInstance game){
-        this.guiLeft = (int)game.getWidthInGui()/2-this.sizeX/2;
-        this.guiTop = (int)game.getHeightInGui()/2-this.sizeY/2;
+        if(!this.hasUnspecifiedBounds){
+            this.x = (int)game.getWidthInGui()/2-this.width/2;
+            this.y = (int)game.getHeightInGui()/2-this.height/2;
+        }
+        else{
+            this.x = 0;
+            this.y = 0;
+
+            this.width = Util.ceil(game.getWidthInGui());
+            this.height = Util.ceil(game.getHeightInGui());
+        }
     }
 
     public void update(IGameInstance game){
@@ -124,7 +144,7 @@ public abstract class Gui{
             GuiComponent component = this.components.get(i);
             if(component.isActive){
                 if(RockBottomAPI.getEventHandler().fireEvent(new ComponentRenderEvent(this, i, component)) != EventResult.CANCELLED){
-                    component.render(game, manager, g);
+                    component.render(game, manager, g, component.getRenderX(), component.getRenderY());
                 }
             }
         }
@@ -135,7 +155,7 @@ public abstract class Gui{
             GuiComponent component = this.components.get(i);
             if(component.isActive){
                 if(RockBottomAPI.getEventHandler().fireEvent(new ComponentRenderOverlayEvent(this, i, component)) != EventResult.CANCELLED){
-                    component.renderOverlay(game, manager, g);
+                    component.renderOverlay(game, manager, g, component.getRenderX(), component.getRenderY());
                 }
             }
         }
@@ -165,7 +185,7 @@ public abstract class Gui{
             int mouseX = (int)game.getMouseInGuiX();
             int mouseY = (int)game.getMouseInGuiY();
 
-            boolean overSelf = mouseX >= this.guiLeft && mouseX < this.guiLeft+this.sizeX && mouseY >= this.guiTop && mouseY < this.guiTop+this.sizeY;
+            boolean overSelf = mouseX >= this.x && mouseX < this.x+this.width && mouseY >= this.y && mouseY < this.y+this.height;
             return overSelf || this.isMouseOverComponent(game);
         }
         else{
@@ -206,4 +226,12 @@ public abstract class Gui{
     }
 
     public abstract IResourceName getName();
+
+    public int getX(){
+        return this.x;
+    }
+
+    public int getY(){
+        return this.y;
+    }
 }

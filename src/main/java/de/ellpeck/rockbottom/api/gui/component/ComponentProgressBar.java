@@ -45,23 +45,23 @@ public class ComponentProgressBar extends GuiComponent{
     }
 
     @Override
-    public void render(IGameInstance game, IAssetManager manager, IGraphics g){
-        super.render(game, manager, g);
+    public void render(IGameInstance game, IAssetManager manager, IGraphics g, int x, int y){
+        super.render(game, manager, g, x, y);
 
         float percent = this.supplier.get();
 
-        g.fillRect(this.x, this.y, this.sizeX, this.sizeY, this.backgroundColor);
+        g.fillRect(x, y, this.width, this.height, this.backgroundColor);
 
         if(this.isVertical){
-            float height = percent*this.sizeY;
-            g.fillRect(this.x, this.y+this.sizeY-height, this.sizeX, height, this.progressColor);
+            float height = percent*this.height;
+            g.fillRect(x, y+this.height-height, this.width, height, this.progressColor);
         }
         else{
-            float width = percent*this.sizeX;
-            g.fillRect(this.x, this.y, width, this.sizeY, this.progressColor);
+            float width = percent*this.width;
+            g.fillRect(x, y, width, this.height, this.progressColor);
         }
 
-        g.drawRect(this.x, this.y, this.sizeX, this.sizeY, Colors.BLACK);
+        g.drawRect(x, y, this.width, this.height, Colors.BLACK);
     }
 
     @Override

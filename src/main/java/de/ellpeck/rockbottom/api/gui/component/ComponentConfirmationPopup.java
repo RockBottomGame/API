@@ -44,40 +44,40 @@ public class ComponentConfirmationPopup extends GuiComponent{
 
         this.buttonArea = new BoundBox(0, 0, 40, 15);
 
-        this.isUpsideDown = this.y < 0;
+        this.isUpsideDown = this.getRenderY() < 0;
         if(this.isUpsideDown){
-            this.y += this.sizeY;
-            this.buttonArea.add(this.x+7, this.y+23);
+            this.y += this.height;
+            this.buttonArea.add(this.getRenderX()+7, this.getRenderY()+23);
         }
         else{
-            this.buttonArea.add(this.x+7, this.y+11);
+            this.buttonArea.add(this.getRenderX()+7, this.getRenderY()+11);
         }
     }
 
     @Override
-    public void render(IGameInstance game, IAssetManager manager, IGraphics g){
+    public void render(IGameInstance game, IAssetManager manager, IGraphics g, int x, int y){
         ITexture tex = manager.getTexture(RES);
         Font font = manager.getFont();
         String text = "Are you sure?";
 
         if(this.isUpsideDown){
-            tex.draw(this.x, this.y+this.sizeY, this.x+this.sizeX, this.y, 0, 0, tex.getWidth(), tex.getHeight());
-            font.drawCenteredString(this.x+this.sizeX/2, this.y+15, text, 0.25F, false);
+            tex.draw(x, y+this.height, x+this.width, y, 0, 0, tex.getWidth(), tex.getHeight());
+            font.drawCenteredString(x+this.width/2, y+15, text, 0.25F, false);
         }
         else{
-            tex.draw(this.x, this.y, this.sizeX, this.sizeY);
-            font.drawCenteredString(this.x+this.sizeX/2, this.y+3, text, 0.25F, false);
+            tex.draw(x, y, this.width, this.height);
+            font.drawCenteredString(x+this.width/2, y+3, text, 0.25F, false);
         }
 
-        int x = (int)this.buttonArea.getMinX();
-        int y = (int)this.buttonArea.getMinY();
+        int renderX = (int)this.buttonArea.getMinX();
+        int renderY = (int)this.buttonArea.getMinY();
         int width = (int)this.buttonArea.getWidth();
         int height = (int)this.buttonArea.getHeight();
 
-        g.fillRect(x, y, width, height, this.isMouseOverPrioritized(game) && this.buttonArea.contains(game.getMouseInGuiX(), game.getMouseInGuiY()) ? this.colorButton : this.colorButtonUnselected);
-        g.drawRect(x, y, width, height, this.colorOutline);
+        g.fillRect(renderX, renderY, width, height, this.isMouseOverPrioritized(game) && this.buttonArea.contains(game.getMouseInGuiX(), game.getMouseInGuiY()) ? this.colorButton : this.colorButtonUnselected);
+        g.drawRect(renderX, renderY, width, height, this.colorOutline);
 
-        font.drawCenteredString(x+width/2F, y+height/2F+0.5F, "Yes", 0.35F, true);
+        font.drawCenteredString(renderX+width/2F, renderY+height/2F+0.5F, "Yes", 0.35F, true);
     }
 
     @Override

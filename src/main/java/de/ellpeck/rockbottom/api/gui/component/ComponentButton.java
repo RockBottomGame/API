@@ -52,15 +52,15 @@ public class ComponentButton extends GuiComponent{
     }
 
     @Override
-    public void render(IGameInstance game, IAssetManager manager, IGraphics g){
+    public void render(IGameInstance game, IAssetManager manager, IGraphics g, int x, int y){
         if(this.hasBackground){
-            g.fillRect(this.x, this.y, this.sizeX, this.sizeY, this.isMouseOverPrioritized(game) ? this.colorButton : this.colorButtonUnselected);
-            g.drawRect(this.x, this.y, this.sizeX, this.sizeY, this.colorOutline);
+            g.fillRect(x, y, this.width, this.height, this.isMouseOverPrioritized(game) ? this.colorButton : this.colorButtonUnselected);
+            g.drawRect(x, y, this.width, this.height, this.colorOutline);
         }
 
         String text = this.getText();
         if(text != null){
-            manager.getFont().drawCenteredString(this.x+this.sizeX/2F, this.y+this.sizeY/2F+0.5F, text, 0.35F, true);
+            manager.getFont().drawCenteredString(x+this.width/2F, y+this.height/2F+0.5F, text, 0.35F, true);
         }
     }
 
@@ -73,7 +73,7 @@ public class ComponentButton extends GuiComponent{
     }
 
     @Override
-    public void renderOverlay(IGameInstance game, IAssetManager manager, IGraphics g){
+    public void renderOverlay(IGameInstance game, IAssetManager manager, IGraphics g, int x, int y){
         if(this.isMouseOverPrioritized(game)){
             String[] hover = this.getHover();
             if(hover != null && hover.length > 0){

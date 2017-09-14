@@ -34,30 +34,30 @@ public abstract class GuiComponent{
     protected final int colorOutline = Colors.multiply(this.guiColor, 0.75F);
     protected final int colorButtonUnselected = Colors.multiplyA(this.colorButton, 0.6F);
 
-    public int sizeX;
-    public int sizeY;
-    public Gui gui;
-    public int x;
-    public int y;
+    protected int width;
+    protected int height;
+    public final Gui gui;
+    protected int x;
+    protected int y;
     public boolean isActive = true;
 
-    public GuiComponent(Gui gui, int x, int y, int sizeX, int sizeY){
+    public GuiComponent(Gui gui, int x, int y, int width, int height){
         this.gui = gui;
         this.x = x;
         this.y = y;
-        this.sizeX = sizeX;
-        this.sizeY = sizeY;
+        this.width = width;
+        this.height = height;
     }
 
     public void update(IGameInstance game){
 
     }
 
-    public void render(IGameInstance game, IAssetManager manager, IGraphics g){
+    public void render(IGameInstance game, IAssetManager manager, IGraphics g, int x, int y){
 
     }
 
-    public void renderOverlay(IGameInstance game, IAssetManager manager, IGraphics g){
+    public void renderOverlay(IGameInstance game, IAssetManager manager, IGraphics g, int x, int y){
 
     }
 
@@ -70,7 +70,10 @@ public abstract class GuiComponent{
             int mouseX = (int)game.getMouseInGuiX();
             int mouseY = (int)game.getMouseInGuiY();
 
-            return mouseX >= this.x && mouseX < this.x+this.sizeX && mouseY >= this.y && mouseY < this.y+this.sizeY;
+            int renderX = this.getRenderX();
+            int renderY = this.getRenderY();
+
+            return mouseX >= renderX && mouseX < renderX+this.width && mouseY >= renderY && mouseY < renderY+this.height;
         }
         else{
             return false;
@@ -91,4 +94,30 @@ public abstract class GuiComponent{
     }
 
     public abstract IResourceName getName();
+
+    public int getX(){
+        return this.x;
+    }
+
+    public int getY(){
+        return this.y;
+    }
+
+    public int getRenderX(){
+        if(this.gui != null){
+            return this.gui.getX()+this.getX();
+        }
+        else{
+            return this.getX();
+        }
+    }
+
+    public int getRenderY(){
+        if(this.gui != null){
+            return this.gui.getY()+this.getY();
+        }
+        else{
+            return this.getY();
+        }
+    }
 }

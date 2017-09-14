@@ -51,12 +51,12 @@ public class ComponentSlot extends GuiComponent{
     }
 
     @Override
-    public void render(IGameInstance game, IAssetManager manager, IGraphics g){
-        g.renderSlotInGui(game, manager, this.slot.get(), this.x, this.y, 1F, this.isMouseOver(game));
+    public void render(IGameInstance game, IAssetManager manager, IGraphics g, int x, int y){
+        g.renderSlotInGui(game, manager, this.slot.get(), x, y, 1F, this.isMouseOver(game));
     }
 
     @Override
-    public void renderOverlay(IGameInstance game, IAssetManager manager, IGraphics g){
+    public void renderOverlay(IGameInstance game, IAssetManager manager, IGraphics g, int x, int y){
         if(this.container.holdingInst == null && this.isMouseOverPrioritized(game)){
             ItemInstance instance = this.slot.get();
             if(instance != null){

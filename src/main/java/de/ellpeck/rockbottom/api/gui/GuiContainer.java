@@ -83,7 +83,7 @@ public abstract class GuiContainer extends Gui{
         ItemContainer container = this.player.getContainer();
         for(int i = 0; i < container.getSlotAmount(); i++){
             ContainerSlot slot = container.getSlot(i);
-            this.components.add(new ComponentSlot(this, slot, i, this.guiLeft+slot.x, this.guiTop+slot.y));
+            this.components.add(new ComponentSlot(this, slot, i, slot.x, slot.y));
         }
     }
 

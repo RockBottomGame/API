@@ -71,17 +71,17 @@ public class ComponentScrollMenu extends ComponentButton{
     }
 
     @Override
-    public void render(IGameInstance game, IAssetManager manager, IGraphics g){
+    public void render(IGameInstance game, IAssetManager manager, IGraphics g, int x, int y){
         int max = this.getMax();
         float percentage = max <= 0 ? 0 : (float)this.number/(float)max;
-        float y = this.y+percentage*(this.sizeY-10);
+        float renderY = y+percentage*(this.height-10);
         int color = this.isMouseOverPrioritized(game) || this.hoverArea.contains(game.getMouseInGuiX(), game.getMouseInGuiY()) ? this.colorButton : this.colorButtonUnselected;
 
-        g.fillRect(this.x, this.y, 6F, this.sizeY, color);
-        g.drawRect(this.x, y, 6F, 10F, this.colorOutline);
+        g.fillRect(x, renderY, 6F, this.height, color);
+        g.drawRect(x, renderY, 6F, 10F, this.colorOutline);
 
-        g.fillRect(this.x, y, 6F, 10F, color);
-        g.drawRect(this.x, this.y, 6F, this.sizeY, this.colorOutline);
+        g.fillRect(x, renderY, 6F, 10F, color);
+        g.drawRect(x, renderY, 6F, this.height, this.colorOutline);
     }
 
     public void organize(){
@@ -104,9 +104,9 @@ public class ComponentScrollMenu extends ComponentButton{
                     component.x = showX;
                     component.y = showY;
 
-                    showX += component.sizeX+2;
-                    if(component.sizeY > highestHeight){
-                        highestHeight = component.sizeY;
+                    showX += component.width+2;
+                    if(component.height > highestHeight){
+                        highestHeight = component.height;
                     }
 
                     index++;
@@ -159,7 +159,7 @@ public class ComponentScrollMenu extends ComponentButton{
 
     private void onClickOrMove(float mouseY){
         int max = this.getMax();
-        float clickPercentage = (mouseY-this.y)/(float)this.sizeY;
+        float clickPercentage = (mouseY-this.y)/(float)this.height;
 
         int number = Math.max(0, Math.min(max, (int)(clickPercentage*(max-1))));
         if(number != this.number){

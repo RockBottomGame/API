@@ -135,23 +135,23 @@ public class ComponentInputField extends GuiComponent{
     }
 
     @Override
-    public void render(IGameInstance game, IAssetManager manager, IGraphics g){
+    public void render(IGameInstance game, IAssetManager manager, IGraphics g, int x, int y){
         if(this.renderBox){
-            g.fillRect(this.x, this.y, this.sizeX, this.sizeY, this.isMouseOverPrioritized(game) ? this.colorButton : this.colorButtonUnselected);
-            g.drawRect(this.x, this.y, this.sizeX, this.sizeY, this.colorOutline);
+            g.fillRect(x, y, this.width, this.height, this.isMouseOverPrioritized(game) ? this.colorButton : this.colorButtonUnselected);
+            g.drawRect(x, y, this.width, this.height, this.colorOutline);
         }
 
         Font font = manager.getFont();
         String text = this.getDisplayText();
 
         String display = text+(this.isActive ? ((this.counter/15)%2 == 0 ? "|" : " ") : "");
-        font.drawCutOffString(this.x+3, this.y+this.sizeY/2F-font.getHeight(0.35F)/2F, display, 0.35F, this.sizeX-6, true, false);
+        font.drawCutOffString(x+3, y+this.height/2F-font.getHeight(0.35F)/2F, display, 0.35F, this.width-6, true, false);
 
         if(this.displaxMaxLength){
             String unformattedText = font.removeFormatting(text);
             int diff = this.maxLength-unformattedText.length();
             FormattingCode format = diff <= 0 ? FormattingCode.RED : (diff <= this.maxLength/8 ? FormattingCode.ORANGE : (diff <= this.maxLength/4 ? FormattingCode.YELLOW : FormattingCode.NONE));
-            font.drawStringFromRight(this.x+this.sizeX-1, this.y+this.sizeY-font.getHeight(0.2F), format.toString()+unformattedText.length()+"/"+this.maxLength, 0.2F);
+            font.drawStringFromRight(x+this.width-1, y+this.height-font.getHeight(0.2F), format.toString()+unformattedText.length()+"/"+this.maxLength, 0.2F);
         }
     }
 
