@@ -202,7 +202,7 @@ public abstract class Gui{
     }
 
     public void sortComponents(){
-        this.components.sort(Comparator.comparingInt(GuiComponent::getPriority).reversed());
+        this.components.sort(Comparator.comparingInt(GuiComponent:: getPriority).reversed());
     }
 
     public boolean isMouseOverPrioritized(IGameInstance game, GuiComponent component){
