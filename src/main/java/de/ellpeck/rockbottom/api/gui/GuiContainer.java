@@ -77,8 +77,8 @@ public abstract class GuiContainer extends Gui{
     }
 
     @Override
-    public void initGui(IGameInstance game){
-        super.initGui(game);
+    public void init(IGameInstance game){
+        super.init(game);
 
         ItemContainer container = this.player.getContainer();
         for(int i = 0; i < container.getSlotAmount(); i++){

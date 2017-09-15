@@ -90,7 +90,7 @@ public class ComponentSlider extends ComponentButton{
     }
 
     private void onClickOrMove(float mouseX){
-        float clickPercentage = (mouseX-this.x)/(float)this.width;
+        float clickPercentage = (mouseX-this.getRenderX())/(float)this.width;
         int number = Math.max(this.min, Math.min(this.max, (int)(clickPercentage*(this.max-this.min+1)+this.min)));
 
         if(number != this.number){

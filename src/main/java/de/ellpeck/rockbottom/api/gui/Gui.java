@@ -34,6 +34,7 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public abstract class Gui{
@@ -76,15 +77,15 @@ public abstract class Gui{
         Keyboard.enableRepeatEvents(false);
     }
 
-    public void initGui(IGameInstance game){
+    public void init(IGameInstance game){
         if(!this.components.isEmpty()){
             this.components.clear();
         }
 
-        this.initGuiVars(game);
+        this.updateDimensions(game);
     }
 
-    protected void initGuiVars(IGameInstance game){
+    protected void updateDimensions(IGameInstance game){
         if(!this.hasUnspecifiedBounds){
             this.x = (int)game.getWidthInGui()/2-this.width/2;
             this.y = (int)game.getHeightInGui()/2-this.height/2;
@@ -99,7 +100,8 @@ public abstract class Gui{
     }
 
     public void update(IGameInstance game){
-        for(GuiComponent component : this.components){
+        for(int i = 0; i < this.components.size(); i++){
+            GuiComponent component = this.components.get(i);
             if(component.isActive){
                 component.update(game);
             }
@@ -107,7 +109,8 @@ public abstract class Gui{
     }
 
     public boolean onMouseAction(IGameInstance game, int button, float x, float y){
-        for(GuiComponent component : this.components){
+        for(int i = 0; i < this.components.size(); i++){
+            GuiComponent component = this.components.get(i);
             if(component.isActive){
                 if(component.onMouseAction(game, button, x, y)){
                     return true;
@@ -118,7 +121,8 @@ public abstract class Gui{
     }
 
     public boolean onKeyboardAction(IGameInstance game, int button, char character){
-        for(GuiComponent component : this.components){
+        for(int i = 0; i < this.components.size(); i++){
+            GuiComponent component = this.components.get(i);
             if(component.isActive){
                 if(component.onKeyboardAction(game, button, character)){
                     return true;
@@ -197,9 +201,8 @@ public abstract class Gui{
         return true;
     }
 
-    public void prioritize(GuiComponent component){
-        this.components.remove(component);
-        this.components.add(0, component);
+    public void sortComponents(){
+        this.components.sort(Comparator.comparingInt(GuiComponent::getPriority).reversed());
     }
 
     public boolean isMouseOverPrioritized(IGameInstance game, GuiComponent component){

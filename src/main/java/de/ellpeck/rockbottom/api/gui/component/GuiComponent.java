@@ -120,4 +120,8 @@ public abstract class GuiComponent{
             return this.getY();
         }
     }
+
+    public int getPriority(){
+        return 0;
+    }
 }

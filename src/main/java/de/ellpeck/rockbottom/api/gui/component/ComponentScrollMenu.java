@@ -159,7 +159,7 @@ public class ComponentScrollMenu extends ComponentButton{
 
     private void onClickOrMove(float mouseY){
         int max = this.getMax();
-        float clickPercentage = (mouseY-this.y)/(float)this.height;
+        float clickPercentage = (mouseY-this.getRenderY())/(float)this.height;
 
         int number = Math.max(0, Math.min(max, (int)(clickPercentage*(max-1))));
         if(number != this.number){
