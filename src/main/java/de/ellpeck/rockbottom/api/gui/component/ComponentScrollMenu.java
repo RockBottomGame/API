@@ -77,11 +77,11 @@ public class ComponentScrollMenu extends ComponentButton{
         float renderY = y+percentage*(this.height-10);
         int color = this.isMouseOverPrioritized(game) || this.hoverArea.contains(game.getMouseInGuiX(), game.getMouseInGuiY()) ? this.colorButton : this.colorButtonUnselected;
 
-        g.fillRect(x, renderY, 6F, this.height, color);
-        g.drawRect(x, renderY, 6F, 10F, this.colorOutline);
+        g.fillRect(x, y, 6F, this.height, color);
+        g.drawRect(x, y, 6F, this.height, this.colorOutline);
 
         g.fillRect(x, renderY, 6F, 10F, color);
-        g.drawRect(x, renderY, 6F, this.height, this.colorOutline);
+        g.drawRect(x, renderY, 6F, 10F, this.colorOutline);
     }
 
     public void organize(){
