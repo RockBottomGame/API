@@ -19,6 +19,7 @@
 package de.ellpeck.rockbottom.api;
 
 import de.ellpeck.rockbottom.api.item.Item;
+import de.ellpeck.rockbottom.api.item.ToolType;
 import de.ellpeck.rockbottom.api.tile.Tile;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 import de.ellpeck.rockbottom.api.util.reg.NameRegistry;
@@ -27,8 +28,13 @@ import de.ellpeck.rockbottom.api.world.gen.biome.Biome;
 public final class GameContent{
 
     public static final Tile TILE_AIR = getTile("air");
+    public static final Tile TILE_SOIL = getTile("soil").addEffectiveTool(ToolType.SHOVEL, 0).setForceDrop();
+    public static final Tile TILE_GRASS = getTile("grass").addEffectiveTool(ToolType.SHOVEL, 0).setForceDrop();
+    public static final Tile TILE_STONE = getTile("stone").setHardness(5F).addEffectiveTool(ToolType.PICKAXE, 0);
 
     public static final Biome BIOME_SKY = getBiome("sky");
+    public static final Biome BIOME_GRASSLAND = getBiome("grassland");
+    public static final Biome BIOME_UNDERGROUND = getBiome("underground");
 
     private static Biome getBiome(String name){
         return get(name, RockBottomAPI.BIOME_REGISTRY);

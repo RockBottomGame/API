@@ -19,7 +19,14 @@
 package de.ellpeck.rockbottom.api.world.gen.biome;
 
 import de.ellpeck.rockbottom.api.RockBottomAPI;
+import de.ellpeck.rockbottom.api.tile.state.TileState;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
+import de.ellpeck.rockbottom.api.world.IChunk;
+import de.ellpeck.rockbottom.api.world.IWorld;
+import de.ellpeck.rockbottom.api.world.TileLayer;
+import de.ellpeck.rockbottom.api.world.gen.INoiseGen;
+
+import java.util.Random;
 
 public abstract class Biome{
 
@@ -34,6 +41,8 @@ public abstract class Biome{
     public abstract int getHighestGridPos();
 
     public abstract int getLowestGridPos();
+
+    public abstract TileState getState(IWorld world, IChunk chunk, int x, int y, TileLayer layer, INoiseGen noise, Random rand);
 
     public IResourceName getName(){
         return this.name;

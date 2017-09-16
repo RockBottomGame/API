@@ -20,7 +20,7 @@ package de.ellpeck.rockbottom.api.world.gen.biome;
 
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 
-public class BiomeBasic extends Biome{
+public abstract class BiomeBasic extends Biome{
 
     private final int highestY;
     private final int lowestY;
