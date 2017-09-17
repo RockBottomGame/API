@@ -44,6 +44,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 /**
  * The main API class
@@ -200,6 +201,14 @@ public final class RockBottomAPI{
      */
     public static IResourceName createRes(String combined){
         return getModLoader().createResourceName(combined);
+    }
+
+    public static Logger createLogger(String name){
+        return getApiHandler().createLogger(name);
+    }
+
+    public static Logger logger(){
+        return getApiHandler().logger();
     }
 
     public static void setInternals(Internals intern){

@@ -23,10 +23,10 @@ import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.entity.Entity;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 import de.ellpeck.rockbottom.api.world.IWorld;
-import org.newdawn.slick.util.Log;
 
 import java.io.File;
 import java.util.Random;
+import java.util.logging.Level;
 
 public final class Util{
 
@@ -79,7 +79,7 @@ public final class Util{
             return entityClass.getConstructor(IWorld.class).newInstance(world);
         }
         catch(Exception e){
-            Log.error("Couldn't initialize entity with name "+name, e);
+            RockBottomAPI.logger().log(Level.SEVERE, "Couldn't initialize entity with name "+name, e);
             return null;
         }
     }

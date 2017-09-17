@@ -18,6 +18,7 @@
 
 package de.ellpeck.rockbottom.api.gui.container;
 
+import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.inventory.IInventory;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
@@ -53,7 +54,7 @@ public abstract class ItemContainer{
             }
         }
 
-        Log.warn("Tried adding slot "+slot+" with inventory "+slot.inventory+" to container "+this+" that doesn't contain it!");
+        RockBottomAPI.logger().warning("Tried adding slot "+slot+" with inventory "+slot.inventory+" to container "+this+" that doesn't contain it!");
     }
 
     public int getIndexForInvSlot(IInventory inv, int id){

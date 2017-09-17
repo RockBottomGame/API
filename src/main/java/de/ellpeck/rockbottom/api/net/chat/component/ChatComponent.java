@@ -4,7 +4,8 @@ import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.data.set.DataSet;
-import org.newdawn.slick.util.Log;
+
+import java.util.logging.Level;
 
 public abstract class ChatComponent{
 
@@ -26,7 +27,7 @@ public abstract class ChatComponent{
             return component;
         }
         catch(Exception e){
-            Log.error("Couldn't read chat component with id "+id+" from data set "+set+"! Does it have a default constructor?", e);
+            RockBottomAPI.logger().log(Level.SEVERE, "Couldn't read chat component with id "+id+" from data set "+set+"! Does it have a default constructor?", e);
             return null;
         }
     }

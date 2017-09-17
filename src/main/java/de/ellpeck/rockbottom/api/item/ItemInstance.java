@@ -81,7 +81,7 @@ public class ItemInstance{
             return instance;
         }
         else{
-            Log.info("Could not load item instance from data set "+set+" because name "+name+" is missing!");
+            RockBottomAPI.logger().info("Could not load item instance from data set "+set+" because name "+name+" is missing!");
             return null;
         }
     }

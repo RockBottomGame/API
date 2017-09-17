@@ -73,7 +73,7 @@ public class Font{
         }
 
         int height = rows.size();
-        Log.debug("Loaded font "+name+" with dimensions "+width+"x"+height+" and the following character map: "+characters);
+        RockBottomAPI.logger().config("Loaded font "+name+" with dimensions "+width+"x"+height+" and the following character map: "+characters);
 
         return new Font(name, texture, width, height, characters);
     }
@@ -187,7 +187,7 @@ public class Font{
                 pos = new Pos2(-1, -1);
                 this.characters.put(character, pos);
 
-                Log.warn("Character "+character+" is missing from font with name "+this.name+"!");
+                RockBottomAPI.logger().warning("Character "+character+" is missing from font with name "+this.name+"!");
             }
 
             if(pos.getX() >= 0 && pos.getY() >= 0){

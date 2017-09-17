@@ -59,7 +59,7 @@ public class Locale{
             String value = element.getAsJsonPrimitive().getAsString();
 
             locale.localization.put(RockBottomAPI.createRes(key), value);
-            Log.debug("Added localization "+key+" -> "+value+" to locale with name "+locale.name);
+            RockBottomAPI.logger().config("Added localization "+key+" -> "+value+" to locale with name "+locale.name);
         }
         else{
             for(Entry<String, JsonElement> entry : element.getAsJsonObject().entrySet()){
@@ -73,7 +73,7 @@ public class Locale{
         if(this.name.equals(otherLocale.name)){
             this.localization.putAll(otherLocale.localization);
 
-            Log.debug("Merged locale "+this.name+" with "+otherLocale.localization.size()+" bits of additional localization information");
+            RockBottomAPI.logger().config("Merged locale "+this.name+" with "+otherLocale.localization.size()+" bits of additional localization information");
             return true;
         }
         else{
@@ -94,7 +94,7 @@ public class Locale{
 
             this.localization.put(unloc, loc);
 
-            Log.warn("Localization with name "+unloc+" is missing from locale with name "+this.name+"!");
+            RockBottomAPI.logger().warning("Localization with name "+unloc+" is missing from locale with name "+this.name+"!");
         }
 
         if(format == null || format.length <= 0){

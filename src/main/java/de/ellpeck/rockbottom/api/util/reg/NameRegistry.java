@@ -21,6 +21,7 @@ package de.ellpeck.rockbottom.api.util.reg;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.Maps;
+import de.ellpeck.rockbottom.api.RockBottomAPI;
 import org.newdawn.slick.util.Log;
 
 public class NameRegistry<T> implements IRegistry<IResourceName, T>{
@@ -43,13 +44,13 @@ public class NameRegistry<T> implements IRegistry<IResourceName, T>{
 
         this.map.put(name, value);
 
-        Log.debug("Registered "+value+" with name "+name+" into registry "+this);
+        RockBottomAPI.logger().config("Registered "+value+" with name "+name+" into registry "+this);
     }
 
     @Override
     public T get(IResourceName name){
         if(name == null || name.isEmpty()){
-            Log.warn("Tried getting value of "+name+" for registry "+this+" which is invalid");
+            RockBottomAPI.logger().warning("Tried getting value of "+name+" for registry "+this+" which is invalid");
             return null;
         }
         else{

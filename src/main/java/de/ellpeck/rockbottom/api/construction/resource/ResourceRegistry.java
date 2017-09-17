@@ -18,6 +18,7 @@
 
 package de.ellpeck.rockbottom.api.construction.resource;
 
+import de.ellpeck.rockbottom.api.RockBottomAPI;
 import org.newdawn.slick.util.Log;
 
 import java.util.*;
@@ -41,7 +42,7 @@ public final class ResourceRegistry{
             }
         }
 
-        Log.debug("Registered resources "+Arrays.toString(resources)+" for resource name "+name);
+        RockBottomAPI.logger().config("Registered resources "+Arrays.toString(resources)+" for resource name "+name);
         return name;
     }
 

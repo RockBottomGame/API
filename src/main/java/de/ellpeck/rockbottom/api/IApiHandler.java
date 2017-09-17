@@ -33,6 +33,7 @@ import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.File;
 import java.util.Random;
+import java.util.logging.Logger;
 
 /**
  * The API handler can be used for executing code that is not part
@@ -128,4 +129,8 @@ public interface IApiHandler{
     boolean isToolEffective(AbstractEntityPlayer player, ItemInstance instance, Tile tile, TileLayer layer, int x, int y);
 
     boolean placeTile(int x, int y, TileLayer layer, AbstractEntityPlayer player, ItemInstance selected, Tile tile);
+
+    Logger createLogger(String name);
+
+    Logger logger();
 }

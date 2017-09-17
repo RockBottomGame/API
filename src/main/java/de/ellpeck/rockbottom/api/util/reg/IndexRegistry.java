@@ -21,6 +21,7 @@ package de.ellpeck.rockbottom.api.util.reg;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.Maps;
+import de.ellpeck.rockbottom.api.RockBottomAPI;
 import org.newdawn.slick.util.Log;
 
 public class IndexRegistry<T> implements IRegistry<Integer, T>{
@@ -45,13 +46,13 @@ public class IndexRegistry<T> implements IRegistry<Integer, T>{
 
         this.map.put(id, value);
 
-        Log.debug("Registered "+value+" with id "+id+" into registry "+this);
+        RockBottomAPI.logger().config("Registered "+value+" with id "+id+" into registry "+this);
     }
 
     @Override
     public T get(Integer id){
         if(id > this.max){
-            Log.warn("Tried getting value of "+id+" for registry "+this+" which is greater than max "+this.max);
+            RockBottomAPI.logger().warning("Tried getting value of "+id+" for registry "+this+" which is greater than max "+this.max);
             return null;
         }
         else{
