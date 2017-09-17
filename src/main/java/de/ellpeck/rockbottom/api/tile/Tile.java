@@ -114,7 +114,7 @@ public class Tile{
     }
 
     public boolean canPlaceInLayer(TileLayer layer){
-        return layer != TileLayer.BACKGROUND || !this.canProvideTileEntity();
+        return layer == TileLayer.MAIN || (layer == TileLayer.BACKGROUND && !this.canProvideTileEntity());
     }
 
     public Tile register(){
