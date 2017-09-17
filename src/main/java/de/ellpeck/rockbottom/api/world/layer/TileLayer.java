@@ -23,6 +23,8 @@ public class TileLayer{
     private final int renderPriority;
     private final BiFunction<IGameInstance, AbstractEntityPlayer, Boolean> canEditFunction;
 
+    private int assignedIndex = -1;
+
     public TileLayer(IResourceName name, int renderPriority, BiFunction<IGameInstance, AbstractEntityPlayer, Boolean> canEditFunction){
         this.name = name;
         this.renderPriority = renderPriority;
@@ -69,19 +71,38 @@ public class TileLayer{
         return this.name.hashCode();
     }
 
-    public int sessionIndex(){
-        return getAllLayers().indexOf(this);
+    public int index(){
+        if(this.assignedIndex >= 0){
+            return this.assignedIndex;
+        }
+        else{
+            throw new RuntimeException("Cannot access layer index before layer list has been initialized!");
+        }
     }
 
-    public static List<TileLayer> getAllLayers(){
-        if(allLayers == null || allLayers.size() != RockBottomAPI.TILE_LAYER_REGISTRY.getSize()){
+    public static void initLayerList(){
+        if(allLayers == null){
             List<TileLayer> list = new ArrayList<>(RockBottomAPI.TILE_LAYER_REGISTRY.getUnmodifiable().values());
             list.sort(Comparator.comparing(TileLayer:: getName));
             allLayers = Collections.unmodifiableList(list);
 
+            for(int i = 0; i < allLayers.size(); i++){
+                allLayers.get(i).assignedIndex = i;
+            }
+
             RockBottomAPI.logger().info("Sorting a total of "+allLayers.size()+" tile layers");
         }
+        else{
+            throw new RuntimeException("Layer list already initialized!");
+        }
+    }
 
-        return allLayers;
+    public static List<TileLayer> getAllLayers(){
+        if(allLayers != null){
+            return allLayers;
+        }
+        else{
+            throw new RuntimeException("Cannot access layer list before it has been initialized!");
+        }
     }
 }
