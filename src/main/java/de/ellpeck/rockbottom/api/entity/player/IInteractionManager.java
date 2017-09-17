@@ -18,7 +18,7 @@
 
 package de.ellpeck.rockbottom.api.entity.player;
 
-import de.ellpeck.rockbottom.api.world.TileLayer;
+import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 
 public interface IInteractionManager{
 

@@ -43,7 +43,7 @@ import de.ellpeck.rockbottom.api.util.Direction;
 import de.ellpeck.rockbottom.api.util.Util;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 import de.ellpeck.rockbottom.api.world.IWorld;
-import de.ellpeck.rockbottom.api.world.TileLayer;
+import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 import org.newdawn.slick.Input;
 
 import java.util.*;
@@ -102,12 +102,8 @@ public class Tile{
             return false;
         }
 
-        if(!world.getState(layer.getOpposite(), x, y).getTile().isAir()){
-            return true;
-        }
-
-        for(TileLayer testLayer : TileLayer.LAYERS){
-            for(Direction dir : Direction.ADJACENT){
+        for(TileLayer testLayer : TileLayer.getAllLayers()){
+            for(Direction dir : Direction.ADJACENT_INCLUDING_NONE){
                 Tile tile = world.getState(testLayer, x+dir.x, y+dir.y).getTile();
                 if(!tile.isAir()){
                     return true;
@@ -310,10 +306,10 @@ public class Tile{
     }
 
     public void describeItem(IAssetManager manager, ItemInstance instance, List<String> desc, boolean isAdvanced){
-        for(TileLayer layer : TileLayer.LAYERS){
+        for(TileLayer layer : TileLayer.getAllLayers()){
             if(this.canPlaceInLayer(layer)){
                 if(isAdvanced){
-                    desc.add(FormattingCode.GRAY+manager.localize(LOC_LAYER, manager.localize(layer.name)));
+                    desc.add(FormattingCode.GRAY+manager.localize(LOC_LAYER, manager.localize(layer.getName())));
                 }
                 else{
                     desc.add(FormattingCode.DARK_GRAY+manager.localize(LOC_ADVANCED, Input.getKeyName(Settings.KEY_ADVANCED_INFO.getKey())));

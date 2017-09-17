@@ -36,6 +36,7 @@ import de.ellpeck.rockbottom.api.tile.state.TileState;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 import de.ellpeck.rockbottom.api.util.reg.IndexRegistry;
 import de.ellpeck.rockbottom.api.util.reg.NameRegistry;
+import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 import de.ellpeck.rockbottom.api.world.gen.IWorldGenerator;
 import de.ellpeck.rockbottom.api.world.gen.biome.Biome;
 
@@ -53,7 +54,7 @@ public final class RockBottomAPI{
     /**
      * The current API version
      */
-    public static final String VERSION = "0.1.0";
+    public static final String VERSION = "0.1.1";
 
     /**
      * The registry for {@link Tile}
@@ -108,6 +109,7 @@ public final class RockBottomAPI{
      * <br> DO NOT manually register states into this registry, it is populated automatically
      */
     public static final NameRegistry<TileState> TILE_STATE_REGISTRY = new NameRegistry<>("tile_state_registry");
+    public static final NameRegistry<TileLayer> TILE_LAYER_REGISTRY = new NameRegistry<>("tile_layer_registry");
     /**
      * The registry for {@link Keybind}
      * <br> Use this to register custom keybinds

@@ -20,7 +20,7 @@ package de.ellpeck.rockbottom.api.event.impl;
 
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.event.Event;
-import de.ellpeck.rockbottom.api.world.TileLayer;
+import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 
 /**
  * This event is fired when an {@link AbstractEntityPlayer} destroys a tile

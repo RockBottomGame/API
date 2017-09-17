@@ -25,9 +25,11 @@ import de.ellpeck.rockbottom.api.tile.Tile;
 import de.ellpeck.rockbottom.api.tile.state.TileState;
 import de.ellpeck.rockbottom.api.util.MutableInt;
 import de.ellpeck.rockbottom.api.world.gen.biome.Biome;
+import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * The world is split up into parts with the dimensions
@@ -216,4 +218,6 @@ public interface IChunk extends IChunkOrWorld{
     Biome getBiomeInner(int x, int y);
 
     void setBiomeInner(int x, int y, Biome biome);
+
+    Set<TileLayer> getLoadedLayers();
 }
