@@ -193,7 +193,7 @@ public class Tile{
         }
     }
 
-    public TileEntity provideTileEntity(IWorld world, int x, int y){
+    public TileEntity provideTileEntity(IWorld world, int x, int y, TileLayer layer){
         return null;
     }
 

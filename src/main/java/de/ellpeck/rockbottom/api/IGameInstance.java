@@ -188,16 +188,6 @@ public interface IGameInstance extends IMod{
     boolean isLightDebug();
 
     /**
-     * @return If the game is in foreground debug making the foreground layer disappear (F3)
-     */
-    boolean isForegroundDebug();
-
-    /**
-     * @return If the game is in background debug making the background layer disappear (F4)
-     */
-    boolean isBackgroundDebug();
-
-    /**
      * @return If the game is in item info debug making the id and data of items show on the tooltip (F5)
      */
     boolean isItemInfoDebug();

@@ -70,13 +70,15 @@ public interface IChunkOrWorld{
      * @param x The x coordinate
      * @param y The y coordinate
      */
-    void removeTileEntity(int x, int y);
+    void removeTileEntity(TileLayer layer, int x, int y);
 
     /**
      * @param x The x coordinate
      * @param y The y coordinate
      * @return The {@link TileEntity} at the specified coordinates
      */
+    TileEntity getTileEntity(TileLayer layer, int x, int y);
+
     TileEntity getTileEntity(int x, int y);
 
     /**
@@ -88,6 +90,8 @@ public interface IChunkOrWorld{
      * @param <T>       The type
      * @return The tileentity of the type, or {@code null} if there is none or it is not the right type
      */
+    <T extends TileEntity> T getTileEntity(TileLayer layer, int x, int y, Class<T> tileClass);
+
     <T extends TileEntity> T getTileEntity(int x, int y, Class<T> tileClass);
 
     /**

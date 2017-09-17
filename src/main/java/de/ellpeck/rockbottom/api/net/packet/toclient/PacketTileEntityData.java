@@ -23,6 +23,7 @@ import de.ellpeck.rockbottom.api.data.set.DataSet;
 import de.ellpeck.rockbottom.api.net.NetUtil;
 import de.ellpeck.rockbottom.api.net.packet.IPacket;
 import de.ellpeck.rockbottom.api.tile.entity.TileEntity;
+import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 
@@ -33,10 +34,12 @@ public class PacketTileEntityData implements IPacket{
     private final DataSet set = new DataSet();
     private int x;
     private int y;
+    private TileLayer layer;
 
-    public PacketTileEntityData(int x, int y, TileEntity tile){
+    public PacketTileEntityData(int x, int y, TileLayer layer, TileEntity tile){
         this.x = x;
         this.y = y;
+        this.layer = layer;
         tile.save(this.set, true);
     }
 
@@ -48,6 +51,7 @@ public class PacketTileEntityData implements IPacket{
     public void toBuffer(ByteBuf buf) throws IOException{
         buf.writeInt(this.x);
         buf.writeInt(this.y);
+        buf.writeInt(this.layer.sessionIndex());
         NetUtil.writeSetToBuffer(this.set, buf);
     }
 
@@ -55,6 +59,7 @@ public class PacketTileEntityData implements IPacket{
     public void fromBuffer(ByteBuf buf) throws IOException{
         this.x = buf.readInt();
         this.y = buf.readInt();
+        this.layer = TileLayer.getAllLayers().get(buf.readInt());
         NetUtil.readSetFromBuffer(this.set, buf);
     }
 

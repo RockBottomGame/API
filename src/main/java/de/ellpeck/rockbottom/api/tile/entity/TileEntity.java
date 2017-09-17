@@ -27,17 +27,20 @@ import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.net.packet.toclient.PacketTileEntityData;
 import de.ellpeck.rockbottom.api.util.Util;
 import de.ellpeck.rockbottom.api.world.IWorld;
+import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 
 public class TileEntity{
 
     public final IWorld world;
     public final int x;
     public final int y;
+    public final TileLayer layer;
 
-    public TileEntity(IWorld world, int x, int y){
+    public TileEntity(IWorld world, int x, int y, TileLayer layer){
         this.world = world;
         this.x = x;
         this.y = y;
+        this.layer = layer;
     }
 
     public void update(IGameInstance game){
@@ -75,7 +78,7 @@ public class TileEntity{
 
     public void sendToClients(){
         if(this.world.isServer()){
-            RockBottomAPI.getNet().sendToAllPlayers(this.world, new PacketTileEntityData(this.x, this.y, this));
+            RockBottomAPI.getNet().sendToAllPlayers(this.world, new PacketTileEntityData(this.x, this.y, this.layer, this));
         }
     }
 
