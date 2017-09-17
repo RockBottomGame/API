@@ -20,12 +20,12 @@ public class TileLayer{
     private static List<TileLayer> allLayers;
 
     private final IResourceName name;
-    private final int priority;
+    private final int renderPriority;
     private final BiFunction<IGameInstance, AbstractEntityPlayer, Boolean> canEditFunction;
 
-    public TileLayer(IResourceName name, int priority, BiFunction<IGameInstance, AbstractEntityPlayer, Boolean> canEditFunction){
+    public TileLayer(IResourceName name, int renderPriority, BiFunction<IGameInstance, AbstractEntityPlayer, Boolean> canEditFunction){
         this.name = name;
-        this.priority = priority;
+        this.renderPriority = renderPriority;
         this.canEditFunction = canEditFunction;
     }
 
@@ -33,8 +33,8 @@ public class TileLayer{
         return this.name;
     }
 
-    public int getPriority(){
-        return this.priority;
+    public int getRenderPriority(){
+        return this.renderPriority;
     }
 
     public boolean canEditLayer(IGameInstance game, AbstractEntityPlayer player){
@@ -76,8 +76,10 @@ public class TileLayer{
     public static List<TileLayer> getAllLayers(){
         if(allLayers == null || allLayers.size() != RockBottomAPI.TILE_LAYER_REGISTRY.getSize()){
             List<TileLayer> list = new ArrayList<>(RockBottomAPI.TILE_LAYER_REGISTRY.getUnmodifiable().values());
-            list.sort(Comparator.comparingInt(TileLayer:: getPriority).reversed());
+            list.sort(Comparator.comparing(TileLayer:: getName));
             allLayers = Collections.unmodifiableList(list);
+
+            RockBottomAPI.logger().info("Sorting a total of "+allLayers.size()+" tile layers");
         }
 
         return allLayers;
