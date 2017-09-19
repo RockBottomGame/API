@@ -219,7 +219,7 @@ public class Tile{
         return this.isFullTile();
     }
 
-    public void updateRandomly(IWorld world, int x, int y){
+    public void updateRandomly(IWorld world, int x, int y, TileLayer layer){
 
     }
 
@@ -317,6 +317,10 @@ public class Tile{
                 }
             }
         }
+    }
+
+    public boolean canGrassSpreadTo(IWorld world, int x, int y, TileLayer layer){
+        return false;
     }
 
     public TileState getDefState(){
