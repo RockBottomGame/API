@@ -309,7 +309,7 @@ public class Tile{
         for(TileLayer layer : TileLayer.getAllLayers()){
             if(this.canPlaceInLayer(layer)){
                 if(isAdvanced){
-                    desc.add(FormattingCode.GRAY+manager.localize(LOC_LAYER, manager.localize(layer.getName())));
+                    desc.add(FormattingCode.GRAY+manager.localize(LOC_LAYER, manager.localize(layer.getName().addPrefix("layer."))));
                 }
                 else{
                     desc.add(FormattingCode.DARK_GRAY+manager.localize(LOC_ADVANCED, Input.getKeyName(Settings.KEY_ADVANCED_INFO.getKey())));

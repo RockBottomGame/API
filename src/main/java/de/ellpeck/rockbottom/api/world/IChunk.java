@@ -109,6 +109,8 @@ public interface IChunk extends IChunkOrWorld{
      */
     int getY();
 
+    int getLowestAirUpwardsInner(TileLayer layer, int x, int y);
+
     TileState getStateInner(TileLayer layer, int x, int y);
 
     TileState getStateInner(int x, int y);

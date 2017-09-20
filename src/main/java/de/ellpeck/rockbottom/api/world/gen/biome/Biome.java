@@ -53,4 +53,7 @@ public abstract class Biome{
         return this;
     }
 
+    public boolean hasGrasslandDecoration(){
+        return false;
+    }
 }

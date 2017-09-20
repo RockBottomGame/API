@@ -31,6 +31,7 @@ public final class GameContent{
     public static final Tile TILE_SOIL = getTile("soil").addEffectiveTool(ToolType.SHOVEL, 0).setForceDrop();
     public static final Tile TILE_GRASS = getTile("grass").addEffectiveTool(ToolType.SHOVEL, 0).setForceDrop();
     public static final Tile TILE_STONE = getTile("stone").setHardness(5F).addEffectiveTool(ToolType.PICKAXE, 0);
+    public static final Tile TILE_GRASS_TUFT = getTile("grass_tuft").setHardness(0F);
 
     public static final Biome BIOME_SKY = getBiome("sky");
     public static final Biome BIOME_GRASSLAND = getBiome("grassland");
