@@ -27,6 +27,7 @@ import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 import org.newdawn.slick.Sound;
 
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.Map;
 
 public interface IAssetManager{
@@ -60,4 +61,6 @@ public interface IAssetManager{
     InputStream getResourceStream(String s);
 
     ITexture getMissingTexture();
+
+    SimpleDateFormat getLocalizedDateFormat();
 }
