@@ -100,9 +100,11 @@ public class ComponentInputField extends GuiComponent{
                             }
                             return true;
                         }
+                        return false;
                     }
                 }
-                else if(!Character.isISOControl(character)){
+
+                if(character >= 32 && character <= 254){
                     if(this.text.length() < this.maxLength){
                         this.text += character;
                         if(this.consumer != null){

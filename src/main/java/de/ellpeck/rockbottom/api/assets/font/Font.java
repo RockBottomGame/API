@@ -25,7 +25,6 @@ import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.tex.ITexture;
 import de.ellpeck.rockbottom.api.util.Colors;
 import de.ellpeck.rockbottom.api.util.Pos2;
-import org.newdawn.slick.util.Log;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -67,8 +66,11 @@ public class Font{
             }
 
             for(int x = 0; x < length; x++){
-                char c = row.get(x).getAsCharacter();
-                characters.put(c, new Pos2(x, y));
+                String s = row.get(x).getAsString();
+                if(s != null && !s.isEmpty()){
+                    char c = s.charAt(0);
+                    characters.put(c, new Pos2(x, y));
+                }
             }
         }
 
