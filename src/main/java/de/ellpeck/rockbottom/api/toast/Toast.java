@@ -7,15 +7,12 @@ import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.assets.font.Font;
 import de.ellpeck.rockbottom.api.assets.font.FormattingCode;
 import de.ellpeck.rockbottom.api.assets.tex.ITexture;
+import de.ellpeck.rockbottom.api.gui.component.GuiComponent;
 import de.ellpeck.rockbottom.api.net.chat.component.ChatComponent;
 import de.ellpeck.rockbottom.api.util.Colors;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 
 public class Toast{
-
-    protected final int guiColor = RockBottomAPI.getGame().getSettings().guiColor;
-    protected final int color = Colors.multiplyA(this.guiColor, 0.5F);
-    protected final int colorOutline = Colors.multiply(this.guiColor, 0.75F);
 
     private final IResourceName icon;
     private final ChatComponent title;
@@ -37,8 +34,8 @@ public class Toast{
         float width = this.getWidth();
         float height = this.getHeight();
 
-        g.fillRect(x, y, width, height, this.color);
-        g.drawRect(x, y, width, height, this.colorOutline);
+        g.fillRect(x, y, width, height, GuiComponent.getElementColor());
+        g.drawRect(x, y, width, height, GuiComponent.getElementOutlineColor());
 
         float textX = x;
         float textWidth = width;

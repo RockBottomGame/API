@@ -137,8 +137,8 @@ public class ComponentInputField extends GuiComponent{
     @Override
     public void render(IGameInstance game, IAssetManager manager, IGraphics g, int x, int y){
         if(this.renderBox){
-            g.fillRect(x, y, this.width, this.height, this.isMouseOverPrioritized(game) ? this.colorButton : this.colorButtonUnselected);
-            g.drawRect(x, y, this.width, this.height, this.colorOutline);
+            g.fillRect(x, y, this.width, this.height, this.isMouseOverPrioritized(game) ? getElementColor() : getUnselectedElementColor());
+            g.drawRect(x, y, this.width, this.height, getElementOutlineColor());
         }
 
         Font font = manager.getFont();

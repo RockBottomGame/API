@@ -30,10 +30,6 @@ import org.lwjgl.input.Mouse;
 public abstract class GuiComponent{
 
     public final Gui gui;
-    protected final int guiColor = RockBottomAPI.getGame().getSettings().guiColor;
-    protected final int colorButton = Colors.multiplyA(this.guiColor, 0.5F);
-    protected final int colorOutline = Colors.multiply(this.guiColor, 0.75F);
-    protected final int colorButtonUnselected = Colors.multiplyA(this.colorButton, 0.6F);
     public boolean isActive = true;
     protected int width;
     protected int height;
@@ -46,6 +42,22 @@ public abstract class GuiComponent{
         this.y = y;
         this.width = width;
         this.height = height;
+    }
+
+    public static int getGuiColor(){
+        return RockBottomAPI.getGame().getSettings().guiColor;
+    }
+
+    public static int getElementColor(){
+        return Colors.multiplyA(getGuiColor(), 0.5F);
+    }
+
+    public static int getUnselectedElementColor(){
+        return Colors.multiplyA(getElementColor(), 0.6F);
+    }
+
+    public static int getElementOutlineColor(){
+        return Colors.multiply(getGuiColor(), 0.75F);
     }
 
     public void update(IGameInstance game){

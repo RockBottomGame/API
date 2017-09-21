@@ -74,8 +74,8 @@ public class ComponentConfirmationPopup extends GuiComponent{
         int width = (int)this.buttonArea.getWidth();
         int height = (int)this.buttonArea.getHeight();
 
-        g.fillRect(renderX, renderY, width, height, this.isMouseOverPrioritized(game) && this.buttonArea.contains(game.getMouseInGuiX(), game.getMouseInGuiY()) ? this.colorButton : this.colorButtonUnselected);
-        g.drawRect(renderX, renderY, width, height, this.colorOutline);
+        g.fillRect(renderX, renderY, width, height, this.isMouseOverPrioritized(game) && this.buttonArea.contains(game.getMouseInGuiX(), game.getMouseInGuiY()) ? getElementColor() : getUnselectedElementColor());
+        g.drawRect(renderX, renderY, width, height, getElementOutlineColor());
 
         font.drawCenteredString(renderX+width/2F, renderY+height/2F+0.5F, "Yes", 0.35F, true);
     }
