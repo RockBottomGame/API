@@ -51,6 +51,7 @@ public class FormattingCode{
     public static final FormattingCode ITALICS = new FormattingCode('i', FontProp.ITALICS).registerAsDefault();
     public static final FormattingCode UPSIDE_DOWN = new FormattingCode('t', FontProp.UPSIDE_DOWN).registerAsDefault();
     public static final FormattingCode BOLD = new FormattingCode('b', FontProp.BOLD).registerAsDefault();
+    public static final FormattingCode RANDOM = new FormattingCode('c', FontProp.RANDOM).registerAsDefault();
 
     private final char format;
     private final int color;
@@ -107,8 +108,13 @@ public class FormattingCode{
     }
 
     public FormattingCode registerAsDefault(){
-        DEFAULT_CODES.put(this.format, this);
-        return this;
+        if(!DEFAULT_CODES.containsKey(this.format)){
+            DEFAULT_CODES.put(this.format, this);
+            return this;
+        }
+        else{
+            throw new RuntimeException("Tried to register two formatting codes as a default with key "+this.format+"!");
+        }
     }
 
     public int getColor(){

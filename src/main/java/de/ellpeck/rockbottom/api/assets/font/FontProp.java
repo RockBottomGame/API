@@ -28,5 +28,6 @@ public enum FontProp{
     STRIKETHROUGH,
     ITALICS,
     UPSIDE_DOWN,
-    BOLD
+    BOLD,
+    RANDOM
 }
