@@ -1,3 +1,4 @@
+//TODO Add copyright profile, fix source code link and somehow put the copyright profile on the GitHub maybe?
 /*
  * This file ("RockBottomAPI.java") is part of the RockBottomAPI by Ellpeck.
  * View the source code at <https://github.com/Ellpeck/RockBottomAPI>.
@@ -36,9 +37,9 @@ import de.ellpeck.rockbottom.api.tile.state.TileState;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 import de.ellpeck.rockbottom.api.util.reg.IndexRegistry;
 import de.ellpeck.rockbottom.api.util.reg.NameRegistry;
-import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 import de.ellpeck.rockbottom.api.world.gen.IWorldGenerator;
 import de.ellpeck.rockbottom.api.world.gen.biome.Biome;
+import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 
 import java.util.ArrayList;
 import java.util.HashMap;

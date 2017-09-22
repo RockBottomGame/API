@@ -28,7 +28,8 @@ import de.ellpeck.rockbottom.api.world.IWorld;
 public abstract class EntityLiving extends Entity{
 
     public boolean jumping;
-    private int health;
+    protected int jumpTimeout;
+    protected int health;
 
     public EntityLiving(IWorld world){
         super(world);
@@ -42,6 +43,11 @@ public abstract class EntityLiving extends Entity{
         if(this.jumping && this.collidedVert){
             this.motionY = 0;
             this.jumping = false;
+            this.jumpTimeout = this.getJumpTimeout();
+        }
+
+        if(this.jumpTimeout > 0){
+            this.jumpTimeout--;
         }
 
         if(!this.world.isClient()){
@@ -61,10 +67,14 @@ public abstract class EntityLiving extends Entity{
     }
 
     public void jump(double motion){
-        if(this.onGround && !this.jumping){
+        if(this.onGround && !this.jumping && this.jumpTimeout <= 0){
             this.motionY += motion;
             this.jumping = true;
         }
+    }
+
+    protected int getJumpTimeout(){
+        return 3;
     }
 
     public int getHealth(){
@@ -91,6 +101,7 @@ public abstract class EntityLiving extends Entity{
         super.save(set);
 
         set.addBoolean("jumping", this.jumping);
+        set.addInt("jump_timeout", this.jumpTimeout);
         set.addInt("health", this.health);
     }
 
@@ -99,6 +110,7 @@ public abstract class EntityLiving extends Entity{
         super.load(set);
 
         this.jumping = set.getBoolean("jumping");
+        this.jumpTimeout = set.getInt("jump_timeout");
         this.health = set.getInt("health");
     }
 }
