@@ -60,6 +60,10 @@ public abstract class Biome{
         return false;
     }
 
+    public float getFlowerChance(){
+        return 0F;
+    }
+
     public boolean canTreeGrow(IWorld world, IChunk chunk, int x, int y){
         return false;
     }

@@ -87,7 +87,7 @@ public abstract class MultiTile extends TileBasic{
                     int theX = startX+addX;
                     int theY = startY+addY;
 
-                    if(!world.getState(layer, theX, theY).getTile().canReplace(world, theX, theY, layer, this)){
+                    if(!world.getState(layer, theX, theY).getTile().canReplace(world, theX, theY, layer)){
                         return false;
                     }
                 }

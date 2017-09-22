@@ -44,8 +44,15 @@ public class TileMeta extends TileBasic{
     public IntProp metaProp;
 
     public TileMeta(IResourceName name){
+        this(name, true);
+    }
+
+    public TileMeta(IResourceName name, boolean addDirectly){
         super(name);
-        this.addSubTile(name);
+
+        if(addDirectly){
+            this.addSubTile(name);
+        }
     }
 
     @Override

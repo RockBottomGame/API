@@ -24,6 +24,7 @@ package de.ellpeck.rockbottom.api;
 import de.ellpeck.rockbottom.api.item.Item;
 import de.ellpeck.rockbottom.api.item.ToolType;
 import de.ellpeck.rockbottom.api.tile.Tile;
+import de.ellpeck.rockbottom.api.tile.TileMeta;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 import de.ellpeck.rockbottom.api.util.reg.NameRegistry;
 import de.ellpeck.rockbottom.api.world.gen.biome.Biome;
@@ -34,9 +35,10 @@ public final class GameContent{
     public static final Tile TILE_SOIL = getTile("soil").addEffectiveTool(ToolType.SHOVEL, 0).setForceDrop();
     public static final Tile TILE_GRASS = getTile("grass").addEffectiveTool(ToolType.SHOVEL, 0).setForceDrop();
     public static final Tile TILE_STONE = getTile("stone").setHardness(5F).addEffectiveTool(ToolType.PICKAXE, 0);
-    public static final Tile TILE_GRASS_TUFT = getTile("grass_tuft").setHardness(0F);
+    public static final TileMeta TILE_GRASS_TUFT = (TileMeta)getTile("grass_tuft").setHardness(0F);
     public static final Tile TILE_LOG = getTile("log").setHardness(3F).addEffectiveTool(ToolType.AXE, 0).setForceDrop();
     public static final Tile TILE_LEAVES = getTile("leaves").setHardness(0.5F).setForceDrop();
+    public static final TileMeta TILE_FLOWER = (TileMeta)getTile("flower").setHardness(0F).setForceDrop();
 
     public static final Biome BIOME_SKY = getBiome("sky");
     public static final Biome BIOME_GRASSLAND = getBiome("grassland");

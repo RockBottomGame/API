@@ -141,7 +141,7 @@ public class Tile{
         return false;
     }
 
-    public boolean canReplace(IWorld world, int x, int y, TileLayer layer, Tile replacementTile){
+    public boolean canReplace(IWorld world, int x, int y, TileLayer layer){
         return false;
     }
 

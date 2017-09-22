@@ -240,6 +240,8 @@ public interface IChunkOrWorld{
      */
     int getLowestAirUpwards(TileLayer layer, int x, int y);
 
+    int getLowestAirUpwards(TileLayer layer, int x, int y, boolean ignoreReplaceableTiles);
+
     Biome getBiome(int x, int y);
 
     void setBiome(int x, int y, Biome biome);
