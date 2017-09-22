@@ -170,6 +170,8 @@ public interface IGameInstance extends IMod{
      */
     IAssetManager getAssetManager();
 
+    IGraphics getGraphics();
+
     /**
      * @return The {@link IParticleManager} of the game
      */

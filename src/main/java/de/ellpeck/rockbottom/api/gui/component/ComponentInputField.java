@@ -25,8 +25,8 @@ import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.IGraphics;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
-import de.ellpeck.rockbottom.api.assets.font.Font;
 import de.ellpeck.rockbottom.api.assets.font.FormattingCode;
+import de.ellpeck.rockbottom.api.assets.font.IFont;
 import de.ellpeck.rockbottom.api.data.settings.Settings;
 import de.ellpeck.rockbottom.api.gui.Gui;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
@@ -146,10 +146,10 @@ public class ComponentInputField extends GuiComponent{
             g.drawRect(x, y, this.width, this.height, getElementOutlineColor());
         }
 
-        Font font = manager.getFont();
+        IFont font = manager.getFont();
         String text = this.getDisplayText();
 
-        String display = text+(this.isActive ? ((this.counter/15)%2 == 0 ? "|" : " ") : "");
+        String display = text+(this.isActive ? ((this.counter/15)%2 == 0 ? "│" : " ") : "");
         font.drawCutOffString(x+3, y+this.height/2F-font.getHeight(0.35F)/2F, display, 0.35F, this.width-6, true, false);
 
         if(this.displaxMaxLength){

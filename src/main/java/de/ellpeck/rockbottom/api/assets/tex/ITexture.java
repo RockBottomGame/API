@@ -48,4 +48,8 @@ public interface ITexture{
     int getHeight();
 
     int getTextureColor(int x, int y);
+
+    void setRotation(float angle);
+
+    void setRotationCenter(float x, float y);
 }

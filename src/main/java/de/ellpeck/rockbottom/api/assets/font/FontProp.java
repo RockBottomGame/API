@@ -1,5 +1,5 @@
 /*
- * This file ("AssetFont.java") is part of the RockBottomAPI by Ellpeck.
+ * This file ("FontProp.java") is part of the RockBottomAPI by Ellpeck.
  * View the source code at <https://github.com/RockBottomGame/>.
  * View information on the project at <https://rockbottom.ellpeck.de/>.
  *
@@ -21,18 +21,12 @@
 
 package de.ellpeck.rockbottom.api.assets.font;
 
-import de.ellpeck.rockbottom.api.assets.IAsset;
-
-public class AssetFont implements IAsset<IFont>{
-
-    private final IFont font;
-
-    public AssetFont(IFont font){
-        this.font = font;
-    }
-
-    @Override
-    public IFont get(){
-        return this.font;
-    }
+public enum FontProp{
+    NONE,
+    RESET,
+    UNDERLINED,
+    STRIKETHROUGH,
+    ITALICS,
+    UPSIDE_DOWN,
+    BOLD
 }

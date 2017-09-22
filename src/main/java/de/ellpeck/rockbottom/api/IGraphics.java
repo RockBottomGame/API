@@ -118,6 +118,8 @@ public interface IGraphics{
 
     void translate(float x, float y);
 
+    void rotate(float angle);
+
     void drawRect(float x, float y, float width, float height, int color);
 
     void drawRect(float x, float y, float width, float height, float lineWidth, int color);

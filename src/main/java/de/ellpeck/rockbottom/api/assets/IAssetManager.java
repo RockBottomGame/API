@@ -23,7 +23,7 @@ package de.ellpeck.rockbottom.api.assets;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.assets.anim.Animation;
-import de.ellpeck.rockbottom.api.assets.font.Font;
+import de.ellpeck.rockbottom.api.assets.font.IFont;
 import de.ellpeck.rockbottom.api.assets.local.Locale;
 import de.ellpeck.rockbottom.api.assets.tex.ITexture;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
@@ -49,13 +49,13 @@ public interface IAssetManager{
 
     Locale getLocale(IResourceName path);
 
-    Font getFont(IResourceName path);
+    IFont getFont(IResourceName path);
 
     String localize(IResourceName unloc, Object... format);
 
-    Font getFont();
+    IFont getFont();
 
-    void setFont(Font font);
+    void setFont(IFont font);
 
     Locale getLocale();
 

@@ -23,14 +23,12 @@ package de.ellpeck.rockbottom.api.toast;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.IGraphics;
-import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
-import de.ellpeck.rockbottom.api.assets.font.Font;
+import de.ellpeck.rockbottom.api.assets.font.IFont;
 import de.ellpeck.rockbottom.api.assets.font.FormattingCode;
 import de.ellpeck.rockbottom.api.assets.tex.ITexture;
 import de.ellpeck.rockbottom.api.gui.component.GuiComponent;
 import de.ellpeck.rockbottom.api.net.chat.component.ChatComponent;
-import de.ellpeck.rockbottom.api.util.Colors;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 
 public class Toast{
@@ -71,7 +69,7 @@ public class Toast{
             tex.draw(x+1, y+1, size, ((float)tex.getWidth()/(float)tex.getHeight())*size);
         }
 
-        Font font = manager.getFont();
+        IFont font = manager.getFont();
         font.drawString(textX+1, y+1, this.getTitle().getDisplayWithChildren(game, manager), 0.3F);
         font.drawSplitString(textX+1, y+8, FormattingCode.LIGHT_GRAY+this.getDescription().getDisplayWithChildren(game, manager), 0.25F, (int)textWidth-2);
     }
