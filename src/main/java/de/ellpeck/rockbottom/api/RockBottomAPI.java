@@ -1,7 +1,7 @@
-//TODO Add copyright profile, fix source code link and somehow put the copyright profile on the GitHub maybe?
 /*
  * This file ("RockBottomAPI.java") is part of the RockBottomAPI by Ellpeck.
- * View the source code at <https://github.com/Ellpeck/RockBottomAPI>.
+ * View the source code at <https://github.com/RockBottomGame>.
+ * View information on the project at <https://rockbottom.ellpeck.de/>.
  *
  * The RockBottomAPI is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -15,7 +15,12 @@
  *
  * You should have received a copy of the GNU Lesser General Public License
  * along with the RockBottomAPI. If not, see <http://www.gnu.org/licenses/>.
+ *
+ * © 2017 Ellpeck
  */
+
+//TODO Add copyright profile, fix source code link and somehow put the copyright profile on the GitHub maybe?
+
 
 package de.ellpeck.rockbottom.api;
 
