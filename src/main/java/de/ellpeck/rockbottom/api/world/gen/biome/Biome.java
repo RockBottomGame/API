@@ -59,4 +59,8 @@ public abstract class Biome{
     public boolean hasGrasslandDecoration(){
         return false;
     }
+
+    public boolean canTreeGrow(IWorld world, IChunk chunk, int x, int y){
+        return false;
+    }
 }

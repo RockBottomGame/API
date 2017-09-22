@@ -84,36 +84,11 @@ public class Tile{
     }
 
     public boolean canBreak(IWorld world, int x, int y, TileLayer layer){
-        if(layer == TileLayer.MAIN){
-            return true;
-        }
-        else{
-            if(!world.getState(x, y).getTile().isFullTile()){
-                for(Direction dir : Direction.ADJACENT){
-                    Tile tile = world.getState(layer, x+dir.x, y+dir.y).getTile();
-                    if(!tile.isFullTile()){
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
+        return true;
     }
 
     public boolean canPlace(IWorld world, int x, int y, TileLayer layer){
-        if(!this.canPlaceInLayer(layer)){
-            return false;
-        }
-
-        for(TileLayer testLayer : TileLayer.getAllLayers()){
-            for(Direction dir : Direction.ADJACENT_INCLUDING_NONE){
-                Tile tile = world.getState(testLayer, x+dir.x, y+dir.y).getTile();
-                if(!tile.isAir()){
-                    return true;
-                }
-            }
-        }
-        return false;
+        return true;
     }
 
     public boolean canPlaceInLayer(TileLayer layer){
@@ -323,6 +298,10 @@ public class Tile{
     }
 
     public boolean canGrassSpreadTo(IWorld world, int x, int y, TileLayer layer){
+        return false;
+    }
+
+    public boolean canKeepPlants(IWorld world, int x, int y, TileLayer layer){
         return false;
     }
 
