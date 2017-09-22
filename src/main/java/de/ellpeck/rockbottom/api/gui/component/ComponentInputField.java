@@ -149,7 +149,7 @@ public class ComponentInputField extends GuiComponent{
         IFont font = manager.getFont();
         String text = this.getDisplayText();
 
-        String display = text+(this.isActive ? ((this.counter/15)%2 == 0 ? "│" : " ") : "");
+        String display = text+(this.isActive ? ((this.counter/15)%2 == 0 ? "|" : " ") : "");
         font.drawCutOffString(x+3, y+this.height/2F-font.getHeight(0.35F)/2F, display, 0.35F, this.width-6, true, false);
 
         if(this.displaxMaxLength){
