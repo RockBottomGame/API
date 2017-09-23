@@ -35,21 +35,19 @@ import java.util.function.BiFunction;
 
 public class TileLayer{
 
-    public static final TileLayer MAIN = new TileLayer(RockBottomAPI.createInternalRes("main"), 0, (game, player) -> !Settings.KEY_BACKGROUND.isDown()).register();
-    public static final TileLayer BACKGROUND = new TileLayer(RockBottomAPI.createInternalRes("background"), -10, (game, player) -> Settings.KEY_BACKGROUND.isDown()).register();
+    public static final TileLayer MAIN = new TileLayer(RockBottomAPI.createInternalRes("main"), 0).register();
+    public static final TileLayer BACKGROUND = new TileLayer(RockBottomAPI.createInternalRes("background"), -10).register();
 
     private static List<TileLayer> allLayers;
 
     private final IResourceName name;
     private final int renderPriority;
-    private final BiFunction<IGameInstance, AbstractEntityPlayer, Boolean> canEditFunction;
 
     private int assignedIndex = -1;
 
-    public TileLayer(IResourceName name, int renderPriority, BiFunction<IGameInstance, AbstractEntityPlayer, Boolean> canEditFunction){
+    public TileLayer(IResourceName name, int renderPriority){
         this.name = name;
         this.renderPriority = renderPriority;
-        this.canEditFunction = canEditFunction;
     }
 
     public IResourceName getName(){
@@ -61,11 +59,15 @@ public class TileLayer{
     }
 
     public boolean canEditLayer(IGameInstance game, AbstractEntityPlayer player){
-        return this.canEditFunction.apply(game, player);
+        return Settings.KEY_BACKGROUND.isDown() ? this == BACKGROUND : this == MAIN;
     }
 
     public float getRenderLightModifier(){
         return this == BACKGROUND ? 0.5F : 1F;
+    }
+
+    public boolean forceForegroundRender(){
+        return false;
     }
 
     public TileLayer register(){
