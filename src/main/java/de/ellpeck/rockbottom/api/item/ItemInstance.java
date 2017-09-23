@@ -179,12 +179,23 @@ public class ItemInstance{
         return instance;
     }
 
+    public boolean hasAdditionalData(){
+        return this.additionalData != null;
+    }
+
     public DataSet getAdditionalData(){
         return this.additionalData;
     }
 
     public void setAdditionalData(DataSet set){
         this.additionalData = set;
+    }
+
+    public DataSet getOrCreateAdditionalData(){
+        if(this.additionalData == null){
+            this.additionalData = new DataSet();
+        }
+        return this.additionalData;
     }
 
     public boolean isEffectivelyEqual(ItemInstance instance){
