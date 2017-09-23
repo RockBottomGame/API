@@ -43,7 +43,7 @@ import java.util.List;
 public abstract class Gui{
 
     public static final int GRADIENT_COLOR = Colors.rgb(0F, 0F, 0F, 0.7F);
-    public static final int HOVER_INFO_BACKGROUND = Colors.rgb(0F, 0F, 0F, 0.8F);
+    public static final int HOVER_INFO_BACKGROUND = Colors.rgb(0F, 0F, 0F, 0.65F);
     protected final Gui parent;
     protected final boolean hasUnspecifiedBounds;
     protected int width;

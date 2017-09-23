@@ -148,6 +148,10 @@ public class Tile{
         return false;
     }
 
+    public boolean doesSustainLeaves(IWorld world, int x, int y, TileLayer layer){
+        return false;
+    }
+
     public void onDestroyed(IWorld world, int x, int y, Entity destroyer, TileLayer layer, boolean shouldDrop){
         if(shouldDrop){
             if(!world.isClient()){
