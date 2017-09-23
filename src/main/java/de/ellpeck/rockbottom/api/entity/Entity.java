@@ -187,7 +187,7 @@ public class Entity extends MovableWorldObject{
         return true;
     }
 
-    public void onCollideWithTile(int x, int y, TileLayer layer, TileState state, BoundBox entityBox, List<BoundBox> boxes){
+    public void onCollideWithTile(int x, int y, TileLayer layer, TileState state, BoundBox entityBox, BoundBox entityBoxMotion, List<BoundBox> tileBoxes){
 
     }
 
@@ -196,10 +196,10 @@ public class Entity extends MovableWorldObject{
     }
 
     @Override
-    public final void onTileCollision(IWorld world, int x, int y, TileLayer layer, TileState state, BoundBox myBox, List<BoundBox> boxes){
+    public final void onTileCollision(IWorld world, int x, int y, TileLayer layer, TileState state, BoundBox objBox, BoundBox objBoxMotion, List<BoundBox> boxes){
         Tile tile = state.getTile();
 
-        if(tile.canClimb(this.world, x, y, layer, state, myBox, boxes, this)){
+        if(tile.canClimb(this.world, x, y, layer, state, objBox, objBoxMotion, boxes, this)){
             this.canClimb = true;
 
             if(!this.onGround){
@@ -207,7 +207,7 @@ public class Entity extends MovableWorldObject{
             }
         }
 
-        tile.onCollideWithEntity(this.world, x, y, layer, state, myBox, boxes, this);
-        this.onCollideWithTile(x, y, layer, state, myBox, boxes);
+        tile.onCollideWithEntity(this.world, x, y, layer, state, objBox, objBoxMotion, boxes, this);
+        this.onCollideWithTile(x, y, layer, state, objBox, objBoxMotion, boxes);
     }
 }
