@@ -23,14 +23,7 @@ package de.ellpeck.rockbottom.api.assets.anim;
 
 import de.ellpeck.rockbottom.api.assets.tex.ITexture;
 
-import java.util.function.BiConsumer;
-import java.util.function.Consumer;
-
 public interface IAnimation{
-
-    void setFrameFinishedCallback(BiConsumer<AnimationRow, Integer> consumer);
-
-    void setRowFinishedCallback(Consumer<AnimationRow> consumer);
 
     void drawFrame(int row, int frame, float x, float y, float scale, int filter);
 
@@ -44,11 +37,17 @@ public interface IAnimation{
 
     void drawRow(int row, float x1, float y1, float x2, float y2, float srcX1, float srcY1, float srcX2, float srcY2, int[] light, int filter);
 
-    void drawRow(long timeOffsetMillis, int row, float x, float y, float scale, int filter);
+    void drawRow(long startTimeMillis, int row, float x, float y, float scale, int filter);
 
-    void drawRow(long timeOffsetMillis, int row, float x, float y, float scale, int[] light, int filter);
+    void drawRow(long startTimeMillis, int row, float x, float y, float scale, int[] light, int filter);
 
-    void drawRow(long timeOffsetMillis, int row, float x1, float y1, float x2, float y2, float srcX1, float srcY1, float srcX2, float srcY2, int[] light, int filter);
+    void drawRow(long startTimeMillis, int row, float x1, float y1, float x2, float y2, float srcX1, float srcY1, float srcX2, float srcY2, int[] light, int filter);
+
+    int getFrameAmount(int row);
+
+    long getTotalTime(int row);
+
+    long getFrameTime(int row, int frame);
 
     ITexture getTexture();
 }
