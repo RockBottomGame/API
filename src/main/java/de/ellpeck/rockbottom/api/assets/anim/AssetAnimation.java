@@ -23,16 +23,16 @@ package de.ellpeck.rockbottom.api.assets.anim;
 
 import de.ellpeck.rockbottom.api.assets.IAsset;
 
-public class AssetAnimation implements IAsset<Animation>{
+public class AssetAnimation implements IAsset<IAnimation>{
 
-    private final Animation animation;
+    private final IAnimation animation;
 
-    public AssetAnimation(Animation animation){
+    public AssetAnimation(IAnimation animation){
         this.animation = animation;
     }
 
     @Override
-    public Animation get(){
+    public IAnimation get(){
         return this.animation;
     }
 }

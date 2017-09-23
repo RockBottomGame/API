@@ -22,7 +22,7 @@
 package de.ellpeck.rockbottom.api.assets;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
-import de.ellpeck.rockbottom.api.assets.anim.Animation;
+import de.ellpeck.rockbottom.api.assets.anim.IAnimation;
 import de.ellpeck.rockbottom.api.assets.font.IFont;
 import de.ellpeck.rockbottom.api.assets.local.Locale;
 import de.ellpeck.rockbottom.api.assets.tex.ITexture;
@@ -43,7 +43,7 @@ public interface IAssetManager{
 
     ITexture getTexture(IResourceName path);
 
-    Animation getAnimation(IResourceName path);
+    IAnimation getAnimation(IResourceName path);
 
     Sound getSound(IResourceName path);
 
