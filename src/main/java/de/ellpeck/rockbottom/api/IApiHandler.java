@@ -107,7 +107,7 @@ public interface IApiHandler{
      */
     void doDefaultEntityUpdate(Entity entity);
 
-    void doWorldObjectMovement(MovableWorldObject object, double motionX, double motionY);
+    void doWorldObjectMovement(MovableWorldObject object);
 
     /**
      * Does everything necessary for moving instances of {@link ItemInstance} around between

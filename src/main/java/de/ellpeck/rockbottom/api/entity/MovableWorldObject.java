@@ -52,8 +52,8 @@ public abstract class MovableWorldObject{
         this.y = y;
     }
 
-    public void move(double motionX, double motionY){
-        RockBottomAPI.getApiHandler().doWorldObjectMovement(this, motionX, motionY);
+    public void move(){
+        RockBottomAPI.getApiHandler().doWorldObjectMovement(this);
     }
 
     public void onTileCollision(IWorld world, int x, int y, TileLayer layer, TileState state, BoundBox objBox, BoundBox objBoxMotion, List<BoundBox> boxes){

@@ -59,8 +59,7 @@ public class Particle extends MovableWorldObject{
         }
 
         this.applyMotion();
-
-        this.move(this.motionX, this.motionY);
+        this.move();
 
         if(this.onGround){
             this.motionY = 0;
