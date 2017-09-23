@@ -29,6 +29,7 @@ import de.ellpeck.rockbottom.api.construction.resource.ResourceRegistry;
 import de.ellpeck.rockbottom.api.data.settings.Settings;
 import de.ellpeck.rockbottom.api.entity.Entity;
 import de.ellpeck.rockbottom.api.entity.EntityItem;
+import de.ellpeck.rockbottom.api.entity.MovableWorldObject;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.event.EventResult;
 import de.ellpeck.rockbottom.api.event.impl.TileDropsEvent;
@@ -75,7 +76,7 @@ public class Tile{
         return DEFAULT_BOUNDS;
     }
 
-    public List<BoundBox> getBoundBoxes(IWorld world, int x, int y){
+    public List<BoundBox> getBoundBoxes(IWorld world, int x, int y, MovableWorldObject object, BoundBox objectBox, BoundBox objectBoxMotion){
         BoundBox box = this.getBoundBox(world, x, y);
 
         if(box != null && !box.isEmpty()){
