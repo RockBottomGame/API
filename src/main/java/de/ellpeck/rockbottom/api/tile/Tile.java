@@ -42,7 +42,6 @@ import de.ellpeck.rockbottom.api.tile.state.StateHandler;
 import de.ellpeck.rockbottom.api.tile.state.TileProp;
 import de.ellpeck.rockbottom.api.tile.state.TileState;
 import de.ellpeck.rockbottom.api.util.BoundBox;
-import de.ellpeck.rockbottom.api.util.Direction;
 import de.ellpeck.rockbottom.api.util.Util;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 import de.ellpeck.rockbottom.api.world.IWorld;
@@ -76,10 +75,14 @@ public class Tile{
         return DEFAULT_BOUNDS;
     }
 
-    public void getBoundBoxes(IWorld world, int x, int y, List<BoundBox> list){
+    public List<BoundBox> getBoundBoxes(IWorld world, int x, int y){
         BoundBox box = this.getBoundBox(world, x, y);
+
         if(box != null && !box.isEmpty()){
-            list.add(box.copy().add(x, y));
+            return Collections.singletonList(box.copy().add(x, y));
+        }
+        else{
+            return Collections.emptyList();
         }
     }
 
@@ -275,11 +278,11 @@ public class Tile{
 
     }
 
-    public boolean canClimb(IWorld world, int x, int y, TileLayer layer, Entity entity){
+    public boolean canClimb(IWorld world, int x, int y, TileLayer layer, TileState state, BoundBox entityBox, List<BoundBox> boxes, Entity entity){
         return false;
     }
 
-    public void onCollideWithEntity(IWorld world, int x, int y, TileLayer layer, Entity entity){
+    public void onCollideWithEntity(IWorld world, int x, int y, TileLayer layer, TileState state, BoundBox entityBox, List<BoundBox> boxes, Entity entity){
 
     }
 

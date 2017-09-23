@@ -82,14 +82,6 @@ public interface IWorld extends IChunkOrWorld{
      */
     boolean isChunkLoaded(int x, int y);
 
-    /**
-     * Gets a {@link java.util.ArrayList} of {@link BoundBox} of tiles that are contained by the specified {@link BoundBox}
-     *
-     * @param area The bound box to check for tiles in
-     * @return The collisions of tiles inside the specified area
-     */
-    List<BoundBox> getCollisions(BoundBox area);
-
     int getIdForState(TileState state);
 
     TileState getStateForId(int id);

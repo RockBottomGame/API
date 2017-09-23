@@ -30,12 +30,14 @@ import de.ellpeck.rockbottom.api.event.impl.EntityDeathEvent;
 import de.ellpeck.rockbottom.api.net.packet.toclient.PacketDeath;
 import de.ellpeck.rockbottom.api.render.entity.IEntityRenderer;
 import de.ellpeck.rockbottom.api.tile.Tile;
+import de.ellpeck.rockbottom.api.tile.state.TileState;
 import de.ellpeck.rockbottom.api.util.BoundBox;
 import de.ellpeck.rockbottom.api.util.Direction;
 import de.ellpeck.rockbottom.api.world.IChunk;
 import de.ellpeck.rockbottom.api.world.IWorld;
 import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 
+import java.util.List;
 import java.util.UUID;
 
 public class Entity extends MovableWorldObject{
@@ -185,11 +187,27 @@ public class Entity extends MovableWorldObject{
         return true;
     }
 
-    public void onCollideWithTile(int x, int y, TileLayer layer, Tile tile){
+    public void onCollideWithTile(int x, int y, TileLayer layer, TileState state, BoundBox entityBox, List<BoundBox> boxes){
 
     }
 
     public boolean onInteractWith(AbstractEntityPlayer player, double mouseX, double mouseY){
         return false;
+    }
+
+    @Override
+    public final void onTileCollision(IWorld world, int x, int y, TileLayer layer, TileState state, BoundBox myBox, List<BoundBox> boxes){
+        Tile tile = state.getTile();
+
+        if(tile.canClimb(this.world, x, y, layer, state, myBox, boxes, this)){
+            this.canClimb = true;
+
+            if(!this.onGround){
+                this.isClimbing = true;
+            }
+        }
+
+        tile.onCollideWithEntity(this.world, x, y, layer, state, myBox, boxes, this);
+        this.onCollideWithTile(x, y, layer, state, myBox, boxes);
     }
 }

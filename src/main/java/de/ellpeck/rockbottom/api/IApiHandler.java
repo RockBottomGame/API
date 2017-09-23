@@ -24,6 +24,7 @@ package de.ellpeck.rockbottom.api;
 import de.ellpeck.rockbottom.api.data.set.DataSet;
 import de.ellpeck.rockbottom.api.data.set.part.DataPart;
 import de.ellpeck.rockbottom.api.entity.Entity;
+import de.ellpeck.rockbottom.api.entity.MovableWorldObject;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.gui.component.ComponentSlot;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
@@ -105,6 +106,8 @@ public interface IApiHandler{
      * @param entity The entity
      */
     void doDefaultEntityUpdate(Entity entity);
+
+    void doWorldObjectMovement(MovableWorldObject object, double motionX, double motionY);
 
     /**
      * Does everything necessary for moving instances of {@link ItemInstance} around between
