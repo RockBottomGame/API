@@ -21,6 +21,7 @@
 
 package de.ellpeck.rockbottom.api.assets.local;
 
+import com.google.common.base.Charsets;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import de.ellpeck.rockbottom.api.Constants;
@@ -47,7 +48,7 @@ public class Locale{
         Locale locale = new Locale(name);
 
         JsonParser parser = new JsonParser();
-        JsonElement main = parser.parse(new InputStreamReader(stream));
+        JsonElement main = parser.parse(new InputStreamReader(stream, Charsets.UTF_8));
 
         for(Entry<String, JsonElement> entry : main.getAsJsonObject().entrySet()){
             recurseLoad(locale, entry.getKey(), "", entry.getValue());
