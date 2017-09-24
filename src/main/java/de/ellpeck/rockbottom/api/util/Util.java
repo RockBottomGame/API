@@ -27,6 +27,7 @@ import de.ellpeck.rockbottom.api.entity.Entity;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 import de.ellpeck.rockbottom.api.world.IWorld;
 
+import java.awt.*;
 import java.io.File;
 import java.util.Random;
 import java.util.logging.Level;
@@ -89,5 +90,20 @@ public final class Util{
 
     public static long getTimeMillis(){
         return System.currentTimeMillis();
+    }
+
+    public static boolean createAndOpen(File file){
+        if(!file.exists()){
+            file.mkdirs();
+        }
+
+        try{
+            Desktop.getDesktop().open(file);
+            return true;
+        }
+        catch(Exception e){
+            RockBottomAPI.logger().log(Level.WARNING, "Couldn't open file "+file, e);
+            return false;
+        }
     }
 }
