@@ -47,7 +47,7 @@ public class Settings implements IPropSettings{
     public static final Keybind KEY_ADVANCED_INFO = new Keybind(RockBottomAPI.createInternalRes("advanced_info"), Input.KEY_LSHIFT, false).register();
     public static final Keybind KEY_SCREENSHOT = new Keybind(RockBottomAPI.createInternalRes("screenshot"), Input.KEY_F10, false).register();
     public static final Keybind[] KEYS_ITEM_SELECTION = new Keybind[8];
-    public static final int DEFAULT_GUI_COLOR = 0x30704E;
+    public static final int DEFAULT_GUI_COLOR = 0xFF30704E;
 
     static{
         int[] defKeys = new int[]{Input.KEY_1, Input.KEY_2, Input.KEY_3, Input.KEY_4, Input.KEY_5, Input.KEY_6, Input.KEY_7, Input.KEY_8};
@@ -90,7 +90,7 @@ public class Settings implements IPropSettings{
         this.textSpeed = this.getProp(props, "text_speed", 0.5F);
         this.guiScale = this.getProp(props, "scale_gui", 1F);
         this.renderScale = this.getProp(props, "scale_world", 1F);
-        this.guiColor = this.getProp(props, "gui_color", DEFAULT_GUI_COLOR);
+        this.guiColor = this.getProp(props, "gui_colors", DEFAULT_GUI_COLOR);
 
         this.hardwareCursor = this.getProp(props, "hardware_cursor", false);
         this.cursorInfos = this.getProp(props, "cursor_infos", true);
@@ -117,7 +117,7 @@ public class Settings implements IPropSettings{
         this.setProp(props, "text_speed", this.textSpeed);
         this.setProp(props, "scale_gui", this.guiScale);
         this.setProp(props, "scale_world", this.renderScale);
-        this.setProp(props, "gui_color", this.guiColor);
+        this.setProp(props, "gui_colors", this.guiColor);
 
         this.setProp(props, "hardware_cursor", this.hardwareCursor);
         this.setProp(props, "cursor_infos", this.cursorInfos);

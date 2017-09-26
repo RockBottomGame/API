@@ -27,17 +27,18 @@ import java.util.Random;
 
 public final class Colors{
 
-    public static final int WHITE = 0xFFFFFF;
-    public static final int BLACK = 0x000000;
-    public static final int DARK_GRAY = 0x262626;
-    public static final int GRAY = 0x515151;
-    public static final int LIGHT_GRAY = 0x878787;
-    public static final int YELLOW = 0xFFD800;
-    public static final int ORANGE = 0xFF6A00;
-    public static final int RED = 0xFF0000;
-    public static final int PINK = 0xFF006E;
-    public static final int MAGENTA = 0xFF00DC;
-    public static final int GREEN = 0x267F00;
+    public static final int TRANSPARENT = 0x00FFFFFF;
+    public static final int WHITE = 0xFFFFFFFF;
+    public static final int BLACK = 0xFF000000;
+    public static final int DARK_GRAY = 0xFF262626;
+    public static final int GRAY = 0xFF515151;
+    public static final int LIGHT_GRAY = 0xFF878787;
+    public static final int YELLOW = 0xFFFFD800;
+    public static final int ORANGE = 0xFFFF6A00;
+    public static final int RED = 0xFFFF0000;
+    public static final int PINK = 0xFFFF006E;
+    public static final int MAGENTA = 0xFFFF00DC;
+    public static final int GREEN = 0xFF267F00;
 
     public static int rgb(int r, int g, int b){
         return rgb(r, g, b, 255);
@@ -68,8 +69,7 @@ public final class Colors{
     }
 
     public static float getA(int color){
-        int a = (color >> 24);
-        return a == 0 ? 1F : (float)(a & 255)/255F;
+        return (float)((color >> 24) & 255)/255F;
     }
 
     public static int setA(int color, float a){
@@ -105,11 +105,11 @@ public final class Colors{
     }
 
     public static int multiply(int c1, int c2){
-        return multiply(getR(c1), getG(c1), getB(c1), getR(c2), getG(c2), getB(c2));
+        return multiply(getR(c1), getG(c1), getB(c1), getA(c1), getR(c2), getG(c2), getB(c2), getA(c2));
     }
 
-    public static int multiply(float r1, float g1, float b1, float r2, float g2, float b2){
-        return rgb(r1*r2, g1*g2, b1*b2);
+    public static int multiply(float r1, float g1, float b1, float a1, float r2, float g2, float b2, float a2){
+        return rgb(r1*r2, g1*g2, b1*b2, a1*a2);
     }
 
     public static int multiply(int color, float r, float g, float b, float a){
