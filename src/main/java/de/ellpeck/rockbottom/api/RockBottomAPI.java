@@ -22,6 +22,7 @@
 package de.ellpeck.rockbottom.api;
 
 import de.ellpeck.rockbottom.api.construction.BasicRecipe;
+import de.ellpeck.rockbottom.api.construction.IRecipe;
 import de.ellpeck.rockbottom.api.data.set.part.DataPart;
 import de.ellpeck.rockbottom.api.data.settings.Keybind;
 import de.ellpeck.rockbottom.api.entity.Entity;
@@ -58,7 +59,7 @@ public final class RockBottomAPI{
     /**
      * The current API version
      */
-    public static final String VERSION = "0.1.7";
+    public static final String VERSION = "0.1.8";
 
     /**
      * The registry for {@link Tile}
@@ -92,10 +93,17 @@ public final class RockBottomAPI{
      */
     public static final Map<String, Command> COMMAND_REGISTRY = new HashMap<>();
     /**
-     * The registry for {@link BasicRecipe}
-     * <br> Use this to register construction recipes that can be used in the inventory {@link de.ellpeck.rockbottom.api.gui.Gui}
+     * The registry for all {@link IRecipe}
+     * <br> Used to simplify saving/loading of recipes because it does not have to be registry based
+     * <br> Register all your custom recipes into this
+     * <br> Methods like {@link BasicRecipe#register(NameRegistry)} will autoamtically register into this as well
      */
-    public static final List<BasicRecipe> MANUAL_CONSTRUCTION_RECIPES = new ArrayList<>();
+    public static final NameRegistry<IRecipe> ALL_CONSTRUCTION_RECIPES = new NameRegistry<>("all_recipe_registry");
+    /**
+     * The registry for {@link BasicRecipe}
+     * <br> Use {@link BasicRecipe#register(NameRegistry)} to register your recipes into this registry
+     */
+    public static final NameRegistry<BasicRecipe> MANUAL_CONSTRUCTION_RECIPES = new NameRegistry<>("manual_recipe_registry");
     /**
      * The registry for {@link IWorldGenerator}
      * <br> Use this to register custom world generators

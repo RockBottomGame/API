@@ -105,7 +105,7 @@ public abstract class Gui{
     public void update(IGameInstance game){
         for(int i = 0; i < this.components.size(); i++){
             GuiComponent component = this.components.get(i);
-            if(component.isActive){
+            if(component.isActive()){
                 component.update(game);
             }
         }
@@ -114,7 +114,7 @@ public abstract class Gui{
     public boolean onMouseAction(IGameInstance game, int button, float x, float y){
         for(int i = 0; i < this.components.size(); i++){
             GuiComponent component = this.components.get(i);
-            if(component.isActive){
+            if(component.isActive()){
                 if(component.onMouseAction(game, button, x, y)){
                     return true;
                 }
@@ -126,7 +126,7 @@ public abstract class Gui{
     public boolean onKeyboardAction(IGameInstance game, int button, char character){
         for(int i = 0; i < this.components.size(); i++){
             GuiComponent component = this.components.get(i);
-            if(component.isActive){
+            if(component.isActive()){
                 if(component.onKeyboardAction(game, button, character)){
                     return true;
                 }
@@ -149,7 +149,7 @@ public abstract class Gui{
     public void render(IGameInstance game, IAssetManager manager, IGraphics g){
         for(int i = this.components.size()-1; i >= 0; i--){
             GuiComponent component = this.components.get(i);
-            if(component.isActive){
+            if(component.isActive()){
                 if(RockBottomAPI.getEventHandler().fireEvent(new ComponentRenderEvent(this, i, component)) != EventResult.CANCELLED){
                     component.render(game, manager, g, component.getRenderX(), component.getRenderY());
                 }
@@ -160,7 +160,7 @@ public abstract class Gui{
     public void renderOverlay(IGameInstance game, IAssetManager manager, IGraphics g){
         for(int i = this.components.size()-1; i >= 0; i--){
             GuiComponent component = this.components.get(i);
-            if(component.isActive){
+            if(component.isActive()){
                 if(RockBottomAPI.getEventHandler().fireEvent(new ComponentRenderOverlayEvent(this, i, component)) != EventResult.CANCELLED){
                     component.renderOverlay(game, manager, g, component.getRenderX(), component.getRenderY());
                 }
@@ -184,7 +184,7 @@ public abstract class Gui{
     }
 
     public boolean isMouseOverComponent(IGameInstance game){
-        return this.components.stream().anyMatch(component -> component.isActive && component.isMouseOver(game));
+        return this.components.stream().anyMatch(component -> component.isActive() && component.isMouseOver(game));
     }
 
     public boolean isMouseOver(IGameInstance game){

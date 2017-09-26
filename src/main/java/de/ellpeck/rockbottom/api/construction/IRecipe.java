@@ -22,8 +22,10 @@
 package de.ellpeck.rockbottom.api.construction;
 
 import de.ellpeck.rockbottom.api.construction.resource.IUseInfo;
+import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.inventory.IInventory;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
+import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 
 import java.util.List;
 
@@ -41,4 +43,12 @@ public interface IRecipe{
     List<IUseInfo> getInputs();
 
     List<ItemInstance> getOutputs();
+
+    boolean isKnown(AbstractEntityPlayer player);
+
+    boolean shouldDisplayIngredient(AbstractEntityPlayer player, IUseInfo info);
+
+    boolean shouldDisplayOutput(AbstractEntityPlayer player, ItemInstance output);
+
+    IResourceName getName();
 }

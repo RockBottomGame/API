@@ -92,7 +92,7 @@ public class ComponentScrollMenu extends ComponentButton{
 
         int index = 0;
         while(index < this.contents.size() && index < this.number*this.contentsX){
-            this.contents.get(index).isActive = false;
+            this.contents.get(index).setActive(false);
             index++;
         }
 
@@ -103,7 +103,7 @@ public class ComponentScrollMenu extends ComponentButton{
                 int highestHeight = 0;
                 for(int x = 0; x < this.contentsX; x++){
                     GuiComponent component = this.contents.get(index);
-                    component.isActive = true;
+                    component.setActive(true);
                     component.x = showX;
                     component.y = showY;
 
@@ -121,7 +121,7 @@ public class ComponentScrollMenu extends ComponentButton{
             }
 
             while(index < this.contents.size()){
-                this.contents.get(index).isActive = false;
+                this.contents.get(index).setActive(false);
                 index++;
             }
         }

@@ -21,8 +21,12 @@
 
 package de.ellpeck.rockbottom.api.construction;
 
+import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.construction.resource.IUseInfo;
+import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
+import de.ellpeck.rockbottom.api.util.reg.IResourceName;
+import de.ellpeck.rockbottom.api.util.reg.NameRegistry;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -30,10 +34,12 @@ import java.util.List;
 
 public class BasicRecipe implements IRecipe{
 
+    private final IResourceName name;
     private final List<IUseInfo> inputs;
     private final List<ItemInstance> outputs;
 
-    public BasicRecipe(ItemInstance output, IUseInfo... inputs){
+    public BasicRecipe(IResourceName name, ItemInstance output, IUseInfo... inputs){
+        this.name = name;
         this.inputs = Arrays.asList(inputs);
         this.outputs = Collections.singletonList(output);
     }
@@ -46,5 +52,30 @@ public class BasicRecipe implements IRecipe{
     @Override
     public List<ItemInstance> getOutputs(){
         return this.outputs;
+    }
+
+    @Override
+    public boolean isKnown(AbstractEntityPlayer player){
+        return true;
+    }
+
+    @Override
+    public boolean shouldDisplayIngredient(AbstractEntityPlayer player, IUseInfo info){
+        return true;
+    }
+
+    @Override
+    public boolean shouldDisplayOutput(AbstractEntityPlayer player, ItemInstance output){
+        return true;
+    }
+
+    @Override
+    public IResourceName getName(){
+        return this.name;
+    }
+
+    public void register(NameRegistry<BasicRecipe> registry){
+        RockBottomAPI.ALL_CONSTRUCTION_RECIPES.register(this.getName(), this);
+        registry.register(this.getName(), this);
     }
 }

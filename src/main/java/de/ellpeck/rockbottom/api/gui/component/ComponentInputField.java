@@ -44,7 +44,7 @@ public class ComponentInputField extends GuiComponent{
     private final boolean displaxMaxLength;
     private final Consumer<String> consumer;
     private String text = "";
-    private boolean isActive;
+    private boolean isSelected;
     private int counter;
 
     public ComponentInputField(Gui gui, int x, int y, int sizeX, int sizeY, boolean renderBox, boolean selectable, boolean defaultActive, int maxLength, boolean displayMaxLength){
@@ -55,19 +55,19 @@ public class ComponentInputField extends GuiComponent{
         super(gui, x, y, sizeX, sizeY);
         this.renderBox = renderBox;
         this.selectable = selectable;
-        this.isActive = defaultActive;
+        this.isSelected = defaultActive;
         this.maxLength = maxLength;
         this.displaxMaxLength = displayMaxLength;
         this.consumer = consumer;
     }
 
-    public boolean isActive(){
-        return this.isActive;
+    public boolean isSelected(){
+        return this.isSelected;
     }
 
     @Override
     public boolean onKeyboardAction(IGameInstance game, int button, char character){
-        if(this.isActive){
+        if(this.isSelected){
             if(button == Input.KEY_BACK){
                 if(!this.text.isEmpty()){
                     this.text = this.text.substring(0, this.text.length()-1);
@@ -79,7 +79,7 @@ public class ComponentInputField extends GuiComponent{
             }
             else if(button == Input.KEY_ESCAPE){
                 if(this.selectable){
-                    this.isActive = false;
+                    this.isSelected = false;
                     return true;
                 }
             }
@@ -149,7 +149,7 @@ public class ComponentInputField extends GuiComponent{
         IFont font = manager.getFont();
         String text = this.getDisplayText();
 
-        String display = text+(this.isActive ? ((this.counter/15)%2 == 0 ? "|" : " ") : "");
+        String display = text+(this.isSelected ? ((this.counter/15)%2 == 0 ? "|" : " ") : "");
         font.drawCutOffString(x+3, y+this.height/2F-font.getHeight(0.35F)/2F, display, 0.35F, this.width-6, true, false);
 
         if(this.displaxMaxLength){
@@ -171,7 +171,7 @@ public class ComponentInputField extends GuiComponent{
     public boolean onMouseAction(IGameInstance game, int button, float x, float y){
         if(Settings.KEY_GUI_ACTION_1.isKey(button)){
             if(this.selectable){
-                this.isActive = this.isMouseOver(game);
+                this.isSelected = this.isMouseOver(game);
             }
         }
         else if(Settings.KEY_GUI_ACTION_2.isKey(button)){
@@ -182,7 +182,7 @@ public class ComponentInputField extends GuiComponent{
                 }
 
                 if(this.selectable){
-                    this.isActive = true;
+                    this.isSelected = true;
                 }
 
                 return true;

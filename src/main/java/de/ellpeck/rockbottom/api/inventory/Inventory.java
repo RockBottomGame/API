@@ -21,16 +21,17 @@
 
 package de.ellpeck.rockbottom.api.inventory;
 
+import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.data.set.DataSet;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.function.BiConsumer;
 
 public class Inventory implements IInventory{
 
-    protected final List<BiConsumer<IInventory, Integer>> callbacks = new ArrayList<>();
+    protected final Set<BiConsumer<IInventory, Integer>> callbacks = new HashSet<>();
     protected final ItemInstance[] slots;
 
     public Inventory(int slotAmount){
@@ -97,12 +98,17 @@ public class Inventory implements IInventory{
     public void addChangeCallback(BiConsumer<IInventory, Integer> callback){
         if(!this.callbacks.contains(callback)){
             this.callbacks.add(callback);
+            RockBottomAPI.logger().config("Added change callback "+callback+" to inventory "+this);
+        }
+        else{
+            RockBottomAPI.logger().warning("Tried adding change callback "+callback+" to inventory "+this+" but it was already present!");
         }
     }
 
     @Override
     public void removeChangeCallback(BiConsumer<IInventory, Integer> callback){
         this.callbacks.remove(callback);
+        RockBottomAPI.logger().config("Removed change callback "+callback+" from inventory "+this);
     }
 
     public ItemInstance add(ItemInstance instance, boolean simulate){

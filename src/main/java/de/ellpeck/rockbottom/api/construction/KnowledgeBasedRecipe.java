@@ -1,5 +1,5 @@
 /*
- * This file ("CombinerRecipe.java") is part of the RockBottomAPI by Ellpeck.
+ * This file ("KnowledgeBasedRecipe.java") is part of the RockBottomAPI by Ellpeck.
  * View the source code at <https://github.com/RockBottomGame/>.
  * View information on the project at <https://rockbottom.ellpeck.de/>.
  *
@@ -21,36 +21,29 @@
 
 package de.ellpeck.rockbottom.api.construction;
 
-import de.ellpeck.rockbottom.api.construction.resource.ResUseInfo;
+import de.ellpeck.rockbottom.api.construction.resource.IUseInfo;
+import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
+import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 
-public class CombinerRecipe{
+public class KnowledgeBasedRecipe extends BasicRecipe{
 
-    private final ResUseInfo inputOne;
-    private final ResUseInfo inputTwo;
-    private final ItemInstance output;
-    private final int time;
-
-    public CombinerRecipe(ItemInstance output, ResUseInfo inputOne, ResUseInfo inputTwo, int time){
-        this.inputOne = inputOne;
-        this.inputTwo = inputTwo;
-        this.output = output;
-        this.time = time;
+    public KnowledgeBasedRecipe(IResourceName name, ItemInstance output, IUseInfo... inputs){
+        super(name, output, inputs);
     }
 
-    public ResUseInfo getInputOne(){
-        return this.inputOne;
+    @Override
+    public boolean isKnown(AbstractEntityPlayer player){
+        return player.getKnowledge().knowsRecipe(this);
     }
 
-    public ResUseInfo getInputTwo(){
-        return this.inputTwo;
+    @Override
+    public boolean shouldDisplayIngredient(AbstractEntityPlayer player, IUseInfo info){
+        return player.getKnowledge().knowsIngredient(this, info);
     }
 
-    public ItemInstance getOutput(){
-        return this.output;
-    }
-
-    public int getTime(){
-        return this.time;
+    @Override
+    public boolean shouldDisplayOutput(AbstractEntityPlayer player, ItemInstance output){
+        return player.getKnowledge().knowsOutput(this, output);
     }
 }

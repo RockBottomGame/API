@@ -33,7 +33,7 @@ import org.lwjgl.input.Mouse;
 public abstract class GuiComponent{
 
     public final Gui gui;
-    public boolean isActive = true;
+    private boolean isActive = true;
     protected int width;
     protected int height;
     protected int x;
@@ -80,7 +80,7 @@ public abstract class GuiComponent{
     }
 
     public boolean isMouseOver(IGameInstance game){
-        if(this.isActive && Mouse.isInsideWindow()){
+        if(this.isActive() && Mouse.isInsideWindow()){
             int mouseX = (int)game.getMouseInGuiX();
             int mouseY = (int)game.getMouseInGuiY();
 
@@ -92,6 +92,14 @@ public abstract class GuiComponent{
         else{
             return false;
         }
+    }
+
+    public boolean isActive(){
+        return this.isActive;
+    }
+
+    public void setActive(boolean active){
+        this.isActive = active;
     }
 
     public boolean onMouseAction(IGameInstance game, int button, float x, float y){

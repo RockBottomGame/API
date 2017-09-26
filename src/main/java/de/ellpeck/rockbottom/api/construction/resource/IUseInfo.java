@@ -34,4 +34,6 @@ public interface IUseInfo{
     List<ItemInstance> getItems();
 
     boolean containsItem(ItemInstance instance);
+
+
 }

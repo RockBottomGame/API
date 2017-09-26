@@ -1,5 +1,5 @@
 /*
- * This file ("SmelterRecipe.java") is part of the RockBottomAPI by Ellpeck.
+ * This file ("IKnowledgeManager.java") is part of the RockBottomAPI by Ellpeck.
  * View the source code at <https://github.com/RockBottomGame/>.
  * View information on the project at <https://rockbottom.ellpeck.de/>.
  *
@@ -19,32 +19,23 @@
  * © 2017 Ellpeck
  */
 
-package de.ellpeck.rockbottom.api.construction;
+package de.ellpeck.rockbottom.api.entity.player;
 
+import de.ellpeck.rockbottom.api.construction.IRecipe;
 import de.ellpeck.rockbottom.api.construction.resource.IUseInfo;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 
-public class SmelterRecipe{
+public interface IKnowledgeManager{
 
-    private final IUseInfo input;
-    private final ItemInstance output;
-    private final int time;
+    boolean knowsRecipe(IRecipe recipe);
 
-    public SmelterRecipe(ItemInstance output, IUseInfo input, int time){
-        this.input = input;
-        this.output = output;
-        this.time = time;
-    }
+    boolean knowsIngredient(IRecipe recipe, IUseInfo info);
 
-    public IUseInfo getInput(){
-        return this.input;
-    }
+    boolean knowsOutput(IRecipe recipe, ItemInstance instance);
 
-    public ItemInstance getOutput(){
-        return this.output;
-    }
+    void teachRecipe(IRecipe recipe, boolean teachAllParts);
 
-    public int getTime(){
-        return this.time;
-    }
+    void teachIngredient(IRecipe recipe, IUseInfo info);
+
+    void teachOutput(IRecipe recipe, ItemInstance instance);
 }

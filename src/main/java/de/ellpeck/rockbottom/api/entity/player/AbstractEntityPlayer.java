@@ -88,4 +88,6 @@ public abstract class AbstractEntityPlayer extends EntityLiving implements IComm
     public abstract IPlayerDesign getDesign();
 
     public abstract boolean isInRange(double x, double y);
+
+    public abstract IKnowledgeManager getKnowledge();
 }
