@@ -206,7 +206,7 @@ public class Entity extends MovableWorldObject{
         return false;
     }
 
-    public boolean canClimb(int x, int y, TileLayer layer, TileState state, BoundBox entityBox, BoundBox entityBoxMotion, List<BoundBox> tileBoxes){
+    public boolean shouldStartClimbing(int x, int y, TileLayer layer, TileState state, BoundBox entityBox, BoundBox entityBoxMotion, List<BoundBox> tileBoxes){
         return true;
     }
 
@@ -214,11 +214,13 @@ public class Entity extends MovableWorldObject{
     public final void onTileCollision(int x, int y, TileLayer layer, TileState state, BoundBox objBox, BoundBox objBoxMotion, List<BoundBox> boxes){
         Tile tile = state.getTile();
 
-        if(this.canClimb(x, y, layer, state, objBox, objBoxMotion, boxes) && tile.canClimb(this.world, x, y, layer, state, objBox, objBoxMotion, boxes, this)){
+        if(tile.canClimb(this.world, x, y, layer, state, objBox, objBoxMotion, boxes, this)){
             this.canClimb = true;
 
             if(!this.onGround){
-                this.isClimbing = true;
+                if(this.shouldStartClimbing(x, y, layer, state, objBox, objBoxMotion, boxes)){
+                    this.isClimbing = true;
+                }
             }
         }
 
