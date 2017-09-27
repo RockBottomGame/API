@@ -30,4 +30,8 @@ public interface IGuiManager{
     void closeGui();
 
     Gui getGui();
+
+    boolean fadeOut(int ticks, Runnable after);
+
+    boolean fadeIn(int ticks, Runnable after);
 }
