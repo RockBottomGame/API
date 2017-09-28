@@ -94,6 +94,11 @@ public class TileLayer{
         return this.name.hashCode();
     }
 
+    @Override
+    public String toString(){
+        return this.getName().toString();
+    }
+
     public int index(){
         if(this.assignedIndex >= 0){
             return this.assignedIndex;
