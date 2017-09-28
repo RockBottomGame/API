@@ -66,4 +66,6 @@ public interface IAnimation{
     int getFrameWidth();
 
     int getFrameHeight();
+
+    int getFrameByTime(int row, long millis);
 }
