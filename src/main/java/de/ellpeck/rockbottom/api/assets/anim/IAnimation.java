@@ -25,17 +25,29 @@ import de.ellpeck.rockbottom.api.assets.tex.ITexture;
 
 public interface IAnimation{
 
+    void drawFrame(int row, int frame, float x, float y, float width, float height, int filter);
+
+    void drawFrame(int row, int frame, float x, float y, float width, float height, int[] light, int filter);
+
     void drawFrame(int row, int frame, float x, float y, float scale, int filter);
 
     void drawFrame(int row, int frame, float x, float y, float scale, int[] light, int filter);
 
     void drawFrame(int row, int frame, float x1, float y1, float x2, float y2, float srcX1, float srcY1, float srcX2, float srcY2, int[] light, int filter);
 
+    void drawRow(int row, float x, float y, float width, float height, int filter);
+
+    void drawRow(int row, float x, float y, float width, float height, int[] light, int filter);
+
     void drawRow(int row, float x, float y, float scale, int filter);
 
     void drawRow(int row, float x, float y, float scale, int[] light, int filter);
 
     void drawRow(int row, float x1, float y1, float x2, float y2, float srcX1, float srcY1, float srcX2, float srcY2, int[] light, int filter);
+
+    void drawRow(long startTimeMillis, int row, float x, float y, float width, float height, int filter);
+
+    void drawRow(long startTimeMillis, int row, float x, float y, float width, float height, int[] light, int filter);
 
     void drawRow(long startTimeMillis, int row, float x, float y, float scale, int filter);
 
@@ -50,4 +62,8 @@ public interface IAnimation{
     long getFrameTime(int row, int frame);
 
     ITexture getTexture();
+
+    int getFrameWidth();
+
+    int getFrameHeight();
 }
