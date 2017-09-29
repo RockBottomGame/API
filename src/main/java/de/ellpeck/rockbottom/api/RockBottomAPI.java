@@ -26,6 +26,7 @@ import de.ellpeck.rockbottom.api.construction.IRecipe;
 import de.ellpeck.rockbottom.api.data.set.part.DataPart;
 import de.ellpeck.rockbottom.api.data.settings.Keybind;
 import de.ellpeck.rockbottom.api.entity.Entity;
+import de.ellpeck.rockbottom.api.entity.player.knowledge.Information;
 import de.ellpeck.rockbottom.api.event.IEventHandler;
 import de.ellpeck.rockbottom.api.gui.IMainMenuTheme;
 import de.ellpeck.rockbottom.api.item.Item;
@@ -59,7 +60,7 @@ public final class RockBottomAPI{
     /**
      * The current API version
      */
-    public static final String VERSION = "0.1.8";
+    public static final String VERSION = "0.1.9";
 
     /**
      * The registry for {@link Tile}
@@ -133,6 +134,7 @@ public final class RockBottomAPI{
      */
     public static final IndexRegistry<Class<? extends ChatComponent>> CHAT_COMPONENT_REGISTRY = new IndexRegistry<>("chat_component_registry", Byte.MAX_VALUE);
     public static final List<IMainMenuTheme> MAIN_MENU_THEMES = new ArrayList<>();
+    public static final NameRegistry<Class<? extends Information>> INFORMATION_REGISTRY = new NameRegistry<>("information_registry");
 
     private static Internals internals;
 

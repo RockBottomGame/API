@@ -1,5 +1,5 @@
 /*
- * This file ("IKnowledgeManager.java") is part of the RockBottomAPI by Ellpeck.
+ * This file ("Information.java") is part of the RockBottomAPI by Ellpeck.
  * View the source code at <https://github.com/RockBottomGame/>.
  * View information on the project at <https://rockbottom.ellpeck.de/>.
  *
@@ -19,23 +19,32 @@
  * © 2017 Ellpeck
  */
 
-package de.ellpeck.rockbottom.api.entity.player;
+package de.ellpeck.rockbottom.api.entity.player.knowledge;
 
-import de.ellpeck.rockbottom.api.construction.IRecipe;
-import de.ellpeck.rockbottom.api.construction.resource.IUseInfo;
-import de.ellpeck.rockbottom.api.item.ItemInstance;
+import de.ellpeck.rockbottom.api.data.set.DataSet;
+import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 
-public interface IKnowledgeManager{
+public class Information{
 
-    boolean knowsRecipe(IRecipe recipe);
+    private final IResourceName name;
 
-    boolean knowsIngredient(IRecipe recipe, IUseInfo info);
+    public Information(IResourceName name){
+        this.name = name;
+    }
 
-    boolean knowsOutput(IRecipe recipe, ItemInstance instance);
+    public void save(DataSet set, IKnowledgeManager manager){
 
-    void teachRecipe(IRecipe recipe, boolean teachAllParts);
+    }
 
-    void teachIngredient(IRecipe recipe, IUseInfo info);
+    public void load(DataSet set, IKnowledgeManager manager){
 
-    void teachOutput(IRecipe recipe, ItemInstance instance);
+    }
+
+    public IResourceName getName(){
+        return this.name;
+    }
+
+    public IResourceName getRegistryName(){
+        return this.name;
+    }
 }
