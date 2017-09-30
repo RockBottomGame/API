@@ -22,6 +22,7 @@
 package de.ellpeck.rockbottom.api.assets.font;
 
 public enum FontProp{
+
     NONE,
     RESET,
     UNDERLINED,
@@ -29,5 +30,8 @@ public enum FontProp{
     ITALICS,
     UPSIDE_DOWN,
     BOLD,
-    RANDOM
+    RANDOM;
+
+    public static final int NO_COLOR = Integer.MAX_VALUE;
+    public static final int RESET_COLOR = Integer.MIN_VALUE;
 }

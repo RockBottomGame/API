@@ -31,7 +31,8 @@ public class FormattingCode{
 
     private static final Map<Character, FormattingCode> DEFAULT_CODES = new HashMap<>();
 
-    public static final FormattingCode NONE = new FormattingCode(' ', Integer.MAX_VALUE, FontProp.NONE, 0, "");
+    public static final FormattingCode NONE = new FormattingCode(' ', FontProp.NO_COLOR, FontProp.NONE, 0, "");
+    public static final FormattingCode RESET_COLOR = new FormattingCode('y', FontProp.RESET_COLOR).registerAsDefault();
     public static final FormattingCode RESET_PROPS = new FormattingCode('x', FontProp.RESET).registerAsDefault();
 
     public static final FormattingCode BLACK = new FormattingCode('0', Colors.BLACK).registerAsDefault();
@@ -60,7 +61,7 @@ public class FormattingCode{
     private final FontProp prop;
 
     public FormattingCode(char format, FontProp prop){
-        this(format, Integer.MAX_VALUE, prop, 2, "&"+format);
+        this(format, FontProp.NO_COLOR, prop, 2, "&"+format);
     }
 
     public FormattingCode(char format, int color){
@@ -108,7 +109,7 @@ public class FormattingCode{
     }
 
     public FormattingCode registerAsDefault(){
-        if(!DEFAULT_CODES.containsKey(this.format)){
+        if(this.format != ' ' && !DEFAULT_CODES.containsKey(this.format)){
             DEFAULT_CODES.put(this.format, this);
             return this;
         }
