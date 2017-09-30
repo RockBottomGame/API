@@ -31,7 +31,7 @@ public class FormattingCode{
 
     private static final Map<Character, FormattingCode> DEFAULT_CODES = new HashMap<>();
 
-    public static final FormattingCode NONE = new FormattingCode(' ', -1, FontProp.NONE, 0, "");
+    public static final FormattingCode NONE = new FormattingCode(' ', Integer.MAX_VALUE, FontProp.NONE, 0, "");
     public static final FormattingCode RESET_PROPS = new FormattingCode('x', FontProp.RESET).registerAsDefault();
 
     public static final FormattingCode BLACK = new FormattingCode('0', Colors.BLACK).registerAsDefault();
@@ -60,7 +60,7 @@ public class FormattingCode{
     private final FontProp prop;
 
     public FormattingCode(char format, FontProp prop){
-        this(format, -1, prop, 2, "&"+format);
+        this(format, Integer.MAX_VALUE, prop, 2, "&"+format);
     }
 
     public FormattingCode(char format, int color){
