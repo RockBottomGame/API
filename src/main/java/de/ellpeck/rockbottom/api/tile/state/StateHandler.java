@@ -43,7 +43,15 @@ public class StateHandler{
 
             Map<TileProp, Comparable> defMap = new TreeMap<>();
             for(TileProp prop : this.getProps()){
-                defMap.put(prop, prop.getDefault());
+                Comparable def = prop.getDefault();
+                int index = prop.getIndex(def);
+
+                if(index >= 0 && index < prop.getVariants()){
+                    defMap.put(prop, def);
+                }
+                else{
+                    throw new IllegalArgumentException();
+                }
             }
             this.defaultState = new TileState(this.tile, defMap);
         }
