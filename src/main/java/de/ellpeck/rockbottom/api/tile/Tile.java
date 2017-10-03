@@ -154,16 +154,16 @@ public class Tile{
     }
 
     public void onDestroyed(IWorld world, int x, int y, Entity destroyer, TileLayer layer, boolean shouldDrop){
-        if(shouldDrop){
-            if(!world.isClient()){
-                List<ItemInstance> drops = new ArrayList<>(this.getDrops(world, x, y, layer, destroyer));
+        List<ItemInstance> drops = new ArrayList<>();
 
-                if(RockBottomAPI.getEventHandler().fireEvent(new TileDropsEvent(this, drops, world, x, y, layer, destroyer)) != EventResult.CANCELLED){
-                    if(drops != null && !drops.isEmpty()){
-                        for(ItemInstance inst : drops){
-                            EntityItem.spawn(world, inst, x+0.5, y+0.5, Util.RANDOM.nextGaussian()*0.1, Util.RANDOM.nextGaussian()*0.1);
-                        }
-                    }
+        if(shouldDrop && !world.isClient()){
+            drops.addAll(this.getDrops(world, x, y, layer, destroyer));
+        }
+
+        if(RockBottomAPI.getEventHandler().fireEvent(new TileDropsEvent(this, drops, world, x, y, layer, destroyer)) != EventResult.CANCELLED){
+            if(!drops.isEmpty()){
+                for(ItemInstance inst : drops){
+                    EntityItem.spawn(world, inst, x+0.5, y+0.5, Util.RANDOM.nextGaussian()*0.1, Util.RANDOM.nextGaussian()*0.1);
                 }
             }
         }
