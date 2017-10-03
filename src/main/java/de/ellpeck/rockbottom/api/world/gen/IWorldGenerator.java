@@ -39,11 +39,11 @@ public interface IWorldGenerator{
 
     int getPriority();
 
-    default boolean needsPlayerToAllowGeneration(){
+    default boolean needsPlayerToAllowGeneration(IWorld world, IChunk chunk, Random rand){
         return false;
     }
 
-    default boolean doesPlayerAllowGeneration(AbstractEntityPlayer player){
+    default boolean doesPlayerAllowGeneration(IWorld world, IChunk chunk, Random rand, AbstractEntityPlayer player){
         return true;
     }
 }
