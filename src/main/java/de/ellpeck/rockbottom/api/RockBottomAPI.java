@@ -60,7 +60,7 @@ public final class RockBottomAPI{
     /**
      * The current API version
      */
-    public static final String VERSION = "0.1.10";
+    public static final String VERSION = "0.1.11";
 
     /**
      * The registry for {@link Tile}
@@ -111,7 +111,7 @@ public final class RockBottomAPI{
      * <br> Every world generator class needs to have an empty constructor to be able
      * to be initialized for the appropriate world
      */
-    public static final List<Class<? extends IWorldGenerator>> WORLD_GENERATORS = new ArrayList<>();
+    public static final NameRegistry<Class<? extends IWorldGenerator>> WORLD_GENERATORS = new NameRegistry<>("world_generator_registry");
     /**
      * The registry for {@link Biome}
      * <br> Use this to register custom biomes

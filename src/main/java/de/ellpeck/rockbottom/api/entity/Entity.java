@@ -24,6 +24,7 @@ package de.ellpeck.rockbottom.api.entity;
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.data.set.DataSet;
+import de.ellpeck.rockbottom.api.data.set.IAdditionalDataProvider;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.event.EventResult;
 import de.ellpeck.rockbottom.api.event.impl.EntityDeathEvent;
@@ -40,7 +41,7 @@ import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 import java.util.List;
 import java.util.UUID;
 
-public class Entity extends MovableWorldObject{
+public class Entity extends MovableWorldObject implements IAdditionalDataProvider{
 
     protected final BoundBox boundingBox = new BoundBox(-0.5, -0.5, 0.5, 0.5);
 
@@ -142,18 +143,22 @@ public class Entity extends MovableWorldObject{
         this.chunkY = chunk.getGridY();
     }
 
+    @Override
     public boolean hasAdditionalData(){
         return this.additionalData != null;
     }
 
+    @Override
     public DataSet getAdditionalData(){
         return this.additionalData;
     }
 
+    @Override
     public void setAdditionalData(DataSet set){
         this.additionalData = set;
     }
 
+    @Override
     public DataSet getOrCreateAdditionalData(){
         if(this.additionalData == null){
             this.additionalData = new DataSet();

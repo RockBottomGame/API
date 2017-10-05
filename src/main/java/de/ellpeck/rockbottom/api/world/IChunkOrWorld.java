@@ -249,4 +249,6 @@ public interface IChunkOrWorld{
     boolean isClient();
 
     boolean isServer();
+
+    void callRetroactiveGeneration();
 }

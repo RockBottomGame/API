@@ -23,6 +23,7 @@ package de.ellpeck.rockbottom.api.world;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.data.set.DataSet;
+import de.ellpeck.rockbottom.api.data.set.IAdditionalDataProvider;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.tile.Tile;
 import de.ellpeck.rockbottom.api.tile.state.TileState;
@@ -42,7 +43,7 @@ import java.util.Set;
  * when the player leaves their range to save on memory and to allow for the world to be infinte.
  * <br> Use this interface to interact with chunks
  */
-public interface IChunk extends IChunkOrWorld{
+public interface IChunk extends IChunkOrWorld, IAdditionalDataProvider{
 
     /**
      * @return The players that are in loading range of the chunk

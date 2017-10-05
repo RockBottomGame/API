@@ -23,10 +23,10 @@ package de.ellpeck.rockbottom.api.item;
 
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.data.set.DataSet;
+import de.ellpeck.rockbottom.api.data.set.IAdditionalDataProvider;
 import de.ellpeck.rockbottom.api.tile.Tile;
-import org.newdawn.slick.util.Log;
 
-public class ItemInstance{
+public class ItemInstance implements IAdditionalDataProvider{
 
     private final Item item;
 
@@ -179,18 +179,22 @@ public class ItemInstance{
         return instance;
     }
 
+    @Override
     public boolean hasAdditionalData(){
         return this.additionalData != null;
     }
 
+    @Override
     public DataSet getAdditionalData(){
         return this.additionalData;
     }
 
+    @Override
     public void setAdditionalData(DataSet set){
         this.additionalData = set;
     }
 
+    @Override
     public DataSet getOrCreateAdditionalData(){
         if(this.additionalData == null){
             this.additionalData = new DataSet();
