@@ -44,6 +44,10 @@ public class BasicRecipe implements IRecipe{
         this.outputs = Collections.singletonList(output);
     }
 
+    public BasicRecipe(ItemInstance output, IUseInfo... inputs){
+        this(output.getItem().getName(), output, inputs);
+    }
+
     @Override
     public List<IUseInfo> getInputs(){
         return this.inputs;

@@ -32,6 +32,10 @@ public class KnowledgeBasedRecipe extends BasicRecipe{
         super(name, output, inputs);
     }
 
+    public KnowledgeBasedRecipe(ItemInstance output, IUseInfo... inputs){
+        super(output, inputs);
+    }
+
     @Override
     public boolean isKnown(AbstractEntityPlayer player){
         return player.getKnowledge().knowsRecipe(this);
