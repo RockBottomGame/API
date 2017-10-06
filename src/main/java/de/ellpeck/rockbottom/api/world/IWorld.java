@@ -34,6 +34,7 @@ import de.ellpeck.rockbottom.api.world.gen.biome.Biome;
 import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 import io.netty.channel.Channel;
 
+import java.io.File;
 import java.util.List;
 import java.util.UUID;
 
@@ -186,4 +187,12 @@ public interface IWorld extends IChunkOrWorld{
     boolean isDaytime();
 
     boolean isNighttime();
+
+    File getFolder();
+
+    File getPlayerFolder();
+
+    File getChunksFolder();
+
+    String getName();
 }
