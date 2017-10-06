@@ -41,6 +41,7 @@ public class ItemTool extends ItemBasic{
         this.miningSpeed = miningSpeed;
 
         this.addToolType(type, level);
+        this.maxAmount = 1;
     }
 
     @Override
