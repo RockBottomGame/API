@@ -22,21 +22,29 @@
 package de.ellpeck.rockbottom.api.net.chat;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
+import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.net.chat.component.ChatComponent;
+import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 
 public abstract class Command{
 
-    private final String name;
+    private final IResourceName name;
     private final String description;
     private final int level;
+    private final String[] triggers;
 
-    public Command(String name, String description, int level){
+    public Command(IResourceName name, String description, int level){
+        this(name, description, level, name.getResourceName());
+    }
+
+    public Command(IResourceName name, String description, int level, String... triggers){
         this.name = name;
         this.description = description;
         this.level = level;
+        this.triggers = triggers;
     }
 
-    public String getName(){
+    public IResourceName getName(){
         return this.name;
     }
 
@@ -44,8 +52,17 @@ public abstract class Command{
         return this.description;
     }
 
+    public String[] getTriggers(){
+        return this.triggers;
+    }
+
     public int getLevel(){
         return this.level;
+    }
+
+    public Command register(){
+        RockBottomAPI.COMMAND_REGISTRY.register(this.getName(), this);
+        return this;
     }
 
     public abstract ChatComponent execute(String[] args, ICommandSender sender, String playerName, IGameInstance game, IChatLog chat);

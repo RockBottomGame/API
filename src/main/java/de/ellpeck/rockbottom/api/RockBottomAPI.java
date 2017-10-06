@@ -46,9 +46,7 @@ import de.ellpeck.rockbottom.api.world.gen.biome.Biome;
 import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Logger;
 
 /**
@@ -60,7 +58,7 @@ public final class RockBottomAPI{
     /**
      * The current API version
      */
-    public static final String VERSION = "0.1.11";
+    public static final String VERSION = "0.1.12";
 
     /**
      * The registry for {@link Tile}
@@ -92,7 +90,7 @@ public final class RockBottomAPI{
      * The registry for {@link Command}
      * <br> Use this to register custom commands
      */
-    public static final Map<String, Command> COMMAND_REGISTRY = new HashMap<>();
+    public static final NameRegistry<Command> COMMAND_REGISTRY = new NameRegistry<>("command_registry");
     /**
      * The registry for all {@link IRecipe}
      * <br> Used to simplify saving/loading of recipes because it does not have to be registry based

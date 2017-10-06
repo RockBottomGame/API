@@ -25,7 +25,6 @@ import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.Maps;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
-import org.newdawn.slick.util.Log;
 
 public class NameRegistry<T> implements IRegistry<IResourceName, T>{
 

@@ -21,16 +21,11 @@
 
 package de.ellpeck.rockbottom.api.net.chat;
 
-import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.net.chat.component.ChatComponent;
 
 import java.util.List;
 
 public interface IChatLog{
-
-    static void registerCommand(Command command){
-        RockBottomAPI.COMMAND_REGISTRY.put(command.getName(), command);
-    }
 
     void displayMessage(ChatComponent message);
 
