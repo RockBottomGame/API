@@ -64,6 +64,10 @@ public abstract class Biome{
         return 0F;
     }
 
+    public float getPebbleChance(){
+        return 0F;
+    }
+
     public boolean canTreeGrow(IWorld world, IChunk chunk, int x, int y){
         return false;
     }

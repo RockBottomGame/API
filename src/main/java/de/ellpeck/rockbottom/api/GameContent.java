@@ -39,6 +39,7 @@ public final class GameContent{
     public static final Tile TILE_LOG = getTile("log").setHardness(3F).addEffectiveTool(ToolType.AXE, 0).setForceDrop();
     public static final Tile TILE_LEAVES = getTile("leaves").setHardness(0.5F).setForceDrop();
     public static final TileMeta TILE_FLOWER = (TileMeta)getTile("flower").setHardness(0F).setForceDrop();
+    public static final Tile TILE_PEBBLES = getTile("pebbles").setHardness(0F).setForceDrop();
 
     public static final Biome BIOME_SKY = getBiome("sky");
     public static final Biome BIOME_GRASSLAND = getBiome("grassland");
