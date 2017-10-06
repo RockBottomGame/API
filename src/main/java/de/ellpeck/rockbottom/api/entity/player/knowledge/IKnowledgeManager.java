@@ -40,19 +40,35 @@ public interface IKnowledgeManager{
 
     <T extends Information> T getInformation(IResourceName name, Class<T> infoClass);
 
+    void teachRecipe(IRecipe recipe, boolean teachAllParts, boolean announce);
+
     void teachRecipe(IRecipe recipe, boolean teachAllParts);
+
+    void teachIngredient(IRecipe recipe, IUseInfo info, boolean announce);
 
     void teachIngredient(IRecipe recipe, IUseInfo info);
 
+    void teachOutput(IRecipe recipe, ItemInstance instance, boolean announce);
+
     void teachOutput(IRecipe recipe, ItemInstance instance);
+
+    void teachInformation(Information information, boolean announce);
 
     void teachInformation(Information information);
 
+    void forgetRecipe(IRecipe recipe, boolean forgetAllParts, boolean announce);
+
     void forgetRecipe(IRecipe recipe, boolean forgetAllParts);
+
+    void forgetIngredient(IRecipe recipe, IUseInfo info, boolean announce);
 
     void forgetIngredient(IRecipe recipe, IUseInfo info);
 
+    void forgetOutput(IRecipe recipe, ItemInstance instance, boolean announce);
+
     void forgetOutput(IRecipe recipe, ItemInstance instance);
+
+    void forgetInformation(IResourceName name, boolean announce);
 
     void forgetInformation(IResourceName name);
 }

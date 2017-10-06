@@ -74,8 +74,13 @@ public class BasicRecipe implements IRecipe{
         return this.name;
     }
 
-    public void register(NameRegistry<BasicRecipe> registry){
+    public BasicRecipe register(NameRegistry<BasicRecipe> registry){
         RockBottomAPI.ALL_CONSTRUCTION_RECIPES.register(this.getName(), this);
         registry.register(this.getName(), this);
+        return this;
+    }
+
+    public BasicRecipe registerManual(){
+        return this.register(RockBottomAPI.MANUAL_CONSTRUCTION_RECIPES);
     }
 }

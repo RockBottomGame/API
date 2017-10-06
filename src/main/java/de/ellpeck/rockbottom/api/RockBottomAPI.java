@@ -102,7 +102,7 @@ public final class RockBottomAPI{
     public static final NameRegistry<IRecipe> ALL_CONSTRUCTION_RECIPES = new NameRegistry<>("all_recipe_registry");
     /**
      * The registry for {@link BasicRecipe}
-     * <br> Use {@link BasicRecipe#register(NameRegistry)} to register your recipes into this registry
+     * <br> Use {@link BasicRecipe#registerManual()} to register your recipes into this registry
      */
     public static final NameRegistry<BasicRecipe> MANUAL_CONSTRUCTION_RECIPES = new NameRegistry<>("manual_recipe_registry");
     /**

@@ -22,6 +22,7 @@
 package de.ellpeck.rockbottom.api.entity.player.knowledge;
 
 import de.ellpeck.rockbottom.api.data.set.DataSet;
+import de.ellpeck.rockbottom.api.toast.Toast;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 
 public class Information{
@@ -38,6 +39,14 @@ public class Information{
 
     public void load(DataSet set, IKnowledgeManager manager){
 
+    }
+
+    public Toast announceTeach(){
+        return null;
+    }
+
+    public Toast announceForget(){
+        return null;
     }
 
     public IResourceName getName(){
