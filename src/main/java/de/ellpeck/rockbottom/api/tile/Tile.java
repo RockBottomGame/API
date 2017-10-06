@@ -53,6 +53,7 @@ import java.util.*;
 
 public class Tile{
 
+    private static final IResourceName SOUND_GENERIC_TILE = RockBottomAPI.createInternalRes("tiles.generic_tile");
     public static final BoundBox DEFAULT_BOUNDS = new BoundBox(0, 0, 1, 1);
     private static final IResourceName LOC_ADVANCED = RockBottomAPI.createInternalRes("info.advanced_info");
     private static final IResourceName LOC_LAYER = RockBottomAPI.createInternalRes("info.layer_placement");
@@ -326,5 +327,13 @@ public class Tile{
 
     public List<TileProp> getProps(){
         return this.stateHandler.getProps();
+    }
+
+    public IResourceName getBreakSound(IWorld world, int x, int y, TileLayer layer, Entity destroyer){
+        return SOUND_GENERIC_TILE;
+    }
+
+    public IResourceName getPlaceSound(IWorld world, int x, int y, TileLayer layer, Entity placer, TileState state){
+        return SOUND_GENERIC_TILE;
     }
 }

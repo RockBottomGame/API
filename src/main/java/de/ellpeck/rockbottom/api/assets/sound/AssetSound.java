@@ -19,20 +19,20 @@
  * © 2017 Ellpeck
  */
 
-package de.ellpeck.rockbottom.api.assets;
+package de.ellpeck.rockbottom.api.assets.sound;
 
-import org.newdawn.slick.Sound;
+import de.ellpeck.rockbottom.api.assets.IAsset;
 
-public class AssetSound implements IAsset<Sound>{
+public class AssetSound implements IAsset<ISound>{
 
-    private final Sound sound;
+    private final ISound sound;
 
-    public AssetSound(Sound sound){
+    public AssetSound(ISound sound){
         this.sound = sound;
     }
 
     @Override
-    public Sound get(){
+    public ISound get(){
         return this.sound;
     }
 }

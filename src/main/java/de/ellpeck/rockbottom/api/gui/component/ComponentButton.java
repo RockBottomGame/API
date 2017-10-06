@@ -88,10 +88,8 @@ public class ComponentButton extends GuiComponent{
     @Override
     public boolean onMouseAction(IGameInstance game, int button, float x, float y){
         if(Settings.KEY_GUI_ACTION_1.isKey(button) && this.isMouseOver(game)){
-            if(this.onPressed(game)){
-                return true;
-            }
-            else if(this.supplier != null && this.supplier.get()){
+            if(this.onPressed(game) || (this.supplier != null && this.supplier.get())){
+                game.getAssetManager().getSound(RockBottomAPI.createInternalRes("menu.click")).play();
                 return true;
             }
         }

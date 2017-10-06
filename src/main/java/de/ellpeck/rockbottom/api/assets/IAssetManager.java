@@ -25,6 +25,7 @@ import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.assets.anim.IAnimation;
 import de.ellpeck.rockbottom.api.assets.font.IFont;
 import de.ellpeck.rockbottom.api.assets.local.Locale;
+import de.ellpeck.rockbottom.api.assets.sound.ISound;
 import de.ellpeck.rockbottom.api.assets.tex.ITexture;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 import org.newdawn.slick.Sound;
@@ -45,7 +46,7 @@ public interface IAssetManager{
 
     IAnimation getAnimation(IResourceName path);
 
-    Sound getSound(IResourceName path);
+    ISound getSound(IResourceName path);
 
     Locale getLocale(IResourceName path);
 

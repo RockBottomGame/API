@@ -86,6 +86,7 @@ public class ComponentConfirmationPopup extends GuiComponent{
     @Override
     public boolean onMouseAction(IGameInstance game, int button, float x, float y){
         if(Settings.KEY_GUI_ACTION_1.isKey(button) && this.isMouseOverPrioritized(game) && this.buttonArea.contains(game.getMouseInGuiX(), game.getMouseInGuiY())){
+            game.getAssetManager().getSound(RockBottomAPI.createInternalRes("menu.click")).play();
             this.consumer.accept(true);
         }
         else{
