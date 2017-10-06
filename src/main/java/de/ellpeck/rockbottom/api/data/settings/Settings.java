@@ -71,6 +71,9 @@ public class Settings implements IPropSettings{
     public boolean vsync;
     public boolean smoothLighting;
 
+    public float musicVolume;
+    public float soundVolume;
+
     public String lastServerIp;
     public String currentLocale;
 
@@ -98,6 +101,9 @@ public class Settings implements IPropSettings{
         this.vsync = this.getProp(props, "vsync", false);
         this.smoothLighting = this.getProp(props, "smooth_lighting", true);
 
+        this.musicVolume = this.getProp(props, "music_volume", 0.5F);
+        this.soundVolume = this.getProp(props, "sound_volume", 1F);
+
         this.lastServerIp = this.getProp(props, "last_server_ip", "");
         this.currentLocale = this.getProp(props, "curr_locale", "rockbottom/loc.us_english");
     }
@@ -124,6 +130,9 @@ public class Settings implements IPropSettings{
         this.setProp(props, "fullscreen", this.fullscreen);
         this.setProp(props, "vsync", this.vsync);
         this.setProp(props, "smooth_lighting", this.smoothLighting);
+
+        this.setProp(props, "music_volume", this.musicVolume);
+        this.setProp(props, "sound_volume", this.soundVolume);
 
         this.setProp(props, "last_server_ip", this.lastServerIp);
         this.setProp(props, "curr_locale", this.currentLocale);

@@ -87,6 +87,7 @@ public class ComponentSlider extends ComponentButton{
             }
             else{
                 this.consumer.accept(this.number, true);
+                game.getAssetManager().getSound(RockBottomAPI.createInternalRes("menu.click")).play();
                 this.wasMouseDown = false;
             }
         }
