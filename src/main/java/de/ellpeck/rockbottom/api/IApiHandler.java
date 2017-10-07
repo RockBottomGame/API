@@ -39,89 +39,24 @@ import java.io.File;
 import java.util.Random;
 import java.util.logging.Logger;
 
-/**
- * The API handler can be used for executing code that is not part
- * of the API through simple methods
- */
 public interface IApiHandler{
 
-    /**
-     * Writes the specified {@link DataSet} to the specified {@link File}
-     *
-     * @param set  The set
-     * @param file The file
-     */
     void writeDataSet(DataSet set, File file);
 
-    /**
-     * Reads the specified {@link DataSet} from the specified {@link File}
-     *
-     * @param set  The set
-     * @param file The file
-     */
     void readDataSet(DataSet set, File file);
 
-    /**
-     * Writes the specified {@link DataSet} to the specified {@link DataOutput}
-     *
-     * @param stream The output to write to
-     * @param set    The set
-     * @throws Exception If writing to the output fails in some way
-     */
     void writeSet(DataOutput stream, DataSet set) throws Exception;
 
-    /**
-     * Reads the specified {@link DataSet} from the specified {@link DataInput}
-     *
-     * @param stream The input to read from
-     * @param set    The set
-     * @throws Exception If reading from the input fails in some way
-     */
     void readSet(DataInput stream, DataSet set) throws Exception;
 
-    /**
-     * Writes the specified {@link DataPart} to the specified {@link DataOutput}
-     *
-     * @param stream The output to write to
-     * @param part   The part
-     * @throws Exception If writing to the output fails in some way
-     */
     void writePart(DataOutput stream, DataPart part) throws Exception;
 
-    /**
-     * Reads a {@link DataPart} from the specified {@link DataInput} and returns it
-     *
-     * @param stream The input to read from
-     * @return The read {@link DataPart}
-     * @throws Exception If reading from the input fails in some way
-     */
     DataPart readPart(DataInput stream) throws Exception;
 
-    /**
-     * Updates an {@link Entity}'s {@link Entity#x} and {@link Entity#y} values
-     * depending on its {@link Entity#motionX} and {@link Entity#motionY}, increases
-     * its {@link Entity#ticksExisted} value and so on
-     * <br> Not supposed to be used by mods
-     *
-     * @param entity The entity
-     */
     void doDefaultEntityUpdate(Entity entity);
 
     void doWorldObjectMovement(MovableWorldObject object);
 
-    /**
-     * Does everything necessary for moving instances of {@link ItemInstance} around between
-     * slots of a {@link de.ellpeck.rockbottom.api.gui.container.ItemContainer} using the {@link ComponentSlot}
-     * provided
-     * <br> Not supposed to be used by mods
-     *
-     * @param game   The current game instance
-     * @param button The button pressed
-     * @param x      The x coordinate of the mouse
-     * @param y      The y coordiante of the mouse
-     * @param slot   The slot
-     * @return If the movement was successful
-     */
     boolean doDefaultSlotMovement(IGameInstance game, int button, float x, float y, ComponentSlot slot);
 
     int[] interpolateLight(IWorld world, int x, int y);

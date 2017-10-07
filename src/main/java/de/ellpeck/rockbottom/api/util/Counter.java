@@ -1,5 +1,5 @@
 /*
- * This file ("MutableBool.java") is part of the RockBottomAPI by Ellpeck.
+ * This file ("MutableInt.java") is part of the RockBottomAPI by Ellpeck.
  * View the source code at <https://github.com/RockBottomGame/>.
  * View information on the project at <https://rockbottom.ellpeck.de/>.
  *
@@ -21,25 +21,25 @@
 
 package de.ellpeck.rockbottom.api.util;
 
-public class MutableBool{
+public class Counter{
 
-    private boolean value;
+    private int value;
 
-    public MutableBool(boolean value){
+    public Counter(int value){
         this.value = value;
     }
 
-    public MutableBool set(boolean value){
+    public Counter set(int value){
         this.value = value;
         return this;
     }
 
-    public MutableBool invert(){
-        this.value = !this.value;
+    public Counter add(int value){
+        this.value += value;
         return this;
     }
 
-    public boolean get(){
+    public int get(){
         return this.value;
     }
 }

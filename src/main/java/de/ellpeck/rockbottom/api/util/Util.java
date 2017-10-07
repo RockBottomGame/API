@@ -34,9 +34,6 @@ import java.util.logging.Level;
 
 public final class Util{
 
-    /**
-     * An unseeded {@link Random} for general use
-     */
     public static final Random RANDOM = new Random();
 
     public static double distance(double x1, double y1, double x2, double y2){

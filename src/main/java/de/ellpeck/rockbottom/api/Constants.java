@@ -21,9 +21,6 @@
 
 package de.ellpeck.rockbottom.api;
 
-/**
- * A collection of constant values used in the game
- */
 public final class Constants{
 
     public static final String RESOURCE_SEPARATOR = "/";

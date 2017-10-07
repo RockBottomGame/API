@@ -21,8 +21,6 @@
 
 package de.ellpeck.rockbottom.api.assets;
 
-import de.ellpeck.rockbottom.api.assets.IAsset;
-
 public interface ITexture extends IAsset{
 
     void draw(float x, float y);

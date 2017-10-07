@@ -44,52 +44,16 @@ import java.net.URLClassLoader;
 import java.util.UUID;
 import java.util.function.Supplier;
 
-/**
- * The current instance of the game
- * <br> Use this to access important game functions and variables
- */
 public interface IGameInstance extends IMod{
 
-    /**
-     * Starts up a {@link IWorld} from a specified {@link File} and {@link WorldInfo}
-     * and puts the player into it
-     * <br> Not supposed to be used by mods
-     *
-     * @param worldFile The world's directory
-     * @param info      The world info
-     */
     void startWorld(File worldFile, WorldInfo info);
 
-    /**
-     * Joins a {@link IWorld} with a specified {@link DataSet} storing the player information,
-     * a {@link WorldInfo} and  a specified {@link NameToIndexInfo} storing the mapping of tiles
-     * to their ids on disk.
-     * <br> Not supposed to be used by mods
-     *
-     * @param playerSet The player data
-     * @param info      The world info
-     */
     void joinWorld(DataSet playerSet, WorldInfo info, DynamicRegistryInfo regInfo);
 
-    /**
-     * Quits the current {@link IWorld}
-     * <br> Not supposed to be used by mods
-     */
     void quitWorld();
 
-    /**
-     * Opens the ingame {@link de.ellpeck.rockbottom.api.gui.Gui}
-     * <br> Not supposed to be used by mods
-     */
     void openIngameMenu();
 
-    /**
-     * Schedules a {@link Supplier} to be executed next tick
-     * <br> Useful for use with {@link de.ellpeck.rockbottom.api.net.packet.IPacket} as
-     * it prevents concurrent modification
-     *
-     * @param action The action to be executed
-     */
     void scheduleAction(Supplier<Boolean> action);
 
     void calcScales();
@@ -100,118 +64,52 @@ public interface IGameInstance extends IMod{
 
     float getWorldScale();
 
-    /**
-     * @return The width of the current visible screen area when applying {@link #getWorldScale()}
-     */
     float getWidthInWorld();
 
-    /**
-     * @return The height of the current visible screen area when applying {@link #getWorldScale()}
-     */
     float getHeightInWorld();
 
-    /**
-     * @return The width of the current visible screen area when applying {@link #getGuiScale()}
-     */
     float getWidthInGui();
 
-    /**
-     * @return The height of the current visible screen area when applying {@link #getGuiScale()}
-     */
     float getHeightInGui();
 
-    /**
-     * @return The x coordinate of the {@link org.lwjgl.input.Mouse} when applying {@link #getGuiScale()}
-     */
     float getMouseInGuiX();
 
-    /**
-     * @return The y coordinate of the {@link org.lwjgl.input.Mouse} when applying {@link #getGuiScale()}
-     */
     float getMouseInGuiY();
 
-    /**
-     * @return The {@link IDataManager} containing the game location and save locations
-     */
     IDataManager getDataManager();
 
-    /**
-     * @return The {@link Settings} of the game
-     */
     Settings getSettings();
 
-    /**
-     * @return The current {@link AbstractEntityPlayer} of {@code null} if there is none
-     */
     AbstractEntityPlayer getPlayer();
 
-    /**
-     * @return The {@link IGuiManager} of the game that can be used to open {@link de.ellpeck.rockbottom.api.gui.Gui}
-     */
     IGuiManager getGuiManager();
 
-    /**
-     * @return The {@link IInteractionManager} of the game
-     */
     IInteractionManager getInteractionManager();
 
-    /**
-     * @return The {@link IChatLog} that can be used to send and query chat messages
-     */
     IChatLog getChatLog();
 
-    /**
-     * @return The current {@link IWorld} of the game or {@code null} if there is none
-     */
     IWorld getWorld();
 
-    /**
-     * @return The {@link IAssetManager} that can be used to get and modify game assets
-     */
     IAssetManager getAssetManager();
 
     IGraphics getGraphics();
 
-    /**
-     * @return The {@link IParticleManager} of the game
-     */
     IParticleManager getParticleManager();
 
-    /**
-     * @return The {@link UUID} of the game and its {@link AbstractEntityPlayer}
-     */
     UUID getUniqueId();
 
-    /**
-     * @return If the game is in debug mode making the debug menu show (F1)
-     */
     boolean isDebug();
 
-    /**
-     * @return If the game is in light debug mode making all lighting be equally bright (F2)
-     */
     boolean isLightDebug();
 
-    /**
-     * @return If the game is in item info debug making the id and data of items show on the tooltip (F5)
-     */
     boolean isItemInfoDebug();
 
     boolean isChunkBorderDebug();
 
-    /**
-     * @return The average TPS (ticks per second) out of {@link Constants#TARGET_TPS} over the last second
-     */
     int getTpsAverage();
 
-    /**
-     * @return The average FPS (frames per second) out of {@link Settings#targetFps} over the last second
-     */
     int getFpsAverage();
 
-    /**
-     * @return The {@link ClassLoader} used to load vanilla game and {@link IMod} classes
-     */
     URLClassLoader getClassLoader();
 
     void setFullscreen(boolean fullscreen);
