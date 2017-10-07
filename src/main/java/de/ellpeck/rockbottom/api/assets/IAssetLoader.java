@@ -1,5 +1,5 @@
 /*
- * This file ("AssetFont.java") is part of the RockBottomAPI by Ellpeck.
+ * This file ("AssetLoader.java") is part of the RockBottomAPI by Ellpeck.
  * View the source code at <https://github.com/RockBottomGame/>.
  * View information on the project at <https://rockbottom.ellpeck.de/>.
  *
@@ -19,20 +19,20 @@
  * © 2017 Ellpeck
  */
 
-package de.ellpeck.rockbottom.api.assets.font;
+package de.ellpeck.rockbottom.api.assets;
 
-import de.ellpeck.rockbottom.api.assets.IAsset;
+import com.google.gson.JsonElement;
+import de.ellpeck.rockbottom.api.RockBottomAPI;
+import de.ellpeck.rockbottom.api.mod.IMod;
+import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 
-public class AssetFont implements IAsset<IFont>{
+public interface IAssetLoader<T extends IAsset>{
 
-    private final IFont font;
-
-    public AssetFont(IFont font){
-        this.font = font;
+    default void register(){
+        RockBottomAPI.ASSET_LOADER_REGISTRY.register(this.getAssetIdentifier(), this);
     }
 
-    @Override
-    public IFont get(){
-        return this.font;
-    }
+    IResourceName getAssetIdentifier();
+
+    T loadAsset(IAssetManager manager, IResourceName resourceName, String path, JsonElement element, String elementName, IMod loadingMod) throws Exception;
 }

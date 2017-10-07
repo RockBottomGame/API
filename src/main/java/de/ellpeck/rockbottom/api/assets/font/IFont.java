@@ -21,9 +21,11 @@
 
 package de.ellpeck.rockbottom.api.assets.font;
 
+import de.ellpeck.rockbottom.api.assets.IAsset;
+
 import java.util.List;
 
-public interface IFont{
+public interface IFont extends IAsset{
 
     void drawStringFromRight(float x, float y, String s, float scale);
 

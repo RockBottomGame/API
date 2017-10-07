@@ -1,5 +1,5 @@
 /*
- * This file ("AssetLocale.java") is part of the RockBottomAPI by Ellpeck.
+ * This file ("ISound.java") is part of the RockBottomAPI by Ellpeck.
  * View the source code at <https://github.com/RockBottomGame/>.
  * View information on the project at <https://rockbottom.ellpeck.de/>.
  *
@@ -19,20 +19,25 @@
  * © 2017 Ellpeck
  */
 
-package de.ellpeck.rockbottom.api.assets.local;
+package de.ellpeck.rockbottom.api.assets;
 
 import de.ellpeck.rockbottom.api.assets.IAsset;
 
-public class AssetLocale implements IAsset<Locale>{
+public interface ISound extends IAsset{
 
-    private final Locale locale;
+    void play();
 
-    public AssetLocale(Locale locale){
-        this.locale = locale;
-    }
+    void play(float pitch, float volume);
 
-    @Override
-    public Locale get(){
-        return this.locale;
-    }
+    void playAt(double x, double y, double z);
+
+    void playAt(float pitch, float volume, double x, double y, double z);
+
+    void loop();
+
+    void loop(float pitch, float volume);
+
+    boolean isPlaying();
+
+    void stop();
 }

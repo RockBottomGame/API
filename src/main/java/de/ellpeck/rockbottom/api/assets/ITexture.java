@@ -19,9 +19,11 @@
  * © 2017 Ellpeck
  */
 
-package de.ellpeck.rockbottom.api.assets.tex;
+package de.ellpeck.rockbottom.api.assets;
 
-public interface ITexture{
+import de.ellpeck.rockbottom.api.assets.IAsset;
+
+public interface ITexture extends IAsset{
 
     void draw(float x, float y);
 

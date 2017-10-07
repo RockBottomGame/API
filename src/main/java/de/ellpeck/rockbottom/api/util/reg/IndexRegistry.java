@@ -32,6 +32,7 @@ public class IndexRegistry<T> implements IRegistry<Integer, T>{
     protected final int max;
     protected final String name;
     protected final BiMap<Integer, T> map = HashBiMap.create();
+    private BiMap<Integer, T> cachedUnmodifiableMap;
 
     public IndexRegistry(String name, int max){
         this.name = name;
@@ -84,7 +85,11 @@ public class IndexRegistry<T> implements IRegistry<Integer, T>{
 
     @Override
     public BiMap<Integer, T> getUnmodifiable(){
-        return Maps.unmodifiableBiMap(this.map);
+        if(this.cachedUnmodifiableMap == null || this.cachedUnmodifiableMap.size() != this.map.size()){
+            this.cachedUnmodifiableMap = Maps.unmodifiableBiMap(this.map);
+        }
+
+        return this.cachedUnmodifiableMap;
     }
 
     @Override

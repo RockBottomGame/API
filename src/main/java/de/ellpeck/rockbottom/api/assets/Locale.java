@@ -19,7 +19,7 @@
  * © 2017 Ellpeck
  */
 
-package de.ellpeck.rockbottom.api.assets.local;
+package de.ellpeck.rockbottom.api.assets;
 
 import com.google.common.base.Charsets;
 import com.google.gson.JsonElement;
@@ -27,7 +27,6 @@ import com.google.gson.JsonParser;
 import de.ellpeck.rockbottom.api.Constants;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
-import org.newdawn.slick.util.Log;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -35,7 +34,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-public class Locale{
+public class Locale implements IAsset{
 
     private final String name;
     private final Map<IResourceName, String> localization = new HashMap<>();

@@ -21,6 +21,7 @@
 
 package de.ellpeck.rockbottom.api;
 
+import de.ellpeck.rockbottom.api.assets.IAssetLoader;
 import de.ellpeck.rockbottom.api.construction.BasicRecipe;
 import de.ellpeck.rockbottom.api.construction.IRecipe;
 import de.ellpeck.rockbottom.api.data.set.part.DataPart;
@@ -58,7 +59,7 @@ public final class RockBottomAPI{
     /**
      * The current API version
      */
-    public static final String VERSION = "0.1.12";
+    public static final String VERSION = "0.1.13";
 
     /**
      * The registry for {@link Tile}
@@ -133,6 +134,7 @@ public final class RockBottomAPI{
     public static final IndexRegistry<Class<? extends ChatComponent>> CHAT_COMPONENT_REGISTRY = new IndexRegistry<>("chat_component_registry", Byte.MAX_VALUE);
     public static final List<IMainMenuTheme> MAIN_MENU_THEMES = new ArrayList<>();
     public static final NameRegistry<Class<? extends Information>> INFORMATION_REGISTRY = new NameRegistry<>("information_registry");
+    public static final NameRegistry<IAssetLoader> ASSET_LOADER_REGISTRY = new NameRegistry<>("asset_loader_registry");
 
     private static Internals internals;
 

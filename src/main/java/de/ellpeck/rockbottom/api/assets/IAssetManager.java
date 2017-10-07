@@ -22,13 +22,8 @@
 package de.ellpeck.rockbottom.api.assets;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
-import de.ellpeck.rockbottom.api.assets.anim.IAnimation;
 import de.ellpeck.rockbottom.api.assets.font.IFont;
-import de.ellpeck.rockbottom.api.assets.local.Locale;
-import de.ellpeck.rockbottom.api.assets.sound.ISound;
-import de.ellpeck.rockbottom.api.assets.tex.ITexture;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
-import org.newdawn.slick.Sound;
 
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
@@ -40,7 +35,7 @@ public interface IAssetManager{
 
     <T extends IAsset> Map<IResourceName, T> getAllOfType(Class<T> type);
 
-    <T> T getAssetWithFallback(IResourceName path, IAsset<T> fallback);
+    <T extends IAsset> T getAssetWithFallback(IResourceName path, T fallback);
 
     ITexture getTexture(IResourceName path);
 

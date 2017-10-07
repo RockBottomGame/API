@@ -19,11 +19,9 @@
  * © 2017 Ellpeck
  */
 
-package de.ellpeck.rockbottom.api.assets.anim;
+package de.ellpeck.rockbottom.api.assets;
 
-import de.ellpeck.rockbottom.api.assets.tex.ITexture;
-
-public interface IAnimation{
+public interface IAnimation extends IAsset{
 
     void drawFrame(int row, int frame, float x, float y, float width, float height, int filter);
 

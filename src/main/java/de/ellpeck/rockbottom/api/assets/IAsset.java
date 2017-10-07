@@ -21,8 +21,6 @@
 
 package de.ellpeck.rockbottom.api.assets;
 
-public interface IAsset<T>{
-
-    T get();
+public interface IAsset{
 
 }
