@@ -24,6 +24,7 @@ package de.ellpeck.rockbottom.api.net.packet.toclient;
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.entity.Entity;
 import de.ellpeck.rockbottom.api.net.packet.IPacket;
+import de.ellpeck.rockbottom.api.util.ApiInternal;
 import de.ellpeck.rockbottom.api.world.IWorld;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
@@ -31,6 +32,7 @@ import io.netty.channel.ChannelHandlerContext;
 import java.io.IOException;
 import java.util.UUID;
 
+@ApiInternal
 public class PacketDeath implements IPacket{
 
     private UUID entityId;

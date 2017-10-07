@@ -22,12 +22,14 @@
 package de.ellpeck.rockbottom.api.data.settings;
 
 import de.ellpeck.rockbottom.api.data.IDataManager;
+import de.ellpeck.rockbottom.api.util.ApiInternal;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+@ApiInternal
 public class ModSettings implements IPropSettings{
 
     private final List<String> disabledMods = new ArrayList<>();

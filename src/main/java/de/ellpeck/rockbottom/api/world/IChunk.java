@@ -26,6 +26,7 @@ import de.ellpeck.rockbottom.api.data.set.DataSet;
 import de.ellpeck.rockbottom.api.data.set.IAdditionalDataProvider;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.tile.state.TileState;
+import de.ellpeck.rockbottom.api.util.ApiInternal;
 import de.ellpeck.rockbottom.api.util.Counter;
 import de.ellpeck.rockbottom.api.world.gen.biome.Biome;
 import de.ellpeck.rockbottom.api.world.layer.TileLayer;
@@ -36,10 +37,13 @@ import java.util.Set;
 
 public interface IChunk extends IChunkOrWorld, IAdditionalDataProvider{
 
+    @ApiInternal
     List<AbstractEntityPlayer> getPlayersInRange();
 
+    @ApiInternal
     List<AbstractEntityPlayer> getPlayersLeftRange();
 
+    @ApiInternal
     Map<AbstractEntityPlayer, Counter> getLeftPlayerTimers();
 
     int getGridX();
@@ -66,29 +70,39 @@ public interface IChunk extends IChunkOrWorld, IAdditionalDataProvider{
 
     byte getSkylightInner(int x, int y);
 
+    @ApiInternal
     void setSkylightInner(int x, int y, byte light);
 
     byte getArtificialLightInner(int x, int y);
 
+    @ApiInternal
     void setArtificialLightInner(int x, int y, byte light);
 
+    @ApiInternal
     void setGenerating(boolean generating);
 
+    @ApiInternal
     boolean needsSave();
 
+    @ApiInternal
     boolean shouldUnload();
 
+    @ApiInternal
     void save(DataSet set);
 
+    @ApiInternal
     void update(IGameInstance game);
 
     byte getCombinedLightInner(int x, int y);
 
+    @ApiInternal
     int getScheduledUpdateAmount();
 
     Biome getBiomeInner(int x, int y);
 
+    @ApiInternal
     void setBiomeInner(int x, int y, Biome biome);
 
+    @ApiInternal
     Set<TileLayer> getLoadedLayers();
 }

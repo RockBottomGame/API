@@ -23,6 +23,7 @@ package de.ellpeck.rockbottom.api.assets;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.assets.font.IFont;
+import de.ellpeck.rockbottom.api.util.ApiInternal;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 
 import java.io.InputStream;
@@ -31,6 +32,7 @@ import java.util.Map;
 
 public interface IAssetManager{
 
+    @ApiInternal
     void reloadCursor(IGameInstance game);
 
     <T extends IAsset> Map<IResourceName, T> getAllOfType(Class<T> type);
@@ -43,18 +45,22 @@ public interface IAssetManager{
 
     ISound getSound(IResourceName path);
 
+    @ApiInternal
     Locale getLocale(IResourceName path);
 
+    @ApiInternal
     IFont getFont(IResourceName path);
 
     String localize(IResourceName unloc, Object... format);
 
     IFont getFont();
 
+    @ApiInternal
     void setFont(IFont font);
 
     Locale getLocale();
 
+    @ApiInternal
     void setLocale(Locale locale);
 
     InputStream getResourceStream(String s);

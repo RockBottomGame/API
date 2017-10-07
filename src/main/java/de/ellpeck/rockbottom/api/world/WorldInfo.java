@@ -22,18 +22,21 @@
 package de.ellpeck.rockbottom.api.world;
 
 import de.ellpeck.rockbottom.api.data.set.DataSet;
+import de.ellpeck.rockbottom.api.util.ApiInternal;
 import io.netty.buffer.ByteBuf;
 
 import java.io.File;
 
 public class WorldInfo{
 
+    @ApiInternal
     private final File dataFile;
 
     public long seed;
     public int totalTimeInWorld;
     public int currentWorldTime = 3000;
 
+    @ApiInternal
     public WorldInfo(File worldDirectory){
         this.dataFile = new File(worldDirectory, "world_info.dat");
     }
@@ -46,6 +49,7 @@ public class WorldInfo{
         return new File(directory, "world_info.dat").lastModified();
     }
 
+    @ApiInternal
     public void load(){
         DataSet dataSet = new DataSet();
         dataSet.read(this.dataFile);
@@ -55,6 +59,7 @@ public class WorldInfo{
         this.currentWorldTime = dataSet.getInt("curr_time");
     }
 
+    @ApiInternal
     public void save(){
         DataSet dataSet = new DataSet();
         dataSet.addLong("seed", this.seed);
@@ -63,12 +68,14 @@ public class WorldInfo{
         dataSet.write(this.dataFile);
     }
 
+    @ApiInternal
     public void toBuffer(ByteBuf buf){
         buf.writeLong(this.seed);
         buf.writeInt(this.totalTimeInWorld);
         buf.writeInt(this.currentWorldTime);
     }
 
+    @ApiInternal
     public void fromBuffer(ByteBuf buf){
         this.seed = buf.readLong();
         this.totalTimeInWorld = buf.readInt();

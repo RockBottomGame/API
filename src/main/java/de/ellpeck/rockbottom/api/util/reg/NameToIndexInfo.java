@@ -25,12 +25,14 @@ import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.data.IDataManager;
 import de.ellpeck.rockbottom.api.data.settings.IPropSettings;
 import de.ellpeck.rockbottom.api.net.NetUtil;
+import de.ellpeck.rockbottom.api.util.ApiInternal;
 import io.netty.buffer.ByteBuf;
 
 import java.io.File;
 import java.util.Map;
 import java.util.Properties;
 
+@ApiInternal
 public class NameToIndexInfo implements IPropSettings{
 
     private final IndexRegistry<IResourceName> reg;

@@ -23,6 +23,7 @@ package de.ellpeck.rockbottom.api.data.settings;
 
 import de.ellpeck.rockbottom.api.data.IDataManager;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
+import de.ellpeck.rockbottom.api.util.ApiInternal;
 
 import java.io.File;
 import java.util.HashMap;
@@ -30,6 +31,7 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.UUID;
 
+@ApiInternal
 public class CommandPermissions implements IPropSettings{
 
     private final Map<UUID, Integer> commandLevels = new HashMap<>();

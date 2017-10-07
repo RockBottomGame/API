@@ -21,8 +21,11 @@
 
 package de.ellpeck.rockbottom.api.gui;
 
+import de.ellpeck.rockbottom.api.util.ApiInternal;
+
 public interface IGuiManager{
 
+    @ApiInternal
     void updateDimensions();
 
     void openGui(Gui gui);

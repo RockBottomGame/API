@@ -23,11 +23,13 @@ package de.ellpeck.rockbottom.api.data.settings;
 
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.data.IDataManager;
+import de.ellpeck.rockbottom.api.util.ApiInternal;
 import org.newdawn.slick.Input;
 
 import java.io.File;
 import java.util.Properties;
 
+@ApiInternal
 public class Settings implements IPropSettings{
 
     public static final Keybind KEY_PLACE = new Keybind(RockBottomAPI.createInternalRes("place"), Input.MOUSE_RIGHT_BUTTON, true).register();

@@ -22,6 +22,7 @@
 package de.ellpeck.rockbottom.api.mod;
 
 import de.ellpeck.rockbottom.api.data.settings.ModSettings;
+import de.ellpeck.rockbottom.api.util.ApiInternal;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 
 import java.io.File;
@@ -29,22 +30,31 @@ import java.util.List;
 
 public interface IModLoader{
 
+    @ApiInternal
     void loadJarMods(File dir);
 
+    @ApiInternal
     void loadUnpackedMods(File dir);
 
+    @ApiInternal
     void sortMods();
 
+    @ApiInternal
     void prePreInit();
 
+    @ApiInternal
     void preInit();
 
+    @ApiInternal
     void init();
 
+    @ApiInternal
     void initAssets();
 
+    @ApiInternal
     void postInit();
 
+    @ApiInternal
     void postPostInit();
 
     IMod getMod(String id);

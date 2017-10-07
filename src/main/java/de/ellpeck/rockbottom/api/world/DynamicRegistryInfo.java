@@ -21,9 +21,11 @@
 
 package de.ellpeck.rockbottom.api.world;
 
+import de.ellpeck.rockbottom.api.util.ApiInternal;
 import de.ellpeck.rockbottom.api.util.reg.NameToIndexInfo;
 import io.netty.buffer.ByteBuf;
 
+@ApiInternal
 public class DynamicRegistryInfo{
 
     private NameToIndexInfo tileRegInfo;

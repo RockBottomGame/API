@@ -25,6 +25,7 @@ import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.data.settings.Settings;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
+import de.ellpeck.rockbottom.api.util.ApiInternal;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 
 import java.util.ArrayList;
@@ -108,6 +109,7 @@ public class TileLayer{
         }
     }
 
+    @ApiInternal
     public static void initLayerList(){
         if(allLayers == null){
             List<TileLayer> list = new ArrayList<>(RockBottomAPI.TILE_LAYER_REGISTRY.getUnmodifiable().values());
@@ -125,6 +127,7 @@ public class TileLayer{
         }
     }
 
+    @ApiInternal
     public static List<TileLayer> getAllLayers(){
         if(allLayers != null){
             return allLayers;

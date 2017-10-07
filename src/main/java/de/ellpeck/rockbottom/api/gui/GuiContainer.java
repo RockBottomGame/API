@@ -33,6 +33,7 @@ import de.ellpeck.rockbottom.api.gui.container.ContainerSlot;
 import de.ellpeck.rockbottom.api.gui.container.ItemContainer;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.net.packet.toserver.PacketDropItem;
+import de.ellpeck.rockbottom.api.util.ApiInternal;
 import de.ellpeck.rockbottom.api.util.Colors;
 
 public abstract class GuiContainer extends Gui{
@@ -102,6 +103,7 @@ public abstract class GuiContainer extends Gui{
         }
     }
 
+    @ApiInternal
     private void dropHeldItem(){
         if(RockBottomAPI.getNet().isClient()){
             RockBottomAPI.getNet().sendToServer(new PacketDropItem(this.player.getUniqueId(), this.holdingInst));

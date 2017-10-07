@@ -33,6 +33,7 @@ import de.ellpeck.rockbottom.api.net.chat.IChatLog;
 import de.ellpeck.rockbottom.api.particle.IParticleManager;
 import de.ellpeck.rockbottom.api.render.IPlayerDesign;
 import de.ellpeck.rockbottom.api.toast.IToaster;
+import de.ellpeck.rockbottom.api.util.ApiInternal;
 import de.ellpeck.rockbottom.api.util.reg.NameToIndexInfo;
 import de.ellpeck.rockbottom.api.world.DynamicRegistryInfo;
 import de.ellpeck.rockbottom.api.world.IWorld;
@@ -46,16 +47,21 @@ import java.util.function.Supplier;
 
 public interface IGameInstance extends IMod{
 
+    @ApiInternal
     void startWorld(File worldFile, WorldInfo info);
 
+    @ApiInternal
     void joinWorld(DataSet playerSet, WorldInfo info, DynamicRegistryInfo regInfo);
 
+    @ApiInternal
     void quitWorld();
 
+    @ApiInternal
     void openIngameMenu();
 
     void scheduleAction(Supplier<Boolean> action);
 
+    @ApiInternal
     void calcScales();
 
     float getDisplayRatio();
@@ -106,12 +112,15 @@ public interface IGameInstance extends IMod{
 
     boolean isChunkBorderDebug();
 
+    @ApiInternal
     int getTpsAverage();
 
+    @ApiInternal
     int getFpsAverage();
 
     URLClassLoader getClassLoader();
 
+    @ApiInternal
     void setFullscreen(boolean fullscreen);
 
     int getTotalTicks();
@@ -120,10 +129,12 @@ public interface IGameInstance extends IMod{
 
     boolean isDedicatedServer();
 
+    @ApiInternal
     void setUniqueId(UUID id);
 
     Input getInput();
 
+    @ApiInternal
     void exit();
 
     IToaster getToaster();

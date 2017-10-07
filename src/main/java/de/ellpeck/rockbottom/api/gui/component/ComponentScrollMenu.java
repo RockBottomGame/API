@@ -27,6 +27,7 @@ import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.data.settings.Settings;
 import de.ellpeck.rockbottom.api.gui.Gui;
+import de.ellpeck.rockbottom.api.util.ApiInternal;
 import de.ellpeck.rockbottom.api.util.BoundBox;
 import de.ellpeck.rockbottom.api.util.Util;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
@@ -160,6 +161,7 @@ public class ComponentScrollMenu extends ComponentButton{
         }
     }
 
+    @ApiInternal
     private void onClickOrMove(float mouseY){
         int max = this.getMax();
         float clickPercentage = (mouseY-this.getRenderY())/(float)this.height;
@@ -171,6 +173,7 @@ public class ComponentScrollMenu extends ComponentButton{
         }
     }
 
+    @ApiInternal
     private int getMax(){
         return (Util.ceil((float)this.contents.size()/(float)this.contentsX))-this.contentsY;
     }

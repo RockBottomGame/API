@@ -25,6 +25,7 @@ import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.data.set.DataSet;
+import de.ellpeck.rockbottom.api.util.ApiInternal;
 
 import java.util.logging.Level;
 
@@ -36,6 +37,7 @@ public abstract class ChatComponent{
 
     }
 
+    @ApiInternal
     public static ChatComponent createFromSet(DataSet set){
         int id = set.getInt("id");
 

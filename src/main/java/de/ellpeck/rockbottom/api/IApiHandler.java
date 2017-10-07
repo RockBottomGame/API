@@ -29,6 +29,7 @@ import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.gui.component.ComponentSlot;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.tile.Tile;
+import de.ellpeck.rockbottom.api.util.ApiInternal;
 import de.ellpeck.rockbottom.api.world.IWorld;
 import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 import de.ellpeck.rockbottom.api.world.gen.INoiseGen;
@@ -53,10 +54,13 @@ public interface IApiHandler{
 
     DataPart readPart(DataInput stream) throws Exception;
 
+    @ApiInternal
     void doDefaultEntityUpdate(Entity entity);
 
+    @ApiInternal
     void doWorldObjectMovement(MovableWorldObject object);
 
+    @ApiInternal
     boolean doDefaultSlotMovement(IGameInstance game, int button, float x, float y, ComponentSlot slot);
 
     int[] interpolateLight(IWorld world, int x, int y);
@@ -67,11 +71,14 @@ public interface IApiHandler{
 
     INoiseGen makeSimplexNoise(Random random);
 
+    @ApiInternal
     boolean isToolEffective(AbstractEntityPlayer player, ItemInstance instance, Tile tile, TileLayer layer, int x, int y);
 
+    @ApiInternal
     boolean placeTile(int x, int y, TileLayer layer, AbstractEntityPlayer player, ItemInstance selected, Tile tile);
 
     Logger createLogger(String name);
 
+    @ApiInternal
     Logger logger();
 }

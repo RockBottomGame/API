@@ -26,6 +26,7 @@ import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.render.IPlayerDesign;
 import de.ellpeck.rockbottom.api.tile.Tile;
 import de.ellpeck.rockbottom.api.tile.state.TileState;
+import de.ellpeck.rockbottom.api.util.ApiInternal;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 import de.ellpeck.rockbottom.api.util.reg.NameToIndexInfo;
 import de.ellpeck.rockbottom.api.world.gen.IRetroactiveGenerator;
@@ -78,14 +79,19 @@ public interface IWorld extends IChunkOrWorld{
 
     void causeLightUpdate(int x, int y);
 
+    @ApiInternal
     void unloadChunk(IChunk chunk);
 
+    @ApiInternal
     void savePlayer(AbstractEntityPlayer player);
 
+    @ApiInternal
     List<IWorldGenerator> getSortedGenerators();
 
+    @ApiInternal
     List<IRetroactiveGenerator> getSortedRetroactiveGenerators();
 
+    @ApiInternal
     void save();
 
     List<AbstractEntityPlayer> getAllPlayers();

@@ -25,6 +25,7 @@ import de.ellpeck.rockbottom.api.data.settings.CommandPermissions;
 import de.ellpeck.rockbottom.api.entity.Entity;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.net.packet.IPacket;
+import de.ellpeck.rockbottom.api.util.ApiInternal;
 import de.ellpeck.rockbottom.api.world.IWorld;
 import io.netty.channel.group.ChannelGroup;
 
@@ -40,6 +41,7 @@ public interface INetHandler{
 
     boolean isConnectedToServer();
 
+    @ApiInternal
     ChannelGroup getConnectedClients();
 
     CommandPermissions getCommandPermissions();
@@ -50,7 +52,9 @@ public interface INetHandler{
 
     void sendToAllPlayersExcept(IWorld world, IPacket packet, Entity except);
 
+    @ApiInternal
     void init(String ip, int port, boolean isServer) throws Exception;
 
+    @ApiInternal
     void shutdown();
 }

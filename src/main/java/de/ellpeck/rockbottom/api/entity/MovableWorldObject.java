@@ -23,6 +23,7 @@ package de.ellpeck.rockbottom.api.entity;
 
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.tile.state.TileState;
+import de.ellpeck.rockbottom.api.util.ApiInternal;
 import de.ellpeck.rockbottom.api.util.BoundBox;
 import de.ellpeck.rockbottom.api.world.IWorld;
 import de.ellpeck.rockbottom.api.world.layer.TileLayer;
@@ -52,10 +53,12 @@ public abstract class MovableWorldObject{
         this.y = y;
     }
 
+    @ApiInternal
     public void move(){
         RockBottomAPI.getApiHandler().doWorldObjectMovement(this);
     }
 
+    @ApiInternal
     public void onTileCollision(int x, int y, TileLayer layer, TileState state, BoundBox objBox, BoundBox objBoxMotion, List<BoundBox> boxes){
 
     }

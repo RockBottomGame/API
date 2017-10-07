@@ -21,11 +21,14 @@
 
 package de.ellpeck.rockbottom.api.event;
 
+import de.ellpeck.rockbottom.api.util.ApiInternal;
+
 public enum EventResult{
     DEFAULT,
     MODIFIED,
     CANCELLED;
 
+    @ApiInternal
     public boolean shouldCancel(){
         return this == CANCELLED;
     }

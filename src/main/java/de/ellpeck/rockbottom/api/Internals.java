@@ -24,7 +24,9 @@ package de.ellpeck.rockbottom.api;
 import de.ellpeck.rockbottom.api.event.IEventHandler;
 import de.ellpeck.rockbottom.api.mod.IModLoader;
 import de.ellpeck.rockbottom.api.net.INetHandler;
+import de.ellpeck.rockbottom.api.util.ApiInternal;
 
+@ApiInternal
 public class Internals{
 
     private IGameInstance game;

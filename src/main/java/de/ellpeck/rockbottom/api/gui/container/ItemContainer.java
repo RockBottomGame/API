@@ -24,6 +24,7 @@ package de.ellpeck.rockbottom.api.gui.container;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.inventory.IInventory;
+import de.ellpeck.rockbottom.api.util.ApiInternal;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 import org.newdawn.slick.util.Log;
 
@@ -97,6 +98,7 @@ public abstract class ItemContainer{
 
     }
 
+    @ApiInternal
     public int getUnboundId(){
         return -1;
     }

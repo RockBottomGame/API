@@ -27,8 +27,10 @@ import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.entity.EntityItem;
 import de.ellpeck.rockbottom.api.item.Item;
 import de.ellpeck.rockbottom.api.render.item.IItemRenderer;
+import de.ellpeck.rockbottom.api.util.ApiInternal;
 import de.ellpeck.rockbottom.api.world.IWorld;
 
+@ApiInternal
 public class ItemEntityRenderer implements IEntityRenderer<EntityItem>{
 
     @Override

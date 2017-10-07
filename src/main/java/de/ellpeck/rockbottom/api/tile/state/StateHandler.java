@@ -22,9 +22,11 @@
 package de.ellpeck.rockbottom.api.tile.state;
 
 import de.ellpeck.rockbottom.api.tile.Tile;
+import de.ellpeck.rockbottom.api.util.ApiInternal;
 
 import java.util.*;
 
+@ApiInternal
 public class StateHandler{
 
     private final Tile tile;

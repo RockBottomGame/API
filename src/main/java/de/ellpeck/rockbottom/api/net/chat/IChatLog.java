@@ -22,6 +22,7 @@
 package de.ellpeck.rockbottom.api.net.chat;
 
 import de.ellpeck.rockbottom.api.net.chat.component.ChatComponent;
+import de.ellpeck.rockbottom.api.util.ApiInternal;
 
 import java.util.List;
 
@@ -37,5 +38,6 @@ public interface IChatLog{
 
     List<ChatComponent> getMessages();
 
+    @ApiInternal
     void clear();
 }

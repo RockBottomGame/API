@@ -26,9 +26,11 @@ import de.ellpeck.rockbottom.api.data.set.DataSet;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.render.entity.IEntityRenderer;
 import de.ellpeck.rockbottom.api.render.entity.ItemEntityRenderer;
+import de.ellpeck.rockbottom.api.util.ApiInternal;
 import de.ellpeck.rockbottom.api.util.BoundBox;
 import de.ellpeck.rockbottom.api.world.IWorld;
 
+@ApiInternal
 public class EntityItem extends Entity{
 
     private final BoundBox boundingBox = new BoundBox(-0.25, -0.25, 0.25, 0.25);

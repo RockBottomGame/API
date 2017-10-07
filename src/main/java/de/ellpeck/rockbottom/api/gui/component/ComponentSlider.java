@@ -27,6 +27,7 @@ import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.data.settings.Settings;
 import de.ellpeck.rockbottom.api.gui.Gui;
+import de.ellpeck.rockbottom.api.util.ApiInternal;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 
 import java.util.function.BiConsumer;
@@ -93,6 +94,7 @@ public class ComponentSlider extends ComponentButton{
         }
     }
 
+    @ApiInternal
     private void onClickOrMove(float mouseX){
         float clickPercentage = (mouseX-this.getRenderX())/(float)this.width;
         int number = Math.max(this.min, Math.min(this.max, (int)(clickPercentage*(this.max-this.min+1)+this.min)));

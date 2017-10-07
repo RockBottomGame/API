@@ -29,6 +29,7 @@ import de.ellpeck.rockbottom.api.assets.font.IFont;
 import de.ellpeck.rockbottom.api.assets.ITexture;
 import de.ellpeck.rockbottom.api.data.settings.Settings;
 import de.ellpeck.rockbottom.api.gui.Gui;
+import de.ellpeck.rockbottom.api.util.ApiInternal;
 import de.ellpeck.rockbottom.api.util.BoundBox;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 
@@ -36,6 +37,7 @@ import java.util.function.Consumer;
 
 public class ComponentConfirmationPopup extends GuiComponent{
 
+    @ApiInternal
     private static final IResourceName RES = RockBottomAPI.createInternalRes("gui.popup");
     private final Consumer<Boolean> consumer;
     private final boolean isUpsideDown;

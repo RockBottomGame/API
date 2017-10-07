@@ -26,6 +26,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import de.ellpeck.rockbottom.api.Constants;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
+import de.ellpeck.rockbottom.api.util.ApiInternal;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 
 import java.io.InputStream;
@@ -34,6 +35,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
+@ApiInternal
 public class Locale implements IAsset{
 
     private final String name;

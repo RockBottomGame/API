@@ -23,6 +23,7 @@ package de.ellpeck.rockbottom.api.render;
 
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.data.set.DataSet;
+import de.ellpeck.rockbottom.api.util.ApiInternal;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 
 import java.util.ArrayList;
@@ -31,8 +32,10 @@ import java.util.List;
 
 public interface IPlayerDesign{
 
+    @ApiInternal
     IResourceName EYES = RockBottomAPI.createInternalRes("player.base.eyes");
 
+    @ApiInternal
     List<IResourceName> BASE = Arrays.asList(
             RockBottomAPI.createInternalRes("player.base.1"),
             RockBottomAPI.createInternalRes("player.base.2"),
@@ -49,6 +52,7 @@ public interface IPlayerDesign{
             null
     ));
 
+    @ApiInternal
     List<IResourceName> ARMS = Arrays.asList(
             RockBottomAPI.createInternalRes("player.arm.skin_1"),
             RockBottomAPI.createInternalRes("player.arm.skin_2"),
@@ -136,20 +140,26 @@ public interface IPlayerDesign{
             RockBottomAPI.createInternalRes("player.beard.2")
     ));
 
+    @ApiInternal
     void saveToFile();
 
+    @ApiInternal
     void loadFromFile();
 
+    @ApiInternal
     void save(DataSet set);
 
+    @ApiInternal
     void load(DataSet set);
 
     int getFavoriteColor();
 
+    @ApiInternal
     void setFavoriteColor(int color);
 
     String getName();
 
+    @ApiInternal
     void setName(String name);
 
     int getBase();
@@ -190,41 +200,60 @@ public interface IPlayerDesign{
 
     boolean isFemale();
 
+    @ApiInternal
     void setBase(int base);
 
+    @ApiInternal
     void setEyeColor(int eyeColor);
 
+    @ApiInternal
     void setShirt(int shirt);
 
+    @ApiInternal
     void setShirtColor(int shirtColor);
 
+    @ApiInternal
     void setSleeves(int sleeves);
 
+    @ApiInternal
     void setSleevesColor(int sleevesColor);
 
+    @ApiInternal
     void setPants(int pants);
 
+    @ApiInternal
     void setPantsColor(int pantsColor);
 
+    @ApiInternal
     void setFootwear(int footwear);
 
+    @ApiInternal
     void setFootwearColor(int footwearColor);
 
+    @ApiInternal
     void setHair(int hair);
 
+    @ApiInternal
     void setHairColor(int hairColor);
 
+    @ApiInternal
     void setAccessory(int accessory);
 
+    @ApiInternal
     void setEyebrows(int eyebrows);
 
+    @ApiInternal
     void setMouth(int mouth);
 
+    @ApiInternal
     void setEyebrowsColor(int eyebrowsColor);
 
+    @ApiInternal
     void setBeard(int beard);
 
+    @ApiInternal
     void setBeardColor(int beardColor);
 
+    @ApiInternal
     void setFemale(boolean female);
 }

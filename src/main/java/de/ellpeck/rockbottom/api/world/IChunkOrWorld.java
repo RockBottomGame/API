@@ -22,9 +22,9 @@
 package de.ellpeck.rockbottom.api.world;
 
 import de.ellpeck.rockbottom.api.entity.Entity;
-import de.ellpeck.rockbottom.api.tile.Tile;
 import de.ellpeck.rockbottom.api.tile.entity.TileEntity;
 import de.ellpeck.rockbottom.api.tile.state.TileState;
+import de.ellpeck.rockbottom.api.util.ApiInternal;
 import de.ellpeck.rockbottom.api.util.BoundBox;
 import de.ellpeck.rockbottom.api.world.gen.biome.Biome;
 import de.ellpeck.rockbottom.api.world.layer.TileLayer;
@@ -45,10 +45,12 @@ public interface IChunkOrWorld{
 
     void addEntity(Entity entity);
 
+    @ApiInternal
     void addTileEntity(TileEntity tile);
 
     void removeEntity(Entity entity);
 
+    @ApiInternal
     void removeTileEntity(TileLayer layer, int x, int y);
 
     TileEntity getTileEntity(TileLayer layer, int x, int y);
@@ -79,8 +81,10 @@ public interface IChunkOrWorld{
 
     byte getArtificialLight(int x, int y);
 
+    @ApiInternal
     void setSkyLight(int x, int y, byte light);
 
+    @ApiInternal
     void setArtificialLight(int x, int y, byte light);
 
     void scheduleUpdate(int x, int y, TileLayer layer, int time);
@@ -93,6 +97,7 @@ public interface IChunkOrWorld{
 
     Biome getBiome(int x, int y);
 
+    @ApiInternal
     void setBiome(int x, int y, Biome biome);
 
     boolean isClient();

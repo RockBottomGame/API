@@ -30,6 +30,7 @@ import de.ellpeck.rockbottom.api.inventory.Inventory;
 import de.ellpeck.rockbottom.api.net.chat.ICommandSender;
 import de.ellpeck.rockbottom.api.net.packet.IPacket;
 import de.ellpeck.rockbottom.api.render.IPlayerDesign;
+import de.ellpeck.rockbottom.api.util.ApiInternal;
 import de.ellpeck.rockbottom.api.world.IChunk;
 import de.ellpeck.rockbottom.api.world.IWorld;
 
@@ -55,16 +56,21 @@ public abstract class AbstractEntityPlayer extends EntityLiving implements IComm
 
     public abstract ItemContainer getContainer();
 
+    @ApiInternal
     public abstract void resetAndSpawn(IGameInstance game);
 
     public abstract void sendPacket(IPacket packet);
 
+    @ApiInternal
     public abstract boolean move(int type);
 
+    @ApiInternal
     public abstract void onChunkLoaded(IChunk chunk);
 
+    @ApiInternal
     public abstract void onChunkUnloaded(IChunk chunk);
 
+    @ApiInternal
     public abstract List<IChunk> getChunksInRange();
 
     @Override
@@ -76,6 +82,7 @@ public abstract class AbstractEntityPlayer extends EntityLiving implements IComm
 
     public abstract int getSelectedSlot();
 
+    @ApiInternal
     public abstract void setSelectedSlot(int slot);
 
     @Override

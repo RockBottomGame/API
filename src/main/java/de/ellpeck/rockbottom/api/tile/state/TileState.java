@@ -25,6 +25,7 @@ import com.google.common.collect.Table;
 import com.google.common.collect.TreeBasedTable;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.tile.Tile;
+import de.ellpeck.rockbottom.api.util.ApiInternal;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 
 import java.util.Iterator;
@@ -39,6 +40,7 @@ public class TileState{
     private final Map<TileProp, Comparable> properties;
     private final Table<TileProp, Comparable, TileState> subStates = TreeBasedTable.create();
 
+    @ApiInternal
     private TileState(IResourceName name, Tile tile, Map<TileProp, Comparable> properties){
         this.tile = tile;
         this.properties = properties;
@@ -66,10 +68,12 @@ public class TileState{
         }
     }
 
+    @ApiInternal
     public TileState(Tile tile, Map<TileProp, Comparable> properties){
         this(generateName(tile, properties), tile, properties);
     }
 
+    @ApiInternal
     private static IResourceName generateName(Tile tile, Map<TileProp, Comparable> properties){
         String suffix = "";
 

@@ -27,6 +27,7 @@ import de.ellpeck.rockbottom.api.data.set.part.num.*;
 import de.ellpeck.rockbottom.api.data.set.part.num.array.PartByteArray;
 import de.ellpeck.rockbottom.api.data.set.part.num.array.PartIntArray;
 import de.ellpeck.rockbottom.api.data.set.part.num.array.PartShortArray;
+import de.ellpeck.rockbottom.api.util.ApiInternal;
 
 import java.io.File;
 import java.util.HashMap;
@@ -37,6 +38,7 @@ public class DataSet{
 
     public final Map<String, DataPart> data = new HashMap<>();
 
+    @ApiInternal
     public void addPart(DataPart part){
         this.data.put(part.getName(), part);
     }
@@ -45,6 +47,7 @@ public class DataSet{
         return this.data.containsKey(key);
     }
 
+    @ApiInternal
     public <T> T getPartContent(String key, Class<? extends DataPart<T>> typeClass, T defaultValue){
         DataPart part = this.data.get(key);
 
@@ -175,6 +178,7 @@ public class DataSet{
         return this.data.toString();
     }
 
+    @ApiInternal
     public Map<String, DataPart> getData(){
         return this.data;
     }

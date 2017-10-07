@@ -28,12 +28,14 @@ import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.net.NetUtil;
 import de.ellpeck.rockbottom.api.net.packet.IPacket;
+import de.ellpeck.rockbottom.api.util.ApiInternal;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 
 import java.io.IOException;
 import java.util.UUID;
 
+@ApiInternal
 public class PacketDropItem implements IPacket{
 
     private UUID playerId;

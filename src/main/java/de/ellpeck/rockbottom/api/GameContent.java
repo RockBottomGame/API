@@ -25,6 +25,7 @@ import de.ellpeck.rockbottom.api.item.Item;
 import de.ellpeck.rockbottom.api.item.ToolType;
 import de.ellpeck.rockbottom.api.tile.Tile;
 import de.ellpeck.rockbottom.api.tile.TileMeta;
+import de.ellpeck.rockbottom.api.util.ApiInternal;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 import de.ellpeck.rockbottom.api.util.reg.NameRegistry;
 import de.ellpeck.rockbottom.api.world.gen.biome.Biome;
@@ -49,18 +50,22 @@ public final class GameContent{
     public static final Biome BIOME_GRASSLAND = getBiome("grassland");
     public static final Biome BIOME_UNDERGROUND = getBiome("underground");
 
+    @ApiInternal
     private static Biome getBiome(String name){
         return get(name, RockBottomAPI.BIOME_REGISTRY);
     }
 
+    @ApiInternal
     private static Item getItem(String name){
         return get(name, RockBottomAPI.ITEM_REGISTRY);
     }
 
+    @ApiInternal
     private static Tile getTile(String name){
         return get(name, RockBottomAPI.TILE_REGISTRY);
     }
 
+    @ApiInternal
     private static <T> T get(String name, NameRegistry<T> registry){
         IResourceName res = RockBottomAPI.createInternalRes(name);
         T thing = registry.get(res);
