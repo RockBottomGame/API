@@ -29,8 +29,11 @@ import de.ellpeck.rockbottom.api.event.Event;
 import de.ellpeck.rockbottom.api.world.IWorld;
 
 /**
- * This event is fired after the world is rendered
- * <br> It is not cancellable
+ * This event is fired every frame when an {@link IWorld} is rendered. It is
+ * fired between the background, the entities and the particles rendering and
+ * the foreground rendering. Note that when this event is fired, the game has
+ * applied the {@link IGameInstance#getWorldScale()} to the GL context. The
+ * event cannot be cancelled.
  */
 public class WorldRenderEvent extends Event{
 

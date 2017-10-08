@@ -42,6 +42,7 @@ import de.ellpeck.rockbottom.api.net.packet.IPacket;
 import de.ellpeck.rockbottom.api.tile.Tile;
 import de.ellpeck.rockbottom.api.tile.state.TileState;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
+import de.ellpeck.rockbottom.api.util.reg.IRegistry;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 import de.ellpeck.rockbottom.api.util.reg.IndexRegistry;
 import de.ellpeck.rockbottom.api.util.reg.NameRegistry;
@@ -56,9 +57,8 @@ import java.util.List;
 import java.util.logging.Logger;
 
 /**
- * The main API class. Use this to access all of the {@link
- * de.ellpeck.rockbottom.api.util.reg.IRegistry} objects and other important
- * data.
+ * The main API class. Use this to access all of the {@link IRegistry} objects
+ * and other important data.
  */
 public final class RockBottomAPI{
 

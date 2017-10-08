@@ -21,12 +21,16 @@
 
 package de.ellpeck.rockbottom.api.event.impl;
 
+import de.ellpeck.rockbottom.api.IApiHandler;
+import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.data.settings.Settings;
 import de.ellpeck.rockbottom.api.event.Event;
+import de.ellpeck.rockbottom.api.event.IEventHandler;
 
 /**
- * This event is fired when {@link Settings} are loaded
- * <br> This event is not cancellable.
+ * This event is fired before the {@link Settings} are loaded in {@link
+ * IGameInstance#preInit(IGameInstance, IApiHandler, IEventHandler)}. It cannot
+ * be cancelled.
  */
 public class LoadSettingsEvent extends Event{
 

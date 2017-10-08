@@ -21,15 +21,21 @@
 
 package de.ellpeck.rockbottom.api.event.impl;
 
+import de.ellpeck.rockbottom.api.entity.Entity;
 import de.ellpeck.rockbottom.api.entity.MovableWorldObject;
 import de.ellpeck.rockbottom.api.event.Event;
+import de.ellpeck.rockbottom.api.particle.Particle;
+import de.ellpeck.rockbottom.api.tile.Tile;
 import de.ellpeck.rockbottom.api.util.BoundBox;
 
 import java.util.List;
 
 /**
- * This event is fired when a {@link MovableWorldObject} collides with a multitude of {@link BoundBox}es
- * <br> It is not cancellable
+ * This event is fired when a {@link MovableWorldObject} collides with a set of
+ * {@link BoundBox} objects in the world. Most likely, the object in question is
+ * an {@link Entity} or a {@link Particle} and the list of bounding boxes comes
+ * from the surrounding {@link Tile} objects in the world. This event cannot be
+ * cancelled.
  */
 public class WorldObjectCollisionEvent extends Event{
 

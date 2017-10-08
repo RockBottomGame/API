@@ -25,8 +25,9 @@ import de.ellpeck.rockbottom.api.event.Event;
 import de.ellpeck.rockbottom.api.gui.Gui;
 
 /**
- * This event is fired when a {@link Gui} is opened
- * <br> Cancelling the event will make the gui not open
+ * This event is fired when a {@link Gui} is opened. Changing the value will
+ * result in a different gui being opened. Cancelling the event will result in
+ * no gui being opened.
  */
 public class GuiOpenEvent extends Event{
 

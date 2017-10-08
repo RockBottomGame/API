@@ -25,8 +25,9 @@ import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.event.Event;
 
 /**
- * This event is fired when an {@link AbstractEntityPlayer} leaves an {@link de.ellpeck.rockbottom.api.world.IWorld}
- * <br> It is not cancellable
+ * This event is fired when an {@link AbstractEntityPlayer} disconnects from a
+ * world. The isConnected variable determines if the player was part of a server
+ * that they didn't host. The event cannot be cancelled.
  */
 public class PlayerLeaveWorldEvent extends Event{
 

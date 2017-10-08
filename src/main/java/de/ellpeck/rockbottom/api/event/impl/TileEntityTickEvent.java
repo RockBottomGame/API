@@ -25,8 +25,8 @@ import de.ellpeck.rockbottom.api.event.Event;
 import de.ellpeck.rockbottom.api.tile.entity.TileEntity;
 
 /**
- * This event is fired when a {@link TileEntity} is trying to tick
- * <br> Cancelling the event will cancel the tick
+ * This event is fired every tick when a {@link TileEntity} updates. Cancelling
+ * this event will cause the tile entity not to update for one tick.
  */
 public class TileEntityTickEvent extends Event{
 

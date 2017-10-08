@@ -1,5 +1,5 @@
 /*
- * This file ("WorldTickEvent.java") is part of the RockBottomAPI by Ellpeck.
+ * This file ("WorldCreationEvent.java") is part of the RockBottomAPI by Ellpeck.
  * View the source code at <https://github.com/RockBottomGame/>.
  * View information on the project at <https://rockbottom.ellpeck.de/>.
  *
@@ -21,21 +21,29 @@
 
 package de.ellpeck.rockbottom.api.event.impl;
 
-import de.ellpeck.rockbottom.api.entity.Entity;
 import de.ellpeck.rockbottom.api.event.Event;
-import de.ellpeck.rockbottom.api.tile.entity.TileEntity;
+import de.ellpeck.rockbottom.api.world.DynamicRegistryInfo;
 import de.ellpeck.rockbottom.api.world.IWorld;
+import de.ellpeck.rockbottom.api.world.WorldInfo;
+
+import java.io.File;
 
 /**
- * This event is fired from the specified {@link IWorld} every tick. Cancelling
- * it results in the world's {@link TileEntity} and {@link Entity} objects not
- * updating along with time not progressing for one tick.
+ * This event is fired when an {@link IWorld} is created for the first time.
+ * Note that determining this is a vague process as the event is called whenever
+ * the {@link WorldInfo} does not exist. This event cannot be cancelled.
  */
-public class WorldTickEvent extends Event{
+public class WorldCreationEvent extends Event{
 
+    public final File worldFile;
     public final IWorld world;
+    public final WorldInfo info;
+    public final DynamicRegistryInfo regInfo;
 
-    public WorldTickEvent(IWorld world){
+    public WorldCreationEvent(File worldFile, IWorld world, WorldInfo info, DynamicRegistryInfo regInfo){
+        this.worldFile = worldFile;
         this.world = world;
+        this.info = info;
+        this.regInfo = regInfo;
     }
 }

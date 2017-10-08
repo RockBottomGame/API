@@ -26,8 +26,9 @@ import de.ellpeck.rockbottom.api.event.Event;
 import de.ellpeck.rockbottom.api.gui.container.ItemContainer;
 
 /**
- * This event is fired when an {@link ItemContainer} is opened
- * <br> Cancelling it will make the container not open
+ * This event is fired when an {@link ItemContainer} is opened. Changing the
+ * container variable will result in a different container being opened.
+ * Cancelling the event will result in no container being opened.
  */
 public class ContainerOpenEvent extends Event{
 

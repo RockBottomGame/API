@@ -25,8 +25,9 @@ import de.ellpeck.rockbottom.api.entity.Entity;
 import de.ellpeck.rockbottom.api.event.Event;
 
 /**
- * This event is fired when an {@link Entity} dies
- * <br> Cancelling it will revive the entity
+ * This event is fired when an {@link Entity} dies using {@link
+ * Entity#setDead(boolean)}. Cancelling this event will result in the entity
+ * being brought back to life.
  */
 public class EntityDeathEvent extends Event{
 

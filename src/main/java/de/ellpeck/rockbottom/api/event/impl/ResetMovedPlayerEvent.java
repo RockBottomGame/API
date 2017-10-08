@@ -25,9 +25,13 @@ import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.event.Event;
 
 /**
- * This event gets fired when an {@link AbstractEntityPlayer} gets moved back on the server because
- * they moved too fast. This calculation is done every 80 ticks.
- * <br> Cancelling it will stop the player from being moved back
+ * This event is fired when a simple calculation in the server results in the
+ * {@link AbstractEntityPlayer} in question having moved farther than they
+ * should be able to. If this event is not cancelled, the player will be reset
+ * to the last calculated coordinates if the moved distance is greater than the
+ * allowed distance. You can change the moved distance (that is squared,
+ * however) or the allowed distance (which is not squared!) if you want the
+ * player to be allowed to move further.
  */
 public class ResetMovedPlayerEvent extends Event{
 

@@ -25,8 +25,10 @@ import de.ellpeck.rockbottom.api.entity.EntityLiving;
 import de.ellpeck.rockbottom.api.event.Event;
 
 /**
- * This event is fired when an {@link EntityLiving} takes damage
- * <br> Cancelling it will make the entity not take damage
+ * This event is fired when an {@link EntityLiving} takes damage using the
+ * {@link EntityLiving#takeDamage(int)} method. Changing the amount will result
+ * in the damage changing. Cancelling the event will result in the entity taking
+ * no damage.
  */
 public class EntityDamageEvent extends Event{
 

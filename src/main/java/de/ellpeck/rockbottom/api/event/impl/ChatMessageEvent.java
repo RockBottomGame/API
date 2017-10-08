@@ -26,8 +26,10 @@ import de.ellpeck.rockbottom.api.net.chat.IChatLog;
 import de.ellpeck.rockbottom.api.net.chat.ICommandSender;
 
 /**
- * This event is fired when a chat message is sent in {@link IChatLog}
- * <br> Cancelling it will make the message not be sent
+ * This event is fired when a message is sent in an {@link IChatLog}. Changing
+ * the message variable will result in the input message being changed (meaning
+ * changing it to a command will execute a command). Cancelling the event will
+ * result in no message being sent.
  */
 public class ChatMessageEvent extends Event{
 

@@ -30,8 +30,11 @@ import de.ellpeck.rockbottom.api.item.ItemInstance;
 import java.util.List;
 
 /**
- * This event is fired when a tooltip is being rendered
- * <br> Cancelling the event will stop the tooltip from rendering
+ * This event is fired whenever a tooltip is rendered using {@link
+ * IGraphics#describeItem(IGameInstance, IAssetManager, ItemInstance)}. Note
+ * that whatever scale is applied to render the tooltip will also be applied
+ * within the event. This is most likely {@link IGameInstance#getGuiScale()}.
+ * This event cannot be cancelled.
  */
 public class TooltipEvent extends Event{
 

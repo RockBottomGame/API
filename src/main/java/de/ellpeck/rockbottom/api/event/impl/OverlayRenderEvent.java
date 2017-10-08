@@ -30,8 +30,10 @@ import de.ellpeck.rockbottom.api.gui.Gui;
 import de.ellpeck.rockbottom.api.gui.IGuiManager;
 
 /**
- * This event is fired after the game overlay is rendered
- * <br> It is not cancellable
+ * This event is fired when the overlay is rendered. This takes place after all
+ * {@link Gui} elements of the current gui are rendered. Note that, during the
+ * firing of this event, the {@link IGameInstance#getGuiScale()} is applied to
+ * the GL context. This event cannot be cancelled.
  */
 public class OverlayRenderEvent extends Event{
 

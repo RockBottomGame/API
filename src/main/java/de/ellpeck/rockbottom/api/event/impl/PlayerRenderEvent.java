@@ -28,8 +28,9 @@ import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.event.Event;
 
 /**
- * This event is fired when an {@link AbstractEntityPlayer} is rendered
- * <br> It is not cancellable
+ * This event is fired after an {@link AbstractEntityPlayer} is rendered. Note
+ * that during the firing of this event, the {@link IGameInstance#getWorldScale()}
+ * is applied to the GL context. This event cannot be cancelled.
  */
 public class PlayerRenderEvent extends Event{
 

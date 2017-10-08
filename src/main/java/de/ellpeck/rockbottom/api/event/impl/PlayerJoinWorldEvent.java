@@ -25,8 +25,9 @@ import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.event.Event;
 
 /**
- * This event is fired when an {@link AbstractEntityPlayer} joins an {@link de.ellpeck.rockbottom.api.world.IWorld}
- * <br> It is not cancellable
+ * This event is fired when an {@link AbstractEntityPlayer} connects to a world.
+ * The isConnected variable determines if the player is connecting to a server
+ * that they aren't hosting themselves.
  */
 public class PlayerJoinWorldEvent extends Event{
 

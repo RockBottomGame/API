@@ -29,8 +29,11 @@ import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 import java.util.List;
 
 /**
- * This event is fired when an {@link AbstractEntityPlayer} interacts with the world
- * <br> Cancelling it will cancel the interaction
+ * This event is fired when an {@link AbstractEntityPlayer} interacts with the
+ * world in any way. With the default keybinds, this happens when they click the
+ * right mouse button. Changing any of the non-final values will result in the
+ * point and information of interaction being changed. Cancelling the event will
+ * result in no interaction taking place.
  */
 public class InteractionEvent extends Event{
 

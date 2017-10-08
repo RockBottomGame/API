@@ -48,7 +48,7 @@ import java.util.function.Supplier;
 public interface IGameInstance extends IMod{
 
     @ApiInternal
-    void startWorld(File worldFile, WorldInfo info);
+    void startWorld(File worldFile, WorldInfo info, boolean isNewlyCreated);
 
     @ApiInternal
     void joinWorld(DataSet playerSet, WorldInfo info, DynamicRegistryInfo regInfo);

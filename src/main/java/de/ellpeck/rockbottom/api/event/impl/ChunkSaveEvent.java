@@ -26,8 +26,8 @@ import de.ellpeck.rockbottom.api.event.Event;
 import de.ellpeck.rockbottom.api.world.IChunk;
 
 /**
- * This event is fired when an {@link IChunk} is saving
- * <br> It is not cancellable
+ * This event is fired when an {@link IChunk} is saved using the specified
+ * {@link IDataManager}. It cannot be cancelled.
  */
 public class ChunkSaveEvent extends Event{
 
