@@ -31,9 +31,9 @@ import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 import java.util.List;
 
 /**
- * This event is fired whenever a {@link Tile} is broken in the world. The
- * {@link List<ItemInstance>} can be modified to change the drops of the tile.
- * Cancelling the event will stop the tile from dropping anything.
+ * This event is fired whenever a {@link Tile} is broken in the world. The list
+ * can be modified to change the drops of the tile. Cancelling the event will
+ * stop the tile from dropping anything.
  */
 public class TileDropsEvent extends Event{
 
