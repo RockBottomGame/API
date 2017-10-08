@@ -46,6 +46,14 @@ public final class Util{
         return (dx*dx)+(dy*dy);
     }
 
+    public static double clamp(double num, double min, double max){
+        return Math.max(min, Math.min(max, num));
+    }
+
+    public static int clamp(int num, int min, int max){
+        return Math.max(min, Math.min(max, num));
+    }
+
     public static int floor(double value){
         int i = (int)value;
         return value < (double)i ? i-1 : i;
@@ -102,5 +110,33 @@ public final class Util{
             RockBottomAPI.logger().log(Level.WARNING, "Couldn't open file "+file, e);
             return false;
         }
+    }
+
+    public static long shiftScramble(long l){
+        l ^= (l << 21);
+        l ^= (l >> 35);
+        l ^= (l << 4);
+        return l;
+    }
+
+    public static long scrambleSeed(int x, int y){
+        return scrambleSeed(x, y, 0L);
+    }
+
+    public static long scrambleSeed(int i){
+        return scrambleSeed(i, 0L);
+    }
+
+    public static long scrambleSeed(int x, int y, long seed){
+        return shiftScramble(shiftScramble(x)+Long.rotateLeft(shiftScramble(y), 32))+seed;
+    }
+
+    public static long scrambleSeed(int i, long seed){
+        return shiftScramble(i)+seed;
+    }
+
+    public static double polymax(double a, double b, double div){
+        double h = clamp(0.5+0.5*(b-a)/div, 0.0, 1.0);
+        return (b*h+a*(1.0-h))+div*h*(1.0-h);
     }
 }

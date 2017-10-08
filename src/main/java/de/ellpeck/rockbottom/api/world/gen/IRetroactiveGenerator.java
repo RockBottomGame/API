@@ -30,17 +30,17 @@ import java.util.Random;
 public interface IRetroactiveGenerator extends IWorldGenerator{
 
     @Override
-    default boolean shouldGenerate(IWorld world, IChunk chunk, Random rand){
-        return (!chunk.hasAdditionalData() || !chunk.getAdditionalData().getBoolean(RockBottomAPI.WORLD_GENERATORS.getId(this.getClass()).toString())) && this.shouldGenerateRetroactively(world, chunk, rand);
+    default boolean shouldGenerate(IWorld world, IChunk chunk){
+        return (!chunk.hasAdditionalData() || !chunk.getAdditionalData().getBoolean(RockBottomAPI.WORLD_GENERATORS.getId(this.getClass()).toString())) && this.shouldGenerateRetroactively(world, chunk);
     }
 
     @Override
-    default void generate(IWorld world, IChunk chunk, Random rand){
+    default void generate(IWorld world, IChunk chunk){
         chunk.getOrCreateAdditionalData().addBoolean(RockBottomAPI.WORLD_GENERATORS.getId(this.getClass()).toString(), true);
-        this.generateRetroactively(world, chunk, rand);
+        this.generateRetroactively(world, chunk);
     }
 
-    boolean shouldGenerateRetroactively(IWorld world, IChunk chunk, Random rand);
+    boolean shouldGenerateRetroactively(IWorld world, IChunk chunk);
 
-    void generateRetroactively(IWorld world, IChunk chunk, Random rand);
+    void generateRetroactively(IWorld world, IChunk chunk);
 }

@@ -105,4 +105,6 @@ public interface IChunkOrWorld{
     boolean isServer();
 
     void callRetroactiveGeneration();
+
+    long getSeed();
 }

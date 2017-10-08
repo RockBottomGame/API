@@ -29,21 +29,21 @@ import java.util.Random;
 
 public interface IWorldGenerator{
 
-    default void initWorld(IWorld world, Random rand){
+    default void initWorld(IWorld world){
 
     }
 
-    boolean shouldGenerate(IWorld world, IChunk chunk, Random rand);
+    boolean shouldGenerate(IWorld world, IChunk chunk);
 
-    void generate(IWorld world, IChunk chunk, Random rand);
+    void generate(IWorld world, IChunk chunk);
 
     int getPriority();
 
-    default boolean needsPlayerToAllowGeneration(IWorld world, IChunk chunk, Random rand){
+    default boolean needsPlayerToAllowGeneration(IWorld world, IChunk chunk){
         return false;
     }
 
-    default boolean doesPlayerAllowGeneration(IWorld world, IChunk chunk, Random rand, AbstractEntityPlayer player){
+    default boolean doesPlayerAllowGeneration(IWorld world, IChunk chunk, AbstractEntityPlayer player){
         return true;
     }
 }

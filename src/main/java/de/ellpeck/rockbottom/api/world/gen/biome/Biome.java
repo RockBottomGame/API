@@ -45,7 +45,7 @@ public abstract class Biome{
 
     public abstract int getLowestGridPos();
 
-    public abstract TileState getState(IWorld world, IChunk chunk, int x, int y, TileLayer layer, INoiseGen noise, Random rand);
+    public abstract TileState getState(IWorld world, IChunk chunk, int x, int y, TileLayer layer, INoiseGen noise);
 
     public IResourceName getName(){
         return this.name;

@@ -89,7 +89,7 @@ public class ComponentScrollMenu extends ComponentButton{
     }
 
     public void organize(){
-        this.number = Math.max(0, Math.min(this.getMax(), this.number));
+        this.number = Util.clamp(this.number, 0, this.getMax());
 
         int index = 0;
         while(index < this.contents.size() && index < this.number*this.contentsX){
@@ -152,7 +152,7 @@ public class ComponentScrollMenu extends ComponentButton{
         else{
             int scroll = Mouse.getDWheel();
             if(scroll != 0 && this.hoverArea.contains(game.getMouseInGuiX(), game.getMouseInGuiY())){
-                int number = Math.max(0, Math.min(this.getMax(), this.number+(scroll < 0 ? 1 : -1)));
+                int number = Util.clamp(this.number+(scroll < 0 ? 1 : -1), 0, this.getMax());
                 if(number != this.number){
                     this.number = number;
                     this.organize();
@@ -166,7 +166,7 @@ public class ComponentScrollMenu extends ComponentButton{
         int max = this.getMax();
         float clickPercentage = (mouseY-this.getRenderY())/(float)this.height;
 
-        int number = Math.max(0, Math.min(max, (int)(clickPercentage*(max-1))));
+        int number = Util.clamp((int)(clickPercentage*(max-1)), 0, max);
         if(number != this.number){
             this.number = number;
             this.organize();

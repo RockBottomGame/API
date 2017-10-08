@@ -69,7 +69,7 @@ public interface IApiHandler{
 
     int getColorByLight(int light, TileLayer layer);
 
-    INoiseGen makeSimplexNoise(Random random);
+    INoiseGen makeSimplexNoise(long seed);
 
     @ApiInternal
     boolean isToolEffective(AbstractEntityPlayer player, ItemInstance instance, Tile tile, TileLayer layer, int x, int y);

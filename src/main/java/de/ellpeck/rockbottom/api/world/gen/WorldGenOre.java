@@ -31,14 +31,18 @@ import java.util.Random;
 
 public abstract class WorldGenOre implements IWorldGenerator{
 
+    private final Random oreRandom = new Random();
+
     @Override
-    public boolean shouldGenerate(IWorld world, IChunk chunk, Random rand){
+    public boolean shouldGenerate(IWorld world, IChunk chunk){
         return chunk.getGridY() <= this.getHighestGridPos() && chunk.getGridY() >= this.getLowestGridPos();
     }
 
     @Override
-    public void generate(IWorld world, IChunk chunk, Random rand){
-        int amount = rand.nextInt(this.getMaxAmount()+1);
+    public void generate(IWorld world, IChunk chunk){
+        this.oreRandom.setSeed(Util.scrambleSeed(chunk.getX(), chunk.getY(), world.getSeed()));
+
+        int amount = this.oreRandom.nextInt(this.getMaxAmount()+1);
         if(amount > 0){
             int radX = this.getClusterRadiusX();
             int radY = this.getClusterRadiusY();
@@ -46,15 +50,15 @@ public abstract class WorldGenOre implements IWorldGenerator{
             int radYHalf = Util.ceil((double)radY/2);
 
             for(int i = 0; i < amount; i++){
-                int startX = chunk.getX()+radX+rand.nextInt(Constants.CHUNK_SIZE-radX*2);
-                int startY = chunk.getY()+radY+rand.nextInt(Constants.CHUNK_SIZE-radY*2);
+                int startX = chunk.getX()+radX+this.oreRandom.nextInt(Constants.CHUNK_SIZE-radX*2);
+                int startY = chunk.getY()+radY+this.oreRandom.nextInt(Constants.CHUNK_SIZE-radY*2);
 
-                int thisRadX = rand.nextInt(radXHalf)+radXHalf;
-                int thisRadY = rand.nextInt(radYHalf)+radYHalf;
+                int thisRadX = this.oreRandom.nextInt(radXHalf)+radXHalf;
+                int thisRadY = this.oreRandom.nextInt(radYHalf)+radYHalf;
 
                 for(int x = -thisRadX; x <= thisRadX; x++){
                     for(int y = -thisRadY; y <= thisRadY; y++){
-                        if(rand.nextInt(thisRadX) == x || rand.nextInt(thisRadY) == y){
+                        if(this.oreRandom.nextInt(thisRadX) == x || this.oreRandom.nextInt(thisRadY) == y){
                             world.setState(startX+x, startY+y, this.getOreState());
                         }
                     }
