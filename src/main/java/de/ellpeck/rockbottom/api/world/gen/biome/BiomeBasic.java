@@ -42,12 +42,12 @@ public abstract class BiomeBasic extends Biome{
     }
 
     @Override
-    public int getHighestGridPos(){
+    public int getHighestY(){
         return this.highestY;
     }
 
     @Override
-    public int getLowestGridPos(){
+    public int getLowestY(){
         return this.lowestY;
     }
 }

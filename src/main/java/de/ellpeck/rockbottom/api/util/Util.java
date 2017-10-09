@@ -136,7 +136,7 @@ public final class Util{
     }
 
     public static double polymax(double a, double b, double div){
-        double h = clamp(0.5+0.5*(b-a)/div, 0.0, 1.0);
-        return (b*h+a*(1.0-h))+div*h*(1.0-h);
+        double h = clamp(0.5D+0.5D*(b-a)/div, 0D, 1D);
+        return (b*h+a*(1D-h))+div*h*(1D-h);
     }
 }

@@ -41,9 +41,9 @@ public abstract class Biome{
 
     public abstract int getWeight();
 
-    public abstract int getHighestGridPos();
+    public abstract int getHighestY();
 
-    public abstract int getLowestGridPos();
+    public abstract int getLowestY();
 
     public abstract TileState getState(IWorld world, IChunk chunk, int x, int y, TileLayer layer, INoiseGen noise);
 
