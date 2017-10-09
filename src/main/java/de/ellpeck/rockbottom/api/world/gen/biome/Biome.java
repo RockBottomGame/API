@@ -47,6 +47,10 @@ public abstract class Biome{
 
     public abstract TileState getState(IWorld world, IChunk chunk, int x, int y, TileLayer layer, INoiseGen noise);
 
+    public int getNoiseSeedModifier(IWorld world){
+        return this.getName().hashCode();
+    }
+
     public IResourceName getName(){
         return this.name;
     }

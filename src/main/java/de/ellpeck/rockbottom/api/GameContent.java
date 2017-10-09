@@ -41,6 +41,8 @@ public final class GameContent{
     public static final Tile TILE_LEAVES = getTile("leaves").setHardness(0.5F).setForceDrop();
     public static final TileMeta TILE_FLOWER = (TileMeta)getTile("flower").setHardness(0F).setForceDrop();
     public static final Tile TILE_PEBBLES = getTile("pebbles").setHardness(0F).setForceDrop();
+    public static final Tile TILE_SAND = getTile("sand").setHardness(0.75F).addEffectiveTool(ToolType.SHOVEL, 0).setForceDrop();
+    public static final Tile TILE_SANDSTONE = getTile("sandstone").setHardness(4F).addEffectiveTool(ToolType.PICKAXE, 0);
 
     public static final Item ITEM_BRITTLE_PICKAXE = getItem("brittle_pickaxe");
     public static final Item ITEM_BRITTLE_AXE = getItem("brittle_axe");
