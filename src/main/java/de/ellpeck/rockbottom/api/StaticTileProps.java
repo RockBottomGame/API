@@ -22,9 +22,20 @@
 package de.ellpeck.rockbottom.api;
 
 import de.ellpeck.rockbottom.api.tile.state.BoolProp;
+import de.ellpeck.rockbottom.api.tile.state.TileProp;
 
+/**
+ * A list of static {@link TileProp} objects that are used for certain tiles
+ * from the game. Use these to interact with vanilla tiles from {@link
+ * GameContent} to see their values. Every prop in here has a list of tiles that
+ * it applies to.
+ */
 public final class StaticTileProps{
 
+    /**
+     * Determines if a tile is naturally generated or placed manually. Used by
+     * {@link GameContent#TILE_LOG} and {@link GameContent#TILE_LEAVES}
+     */
     public static final BoolProp NATURAL = new BoolProp("natural", true);
 
 }

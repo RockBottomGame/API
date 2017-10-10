@@ -22,12 +22,33 @@
 package de.ellpeck.rockbottom.api;
 
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
+import de.ellpeck.rockbottom.api.gui.container.ItemContainer;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 
 import java.util.List;
 
+/**
+ * The graphics context to interact with OpenGL as well as a multitude of
+ * game-provided rendering methods. To access these methods, use the {@link
+ * IGraphics} object given to you in render methods or access {@link
+ * IGameInstance#getGraphics()}
+ */
 public interface IGraphics{
 
+    /**
+     * Renders a slot. This displays the (by default) green box based on the gui
+     * color as well as the item inside and the amount. To make a slot that has
+     * functionality, use {@link ItemContainer} to create functioning slots.
+     *
+     * @param game    The game instance
+     * @param manager The asset manager
+     * @param slot    The content of the slot to draw
+     * @param x       The x coordinate
+     * @param y       The y coordinate
+     * @param scale   The scale
+     * @param hovered If the slot is currently being hovered or not (ie if it
+     *                should show the hover info of what is in the slot)
+     */
     void renderSlotInGui(IGameInstance game, IAssetManager manager, ItemInstance slot, float x, float y, float scale, boolean hovered);
 
     void renderItemInGui(IGameInstance game, IAssetManager manager, ItemInstance slot, float x, float y, float scale, int color);
