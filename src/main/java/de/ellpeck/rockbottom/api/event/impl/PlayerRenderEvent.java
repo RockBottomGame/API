@@ -29,7 +29,7 @@ import de.ellpeck.rockbottom.api.event.Event;
 
 /**
  * This event is fired after an {@link AbstractEntityPlayer} is rendered. Note
- * that during the firing of this event, the {@link IGameInstance#getWorldScale()}
+ * that during the firing of this event, the {@link IGraphics#getWorldScale()}
  * is applied to the GL context. This event cannot be cancelled.
  */
 public class PlayerRenderEvent extends Event{

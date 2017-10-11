@@ -25,6 +25,7 @@ import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.event.impl.TooltipEvent;
 import de.ellpeck.rockbottom.api.gui.container.ItemContainer;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
+import de.ellpeck.rockbottom.api.util.ApiInternal;
 import org.lwjgl.opengl.GL11;
 
 import java.util.List;
@@ -71,7 +72,7 @@ public interface IGraphics{
 
     /**
      * Renders an item's hover over information on the mouse cursor position.
-     * Additionally, it draws the {@link IGameInstance#isItemInfoDebug()} text
+     * Additionally, it draws the {@link IGraphics#isItemInfoDebug()} text
      * and also fires the {@link TooltipEvent}.
      *
      * @param game     The game instance
@@ -243,4 +244,37 @@ public interface IGraphics{
      * @param color  The color
      */
     void fillRect(float x, float y, float width, float height, int color);
+
+    @ApiInternal
+    void calcScales();
+
+    float getDisplayRatio();
+
+    float getGuiScale();
+
+    float getWorldScale();
+
+    float getWidthInWorld();
+
+    float getHeightInWorld();
+
+    float getWidthInGui();
+
+    float getHeightInGui();
+
+    float getMouseInGuiX();
+
+    float getMouseInGuiY();
+
+    boolean isDebug();
+
+    boolean isLightDebug();
+
+    boolean isItemInfoDebug();
+
+    boolean isChunkBorderDebug();
+
+    double getMousedTileX();
+
+    double getMousedTileY();
 }

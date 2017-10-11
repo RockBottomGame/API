@@ -21,6 +21,8 @@
 
 package de.ellpeck.rockbottom.api.entity.player;
 
+import de.ellpeck.rockbottom.api.IGraphics;
+import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 
 public interface IInteractionManager{
@@ -35,7 +37,19 @@ public interface IInteractionManager{
 
     int getPlaceCooldown();
 
-    double getMousedTileX();
+    /**
+     * @deprecated Use {@link IGraphics#getMousedTileX()}
+     */
+    @Deprecated
+    default double getMousedTileX(){
+        return RockBottomAPI.getGame().getGraphics().getMousedTileX();
+    }
 
-    double getMousedTileY();
+    /**
+     * @deprecated Use {@link IGraphics#getMousedTileY()}
+     */
+    @Deprecated
+    default double getMousedTileY(){
+        return RockBottomAPI.getGame().getGraphics().getMousedTileY();
+    }
 }

@@ -79,7 +79,7 @@ public class ComponentScrollMenu extends ComponentButton{
         int max = this.getMax();
         float percentage = max <= 0 ? 0 : (float)this.number/(float)max;
         float renderY = y+percentage*(this.height-10);
-        int color = this.isMouseOverPrioritized(game) || this.hoverArea.contains(game.getMouseInGuiX(), game.getMouseInGuiY()) ? getElementColor() : getUnselectedElementColor();
+        int color = this.isMouseOverPrioritized(game) || this.hoverArea.contains(g.getMouseInGuiX(), g.getMouseInGuiY()) ? getElementColor() : getUnselectedElementColor();
 
         g.fillRect(x, y, 6F, this.height, color);
         g.drawRect(x, y, 6F, this.height, getElementOutlineColor());
@@ -143,7 +143,7 @@ public class ComponentScrollMenu extends ComponentButton{
     public void update(IGameInstance game){
         if(this.wasMouseDown){
             if(Settings.KEY_GUI_ACTION_1.isDown()){
-                this.onClickOrMove(game.getMouseInGuiY());
+                this.onClickOrMove(game.getGraphics().getMouseInGuiY());
             }
             else{
                 this.wasMouseDown = false;
@@ -151,7 +151,7 @@ public class ComponentScrollMenu extends ComponentButton{
         }
         else{
             int scroll = Mouse.getDWheel();
-            if(scroll != 0 && this.hoverArea.contains(game.getMouseInGuiX(), game.getMouseInGuiY())){
+            if(scroll != 0 && this.hoverArea.contains(game.getGraphics().getMouseInGuiX(), game.getGraphics().getMouseInGuiY())){
                 int number = Util.clamp(this.number+(scroll < 0 ? 1 : -1), 0, this.getMax());
                 if(number != this.number){
                     this.number = number;

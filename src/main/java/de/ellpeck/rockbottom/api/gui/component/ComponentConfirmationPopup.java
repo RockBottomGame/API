@@ -25,8 +25,8 @@ import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.IGraphics;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
-import de.ellpeck.rockbottom.api.assets.font.IFont;
 import de.ellpeck.rockbottom.api.assets.ITexture;
+import de.ellpeck.rockbottom.api.assets.font.IFont;
 import de.ellpeck.rockbottom.api.data.settings.Settings;
 import de.ellpeck.rockbottom.api.gui.Gui;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
@@ -79,7 +79,7 @@ public class ComponentConfirmationPopup extends GuiComponent{
         int width = (int)this.buttonArea.getWidth();
         int height = (int)this.buttonArea.getHeight();
 
-        g.fillRect(renderX, renderY, width, height, this.isMouseOverPrioritized(game) && this.buttonArea.contains(game.getMouseInGuiX(), game.getMouseInGuiY()) ? getElementColor() : getUnselectedElementColor());
+        g.fillRect(renderX, renderY, width, height, this.isMouseOverPrioritized(game) && this.buttonArea.contains(game.getGraphics().getMouseInGuiX(), game.getGraphics().getMouseInGuiY()) ? getElementColor() : getUnselectedElementColor());
         g.drawRect(renderX, renderY, width, height, getElementOutlineColor());
 
         font.drawCenteredString(renderX+width/2F, renderY+height/2F+0.5F, "Yes", 0.35F, true);
@@ -87,7 +87,7 @@ public class ComponentConfirmationPopup extends GuiComponent{
 
     @Override
     public boolean onMouseAction(IGameInstance game, int button, float x, float y){
-        if(Settings.KEY_GUI_ACTION_1.isKey(button) && this.isMouseOverPrioritized(game) && this.buttonArea.contains(game.getMouseInGuiX(), game.getMouseInGuiY())){
+        if(Settings.KEY_GUI_ACTION_1.isKey(button) && this.isMouseOverPrioritized(game) && this.buttonArea.contains(game.getGraphics().getMouseInGuiX(), game.getGraphics().getMouseInGuiY())){
             game.getAssetManager().getSound(RockBottomAPI.createInternalRes("menu.click")).play();
             this.consumer.accept(true);
         }

@@ -34,7 +34,6 @@ import de.ellpeck.rockbottom.api.particle.IParticleManager;
 import de.ellpeck.rockbottom.api.render.IPlayerDesign;
 import de.ellpeck.rockbottom.api.toast.IToaster;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
-import de.ellpeck.rockbottom.api.util.reg.NameToIndexInfo;
 import de.ellpeck.rockbottom.api.world.DynamicRegistryInfo;
 import de.ellpeck.rockbottom.api.world.IWorld;
 import de.ellpeck.rockbottom.api.world.WorldInfo;
@@ -61,27 +60,6 @@ public interface IGameInstance extends IMod{
 
     void scheduleAction(Supplier<Boolean> action);
 
-    @ApiInternal
-    void calcScales();
-
-    float getDisplayRatio();
-
-    float getGuiScale();
-
-    float getWorldScale();
-
-    float getWidthInWorld();
-
-    float getHeightInWorld();
-
-    float getWidthInGui();
-
-    float getHeightInGui();
-
-    float getMouseInGuiX();
-
-    float getMouseInGuiY();
-
     IDataManager getDataManager();
 
     Settings getSettings();
@@ -103,14 +81,6 @@ public interface IGameInstance extends IMod{
     IParticleManager getParticleManager();
 
     UUID getUniqueId();
-
-    boolean isDebug();
-
-    boolean isLightDebug();
-
-    boolean isItemInfoDebug();
-
-    boolean isChunkBorderDebug();
 
     @ApiInternal
     int getTpsAverage();
@@ -138,4 +108,108 @@ public interface IGameInstance extends IMod{
     void exit();
 
     IToaster getToaster();
+
+    /**
+     * @deprecated Use {@link IGraphics#getDisplayRatio()}
+     */
+    @Deprecated
+    default float getDisplayRatio(){
+        return this.getGraphics().getDisplayRatio();
+    }
+
+    /**
+     * @deprecated Use {@link IGraphics#getGuiScale()}
+     */
+    @Deprecated
+    default float getGuiScale(){
+        return this.getGraphics().getGuiScale();
+    }
+
+    /**
+     * @deprecated Use {@link IGraphics#getWorldScale()}
+     */
+    @Deprecated
+    default float getWorldScale(){
+        return this.getGraphics().getWorldScale();
+    }
+
+    /**
+     * @deprecated Use {@link IGraphics#getWidthInWorld()}
+     */
+    @Deprecated
+    default float getWidthInWorld(){
+        return this.getGraphics().getWidthInWorld();
+    }
+
+    /**
+     * @deprecated Use {@link IGraphics#getHeightInWorld()}
+     */
+    @Deprecated
+    default float getHeightInWorld(){
+        return this.getGraphics().getHeightInWorld();
+    }
+
+    /**
+     * @deprecated Use {@link IGraphics#getWidthInGui()}
+     */
+    @Deprecated
+    default float getWidthInGui(){
+        return this.getGraphics().getWidthInGui();
+    }
+
+    /**
+     * @deprecated Use {@link IGraphics#getHeightInGui()}
+     */
+    @Deprecated
+    default float getHeightInGui(){
+        return this.getGraphics().getHeightInGui();
+    }
+
+    /**
+     * @deprecated Use {@link IGraphics#getMouseInGuiX()}
+     */
+    @Deprecated
+    default float getMouseInGuiX(){
+        return this.getGraphics().getMouseInGuiX();
+    }
+
+    /**
+     * @deprecated Use {@link IGraphics#getMouseInGuiY()}
+     */
+    @Deprecated
+    default float getMouseInGuiY(){
+        return this.getGraphics().getMouseInGuiY();
+    }
+
+    /**
+     * @deprecated Use {@link IGraphics#isDebug()}
+     */
+    @Deprecated
+    default boolean isDebug(){
+        return this.getGraphics().isDebug();
+    }
+
+    /**
+     * @deprecated Use {@link IGraphics#isLightDebug()}
+     */
+    @Deprecated
+    default boolean isLightDebug(){
+        return this.getGraphics().isLightDebug();
+    }
+
+    /**
+     * @deprecated Use {@link IGraphics#isItemInfoDebug()}
+     */
+    @Deprecated
+    default boolean isItemInfoDebug(){
+        return this.getGraphics().isItemInfoDebug();
+    }
+
+    /**
+     * @deprecated Use {@link IGraphics#isChunkBorderDebug()}
+     */
+    @Deprecated
+    default boolean isChunkBorderDebug(){
+        return this.getGraphics().isChunkBorderDebug();
+    }
 }

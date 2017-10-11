@@ -81,8 +81,8 @@ public abstract class GuiComponent{
 
     public boolean isMouseOver(IGameInstance game){
         if(this.isActive() && Mouse.isInsideWindow()){
-            int mouseX = (int)game.getMouseInGuiX();
-            int mouseY = (int)game.getMouseInGuiY();
+            int mouseX = (int)game.getGraphics().getMouseInGuiX();
+            int mouseY = (int)game.getGraphics().getMouseInGuiY();
 
             int renderX = this.getRenderX();
             int renderY = this.getRenderY();

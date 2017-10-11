@@ -82,7 +82,7 @@ public class ComponentSlider extends ComponentButton{
     @Override
     public void update(IGameInstance game){
         if(this.wasMouseDown){
-            float mouseX = game.getMouseInGuiX();
+            float mouseX = game.getGraphics().getMouseInGuiX();
 
             if(Settings.KEY_GUI_ACTION_1.isDown()){
                 this.onClickOrMove(mouseX);

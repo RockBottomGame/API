@@ -90,15 +90,15 @@ public abstract class Gui{
 
     protected void updateDimensions(IGameInstance game){
         if(!this.hasUnspecifiedBounds){
-            this.x = (int)game.getWidthInGui()/2-this.width/2;
-            this.y = (int)game.getHeightInGui()/2-this.height/2;
+            this.x = (int)game.getGraphics().getWidthInGui()/2-this.width/2;
+            this.y = (int)game.getGraphics().getHeightInGui()/2-this.height/2;
         }
         else{
             this.x = 0;
             this.y = 0;
 
-            this.width = Util.ceil(game.getWidthInGui());
-            this.height = Util.ceil(game.getHeightInGui());
+            this.width = Util.ceil(game.getGraphics().getWidthInGui());
+            this.height = Util.ceil(game.getGraphics().getHeightInGui());
         }
     }
 
@@ -189,8 +189,8 @@ public abstract class Gui{
 
     public boolean isMouseOver(IGameInstance game){
         if(Mouse.isInsideWindow()){
-            int mouseX = (int)game.getMouseInGuiX();
-            int mouseY = (int)game.getMouseInGuiY();
+            int mouseX = (int)game.getGraphics().getMouseInGuiX();
+            int mouseY = (int)game.getGraphics().getMouseInGuiY();
 
             boolean overSelf = mouseX >= this.x && mouseX < this.x+this.width && mouseY >= this.y && mouseY < this.y+this.height;
             return overSelf || this.isMouseOverComponent(game);
