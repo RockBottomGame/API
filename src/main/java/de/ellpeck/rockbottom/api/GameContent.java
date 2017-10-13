@@ -30,6 +30,11 @@ import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 import de.ellpeck.rockbottom.api.util.reg.NameRegistry;
 import de.ellpeck.rockbottom.api.world.gen.biome.Biome;
 
+/**
+ * This class houses all of the game's default content like all the {@link
+ * Tile}, {@link Item}, {@link Biome} objects as static variables that can be
+ * accessed from anywhere.
+ */
 public final class GameContent{
 
     public static final Tile TILE_AIR = getTile("air");

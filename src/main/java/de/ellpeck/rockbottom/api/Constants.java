@@ -21,6 +21,11 @@
 
 package de.ellpeck.rockbottom.api;
 
+/**
+ * This class houses a list of constant values that are used by the game to do
+ * different things. It might be useful to have access to these values for
+ * modders.
+ */
 public final class Constants{
 
     public static final String RESOURCE_SEPARATOR = "/";
