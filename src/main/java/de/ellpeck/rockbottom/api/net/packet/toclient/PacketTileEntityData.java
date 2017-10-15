@@ -72,7 +72,7 @@ public class PacketTileEntityData implements IPacket{
     public void handle(IGameInstance game, ChannelHandlerContext context){
         game.scheduleAction(() -> {
             if(game.getWorld() != null){
-                TileEntity tile = game.getWorld().getTileEntity(this.x, this.y);
+                TileEntity tile = game.getWorld().getTileEntity(this.layer, this.x, this.y);
                 if(tile != null){
                     tile.load(this.set, true);
                 }
