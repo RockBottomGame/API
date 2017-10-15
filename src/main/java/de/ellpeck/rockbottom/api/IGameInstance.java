@@ -29,11 +29,9 @@ import de.ellpeck.rockbottom.api.data.settings.Keybind;
 import de.ellpeck.rockbottom.api.data.settings.Settings;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.entity.player.IInteractionManager;
-import de.ellpeck.rockbottom.api.event.impl.WorldTickEvent;
 import de.ellpeck.rockbottom.api.gui.IGuiManager;
 import de.ellpeck.rockbottom.api.mod.IMod;
 import de.ellpeck.rockbottom.api.net.chat.IChatLog;
-import de.ellpeck.rockbottom.api.net.packet.IPacket;
 import de.ellpeck.rockbottom.api.particle.IParticleManager;
 import de.ellpeck.rockbottom.api.render.IPlayerDesign;
 import de.ellpeck.rockbottom.api.toast.IToaster;
@@ -46,8 +44,9 @@ import org.newdawn.slick.Input;
 
 import java.io.File;
 import java.net.URLClassLoader;
-import java.util.ConcurrentModificationException;
 import java.util.UUID;
+import java.util.function.BiConsumer;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 /**
@@ -72,17 +71,9 @@ public interface IGameInstance extends IMod{
     @ApiInternal
     void openIngameMenu();
 
-    /**
-     * Schedules an action to be run next tick. This can be used for things like
-     * receiving of {@link IPacket} that run asynchronously to avoid a {@link
-     * ConcurrentModificationException} being thrown. The action's {@code
-     * boolean} value determines if the action should be rescheduled (run again
-     * the next tick). Note: This should NOT be used for actions that run each
-     * tick. For that, use {@link WorldTickEvent}.
-     *
-     * @param action The action to be run next tick
-     */
-    void scheduleAction(Supplier<Boolean> action);
+    <T> void enqueueAction(BiConsumer<IGameInstance, T> action, T object, Predicate<IGameInstance> condition);
+
+    <T> void enqueueAction(BiConsumer<IGameInstance, T> action, T object);
 
     /**
      * Gets the {@link IDataManager} of the current game instance. This can be
@@ -368,5 +359,14 @@ public interface IGameInstance extends IMod{
     @Deprecated
     default boolean isChunkBorderDebug(){
         return this.getGraphics().isChunkBorderDebug();
+    }
+
+    /**
+     * @deprecated Use new action enqueueing system {@link #enqueueAction(BiConsumer,
+     * Object, Predicate)} instead
+     */
+    @Deprecated
+    default void scheduleAction(Supplier<Boolean> action){
+        this.enqueueAction((game, o) -> action.get(), null);
     }
 }

@@ -57,15 +57,12 @@ public class PacketDeath implements IPacket{
 
     @Override
     public void handle(IGameInstance game, ChannelHandlerContext context){
-        game.scheduleAction(() -> {
-            IWorld world = game.getWorld();
-            if(world != null){
-                Entity entity = world.getEntity(this.entityId);
-                if(entity != null){
-                    entity.setDead(true);
-                }
+        IWorld world = game.getWorld();
+        if(world != null){
+            Entity entity = world.getEntity(this.entityId);
+            if(entity != null){
+                entity.setDead(true);
             }
-            return true;
-        });
+        }
     }
 }

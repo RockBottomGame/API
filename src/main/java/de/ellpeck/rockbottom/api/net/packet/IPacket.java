@@ -34,4 +34,8 @@ public interface IPacket{
     void fromBuffer(ByteBuf buf) throws IOException;
 
     void handle(IGameInstance game, ChannelHandlerContext context);
+
+    default void enqueueAsAction(IGameInstance game, ChannelHandlerContext context){
+        game.enqueueAction(IPacket.this :: handle, context);
+    }
 }

@@ -32,6 +32,7 @@ import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 
 import java.io.IOException;
+import java.util.function.Predicate;
 
 @ApiInternal
 public class PacketTileEntityData implements IPacket{
@@ -70,17 +71,16 @@ public class PacketTileEntityData implements IPacket{
 
     @Override
     public void handle(IGameInstance game, ChannelHandlerContext context){
-        game.scheduleAction(() -> {
-            if(game.getWorld() != null){
-                TileEntity tile = game.getWorld().getTileEntity(this.layer, this.x, this.y);
-                if(tile != null){
-                    tile.load(this.set, true);
-                }
-                return true;
+        if(game.getWorld() != null){
+            TileEntity tile = game.getWorld().getTileEntity(this.layer, this.x, this.y);
+            if(tile != null){
+                tile.load(this.set, true);
             }
-            else{
-                return false;
-            }
-        });
+        }
+    }
+
+    @Override
+    public void enqueueAsAction(IGameInstance game, ChannelHandlerContext context){
+        game.enqueueAction(this :: handle, context, inst -> inst.getWorld() != null);
     }
 }

@@ -70,14 +70,11 @@ public class PacketDropItem implements IPacket{
 
     @Override
     public void handle(IGameInstance game, ChannelHandlerContext context){
-        game.scheduleAction(() -> {
-            if(game.getWorld() != null){
-                AbstractEntityPlayer player = game.getWorld().getPlayer(this.playerId);
-                if(player != null){
-                    EntityItem.spawn(player.world, this.instance, player.x, player.y+1, player.facing.x*0.25, 0);
-                }
+        if(game.getWorld() != null){
+            AbstractEntityPlayer player = game.getWorld().getPlayer(this.playerId);
+            if(player != null){
+                EntityItem.spawn(player.world, this.instance, player.x, player.y+1, player.facing.x*0.25, 0);
             }
-            return true;
-        });
+        }
     }
 }
