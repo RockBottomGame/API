@@ -27,6 +27,9 @@ import java.util.Random;
 
 public final class Colors{
 
+    public static final int NO_COLOR = Integer.MAX_VALUE;
+    public static final int RESET_COLOR = Integer.MIN_VALUE;
+
     public static final int TRANSPARENT = 0x00FFFFFF;
     public static final int WHITE = 0xFFFFFFFF;
     public static final int BLACK = 0xFF000000;

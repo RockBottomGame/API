@@ -32,6 +32,4 @@ public enum FontProp{
     BOLD,
     RANDOM;
 
-    public static final int NO_COLOR = Integer.MAX_VALUE;
-    public static final int RESET_COLOR = Integer.MIN_VALUE;
 }

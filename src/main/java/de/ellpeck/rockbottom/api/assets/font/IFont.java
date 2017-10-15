@@ -41,7 +41,11 @@ public interface IFont extends IAsset{
 
     void drawSplitString(float x, float y, String s, float scale, int length);
 
+    void drawString(float x, float y, String s, int drawStart, int drawEnd, float scale, int color, int shadowColor);
+
     void drawString(float x, float y, String s, int drawStart, int drawEnd, float scale, int color);
+
+    void drawCharacter(float x, float y, char character, float scale, int color, FontProp prop, int shadowColor);
 
     void drawCharacter(float x, float y, char character, float scale, int color, FontProp prop);
 
