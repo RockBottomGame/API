@@ -21,6 +21,8 @@
 
 package de.ellpeck.rockbottom.api.assets;
 
+import com.google.gson.JsonElement;
+
 public interface IAnimation extends IAsset{
 
     void drawFrame(int row, int frame, float x, float y, float width, float height, int filter);
@@ -66,4 +68,8 @@ public interface IAnimation extends IAsset{
     int getFrameHeight();
 
     int getFrameByTime(int row, long millis);
+
+    JsonElement[] getAdditionalFrameData(String name, int row);
+
+    JsonElement getAdditionalFrameData(String name, int row, int frame);
 }
