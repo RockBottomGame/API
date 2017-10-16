@@ -167,6 +167,12 @@ public class ComponentInputField extends GuiComponent{
         }
     }
 
+    public void append(String text){
+        if(this.text.length()+text.length() <= this.maxLength){
+            this.setText(this.text+text);
+        }
+    }
+
     @Override
     public boolean onMouseAction(IGameInstance game, int button, float x, float y){
         if(Settings.KEY_GUI_ACTION_1.isKey(button)){

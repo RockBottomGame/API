@@ -24,12 +24,13 @@ package de.ellpeck.rockbottom.api.assets.font;
 import de.ellpeck.rockbottom.api.util.Colors;
 import de.ellpeck.rockbottom.api.util.Util;
 
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class FormattingCode{
 
-    private static final Map<Character, FormattingCode> DEFAULT_CODES = new HashMap<>();
+    private static final Map<Character, FormattingCode> DEFAULT_CODES = new TreeMap<>(Character:: compare);
 
     public static final FormattingCode NONE = new FormattingCode(' ', Colors.NO_COLOR, FontProp.NONE, 0, "");
     public static final FormattingCode RESET_COLOR = new FormattingCode('y', Colors.RESET_COLOR).registerAsDefault();
@@ -133,5 +134,9 @@ public class FormattingCode{
     @Override
     public String toString(){
         return this.strg;
+    }
+
+    public static Map<Character, FormattingCode> getDefaultCodes(){
+        return Collections.unmodifiableMap(DEFAULT_CODES);
     }
 }
