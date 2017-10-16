@@ -24,6 +24,7 @@ package de.ellpeck.rockbottom.api.render.item;
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.IGraphics;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
+import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.item.Item;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 
@@ -33,5 +34,13 @@ public interface IItemRenderer<T extends Item>{
 
     default void renderOnMouseCursor(IGameInstance game, IAssetManager manager, IGraphics g, T item, ItemInstance instance, float x, float y, float scale, int filter, boolean isInPlayerRange){
 
+    }
+
+    default void renderHolding(IGameInstance game, IAssetManager manager, IGraphics g, T item, ItemInstance instance, AbstractEntityPlayer player, float x, float y, float rotation, float scale, int filter){
+        g.pushMatrix();
+        g.translate(x, y);
+        g.rotate(rotation);
+        this.render(game, manager, g, item, instance, 0F, 0F, scale*0.5F, filter);
+        g.popMatrix();
     }
 }
