@@ -62,6 +62,10 @@ public class ComponentFormatSelector extends ComponentButton{
         this.gui.sortComponents();
     }
 
+    public boolean isMenuOpen(){
+        return this.menu != null;
+    }
+
     @Override
     public boolean onKeyboardAction(IGameInstance game, int button, char character){
         if(this.menu != null){
