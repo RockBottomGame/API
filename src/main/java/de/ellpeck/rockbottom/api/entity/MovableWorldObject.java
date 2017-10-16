@@ -63,5 +63,10 @@ public abstract class MovableWorldObject{
 
     }
 
+    @ApiInternal
+    public void onEntityCollision(Entity entity, BoundBox thisBox, BoundBox thisBoxMotion, BoundBox otherBox, BoundBox otherBoxMotion){
+
+    }
+
     public abstract BoundBox getBoundingBox();
 }

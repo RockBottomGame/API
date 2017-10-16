@@ -207,6 +207,10 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
 
     }
 
+    public void onCollideWithEntity(Entity otherEntity, BoundBox thisBox, BoundBox thisBoxMotion, BoundBox otherBox, BoundBox otherBoxMotion){
+
+    }
+
     public boolean onInteractWith(AbstractEntityPlayer player, double mouseX, double mouseY){
         return false;
     }
@@ -231,5 +235,15 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
 
         tile.onCollideWithEntity(this.world, x, y, layer, state, objBox, objBoxMotion, boxes, this);
         this.onCollideWithTile(x, y, layer, state, objBox, objBoxMotion, boxes);
+    }
+
+    @Override
+    public final void onEntityCollision(Entity entity, BoundBox thisBox, BoundBox thisBoxMotion, BoundBox otherBox, BoundBox otherBoxMotion){
+        this.onCollideWithEntity(entity, thisBox, thisBoxMotion, otherBox, otherBoxMotion);
+        entity.onCollideWithEntity(this, otherBox, otherBoxMotion, thisBox, thisBoxMotion);
+    }
+
+    public boolean canCollideWith(MovableWorldObject object, BoundBox entityBox, BoundBox entityBoxMotion){
+        return false;
     }
 }
