@@ -29,6 +29,7 @@ import de.ellpeck.rockbottom.api.world.IWorld;
 
 import java.awt.*;
 import java.io.File;
+import java.net.URI;
 import java.util.Random;
 import java.util.logging.Level;
 
@@ -108,6 +109,17 @@ public final class Util{
         }
         catch(Exception e){
             RockBottomAPI.logger().log(Level.WARNING, "Couldn't open file "+file, e);
+            return false;
+        }
+    }
+
+    public static boolean openWebsite(String domain){
+        try{
+            Desktop.getDesktop().browse(new URI(domain));
+            return true;
+        }
+        catch(Exception e){
+            RockBottomAPI.logger().log(Level.WARNING, "Couldn't open website "+domain, e);
             return false;
         }
     }
