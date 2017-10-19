@@ -112,4 +112,8 @@ public class Item{
     public int getHighestPossibleMeta(){
         return 0;
     }
+
+    public double getMaxInteractionDistance(IWorld world, int x, int y, TileLayer layer, double mouseX, double mouseY, AbstractEntityPlayer player){
+        return AbstractEntityPlayer.RANGE;
+    }
 }

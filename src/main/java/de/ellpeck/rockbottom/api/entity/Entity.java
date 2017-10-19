@@ -246,4 +246,8 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
     public boolean canCollideWith(MovableWorldObject object, BoundBox entityBox, BoundBox entityBoxMotion){
         return false;
     }
+
+    public double getMaxInteractionDistance(IWorld world, double mouseX, double mouseY, AbstractEntityPlayer player){
+        return AbstractEntityPlayer.RANGE;
+    }
 }

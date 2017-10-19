@@ -336,4 +336,8 @@ public class Tile{
     public IResourceName getPlaceSound(IWorld world, int x, int y, TileLayer layer, Entity placer, TileState state){
         return SOUND_GENERIC_TILE;
     }
+
+    public double getMaxInteractionDistance(IWorld world, int x, int y, TileLayer layer, double mouseX, double mouseY, AbstractEntityPlayer player){
+        return AbstractEntityPlayer.RANGE;
+    }
 }
