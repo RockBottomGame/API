@@ -21,6 +21,7 @@
 
 package de.ellpeck.rockbottom.api.render.item;
 
+import com.google.gson.JsonElement;
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.IGraphics;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
@@ -36,11 +37,20 @@ public interface IItemRenderer<T extends Item>{
 
     }
 
-    default void renderHolding(IGameInstance game, IAssetManager manager, IGraphics g, T item, ItemInstance instance, AbstractEntityPlayer player, float x, float y, float rotation, float scale, int filter){
+    default void renderHolding(IGameInstance game, IAssetManager manager, IGraphics g, T item, ItemInstance instance, AbstractEntityPlayer player, float x, float y, float rotation, float scale, int filter, boolean mirrored){
         g.pushMatrix();
         g.translate(x, y);
         g.rotate(rotation);
+
+        if(mirrored){
+            g.scale(-1F, 1F);
+        }
+
         this.render(game, manager, g, item, instance, 0F, 0F, scale*0.5F, filter);
         g.popMatrix();
+    }
+
+    default JsonElement getAdditionalTextureData(IGameInstance game, IAssetManager manager, IGraphics g, T item, ItemInstance instance, AbstractEntityPlayer player, String name){
+        return null;
     }
 }

@@ -21,9 +21,11 @@
 
 package de.ellpeck.rockbottom.api.render.item;
 
+import com.google.gson.JsonElement;
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.IGraphics;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
+import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.item.ItemMeta;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
@@ -43,6 +45,17 @@ public class ItemMetaRenderer extends DefaultItemRenderer<ItemMeta>{
         }
         else{
             super.render(game, manager, g, item, instance, x, y, scale, filter);
+        }
+    }
+
+    @Override
+    public JsonElement getAdditionalTextureData(IGameInstance game, IAssetManager manager, IGraphics g, ItemMeta item, ItemInstance instance, AbstractEntityPlayer player, String name){
+        int meta = instance.getMeta();
+        if(meta >= 0 && item.subResourceNames.size() > meta){
+            return manager.getTexture(item.subResourceNames.get(meta)).getAdditionalData(name);
+        }
+        else{
+            return super.getAdditionalTextureData(game, manager, g, item, instance, player, name);
         }
     }
 }

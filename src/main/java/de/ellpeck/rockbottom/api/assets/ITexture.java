@@ -21,6 +21,8 @@
 
 package de.ellpeck.rockbottom.api.assets;
 
+import com.google.gson.JsonElement;
+
 public interface ITexture extends IAsset{
 
     void draw(float x, float y);
@@ -52,4 +54,6 @@ public interface ITexture extends IAsset{
     void setRotation(float angle);
 
     void setRotationCenter(float x, float y);
+
+    JsonElement getAdditionalData(String name);
 }
