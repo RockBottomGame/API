@@ -26,10 +26,11 @@ import de.ellpeck.rockbottom.api.IGraphics;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.assets.ITexture;
 import de.ellpeck.rockbottom.api.entity.player.IInteractionManager;
+import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 
 public interface ISpecialCursor{
 
-    ITexture getTexture();
+    IResourceName getTexture();
 
     boolean shouldUseCursor(IGameInstance game, IAssetManager manager, IGraphics graphics, IGuiManager guiManager, IInteractionManager interactionManager);
 
