@@ -42,4 +42,8 @@ public interface IAssetLoader<T extends IAsset>{
     default Map<IResourceName, T> dealWithSpecialCases(IAssetManager manager, String resourceName, String path, JsonElement element, String elementName, IMod loadingMod) throws Exception{
         return null;
     }
+
+    default void finalize(IAssetManager manager){
+
+    }
 }
