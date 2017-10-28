@@ -21,10 +21,12 @@
 
 package de.ellpeck.rockbottom.api.render.tile;
 
+import com.google.gson.JsonElement;
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.IGraphics;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.assets.ITexture;
+import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.tile.Tile;
 import de.ellpeck.rockbottom.api.tile.state.TileState;
@@ -49,5 +51,9 @@ public interface ITileRenderer<T extends Tile>{
 
     default void renderInForeground(IGameInstance game, IAssetManager manager, IGraphics g, IWorld world, T tile, TileState state, int x, int y, TileLayer layer, float renderX, float renderY, float scale, int[] light){
 
+    }
+
+    default JsonElement getAdditionalTextureData(IGameInstance game, IAssetManager manager, IGraphics g, T tile, ItemInstance instance, AbstractEntityPlayer player, String name){
+        return null;
     }
 }

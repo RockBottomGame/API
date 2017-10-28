@@ -21,10 +21,12 @@
 
 package de.ellpeck.rockbottom.api.render.tile;
 
+import com.google.gson.JsonElement;
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.IGraphics;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.assets.ITexture;
+import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.tile.TileMeta;
 import de.ellpeck.rockbottom.api.tile.state.TileState;
@@ -55,5 +57,10 @@ public class TileMetaRenderer implements ITileRenderer<TileMeta>{
         else{
             return manager.getMissingTexture();
         }
+    }
+
+    @Override
+    public JsonElement getAdditionalTextureData(IGameInstance game, IAssetManager manager, IGraphics g, TileMeta tile, ItemInstance instance, AbstractEntityPlayer player, String name){
+        return this.getTexture(manager, tile, instance.getMeta()).getAdditionalData(name);
     }
 }

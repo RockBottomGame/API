@@ -21,9 +21,11 @@
 
 package de.ellpeck.rockbottom.api.render.item;
 
+import com.google.gson.JsonElement;
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.IGraphics;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
+import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.item.ItemTile;
 import de.ellpeck.rockbottom.api.render.tile.ITileRenderer;
@@ -47,5 +49,17 @@ public class ItemTileRenderer implements IItemRenderer<ItemTile>{
         if(isInPlayerRange){
             this.render(game, manager, g, item, instance, x+0.1F*scale, y, scale*0.75F, filter);
         }
+    }
+
+    @Override
+    public JsonElement getAdditionalTextureData(IGameInstance game, IAssetManager manager, IGraphics g, ItemTile item, ItemInstance instance, AbstractEntityPlayer player, String name){
+        Tile tile = item.getTile();
+        if(tile != null){
+            ITileRenderer renderer = tile.getRenderer();
+            if(renderer != null){
+                return renderer.getAdditionalTextureData(game, manager, g, tile, instance, player, name);
+            }
+        }
+        return null;
     }
 }

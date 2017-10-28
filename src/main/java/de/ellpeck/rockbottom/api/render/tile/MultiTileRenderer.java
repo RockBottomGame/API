@@ -21,10 +21,12 @@
 
 package de.ellpeck.rockbottom.api.render.tile;
 
+import com.google.gson.JsonElement;
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.IGraphics;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.assets.ITexture;
+import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.tile.MultiTile;
 import de.ellpeck.rockbottom.api.tile.state.TileState;
@@ -69,5 +71,10 @@ public class MultiTileRenderer<T extends MultiTile> extends DefaultTileRenderer<
     @Override
     public void renderItem(IGameInstance game, IAssetManager manager, IGraphics g, T tile, ItemInstance instance, float x, float y, float scale, int filter){
         manager.getTexture(this.texItem).draw(x, y, scale, scale, filter);
+    }
+
+    @Override
+    public JsonElement getAdditionalTextureData(IGameInstance game, IAssetManager manager, IGraphics g, T tile, ItemInstance instance, AbstractEntityPlayer player, String name){
+        return manager.getTexture(this.texItem).getAdditionalData(name);
     }
 }
