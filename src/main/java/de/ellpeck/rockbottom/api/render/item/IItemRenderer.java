@@ -44,9 +44,10 @@ public interface IItemRenderer<T extends Item>{
 
         if(mirrored){
             g.scale(-1F, 1F);
+            g.translate(-scale, 0F);
         }
 
-        this.render(game, manager, g, item, instance, 0F, 0F, scale*0.5F, filter);
+        this.render(game, manager, g, item, instance, 0F, 0F, scale, filter);
         g.popMatrix();
     }
 
