@@ -56,4 +56,8 @@ public interface ITexture extends IAsset{
     void setRotationCenter(float x, float y);
 
     JsonElement getAdditionalData(String name);
+
+    ITexture copyAndFlip(boolean flipHor, boolean flipVert);
+
+    ITexture getCopy();
 }

@@ -23,6 +23,7 @@ package de.ellpeck.rockbottom.api.assets;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.assets.font.IFont;
+import de.ellpeck.rockbottom.api.gui.ISpecialCursor;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 
@@ -33,7 +34,7 @@ import java.util.Map;
 public interface IAssetManager{
 
     @ApiInternal
-    void reloadCursor(IGameInstance game);
+    void setCursor(IGameInstance game, ISpecialCursor cursor);
 
     <T extends IAsset> Map<IResourceName, T> getAllOfType(Class<T> type);
 

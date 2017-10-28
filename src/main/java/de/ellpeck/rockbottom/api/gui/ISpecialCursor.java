@@ -1,5 +1,5 @@
 /*
- * This file ("IGuiManager.java") is part of the RockBottomAPI by Ellpeck.
+ * This file ("ICursor.java") is part of the RockBottomAPI by Ellpeck.
  * View the source code at <https://github.com/RockBottomGame/>.
  * View information on the project at <https://rockbottom.ellpeck.de/>.
  *
@@ -21,22 +21,27 @@
 
 package de.ellpeck.rockbottom.api.gui;
 
-import de.ellpeck.rockbottom.api.util.ApiInternal;
+import de.ellpeck.rockbottom.api.IGameInstance;
+import de.ellpeck.rockbottom.api.IGraphics;
+import de.ellpeck.rockbottom.api.assets.IAssetManager;
+import de.ellpeck.rockbottom.api.assets.ITexture;
+import de.ellpeck.rockbottom.api.entity.player.IInteractionManager;
 
-public interface IGuiManager{
+public interface ISpecialCursor{
 
-    @ApiInternal
-    void updateDimensions();
+    ITexture getTexture();
 
-    void openGui(Gui gui);
+    boolean shouldUseCursor(IGameInstance game, IAssetManager manager, IGraphics graphics, IGuiManager guiManager, IInteractionManager interactionManager);
 
-    void closeGui();
+    default int getHotspotX(){
+        return 0;
+    }
 
-    Gui getGui();
+    default int getHotspotY(){
+        return 0;
+    }
 
-    boolean fadeOut(int ticks, Runnable after);
-
-    boolean fadeIn(int ticks, Runnable after);
-
-    ISpecialCursor getCursor();
+    default int getPriority(){
+        return 0;
+    }
 }

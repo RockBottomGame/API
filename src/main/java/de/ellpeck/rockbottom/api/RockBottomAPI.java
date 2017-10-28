@@ -31,6 +31,7 @@ import de.ellpeck.rockbottom.api.data.settings.Settings;
 import de.ellpeck.rockbottom.api.entity.Entity;
 import de.ellpeck.rockbottom.api.entity.player.knowledge.Information;
 import de.ellpeck.rockbottom.api.event.IEventHandler;
+import de.ellpeck.rockbottom.api.gui.ISpecialCursor;
 import de.ellpeck.rockbottom.api.gui.IMainMenuTheme;
 import de.ellpeck.rockbottom.api.item.Item;
 import de.ellpeck.rockbottom.api.mod.IMod;
@@ -65,7 +66,7 @@ public final class RockBottomAPI{
     /**
      * The current API version equal to the version in the build.gradle file.
      */
-    public static final String VERSION = "0.1.18";
+    public static final String VERSION = "0.1.19";
 
     /**
      * The registry for all {@link Tile} objects. Use {@link Tile#register()} to
@@ -190,6 +191,12 @@ public final class RockBottomAPI{
      */
     @ApiInternal
     public static final NameRegistry<IAssetLoader> ASSET_LOADER_REGISTRY = new NameRegistry<>("asset_loader_registry");
+    /**
+     * The list of all {@link ISpecialCursor} instance. Adding cursors into this list
+     * will allow them to be displayed in place of the regular cursor when their
+     * condition is met.
+     */
+    public static final List<ISpecialCursor> SPECIAL_CURSORS = new ArrayList<>();
 
     /**
      * A set of internal references to API classes that are initialized by the
