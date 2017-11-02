@@ -340,4 +340,8 @@ public class Tile{
     public double getMaxInteractionDistance(IWorld world, int x, int y, TileLayer layer, double mouseX, double mouseY, AbstractEntityPlayer player){
         return AbstractEntityPlayer.RANGE;
     }
+
+    public boolean shouldShowBreakAnimation(IWorld world, int x, int y, TileLayer layer){
+        return true;
+    }
 }
