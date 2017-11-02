@@ -133,13 +133,7 @@ public abstract class Gui{
             }
         }
 
-        if(Settings.KEY_MENU.isKey(button) || (this.canCloseWithInvKey() && Settings.KEY_INVENTORY.isKey(button))){
-            if(this.tryEscape(game)){
-                return true;
-            }
-        }
-
-        return false;
+        return (Settings.KEY_MENU.isKey(button) || (this.canCloseWithInvKey() && Settings.KEY_INVENTORY.isKey(button))) && this.tryEscape(game);
     }
 
     public boolean canCloseWithInvKey(){
