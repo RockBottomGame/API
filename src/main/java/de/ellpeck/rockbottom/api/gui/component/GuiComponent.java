@@ -146,4 +146,8 @@ public abstract class GuiComponent{
     public int getPriority(){
         return 0;
     }
+
+    public boolean shouldDoFingerCursor(IGameInstance game){
+        return this.isMouseOverPrioritized(game);
+    }
 }

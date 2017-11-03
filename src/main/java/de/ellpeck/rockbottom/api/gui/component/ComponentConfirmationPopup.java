@@ -103,4 +103,10 @@ public class ComponentConfirmationPopup extends GuiComponent{
     public IResourceName getName(){
         return RockBottomAPI.createInternalRes("confirmation_popup");
     }
+
+    @Override
+    public boolean shouldDoFingerCursor(IGameInstance game){
+        IGraphics g = game.getGraphics();
+        return this.buttonArea.contains(g.getMouseInGuiX(), g.getMouseInGuiY());
+    }
 }
