@@ -22,11 +22,14 @@
 package de.ellpeck.rockbottom.api.world.gen;
 
 import de.ellpeck.rockbottom.api.Constants;
+import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.tile.state.TileState;
 import de.ellpeck.rockbottom.api.util.Util;
 import de.ellpeck.rockbottom.api.world.IChunk;
 import de.ellpeck.rockbottom.api.world.IWorld;
+import de.ellpeck.rockbottom.api.world.gen.biome.Biome;
 
+import java.util.Collection;
 import java.util.Random;
 
 public abstract class WorldGenOre implements IWorldGenerator{
@@ -41,6 +44,7 @@ public abstract class WorldGenOre implements IWorldGenerator{
     @Override
     public void generate(IWorld world, IChunk chunk){
         this.oreRandom.setSeed(Util.scrambleSeed(chunk.getX(), chunk.getY(), world.getSeed()));
+        Collection<Biome> allowedBiomes = this.getAllowedBiomes();
 
         int amount = this.oreRandom.nextInt(this.getMaxAmount()+1);
         if(amount > 0){
@@ -53,13 +57,16 @@ public abstract class WorldGenOre implements IWorldGenerator{
                 int startX = chunk.getX()+radX+this.oreRandom.nextInt(Constants.CHUNK_SIZE-radX*2);
                 int startY = chunk.getY()+radY+this.oreRandom.nextInt(Constants.CHUNK_SIZE-radY*2);
 
-                int thisRadX = this.oreRandom.nextInt(radXHalf)+radXHalf;
-                int thisRadY = this.oreRandom.nextInt(radYHalf)+radYHalf;
+                Biome biome = world.getBiome(startX, startY);
+                if(allowedBiomes.contains(biome)){
+                    int thisRadX = this.oreRandom.nextInt(radXHalf)+radXHalf;
+                    int thisRadY = this.oreRandom.nextInt(radYHalf)+radYHalf;
 
-                for(int x = -thisRadX; x <= thisRadX; x++){
-                    for(int y = -thisRadY; y <= thisRadY; y++){
-                        if(this.oreRandom.nextInt(thisRadX) == x || this.oreRandom.nextInt(thisRadY) == y){
-                            world.setState(startX+x, startY+y, this.getOreState());
+                    for(int x = -thisRadX; x <= thisRadX; x++){
+                        for(int y = -thisRadY; y <= thisRadY; y++){
+                            if(this.oreRandom.nextInt(thisRadX) == x || this.oreRandom.nextInt(thisRadY) == y){
+                                world.setState(startX+x, startY+y, this.getOreState());
+                            }
                         }
                     }
                 }
@@ -67,17 +74,21 @@ public abstract class WorldGenOre implements IWorldGenerator{
         }
     }
 
-    public abstract int getHighestGridPos();
+    protected abstract int getHighestGridPos();
 
-    public int getLowestGridPos(){
+    protected int getLowestGridPos(){
         return Integer.MIN_VALUE;
     }
 
-    public abstract int getMaxAmount();
+    protected abstract int getMaxAmount();
 
-    public abstract int getClusterRadiusX();
+    protected abstract int getClusterRadiusX();
 
-    public abstract int getClusterRadiusY();
+    protected abstract int getClusterRadiusY();
 
-    public abstract TileState getOreState();
+    protected abstract TileState getOreState();
+
+    protected Collection<Biome> getAllowedBiomes(){
+        return RockBottomAPI.BIOME_REGISTRY.getUnmodifiable().values();
+    }
 }
