@@ -31,6 +31,7 @@ import de.ellpeck.rockbottom.api.world.gen.biome.Biome;
 
 import java.util.Collection;
 import java.util.Random;
+import java.util.Set;
 
 public abstract class WorldGenOre implements IWorldGenerator{
 
@@ -88,7 +89,7 @@ public abstract class WorldGenOre implements IWorldGenerator{
 
     protected abstract TileState getOreState();
 
-    protected Collection<Biome> getAllowedBiomes(){
+    protected Set<Biome> getAllowedBiomes(){
         return RockBottomAPI.BIOME_REGISTRY.getUnmodifiable().values();
     }
 }
