@@ -21,6 +21,7 @@
 
 package de.ellpeck.rockbottom.api.util;
 
+import com.google.gson.Gson;
 import de.ellpeck.rockbottom.api.Constants;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.entity.Entity;
@@ -36,6 +37,7 @@ import java.util.logging.Level;
 public final class Util{
 
     public static final Random RANDOM = new Random();
+    public static final Gson GSON = new Gson();
 
     public static double distance(double x1, double y1, double x2, double y2){
         return Math.sqrt(distanceSq(x1, y1, x2, y2));

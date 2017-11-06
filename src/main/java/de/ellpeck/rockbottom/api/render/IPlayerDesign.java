@@ -140,18 +140,6 @@ public interface IPlayerDesign{
             RockBottomAPI.createInternalRes("player.beard.2")
     ));
 
-    @ApiInternal
-    void saveToFile();
-
-    @ApiInternal
-    void loadFromFile();
-
-    @ApiInternal
-    void save(DataSet set);
-
-    @ApiInternal
-    void load(DataSet set);
-
     int getFavoriteColor();
 
     @ApiInternal

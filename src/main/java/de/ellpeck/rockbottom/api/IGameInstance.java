@@ -218,6 +218,9 @@ public interface IGameInstance extends IMod{
      */
     IPlayerDesign getPlayerDesign();
 
+    @ApiInternal
+    void setPlayerDesign(String jsonString);
+
     /**
      * Gets if the game is currently in dedicated server mode. This will be true
      * when "--server" is appended to the launch arguments.
