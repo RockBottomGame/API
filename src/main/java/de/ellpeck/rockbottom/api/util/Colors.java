@@ -60,19 +60,35 @@ public final class Colors{
     }
 
     public static float getR(int color){
-        return (float)((color >> 16) & 255)/255F;
+        return (float)getRInt(color)/255F;
     }
 
     public static float getG(int color){
-        return (float)((color >> 8) & 255)/255F;
+        return (float)getGInt(color)/255F;
     }
 
     public static float getB(int color){
-        return (float)(color & 255)/255F;
+        return (float)getBInt(color)/255F;
     }
 
     public static float getA(int color){
-        return (float)((color >> 24) & 255)/255F;
+        return (float)getAInt(color)/255F;
+    }
+
+    public static int getRInt(int color){
+        return (color >> 16) & 255;
+    }
+
+    public static int getGInt(int color){
+        return (color >> 8) & 255;
+    }
+
+    public static int getBInt(int color){
+        return color & 255;
+    }
+
+    public static int getAInt(int color){
+        return (color >> 24) & 255;
     }
 
     public static int setA(int color, float a){
