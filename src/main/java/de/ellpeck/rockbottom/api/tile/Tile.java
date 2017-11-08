@@ -189,7 +189,7 @@ public class Tile{
     }
 
     public void onChangeAround(IWorld world, int x, int y, TileLayer layer, int changedX, int changedY, TileLayer changedLayer){
-        if(!this.canStay(world, x, y, layer, changedX, changedY, changedLayer)){
+        if(!world.isClient() && !this.canStay(world, x, y, layer, changedX, changedY, changedLayer)){
             world.destroyTile(x, y, layer, null, this.forceDrop);
         }
     }
@@ -215,11 +215,15 @@ public class Tile{
     }
 
     public void doBreak(IWorld world, int x, int y, TileLayer layer, AbstractEntityPlayer breaker, boolean isRightTool, boolean allowDrop){
-        world.destroyTile(x, y, layer, breaker, allowDrop && (this.forceDrop || isRightTool));
+        if(!world.isClient()){
+            world.destroyTile(x, y, layer, breaker, allowDrop && (this.forceDrop || isRightTool));
+        }
     }
 
     public void doPlace(IWorld world, int x, int y, TileLayer layer, ItemInstance instance, AbstractEntityPlayer placer){
-        world.setState(layer, x, y, this.getPlacementState(world, x, y, layer, instance, placer));
+        if(!world.isClient()){
+            world.setState(layer, x, y, this.getPlacementState(world, x, y, layer, instance, placer));
+        }
     }
 
     public TileState getPlacementState(IWorld world, int x, int y, TileLayer layer, ItemInstance instance, AbstractEntityPlayer placer){

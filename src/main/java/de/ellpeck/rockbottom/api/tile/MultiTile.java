@@ -98,14 +98,16 @@ public abstract class MultiTile extends TileBasic{
 
     @Override
     public void doPlace(IWorld world, int x, int y, TileLayer layer, ItemInstance instance, AbstractEntityPlayer placer){
-        int startX = x-this.getMainX();
-        int startY = y-this.getMainY();
+        if(!world.isClient()){
+            int startX = x-this.getMainX();
+            int startY = y-this.getMainY();
 
-        for(int addX = 0; addX < this.getWidth(); addX++){
-            for(int addY = 0; addY < this.getHeight(); addY++){
-                if(this.isStructurePart(addX, addY)){
-                    TileState state = this.getPlacementState(world, x, y, layer, instance, placer);
-                    world.setState(layer, startX+addX, startY+addY, state.overrideProps(this.getState(addX, addY), this.propSubX, this.propSubY));
+            for(int addX = 0; addX < this.getWidth(); addX++){
+                for(int addY = 0; addY < this.getHeight(); addY++){
+                    if(this.isStructurePart(addX, addY)){
+                        TileState state = this.getPlacementState(world, x, y, layer, instance, placer);
+                        world.setState(layer, startX+addX, startY+addY, state.overrideProps(this.getState(addX, addY), this.propSubX, this.propSubY));
+                    }
                 }
             }
         }
@@ -113,12 +115,14 @@ public abstract class MultiTile extends TileBasic{
 
     @Override
     public void doBreak(IWorld world, int x, int y, TileLayer layer, AbstractEntityPlayer breaker, boolean isRightTool, boolean allowDrop){
-        Pos2 start = this.getBottomLeft(x, y, world.getState(layer, x, y));
+        if(!world.isClient()){
+            Pos2 start = this.getBottomLeft(x, y, world.getState(layer, x, y));
 
-        for(int addX = 0; addX < this.getWidth(); addX++){
-            for(int addY = 0; addY < this.getHeight(); addY++){
-                if(this.isStructurePart(addX, addY)){
-                    world.destroyTile(start.getX()+addX, start.getY()+addY, layer, breaker, allowDrop && (this.forceDrop || isRightTool));
+            for(int addX = 0; addX < this.getWidth(); addX++){
+                for(int addY = 0; addY < this.getHeight(); addY++){
+                    if(this.isStructurePart(addX, addY)){
+                        world.destroyTile(start.getX()+addX, start.getY()+addY, layer, breaker, allowDrop && (this.forceDrop || isRightTool));
+                    }
                 }
             }
         }
