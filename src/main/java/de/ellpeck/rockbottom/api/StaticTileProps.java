@@ -22,6 +22,7 @@
 package de.ellpeck.rockbottom.api;
 
 import de.ellpeck.rockbottom.api.tile.state.BoolProp;
+import de.ellpeck.rockbottom.api.tile.state.IntProp;
 import de.ellpeck.rockbottom.api.tile.state.TileProp;
 
 /**
@@ -37,5 +38,10 @@ public final class StaticTileProps{
      * {@link GameContent#TILE_LOG} and {@link GameContent#TILE_LEAVES}
      */
     public static final BoolProp NATURAL = new BoolProp("natural", true);
+    /**
+     * Determines which direction a torch is facing. Used by {@link
+     * GameContent#TILE_TORCH}
+     */
+    public static final IntProp TORCH_FACING = new IntProp("facing", 0, 4);
 
 }
