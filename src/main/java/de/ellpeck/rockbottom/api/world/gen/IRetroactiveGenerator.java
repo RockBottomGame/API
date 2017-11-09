@@ -25,8 +25,6 @@ import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.world.IChunk;
 import de.ellpeck.rockbottom.api.world.IWorld;
 
-import java.util.Random;
-
 public interface IRetroactiveGenerator extends IWorldGenerator{
 
     @Override

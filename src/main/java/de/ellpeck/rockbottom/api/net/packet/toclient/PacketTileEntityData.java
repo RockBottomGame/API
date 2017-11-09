@@ -32,7 +32,6 @@ import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 
 import java.io.IOException;
-import java.util.function.Predicate;
 
 @ApiInternal
 public class PacketTileEntityData implements IPacket{

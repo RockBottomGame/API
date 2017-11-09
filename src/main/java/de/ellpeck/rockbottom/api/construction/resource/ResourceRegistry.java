@@ -22,7 +22,6 @@
 package de.ellpeck.rockbottom.api.construction.resource;
 
 import de.ellpeck.rockbottom.api.RockBottomAPI;
-import org.newdawn.slick.util.Log;
 
 import java.util.*;
 

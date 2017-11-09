@@ -30,6 +30,6 @@ public enum FontProp{
     ITALICS,
     UPSIDE_DOWN,
     BOLD,
-    RANDOM;
+    RANDOM
 
 }

@@ -25,8 +25,6 @@ import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.world.IChunk;
 import de.ellpeck.rockbottom.api.world.IWorld;
 
-import java.util.Random;
-
 public interface IWorldGenerator{
 
     default void initWorld(IWorld world){

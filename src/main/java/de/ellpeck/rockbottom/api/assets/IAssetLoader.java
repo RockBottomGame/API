@@ -26,7 +26,6 @@ import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.mod.IMod;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 
-import java.util.List;
 import java.util.Map;
 
 public interface IAssetLoader<T extends IAsset>{

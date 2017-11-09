@@ -29,8 +29,6 @@ import de.ellpeck.rockbottom.api.world.IWorld;
 import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 import de.ellpeck.rockbottom.api.world.gen.INoiseGen;
 
-import java.util.Random;
-
 public abstract class Biome{
 
     protected final IResourceName name;
