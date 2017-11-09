@@ -41,6 +41,10 @@ public interface IMod{
         return "";
     }
 
+    default String[] getAuthors(){
+        return new String[0];
+    }
+
     default int getSortingPriority(){
         return 0;
     }
