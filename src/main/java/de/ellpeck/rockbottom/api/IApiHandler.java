@@ -165,7 +165,7 @@ public interface IApiHandler{
     boolean isToolEffective(AbstractEntityPlayer player, ItemInstance instance, Tile tile, TileLayer layer, int x, int y);
 
     @ApiInternal
-    boolean placeTile(int x, int y, TileLayer layer, AbstractEntityPlayer player, ItemInstance selected, Tile tile, boolean removeItem);
+    boolean placeTile(int x, int y, TileLayer layer, AbstractEntityPlayer player, ItemInstance selected, Tile tile, boolean removeItem, boolean simulate);
 
     /**
      * Creates a {@link Logger} with the specified name that will output to the
