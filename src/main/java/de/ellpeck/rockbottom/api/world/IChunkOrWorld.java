@@ -87,6 +87,8 @@ public interface IChunkOrWorld{
     @ApiInternal
     void setArtificialLight(int x, int y, byte light);
 
+    void scheduleUpdate(int x, int y, TileLayer layer, int scheduledMeta, int time);
+
     void scheduleUpdate(int x, int y, TileLayer layer, int time);
 
     void setDirty(int x, int y);

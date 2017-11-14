@@ -66,7 +66,7 @@ public final class RockBottomAPI{
     /**
      * The current API version equal to the version in the build.gradle file.
      */
-    public static final String VERSION = "0.1.20";
+    public static final String VERSION = "0.1.21";
 
     /**
      * The registry for all {@link Tile} objects. Use {@link Tile#register()} to

@@ -284,8 +284,8 @@ public class Tile{
         return this.getName().toString();
     }
 
-    public void onScheduledUpdate(IWorld world, int x, int y, TileLayer layer){
-
+    public void onScheduledUpdate(IWorld world, int x, int y, TileLayer layer, int scheduledMeta){
+        this.onScheduledUpdate(world, x, y, layer);
     }
 
     public boolean canClimb(IWorld world, int x, int y, TileLayer layer, TileState state, BoundBox entityBox, BoundBox entityBoxMotion, List<BoundBox> tileBoxes, Entity entity){
@@ -347,5 +347,13 @@ public class Tile{
 
     public boolean shouldShowBreakAnimation(IWorld world, int x, int y, TileLayer layer){
         return true;
+    }
+
+    /**
+     * @deprecated use {@link #onScheduledUpdate(IWorld, int, int, TileLayer, int)} instead
+     */
+    @Deprecated
+    public void onScheduledUpdate(IWorld world, int x, int y, TileLayer layer){
+
     }
 }
