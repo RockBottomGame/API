@@ -216,7 +216,7 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
     }
 
     public boolean shouldStartClimbing(int x, int y, TileLayer layer, TileState state, BoundBox entityBox, BoundBox entityBoxMotion, List<BoundBox> tileBoxes){
-        return true;
+        return false;
     }
 
     @Override
