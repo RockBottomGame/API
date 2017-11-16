@@ -274,6 +274,8 @@ public interface IGraphics{
 
     boolean isChunkBorderDebug();
 
+    boolean isGuiDebug();
+
     double getMousedTileX();
 
     double getMousedTileY();

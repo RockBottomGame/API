@@ -31,6 +31,8 @@ import de.ellpeck.rockbottom.api.world.IWorld;
 import java.awt.*;
 import java.io.File;
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.logging.Level;
 
@@ -152,5 +154,13 @@ public final class Util{
     public static double polymax(double a, double b, double div){
         double h = clamp(0.5D+0.5D*(b-a)/div, 0D, 1D);
         return (b*h+a*(1D-h))+div*h*(1D-h);
+    }
+
+    public static List<Integer> makeIntList(int start, int end){
+        List<Integer> list = new ArrayList<>();
+        for(int i = start; i < end; i++){
+            list.add(i);
+        }
+        return list;
     }
 }

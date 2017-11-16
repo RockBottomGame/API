@@ -52,6 +52,14 @@ public interface INetHandler{
 
     void sendToAllPlayersExcept(IWorld world, IPacket packet, Entity except);
 
+    void sendToAllPlayersAround(IWorld world, IPacket packet, double x, double y, double radius);
+
+    void sendToAllPlayersAroundExcept(IWorld world, IPacket packet, double x, double y, double radius, Entity except);
+
+    void sendToAllPlayersWithLoadedPos(IWorld world, IPacket packet, double x, double y);
+
+    void sendToAllPlayersWithLoadedPosExcept(IWorld world, IPacket packet, double x, double y, Entity except);
+
     @ApiInternal
     void init(String ip, int port, boolean isServer) throws Exception;
 

@@ -125,6 +125,14 @@ public abstract class GuiComponent{
         return this.y;
     }
 
+    public int getWidth(){
+        return this.width;
+    }
+
+    public int getHeight(){
+        return this.height;
+    }
+
     public int getRenderX(){
         if(this.gui != null){
             return this.gui.getX()+this.getX();
