@@ -176,7 +176,7 @@ public class Tile{
             return Collections.singletonList(new ItemInstance(item));
         }
         else{
-            return null;
+            return Collections.EMPTY_LIST;
         }
     }
 
