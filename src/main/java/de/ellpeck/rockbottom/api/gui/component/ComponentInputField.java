@@ -65,6 +65,10 @@ public class ComponentInputField extends GuiComponent{
         return this.isSelected;
     }
 
+    public void setSelected(boolean selected){
+        this.isSelected = selected;
+    }
+
     @Override
     public boolean onKeyboardAction(IGameInstance game, int button, char character){
         if(this.isSelected){
@@ -190,8 +194,9 @@ public class ComponentInputField extends GuiComponent{
                 if(this.selectable){
                     this.isSelected = true;
                 }
-
-                return true;
+            }
+            else{
+                this.isSelected = false;
             }
         }
         return false;
