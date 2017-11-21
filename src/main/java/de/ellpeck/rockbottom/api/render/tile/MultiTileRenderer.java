@@ -59,7 +59,7 @@ public class MultiTileRenderer<T extends MultiTile> extends DefaultTileRenderer<
     @Override
     public void render(IGameInstance game, IAssetManager manager, IGraphics g, IWorld world, T tile, TileState state, int x, int y, TileLayer layer, float renderX, float renderY, float scale, int[] light){
         Pos2 innerCoord = tile.getInnerCoord(state);
-        manager.getTexture(this.textures.get(innerCoord)).draw(renderX, renderY, scale, scale, light);
+        manager.getTexture(this.textures.get(innerCoord)).getPositionalVariation(x, y).draw(renderX, renderY, scale, scale, light);
     }
 
     @Override

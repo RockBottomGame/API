@@ -23,6 +23,8 @@ package de.ellpeck.rockbottom.api.assets;
 
 import com.google.gson.JsonElement;
 
+import java.util.Random;
+
 public interface ITexture extends IAsset{
 
     void draw(float x, float y);
@@ -60,4 +62,8 @@ public interface ITexture extends IAsset{
     ITexture copyAndFlip(boolean flipHor, boolean flipVert);
 
     ITexture getCopy();
+
+    ITexture getVariation(Random random);
+
+    ITexture getPositionalVariation(int x, int y);
 }

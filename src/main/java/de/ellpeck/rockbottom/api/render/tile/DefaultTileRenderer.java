@@ -44,7 +44,7 @@ public class DefaultTileRenderer<T extends Tile> implements ITileRenderer<T>{
 
     @Override
     public void render(IGameInstance game, IAssetManager manager, IGraphics g, IWorld world, T tile, TileState state, int x, int y, TileLayer layer, float renderX, float renderY, float scale, int[] light){
-        manager.getTexture(this.texture).draw(renderX, renderY, scale, scale, light);
+        manager.getTexture(this.texture).getPositionalVariation(x, y).draw(renderX, renderY, scale, scale, light);
     }
 
     @Override
