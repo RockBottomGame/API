@@ -38,13 +38,41 @@ public class Inventory implements IInventory{
         this.slots = new ItemInstance[slotAmount];
     }
 
-    @Override
+    public ItemInstance add(ItemInstance instance, boolean simulate){
+        ItemInstance copy = instance.copy();
+
+        for(int i = 0; i < this.slots.length; i++){
+            copy = this.addToSlot(i, copy, simulate);
+
+            if(copy == null){
+                return null;
+            }
+        }
+
+        return copy;
+    }    @Override
     public void set(int id, ItemInstance instance){
         this.slots[id] = instance;
         this.notifyChange(id);
     }
 
-    @Override
+    public ItemInstance addExistingFirst(ItemInstance instance, boolean simulate){
+        ItemInstance copy = instance.copy();
+
+        for(int i = 0; i < 2; i++){
+            for(int j = 0; j < this.slots.length; j++){
+                if(i == 1 || (this.slots[j] != null && this.slots[j].isEffectivelyEqual(instance))){
+                    copy = this.addToSlot(j, copy, simulate);
+
+                    if(copy == null){
+                        return null;
+                    }
+                }
+            }
+        }
+
+        return copy;
+    }    @Override
     public ItemInstance add(int id, int amount){
         ItemInstance inst = this.slots[id];
         if(inst != null){
@@ -58,7 +86,17 @@ public class Inventory implements IInventory{
         }
     }
 
-    @Override
+    public void save(DataSet set){
+        for(int i = 0; i < this.slots.length; i++){
+            ItemInstance slot = this.slots[i];
+
+            if(slot != null){
+                DataSet subset = new DataSet();
+                slot.save(subset);
+                set.addDataSet("item_"+i, subset);
+            }
+        }
+    }    @Override
     public ItemInstance remove(int id, int amount){
         ItemInstance inst = this.slots[id];
         if(inst != null){
@@ -77,7 +115,17 @@ public class Inventory implements IInventory{
         }
     }
 
-    @Override
+    public void load(DataSet set){
+        for(int i = 0; i < this.slots.length; i++){
+            DataSet subset = set.getDataSet("item_"+i);
+            if(!subset.isEmpty()){
+                this.slots[i] = ItemInstance.load(subset);
+            }
+            else{
+                this.slots[i] = null;
+            }
+        }
+    }    @Override
     public ItemInstance get(int id){
         return this.slots[id];
     }
@@ -111,37 +159,9 @@ public class Inventory implements IInventory{
         RockBottomAPI.logger().config("Removed change callback "+callback+" from inventory "+this);
     }
 
-    public ItemInstance add(ItemInstance instance, boolean simulate){
-        ItemInstance copy = instance.copy();
 
-        for(int i = 0; i < this.slots.length; i++){
-            copy = this.addToSlot(i, copy, simulate);
 
-            if(copy == null){
-                return null;
-            }
-        }
 
-        return copy;
-    }
-
-    public ItemInstance addExistingFirst(ItemInstance instance, boolean simulate){
-        ItemInstance copy = instance.copy();
-
-        for(int i = 0; i < 2; i++){
-            for(int j = 0; j < this.slots.length; j++){
-                if(i == 1 || (this.slots[j] != null && this.slots[j].isEffectivelyEqual(instance))){
-                    copy = this.addToSlot(j, copy, simulate);
-
-                    if(copy == null){
-                        return null;
-                    }
-                }
-            }
-        }
-
-        return copy;
-    }
 
     @Override
     public ItemInstance addToSlot(int slot, ItemInstance instance, boolean simulate){
@@ -176,27 +196,7 @@ public class Inventory implements IInventory{
         return instance;
     }
 
-    public void save(DataSet set){
-        for(int i = 0; i < this.slots.length; i++){
-            ItemInstance slot = this.slots[i];
 
-            if(slot != null){
-                DataSet subset = new DataSet();
-                slot.save(subset);
-                set.addDataSet("item_"+i, subset);
-            }
-        }
-    }
 
-    public void load(DataSet set){
-        for(int i = 0; i < this.slots.length; i++){
-            DataSet subset = set.getDataSet("item_"+i);
-            if(!subset.isEmpty()){
-                this.slots[i] = ItemInstance.load(subset);
-            }
-            else{
-                this.slots[i] = null;
-            }
-        }
-    }
+
 }

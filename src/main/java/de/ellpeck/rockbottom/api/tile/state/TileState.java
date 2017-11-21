@@ -41,6 +41,11 @@ public class TileState{
     private final Table<TileProp, Comparable, TileState> subStates = TreeBasedTable.create();
 
     @ApiInternal
+    public TileState(Tile tile, Map<TileProp, Comparable> properties){
+        this(generateName(tile, properties), tile, properties);
+    }
+
+    @ApiInternal
     private TileState(IResourceName name, Tile tile, Map<TileProp, Comparable> properties){
         this.tile = tile;
         this.properties = properties;
@@ -66,11 +71,6 @@ public class TileState{
                 }
             }
         }
-    }
-
-    @ApiInternal
-    public TileState(Tile tile, Map<TileProp, Comparable> properties){
-        this(generateName(tile, properties), tile, properties);
     }
 
     @ApiInternal
@@ -100,21 +100,6 @@ public class TileState{
         return this.name;
     }
 
-    public <T extends Comparable> TileState prop(TileProp<T> prop, T value){
-        if(value.equals(this.get(prop))){
-            return this;
-        }
-        else{
-            TileState state = this.subStates.get(prop, value);
-            if(state == null){
-                throw new IllegalArgumentException("The tile "+this.tile.getName()+" does not have property "+prop+" with value "+value);
-            }
-            else{
-                return state;
-            }
-        }
-    }
-
     public <T extends Comparable> TileState cycleProp(TileProp<T> prop){
         int index = prop.getIndex(this.get(prop))+1;
         if(index >= prop.getVariants()){
@@ -130,6 +115,21 @@ public class TileState{
         }
         else{
             return (T)value;
+        }
+    }
+
+    public <T extends Comparable> TileState prop(TileProp<T> prop, T value){
+        if(value.equals(this.get(prop))){
+            return this;
+        }
+        else{
+            TileState state = this.subStates.get(prop, value);
+            if(state == null){
+                throw new IllegalArgumentException("The tile "+this.tile.getName()+" does not have property "+prop+" with value "+value);
+            }
+            else{
+                return state;
+            }
         }
     }
 
@@ -151,6 +151,13 @@ public class TileState{
     }
 
     @Override
+    public int hashCode(){
+        int result = this.tile.hashCode();
+        result = 31*result+this.properties.hashCode();
+        return result;
+    }
+
+    @Override
     public boolean equals(Object o){
         if(this == o){
             return true;
@@ -162,13 +169,6 @@ public class TileState{
         else{
             return false;
         }
-    }
-
-    @Override
-    public int hashCode(){
-        int result = this.tile.hashCode();
-        result = 31*result+this.properties.hashCode();
-        return result;
     }
 
     @Override

@@ -51,17 +51,8 @@ public final class Util{
         return (dx*dx)+(dy*dy);
     }
 
-    public static double clamp(double num, double min, double max){
-        return Math.max(min, Math.min(max, num));
-    }
-
     public static int clamp(int num, int min, int max){
         return Math.max(min, Math.min(max, num));
-    }
-
-    public static int floor(double value){
-        int i = (int)value;
-        return value < (double)i ? i-1 : i;
     }
 
     public static int ceil(double value){
@@ -71,6 +62,11 @@ public final class Util{
 
     public static int toGridPos(double worldPos){
         return floor(worldPos/(double)Constants.CHUNK_SIZE);
+    }
+
+    public static int floor(double value){
+        int i = (int)value;
+        return value < (double)i ? i-1 : i;
     }
 
     public static int toWorldPos(int gridPos){
@@ -128,6 +124,14 @@ public final class Util{
         }
     }
 
+    public static long scrambleSeed(int x, int y){
+        return scrambleSeed(x, y, 0L);
+    }
+
+    public static long scrambleSeed(int x, int y, long seed){
+        return shiftScramble(shiftScramble(x)+Long.rotateLeft(shiftScramble(y), 32))+seed;
+    }
+
     public static long shiftScramble(long l){
         l ^= (l << 21);
         l ^= (l >> 35);
@@ -135,16 +139,8 @@ public final class Util{
         return l;
     }
 
-    public static long scrambleSeed(int x, int y){
-        return scrambleSeed(x, y, 0L);
-    }
-
     public static long scrambleSeed(int i){
         return scrambleSeed(i, 0L);
-    }
-
-    public static long scrambleSeed(int x, int y, long seed){
-        return shiftScramble(shiftScramble(x)+Long.rotateLeft(shiftScramble(y), 32))+seed;
     }
 
     public static long scrambleSeed(int i, long seed){
@@ -154,6 +150,10 @@ public final class Util{
     public static double polymax(double a, double b, double div){
         double h = clamp(0.5D+0.5D*(b-a)/div, 0D, 1D);
         return (b*h+a*(1D-h))+div*h*(1D-h);
+    }
+
+    public static double clamp(double num, double min, double max){
+        return Math.max(min, Math.min(max, num));
     }
 
     public static List<Integer> makeIntList(int start, int end){

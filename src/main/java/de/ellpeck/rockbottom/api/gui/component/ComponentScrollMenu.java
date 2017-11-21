@@ -88,6 +88,27 @@ public class ComponentScrollMenu extends ComponentButton{
         g.drawRect(x, renderY, 6F, 10F, getElementOutlineColor());
     }
 
+    @Override
+    public boolean onMouseAction(IGameInstance game, int button, float x, float y){
+        if(this.isMouseOver(game)){
+            if(!this.wasMouseDown){
+                this.wasMouseDown = true;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public IResourceName getName(){
+        return RockBottomAPI.createInternalRes("scroll_bar");
+    }
+
+    @ApiInternal
+    private int getMax(){
+        return (Util.ceil((float)this.contents.size()/(float)this.contentsX))-this.contentsY;
+    }
+
     public void organize(){
         this.number = Util.clamp(this.number, 0, this.getMax());
 
@@ -129,17 +150,6 @@ public class ComponentScrollMenu extends ComponentButton{
     }
 
     @Override
-    public boolean onMouseAction(IGameInstance game, int button, float x, float y){
-        if(this.isMouseOver(game)){
-            if(!this.wasMouseDown){
-                this.wasMouseDown = true;
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
     public void update(IGameInstance game){
         if(this.wasMouseDown){
             if(Settings.KEY_GUI_ACTION_1.isDown()){
@@ -171,15 +181,5 @@ public class ComponentScrollMenu extends ComponentButton{
             this.number = number;
             this.organize();
         }
-    }
-
-    @ApiInternal
-    private int getMax(){
-        return (Util.ceil((float)this.contents.size()/(float)this.contentsX))-this.contentsY;
-    }
-
-    @Override
-    public IResourceName getName(){
-        return RockBottomAPI.createInternalRes("scroll_bar");
     }
 }

@@ -50,64 +50,6 @@ public class TileLayer{
         this.renderPriority = renderPriority;
     }
 
-    public IResourceName getName(){
-        return this.name;
-    }
-
-    public int getRenderPriority(){
-        return this.renderPriority;
-    }
-
-    public boolean canEditLayer(IGameInstance game, AbstractEntityPlayer player){
-        return Settings.KEY_BACKGROUND.isDown() ? this == BACKGROUND : this == MAIN;
-    }
-
-    public float getRenderLightModifier(){
-        return this == BACKGROUND ? 0.5F : 1F;
-    }
-
-    public boolean forceForegroundRender(){
-        return false;
-    }
-
-    public TileLayer register(){
-        RockBottomAPI.TILE_LAYER_REGISTRY.register(this.getName(), this);
-        return this;
-    }
-
-    @Override
-    public boolean equals(Object o){
-        if(this == o){
-            return true;
-        }
-        else if(o instanceof TileLayer){
-            TileLayer tileLayer = (TileLayer)o;
-            return this.name.equals(tileLayer.name);
-        }
-        else{
-            return false;
-        }
-    }
-
-    @Override
-    public int hashCode(){
-        return this.name.hashCode();
-    }
-
-    @Override
-    public String toString(){
-        return this.getName().toString();
-    }
-
-    public int index(){
-        if(this.assignedIndex >= 0){
-            return this.assignedIndex;
-        }
-        else{
-            throw new RuntimeException("Cannot access layer index before layer list has been initialized!");
-        }
-    }
-
     @ApiInternal
     public static void initLayerList(){
         if(allLayers == null){
@@ -133,6 +75,64 @@ public class TileLayer{
         }
         else{
             throw new RuntimeException("Cannot access layer list before it has been initialized!");
+        }
+    }
+
+    public int getRenderPriority(){
+        return this.renderPriority;
+    }
+
+    public boolean canEditLayer(IGameInstance game, AbstractEntityPlayer player){
+        return Settings.KEY_BACKGROUND.isDown() ? this == BACKGROUND : this == MAIN;
+    }
+
+    public float getRenderLightModifier(){
+        return this == BACKGROUND ? 0.5F : 1F;
+    }
+
+    public boolean forceForegroundRender(){
+        return false;
+    }
+
+    public TileLayer register(){
+        RockBottomAPI.TILE_LAYER_REGISTRY.register(this.getName(), this);
+        return this;
+    }
+
+    public IResourceName getName(){
+        return this.name;
+    }
+
+    @Override
+    public int hashCode(){
+        return this.name.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object o){
+        if(this == o){
+            return true;
+        }
+        else if(o instanceof TileLayer){
+            TileLayer tileLayer = (TileLayer)o;
+            return this.name.equals(tileLayer.name);
+        }
+        else{
+            return false;
+        }
+    }
+
+    @Override
+    public String toString(){
+        return this.getName().toString();
+    }
+
+    public int index(){
+        if(this.assignedIndex >= 0){
+            return this.assignedIndex;
+        }
+        else{
+            throw new RuntimeException("Cannot access layer index before layer list has been initialized!");
         }
     }
 }

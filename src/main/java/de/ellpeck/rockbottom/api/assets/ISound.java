@@ -21,8 +21,6 @@
 
 package de.ellpeck.rockbottom.api.assets;
 
-import de.ellpeck.rockbottom.api.assets.IAsset;
-
 public interface ISound extends IAsset{
 
     void play();

@@ -53,8 +53,8 @@ import java.util.*;
 
 public class Tile{
 
-    private static final IResourceName SOUND_GENERIC_TILE = RockBottomAPI.createInternalRes("tiles.generic_tile");
     public static final BoundBox DEFAULT_BOUNDS = new BoundBox(0, 0, 1, 1);
+    private static final IResourceName SOUND_GENERIC_TILE = RockBottomAPI.createInternalRes("tiles.generic_tile");
     private static final IResourceName LOC_ADVANCED = RockBottomAPI.createInternalRes("info.advanced_info");
     private static final IResourceName LOC_LAYER = RockBottomAPI.createInternalRes("info.layer_placement");
 
@@ -73,10 +73,6 @@ public class Tile{
         return null;
     }
 
-    public BoundBox getBoundBox(IWorld world, int x, int y){
-        return DEFAULT_BOUNDS;
-    }
-
     public List<BoundBox> getBoundBoxes(IWorld world, int x, int y, MovableWorldObject object, BoundBox objectBox, BoundBox objectBoxMotion){
         BoundBox box = this.getBoundBox(world, x, y);
 
@@ -88,16 +84,16 @@ public class Tile{
         }
     }
 
+    public BoundBox getBoundBox(IWorld world, int x, int y){
+        return DEFAULT_BOUNDS;
+    }
+
     public boolean canBreak(IWorld world, int x, int y, TileLayer layer){
         return true;
     }
 
     public boolean canPlace(IWorld world, int x, int y, TileLayer layer){
         return true;
-    }
-
-    public boolean canPlaceInLayer(TileLayer layer){
-        return layer == TileLayer.MAIN || layer == TileLayer.BACKGROUND;
     }
 
     public Tile register(){
@@ -112,26 +108,21 @@ public class Tile{
         return this;
     }
 
-    public Tile addResource(String name){
-        ResourceRegistry.addResources(name, new ResInfo(this));
-        return this;
-    }
-
-    protected ItemTile createItemTile(){
-        return new ItemTile(this.getName());
+    public IResourceName getName(){
+        return this.name;
     }
 
     protected boolean hasItem(){
         return true;
     }
 
-    public Item getItem(){
-        if(this.hasItem()){
-            return RockBottomAPI.ITEM_REGISTRY.get(this.getName());
-        }
-        else{
-            return null;
-        }
+    protected ItemTile createItemTile(){
+        return new ItemTile(this.getName());
+    }
+
+    public Tile addResource(String name){
+        ResourceRegistry.addResources(name, new ResInfo(this));
+        return this;
     }
 
     public void onRemoved(IWorld world, int x, int y, TileLayer layer){
@@ -180,6 +171,15 @@ public class Tile{
         }
     }
 
+    public Item getItem(){
+        if(this.hasItem()){
+            return RockBottomAPI.ITEM_REGISTRY.get(this.getName());
+        }
+        else{
+            return null;
+        }
+    }
+
     public TileEntity provideTileEntity(IWorld world, int x, int y, TileLayer layer){
         return null;
     }
@@ -198,12 +198,12 @@ public class Tile{
         return true;
     }
 
-    public boolean isFullTile(){
-        return true;
-    }
-
     public boolean obscuresBackground(){
         return this.isFullTile();
+    }
+
+    public boolean isFullTile(){
+        return true;
     }
 
     public void updateRandomly(IWorld world, int x, int y, TileLayer layer){
@@ -228,6 +228,10 @@ public class Tile{
 
     public TileState getPlacementState(IWorld world, int x, int y, TileLayer layer, ItemInstance instance, AbstractEntityPlayer placer){
         return this.getDefState();
+    }
+
+    public TileState getDefState(){
+        return this.stateHandler.getDefault();
     }
 
     public float getHardness(IWorld world, int x, int y, TileLayer layer){
@@ -275,10 +279,6 @@ public class Tile{
         return false;
     }
 
-    public IResourceName getName(){
-        return this.name;
-    }
-
     @Override
     public String toString(){
         return this.getName().toString();
@@ -286,6 +286,15 @@ public class Tile{
 
     public void onScheduledUpdate(IWorld world, int x, int y, TileLayer layer, int scheduledMeta){
         this.onScheduledUpdate(world, x, y, layer);
+    }
+
+    /**
+     * @deprecated use {@link #onScheduledUpdate(IWorld, int, int, TileLayer,
+     * int)} instead
+     */
+    @Deprecated
+    public void onScheduledUpdate(IWorld world, int x, int y, TileLayer layer){
+
     }
 
     public boolean canClimb(IWorld world, int x, int y, TileLayer layer, TileState state, BoundBox entityBox, BoundBox entityBoxMotion, List<BoundBox> tileBoxes, Entity entity){
@@ -310,16 +319,16 @@ public class Tile{
         }
     }
 
+    public boolean canPlaceInLayer(TileLayer layer){
+        return layer == TileLayer.MAIN || layer == TileLayer.BACKGROUND;
+    }
+
     public boolean canGrassSpreadTo(IWorld world, int x, int y, TileLayer layer){
         return false;
     }
 
     public boolean canKeepPlants(IWorld world, int x, int y, TileLayer layer){
         return false;
-    }
-
-    public TileState getDefState(){
-        return this.stateHandler.getDefault();
     }
 
     public Tile addProps(TileProp... props){
@@ -347,13 +356,5 @@ public class Tile{
 
     public boolean shouldShowBreakAnimation(IWorld world, int x, int y, TileLayer layer){
         return true;
-    }
-
-    /**
-     * @deprecated use {@link #onScheduledUpdate(IWorld, int, int, TileLayer, int)} instead
-     */
-    @Deprecated
-    public void onScheduledUpdate(IWorld world, int x, int y, TileLayer layer){
-
     }
 }

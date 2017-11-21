@@ -45,13 +45,13 @@ public class ComponentFancyToggleButton extends ComponentFancyButton{
     }
 
     @Override
-    public boolean onPressed(IGameInstance game){
-        this.isToggled = !this.isToggled;
-        return false;
+    public IResourceName getName(){
+        return RockBottomAPI.createInternalRes("fancy_toggle_button");
     }
 
     @Override
-    public IResourceName getName(){
-        return RockBottomAPI.createInternalRes("fancy_toggle_button");
+    public boolean onPressed(IGameInstance game){
+        this.isToggled = !this.isToggled;
+        return false;
     }
 }

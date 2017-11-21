@@ -50,6 +50,11 @@ public class ItemMeta extends ItemBasic{
     }
 
     @Override
+    public int getHighestPossibleMeta(){
+        return Math.max(this.subUnlocNames.size(), this.subResourceNames.size())-1;
+    }
+
+    @Override
     public IResourceName getUnlocalizedName(ItemInstance instance){
         int meta = instance.getMeta();
 
@@ -59,10 +64,5 @@ public class ItemMeta extends ItemBasic{
         else{
             return super.getUnlocalizedName(instance);
         }
-    }
-
-    @Override
-    public int getHighestPossibleMeta(){
-        return Math.max(this.subUnlocNames.size(), this.subResourceNames.size())-1;
     }
 }

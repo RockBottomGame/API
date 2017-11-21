@@ -55,6 +55,24 @@ public class TileEntity{
         }
     }
 
+    protected int getSyncInterval(){
+        return 10;
+    }
+
+    protected boolean needsSync(){
+        return false;
+    }
+
+    public void sendToClients(){
+        if(this.world.isServer()){
+            RockBottomAPI.getNet().sendToAllPlayersWithLoadedPos(this.world, new PacketTileEntityData(this.x, this.y, this.layer, this), this.x, this.y);
+        }
+    }
+
+    protected void onSync(){
+
+    }
+
     public boolean shouldRemove(){
         return false;
     }
@@ -65,24 +83,6 @@ public class TileEntity{
 
     public void load(DataSet set, boolean forSync){
 
-    }
-
-    protected boolean needsSync(){
-        return false;
-    }
-
-    protected void onSync(){
-
-    }
-
-    protected int getSyncInterval(){
-        return 10;
-    }
-
-    public void sendToClients(){
-        if(this.world.isServer()){
-            RockBottomAPI.getNet().sendToAllPlayersWithLoadedPos(this.world, new PacketTileEntityData(this.x, this.y, this.layer, this), this.x, this.y);
-        }
     }
 
     public boolean doesSave(){

@@ -31,8 +31,8 @@ import de.ellpeck.rockbottom.api.data.settings.Settings;
 import de.ellpeck.rockbottom.api.entity.Entity;
 import de.ellpeck.rockbottom.api.entity.player.knowledge.Information;
 import de.ellpeck.rockbottom.api.event.IEventHandler;
-import de.ellpeck.rockbottom.api.gui.ISpecialCursor;
 import de.ellpeck.rockbottom.api.gui.IMainMenuTheme;
+import de.ellpeck.rockbottom.api.gui.ISpecialCursor;
 import de.ellpeck.rockbottom.api.item.Item;
 import de.ellpeck.rockbottom.api.mod.IMod;
 import de.ellpeck.rockbottom.api.mod.IModLoader;
@@ -192,9 +192,9 @@ public final class RockBottomAPI{
     @ApiInternal
     public static final NameRegistry<IAssetLoader> ASSET_LOADER_REGISTRY = new NameRegistry<>("asset_loader_registry");
     /**
-     * The list of all {@link ISpecialCursor} instance. Adding cursors into this list
-     * will allow them to be displayed in place of the regular cursor when their
-     * condition is met.
+     * The list of all {@link ISpecialCursor} instance. Adding cursors into this
+     * list will allow them to be displayed in place of the regular cursor when
+     * their condition is met.
      */
     public static final List<ISpecialCursor> SPECIAL_CURSORS = new ArrayList<>();
 
@@ -204,17 +204,6 @@ public final class RockBottomAPI{
      */
     @ApiInternal
     private static Internals internals;
-
-    /**
-     * Returns the {@link IApiHandler} object initialized by the game on
-     * startup. The API handler contains a set of useful helper methods that can
-     * be used to do various things.
-     *
-     * @return The API handler
-     */
-    public static IApiHandler getApiHandler(){
-        return internals.getApi();
-    }
 
     /**
      * Returns the {@link INetHandler} object initialized by the game on
@@ -236,29 +225,6 @@ public final class RockBottomAPI{
      */
     public static IEventHandler getEventHandler(){
         return internals.getEvent();
-    }
-
-    /**
-     * Returns the {@link IGameInstance} object initialized as the game on
-     * startup. This is also an instance of the {@link IMod} that the game
-     * represents. The game instance contains references to the player, the
-     * asset manager, the graphics context and various other things.
-     *
-     * @return The game instance
-     */
-    public static IGameInstance getGame(){
-        return internals.getGame();
-    }
-
-    /**
-     * Returns the {@link IModLoader} object initialized by the game on startup.
-     * The mod loader contains a set of methods to deal with mod interaction and
-     * loading and finding mods.
-     *
-     * @return The mod loader
-     */
-    public static IModLoader getModLoader(){
-        return internals.getMod();
     }
 
     /**
@@ -289,6 +255,29 @@ public final class RockBottomAPI{
     }
 
     /**
+     * Returns the {@link IGameInstance} object initialized as the game on
+     * startup. This is also an instance of the {@link IMod} that the game
+     * represents. The game instance contains references to the player, the
+     * asset manager, the graphics context and various other things.
+     *
+     * @return The game instance
+     */
+    public static IGameInstance getGame(){
+        return internals.getGame();
+    }
+
+    /**
+     * Returns the {@link IModLoader} object initialized by the game on startup.
+     * The mod loader contains a set of methods to deal with mod interaction and
+     * loading and finding mods.
+     *
+     * @return The mod loader
+     */
+    public static IModLoader getModLoader(){
+        return internals.getMod();
+    }
+
+    /**
      * Convenience call to {@link IModLoader#createResourceName(String)} that
      * creates an {@link IResourceName} from a combined string.
      *
@@ -311,6 +300,17 @@ public final class RockBottomAPI{
      */
     public static Logger createLogger(String name){
         return getApiHandler().createLogger(name);
+    }
+
+    /**
+     * Returns the {@link IApiHandler} object initialized by the game on
+     * startup. The API handler contains a set of useful helper methods that can
+     * be used to do various things.
+     *
+     * @return The API handler
+     */
+    public static IApiHandler getApiHandler(){
+        return internals.getApi();
     }
 
     /**

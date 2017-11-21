@@ -1,5 +1,5 @@
 /*
- * This file ("AssetLoader.java") is part of the RockBottomAPI by Ellpeck.
+ * This file ("IAssetLoader.java") is part of the RockBottomAPI by Ellpeck.
  * View the source code at <https://github.com/RockBottomGame/>.
  * View information on the project at <https://rockbottom.ellpeck.de/>.
  *

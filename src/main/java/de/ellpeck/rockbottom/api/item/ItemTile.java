@@ -44,15 +44,15 @@ public class ItemTile extends ItemBasic{
         return new ItemTileRenderer();
     }
 
-    public Tile getTile(){
-        return RockBottomAPI.TILE_REGISTRY.get(this.getName());
-    }
-
     @Override
     public void describeItem(IAssetManager manager, ItemInstance instance, List<String> desc, boolean isAdvanced){
         super.describeItem(manager, instance, desc, isAdvanced);
 
         this.getTile().describeItem(manager, instance, desc, isAdvanced);
+    }
+
+    public Tile getTile(){
+        return RockBottomAPI.TILE_REGISTRY.get(this.getName());
     }
 
     @Override

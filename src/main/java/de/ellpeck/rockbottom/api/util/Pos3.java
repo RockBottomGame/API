@@ -35,6 +35,14 @@ public class Pos3{
         this.set(x, y, z);
     }
 
+    public Pos3 set(int x, int y, int z){
+        this.x = x;
+        this.y = y;
+        this.z = z;
+
+        return this;
+    }
+
     public int getX(){
         return this.x;
     }
@@ -47,12 +55,12 @@ public class Pos3{
         return this.z;
     }
 
-    public Pos3 set(int x, int y, int z){
-        this.x = x;
-        this.y = y;
-        this.z = z;
-
-        return this;
+    @Override
+    public int hashCode(){
+        int result = this.x;
+        result = 31*result+this.y;
+        result = 31*result+this.z;
+        return result;
     }
 
     @Override
@@ -66,14 +74,6 @@ public class Pos3{
 
         Pos3 pos3 = (Pos3)o;
         return this.x == pos3.x && this.y == pos3.y && this.z == pos3.z;
-    }
-
-    @Override
-    public int hashCode(){
-        int result = this.x;
-        result = 31*result+this.y;
-        result = 31*result+this.z;
-        return result;
     }
 
     @Override

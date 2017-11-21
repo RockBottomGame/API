@@ -35,43 +35,43 @@ public class Internals{
     private INetHandler net;
     private IModLoader mod;
 
-    public void setGame(IGameInstance game){
-        this.game = game;
-    }
-
-    public void setApi(IApiHandler api){
-        this.api = api;
-    }
-
-    public void setEvent(IEventHandler event){
-        this.event = event;
-    }
-
-    public void setNet(INetHandler net){
-        this.net = net;
-    }
-
-    public void setMod(IModLoader mod){
-        this.mod = mod;
-    }
-
     public IGameInstance getGame(){
         return this.game;
+    }
+
+    public void setGame(IGameInstance game){
+        this.game = game;
     }
 
     public IApiHandler getApi(){
         return this.api;
     }
 
+    public void setApi(IApiHandler api){
+        this.api = api;
+    }
+
     public IEventHandler getEvent(){
         return this.event;
+    }
+
+    public void setEvent(IEventHandler event){
+        this.event = event;
     }
 
     public INetHandler getNet(){
         return this.net;
     }
 
+    public void setNet(INetHandler net){
+        this.net = net;
+    }
+
     public IModLoader getMod(){
         return this.mod;
+    }
+
+    public void setMod(IModLoader mod){
+        this.mod = mod;
     }
 }

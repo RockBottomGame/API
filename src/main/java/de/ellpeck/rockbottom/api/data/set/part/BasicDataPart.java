@@ -25,13 +25,13 @@ public abstract class BasicDataPart<T> extends DataPart<T>{
 
     protected T data;
 
-    public BasicDataPart(String name){
-        super(name);
-    }
-
     public BasicDataPart(String name, T data){
         this(name);
         this.data = data;
+    }
+
+    public BasicDataPart(String name){
+        super(name);
     }
 
     @Override

@@ -58,6 +58,17 @@ public abstract class GuiContainer extends Gui{
     }
 
     @Override
+    public void init(IGameInstance game){
+        super.init(game);
+
+        ItemContainer container = this.player.getContainer();
+        for(int i = 0; i < container.getSlotAmount(); i++){
+            ContainerSlot slot = container.getSlot(i);
+            this.components.add(new ComponentSlot(this, slot, i, slot.x, slot.y));
+        }
+    }
+
+    @Override
     public boolean onMouseAction(IGameInstance game, int button, float x, float y){
         if(super.onMouseAction(game, button, x, y)){
             return true;
@@ -81,17 +92,6 @@ public abstract class GuiContainer extends Gui{
     }
 
     @Override
-    public void init(IGameInstance game){
-        super.init(game);
-
-        ItemContainer container = this.player.getContainer();
-        for(int i = 0; i < container.getSlotAmount(); i++){
-            ContainerSlot slot = container.getSlot(i);
-            this.components.add(new ComponentSlot(this, slot, i, slot.x, slot.y));
-        }
-    }
-
-    @Override
     public void render(IGameInstance game, IAssetManager manager, IGraphics g){
         super.render(game, manager, g);
 
@@ -103,6 +103,11 @@ public abstract class GuiContainer extends Gui{
         }
     }
 
+    @Override
+    public boolean doesPauseGame(){
+        return false;
+    }
+
     @ApiInternal
     private void dropHeldItem(){
         if(RockBottomAPI.getNet().isClient()){
@@ -111,10 +116,5 @@ public abstract class GuiContainer extends Gui{
         else{
             EntityItem.spawn(this.player.world, this.holdingInst, this.player.x, this.player.y+1, this.player.facing.x*0.25, 0);
         }
-    }
-
-    @Override
-    public boolean doesPauseGame(){
-        return false;
     }
 }

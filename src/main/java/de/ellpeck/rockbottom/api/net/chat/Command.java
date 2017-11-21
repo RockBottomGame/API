@@ -44,10 +44,6 @@ public abstract class Command{
         this.triggers = triggers;
     }
 
-    public IResourceName getName(){
-        return this.name;
-    }
-
     public String getDescription(){
         return this.description;
     }
@@ -63,6 +59,10 @@ public abstract class Command{
     public Command register(){
         RockBottomAPI.COMMAND_REGISTRY.register(this.getName(), this);
         return this;
+    }
+
+    public IResourceName getName(){
+        return this.name;
     }
 
     public abstract ChatComponent execute(String[] args, ICommandSender sender, String playerName, IGameInstance game, IChatLog chat);

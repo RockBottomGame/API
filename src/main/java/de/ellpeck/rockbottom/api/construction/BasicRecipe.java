@@ -38,14 +38,14 @@ public class BasicRecipe implements IRecipe{
     private final List<IUseInfo> inputs;
     private final List<ItemInstance> outputs;
 
+    public BasicRecipe(ItemInstance output, IUseInfo... inputs){
+        this(output.getItem().getName(), output, inputs);
+    }
+
     public BasicRecipe(IResourceName name, ItemInstance output, IUseInfo... inputs){
         this.name = name;
         this.inputs = Arrays.asList(inputs);
         this.outputs = Collections.singletonList(output);
-    }
-
-    public BasicRecipe(ItemInstance output, IUseInfo... inputs){
-        this(output.getItem().getName(), output, inputs);
     }
 
     @Override
@@ -78,13 +78,13 @@ public class BasicRecipe implements IRecipe{
         return this.name;
     }
 
+    public BasicRecipe registerManual(){
+        return this.register(RockBottomAPI.MANUAL_CONSTRUCTION_RECIPES);
+    }
+
     public BasicRecipe register(NameRegistry<BasicRecipe> registry){
         RockBottomAPI.ALL_CONSTRUCTION_RECIPES.register(this.getName(), this);
         registry.register(this.getName(), this);
         return this;
-    }
-
-    public BasicRecipe registerManual(){
-        return this.register(RockBottomAPI.MANUAL_CONSTRUCTION_RECIPES);
     }
 }

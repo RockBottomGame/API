@@ -66,10 +66,6 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
         this.uniqueId = UUID.randomUUID();
     }
 
-    public UUID getUniqueId(){
-        return this.uniqueId;
-    }
-
     public IEntityRenderer getRenderer(){
         return null;
     }
@@ -95,20 +91,12 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
         this.motionY *= this.isClimbing ? 0.5 : 0.98;
     }
 
-    public boolean isDead(){
-        return this.dead;
-    }
-
     public boolean shouldBeRemoved(){
         return this.isDead();
     }
 
-    public void onRemoveFromWorld(){
-
-    }
-
-    public boolean shouldRender(){
-        return !this.isDead();
+    public boolean isDead(){
+        return this.dead;
     }
 
     public void setDead(boolean dead){
@@ -121,8 +109,20 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
         }
     }
 
+    public void onRemoveFromWorld(){
+
+    }
+
+    public boolean shouldRender(){
+        return !this.isDead();
+    }
+
     public void kill(){
         this.setDead(true);
+    }
+
+    public UUID getUniqueId(){
+        return this.uniqueId;
     }
 
     public int getRenderPriority(){
@@ -131,11 +131,6 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
 
     public void onGroundHit(double fallDistance){
 
-    }
-
-    @Override
-    public BoundBox getBoundingBox(){
-        return this.boundingBox;
     }
 
     public void moveToChunk(IChunk chunk){
@@ -203,19 +198,7 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
         return true;
     }
 
-    public void onCollideWithTile(int x, int y, TileLayer layer, TileState state, BoundBox entityBox, BoundBox entityBoxMotion, List<BoundBox> tileBoxes){
-
-    }
-
-    public void onCollideWithEntity(Entity otherEntity, BoundBox thisBox, BoundBox thisBoxMotion, BoundBox otherBox, BoundBox otherBoxMotion){
-
-    }
-
     public boolean onInteractWith(AbstractEntityPlayer player, double mouseX, double mouseY){
-        return false;
-    }
-
-    public boolean shouldStartClimbing(int x, int y, TileLayer layer, TileState state, BoundBox entityBox, BoundBox entityBoxMotion, List<BoundBox> tileBoxes){
         return false;
     }
 
@@ -237,10 +220,27 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
         this.onCollideWithTile(x, y, layer, state, objBox, objBoxMotion, boxes);
     }
 
+    public boolean shouldStartClimbing(int x, int y, TileLayer layer, TileState state, BoundBox entityBox, BoundBox entityBoxMotion, List<BoundBox> tileBoxes){
+        return false;
+    }
+
+    public void onCollideWithTile(int x, int y, TileLayer layer, TileState state, BoundBox entityBox, BoundBox entityBoxMotion, List<BoundBox> tileBoxes){
+
+    }
+
     @Override
     public final void onEntityCollision(Entity entity, BoundBox thisBox, BoundBox thisBoxMotion, BoundBox otherBox, BoundBox otherBoxMotion){
         this.onCollideWithEntity(entity, thisBox, thisBoxMotion, otherBox, otherBoxMotion);
         entity.onCollideWithEntity(this, otherBox, otherBoxMotion, thisBox, thisBoxMotion);
+    }
+
+    @Override
+    public BoundBox getBoundingBox(){
+        return this.boundingBox;
+    }
+
+    public void onCollideWithEntity(Entity otherEntity, BoundBox thisBox, BoundBox thisBoxMotion, BoundBox otherBox, BoundBox otherBoxMotion){
+
     }
 
     public boolean canCollideWith(MovableWorldObject object, BoundBox entityBox, BoundBox entityBoxMotion){

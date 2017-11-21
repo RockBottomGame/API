@@ -51,11 +51,6 @@ public class ComponentSlider extends ComponentButton{
     }
 
     @Override
-    protected String getText(){
-        return super.getText()+": "+this.number;
-    }
-
-    @Override
     public void render(IGameInstance game, IAssetManager manager, IGraphics g, int x, int y){
         super.render(game, manager, g, x, y);
 
@@ -64,6 +59,11 @@ public class ComponentSlider extends ComponentButton{
 
         g.fillRect(renderX, y, 5F, this.height, this.isMouseOverPrioritized(game) ? getElementColor() : getUnselectedElementColor());
         g.drawRect(renderX, y, 5F, this.height, getElementOutlineColor());
+    }
+
+    @Override
+    protected String getText(){
+        return super.getText()+": "+this.number;
     }
 
     @Override
@@ -77,6 +77,11 @@ public class ComponentSlider extends ComponentButton{
             }
         }
         return false;
+    }
+
+    @Override
+    public IResourceName getName(){
+        return RockBottomAPI.createInternalRes("slider");
     }
 
     @Override
@@ -104,10 +109,5 @@ public class ComponentSlider extends ComponentButton{
             this.number = number;
             this.consumer.accept(this.number, false);
         }
-    }
-
-    @Override
-    public IResourceName getName(){
-        return RockBottomAPI.createInternalRes("slider");
     }
 }

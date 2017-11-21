@@ -39,14 +39,14 @@ public class EntityItem extends Entity{
 
     private int pickupDelay = 10;
 
-    public EntityItem(IWorld world){
-        super(world);
-        this.renderer = new ItemEntityRenderer();
-    }
-
     public EntityItem(IWorld world, ItemInstance item){
         this(world);
         this.item = item;
+    }
+
+    public EntityItem(IWorld world){
+        super(world);
+        this.renderer = new ItemEntityRenderer();
     }
 
     public static void spawn(IWorld world, ItemInstance inst, double x, double y, double motionX, double motionY){
@@ -88,25 +88,16 @@ public class EntityItem extends Entity{
     }
 
     @Override
-    public int getRenderPriority(){
-        return 1;
-    }
-
-    public boolean canPickUp(){
-        return this.pickupDelay <= 0;
-    }
-
-    @Override
-    public BoundBox getBoundingBox(){
-        return this.boundingBox;
-    }
-
-    @Override
     public void applyMotion(){
         this.motionY -= 0.015;
 
         this.motionX *= this.onGround ? 0.8 : 0.98;
         this.motionY *= 0.98;
+    }
+
+    @Override
+    public int getRenderPriority(){
+        return 1;
     }
 
     @Override
@@ -127,5 +118,14 @@ public class EntityItem extends Entity{
         DataSet itemSet = set.getDataSet("item");
         this.item = ItemInstance.load(itemSet);
         this.pickupDelay = set.getInt("pickup_delay");
+    }
+
+    @Override
+    public BoundBox getBoundingBox(){
+        return this.boundingBox;
+    }
+
+    public boolean canPickUp(){
+        return this.pickupDelay <= 0;
     }
 }

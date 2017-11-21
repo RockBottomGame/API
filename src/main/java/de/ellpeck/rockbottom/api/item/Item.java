@@ -57,6 +57,10 @@ public class Item{
         return this;
     }
 
+    public IResourceName getName(){
+        return this.name;
+    }
+
     public Item addResource(String name){
         for(int i = 0; i <= this.getHighestPossibleMeta(); i++){
             ResourceRegistry.addResources(name, new ResInfo(this, i));
@@ -64,20 +68,20 @@ public class Item{
         return this;
     }
 
+    public int getHighestPossibleMeta(){
+        return 0;
+    }
+
     public int getMaxAmount(){
         return this.maxAmount;
     }
 
-    public IResourceName getName(){
-        return this.name;
+    public String getLocalizedName(ItemInstance instance){
+        return RockBottomAPI.getGame().getAssetManager().localize(this.getUnlocalizedName(instance));
     }
 
     public IResourceName getUnlocalizedName(ItemInstance instance){
         return this.unlocName;
-    }
-
-    public String getLocalizedName(ItemInstance instance){
-        return RockBottomAPI.getGame().getAssetManager().localize(this.getUnlocalizedName(instance));
     }
 
     public void describeItem(IAssetManager manager, ItemInstance instance, List<String> desc, boolean isAdvanced){
@@ -107,10 +111,6 @@ public class Item{
 
     public float getMiningSpeed(IWorld world, int x, int y, TileLayer layer, Tile tile, boolean isRightTool){
         return 1F;
-    }
-
-    public int getHighestPossibleMeta(){
-        return 0;
     }
 
     public double getMaxInteractionDistance(IWorld world, int x, int y, TileLayer layer, double mouseX, double mouseY, AbstractEntityPlayer player){

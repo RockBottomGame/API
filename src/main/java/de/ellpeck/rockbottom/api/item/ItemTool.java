@@ -44,14 +44,14 @@ public class ItemTool extends ItemBasic{
         this.maxAmount = 1;
     }
 
-    @Override
-    protected IItemRenderer createRenderer(IResourceName name){
-        return new ItemToolRenderer(name);
-    }
-
     public ItemTool addToolType(ToolType type, int level){
         this.toolTypes.put(type, level);
         return this;
+    }
+
+    @Override
+    protected IItemRenderer createRenderer(IResourceName name){
+        return new ItemToolRenderer(name);
     }
 
     @Override

@@ -44,37 +44,8 @@ public class ComponentFormatSelector extends ComponentButton{
         this.inputField = inputField;
     }
 
-    public void openMenu(){
-        int width = 86;
-        int height = 58;
-
-        this.menu = new ComponentSelectorMenu(this.gui, this.x+this.width/2-width/2, this.y-height-2, width, height, this.inputField);
-        this.gui.getComponents().add(this.menu);
-
-        this.gui.sortComponents();
-    }
-
-    public void closeMenu(){
-        this.gui.getComponents().remove(this.menu);
-        this.menu.onRemoved();
-        this.menu = null;
-
-        this.gui.sortComponents();
-    }
-
     public boolean isMenuOpen(){
         return this.menu != null;
-    }
-
-    @Override
-    public boolean onKeyboardAction(IGameInstance game, int button, char character){
-        if(this.menu != null){
-            if(Settings.KEY_MENU.isKey(button)){
-                this.closeMenu();
-                return true;
-            }
-        }
-        return false;
     }
 
     @Override
@@ -95,16 +66,36 @@ public class ComponentFormatSelector extends ComponentButton{
         else{
             return false;
         }
+    }    public void closeMenu(){
+        this.gui.getComponents().remove(this.menu);
+        this.menu.onRemoved();
+        this.menu = null;
+
+        this.gui.sortComponents();
+    }
+
+    public void openMenu(){
+        int width = 86;
+        int height = 58;
+
+        this.menu = new ComponentSelectorMenu(this.gui, this.x+this.width/2-width/2, this.y-height-2, width, height, this.inputField);
+        this.gui.getComponents().add(this.menu);
+
+        this.gui.sortComponents();
     }
 
     @Override
     public IResourceName getName(){
         return RockBottomAPI.createInternalRes("format_selector_button");
-    }
-
-    @Override
-    public int getPriority(){
-        return this.menu != null ? 1000 : super.getPriority();
+    }    @Override
+    public boolean onKeyboardAction(IGameInstance game, int button, char character){
+        if(this.menu != null){
+            if(Settings.KEY_MENU.isKey(button)){
+                this.closeMenu();
+                return true;
+            }
+        }
+        return false;
     }
 
     private static class ComponentSelectorMenu extends GuiComponent{
@@ -149,14 +140,23 @@ public class ComponentFormatSelector extends ComponentButton{
         }
 
         @Override
+        public void render(IGameInstance game, IAssetManager manager, IGraphics g, int x, int y){
+            g.fillRect(x, y, this.width, this.height, Colors.setA(Colors.BLACK, 0.65F));
+            g.drawRect(x, y, this.width, this.height, Colors.BLACK);
+        }        @Override
         public IResourceName getName(){
             return RockBottomAPI.createInternalRes("format_selector_menu");
         }
 
-        @Override
-        public void render(IGameInstance game, IAssetManager manager, IGraphics g, int x, int y){
-            g.fillRect(x, y, this.width, this.height, Colors.setA(Colors.BLACK, 0.65F));
-            g.drawRect(x, y, this.width, this.height, Colors.BLACK);
-        }
+
     }
+
+
+
+    @Override
+    public int getPriority(){
+        return this.menu != null ? 1000 : super.getPriority();
+    }
+
+
 }

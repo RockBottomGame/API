@@ -78,6 +78,13 @@ public class ResUseInfo implements IUseInfo{
     }
 
     @Override
+    public int hashCode(){
+        int result = this.name.hashCode();
+        result = 31*result+this.amount;
+        return result;
+    }
+
+    @Override
     public boolean equals(Object o){
         if(this == o){
             return true;
@@ -89,13 +96,6 @@ public class ResUseInfo implements IUseInfo{
         else{
             return false;
         }
-    }
-
-    @Override
-    public int hashCode(){
-        int result = this.name.hashCode();
-        result = 31*result+this.amount;
-        return result;
     }
 
     @Override

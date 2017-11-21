@@ -38,13 +38,12 @@ public class DataSet{
 
     public final Map<String, DataPart> data = new HashMap<>();
 
-    @ApiInternal
-    public void addPart(DataPart part){
-        this.data.put(part.getName(), part);
-    }
-
     public boolean hasKey(String key){
         return this.data.containsKey(key);
+    }
+
+    public int getInt(String key){
+        return this.getPartContent(key, PartInt.class, 0);
     }
 
     @ApiInternal
@@ -61,12 +60,13 @@ public class DataSet{
         return defaultValue;
     }
 
-    public int getInt(String key){
-        return this.getPartContent(key, PartInt.class, 0);
-    }
-
     public void addInt(String key, int i){
         this.addPart(new PartInt(key, i));
+    }
+
+    @ApiInternal
+    public void addPart(DataPart part){
+        this.data.put(part.getName(), part);
     }
 
     public long getLong(String key){
@@ -173,11 +173,6 @@ public class DataSet{
         RockBottomAPI.getApiHandler().readDataSet(this, file);
     }
 
-    @Override
-    public String toString(){
-        return this.data.toString();
-    }
-
     @ApiInternal
     public Map<String, DataPart> getData(){
         return this.data;
@@ -185,6 +180,11 @@ public class DataSet{
 
     public boolean isEmpty(){
         return this.data.isEmpty();
+    }
+
+    @Override
+    public int hashCode(){
+        return this.data.hashCode();
     }
 
     @Override
@@ -201,8 +201,8 @@ public class DataSet{
     }
 
     @Override
-    public int hashCode(){
-        return this.data.hashCode();
+    public String toString(){
+        return this.data.toString();
     }
 
     public DataSet copy(){
