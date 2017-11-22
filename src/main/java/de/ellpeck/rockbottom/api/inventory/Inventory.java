@@ -107,8 +107,12 @@ public class Inventory implements IInventory{
 
     @Override
     public void removeChangeCallback(BiConsumer<IInventory, Integer> callback){
-        this.callbacks.remove(callback);
-        RockBottomAPI.logger().config("Removed change callback "+callback+" from inventory "+this);
+        if(this.callbacks.remove(callback)){
+            RockBottomAPI.logger().config("Removed change callback "+callback+" from inventory "+this);
+        }
+        else{
+            RockBottomAPI.logger().warning("Tried removing change callback "+callback+" to inventory "+this+" but it wasn't part of it!");
+        }
     }
 
     public ItemInstance add(ItemInstance instance, boolean simulate){
