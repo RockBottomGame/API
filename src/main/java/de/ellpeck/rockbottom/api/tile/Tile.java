@@ -350,7 +350,8 @@ public class Tile{
     }
 
     /**
-     * @deprecated use {@link #onScheduledUpdate(IWorld, int, int, TileLayer, int)} instead
+     * @deprecated use {@link #onScheduledUpdate(IWorld, int, int, TileLayer,
+     * int)} instead
      */
     @Deprecated
     public void onScheduledUpdate(IWorld world, int x, int y, TileLayer layer){
