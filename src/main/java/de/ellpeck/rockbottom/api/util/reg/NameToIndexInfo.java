@@ -77,6 +77,15 @@ public class NameToIndexInfo implements IPropSettings{
         }
     }
 
+    public void fromBuffer(ByteBuf buf){
+        this.reg.map.clear();
+
+        int amount = buf.readInt();
+        for(int i = 0; i < amount; i++){
+            this.reg.map.put(buf.readInt(), RockBottomAPI.createRes(NetUtil.readStringFromBuffer(buf)));
+        }
+    }
+
     @Override
     public void save(Properties props){
         for(Map.Entry<Integer, IResourceName> entry : this.reg.map.entrySet()){
@@ -84,6 +93,15 @@ public class NameToIndexInfo implements IPropSettings{
         }
 
         this.needsSave = false;
+    }
+
+    public void toBuffer(ByteBuf buf){
+        buf.writeInt(this.reg.getSize());
+
+        for(Map.Entry<Integer, IResourceName> entry : this.reg.map.entrySet()){
+            buf.writeInt(entry.getKey());
+            NetUtil.writeStringToBuffer(entry.getValue().toString(), buf);
+        }
     }
 
     @Override
@@ -94,23 +112,5 @@ public class NameToIndexInfo implements IPropSettings{
     @Override
     public String getName(){
         return "Name to index info "+this.reg;
-    }
-
-    public void fromBuffer(ByteBuf buf){
-        this.reg.map.clear();
-
-        int amount = buf.readInt();
-        for(int i = 0; i < amount; i++){
-            this.reg.map.put(buf.readInt(), RockBottomAPI.createRes(NetUtil.readStringFromBuffer(buf)));
-        }
-    }
-
-    public void toBuffer(ByteBuf buf){
-        buf.writeInt(this.reg.getSize());
-
-        for(Map.Entry<Integer, IResourceName> entry : this.reg.map.entrySet()){
-            buf.writeInt(entry.getKey());
-            NetUtil.writeStringToBuffer(entry.getValue().toString(), buf);
-        }
     }
 }

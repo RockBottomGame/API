@@ -67,6 +67,21 @@ public class CombinedInventory implements IInventory{
     }
 
     @Override
+    public ItemInstance get(int id){
+        return this.executeOnInv(id, IInventory:: get);
+    }
+
+    @Override
+    public int getSlotAmount(){
+        int sum = 0;
+        for(IInventory inventory : this.inventories){
+            int slotAmount = inventory.getSlotAmount();
+            sum += slotAmount;
+        }
+        return sum;
+    }
+
+    @Override
     public void notifyChange(int slot){
         this.executeOnInv(slot, (inv, i) -> {
             inv.notifyChange(i);
@@ -91,20 +106,5 @@ public class CombinedInventory implements IInventory{
     @Override
     public ItemInstance addToSlot(int slot, ItemInstance instance, boolean simulate){
         return this.executeOnInv(slot, (inv, i) -> inv.addToSlot(i, instance, simulate));
-    }
-
-    @Override
-    public int getSlotAmount(){
-        int sum = 0;
-        for(IInventory inventory : this.inventories){
-            int slotAmount = inventory.getSlotAmount();
-            sum += slotAmount;
-        }
-        return sum;
-    }
-
-    @Override
-    public ItemInstance get(int id){
-        return this.executeOnInv(id, IInventory:: get);
     }
 }

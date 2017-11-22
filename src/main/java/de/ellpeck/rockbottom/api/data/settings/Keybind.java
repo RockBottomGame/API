@@ -69,6 +69,10 @@ public class Keybind{
         return this.key == key;
     }
 
+    public IResourceName getName(){
+        return this.name;
+    }
+
     public int getKey(){
         return this.key;
     }
@@ -80,9 +84,5 @@ public class Keybind{
     public Keybind register(){
         RockBottomAPI.KEYBIND_REGISTRY.register(this.getName(), this);
         return this;
-    }
-
-    public IResourceName getName(){
-        return this.name;
     }
 }

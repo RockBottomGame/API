@@ -44,6 +44,16 @@ public class ComponentSlot extends GuiComponent{
     }
 
     @Override
+    public boolean onMouseAction(IGameInstance game, int button, float x, float y){
+        return RockBottomAPI.getApiHandler().doDefaultSlotMovement(game, button, x, y, this);
+    }
+
+    @Override
+    public IResourceName getName(){
+        return RockBottomAPI.createInternalRes("slot");
+    }
+
+    @Override
     public void render(IGameInstance game, IAssetManager manager, IGraphics g, int x, int y){
         g.renderSlotInGui(game, manager, this.slot.get(), x, y, 1F, this.isMouseOver(game));
     }
@@ -56,15 +66,5 @@ public class ComponentSlot extends GuiComponent{
                 g.describeItem(game, manager, instance);
             }
         }
-    }
-
-    @Override
-    public boolean onMouseAction(IGameInstance game, int button, float x, float y){
-        return RockBottomAPI.getApiHandler().doDefaultSlotMovement(game, button, x, y, this);
-    }
-
-    @Override
-    public IResourceName getName(){
-        return RockBottomAPI.createInternalRes("slot");
     }
 }

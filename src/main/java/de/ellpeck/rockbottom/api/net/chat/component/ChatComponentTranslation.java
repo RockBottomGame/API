@@ -43,16 +43,6 @@ public class ChatComponentTranslation extends ChatComponent{
     }
 
     @Override
-    public String getDisplayString(IGameInstance game, IAssetManager manager){
-        return manager.localize(this.key, (Object[])this.formatting);
-    }
-
-    @Override
-    public String getUnformattedString(){
-        return "Locale("+this.key+", "+Arrays.toString(this.formatting)+")";
-    }
-
-    @Override
     public void save(DataSet set){
         super.save(set);
         set.addString("key", this.key.toString());
@@ -72,5 +62,15 @@ public class ChatComponentTranslation extends ChatComponent{
         for(int i = 0; i < this.formatting.length; i++){
             this.formatting[i] = set.getString("format_"+i);
         }
+    }
+
+    @Override
+    public String getDisplayString(IGameInstance game, IAssetManager manager){
+        return manager.localize(this.key, (Object[])this.formatting);
+    }
+
+    @Override
+    public String getUnformattedString(){
+        return "Locale("+this.key+", "+Arrays.toString(this.formatting)+")";
     }
 }

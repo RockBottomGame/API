@@ -50,11 +50,6 @@ public class TileMetaRenderer implements ITileRenderer<TileMeta>{
         return this.getTexture(manager, tile, state.get(tile.metaProp));
     }
 
-    @Override
-    public JsonElement getAdditionalTextureData(IGameInstance game, IAssetManager manager, IGraphics g, TileMeta tile, ItemInstance instance, AbstractEntityPlayer player, String name){
-        return this.getTexture(manager, tile, instance.getMeta()).getAdditionalData(name);
-    }
-
     private ITexture getTexture(IAssetManager manager, TileMeta tile, int meta){
         if(meta >= 0 && meta < tile.subResourceNames.size()){
             return manager.getTexture(tile.subResourceNames.get(meta));
@@ -62,5 +57,10 @@ public class TileMetaRenderer implements ITileRenderer<TileMeta>{
         else{
             return manager.getMissingTexture();
         }
+    }
+
+    @Override
+    public JsonElement getAdditionalTextureData(IGameInstance game, IAssetManager manager, IGraphics g, TileMeta tile, ItemInstance instance, AbstractEntityPlayer player, String name){
+        return this.getTexture(manager, tile, instance.getMeta()).getAdditionalData(name);
     }
 }

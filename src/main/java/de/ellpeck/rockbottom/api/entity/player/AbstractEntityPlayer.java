@@ -76,12 +76,6 @@ public abstract class AbstractEntityPlayer extends EntityLiving implements IComm
     @Override
     public abstract int getCommandLevel();
 
-    @Override
-    public abstract String getName();
-
-    @Override
-    public abstract String getChatColorFormat();
-
     public abstract ItemContainer getInvContainer();
 
     public abstract Inventory getInv();
@@ -91,9 +85,17 @@ public abstract class AbstractEntityPlayer extends EntityLiving implements IComm
     @ApiInternal
     public abstract void setSelectedSlot(int slot);
 
+    @Override
+    public abstract String getChatColorFormat();
+
+    @Override
+    public abstract String getName();
+
     public abstract int getColor();
 
     public abstract IPlayerDesign getDesign();
+
+    public abstract boolean isInRange(double x, double y, double maxDistance);
 
     public abstract IKnowledgeManager getKnowledge();
 
@@ -104,6 +106,4 @@ public abstract class AbstractEntityPlayer extends EntityLiving implements IComm
     public boolean isInRange(double x, double y){
         return this.isInRange(x, y, RANGE);
     }
-
-    public abstract boolean isInRange(double x, double y, double maxDistance);
 }

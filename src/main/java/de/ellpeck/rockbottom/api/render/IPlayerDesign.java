@@ -151,95 +151,95 @@ public interface IPlayerDesign{
 
     int getBase();
 
+    int getEyeColor();
+
+    int getShirt();
+
+    int getShirtColor();
+
+    int getSleeves();
+
+    int getSleevesColor();
+
+    int getPants();
+
+    int getPantsColor();
+
+    int getFootwear();
+
+    int getFootwearColor();
+
+    int getHair();
+
+    int getHairColor();
+
+    int getAccessory();
+
+    int getEyebrows();
+
+    int getMouth();
+
+    int getBeard();
+
+    int getBeardColor();
+
+    int getEyebrowsColor();
+
+    boolean isFemale();
+
     @ApiInternal
     void setBase(int base);
-
-    int getEyeColor();
 
     @ApiInternal
     void setEyeColor(int eyeColor);
 
-    int getShirt();
-
     @ApiInternal
     void setShirt(int shirt);
-
-    int getShirtColor();
 
     @ApiInternal
     void setShirtColor(int shirtColor);
 
-    int getSleeves();
-
     @ApiInternal
     void setSleeves(int sleeves);
-
-    int getSleevesColor();
 
     @ApiInternal
     void setSleevesColor(int sleevesColor);
 
-    int getPants();
-
     @ApiInternal
     void setPants(int pants);
-
-    int getPantsColor();
 
     @ApiInternal
     void setPantsColor(int pantsColor);
 
-    int getFootwear();
-
     @ApiInternal
     void setFootwear(int footwear);
-
-    int getFootwearColor();
 
     @ApiInternal
     void setFootwearColor(int footwearColor);
 
-    int getHair();
-
     @ApiInternal
     void setHair(int hair);
-
-    int getHairColor();
 
     @ApiInternal
     void setHairColor(int hairColor);
 
-    int getAccessory();
-
     @ApiInternal
     void setAccessory(int accessory);
-
-    int getEyebrows();
 
     @ApiInternal
     void setEyebrows(int eyebrows);
 
-    int getMouth();
-
     @ApiInternal
     void setMouth(int mouth);
-
-    int getBeard();
-
-    @ApiInternal
-    void setBeard(int beard);
-
-    int getBeardColor();
-
-    @ApiInternal
-    void setBeardColor(int beardColor);
-
-    int getEyebrowsColor();
 
     @ApiInternal
     void setEyebrowsColor(int eyebrowsColor);
 
-    boolean isFemale();
+    @ApiInternal
+    void setBeard(int beard);
+
+    @ApiInternal
+    void setBeardColor(int beardColor);
 
     @ApiInternal
     void setFemale(boolean female);

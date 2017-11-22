@@ -38,7 +38,7 @@ public interface IRetroactiveGenerator extends IWorldGenerator{
         this.generateRetroactively(world, chunk);
     }
 
-    void generateRetroactively(IWorld world, IChunk chunk);
-
     boolean shouldGenerateRetroactively(IWorld world, IChunk chunk);
+
+    void generateRetroactively(IWorld world, IChunk chunk);
 }

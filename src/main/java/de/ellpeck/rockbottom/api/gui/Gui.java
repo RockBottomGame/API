@@ -61,15 +61,15 @@ public abstract class Gui{
         this(-1, -1, parent);
     }
 
+    public Gui(int width, int height){
+        this(width, height, null);
+    }
+
     public Gui(int width, int height, Gui parent){
         this.width = width;
         this.height = height;
         this.parent = parent;
         this.hasUnspecifiedBounds = this.width <= 0 || this.height <= 0;
-    }
-
-    public Gui(int width, int height){
-        this(width, height, null);
     }
 
     public void onOpened(IGameInstance game){
@@ -140,17 +140,6 @@ public abstract class Gui{
         return false;
     }
 
-    protected boolean tryEscape(IGameInstance game){
-        if(this.parent != null){
-            game.getGuiManager().openGui(this.parent);
-        }
-        else{
-            game.getGuiManager().closeGui();
-        }
-
-        return true;
-    }
-
     public void render(IGameInstance game, IAssetManager manager, IGraphics g){
         for(int i = this.components.size()-1; i >= 0; i--){
             GuiComponent component = this.components.get(i);
@@ -173,8 +162,23 @@ public abstract class Gui{
         }
     }
 
+    protected boolean tryEscape(IGameInstance game){
+        if(this.parent != null){
+            game.getGuiManager().openGui(this.parent);
+        }
+        else{
+            game.getGuiManager().closeGui();
+        }
+
+        return true;
+    }
+
     public boolean doesPauseGame(){
         return true;
+    }
+
+    public boolean isMouseOverComponent(IGameInstance game){
+        return this.components.stream().anyMatch(component -> component.isActive() && component.isMouseOver(game));
     }
 
     public boolean isMouseOver(IGameInstance game){
@@ -188,10 +192,6 @@ public abstract class Gui{
         else{
             return false;
         }
-    }
-
-    public boolean isMouseOverComponent(IGameInstance game){
-        return this.components.stream().anyMatch(component -> component.isActive() && component.isMouseOver(game));
     }
 
     public boolean hasGradient(){

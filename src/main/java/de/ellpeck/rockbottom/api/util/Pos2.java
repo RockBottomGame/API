@@ -34,13 +34,6 @@ public class Pos2{
         this.set(x, y);
     }
 
-    public Pos2 set(int x, int y){
-        this.x = x;
-        this.y = y;
-
-        return this;
-    }
-
     public int getX(){
         return this.x;
     }
@@ -49,15 +42,15 @@ public class Pos2{
         return this.y;
     }
 
-    public Pos2 add(int x, int y){
-        return this.set(this.x+x, this.y+y);
+    public Pos2 set(int x, int y){
+        this.x = x;
+        this.y = y;
+
+        return this;
     }
 
-    @Override
-    public int hashCode(){
-        int result = this.x;
-        result = 31*result+this.y;
-        return result;
+    public Pos2 add(int x, int y){
+        return this.set(this.x+x, this.y+y);
     }
 
     @Override
@@ -71,6 +64,13 @@ public class Pos2{
 
         Pos2 pos2 = (Pos2)o;
         return this.x == pos2.x && this.y == pos2.y;
+    }
+
+    @Override
+    public int hashCode(){
+        int result = this.x;
+        result = 31*result+this.y;
+        return result;
     }
 
     @Override

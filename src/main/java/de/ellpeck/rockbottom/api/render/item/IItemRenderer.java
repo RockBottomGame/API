@@ -31,6 +31,8 @@ import de.ellpeck.rockbottom.api.item.ItemInstance;
 
 public interface IItemRenderer<T extends Item>{
 
+    void render(IGameInstance game, IAssetManager manager, IGraphics g, T item, ItemInstance instance, float x, float y, float scale, int filter);
+
     default void renderOnMouseCursor(IGameInstance game, IAssetManager manager, IGraphics g, T item, ItemInstance instance, float x, float y, float scale, int filter, boolean isInPlayerRange){
 
     }
@@ -48,8 +50,6 @@ public interface IItemRenderer<T extends Item>{
         this.render(game, manager, g, item, instance, 0F, 0F, scale*0.5F, filter);
         g.popMatrix();
     }
-
-    void render(IGameInstance game, IAssetManager manager, IGraphics g, T item, ItemInstance instance, float x, float y, float scale, int filter);
 
     default JsonElement getAdditionalTextureData(IGameInstance game, IAssetManager manager, IGraphics g, T item, ItemInstance instance, AbstractEntityPlayer player, String name){
         return null;

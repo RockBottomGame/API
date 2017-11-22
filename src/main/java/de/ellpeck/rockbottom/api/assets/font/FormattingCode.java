@@ -30,8 +30,9 @@ import java.util.TreeMap;
 
 public class FormattingCode{
 
-    public static final FormattingCode NONE = new FormattingCode(' ', Colors.NO_COLOR, FontProp.NONE, 0, "");
     private static final Map<Character, FormattingCode> DEFAULT_CODES = new TreeMap<>(Character:: compare);
+
+    public static final FormattingCode NONE = new FormattingCode(' ', Colors.NO_COLOR, FontProp.NONE, 0, "");
     public static final FormattingCode RESET_COLOR = new FormattingCode('y', Colors.RESET_COLOR).registerAsDefault();
     public static final FormattingCode RESET_PROPS = new FormattingCode('x', FontProp.RESET).registerAsDefault();
 
@@ -64,16 +65,16 @@ public class FormattingCode{
         this(format, Colors.NO_COLOR, prop, 2, "&"+format);
     }
 
+    public FormattingCode(char format, int color){
+        this(format, color, FontProp.NONE, 2, "&"+format);
+    }
+
     public FormattingCode(char format, int color, FontProp prop, int length, String strg){
         this.format = format;
         this.color = color;
         this.length = length;
         this.strg = strg;
         this.prop = prop;
-    }
-
-    public FormattingCode(char format, int color){
-        this(format, color, FontProp.NONE, 2, "&"+format);
     }
 
     public static FormattingCode getFormat(String s, int index){
@@ -108,10 +109,6 @@ public class FormattingCode{
         return NONE;
     }
 
-    public static Map<Character, FormattingCode> getDefaultCodes(){
-        return Collections.unmodifiableMap(DEFAULT_CODES);
-    }
-
     public FormattingCode registerAsDefault(){
         if(this.format != ' ' && !DEFAULT_CODES.containsKey(this.format)){
             DEFAULT_CODES.put(this.format, this);
@@ -137,5 +134,9 @@ public class FormattingCode{
     @Override
     public String toString(){
         return this.strg;
+    }
+
+    public static Map<Character, FormattingCode> getDefaultCodes(){
+        return Collections.unmodifiableMap(DEFAULT_CODES);
     }
 }

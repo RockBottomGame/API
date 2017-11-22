@@ -66,10 +66,6 @@ public class Particle extends MovableWorldObject{
         }
     }
 
-    public void setDead(){
-        this.dead = true;
-    }
-
     protected void applyMotion(){
         this.motionY -= 0.02;
 
@@ -83,5 +79,9 @@ public class Particle extends MovableWorldObject{
 
     public boolean isDead(){
         return this.dead;
+    }
+
+    public void setDead(){
+        this.dead = true;
     }
 }

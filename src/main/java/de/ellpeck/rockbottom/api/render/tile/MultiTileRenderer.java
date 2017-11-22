@@ -63,14 +63,14 @@ public class MultiTileRenderer<T extends MultiTile> extends DefaultTileRenderer<
     }
 
     @Override
-    public void renderItem(IGameInstance game, IAssetManager manager, IGraphics g, T tile, ItemInstance instance, float x, float y, float scale, int filter){
-        manager.getTexture(this.texItem).draw(x, y, scale, scale, filter);
-    }
-
-    @Override
     public ITexture getParticleTexture(IGameInstance game, IAssetManager manager, IGraphics g, T tile, TileState state){
         Pos2 innerCoord = tile.getInnerCoord(state);
         return manager.getTexture(this.textures.get(innerCoord));
+    }
+
+    @Override
+    public void renderItem(IGameInstance game, IAssetManager manager, IGraphics g, T tile, ItemInstance instance, float x, float y, float scale, int filter){
+        manager.getTexture(this.texItem).draw(x, y, scale, scale, filter);
     }
 
     @Override

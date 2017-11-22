@@ -72,8 +72,8 @@ public interface IGraphics{
 
     /**
      * Renders an item's hover over information on the mouse cursor position.
-     * Additionally, it draws the {@link IGraphics#isItemInfoDebug()} text and
-     * also fires the {@link TooltipEvent}.
+     * Additionally, it draws the {@link IGraphics#isItemInfoDebug()} text
+     * and also fires the {@link TooltipEvent}.
      *
      * @param game     The game instance
      * @param manager  The asset manager

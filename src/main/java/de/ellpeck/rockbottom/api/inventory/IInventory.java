@@ -34,6 +34,10 @@ public interface IInventory{
 
     ItemInstance remove(int id, int amount);
 
+    ItemInstance get(int id);
+
+    int getSlotAmount();
+
     void notifyChange(int slot);
 
     void addChangeCallback(BiConsumer<IInventory, Integer> callback);
@@ -64,8 +68,4 @@ public interface IInventory{
         }
         return -1;
     }
-
-    int getSlotAmount();
-
-    ItemInstance get(int id);
 }

@@ -75,8 +75,10 @@ public abstract class WorldGenOre implements IWorldGenerator{
         }
     }
 
-    protected Set<Biome> getAllowedBiomes(){
-        return RockBottomAPI.BIOME_REGISTRY.getUnmodifiable().values();
+    protected abstract int getHighestGridPos();
+
+    protected int getLowestGridPos(){
+        return Integer.MIN_VALUE;
     }
 
     protected abstract int getMaxAmount();
@@ -87,9 +89,7 @@ public abstract class WorldGenOre implements IWorldGenerator{
 
     protected abstract TileState getOreState();
 
-    protected abstract int getHighestGridPos();
-
-    protected int getLowestGridPos(){
-        return Integer.MIN_VALUE;
+    protected Set<Biome> getAllowedBiomes(){
+        return RockBottomAPI.BIOME_REGISTRY.getUnmodifiable().values();
     }
 }

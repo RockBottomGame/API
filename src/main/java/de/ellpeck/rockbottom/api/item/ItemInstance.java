@@ -46,6 +46,14 @@ public class ItemInstance implements IAdditionalDataProvider{
         this(tile.getItem(), amount, meta);
     }
 
+    public ItemInstance(Item item){
+        this(item, 1);
+    }
+
+    public ItemInstance(Item item, int amount){
+        this(item, amount, 0);
+    }
+
     public ItemInstance(Item item, int amount, int meta){
         if(item == null){
             throw new NullPointerException("Tried to create an ItemInstance with null item!");
@@ -57,14 +65,6 @@ public class ItemInstance implements IAdditionalDataProvider{
         this.item = item;
         this.amount = amount;
         this.meta = (short)meta;
-    }
-
-    public ItemInstance(Item item){
-        this(item, 1);
-    }
-
-    public ItemInstance(Item item, int amount){
-        this(item, amount, 0);
     }
 
     public static ItemInstance load(DataSet set){
@@ -89,6 +89,38 @@ public class ItemInstance implements IAdditionalDataProvider{
         }
     }
 
+    public static boolean compare(ItemInstance one, ItemInstance other, boolean item, boolean meta, boolean data){
+        if(one == null && other == null){
+            return true;
+        }
+        else if(one == null || other == null){
+            return false;
+        }
+        else{
+            if(item){
+                if(one.item != other.item){
+                    return false;
+                }
+            }
+
+            if(meta){
+                if(one.meta != other.meta){
+                    return false;
+                }
+            }
+
+            if(data){
+                if(one.item.isDataSensitive(one) || other.item.isDataSensitive(other)){
+                    if(one.additionalData == null ? other.additionalData != null : !one.additionalData.equals(other.additionalData)){
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        }
+    }
+
     public void save(DataSet set){
         set.addString("item_name", RockBottomAPI.ITEM_REGISTRY.getId(this.item).toString());
         set.addInt("amount", this.amount);
@@ -106,16 +138,16 @@ public class ItemInstance implements IAdditionalDataProvider{
         return this.meta;
     }
 
+    public int getAmount(){
+        return this.amount;
+    }
+
     public void setMeta(int meta){
         this.meta = (short)meta;
     }
 
     public boolean fitsAmount(int amount){
         return this.getAmount()+amount <= this.getMaxAmount();
-    }
-
-    public int getAmount(){
-        return this.amount;
     }
 
     public int getMaxAmount(){
@@ -174,49 +206,8 @@ public class ItemInstance implements IAdditionalDataProvider{
         return compare(this, instance, true, true, true);
     }
 
-    public static boolean compare(ItemInstance one, ItemInstance other, boolean item, boolean meta, boolean data){
-        if(one == null && other == null){
-            return true;
-        }
-        else if(one == null || other == null){
-            return false;
-        }
-        else{
-            if(item){
-                if(one.item != other.item){
-                    return false;
-                }
-            }
-
-            if(meta){
-                if(one.meta != other.meta){
-                    return false;
-                }
-            }
-
-            if(data){
-                if(one.item.isDataSensitive(one) || other.item.isDataSensitive(other)){
-                    if(one.additionalData == null ? other.additionalData != null : !one.additionalData.equals(other.additionalData)){
-                        return false;
-                    }
-                }
-            }
-
-            return true;
-        }
-    }
-
     public String getDisplayName(){
         return this.item.getLocalizedName(this);
-    }
-
-    @Override
-    public int hashCode(){
-        int result = this.item.hashCode();
-        result = 31*result+(int)this.meta;
-        result = 31*result+this.amount;
-        result = 31*result+(this.additionalData != null ? this.additionalData.hashCode() : 0);
-        return result;
     }
 
     @Override
@@ -231,6 +222,15 @@ public class ItemInstance implements IAdditionalDataProvider{
         else{
             return false;
         }
+    }
+
+    @Override
+    public int hashCode(){
+        int result = this.item.hashCode();
+        result = 31*result+(int)this.meta;
+        result = 31*result+this.amount;
+        result = 31*result+(this.additionalData != null ? this.additionalData.hashCode() : 0);
+        return result;
     }
 
     @Override

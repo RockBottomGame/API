@@ -45,6 +45,10 @@ public class ComponentButton extends GuiComponent{
         this.supplier = supplier;
     }
 
+    public void setText(String text){
+        this.text = text;
+    }
+
     public ComponentButton setHasBackground(boolean has){
         this.hasBackground = has;
         return this;
@@ -67,8 +71,8 @@ public class ComponentButton extends GuiComponent{
         return this.text;
     }
 
-    public void setText(String text){
-        this.text = text;
+    protected String[] getHover(){
+        return this.hover;
     }
 
     @Override
@@ -79,10 +83,6 @@ public class ComponentButton extends GuiComponent{
                 g.drawHoverInfoAtMouse(game, manager, false, 100, hover);
             }
         }
-    }
-
-    protected String[] getHover(){
-        return this.hover;
     }
 
     @Override

@@ -24,6 +24,7 @@ package de.ellpeck.rockbottom.api.gui.component;
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.gui.Gui;
+import de.ellpeck.rockbottom.api.gui.component.ComponentButton;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 
 import java.util.function.Supplier;
@@ -46,13 +47,13 @@ public class ComponentToggleButton extends ComponentButton{
     }
 
     @Override
-    public IResourceName getName(){
-        return RockBottomAPI.createInternalRes("toggle_button");
-    }
-
-    @Override
     public boolean onPressed(IGameInstance game){
         this.isToggled = !this.isToggled;
         return false;
+    }
+
+    @Override
+    public IResourceName getName(){
+        return RockBottomAPI.createInternalRes("toggle_button");
     }
 }

@@ -62,10 +62,6 @@ public class StateHandler{
         }
     }
 
-    public List<TileProp> getProps(){
-        return Collections.unmodifiableList(this.properties);
-    }
-
     public void addProp(TileProp prop){
         if(!this.hasInit){
             if(!this.properties.contains(prop)){
@@ -78,6 +74,10 @@ public class StateHandler{
         else{
             throw new RuntimeException("Cannot add prop "+prop+" to state handler for tile "+this.tile+" after it has been initialized!");
         }
+    }
+
+    public List<TileProp> getProps(){
+        return Collections.unmodifiableList(this.properties);
     }
 
     public TileState getDefault(){

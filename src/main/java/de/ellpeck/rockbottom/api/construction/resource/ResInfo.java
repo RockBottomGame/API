@@ -34,21 +34,21 @@ public class ResInfo{
         this(instance.getItem(), instance.getMeta());
     }
 
-    public ResInfo(Item item, int meta){
-        this.item = item;
-        this.meta = meta;
-    }
-
     public ResInfo(Tile tile){
         this(tile, 0);
+    }
+
+    public ResInfo(Item item){
+        this(item, 0);
     }
 
     public ResInfo(Tile tile, int meta){
         this(tile.getItem(), meta);
     }
 
-    public ResInfo(Item item){
-        this(item, 0);
+    public ResInfo(Item item, int meta){
+        this.item = item;
+        this.meta = meta;
     }
 
     public Item getItem(){
@@ -64,13 +64,6 @@ public class ResInfo{
     }
 
     @Override
-    public int hashCode(){
-        int result = this.item.hashCode();
-        result = 31*result+this.meta;
-        return result;
-    }
-
-    @Override
     public boolean equals(Object o){
         if(this == o){
             return true;
@@ -82,6 +75,13 @@ public class ResInfo{
         else{
             return false;
         }
+    }
+
+    @Override
+    public int hashCode(){
+        int result = this.item.hashCode();
+        result = 31*result+this.meta;
+        return result;
     }
 
     @Override

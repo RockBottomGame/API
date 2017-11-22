@@ -29,6 +29,10 @@ public abstract class TileProp<T extends Comparable> implements Comparable<TileP
         this.name = name;
     }
 
+    public String getName(){
+        return this.name;
+    }
+
     public abstract int getVariants();
 
     public abstract T getValue(int index);
@@ -40,11 +44,6 @@ public abstract class TileProp<T extends Comparable> implements Comparable<TileP
     @Override
     public int compareTo(TileProp o){
         return this.name.compareTo(o.name);
-    }
-
-    @Override
-    public int hashCode(){
-        return this.name.hashCode();
     }
 
     @Override
@@ -62,11 +61,12 @@ public abstract class TileProp<T extends Comparable> implements Comparable<TileP
     }
 
     @Override
-    public String toString(){
-        return this.getName();
+    public int hashCode(){
+        return this.name.hashCode();
     }
 
-    public String getName(){
-        return this.name;
+    @Override
+    public String toString(){
+        return this.getName();
     }
 }

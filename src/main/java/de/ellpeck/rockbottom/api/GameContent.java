@@ -68,6 +68,16 @@ public final class GameContent{
     }
 
     @ApiInternal
+    private static Item getItem(String name){
+        return get(name, RockBottomAPI.ITEM_REGISTRY);
+    }
+
+    @ApiInternal
+    private static Tile getTile(String name){
+        return get(name, RockBottomAPI.TILE_REGISTRY);
+    }
+
+    @ApiInternal
     private static <T> T get(String name, NameRegistry<T> registry){
         IResourceName res = RockBottomAPI.createInternalRes(name);
         T thing = registry.get(res);
@@ -78,15 +88,5 @@ public final class GameContent{
         else{
             return thing;
         }
-    }
-
-    @ApiInternal
-    private static Item getItem(String name){
-        return get(name, RockBottomAPI.ITEM_REGISTRY);
-    }
-
-    @ApiInternal
-    private static Tile getTile(String name){
-        return get(name, RockBottomAPI.TILE_REGISTRY);
     }
 }

@@ -33,8 +33,8 @@ import java.util.List;
  * This event is fired whenever a tooltip is rendered using {@link
  * IGraphics#describeItem(IGameInstance, IAssetManager, ItemInstance)}. Note
  * that whatever scale is applied to render the tooltip will also be applied
- * within the event. This is most likely {@link IGraphics#getGuiScale()}. This
- * event cannot be cancelled.
+ * within the event. This is most likely {@link IGraphics#getGuiScale()}.
+ * This event cannot be cancelled.
  */
 public class TooltipEvent extends Event{
 

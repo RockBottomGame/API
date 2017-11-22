@@ -55,12 +55,6 @@ public class TileMeta extends TileBasic{
         }
     }
 
-    public TileMeta addSubTile(IResourceName name){
-        this.subResourceNames.add(name.addPrefix("tiles."));
-        this.subUnlocNames.add(name.addPrefix("item."));
-        return this;
-    }
-
     @Override
     protected ITileRenderer createRenderer(IResourceName name){
         return new TileMetaRenderer();
@@ -74,14 +68,15 @@ public class TileMeta extends TileBasic{
         return super.register();
     }
 
+    public TileMeta addSubTile(IResourceName name){
+        this.subResourceNames.add(name.addPrefix("tiles."));
+        this.subUnlocNames.add(name.addPrefix("item."));
+        return this;
+    }
+
     @Override
     protected ItemTile createItemTile(){
         return new ItemTile(this.getName()){
-            @Override
-            public int getHighestPossibleMeta(){
-                return Math.max(TileMeta.this.subUnlocNames.size(), TileMeta.this.subResourceNames.size())-1;
-            }
-
             @Override
             public IResourceName getUnlocalizedName(ItemInstance instance){
                 int meta = instance.getMeta();
@@ -93,16 +88,21 @@ public class TileMeta extends TileBasic{
                     return super.getUnlocalizedName(instance);
                 }
             }
-        };
-    }
 
-    @Override
-    public List<ItemInstance> getDrops(IWorld world, int x, int y, TileLayer layer, Entity destroyer){
-        return Collections.singletonList(new ItemInstance(this, 1, world.getState(layer, x, y).get(this.metaProp)));
+            @Override
+            public int getHighestPossibleMeta(){
+                return Math.max(TileMeta.this.subUnlocNames.size(), TileMeta.this.subResourceNames.size())-1;
+            }
+        };
     }
 
     @Override
     public TileState getPlacementState(IWorld world, int x, int y, TileLayer layer, ItemInstance instance, AbstractEntityPlayer placer){
         return this.getDefState().prop(this.metaProp, instance.getMeta());
+    }
+
+    @Override
+    public List<ItemInstance> getDrops(IWorld world, int x, int y, TileLayer layer, Entity destroyer){
+        return Collections.singletonList(new ItemInstance(this, 1, world.getState(layer, x, y).get(this.metaProp)));
     }
 }

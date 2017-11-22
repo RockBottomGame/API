@@ -28,6 +28,7 @@ import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.assets.ITexture;
 import de.ellpeck.rockbottom.api.data.settings.Settings;
 import de.ellpeck.rockbottom.api.gui.Gui;
+import de.ellpeck.rockbottom.api.gui.component.GuiComponent;
 import de.ellpeck.rockbottom.api.util.Util;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 
@@ -57,22 +58,6 @@ public class ComponentColorPicker extends GuiComponent{
         this.defY = y;
         this.defSizeX = sizeX;
         this.defSizeY = sizeY;
-    }
-
-    @Override
-    public void update(IGameInstance game){
-        if(this.wasMouseDown){
-            float mouseX = game.getGraphics().getMouseInGuiX();
-            float mouseY = game.getGraphics().getMouseInGuiY();
-
-            if(Settings.KEY_GUI_ACTION_1.isDown()){
-                this.onClickOrMove(game, mouseX, mouseY);
-            }
-            else{
-                this.consumer.accept(this.color, true);
-                this.wasMouseDown = false;
-            }
-        }
     }
 
     @Override
@@ -129,11 +114,6 @@ public class ComponentColorPicker extends GuiComponent{
         return RockBottomAPI.createInternalRes("color_picker");
     }
 
-    @Override
-    public int getPriority(){
-        return this.isEnlarged ? 1000 : super.getPriority();
-    }
-
     private void unenlarge(){
         if(this.isEnlarged){
             this.x = this.defX;
@@ -143,6 +123,22 @@ public class ComponentColorPicker extends GuiComponent{
 
             this.isEnlarged = false;
             this.gui.sortComponents();
+        }
+    }
+
+    @Override
+    public void update(IGameInstance game){
+        if(this.wasMouseDown){
+            float mouseX = game.getGraphics().getMouseInGuiX();
+            float mouseY = game.getGraphics().getMouseInGuiY();
+
+            if(Settings.KEY_GUI_ACTION_1.isDown()){
+                this.onClickOrMove(game, mouseX, mouseY);
+            }
+            else{
+                this.consumer.accept(this.color, true);
+                this.wasMouseDown = false;
+            }
         }
     }
 
@@ -157,5 +153,10 @@ public class ComponentColorPicker extends GuiComponent{
                 this.consumer.accept(this.color, false);
             }
         }
+    }
+
+    @Override
+    public int getPriority(){
+        return this.isEnlarged ? 1000 : super.getPriority();
     }
 }

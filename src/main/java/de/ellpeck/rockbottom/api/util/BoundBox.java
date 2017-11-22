@@ -37,6 +37,10 @@ public class BoundBox{
         this.set(minX, minY, maxX, maxY);
     }
 
+    public BoundBox set(BoundBox box){
+        return this.set(box.minX, box.minY, box.maxX, box.maxY);
+    }
+
     public BoundBox set(double minX, double minY, double maxX, double maxY){
         this.minX = Math.min(minX, maxX);
         this.minY = Math.min(minY, maxY);
@@ -45,10 +49,6 @@ public class BoundBox{
         this.maxY = Math.max(maxY, minY);
 
         return this;
-    }
-
-    public BoundBox set(BoundBox box){
-        return this.set(box.minX, box.minY, box.maxX, box.maxY);
     }
 
     public BoundBox add(double x, double y){
@@ -87,12 +87,17 @@ public class BoundBox{
         return this.getWidth() <= 0 || this.getHeight() <= 0;
     }
 
-    public double getWidth(){
-        return this.maxX-this.minX;
-    }
+    @Override
+    public boolean equals(Object o){
+        if(this == o){
+            return true;
+        }
+        if(o == null || this.getClass() != o.getClass()){
+            return false;
+        }
 
-    public double getHeight(){
-        return this.maxY-this.minY;
+        BoundBox boundBox = (BoundBox)o;
+        return Double.compare(boundBox.minX, this.minX) == 0 && Double.compare(boundBox.minY, this.minY) == 0 && Double.compare(boundBox.maxX, this.maxX) == 0 && Double.compare(boundBox.maxY, this.maxY) == 0;
     }
 
     @Override
@@ -108,19 +113,6 @@ public class BoundBox{
         temp = Double.doubleToLongBits(this.maxY);
         result = 31*result+(int)(temp ^ (temp >>> 32));
         return result;
-    }
-
-    @Override
-    public boolean equals(Object o){
-        if(this == o){
-            return true;
-        }
-        if(o == null || this.getClass() != o.getClass()){
-            return false;
-        }
-
-        BoundBox boundBox = (BoundBox)o;
-        return Double.compare(boundBox.minX, this.minX) == 0 && Double.compare(boundBox.minY, this.minY) == 0 && Double.compare(boundBox.maxX, this.maxX) == 0 && Double.compare(boundBox.maxY, this.maxY) == 0;
     }
 
     @Override
@@ -142,6 +134,14 @@ public class BoundBox{
 
     public double getMaxY(){
         return this.maxY;
+    }
+
+    public double getWidth(){
+        return this.maxX-this.minX;
+    }
+
+    public double getHeight(){
+        return this.maxY-this.minY;
     }
 
     public double getXDistanceWithMax(BoundBox other, double offsetX){

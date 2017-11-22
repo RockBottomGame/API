@@ -39,8 +39,6 @@ public abstract class EntityLiving extends Entity{
         this.health = this.getMaxHealth();
     }
 
-    public abstract int getMaxHealth();
-
     @Override
     public void update(IGameInstance game){
         super.update(game);
@@ -71,9 +69,33 @@ public abstract class EntityLiving extends Entity{
         }
     }
 
+    public void jump(double motion){
+        if(this.onGround && !this.jumping && this.jumpTimeout <= 0){
+            this.motionY += motion;
+            this.jumping = true;
+        }
+    }
+
     protected int getJumpTimeout(){
         return 3;
     }
+
+    public int getHealth(){
+        return this.health;
+    }
+
+    public void setHealth(int health){
+        this.health = health;
+    }
+
+    public void takeDamage(int amount){
+        EntityDamageEvent event = new EntityDamageEvent(this, amount);
+        if(RockBottomAPI.getEventHandler().fireEvent(event) != EventResult.CANCELLED){
+            this.setHealth(this.getHealth()-event.amount);
+        }
+    }
+
+    public abstract int getMaxHealth();
 
     public abstract int getRegenRate();
 
@@ -93,27 +115,5 @@ public abstract class EntityLiving extends Entity{
         this.jumping = set.getBoolean("jumping");
         this.jumpTimeout = set.getInt("jump_timeout");
         this.health = set.getInt("health");
-    }
-
-    public void jump(double motion){
-        if(this.onGround && !this.jumping && this.jumpTimeout <= 0){
-            this.motionY += motion;
-            this.jumping = true;
-        }
-    }
-
-    public void takeDamage(int amount){
-        EntityDamageEvent event = new EntityDamageEvent(this, amount);
-        if(RockBottomAPI.getEventHandler().fireEvent(event) != EventResult.CANCELLED){
-            this.setHealth(this.getHealth()-event.amount);
-        }
-    }
-
-    public int getHealth(){
-        return this.health;
-    }
-
-    public void setHealth(int health){
-        this.health = health;
     }
 }

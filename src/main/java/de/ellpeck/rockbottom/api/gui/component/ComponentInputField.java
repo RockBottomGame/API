@@ -70,72 +70,6 @@ public class ComponentInputField extends GuiComponent{
     }
 
     @Override
-    public void update(IGameInstance game){
-        this.counter++;
-    }
-
-    @Override
-    public void render(IGameInstance game, IAssetManager manager, IGraphics g, int x, int y){
-        if(this.renderBox){
-            g.fillRect(x, y, this.width, this.height, this.isMouseOverPrioritized(game) ? getElementColor() : getUnselectedElementColor());
-            g.drawRect(x, y, this.width, this.height, getElementOutlineColor());
-        }
-
-        IFont font = manager.getFont();
-        String text = this.getDisplayText();
-
-        String display = text+(this.isSelected ? ((this.counter/15)%2 == 0 ? "|" : " ") : "");
-        font.drawCutOffString(x+3, y+this.height/2F-font.getHeight(0.35F)/2F, display, 0.35F, this.width-6, true, false);
-
-        if(this.displaxMaxLength){
-            String unformattedText = font.removeFormatting(text);
-            int diff = this.maxLength-unformattedText.length();
-            FormattingCode format = diff <= 0 ? FormattingCode.RED : (diff <= this.maxLength/8 ? FormattingCode.ORANGE : (diff <= this.maxLength/4 ? FormattingCode.YELLOW : FormattingCode.NONE));
-            font.drawStringFromRight(x+this.width-1, y+this.height-font.getHeight(0.2F), format.toString()+unformattedText.length()+"/"+this.maxLength, 0.2F);
-        }
-    }
-
-    public String getDisplayText(){
-        return this.getText();
-    }
-
-    public String getText(){
-        return this.text;
-    }
-
-    public void setText(String text){
-        this.text = text;
-        if(this.consumer != null){
-            this.consumer.accept(text);
-        }
-    }
-
-    @Override
-    public boolean onMouseAction(IGameInstance game, int button, float x, float y){
-        if(Settings.KEY_GUI_ACTION_1.isKey(button)){
-            if(this.selectable){
-                this.isSelected = this.isMouseOver(game);
-            }
-        }
-        else if(Settings.KEY_GUI_ACTION_2.isKey(button)){
-            if(this.isMouseOver(game)){
-                this.text = "";
-                if(this.consumer != null){
-                    this.consumer.accept(this.text);
-                }
-
-                if(this.selectable){
-                    this.isSelected = true;
-                }
-            }
-            else{
-                this.isSelected = false;
-            }
-        }
-        return false;
-    }
-
-    @Override
     public boolean onKeyboardAction(IGameInstance game, int button, char character){
         if(this.isSelected){
             if(button == Input.KEY_BACK){
@@ -196,9 +130,75 @@ public class ComponentInputField extends GuiComponent{
         return RockBottomAPI.createInternalRes("input_field");
     }
 
+    @Override
+    public void update(IGameInstance game){
+        this.counter++;
+    }
+
+    public String getText(){
+        return this.text;
+    }
+
+    public String getDisplayText(){
+        return this.getText();
+    }
+
+    @Override
+    public void render(IGameInstance game, IAssetManager manager, IGraphics g, int x, int y){
+        if(this.renderBox){
+            g.fillRect(x, y, this.width, this.height, this.isMouseOverPrioritized(game) ? getElementColor() : getUnselectedElementColor());
+            g.drawRect(x, y, this.width, this.height, getElementOutlineColor());
+        }
+
+        IFont font = manager.getFont();
+        String text = this.getDisplayText();
+
+        String display = text+(this.isSelected ? ((this.counter/15)%2 == 0 ? "|" : " ") : "");
+        font.drawCutOffString(x+3, y+this.height/2F-font.getHeight(0.35F)/2F, display, 0.35F, this.width-6, true, false);
+
+        if(this.displaxMaxLength){
+            String unformattedText = font.removeFormatting(text);
+            int diff = this.maxLength-unformattedText.length();
+            FormattingCode format = diff <= 0 ? FormattingCode.RED : (diff <= this.maxLength/8 ? FormattingCode.ORANGE : (diff <= this.maxLength/4 ? FormattingCode.YELLOW : FormattingCode.NONE));
+            font.drawStringFromRight(x+this.width-1, y+this.height-font.getHeight(0.2F), format.toString()+unformattedText.length()+"/"+this.maxLength, 0.2F);
+        }
+    }
+
+    public void setText(String text){
+        this.text = text;
+        if(this.consumer != null){
+            this.consumer.accept(text);
+        }
+    }
+
     public void append(String text){
         if(this.text.length()+text.length() <= this.maxLength){
             this.setText(this.text+text);
         }
+    }
+
+    @Override
+    public boolean onMouseAction(IGameInstance game, int button, float x, float y){
+        if(Settings.KEY_GUI_ACTION_1.isKey(button)){
+            if(this.selectable){
+                this.isSelected = this.isMouseOver(game);
+            }
+        }
+        else if(Settings.KEY_GUI_ACTION_2.isKey(button)){
+            if(this.isMouseOver(game)){
+                this.text = "";
+                if(this.consumer != null){
+                    this.consumer.accept(this.text);
+                }
+
+                if(this.selectable){
+                    this.isSelected = true;
+                }
+            }
+            else{
+                this.isSelected = false;
+            }
+        }
+        return false;
     }
 }

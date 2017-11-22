@@ -51,16 +51,8 @@ public final class Colors{
         return ((a & 255) << 24) | ((r & 255) << 16) | ((g & 255) << 8) | (b & 255);
     }
 
-    public static int multiplyA(int color, float multiplier){
-        return setA(color, getA(color)*multiplier);
-    }
-
-    public static int setA(int color, float a){
-        return rgb(getR(color), getG(color), getB(color), a);
-    }
-
-    public static float getA(int color){
-        return (float)getAInt(color)/255F;
+    public static int rgb(float red, float green, float blue){
+        return rgb((int)(red*255F), (int)(green*255F), (int)(blue*255F), 255);
     }
 
     public static int rgb(float red, float green, float blue, float alpha){
@@ -79,8 +71,8 @@ public final class Colors{
         return (float)getBInt(color)/255F;
     }
 
-    public static int getAInt(int color){
-        return (color >> 24) & 255;
+    public static float getA(int color){
+        return (float)getAInt(color)/255F;
     }
 
     public static int getRInt(int color){
@@ -95,12 +87,20 @@ public final class Colors{
         return color & 255;
     }
 
-    public static int random(Random rand){
-        return rgb(rand.nextFloat(), rand.nextFloat(), rand.nextFloat());
+    public static int getAInt(int color){
+        return (color >> 24) & 255;
     }
 
-    public static int rgb(float red, float green, float blue){
-        return rgb((int)(red*255F), (int)(green*255F), (int)(blue*255F), 255);
+    public static int setA(int color, float a){
+        return rgb(getR(color), getG(color), getB(color), a);
+    }
+
+    public static int multiplyA(int color, float multiplier){
+        return setA(color, getA(color)*multiplier);
+    }
+
+    public static int random(Random rand){
+        return rgb(rand.nextFloat(), rand.nextFloat(), rand.nextFloat());
     }
 
     public static String toFormattingCode(int color){
@@ -111,12 +111,12 @@ public final class Colors{
         return "&("+r+","+g+","+b+")";
     }
 
-    public static void bind(int color){
-        bind(getR(color), getG(color), getB(color), getA(color));
-    }
-
     public static void bind(float r, float g, float b, float a){
         Renderer.get().glColor4f(r, g, b, a);
+    }
+
+    public static void bind(int color){
+        bind(getR(color), getG(color), getB(color), getA(color));
     }
 
     public static int multiply(int color, float factor){

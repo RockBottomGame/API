@@ -33,11 +33,11 @@ import org.lwjgl.input.Mouse;
 public abstract class GuiComponent{
 
     public final Gui gui;
+    private boolean isActive = true;
     protected int width;
     protected int height;
     protected int x;
     protected int y;
-    private boolean isActive = true;
 
     public GuiComponent(Gui gui, int x, int y, int width, int height){
         this.gui = gui;
@@ -47,16 +47,16 @@ public abstract class GuiComponent{
         this.height = height;
     }
 
-    public static int getUnselectedElementColor(){
-        return Colors.multiplyA(getElementColor(), 0.6F);
+    public static int getGuiColor(){
+        return RockBottomAPI.getGame().getSettings().guiColor;
     }
 
     public static int getElementColor(){
         return Colors.multiplyA(getGuiColor(), 0.5F);
     }
 
-    public static int getGuiColor(){
-        return RockBottomAPI.getGame().getSettings().guiColor;
+    public static int getUnselectedElementColor(){
+        return Colors.multiplyA(getElementColor(), 0.6F);
     }
 
     public static int getElementOutlineColor(){
@@ -73,37 +73,6 @@ public abstract class GuiComponent{
 
     public void renderOverlay(IGameInstance game, IAssetManager manager, IGraphics g, int x, int y){
 
-    }
-
-    public boolean onMouseAction(IGameInstance game, int button, float x, float y){
-        return false;
-    }
-
-    public boolean onKeyboardAction(IGameInstance game, int button, char character){
-        return false;
-    }
-
-    @Override
-    public String toString(){
-        return this.getName().toString();
-    }
-
-    public abstract IResourceName getName();
-
-    public int getWidth(){
-        return this.width;
-    }
-
-    public int getHeight(){
-        return this.height;
-    }
-
-    public int getPriority(){
-        return 0;
-    }
-
-    public boolean shouldDoFingerCursor(IGameInstance game){
-        return this.isMouseOverPrioritized(game);
     }
 
     public boolean isMouseOverPrioritized(IGameInstance game){
@@ -133,6 +102,37 @@ public abstract class GuiComponent{
         this.isActive = active;
     }
 
+    public boolean onMouseAction(IGameInstance game, int button, float x, float y){
+        return false;
+    }
+
+    public boolean onKeyboardAction(IGameInstance game, int button, char character){
+        return false;
+    }
+
+    @Override
+    public String toString(){
+        return this.getName().toString();
+    }
+
+    public abstract IResourceName getName();
+
+    public int getX(){
+        return this.x;
+    }
+
+    public int getY(){
+        return this.y;
+    }
+
+    public int getWidth(){
+        return this.width;
+    }
+
+    public int getHeight(){
+        return this.height;
+    }
+
     public int getRenderX(){
         if(this.gui != null){
             return this.gui.getX()+this.getX();
@@ -151,11 +151,11 @@ public abstract class GuiComponent{
         }
     }
 
-    public int getX(){
-        return this.x;
+    public int getPriority(){
+        return 0;
     }
 
-    public int getY(){
-        return this.y;
+    public boolean shouldDoFingerCursor(IGameInstance game){
+        return this.isMouseOverPrioritized(game);
     }
 }

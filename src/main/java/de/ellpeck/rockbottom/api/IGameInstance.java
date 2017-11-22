@@ -73,6 +73,8 @@ public interface IGameInstance extends IMod{
 
     <T> void enqueueAction(BiConsumer<IGameInstance, T> action, T object, Predicate<IGameInstance> condition);
 
+    <T> void enqueueAction(BiConsumer<IGameInstance, T> action, T object);
+
     /**
      * Gets the {@link IDataManager} of the current game instance. This can be
      * used for accessing locations on disk like the save folder or the game
@@ -151,6 +153,14 @@ public interface IGameInstance extends IMod{
     IAssetManager getAssetManager();
 
     /**
+     * Gets the {@link IGraphics} context of the current game instance. This can
+     * be used to draw various shapes and interact with the OpenGL context.
+     *
+     * @return The graphics context
+     */
+    IGraphics getGraphics();
+
+    /**
      * Gets the {@link IParticleManager} of the current game instance. This can
      * be used to spawn and render particles. Note that this is not implemented
      * on the dedicated server.
@@ -171,9 +181,6 @@ public interface IGameInstance extends IMod{
      * @throws UnsupportedOperationException on the dedicated server
      */
     UUID getUniqueId();
-
-    @ApiInternal
-    void setUniqueId(UUID id);
 
     @ApiInternal
     int getTpsAverage();
@@ -222,6 +229,9 @@ public interface IGameInstance extends IMod{
      */
     boolean isDedicatedServer();
 
+    @ApiInternal
+    void setUniqueId(UUID id);
+
     /**
      * Gets the {@link Input} of the current game instance. This is a slick
      * implemented class that allows for the polling of inputs. Note that, when
@@ -257,14 +267,6 @@ public interface IGameInstance extends IMod{
     default float getDisplayRatio(){
         return this.getGraphics().getDisplayRatio();
     }
-
-    /**
-     * Gets the {@link IGraphics} context of the current game instance. This can
-     * be used to draw various shapes and interact with the OpenGL context.
-     *
-     * @return The graphics context
-     */
-    IGraphics getGraphics();
 
     /**
      * @deprecated Use {@link IGraphics#getGuiScale()}
@@ -370,6 +372,4 @@ public interface IGameInstance extends IMod{
     default void scheduleAction(Supplier<Boolean> action){
         this.enqueueAction((game, o) -> action.get(), null);
     }
-
-    <T> void enqueueAction(BiConsumer<IGameInstance, T> action, T object);
 }

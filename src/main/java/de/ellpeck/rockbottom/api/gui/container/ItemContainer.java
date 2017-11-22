@@ -49,6 +49,17 @@ public abstract class ItemContainer{
         return this.slots.size();
     }
 
+    public void addSlot(ContainerSlot slot){
+        for(IInventory inv : this.containedInventories){
+            if(inv == slot.inventory){
+                this.slots.add(slot);
+                return;
+            }
+        }
+
+        RockBottomAPI.logger().warning("Tried adding slot "+slot+" with inventory "+slot.inventory+" to container "+this+" that doesn't contain it!");
+    }
+
     public int getIndexForInvSlot(IInventory inv, int id){
         for(int i = 0; i < this.slots.size(); i++){
             ContainerSlot slot = this.slots.get(i);
@@ -57,11 +68,6 @@ public abstract class ItemContainer{
             }
         }
         return -1;
-    }
-
-    protected void addPlayerInventory(AbstractEntityPlayer player, int x, int y){
-        this.addSlotGrid(player.getInv(), 0, 8, x, y, 8);
-        this.addSlotGrid(player.getInv(), 8, player.getInv().getSlotAmount(), x, y+25, 8);
     }
 
     protected void addSlotGrid(IInventory inventory, int start, int end, int xStart, int yStart, int width){
@@ -78,15 +84,9 @@ public abstract class ItemContainer{
         }
     }
 
-    public void addSlot(ContainerSlot slot){
-        for(IInventory inv : this.containedInventories){
-            if(inv == slot.inventory){
-                this.slots.add(slot);
-                return;
-            }
-        }
-
-        RockBottomAPI.logger().warning("Tried adding slot "+slot+" with inventory "+slot.inventory+" to container "+this+" that doesn't contain it!");
+    protected void addPlayerInventory(AbstractEntityPlayer player, int x, int y){
+        this.addSlotGrid(player.getInv(), 0, 8, x, y, 8);
+        this.addSlotGrid(player.getInv(), 8, player.getInv().getSlotAmount(), x, y+25, 8);
     }
 
     public void onOpened(){

@@ -33,6 +33,8 @@ public interface IMod{
 
     String getId();
 
+    String getVersion();
+
     String getResourceLocation();
 
     default String getDescription(){
@@ -66,8 +68,6 @@ public interface IMod{
     default boolean isCompatibleWithModVersion(String version){
         return version.equals(this.getVersion());
     }
-
-    String getVersion();
 
     default void prePreInit(IGameInstance game, IApiHandler apiHandler, IEventHandler eventHandler){
 

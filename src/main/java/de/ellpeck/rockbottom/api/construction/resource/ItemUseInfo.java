@@ -36,10 +36,6 @@ public class ItemUseInfo implements IUseInfo{
         this(new ItemInstance(tile, amount, meta));
     }
 
-    public ItemUseInfo(ItemInstance instance){
-        this.instance = instance;
-    }
-
     public ItemUseInfo(Tile tile, int amount){
         this(new ItemInstance(tile, amount));
     }
@@ -58,6 +54,10 @@ public class ItemUseInfo implements IUseInfo{
 
     public ItemUseInfo(Item item){
         this(new ItemInstance(item));
+    }
+
+    public ItemUseInfo(ItemInstance instance){
+        this.instance = instance;
     }
 
     @Override
@@ -82,11 +82,6 @@ public class ItemUseInfo implements IUseInfo{
     }
 
     @Override
-    public int hashCode(){
-        return this.instance.hashCode();
-    }
-
-    @Override
     public boolean equals(Object o){
         if(this == o){
             return true;
@@ -98,6 +93,11 @@ public class ItemUseInfo implements IUseInfo{
         else{
             return false;
         }
+    }
+
+    @Override
+    public int hashCode(){
+        return this.instance.hashCode();
     }
 
     @Override
