@@ -34,8 +34,15 @@ public class ItemMeta extends ItemBasic{
     public final List<IResourceName> subUnlocNames = new ArrayList<>();
 
     public ItemMeta(IResourceName name){
+        this(name, true);
+    }
+
+    public ItemMeta(IResourceName name, boolean addDirectly){
         super(name);
-        this.addSubItem(name);
+
+        if(addDirectly){
+            this.addSubItem(name);
+        }
     }
 
     public ItemMeta addSubItem(IResourceName name){
