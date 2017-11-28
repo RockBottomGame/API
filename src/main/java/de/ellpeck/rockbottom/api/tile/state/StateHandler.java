@@ -23,6 +23,7 @@ package de.ellpeck.rockbottom.api.tile.state;
 
 import de.ellpeck.rockbottom.api.tile.Tile;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
+import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 
 import java.util.*;
 
@@ -43,19 +44,26 @@ public class StateHandler{
         if(!this.hasInit){
             this.hasInit = true;
 
-            Map<TileProp, Comparable> defMap = new TreeMap<>();
+            Map<String, Comparable> defMap = new TreeMap<>();
             for(TileProp prop : this.getProps()){
                 Comparable def = prop.getDefault();
                 int index = prop.getIndex(def);
 
                 if(index >= 0 && index < prop.getVariants()){
-                    defMap.put(prop, def);
+                    defMap.put(prop.getName(), def);
                 }
                 else{
                     throw new IllegalArgumentException();
                 }
             }
-            this.defaultState = new TileState(this.tile, defMap);
+
+            IResourceName defName = TileState.generateName(this.tile, defMap);
+            if(this.tile.hasState(defName, defMap)){
+                this.defaultState = new TileState(defName, this.tile, defMap);
+            }
+            else{
+                throw new RuntimeException("Tile "+this.tile+" is disallowing its default state from being generated! This is disallowed!");
+            }
         }
         else{
             throw new RuntimeException("Cannot initialize state handler for tile "+this.tile+" twice!");

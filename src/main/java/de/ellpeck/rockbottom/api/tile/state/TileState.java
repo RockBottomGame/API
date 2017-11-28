@@ -37,11 +37,11 @@ public class TileState{
 
     private final Tile tile;
     private final IResourceName name;
-    private final Map<TileProp, Comparable> properties;
-    private final Table<TileProp, Comparable, TileState> subStates = TreeBasedTable.create();
+    private final Map<String, Comparable> properties;
+    private final Table<String, Comparable, TileState> subStates = TreeBasedTable.create();
 
     @ApiInternal
-    private TileState(IResourceName name, Tile tile, Map<TileProp, Comparable> properties){
+    public TileState(IResourceName name, Tile tile, Map<String, Comparable> properties){
         this.tile = tile;
         this.properties = properties;
         this.name = name;
@@ -49,42 +49,40 @@ public class TileState{
         RockBottomAPI.TILE_STATE_REGISTRY.register(name, this);
 
         for(TileProp prop : tile.getProps()){
+            String propName = prop.getName();
             for(int i = 0; i < prop.getVariants(); i++){
                 Comparable value = prop.getValue(i);
-                if(!properties.get(prop).equals(value)){
-                    Map<TileProp, Comparable> subProps = new TreeMap<>(properties);
-                    subProps.put(prop, value);
+                if(!properties.get(propName).equals(value)){
+                    Map<String, Comparable> subProps = new TreeMap<>(properties);
+                    subProps.put(propName, value);
 
                     IResourceName subName = generateName(tile, subProps);
+                    if(tile.hasState(subName, subProps)){
+                        TileState state = RockBottomAPI.TILE_STATE_REGISTRY.get(subName);
 
-                    TileState state = RockBottomAPI.TILE_STATE_REGISTRY.get(subName);
-                    if(state == null){
-                        state = new TileState(subName, tile, subProps);
+                        if(state == null){
+                            state = new TileState(subName, tile, subProps);
+                        }
+
+                        this.subStates.put(propName, value, state);
                     }
-
-                    this.subStates.put(prop, value, state);
                 }
             }
         }
     }
 
     @ApiInternal
-    public TileState(Tile tile, Map<TileProp, Comparable> properties){
-        this(generateName(tile, properties), tile, properties);
-    }
-
-    @ApiInternal
-    private static IResourceName generateName(Tile tile, Map<TileProp, Comparable> properties){
+    public static IResourceName generateName(Tile tile, Map<String, Comparable> properties){
         String suffix = "";
 
         if(!properties.isEmpty()){
             suffix += ";";
 
-            Iterator<Entry<TileProp, Comparable>> iterator = properties.entrySet().iterator();
+            Iterator<Entry<String, Comparable>> iterator = properties.entrySet().iterator();
             while(iterator.hasNext()){
-                Entry<TileProp, Comparable> entry = iterator.next();
+                Entry<String, Comparable> entry = iterator.next();
 
-                String append = entry.getKey().getName()+"@"+entry.getValue();
+                String append = entry.getKey()+"@"+entry.getValue();
                 if(iterator.hasNext()){
                     append += ",";
                 }
@@ -100,7 +98,7 @@ public class TileState{
         return this.name;
     }
 
-    public <T extends Comparable> TileState prop(TileProp<T> prop, T value){
+    public <T extends Comparable> TileState prop(String prop, T value){
         if(value.equals(this.get(prop))){
             return this;
         }
@@ -115,6 +113,10 @@ public class TileState{
         }
     }
 
+    public <T extends Comparable> TileState prop(TileProp<T> prop, T value){
+        return this.prop(prop.getName(), value);
+    }
+
     public <T extends Comparable> TileState cycleProp(TileProp<T> prop){
         int index = prop.getIndex(this.get(prop))+1;
         if(index >= prop.getVariants()){
@@ -123,7 +125,7 @@ public class TileState{
         return this.prop(prop, prop.getValue(index));
     }
 
-    public <T extends Comparable> T get(TileProp<T> prop){
+    public <T extends Comparable> T get(String prop){
         Comparable value = this.properties.get(prop);
         if(value == null){
             throw new IllegalArgumentException("The tile "+this.tile.getName()+" does not support property "+prop);
@@ -131,6 +133,10 @@ public class TileState{
         else{
             return (T)value;
         }
+    }
+
+    public <T extends Comparable> T get(TileProp<T> prop){
+        return this.get(prop.getName());
     }
 
     public TileState overrideProps(TileState other, TileProp... props){

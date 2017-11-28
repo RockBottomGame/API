@@ -333,6 +333,10 @@ public class Tile{
         return this.stateHandler.getProps();
     }
 
+    public boolean hasState(IResourceName name, Map<String, Comparable> props){
+        return true;
+    }
+
     public IResourceName getBreakSound(IWorld world, int x, int y, TileLayer layer, Entity destroyer){
         return SOUND_GENERIC_TILE;
     }
