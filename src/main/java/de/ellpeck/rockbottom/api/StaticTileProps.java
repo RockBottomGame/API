@@ -22,6 +22,7 @@
 package de.ellpeck.rockbottom.api;
 
 import de.ellpeck.rockbottom.api.tile.state.BoolProp;
+import de.ellpeck.rockbottom.api.tile.state.EnumProp;
 import de.ellpeck.rockbottom.api.tile.state.IntProp;
 import de.ellpeck.rockbottom.api.tile.state.TileProp;
 
@@ -35,7 +36,7 @@ public final class StaticTileProps{
 
     /**
      * Determines if a tile is naturally generated or placed manually. Used by
-     * {@link GameContent#TILE_LOG} and {@link GameContent#TILE_LEAVES}
+     * {@link GameContent#TILE_LEAVES}
      */
     public static final BoolProp NATURAL = new BoolProp("natural", true);
     /**
@@ -43,5 +44,24 @@ public final class StaticTileProps{
      * GameContent#TILE_TORCH}
      */
     public static final IntProp TORCH_FACING = new IntProp("facing", 0, 4);
+    /**
+     * Determines which type of variation a log tile is. Used by {@link
+     * GameContent#TILE_LOG}
+     */
+    public static final EnumProp<LogType> LOG_VARIANT = new EnumProp<>("variant", LogType.PLACED, LogType.class);
 
+    public enum LogType{
+        PLACED,
+        BRANCH_LEFT,
+        BRANCH_RIGHT,
+        TRUNK_TOP,
+        TRUNK_MIDDLE,
+        TRUNK_BOTTOM,
+        ROOT_LEFT,
+        ROOT_RIGHT;
+
+        public boolean isNatural(){
+            return this != PLACED;
+        }
+    }
 }

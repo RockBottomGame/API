@@ -361,4 +361,8 @@ public class Tile{
     public void onScheduledUpdate(IWorld world, int x, int y, TileLayer layer){
 
     }
+
+    public boolean hasSolidSurface(IWorld world, int x, int y, TileLayer layer){
+        return this.isFullTile();
+    }
 }
