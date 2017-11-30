@@ -27,6 +27,7 @@ import de.ellpeck.rockbottom.api.data.settings.Settings;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
+import de.ellpeck.rockbottom.api.world.IChunk;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -68,6 +69,10 @@ public class TileLayer{
 
     public boolean forceForegroundRender(){
         return false;
+    }
+
+    public boolean isVisible(IGameInstance game, AbstractEntityPlayer player, IChunk chunk, int x, int y, boolean isRenderingForeground){
+        return true;
     }
 
     public TileLayer register(){
