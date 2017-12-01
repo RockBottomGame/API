@@ -34,6 +34,7 @@ import org.newdawn.slick.Input;
 
 import java.awt.*;
 import java.awt.datatransfer.DataFlavor;
+import java.util.Arrays;
 import java.util.function.Consumer;
 
 public class ComponentInputField extends GuiComponent{
@@ -46,6 +47,7 @@ public class ComponentInputField extends GuiComponent{
     private String text = "";
     private boolean isSelected;
     private int counter;
+    private boolean censored;
 
     public ComponentInputField(Gui gui, int x, int y, int sizeX, int sizeY, boolean renderBox, boolean selectable, boolean defaultActive, int maxLength, boolean displayMaxLength){
         this(gui, x, y, sizeX, sizeY, renderBox, selectable, defaultActive, maxLength, displayMaxLength, null);
@@ -67,6 +69,11 @@ public class ComponentInputField extends GuiComponent{
 
     public void setSelected(boolean selected){
         this.isSelected = selected;
+    }
+
+    public ComponentInputField setCensored(boolean censored){
+        this.censored = censored;
+        return this;
     }
 
     @Override
@@ -151,7 +158,13 @@ public class ComponentInputField extends GuiComponent{
         }
 
         IFont font = manager.getFont();
+
         String text = this.getDisplayText();
+        if(this.censored){
+            char[] chars = new char[text.length()];
+            Arrays.fill(chars, '*');
+            text = new String(chars);
+        }
 
         String display = text+(this.isSelected ? ((this.counter/15)%2 == 0 ? "|" : " ") : "");
         font.drawCutOffString(x+3, y+this.height/2F-font.getHeight(0.35F)/2F, display, 0.35F, this.width-6, true, false);
