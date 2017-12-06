@@ -42,6 +42,10 @@ public interface IDataManager{
 
     File getCommandPermsFile();
 
+    File getWhitelistFile();
+
+    File getBlacklistFile();
+
     File getModSettingsFile();
 
     File getPlayerDesignFile();

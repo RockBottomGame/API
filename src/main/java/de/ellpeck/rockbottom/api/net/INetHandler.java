@@ -21,13 +21,14 @@
 
 package de.ellpeck.rockbottom.api.net;
 
-import de.ellpeck.rockbottom.api.data.settings.CommandPermissions;
 import de.ellpeck.rockbottom.api.entity.Entity;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.net.packet.IPacket;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
 import de.ellpeck.rockbottom.api.world.IWorld;
 import io.netty.channel.group.ChannelGroup;
+
+import java.util.UUID;
 
 public interface INetHandler{
 
@@ -44,8 +45,6 @@ public interface INetHandler{
     @ApiInternal
     ChannelGroup getConnectedClients();
 
-    CommandPermissions getCommandPermissions();
-
     void sendToServer(IPacket packet);
 
     void sendToAllPlayers(IWorld world, IPacket packet);
@@ -60,9 +59,34 @@ public interface INetHandler{
 
     void sendToAllPlayersWithLoadedPosExcept(IWorld world, IPacket packet, double x, double y, Entity except);
 
+    int getCommandLevel(AbstractEntityPlayer player);
+
+    void setCommandLevel(AbstractEntityPlayer player, int level);
+
+    void setCommandLevel(UUID id, int level);
+
+    void whitelist(UUID id);
+
+    void removeWhitelist(UUID id);
+
+    boolean isWhitelisted(UUID id);
+
+    boolean isWhitelistEnabled();
+
+    void enableWhitelist(boolean enabled);
+
+    void blacklist(UUID id);
+
+    void removeBlacklist(UUID id);
+
+    boolean isBlacklisted(UUID id);
+
     @ApiInternal
     void init(String ip, int port, boolean isServer) throws Exception;
 
     @ApiInternal
     void shutdown();
+
+    @ApiInternal
+    void saveServerSettings();
 }
