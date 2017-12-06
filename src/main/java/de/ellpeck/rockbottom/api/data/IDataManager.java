@@ -46,6 +46,8 @@ public interface IDataManager{
 
     File getPlayerDesignFile();
 
+    File getModConfigFolder();
+
     DataSet getGameInfo();
 
     void loadPropSettings(IPropSettings settings);
