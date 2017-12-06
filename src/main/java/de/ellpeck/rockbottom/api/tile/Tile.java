@@ -73,19 +73,12 @@ public class Tile{
         return null;
     }
 
-    public BoundBox getBoundBox(IWorld world, int x, int y){
-        return DEFAULT_BOUNDS;
+    public BoundBox getBoundBox(IWorld world, int x, int y, TileLayer layer){
+        return this.getBoundBox(world, x, y);
     }
 
-    public List<BoundBox> getBoundBoxes(IWorld world, int x, int y, MovableWorldObject object, BoundBox objectBox, BoundBox objectBoxMotion){
-        BoundBox box = this.getBoundBox(world, x, y);
-
-        if(box != null && !box.isEmpty()){
-            return Collections.singletonList(box.copy().add(x, y));
-        }
-        else{
-            return Collections.emptyList();
-        }
+    public List<BoundBox> getBoundBoxes(IWorld world, int x, int y, TileLayer layer, MovableWorldObject object, BoundBox objectBox, BoundBox objectBoxMotion){
+        return this.getBoundBoxes(world, x, y, object, objectBox, objectBoxMotion);
     }
 
     public boolean canBreak(IWorld world, int x, int y, TileLayer layer){
@@ -353,6 +346,18 @@ public class Tile{
         return true;
     }
 
+    public boolean hasSolidSurface(IWorld world, int x, int y, TileLayer layer){
+        return this.isFullTile();
+    }
+
+    /**
+     * @deprecated use {@link #getBoundBox(IWorld, int, int, TileLayer)} instead
+     */
+    @Deprecated
+    public BoundBox getBoundBox(IWorld world, int x, int y){
+        return DEFAULT_BOUNDS;
+    }
+
     /**
      * @deprecated use {@link #onScheduledUpdate(IWorld, int, int, TileLayer,
      * int)} instead
@@ -362,7 +367,19 @@ public class Tile{
 
     }
 
-    public boolean hasSolidSurface(IWorld world, int x, int y, TileLayer layer){
-        return this.isFullTile();
+    /**
+     * @deprecated use {@link #getBoundBoxes(IWorld, int, int, TileLayer,
+     * MovableWorldObject, BoundBox, BoundBox)} instead
+     */
+    @Deprecated
+    public List<BoundBox> getBoundBoxes(IWorld world, int x, int y, MovableWorldObject object, BoundBox objectBox, BoundBox objectBoxMotion){
+        BoundBox box = this.getBoundBox(world, x, y, TileLayer.MAIN);
+
+        if(box != null && !box.isEmpty()){
+            return Collections.singletonList(box.copy().add(x, y));
+        }
+        else{
+            return Collections.emptyList();
+        }
     }
 }

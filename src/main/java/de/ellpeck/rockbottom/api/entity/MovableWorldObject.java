@@ -68,5 +68,9 @@ public abstract class MovableWorldObject{
 
     }
 
+    public boolean canCollideWithTile(TileState state, int x, int y, TileLayer layer){
+        return true;
+    }
+
     public abstract BoundBox getBoundingBox();
 }

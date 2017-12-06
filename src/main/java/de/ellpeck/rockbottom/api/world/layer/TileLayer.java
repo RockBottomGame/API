@@ -24,6 +24,7 @@ package de.ellpeck.rockbottom.api.world.layer;
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.data.settings.Settings;
+import de.ellpeck.rockbottom.api.entity.MovableWorldObject;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
@@ -73,6 +74,10 @@ public class TileLayer{
 
     public boolean isVisible(IGameInstance game, AbstractEntityPlayer player, IChunk chunk, int x, int y, boolean isRenderingForeground){
         return true;
+    }
+
+    public boolean canCollide(MovableWorldObject object){
+        return this == MAIN;
     }
 
     public TileLayer register(){
