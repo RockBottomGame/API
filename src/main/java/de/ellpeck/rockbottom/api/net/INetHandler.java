@@ -75,7 +75,9 @@ public interface INetHandler{
 
     void enableWhitelist(boolean enabled);
 
-    void blacklist(UUID id);
+    void blacklist(UUID id, String reason);
+
+    String getBlacklistReason(UUID id);
 
     void removeBlacklist(UUID id);
 
