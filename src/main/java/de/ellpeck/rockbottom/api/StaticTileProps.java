@@ -49,6 +49,11 @@ public final class StaticTileProps{
      * GameContent#TILE_LOG}
      */
     public static final EnumProp<LogType> LOG_VARIANT = new EnumProp<>("variant", LogType.PLACED, LogType.class);
+    /**
+     * Determines how far grown a sapling is. Used by {@link
+     * GameContent#TILE_SAPLING}
+     */
+    public static final IntProp SAPLING_GROWTH = new IntProp("growth", 0, 5);
 
     public enum LogType{
         PLACED,

@@ -53,6 +53,7 @@ public final class GameContent{
     public static final Tile TILE_LADDER = getTile("ladder").setHardness(1.5F).addEffectiveTool(ToolType.AXE, 0).setForceDrop();
     public static final Tile TILE_CHEST = getTile("chest").setHardness(4F).addEffectiveTool(ToolType.AXE, 0).setForceDrop();
     public static final Tile TILE_SIGN = getTile("sign").addEffectiveTool(ToolType.AXE, 0).setForceDrop();
+    public static final Tile TILE_SAPLING = getTile("sapling").setHardness(0F).setForceDrop();
 
     public static final Item ITEM_BRITTLE_PICKAXE = getItem("brittle_pickaxe");
     public static final Item ITEM_BRITTLE_AXE = getItem("brittle_axe");
