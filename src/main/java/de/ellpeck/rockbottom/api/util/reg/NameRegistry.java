@@ -30,10 +30,11 @@ public class NameRegistry<T> implements IRegistry<IResourceName, T>{
 
     protected final String name;
     protected final BiMap<IResourceName, T> map = HashBiMap.create();
-    private BiMap<IResourceName, T> cachedUnmodifiableMap;
+    protected final BiMap<IResourceName, T> unmodifiableMap;
 
     public NameRegistry(String name){
         this.name = name;
+        this.unmodifiableMap = Maps.unmodifiableBiMap(this.map);
     }
 
     @Override
@@ -73,11 +74,7 @@ public class NameRegistry<T> implements IRegistry<IResourceName, T>{
 
     @Override
     public BiMap<IResourceName, T> getUnmodifiable(){
-        if(this.cachedUnmodifiableMap == null || this.cachedUnmodifiableMap.size() != this.map.size()){
-            this.cachedUnmodifiableMap = Maps.unmodifiableBiMap(this.map);
-        }
-
-        return this.cachedUnmodifiableMap;
+        return this.unmodifiableMap;
     }
 
     @Override

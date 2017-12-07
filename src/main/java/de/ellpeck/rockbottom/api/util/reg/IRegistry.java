@@ -22,6 +22,7 @@
 package de.ellpeck.rockbottom.api.util.reg;
 
 import com.google.common.collect.BiMap;
+import de.ellpeck.rockbottom.api.RockBottomAPI;
 
 public interface IRegistry<T, U>{
 
@@ -35,4 +36,8 @@ public interface IRegistry<T, U>{
 
     BiMap<T, U> getUnmodifiable();
 
+    default <V extends IRegistry> V register(){
+        RockBottomAPI.registerRegistry(this);
+        return (V)this;
+    }
 }

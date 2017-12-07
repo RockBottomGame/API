@@ -69,4 +69,7 @@ public interface IAssetManager{
     ITexture getMissingTexture();
 
     SimpleDateFormat getLocalizedDateFormat();
+
+    @ApiInternal
+    ISpecialCursor pickCurrentCursor(IGameInstance game);
 }
