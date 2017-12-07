@@ -211,6 +211,14 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
 
     }
 
+    public void onIntersectWithTile(int x, int y, TileLayer layer, TileState state, BoundBox entityBox, BoundBox entityBoxMotion, List<BoundBox> tileBoxes){
+
+    }
+
+    public void onIntersectWithEntity(Entity otherEntity, BoundBox thisBox, BoundBox thisBoxMotion, BoundBox otherBox, BoundBox otherBoxMotion){
+
+    }
+
     public boolean onInteractWith(AbstractEntityPlayer player, double mouseX, double mouseY){
         return false;
     }
@@ -219,8 +227,29 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
         return false;
     }
 
+    public boolean canCollideWith(MovableWorldObject object, BoundBox entityBox, BoundBox entityBoxMotion){
+        return false;
+    }
+
+    public double getMaxInteractionDistance(IWorld world, double mouseX, double mouseY, AbstractEntityPlayer player){
+        return AbstractEntityPlayer.RANGE;
+    }
+
     @Override
     public final void onTileCollision(int x, int y, TileLayer layer, TileState state, BoundBox objBox, BoundBox objBoxMotion, List<BoundBox> boxes){
+        Tile tile = state.getTile();
+        tile.onCollideWithEntity(this.world, x, y, layer, state, objBox, objBoxMotion, boxes, this);
+        this.onCollideWithTile(x, y, layer, state, objBox, objBoxMotion, boxes);
+    }
+
+    @Override
+    public final void onEntityCollision(Entity entity, BoundBox thisBox, BoundBox thisBoxMotion, BoundBox otherBox, BoundBox otherBoxMotion){
+        this.onCollideWithEntity(entity, thisBox, thisBoxMotion, otherBox, otherBoxMotion);
+        entity.onCollideWithEntity(this, otherBox, otherBoxMotion, thisBox, thisBoxMotion);
+    }
+
+    @Override
+    public final void onTileIntersection(int x, int y, TileLayer layer, TileState state, BoundBox objBox, BoundBox objBoxMotion, List<BoundBox> boxes){
         Tile tile = state.getTile();
 
         if(tile.canClimb(this.world, x, y, layer, state, objBox, objBoxMotion, boxes, this)){
@@ -233,21 +262,13 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
             }
         }
 
-        tile.onCollideWithEntity(this.world, x, y, layer, state, objBox, objBoxMotion, boxes, this);
-        this.onCollideWithTile(x, y, layer, state, objBox, objBoxMotion, boxes);
+        tile.onIntersectWithEntity(this.world, x, y, layer, state, objBox, objBoxMotion, boxes, this);
+        this.onIntersectWithTile(x, y, layer, state, objBox, objBoxMotion, boxes);
     }
 
     @Override
-    public final void onEntityCollision(Entity entity, BoundBox thisBox, BoundBox thisBoxMotion, BoundBox otherBox, BoundBox otherBoxMotion){
-        this.onCollideWithEntity(entity, thisBox, thisBoxMotion, otherBox, otherBoxMotion);
-        entity.onCollideWithEntity(this, otherBox, otherBoxMotion, thisBox, thisBoxMotion);
-    }
-
-    public boolean canCollideWith(MovableWorldObject object, BoundBox entityBox, BoundBox entityBoxMotion){
-        return false;
-    }
-
-    public double getMaxInteractionDistance(IWorld world, double mouseX, double mouseY, AbstractEntityPlayer player){
-        return AbstractEntityPlayer.RANGE;
+    public final void onEntityIntersection(Entity entity, BoundBox thisBox, BoundBox thisBoxMotion, BoundBox otherBox, BoundBox otherBoxMotion){
+        this.onIntersectWithEntity(entity, thisBox, thisBoxMotion, otherBox, otherBoxMotion);
+        entity.onIntersectWithEntity(this, otherBox, otherBoxMotion, thisBox, thisBoxMotion);
     }
 }

@@ -289,6 +289,10 @@ public class Tile{
 
     }
 
+    public void onIntersectWithEntity(IWorld world, int x, int y, TileLayer layer, TileState state, BoundBox entityBox, BoundBox entityBoxMotion, List<BoundBox> tileBoxes, Entity entity){
+
+    }
+
     public void describeItem(IAssetManager manager, ItemInstance instance, List<String> desc, boolean isAdvanced){
         for(TileLayer layer : TileLayer.getAllLayers()){
             if(this.canPlaceInLayer(layer)){

@@ -68,6 +68,16 @@ public abstract class MovableWorldObject{
 
     }
 
+    @ApiInternal
+    public void onTileIntersection(int x, int y, TileLayer layer, TileState state, BoundBox objBox, BoundBox objBoxMotion, List<BoundBox> boxes){
+
+    }
+
+    @ApiInternal
+    public void onEntityIntersection(Entity entity, BoundBox thisBox, BoundBox thisBoxMotion, BoundBox otherBox, BoundBox otherBoxMotion){
+
+    }
+
     public boolean canCollideWithTile(TileState state, int x, int y, TileLayer layer){
         return true;
     }
