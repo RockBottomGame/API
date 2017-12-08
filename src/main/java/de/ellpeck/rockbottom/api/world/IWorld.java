@@ -120,4 +120,6 @@ public interface IWorld extends IChunkOrWorld{
     void playSound(IResourceName name, double x, double y, double z, float pitch, float volume);
 
     void broadcastSound(IResourceName name, float pitch, float volume);
+
+    byte getCombinedVisualLight(int x, int y);
 }
