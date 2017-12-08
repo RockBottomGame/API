@@ -268,7 +268,13 @@ public interface IGraphics{
 
     boolean isDebug();
 
-    boolean isLightDebug();
+    /**
+     * @deprecated This option was removed
+     */
+    @Deprecated
+    default boolean isLightDebug(){
+        return false;
+    }
 
     boolean isItemInfoDebug();
 
