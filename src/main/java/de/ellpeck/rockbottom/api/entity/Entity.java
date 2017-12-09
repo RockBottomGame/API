@@ -223,6 +223,10 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
         return false;
     }
 
+    public boolean onAttack(AbstractEntityPlayer player, double mouseX, double mouseY){
+        return false;
+    }
+
     public boolean shouldStartClimbing(int x, int y, TileLayer layer, TileState state, BoundBox entityBox, BoundBox entityBoxMotion, List<BoundBox> tileBoxes){
         return false;
     }
