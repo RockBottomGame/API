@@ -37,7 +37,7 @@ public final class Constants{
     public static final int CHUNK_SIZE = 32;
     public static final byte MAX_LIGHT = 30;
 
-    public static final int TIME_PER_DAY = 12000;
+    public static final int TIME_PER_DAY = 24000;
 
     public static final int CHUNK_LOAD_DISTANCE = 3;
     public static final int CHUNK_LOAD_TIME = 250;
