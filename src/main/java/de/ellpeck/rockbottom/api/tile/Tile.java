@@ -195,8 +195,8 @@ public class Tile{
         return true;
     }
 
-    public boolean obscuresBackground(){
-        return this.isFullTile();
+    public boolean obscuresBackground(IWorld world, int x, int y, TileLayer layer){
+        return this.obscuresBackground();
     }
 
     public void updateRandomly(IWorld world, int x, int y, TileLayer layer){
@@ -389,5 +389,14 @@ public class Tile{
         else{
             return Collections.emptyList();
         }
+    }
+
+    /**
+     * @deprecated Use {@link #obscuresBackground(IWorld, int, int, TileLayer)}
+     * instead
+     */
+    @Deprecated
+    public boolean obscuresBackground(){
+        return this.isFullTile();
     }
 }
