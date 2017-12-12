@@ -27,7 +27,6 @@ import de.ellpeck.rockbottom.api.data.settings.Settings;
 import de.ellpeck.rockbottom.api.entity.MovableWorldObject;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.tile.Tile;
-import de.ellpeck.rockbottom.api.tile.state.TileState;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 import de.ellpeck.rockbottom.api.world.IChunk;
@@ -41,6 +40,7 @@ import java.util.List;
 public class TileLayer{
 
     public static final TileLayer MAIN = new TileLayer(RockBottomAPI.createInternalRes("main"), 0).register();
+    public static final TileLayer LIQUIDS = new TileLayer(RockBottomAPI.createInternalRes("liquids"), -5).register();
     public static final TileLayer BACKGROUND = new TileLayer(RockBottomAPI.createInternalRes("background"), -10).register();
 
     private static List<TileLayer> allLayers;
@@ -64,7 +64,7 @@ public class TileLayer{
     }
 
     public boolean canEditLayer(IGameInstance game, AbstractEntityPlayer player){
-        return Settings.KEY_BACKGROUND.isDown() ? this == BACKGROUND : this == MAIN;
+        return Settings.KEY_BACKGROUND.isDown() ? this == BACKGROUND : (this == MAIN || this == LIQUIDS);
     }
 
     public float getRenderLightModifier(){
@@ -80,7 +80,11 @@ public class TileLayer{
     }
 
     public boolean canTileBeInLayer(IWorld world, int x, int y, Tile tile){
-        return true;
+        return tile.isAir() || (this == LIQUIDS) == tile.isLiquid();
+    }
+
+    public boolean canHoldTileEntities(){
+        return this == MAIN || this == BACKGROUND;
     }
 
     public boolean canCollide(MovableWorldObject object){

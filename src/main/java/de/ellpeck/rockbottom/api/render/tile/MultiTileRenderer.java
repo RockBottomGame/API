@@ -43,7 +43,7 @@ public class MultiTileRenderer<T extends MultiTile> extends DefaultTileRenderer<
     protected final IResourceName texItem;
     protected final Map<Pos2, IResourceName> textures = new HashMap<>();
 
-    public MultiTileRenderer(IResourceName texture, MultiTile tile){
+    public MultiTileRenderer(IResourceName texture, T tile){
         super(texture);
         this.texItem = this.texture.addSuffix(".item");
 

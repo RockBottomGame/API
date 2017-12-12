@@ -354,6 +354,10 @@ public class Tile{
         return this.isFullTile();
     }
 
+    public boolean isLiquid(){
+        return false;
+    }
+
     /**
      * @deprecated use {@link #getBoundBox(IWorld, int, int, TileLayer)} instead
      */

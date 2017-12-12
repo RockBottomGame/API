@@ -21,6 +21,7 @@
 
 package de.ellpeck.rockbottom.api;
 
+import de.ellpeck.rockbottom.api.tile.TileLiquid;
 import de.ellpeck.rockbottom.api.tile.state.BoolProp;
 import de.ellpeck.rockbottom.api.tile.state.EnumProp;
 import de.ellpeck.rockbottom.api.tile.state.IntProp;
