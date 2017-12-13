@@ -22,6 +22,7 @@
 package de.ellpeck.rockbottom.api.tile;
 
 import de.ellpeck.rockbottom.api.GameContent;
+import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.render.tile.ITileRenderer;
 import de.ellpeck.rockbottom.api.render.tile.TileLiquidRenderer;
 import de.ellpeck.rockbottom.api.tile.state.IntProp;
@@ -63,11 +64,17 @@ public abstract class TileLiquid extends TileBasic{
                 world.setState(layer, x, y, GameContent.TILE_AIR.getDefState());
             }
         }
+
+        if(this.doesFlow()){
+            world.scheduleUpdate(x, y, layer, this.getFlowSpeed());
+        }
     }
 
     @Override
     public void onAdded(IWorld world, int x, int y, TileLayer layer){
-
+        if(this.doesFlow()){
+            world.scheduleUpdate(x, y, layer, this.getFlowSpeed());
+        }
     }
 
     @Override
@@ -83,5 +90,10 @@ public abstract class TileLiquid extends TileBasic{
     @Override
     public boolean isFullTile(){
         return false;
+    }
+
+    @Override
+    public void onScheduledUpdate(IWorld world, int x, int y, TileLayer layer, int scheduledMeta){
+        RockBottomAPI.getApiHandler().doDefaultLiquidBehavior(world, x, y, layer, this);
     }
 }
