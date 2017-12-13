@@ -30,6 +30,7 @@ import de.ellpeck.rockbottom.api.data.settings.Settings;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.entity.player.IInteractionManager;
 import de.ellpeck.rockbottom.api.gui.IGuiManager;
+import de.ellpeck.rockbottom.api.input.IInputHandler;
 import de.ellpeck.rockbottom.api.mod.IMod;
 import de.ellpeck.rockbottom.api.net.chat.IChatLog;
 import de.ellpeck.rockbottom.api.particle.IParticleManager;
@@ -40,7 +41,6 @@ import de.ellpeck.rockbottom.api.util.ApiInternal;
 import de.ellpeck.rockbottom.api.world.DynamicRegistryInfo;
 import de.ellpeck.rockbottom.api.world.IWorld;
 import de.ellpeck.rockbottom.api.world.WorldInfo;
-import org.newdawn.slick.Input;
 
 import java.io.File;
 import java.net.URLClassLoader;
@@ -233,9 +233,9 @@ public interface IGameInstance extends IMod{
     void setUniqueId(UUID id);
 
     /**
-     * Gets the {@link Input} of the current game instance. This is a slick
-     * implemented class that allows for the polling of inputs. Note that, when
-     * using {@link Keybind}, {@link Keybind#isDown()} and {@link
+     * Gets the {@link IInputHandler} of the current game instance. This is a
+     * slick implemented class that allows for the polling of inputs. Note that,
+     * when using {@link Keybind}, {@link Keybind#isDown()} and {@link
      * Keybind#isPressed()} should be used instead. Note that this is not
      * implemented on the dedicated server.
      *
@@ -243,7 +243,7 @@ public interface IGameInstance extends IMod{
      *
      * @throws UnsupportedOperationException on the dedicated server
      */
-    Input getInput();
+    IInputHandler getInput();
 
     @ApiInternal
     void exit();

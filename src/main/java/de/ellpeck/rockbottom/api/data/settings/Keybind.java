@@ -21,9 +21,9 @@
 
 package de.ellpeck.rockbottom.api.data.settings;
 
+import de.ellpeck.rockbottom.api.input.IInputHandler;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
-import org.newdawn.slick.Input;
 
 public class Keybind{
 
@@ -44,10 +44,10 @@ public class Keybind{
     }
 
     public boolean isDown(){
-        Input input = RockBottomAPI.getGame().getInput();
+        IInputHandler input = RockBottomAPI.getGame().getInput();
 
         if(this.isMouse){
-            return input.isMouseButtonDown(this.key);
+            return input.isMouseDown(this.key);
         }
         else{
             return input.isKeyDown(this.key);
@@ -55,13 +55,13 @@ public class Keybind{
     }
 
     public boolean isPressed(){
-        Input input = RockBottomAPI.getGame().getInput();
+        IInputHandler input = RockBottomAPI.getGame().getInput();
 
         if(this.isMouse){
-            return input.isMousePressed(this.key);
+            return input.wasMousePressed(this.key);
         }
         else{
-            return input.isKeyPressed(this.key);
+            return input.wasKeyPressed(this.key);
         }
     }
 

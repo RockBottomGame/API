@@ -23,6 +23,7 @@ package de.ellpeck.rockbottom.api.gui.component;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.IGraphics;
+import de.ellpeck.rockbottom.api.input.IInputHandler;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.assets.font.FormattingCode;
@@ -30,6 +31,7 @@ import de.ellpeck.rockbottom.api.assets.font.IFont;
 import de.ellpeck.rockbottom.api.data.settings.Settings;
 import de.ellpeck.rockbottom.api.gui.Gui;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
+import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.Input;
 
 import java.awt.*;
@@ -79,7 +81,7 @@ public class ComponentInputField extends GuiComponent{
     @Override
     public boolean onKeyboardAction(IGameInstance game, int button, char character){
         if(this.isSelected){
-            if(button == Input.KEY_BACK){
+            if(button == Keyboard.KEY_BACK){
                 if(!this.text.isEmpty()){
                     this.text = this.text.substring(0, this.text.length()-1);
                     if(this.consumer != null){
@@ -88,16 +90,16 @@ public class ComponentInputField extends GuiComponent{
                 }
                 return true;
             }
-            else if(button == Input.KEY_ESCAPE){
+            else if(button == Keyboard.KEY_ESCAPE){
                 if(this.selectable){
                     this.isSelected = false;
                     return true;
                 }
             }
             else{
-                Input input = game.getInput();
-                if(input.isKeyDown(Input.KEY_LCONTROL) || input.isKeyDown(Input.KEY_RCONTROL)){
-                    if(button == Input.KEY_V){
+                IInputHandler input = game.getInput();
+                if(input.isKeyDown(Keyboard.KEY_LCONTROL) || input.isKeyDown(Keyboard.KEY_RCONTROL)){
+                    if(button == Keyboard.KEY_V){
                         if(this.text.length() < this.maxLength){
                             try{
                                 this.text += (String)Toolkit.getDefaultToolkit().getSystemClipboard().getData(DataFlavor.stringFlavor);
