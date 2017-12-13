@@ -30,7 +30,6 @@ import de.ellpeck.rockbottom.api.data.settings.Settings;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.entity.player.IInteractionManager;
 import de.ellpeck.rockbottom.api.gui.IGuiManager;
-import de.ellpeck.rockbottom.api.input.IInputHandler;
 import de.ellpeck.rockbottom.api.mod.IMod;
 import de.ellpeck.rockbottom.api.net.chat.IChatLog;
 import de.ellpeck.rockbottom.api.particle.IParticleManager;
@@ -234,16 +233,18 @@ public interface IGameInstance extends IMod{
 
     /**
      * Gets the {@link IInputHandler} of the current game instance. This is a
-     * slick implemented class that allows for the polling of inputs. Note that,
-     * when using {@link Keybind}, {@link Keybind#isDown()} and {@link
-     * Keybind#isPressed()} should be used instead. Note that this is not
-     * implemented on the dedicated server.
+     * class that allows for the polling of inputs. Note that, when using {@link
+     * Keybind}, {@link Keybind#isDown()} and {@link Keybind#isPressed()} should
+     * be used instead. Note that this is not implemented on the dedicated
+     * server.
      *
      * @return The input manager
      *
      * @throws UnsupportedOperationException on the dedicated server
      */
     IInputHandler getInput();
+
+    ISoundHandler getSound();
 
     @ApiInternal
     void exit();

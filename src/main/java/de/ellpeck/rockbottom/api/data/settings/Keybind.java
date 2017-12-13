@@ -21,7 +21,7 @@
 
 package de.ellpeck.rockbottom.api.data.settings;
 
-import de.ellpeck.rockbottom.api.input.IInputHandler;
+import de.ellpeck.rockbottom.api.IInputHandler;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 

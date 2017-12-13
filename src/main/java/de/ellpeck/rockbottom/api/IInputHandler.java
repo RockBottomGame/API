@@ -19,7 +19,7 @@
  * © 2017 Ellpeck
  */
 
-package de.ellpeck.rockbottom.api.input;
+package de.ellpeck.rockbottom.api;
 
 public interface IInputHandler{
 

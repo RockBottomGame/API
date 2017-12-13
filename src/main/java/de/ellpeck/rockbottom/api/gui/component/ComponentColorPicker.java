@@ -35,7 +35,7 @@ import java.util.function.BiConsumer;
 
 public class ComponentColorPicker extends GuiComponent{
 
-    private final ITexture texture = RockBottomAPI.getGame().getAssetManager().getTexture(RockBottomAPI.createInternalRes("gui.colorpick"));
+    private final ITexture texture = RockBottomAPI.getGame().getAssetManager().getTexture(RockBottomAPI.createInternalRes("gui.colorpick")).getSubTexture(16F, 16F, 64F, 64F);
 
     private final BiConsumer<Integer, Boolean> consumer;
     private final boolean isEnlargable;

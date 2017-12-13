@@ -21,7 +21,7 @@
 
 package de.ellpeck.rockbottom.api.util;
 
-import org.newdawn.slick.opengl.renderer.Renderer;
+import org.lwjgl.opengl.GL11;
 
 import java.util.Random;
 
@@ -112,7 +112,7 @@ public final class Colors{
     }
 
     public static void bind(float r, float g, float b, float a){
-        Renderer.get().glColor4f(r, g, b, a);
+        GL11.glColor4f(r, g, b, a);
     }
 
     public static void bind(int color){

@@ -48,7 +48,6 @@ import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 import de.ellpeck.rockbottom.api.world.IWorld;
 import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 import org.lwjgl.input.Keyboard;
-import org.newdawn.slick.Input;
 
 import java.util.*;
 

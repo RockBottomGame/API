@@ -27,6 +27,11 @@ import java.util.Random;
 
 public interface ITexture extends IAsset{
 
+    int TOP_LEFT = 0;
+    int TOP_RIGHT = 1;
+    int BOTTOM_RIGHT = 2;
+    int BOTTOM_LEFT = 3;
+
     void draw(float x, float y);
 
     void draw(float x, float y, float scale);
@@ -47,9 +52,27 @@ public interface ITexture extends IAsset{
 
     void draw(float x, float y, float x2, float y2, float srcX, float srcY, float srcX2, float srcY2, int[] light, int filter);
 
-    int getWidth();
+    float getWidth();
 
-    int getHeight();
+    float getHeight();
+
+    int getUnderlyingWidth();
+
+    int getUnderlyingHeight();
+
+    float getTextureWidth();
+
+    float getTextureHeight();
+
+    float getTextureOffsetX();
+
+    float getTextureOffsetY();
+
+    float getCenterX();
+
+    float getCenterY();
+
+    float getAngle();
 
     int getTextureColor(int x, int y);
 
@@ -66,4 +89,10 @@ public interface ITexture extends IAsset{
     ITexture getVariation(Random random);
 
     ITexture getPositionalVariation(int x, int y);
+
+    void bind();
+
+    boolean hasAlpha();
+
+    ITexture getSubTexture(float x, float y, float width, float height);
 }

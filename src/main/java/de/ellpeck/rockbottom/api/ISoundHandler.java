@@ -1,5 +1,5 @@
 /*
- * This file ("ISound.java") is part of the RockBottomAPI by Ellpeck.
+ * This file ("ISoundHandler.java") is part of the RockBottomAPI by Ellpeck.
  * View the source code at <https://github.com/RockBottomGame/>.
  * View information on the project at <https://rockbottom.ellpeck.de/>.
  *
@@ -19,23 +19,11 @@
  * © 2017 Ellpeck
  */
 
-package de.ellpeck.rockbottom.api.assets;
+package de.ellpeck.rockbottom.api;
 
-public interface ISound extends IAsset{
+public interface ISoundHandler{
 
-    void play();
+    void setSoundVolume(float volume);
 
-    void play(float pitch, float volume);
-
-    void play(float pitch, float volume, boolean loop);
-
-    void playAt(double x, double y, double z);
-
-    void playAt(float pitch, float volume, double x, double y, double z);
-
-    void playAt(float pitch, float volume, double x, double y, double z, boolean loop);
-
-    boolean isPlaying();
-
-    void stop();
+    void setMusicVolume(float volume);
 }
