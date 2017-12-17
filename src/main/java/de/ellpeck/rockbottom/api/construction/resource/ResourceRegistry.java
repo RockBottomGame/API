@@ -21,24 +21,29 @@
 
 package de.ellpeck.rockbottom.api.construction.resource;
 
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.ListMultimap;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
 
 public final class ResourceRegistry{
 
-    private static final Map<String, List<ResInfo>> RESOURCES = new HashMap<>();
-    private static final Map<ResInfo, List<String>> RESOURCE_NAMES = new HashMap<>();
+    private static final ListMultimap<String, ResInfo> RESOURCES = ArrayListMultimap.create();
+    private static final ListMultimap<ResInfo, String> RESOURCE_NAMES = ArrayListMultimap.create();
 
     public static String addResources(String name, ResInfo... resources){
-        List<ResInfo> resList = RESOURCES.computeIfAbsent(name, k -> new ArrayList<>());
+        List<ResInfo> resList = RESOURCES.get(name);
 
         for(ResInfo res : resources){
             if(!resList.contains(res)){
                 resList.add(res);
             }
 
-            List<String> nameList = RESOURCE_NAMES.computeIfAbsent(res, k -> new ArrayList<>());
+            List<String> nameList = RESOURCE_NAMES.get(res);
             if(!nameList.contains(name)){
                 nameList.add(name);
             }
