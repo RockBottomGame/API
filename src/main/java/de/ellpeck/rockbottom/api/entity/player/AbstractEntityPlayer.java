@@ -98,12 +98,4 @@ public abstract class AbstractEntityPlayer extends EntityLiving implements IComm
     public abstract boolean isInRange(double x, double y, double maxDistance);
 
     public abstract IKnowledgeManager getKnowledge();
-
-    /**
-     * @deprecated use {@link #isInRange(double, double, double)}
-     */
-    @Deprecated
-    public boolean isInRange(double x, double y){
-        return this.isInRange(x, y, RANGE);
-    }
 }

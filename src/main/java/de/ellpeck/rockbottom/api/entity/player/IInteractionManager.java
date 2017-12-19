@@ -36,20 +36,4 @@ public interface IInteractionManager{
     float getBreakProgress();
 
     int getPlaceCooldown();
-
-    /**
-     * @deprecated Use {@link IGraphics#getMousedTileX()}
-     */
-    @Deprecated
-    default double getMousedTileX(){
-        return RockBottomAPI.getGame().getGraphics().getMousedTileX();
-    }
-
-    /**
-     * @deprecated Use {@link IGraphics#getMousedTileY()}
-     */
-    @Deprecated
-    default double getMousedTileY(){
-        return RockBottomAPI.getGame().getGraphics().getMousedTileY();
-    }
 }

@@ -74,11 +74,18 @@ public class Tile{
     }
 
     public BoundBox getBoundBox(IWorld world, int x, int y, TileLayer layer){
-        return this.getBoundBox(world, x, y);
+        return DEFAULT_BOUNDS;
     }
 
     public List<BoundBox> getBoundBoxes(IWorld world, int x, int y, TileLayer layer, MovableWorldObject object, BoundBox objectBox, BoundBox objectBoxMotion){
-        return this.getBoundBoxes(world, x, y, object, objectBox, objectBoxMotion);
+        BoundBox box = this.getBoundBox(world, x, y, TileLayer.MAIN);
+
+        if(box != null && !box.isEmpty()){
+            return Collections.singletonList(box.copy().add(x, y));
+        }
+        else{
+            return Collections.emptyList();
+        }
     }
 
     public boolean canBreak(IWorld world, int x, int y, TileLayer layer){
@@ -196,7 +203,7 @@ public class Tile{
     }
 
     public boolean obscuresBackground(IWorld world, int x, int y, TileLayer layer){
-        return this.obscuresBackground();
+        return this.isFullTile();
     }
 
     public void updateRandomly(IWorld world, int x, int y, TileLayer layer){
@@ -278,7 +285,7 @@ public class Tile{
     }
 
     public void onScheduledUpdate(IWorld world, int x, int y, TileLayer layer, int scheduledMeta){
-        this.onScheduledUpdate(world, x, y, layer);
+
     }
 
     public boolean canClimb(IWorld world, int x, int y, TileLayer layer, TileState state, BoundBox entityBox, BoundBox entityBoxMotion, List<BoundBox> tileBoxes, Entity entity){
@@ -356,47 +363,5 @@ public class Tile{
 
     public boolean isLiquid(){
         return false;
-    }
-
-    /**
-     * @deprecated use {@link #getBoundBox(IWorld, int, int, TileLayer)} instead
-     */
-    @Deprecated
-    public BoundBox getBoundBox(IWorld world, int x, int y){
-        return DEFAULT_BOUNDS;
-    }
-
-    /**
-     * @deprecated use {@link #onScheduledUpdate(IWorld, int, int, TileLayer,
-     * int)} instead
-     */
-    @Deprecated
-    public void onScheduledUpdate(IWorld world, int x, int y, TileLayer layer){
-
-    }
-
-    /**
-     * @deprecated use {@link #getBoundBoxes(IWorld, int, int, TileLayer,
-     * MovableWorldObject, BoundBox, BoundBox)} instead
-     */
-    @Deprecated
-    public List<BoundBox> getBoundBoxes(IWorld world, int x, int y, MovableWorldObject object, BoundBox objectBox, BoundBox objectBoxMotion){
-        BoundBox box = this.getBoundBox(world, x, y, TileLayer.MAIN);
-
-        if(box != null && !box.isEmpty()){
-            return Collections.singletonList(box.copy().add(x, y));
-        }
-        else{
-            return Collections.emptyList();
-        }
-    }
-
-    /**
-     * @deprecated Use {@link #obscuresBackground(IWorld, int, int, TileLayer)}
-     * instead
-     */
-    @Deprecated
-    public boolean obscuresBackground(){
-        return this.isFullTile();
     }
 }
