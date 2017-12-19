@@ -244,8 +244,6 @@ public interface IGameInstance extends IMod{
      */
     IInputHandler getInput();
 
-    ISoundHandler getSound();
-
     @ApiInternal
     void exit();
 
