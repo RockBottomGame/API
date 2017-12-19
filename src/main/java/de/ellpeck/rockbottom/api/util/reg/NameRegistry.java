@@ -39,7 +39,7 @@ public class NameRegistry<T> implements IRegistry<IResourceName, T>{
 
     @Override
     public void register(IResourceName name, T value){
-        if(name == null || name.isEmpty()){
+        if(name == null){
             throw new IndexOutOfBoundsException("Tried registering "+value+" with name "+name+" which is invalid into registry "+this);
         }
         if(this.map.containsKey(name)){
@@ -53,7 +53,7 @@ public class NameRegistry<T> implements IRegistry<IResourceName, T>{
 
     @Override
     public T get(IResourceName name){
-        if(name == null || name.isEmpty()){
+        if(name == null){
             RockBottomAPI.logger().warning("Tried getting value of "+name+" for registry "+this+" which is invalid");
             return null;
         }
