@@ -361,6 +361,10 @@ public class Tile{
         return this.isFullTile();
     }
 
+    public boolean canLiquidSpreadInto(IWorld world, int x, int y, TileLiquid liquid){
+        return !this.isFullTile();
+    }
+
     public boolean isLiquid(){
         return false;
     }
