@@ -27,6 +27,7 @@ import com.google.gson.JsonParser;
 import de.ellpeck.rockbottom.api.Constants;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
+import de.ellpeck.rockbottom.api.util.Util;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 
 import java.io.InputStream;
@@ -48,8 +49,7 @@ public class Locale implements IAsset{
     public static Locale fromStream(InputStream stream, String name) throws Exception{
         Locale locale = new Locale(name);
 
-        JsonParser parser = new JsonParser();
-        JsonElement main = parser.parse(new InputStreamReader(stream, Charsets.UTF_8));
+        JsonElement main = Util.JSON_PARSER.parse(new InputStreamReader(stream, Charsets.UTF_8));
 
         for(Entry<String, JsonElement> entry : main.getAsJsonObject().entrySet()){
             recurseLoad(locale, entry.getKey(), "", entry.getValue());
