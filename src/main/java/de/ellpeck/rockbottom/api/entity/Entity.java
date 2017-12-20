@@ -112,11 +112,13 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
     }
 
     public void setDead(boolean dead){
-        if(RockBottomAPI.getEventHandler().fireEvent(new EntityDeathEvent(this)) != EventResult.CANCELLED){
-            this.dead = dead;
+        if(this.dead != dead){
+            if(RockBottomAPI.getEventHandler().fireEvent(new EntityDeathEvent(this)) != EventResult.CANCELLED){
+                this.dead = dead;
 
-            if(this.world.isServer()){
-                RockBottomAPI.getNet().sendToAllPlayersWithLoadedPos(this.world, new PacketDeath(this.getUniqueId()), this.x, this.y);
+                if(this.world.isServer()){
+                    RockBottomAPI.getNet().sendToAllPlayersWithLoadedPos(this.world, new PacketDeath(this.getUniqueId()), this.x, this.y);
+                }
             }
         }
     }
