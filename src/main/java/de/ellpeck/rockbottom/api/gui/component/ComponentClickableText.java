@@ -65,10 +65,14 @@ public class ComponentClickableText extends GuiComponent{
         boolean moused = this.isMouseOverPrioritized(game);
 
         int yOff = 0;
-        for(String s : this.text){
+        for(String s : this.getText()){
             font.drawString(this.x, this.y+yOff, moused ? FormattingCode.UNDERLINED+s : s, this.scale);
             yOff += font.getHeight(this.scale);
         }
+    }
+
+    public String[] getText(){
+        return this.text;
     }
 
     @Override
