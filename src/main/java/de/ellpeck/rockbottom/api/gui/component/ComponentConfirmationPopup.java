@@ -109,4 +109,9 @@ public class ComponentConfirmationPopup extends GuiComponent{
         IGraphics g = game.getGraphics();
         return this.buttonArea.contains(g.getMouseInGuiX(), g.getMouseInGuiY());
     }
+
+    @Override
+    public int getPriority(){
+        return 5000;
+    }
 }

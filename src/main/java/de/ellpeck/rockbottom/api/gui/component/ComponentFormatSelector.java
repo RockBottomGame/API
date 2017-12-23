@@ -36,19 +36,19 @@ import java.util.List;
 
 public class ComponentFormatSelector extends ComponentButton{
 
-    private final ComponentInputField inputField;
+    private final ComponentInputField[] inputFields;
     private ComponentSelectorMenu menu;
 
-    public ComponentFormatSelector(Gui gui, int x, int y, ComponentInputField inputField){
+    public ComponentFormatSelector(Gui gui, int x, int y, ComponentInputField... inputFields){
         super(gui, x, y, 16, 16, null, "Aa");
-        this.inputField = inputField;
+        this.inputFields = inputFields;
     }
 
     public void openMenu(){
         int width = 86;
         int height = 58;
 
-        this.menu = new ComponentSelectorMenu(this.gui, this.x+this.width/2-width/2, this.y-height-2, width, height, this.inputField);
+        this.menu = new ComponentSelectorMenu(this.gui, this.x+this.width/2-width/2, this.y-height-2, width, height, this.inputFields);
         this.gui.getComponents().add(this.menu);
 
         this.gui.sortComponents();
@@ -111,7 +111,7 @@ public class ComponentFormatSelector extends ComponentButton{
 
         private final List<GuiComponent> subComponents = new ArrayList<>();
 
-        public ComponentSelectorMenu(Gui gui, int x, int y, int width, int height, ComponentInputField inputField){
+        public ComponentSelectorMenu(Gui gui, int x, int y, int width, int height, ComponentInputField[] inputFields){
             super(gui, x, y, width, height);
 
 
@@ -120,8 +120,22 @@ public class ComponentFormatSelector extends ComponentButton{
             for(FormattingCode code : FormattingCode.getDefaultCodes().values()){
                 this.subComponents.add(new ComponentButton(gui, x+buttonX, y+buttonY, 12, 12, () -> {
                     String codeStrg = code.toString();
-                    if(!inputField.getText().endsWith(codeStrg)){
-                        inputField.append(codeStrg);
+                    ComponentInputField field = null;
+
+                    if(inputFields.length <= 1){
+                        field = inputFields[0];
+                    }
+                    else{
+                        for(ComponentInputField f : inputFields){
+                            if(f.isSelected()){
+                                field = f;
+                                break;
+                            }
+                        }
+                    }
+
+                    if(field != null && !field.getText().endsWith(codeStrg)){
+                        field.append(codeStrg);
                         return true;
                     }
                     else{
@@ -157,6 +171,11 @@ public class ComponentFormatSelector extends ComponentButton{
         public void render(IGameInstance game, IAssetManager manager, IGraphics g, int x, int y){
             g.fillRect(x, y, this.width, this.height, Colors.setA(Colors.BLACK, 0.65F));
             g.drawRect(x, y, this.width, this.height, Colors.BLACK);
+        }
+
+        @Override
+        public int getPriority(){
+            return 1500;
         }
     }
 }
