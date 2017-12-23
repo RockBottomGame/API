@@ -127,7 +127,7 @@ public class ComponentFormatSelector extends ComponentButton{
                     else{
                         return false;
                     }
-                }, code+"Aa", "Code: "+code.toString().replaceAll("&", "<&>")){
+                }, code+"Aa", RockBottomAPI.getGame().getAssetManager().localize(RockBottomAPI.createInternalRes("info.format."+code)), "Code: "+code.toString().replaceAll("&", "<&>")){
                     @Override
                     public int getPriority(){
                         return 2000;
