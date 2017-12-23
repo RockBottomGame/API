@@ -29,6 +29,7 @@ import de.ellpeck.rockbottom.api.gui.GuiContainer;
 import de.ellpeck.rockbottom.api.gui.container.ContainerSlot;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
+import org.lwjgl.input.Keyboard;
 
 public class ComponentSlot extends GuiComponent{
 
@@ -45,7 +46,17 @@ public class ComponentSlot extends GuiComponent{
 
     @Override
     public boolean onMouseAction(IGameInstance game, int button, float x, float y){
-        return RockBottomAPI.getApiHandler().doDefaultSlotMovement(game, button, x, y, this);
+        if(this.isMouseOver(game)){
+            if(game.getInput().isKeyDown(Keyboard.KEY_LSHIFT)){
+                return RockBottomAPI.getApiHandler().doDefaultShiftClicking(game, this.container, this);
+            }
+            else{
+                return RockBottomAPI.getApiHandler().doDefaultSlotMovement(game, button, x, y, this);
+            }
+        }
+        else{
+            return false;
+        }
     }
 
     @Override

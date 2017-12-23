@@ -35,9 +35,14 @@ import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.net.packet.toserver.PacketDropItem;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
 import de.ellpeck.rockbottom.api.util.Colors;
+import de.ellpeck.rockbottom.api.util.Util;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class GuiContainer extends Gui{
 
+    public final List<ShiftClickBehavior> shiftClickBehaviors = new ArrayList<>();
     public final AbstractEntityPlayer player;
     public ItemInstance holdingInst;
 
@@ -116,5 +121,24 @@ public abstract class GuiContainer extends Gui{
     @Override
     public boolean doesPauseGame(){
         return false;
+    }
+
+    public static class ShiftClickBehavior{
+
+        public final List<Integer> slots;
+        public final List<Integer> slotsInto;
+
+        public ShiftClickBehavior(List<Integer> slots, List<Integer> slotsInto){
+            this.slots = slots;
+            this.slotsInto = slotsInto;
+        }
+
+        public ShiftClickBehavior(int startSlot, int endSlot, int slotsIntoStart, int slotsIntoEnd){
+            this(Util.makeIntList(startSlot, endSlot+1), Util.makeIntList(slotsIntoStart, slotsIntoEnd+1));
+        }
+
+        public ShiftClickBehavior reversed(){
+            return new ShiftClickBehavior(this.slotsInto, this.slots);
+        }
     }
 }
