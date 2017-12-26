@@ -26,6 +26,9 @@ import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.net.chat.component.ChatComponent;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 
+import java.util.Collections;
+import java.util.List;
+
 public abstract class Command{
 
     private final IResourceName name;
@@ -66,4 +69,8 @@ public abstract class Command{
     }
 
     public abstract ChatComponent execute(String[] args, ICommandSender sender, String playerName, IGameInstance game, IChatLog chat);
+
+    public List<String> getAutocompleteSuggestions(int argNumber, ICommandSender sender, IGameInstance game, IChatLog chat){
+        return Collections.emptyList();
+    }
 }

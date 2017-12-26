@@ -32,6 +32,8 @@ public interface IChatLog{
 
     void sendCommandSenderMessage(String message, ICommandSender sender);
 
+    Command getCommand(String name);
+
     void sendMessageTo(ICommandSender sender, ChatComponent message);
 
     void broadcastMessage(ChatComponent message);
