@@ -95,4 +95,6 @@ public interface ITexture extends IAsset{
     boolean hasAlpha();
 
     ITexture getSubTexture(float x, float y, float width, float height);
+
+    ITexture getSubTexture(float x, float y, float width, float height, boolean inheritVariations, boolean inheritData);
 }
