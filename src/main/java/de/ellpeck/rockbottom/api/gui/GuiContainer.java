@@ -145,8 +145,12 @@ public abstract class GuiContainer extends Gui{
             this(startSlot, endSlot, slotsIntoStart, slotsIntoEnd, null);
         }
 
+        public ShiftClickBehavior reversed(BiFunction<ContainerSlot, ContainerSlot, Boolean> condition){
+            return new ShiftClickBehavior(this.slotsInto, this.slots, condition);
+        }
+
         public ShiftClickBehavior reversed(){
-            return new ShiftClickBehavior(this.slotsInto, this.slots, this.condition == null ? null : (slotFrom, slotTo) -> !this.condition.apply(slotFrom, slotTo));
+           return this.reversed(this.condition == null ? null : (slotFrom, slotTo) -> !this.condition.apply(slotFrom, slotTo));
         }
     }
 }
