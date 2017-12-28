@@ -55,6 +55,7 @@ public final class GameContent{
     public static final Tile TILE_SIGN = getTile("sign").addEffectiveTool(ToolType.AXE, 0).setForceDrop();
     public static final Tile TILE_SAPLING = getTile("sapling").setHardness(0F).setForceDrop();
     public static final Tile TILE_WATER = getTile("water");
+    public static final TileMeta WOOD_BOARDS = (TileMeta)getTile("wood_boards").setHardness(2F).addEffectiveTool(ToolType.AXE, 0).setForceDrop();
 
     public static final Item ITEM_BRITTLE_PICKAXE = getItem("brittle_pickaxe");
     public static final Item ITEM_BRITTLE_AXE = getItem("brittle_axe");

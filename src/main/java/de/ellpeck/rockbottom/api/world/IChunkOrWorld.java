@@ -21,6 +21,7 @@
 
 package de.ellpeck.rockbottom.api.world;
 
+import de.ellpeck.rockbottom.api.data.set.IAdditionalDataProvider;
 import de.ellpeck.rockbottom.api.entity.Entity;
 import de.ellpeck.rockbottom.api.tile.entity.TileEntity;
 import de.ellpeck.rockbottom.api.tile.state.TileState;
@@ -33,7 +34,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.function.Predicate;
 
-public interface IChunkOrWorld{
+public interface IChunkOrWorld extends IAdditionalDataProvider{
 
     TileState getState(int x, int y);
 
