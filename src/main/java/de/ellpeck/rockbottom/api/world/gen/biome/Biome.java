@@ -21,6 +21,7 @@
 
 package de.ellpeck.rockbottom.api.world.gen.biome;
 
+import de.ellpeck.rockbottom.api.GameContent;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.tile.state.TileState;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
@@ -72,5 +73,9 @@ public abstract class Biome{
 
     public boolean canTreeGrow(IWorld world, IChunk chunk, int x, int y){
         return false;
+    }
+
+    public TileState getFillerTile(IWorld world, IChunk chunk, int x, int y){
+        return GameContent.TILE_SOIL.getDefState();
     }
 }
