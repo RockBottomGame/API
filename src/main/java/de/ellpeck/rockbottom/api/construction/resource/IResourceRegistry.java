@@ -1,5 +1,5 @@
 /*
- * This file ("ResourceRegistry.java") is part of the RockBottomAPI by Ellpeck.
+ * This file ("IResourceRegistry.java") is part of the RockBottomAPI by Ellpeck.
  * View the source code at <https://github.com/RockBottomGame/>.
  * View information on the project at <https://rockbottom.ellpeck.de/>.
  *
@@ -16,41 +16,23 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with the RockBottomAPI. If not, see <http://www.gnu.org/licenses/>.
  *
- * © 2017 Ellpeck
+ * © 2018 Ellpeck
  */
 
 package de.ellpeck.rockbottom.api.construction.resource;
 
-import de.ellpeck.rockbottom.api.RockBottomAPI;
-
 import java.util.List;
 import java.util.Set;
 
-/**
- * @deprecated Use {@link RockBottomAPI#getResourceRegistry()} instead
- */
-@Deprecated
-public final class ResourceRegistry{
+public interface IResourceRegistry{
 
-    private static final IResourceRegistry R = RockBottomAPI.getResourceRegistry();
+    String addResources(String name, ResInfo... resources);
 
-    public static String addResources(String name, ResInfo... resources){
-        return R.addResources(name, resources);
-    }
+    List<ResInfo> getResources(String name);
 
-    public static List<ResInfo> getResources(String name){
-        return R.getResources(name);
-    }
+    List<String> getNames(ResInfo resource);
 
-    public static List<String> getNames(ResInfo resource){
-        return R.getNames(resource);
-    }
+    Set<ResInfo> getAllResources();
 
-    public static Set<ResInfo> getAllResources(){
-        return R.getAllResources();
-    }
-
-    public static Set<String> getAllResourceNames(){
-        return R.getAllResourceNames();
-    }
+    Set<String> getAllResourceNames();
 }

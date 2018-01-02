@@ -113,7 +113,7 @@ public class Tile{
     }
 
     public Tile addResource(String name){
-        ResourceRegistry.addResources(name, new ResInfo(this));
+        RockBottomAPI.getResourceRegistry().addResources(name, new ResInfo(this));
         return this;
     }
 

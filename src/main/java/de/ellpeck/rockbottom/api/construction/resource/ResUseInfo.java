@@ -21,6 +21,7 @@
 
 package de.ellpeck.rockbottom.api.construction.resource;
 
+import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 
 import java.util.ArrayList;
@@ -57,7 +58,7 @@ public class ResUseInfo implements IUseInfo{
 
     @Override
     public List<ItemInstance> getItems(){
-        List<ResInfo> resources = ResourceRegistry.getResources(this.name);
+        List<ResInfo> resources = RockBottomAPI.getResourceRegistry().getResources(this.name);
 
         if(!resources.isEmpty()){
             List<ItemInstance> list = new ArrayList<>();
@@ -73,7 +74,7 @@ public class ResUseInfo implements IUseInfo{
 
     @Override
     public boolean containsItem(ItemInstance instance){
-        List<String> names = ResourceRegistry.getNames(new ResInfo(instance));
+        List<String> names = RockBottomAPI.getResourceRegistry().getNames(new ResInfo(instance));
         return names.contains(this.name);
     }
 

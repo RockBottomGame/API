@@ -59,7 +59,7 @@ public class Item{
 
     public Item addResource(String name){
         for(int i = 0; i <= this.getHighestPossibleMeta(); i++){
-            ResourceRegistry.addResources(name, new ResInfo(this, i));
+            RockBottomAPI.getResourceRegistry().addResources(name, new ResInfo(this, i));
         }
         return this;
     }
