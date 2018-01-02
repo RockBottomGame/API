@@ -113,9 +113,11 @@ public class EntityItem extends Entity{
     public void save(DataSet set){
         super.save(set);
 
-        DataSet itemSet = new DataSet();
-        this.item.save(itemSet);
-        set.addDataSet("item", itemSet);
+        if(this.item != null){
+            DataSet itemSet = new DataSet();
+            this.item.save(itemSet);
+            set.addDataSet("item", itemSet);
+        }
 
         set.addInt("pickup_delay", this.pickupDelay);
     }
