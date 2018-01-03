@@ -23,6 +23,7 @@ package de.ellpeck.rockbottom.api.construction;
 
 import de.ellpeck.rockbottom.api.construction.resource.IUseInfo;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
+import de.ellpeck.rockbottom.api.gui.component.GuiComponent;
 import de.ellpeck.rockbottom.api.inventory.IInventory;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
@@ -59,4 +60,8 @@ public interface IRecipe{
     boolean shouldDisplayOutput(AbstractEntityPlayer player, ItemInstance output);
 
     IResourceName getName();
+
+    default GuiComponent getCustomComponent(IInventory inventory){
+        return null;
+    }
 }
