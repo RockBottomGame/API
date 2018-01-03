@@ -45,8 +45,6 @@ public interface IInternalHooks{
 
     boolean doDefaultShiftClicking(IGameInstance game, GuiContainer gui, ComponentSlot slot);
 
-    boolean isToolEffective(AbstractEntityPlayer player, ItemInstance instance, Tile tile, TileLayer layer, int x, int y);
-
     boolean placeTile(int x, int y, TileLayer layer, AbstractEntityPlayer player, ItemInstance selected, Tile tile, boolean removeItem, boolean simulate);
 
     //Liquid behavior kindly provided by superaxander
