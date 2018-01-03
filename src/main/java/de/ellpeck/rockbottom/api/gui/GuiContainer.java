@@ -35,9 +35,16 @@ import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.net.packet.toserver.PacketDropItem;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
 import de.ellpeck.rockbottom.api.util.Colors;
+import de.ellpeck.rockbottom.api.util.Util;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.BiFunction;
+import java.util.function.Function;
 
 public abstract class GuiContainer extends Gui{
 
+    public final List<ShiftClickBehavior> shiftClickBehaviors = new ArrayList<>();
     public final AbstractEntityPlayer player;
     public ItemInstance holdingInst;
 
@@ -116,5 +123,34 @@ public abstract class GuiContainer extends Gui{
     @Override
     public boolean doesPauseGame(){
         return false;
+    }
+
+    public static class ShiftClickBehavior{
+
+        public final List<Integer> slots;
+        public final List<Integer> slotsInto;
+        public final BiFunction<ContainerSlot, ContainerSlot, Boolean> condition;
+
+        public ShiftClickBehavior(List<Integer> slots, List<Integer> slotsInto, BiFunction<ContainerSlot, ContainerSlot, Boolean> condition){
+            this.slots = slots;
+            this.slotsInto = slotsInto;
+            this.condition = condition;
+        }
+
+        public ShiftClickBehavior(int startSlot, int endSlot, int slotsIntoStart, int slotsIntoEnd, BiFunction<ContainerSlot, ContainerSlot, Boolean> condition){
+            this(Util.makeIntList(startSlot, endSlot+1), Util.makeIntList(slotsIntoStart, slotsIntoEnd+1), condition);
+        }
+
+        public ShiftClickBehavior(int startSlot, int endSlot, int slotsIntoStart, int slotsIntoEnd){
+            this(startSlot, endSlot, slotsIntoStart, slotsIntoEnd, null);
+        }
+
+        public ShiftClickBehavior reversed(BiFunction<ContainerSlot, ContainerSlot, Boolean> condition){
+            return new ShiftClickBehavior(this.slotsInto, this.slots, condition);
+        }
+
+        public ShiftClickBehavior reversed(){
+           return this.reversed(this.condition == null ? null : (slotFrom, slotTo) -> !this.condition.apply(slotFrom, slotTo));
+        }
     }
 }

@@ -1,5 +1,5 @@
 /*
- * This file ("EventResult.java") is part of the RockBottomAPI by Ellpeck.
+ * This file ("IResourceRegistry.java") is part of the RockBottomAPI by Ellpeck.
  * View the source code at <https://github.com/RockBottomGame/>.
  * View information on the project at <https://rockbottom.ellpeck.de/>.
  *
@@ -16,13 +16,23 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with the RockBottomAPI. If not, see <http://www.gnu.org/licenses/>.
  *
- * © 2017 Ellpeck
+ * © 2018 Ellpeck
  */
 
-package de.ellpeck.rockbottom.api.event;
+package de.ellpeck.rockbottom.api.construction.resource;
 
-public enum EventResult{
-    DEFAULT,
-    MODIFIED,
-    CANCELLED
+import java.util.List;
+import java.util.Set;
+
+public interface IResourceRegistry{
+
+    String addResources(String name, ResInfo... resources);
+
+    List<ResInfo> getResources(String name);
+
+    List<String> getNames(ResInfo resource);
+
+    Set<ResInfo> getAllResources();
+
+    Set<String> getAllResourceNames();
 }

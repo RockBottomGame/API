@@ -26,6 +26,8 @@ import de.ellpeck.rockbottom.api.data.set.part.DataPart;
 import de.ellpeck.rockbottom.api.entity.Entity;
 import de.ellpeck.rockbottom.api.entity.MovableWorldObject;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
+import de.ellpeck.rockbottom.api.gui.Gui;
+import de.ellpeck.rockbottom.api.gui.GuiContainer;
 import de.ellpeck.rockbottom.api.gui.component.ComponentSlot;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.tile.Tile;
@@ -116,6 +118,9 @@ public interface IApiHandler{
     @ApiInternal
     boolean doDefaultSlotMovement(IGameInstance game, int button, float x, float y, ComponentSlot slot);
 
+    @ApiInternal
+    boolean doDefaultShiftClicking(IGameInstance game, GuiContainer gui, ComponentSlot slot);
+
     /**
      * Interpolates the light at a position in the world. The four integers in
      * the returned array specify the light at each four corners of the tile at
@@ -182,6 +187,6 @@ public interface IApiHandler{
     Logger logger();
 
     @ApiInternal
-    //Liquid behavior kindly provided by superaxander
+        //Liquid behavior kindly provided by superaxander
     void doDefaultLiquidBehavior(IWorld world, int x, int y, TileLayer layer, TileLiquid tile);
 }

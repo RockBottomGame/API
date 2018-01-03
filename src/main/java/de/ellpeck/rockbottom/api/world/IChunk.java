@@ -35,7 +35,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public interface IChunk extends IChunkOrWorld, IAdditionalDataProvider{
+public interface IChunk extends IChunkOrWorld{
 
     @ApiInternal
     List<AbstractEntityPlayer> getPlayersInRange();

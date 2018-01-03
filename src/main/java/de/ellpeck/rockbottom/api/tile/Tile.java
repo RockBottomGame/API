@@ -113,7 +113,7 @@ public class Tile{
     }
 
     public Tile addResource(String name){
-        ResourceRegistry.addResources(name, new ResInfo(this));
+        RockBottomAPI.getResourceRegistry().addResources(name, new ResInfo(this));
         return this;
     }
 
@@ -190,7 +190,7 @@ public class Tile{
 
     public void onChangeAround(IWorld world, int x, int y, TileLayer layer, int changedX, int changedY, TileLayer changedLayer){
         if(!world.isClient() && !this.canStay(world, x, y, layer, changedX, changedY, changedLayer)){
-            world.destroyTile(x, y, layer, null, this.forceDrop);
+            this.doBreak(world, x, y, layer, null, false, true);
         }
     }
 

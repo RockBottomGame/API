@@ -24,6 +24,7 @@ package de.ellpeck.rockbottom.api;
 import de.ellpeck.rockbottom.api.assets.IAssetLoader;
 import de.ellpeck.rockbottom.api.construction.BasicRecipe;
 import de.ellpeck.rockbottom.api.construction.IRecipe;
+import de.ellpeck.rockbottom.api.construction.resource.IResourceRegistry;
 import de.ellpeck.rockbottom.api.data.set.DataSet;
 import de.ellpeck.rockbottom.api.data.set.part.DataPart;
 import de.ellpeck.rockbottom.api.data.settings.Keybind;
@@ -67,7 +68,7 @@ public final class RockBottomAPI{
     /**
      * The current API version equal to the version in the build.gradle file.
      */
-    public static final String VERSION = "0.1.3";
+    public static final String VERSION = "0.1.7";
 
     @ApiInternal
     private static final List<IRegistry> ALL_REGISTRIES = new ArrayList<>();
@@ -262,6 +263,21 @@ public final class RockBottomAPI{
      */
     public static IModLoader getModLoader(){
         return internals.getMod();
+    }
+
+    /**
+     * Returns the {@link IResourceRegistry} object initialized by the game on
+     * startup. The resource registry can be used to register resources to be
+     * used in construction and various other recipes. The idea of it is that it
+     * unifies items to be represented by just a name, so that if, for example,
+     * multiple mods add an item representing copper ore, then it can be
+     * registered into the resource registry by both mods as "oreCopper" so that
+     * recipes can use copper universally.
+     *
+     * @return The resource registry
+     */
+    public static IResourceRegistry getResourceRegistry(){
+        return internals.getResource();
     }
 
     /**

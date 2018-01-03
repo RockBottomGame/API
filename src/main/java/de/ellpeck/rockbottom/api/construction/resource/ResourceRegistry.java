@@ -21,53 +21,36 @@
 
 package de.ellpeck.rockbottom.api.construction.resource;
 
-import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.ListMultimap;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * @deprecated Use {@link RockBottomAPI#getResourceRegistry()} instead
+ */
+@Deprecated
 public final class ResourceRegistry{
 
-    private static final ListMultimap<String, ResInfo> RESOURCES = ArrayListMultimap.create();
-    private static final ListMultimap<ResInfo, String> RESOURCE_NAMES = ArrayListMultimap.create();
+    private static final IResourceRegistry R = RockBottomAPI.getResourceRegistry();
 
     public static String addResources(String name, ResInfo... resources){
-        List<ResInfo> resList = RESOURCES.get(name);
-
-        for(ResInfo res : resources){
-            if(!resList.contains(res)){
-                resList.add(res);
-            }
-
-            List<String> nameList = RESOURCE_NAMES.get(res);
-            if(!nameList.contains(name)){
-                nameList.add(name);
-            }
-        }
-
-        RockBottomAPI.logger().config("Registered resources "+Arrays.toString(resources)+" for resource name "+name);
-        return name;
+        return R.addResources(name, resources);
     }
 
     public static List<ResInfo> getResources(String name){
-        List<ResInfo> resources = RESOURCES.get(name);
-        return resources == null ? Collections.emptyList() : Collections.unmodifiableList(resources);
+        return R.getResources(name);
     }
 
     public static List<String> getNames(ResInfo resource){
-        List<String> names = RESOURCE_NAMES.get(resource);
-        return names == null ? Collections.emptyList() : Collections.unmodifiableList(names);
+        return R.getNames(resource);
     }
 
     public static Set<ResInfo> getAllResources(){
-        return Collections.unmodifiableSet(RESOURCE_NAMES.keySet());
+        return R.getAllResources();
     }
 
     public static Set<String> getAllResourceNames(){
-        return Collections.unmodifiableSet(RESOURCES.keySet());
+        return R.getAllResourceNames();
     }
 }

@@ -25,6 +25,7 @@ import de.ellpeck.rockbottom.api.net.chat.component.ChatComponent;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface IChatLog{
 
@@ -32,11 +33,17 @@ public interface IChatLog{
 
     void sendCommandSenderMessage(String message, ICommandSender sender);
 
+    Command getCommand(String name);
+
     void sendMessageTo(ICommandSender sender, ChatComponent message);
 
     void broadcastMessage(ChatComponent message);
 
     List<ChatComponent> getMessages();
+
+    UUID getPlayerIdFromString(String nameOrId);
+
+    List<String> getPlayerSuggestions();
 
     @ApiInternal
     void clear();

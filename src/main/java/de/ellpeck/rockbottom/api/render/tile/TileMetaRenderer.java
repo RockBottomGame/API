@@ -37,7 +37,7 @@ public class TileMetaRenderer implements ITileRenderer<TileMeta>{
 
     @Override
     public void render(IGameInstance game, IAssetManager manager, IGraphics g, IWorld world, TileMeta tile, TileState state, int x, int y, TileLayer layer, float renderX, float renderY, float scale, int[] light){
-        this.getTexture(manager, tile, state.get(tile.metaProp)).draw(renderX, renderY, scale, scale, light);
+        this.getTexture(manager, tile, state.get(tile.metaProp)).getPositionalVariation(x, y).draw(renderX, renderY, scale, scale, light);
     }
 
     @Override

@@ -195,11 +195,11 @@ public class ComponentInputField extends GuiComponent{
     public boolean onMouseAction(IGameInstance game, int button, float x, float y){
         if(Settings.KEY_GUI_ACTION_1.isKey(button)){
             if(this.selectable){
-                this.isSelected = this.isMouseOver(game);
+                this.isSelected = this.isMouseOverPrioritized(game);
             }
         }
         else if(Settings.KEY_GUI_ACTION_2.isKey(button)){
-            if(this.isMouseOver(game)){
+            if(this.isMouseOverPrioritized(game)){
                 this.text = "";
                 if(this.consumer != null){
                     this.consumer.accept(this.text);

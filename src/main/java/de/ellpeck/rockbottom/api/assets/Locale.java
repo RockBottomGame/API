@@ -21,69 +21,22 @@
 
 package de.ellpeck.rockbottom.api.assets;
 
-import com.google.common.base.Charsets;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
-import de.ellpeck.rockbottom.api.Constants;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
-import de.ellpeck.rockbottom.api.util.Util;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.Map;
-import java.util.Map.Entry;
 
 @ApiInternal
 public class Locale implements IAsset{
 
     private final String name;
-    private final Map<IResourceName, String> localization = new HashMap<>();
+    private final Map<IResourceName, String> localization;
 
-    public Locale(String name){
+    public Locale(String name, Map<IResourceName, String> localization){
         this.name = name;
-    }
-
-    public static Locale fromStream(InputStream stream, String name) throws Exception{
-        Locale locale = new Locale(name);
-
-        JsonElement main = Util.JSON_PARSER.parse(new InputStreamReader(stream, Charsets.UTF_8));
-
-        for(Entry<String, JsonElement> entry : main.getAsJsonObject().entrySet()){
-            recurseLoad(locale, entry.getKey(), "", entry.getValue());
-        }
-
-        return locale;
-    }
-
-    private static void recurseLoad(Locale locale, String domain, String name, JsonElement element){
-        if(element.isJsonPrimitive()){
-            String key = domain+Constants.RESOURCE_SEPARATOR+name;
-            String value = element.getAsJsonPrimitive().getAsString();
-
-            locale.localization.put(RockBottomAPI.createRes(key), value);
-            RockBottomAPI.logger().config("Added localization "+key+" -> "+value+" to locale with name "+locale.name);
-        }
-        else{
-            for(Entry<String, JsonElement> entry : element.getAsJsonObject().entrySet()){
-                String key = entry.getKey();
-                recurseLoad(locale, domain, name.isEmpty() ? key : ("*".equals(key) ? name : name+"."+key), entry.getValue());
-            }
-        }
-    }
-
-    public boolean merge(Locale otherLocale){
-        if(this.name.equals(otherLocale.name)){
-            this.localization.putAll(otherLocale.localization);
-
-            RockBottomAPI.logger().config("Merged locale "+this.name+" with "+otherLocale.localization.size()+" bits of additional localization information");
-            return true;
-        }
-        else{
-            return false;
-        }
+        this.localization = localization;
     }
 
     public String localize(Locale fallback, IResourceName unloc, Object... format){
@@ -108,5 +61,13 @@ public class Locale implements IAsset{
         else{
             return String.format(loc, format);
         }
+    }
+
+    public String getName(){
+        return this.name;
+    }
+
+    public Map<IResourceName, String> getLocalization(){
+        return Collections.unmodifiableMap(this.localization);
     }
 }
