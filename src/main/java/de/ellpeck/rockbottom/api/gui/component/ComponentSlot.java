@@ -48,10 +48,10 @@ public class ComponentSlot extends GuiComponent{
     public boolean onMouseAction(IGameInstance game, int button, float x, float y){
         if(this.isMouseOver(game)){
             if(game.getInput().isKeyDown(Keyboard.KEY_LSHIFT)){
-                return RockBottomAPI.getApiHandler().doDefaultShiftClicking(game, this.container, this);
+                return RockBottomAPI.getInternalHooks().doDefaultShiftClicking(game, this.container, this);
             }
             else{
-                return RockBottomAPI.getApiHandler().doDefaultSlotMovement(game, button, x, y, this);
+                return RockBottomAPI.getInternalHooks().doDefaultSlotMovement(game, button, x, y, this);
             }
         }
         else{

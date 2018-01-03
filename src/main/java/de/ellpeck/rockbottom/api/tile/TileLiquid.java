@@ -94,7 +94,7 @@ public abstract class TileLiquid extends TileBasic{
 
     @Override
     public void onScheduledUpdate(IWorld world, int x, int y, TileLayer layer, int scheduledMeta){
-        RockBottomAPI.getApiHandler().doDefaultLiquidBehavior(world, x, y, layer, this);
+        RockBottomAPI.getInternalHooks().doDefaultLiquidBehavior(world, x, y, layer, this);
     }
 
     @Override

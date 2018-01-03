@@ -34,6 +34,8 @@ import de.ellpeck.rockbottom.api.entity.player.knowledge.Information;
 import de.ellpeck.rockbottom.api.event.IEventHandler;
 import de.ellpeck.rockbottom.api.gui.IMainMenuTheme;
 import de.ellpeck.rockbottom.api.gui.ISpecialCursor;
+import de.ellpeck.rockbottom.api.internal.IInternalHooks;
+import de.ellpeck.rockbottom.api.internal.Internals;
 import de.ellpeck.rockbottom.api.item.Item;
 import de.ellpeck.rockbottom.api.mod.IMod;
 import de.ellpeck.rockbottom.api.mod.IModLoader;
@@ -278,6 +280,17 @@ public final class RockBottomAPI{
      */
     public static IResourceRegistry getResourceRegistry(){
         return internals.getResource();
+    }
+
+    /**
+     * Returns the {@link IInternalHooks} object initialized by the game on
+     * startup. This is an api internal interface used to access methods outside
+     * of the API. None of the api internal hooks should be used by mods.
+     *
+     * @return The internal hooks
+     */
+    public static IInternalHooks getInternalHooks(){
+        return internals.getHooks();
     }
 
     /**

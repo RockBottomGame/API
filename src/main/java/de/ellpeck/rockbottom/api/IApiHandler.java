@@ -23,15 +23,6 @@ package de.ellpeck.rockbottom.api;
 
 import de.ellpeck.rockbottom.api.data.set.DataSet;
 import de.ellpeck.rockbottom.api.data.set.part.DataPart;
-import de.ellpeck.rockbottom.api.entity.Entity;
-import de.ellpeck.rockbottom.api.entity.MovableWorldObject;
-import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
-import de.ellpeck.rockbottom.api.gui.Gui;
-import de.ellpeck.rockbottom.api.gui.GuiContainer;
-import de.ellpeck.rockbottom.api.gui.component.ComponentSlot;
-import de.ellpeck.rockbottom.api.item.ItemInstance;
-import de.ellpeck.rockbottom.api.tile.Tile;
-import de.ellpeck.rockbottom.api.tile.TileLiquid;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
 import de.ellpeck.rockbottom.api.world.IWorld;
 import de.ellpeck.rockbottom.api.world.gen.INoiseGen;
@@ -43,11 +34,9 @@ import java.io.File;
 import java.util.logging.Logger;
 
 /**
- * The API handler is used mostly by the API to unexpose certain methods like
- * the movements of entities that need to be called from the API, but are too
- * complex to be inside of it. However, it also exposes a multitude of methods
- * that can be useful to modders. To access the API handler, use {@link
- * RockBottomAPI#getApiHandler()}.
+ * This class exposes a multitude of utility methods that are too big to be
+ * inside the API's code and are, as such, inside of the game. To access the API
+ * handler, use {@link RockBottomAPI#getApiHandler()}.
  */
 public interface IApiHandler{
 
@@ -109,18 +98,6 @@ public interface IApiHandler{
      */
     DataPart readPart(DataInput stream) throws Exception;
 
-    @ApiInternal
-    void doDefaultEntityUpdate(Entity entity);
-
-    @ApiInternal
-    void doWorldObjectMovement(MovableWorldObject object);
-
-    @ApiInternal
-    boolean doDefaultSlotMovement(IGameInstance game, int button, float x, float y, ComponentSlot slot);
-
-    @ApiInternal
-    boolean doDefaultShiftClicking(IGameInstance game, GuiContainer gui, ComponentSlot slot);
-
     /**
      * Interpolates the light at a position in the world. The four integers in
      * the returned array specify the light at each four corners of the tile at
@@ -167,12 +144,6 @@ public interface IApiHandler{
      */
     INoiseGen makeSimplexNoise(long seed);
 
-    @ApiInternal
-    boolean isToolEffective(AbstractEntityPlayer player, ItemInstance instance, Tile tile, TileLayer layer, int x, int y);
-
-    @ApiInternal
-    boolean placeTile(int x, int y, TileLayer layer, AbstractEntityPlayer player, ItemInstance selected, Tile tile, boolean removeItem, boolean simulate);
-
     /**
      * Creates a {@link Logger} with the specified name that will output to the
      * main logger and also written to the log file.
@@ -185,8 +156,4 @@ public interface IApiHandler{
 
     @ApiInternal
     Logger logger();
-
-    @ApiInternal
-        //Liquid behavior kindly provided by superaxander
-    void doDefaultLiquidBehavior(IWorld world, int x, int y, TileLayer layer, TileLiquid tile);
 }

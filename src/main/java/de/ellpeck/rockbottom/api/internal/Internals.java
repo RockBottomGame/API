@@ -16,11 +16,13 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with the RockBottomAPI. If not, see <http://www.gnu.org/licenses/>.
  *
- * © 2017 Ellpeck
+ * © 2018 Ellpeck
  */
 
-package de.ellpeck.rockbottom.api;
+package de.ellpeck.rockbottom.api.internal;
 
+import de.ellpeck.rockbottom.api.IApiHandler;
+import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.construction.resource.IResourceRegistry;
 import de.ellpeck.rockbottom.api.event.IEventHandler;
 import de.ellpeck.rockbottom.api.mod.IModLoader;
@@ -36,9 +38,14 @@ public class Internals{
     private INetHandler net;
     private IModLoader mod;
     private IResourceRegistry resource;
+    private IInternalHooks hooks;
 
     public void setResource(IResourceRegistry resource){
         this.resource = resource;
+    }
+
+    public void setHooks(IInternalHooks hooks){
+        this.hooks = hooks;
     }
 
     public void setGame(IGameInstance game){
@@ -83,5 +90,9 @@ public class Internals{
 
     public IModLoader getMod(){
         return this.mod;
+    }
+
+    public IInternalHooks getHooks(){
+        return this.hooks;
     }
 }

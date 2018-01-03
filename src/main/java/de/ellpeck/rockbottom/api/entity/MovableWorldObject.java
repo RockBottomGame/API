@@ -55,7 +55,7 @@ public abstract class MovableWorldObject{
 
     @ApiInternal
     public void move(){
-        RockBottomAPI.getApiHandler().doWorldObjectMovement(this);
+        RockBottomAPI.getInternalHooks().doWorldObjectMovement(this);
     }
 
     @ApiInternal

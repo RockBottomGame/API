@@ -75,7 +75,7 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
     }
 
     public void update(IGameInstance game){
-        RockBottomAPI.getApiHandler().doDefaultEntityUpdate(this);
+        RockBottomAPI.getInternalHooks().doDefaultEntityUpdate(this);
     }
 
     public boolean doesSync(){
