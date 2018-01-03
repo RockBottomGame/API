@@ -23,7 +23,6 @@ package de.ellpeck.rockbottom.api.data.set.part;
 
 public abstract class BasicDataPart<T> extends DataPart<T>{
 
-    protected String name;
     protected T data;
 
     public BasicDataPart(String name){
