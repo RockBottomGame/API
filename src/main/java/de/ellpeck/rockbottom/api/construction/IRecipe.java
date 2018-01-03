@@ -32,7 +32,7 @@ import java.util.List;
 public interface IRecipe{
 
     static boolean matchesInv(IRecipe recipe, IInventory inventory){
-        for(IUseInfo info : recipe.getInputs()){
+        for(IUseInfo info : recipe.getActualInputs(inventory)){
             if(!inventory.containsResource(info)){
                 return false;
             }
@@ -42,7 +42,15 @@ public interface IRecipe{
 
     List<IUseInfo> getInputs();
 
+    default List<IUseInfo> getActualInputs(IInventory inventory){
+        return this.getInputs();
+    }
+
     List<ItemInstance> getOutputs();
+
+    default List<ItemInstance> getActualOutputs(IInventory inventory, List<ItemInstance> inputs){
+        return this.getOutputs();
+    }
 
     boolean isKnown(AbstractEntityPlayer player);
 
