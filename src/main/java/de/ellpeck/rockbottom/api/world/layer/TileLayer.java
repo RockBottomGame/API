@@ -44,15 +44,23 @@ public class TileLayer{
     public static final TileLayer BACKGROUND = new TileLayer(RockBottomAPI.createInternalRes("background"), -10).register();
 
     private static List<TileLayer> allLayers;
+    private static List<TileLayer> layersByIntPrio;
+    private static List<TileLayer> layersByRenderPrio;
 
     private final IResourceName name;
     private final int renderPriority;
+    private final int interactionPriority;
 
     private int assignedIndex = -1;
 
-    public TileLayer(IResourceName name, int renderPriority){
+    public TileLayer(IResourceName name, int priority){
+        this(name, priority, priority);
+    }
+
+    public TileLayer(IResourceName name, int renderPriority, int interactionPriority){
         this.name = name;
         this.renderPriority = renderPriority;
+        this.interactionPriority = interactionPriority;
     }
 
     public IResourceName getName(){
@@ -61,6 +69,10 @@ public class TileLayer{
 
     public int getRenderPriority(){
         return this.renderPriority;
+    }
+
+    public int getInteractionPriority(){
+        return this.interactionPriority;
     }
 
     public boolean canEditLayer(IGameInstance game, AbstractEntityPlayer player){
@@ -130,30 +142,33 @@ public class TileLayer{
     }
 
     @ApiInternal
-    public static void initLayerList(){
-        if(allLayers == null){
-            List<TileLayer> list = new ArrayList<>(RockBottomAPI.TILE_LAYER_REGISTRY.getUnmodifiable().values());
-            list.sort(Comparator.comparing(TileLayer:: getName));
-            allLayers = Collections.unmodifiableList(list);
-
-            for(int i = 0; i < allLayers.size(); i++){
-                allLayers.get(i).assignedIndex = i;
-            }
-
-            RockBottomAPI.logger().info("Sorting a total of "+allLayers.size()+" tile layers");
+    public static void init(){
+        allLayers = makeList(Comparator.comparing(TileLayer:: getName));
+        for(int i = 0; i < allLayers.size(); i++){
+            allLayers.get(i).assignedIndex = i;
         }
-        else{
-            throw new RuntimeException("Layer list already initialized!");
-        }
+
+        layersByIntPrio = makeList(Comparator.comparingInt(TileLayer:: getInteractionPriority));
+        layersByRenderPrio = makeList(Comparator.comparingInt(TileLayer:: getRenderPriority).reversed());
+
+        RockBottomAPI.logger().info("Sorting a total of "+allLayers.size()+" tile layers");
     }
 
-    @ApiInternal
+    private static List<TileLayer> makeList(Comparator comparator){
+        List<TileLayer> list = new ArrayList<>(RockBottomAPI.TILE_LAYER_REGISTRY.getUnmodifiable().values());
+        list.sort(comparator);
+        return Collections.unmodifiableList(list);
+    }
+
     public static List<TileLayer> getAllLayers(){
-        if(allLayers != null){
-            return allLayers;
-        }
-        else{
-            throw new RuntimeException("Cannot access layer list before it has been initialized!");
-        }
+        return allLayers;
+    }
+
+    public static List<TileLayer> getLayersByInteractionPrio(){
+        return layersByIntPrio;
+    }
+
+    public static List<TileLayer> getLayersByRenderPrio(){
+        return layersByRenderPrio;
     }
 }

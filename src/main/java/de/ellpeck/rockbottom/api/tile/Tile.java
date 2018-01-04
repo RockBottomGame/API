@@ -25,7 +25,6 @@ import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.assets.font.FormattingCode;
 import de.ellpeck.rockbottom.api.construction.resource.ResInfo;
-import de.ellpeck.rockbottom.api.construction.resource.ResourceRegistry;
 import de.ellpeck.rockbottom.api.data.settings.Settings;
 import de.ellpeck.rockbottom.api.entity.Entity;
 import de.ellpeck.rockbottom.api.entity.EntityItem;
@@ -301,7 +300,7 @@ public class Tile{
     }
 
     public void describeItem(IAssetManager manager, ItemInstance instance, List<String> desc, boolean isAdvanced){
-        for(TileLayer layer : TileLayer.getAllLayers()){
+        for(TileLayer layer : TileLayer.getLayersByInteractionPrio()){
             if(this.canPlaceInLayer(layer)){
                 if(isAdvanced){
                     desc.add(FormattingCode.GRAY+manager.localize(LOC_LAYER, manager.localize(layer.getName().addPrefix("layer."))));
