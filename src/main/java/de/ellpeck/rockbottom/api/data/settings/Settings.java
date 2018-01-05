@@ -24,7 +24,7 @@ package de.ellpeck.rockbottom.api.data.settings;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.data.IDataManager;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
-import org.lwjgl.input.Keyboard;
+import org.lwjgl.glfw.GLFW;
 
 import java.io.File;
 import java.util.Properties;
@@ -37,22 +37,22 @@ public class Settings implements IPropSettings{
     public static final Keybind KEY_GUI_ACTION_1 = new Keybind(RockBottomAPI.createInternalRes("gui_action_1"), 0, true).register();
     public static final Keybind KEY_GUI_ACTION_2 = new Keybind(RockBottomAPI.createInternalRes("gui_action_2"), 1, true).register();
 
-    public static final Keybind KEY_INVENTORY = new Keybind(RockBottomAPI.createInternalRes("inventory"), Keyboard.KEY_E, false).register();
-    public static final Keybind KEY_MENU = new Keybind(RockBottomAPI.createInternalRes("menu"), Keyboard.KEY_ESCAPE, false).register();
-    public static final Keybind KEY_LEFT = new Keybind(RockBottomAPI.createInternalRes("left"), Keyboard.KEY_A, false).register();
-    public static final Keybind KEY_RIGHT = new Keybind(RockBottomAPI.createInternalRes("right"), Keyboard.KEY_D, false).register();
-    public static final Keybind KEY_UP = new Keybind(RockBottomAPI.createInternalRes("up"), Keyboard.KEY_W, false).register();
-    public static final Keybind KEY_DOWN = new Keybind(RockBottomAPI.createInternalRes("down"), Keyboard.KEY_S, false).register();
-    public static final Keybind KEY_JUMP = new Keybind(RockBottomAPI.createInternalRes("jump"), Keyboard.KEY_SPACE, false).register();
-    public static final Keybind KEY_BACKGROUND = new Keybind(RockBottomAPI.createInternalRes("background"), Keyboard.KEY_LSHIFT, false).register();
-    public static final Keybind KEY_CHAT = new Keybind(RockBottomAPI.createInternalRes("chat"), Keyboard.KEY_RETURN, false).register();
-    public static final Keybind KEY_ADVANCED_INFO = new Keybind(RockBottomAPI.createInternalRes("advanced_info"), Keyboard.KEY_LSHIFT, false).register();
-    public static final Keybind KEY_SCREENSHOT = new Keybind(RockBottomAPI.createInternalRes("screenshot"), Keyboard.KEY_F10, false).register();
+    public static final Keybind KEY_INVENTORY = new Keybind(RockBottomAPI.createInternalRes("inventory"), GLFW.GLFW_KEY_E, false).register();
+    public static final Keybind KEY_MENU = new Keybind(RockBottomAPI.createInternalRes("menu"), GLFW.GLFW_KEY_ESCAPE, false).register();
+    public static final Keybind KEY_LEFT = new Keybind(RockBottomAPI.createInternalRes("left"), GLFW.GLFW_KEY_A, false).register();
+    public static final Keybind KEY_RIGHT = new Keybind(RockBottomAPI.createInternalRes("right"), GLFW.GLFW_KEY_D, false).register();
+    public static final Keybind KEY_UP = new Keybind(RockBottomAPI.createInternalRes("up"), GLFW.GLFW_KEY_W, false).register();
+    public static final Keybind KEY_DOWN = new Keybind(RockBottomAPI.createInternalRes("down"), GLFW.GLFW_KEY_S, false).register();
+    public static final Keybind KEY_JUMP = new Keybind(RockBottomAPI.createInternalRes("jump"), GLFW.GLFW_KEY_SPACE, false).register();
+    public static final Keybind KEY_BACKGROUND = new Keybind(RockBottomAPI.createInternalRes("background"), GLFW.GLFW_KEY_LEFT_SHIFT, false).register();
+    public static final Keybind KEY_CHAT = new Keybind(RockBottomAPI.createInternalRes("chat"), GLFW.GLFW_KEY_ENTER, false).register();
+    public static final Keybind KEY_ADVANCED_INFO = new Keybind(RockBottomAPI.createInternalRes("advanced_info"), GLFW.GLFW_KEY_LEFT_SHIFT, false).register();
+    public static final Keybind KEY_SCREENSHOT = new Keybind(RockBottomAPI.createInternalRes("screenshot"), GLFW.GLFW_KEY_F10, false).register();
     public static final Keybind[] KEYS_ITEM_SELECTION = new Keybind[8];
     public static final int DEFAULT_GUI_COLOR = 0xFF30704E;
 
     static{
-        int[] defKeys = new int[]{Keyboard.KEY_1, Keyboard.KEY_2, Keyboard.KEY_3, Keyboard.KEY_4, Keyboard.KEY_5, Keyboard.KEY_6, Keyboard.KEY_7, Keyboard.KEY_8};
+        int[] defKeys = new int[]{GLFW.GLFW_KEY_1, GLFW.GLFW_KEY_2, GLFW.GLFW_KEY_3, GLFW.GLFW_KEY_4, GLFW.GLFW_KEY_5, GLFW.GLFW_KEY_6, GLFW.GLFW_KEY_7, GLFW.GLFW_KEY_8};
 
         for(int i = 0; i < KEYS_ITEM_SELECTION.length; i++){
             KEYS_ITEM_SELECTION[i] = new Keybind(RockBottomAPI.createInternalRes("item_selection_"+i), defKeys[i], false).register();

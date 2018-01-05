@@ -22,21 +22,65 @@
 package de.ellpeck.rockbottom.api;
 
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
+import de.ellpeck.rockbottom.api.assets.IShaderProgram;
+import de.ellpeck.rockbottom.api.assets.ITexture;
 import de.ellpeck.rockbottom.api.event.impl.TooltipEvent;
 import de.ellpeck.rockbottom.api.gui.container.ItemContainer;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
+import de.ellpeck.rockbottom.api.render.engine.IDisposable;
+import de.ellpeck.rockbottom.api.render.engine.IVAO;
+import de.ellpeck.rockbottom.api.render.engine.IVBO;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
-import org.lwjgl.opengl.GL11;
 
 import java.util.List;
 
 /**
  * The graphics context to interact with OpenGL as well as a multitude of
  * game-provided rendering methods. To access these methods, use the {@link
- * IGraphics} object given to you in render methods or access {@link
- * IGameInstance#getGraphics()}
+ * IRenderer} object given to you in render methods or access {@link
+ * IGameInstance#getRenderer()}
  */
-public interface IGraphics{
+public interface IRenderer extends IDisposable{
+
+    void setProgram(IShaderProgram program);
+
+    void setTexture(ITexture texture);
+
+    void addTriangle(float x1, float y1, float x2, float y2, float x3, float y3, int color, float u1, float v1, float u2, float v2, float u3, float v3);
+
+    void addVertex(float x, float y, int color, float u, float v);
+
+    void begin();
+
+    void end();
+
+    void flush();
+
+    void rotate(float angle);
+
+    void setRotation(float angle);
+
+    void translate(float x, float y);
+
+    void setTranslation(float x, float y);
+
+    void scale(float x, float y);
+
+    void setScale(float x, float y);
+
+    float getAngle();
+
+    float getTranslationX();
+
+    float getTranslationY();
+
+    float getScaleX();
+
+    float getScaleY();
+
+    IShaderProgram getProgram();
+
+    ITexture getTexture();
 
     /**
      * Renders a slot. This displays the (by default) green box based on the gui
@@ -72,7 +116,7 @@ public interface IGraphics{
 
     /**
      * Renders an item's hover over information on the mouse cursor position.
-     * Additionally, it draws the {@link IGraphics#isItemInfoDebug()} text and
+     * Additionally, it draws the {@link IRenderer#isItemInfoDebug()} text and
      * also fires the {@link TooltipEvent}.
      *
      * @param game     The game instance
@@ -129,87 +173,6 @@ public interface IGraphics{
     void drawHoverInfo(IGameInstance game, IAssetManager manager, float x, float y, float scale, boolean firstLineOffset, boolean canLeaveScreen, int maxLength, List<String> text);
 
     /**
-     * Pushes the GL matrix. See {@link GL11#glPushMatrix()} for reference.
-     */
-    void pushMatrix();
-
-    /**
-     * Pops the GL matrix. See {@link GL11#glPopMatrix()} for reference.
-     */
-    void popMatrix();
-
-    /**
-     * Binds the specified color to the GL context. See {@link
-     * GL11#glColor4f(float, float, float, float)} for reference. Note that
-     * every hex color used in the game needs to contain an alpha component for
-     * it to display.
-     *
-     * @param color The color
-     */
-    void bindColor(int color);
-
-    /**
-     * Binds the specifid color to the GL context. See {@link
-     * GL11#glColor4f(float, float, float, float)} for reference.
-     *
-     * @param r The red component (0-1)
-     * @param g The green component (0-1)
-     * @param b The blue component (0-1)
-     * @param a The alpha (0-1)
-     */
-    void bindColor(float r, float g, float b, float a);
-
-    /**
-     * Sets the background color (the color to fill the screen with at the start
-     * of every render cycle). See {@link GL11#glClearColor(float, float, float,
-     * float)} for reference. Note that every hex color used in the game needs
-     * to contain an alpha component for it to display.
-     *
-     * @param color The color
-     */
-    void backgroundColor(int color);
-
-    /**
-     * Sets the background color (the color to fill the screen with at the start
-     * of every render cycle). See {@link GL11#glClearColor(float, float, float,
-     * float)} for reference.
-     *
-     * @param r The red component (0-1)
-     * @param g The green component (0-1)
-     * @param b The blue component (0-1)
-     * @param a The alpha (0-1)
-     */
-    void backgroundColor(float r, float g, float b, float a);
-
-    /**
-     * Scales the GL context by the specified x and y scale. See {@link
-     * GL11#glScalef(float, float, float)} for reference.
-     *
-     * @param scaleX The x scale
-     * @param scaleY The y scale
-     */
-    void scale(float scaleX, float scaleY);
-
-    /**
-     * Translates the GL context by the specified x and y coordinates. See
-     * {@link GL11#glPixelTransferf(int, float)} for reference.
-     *
-     * @param x The x coordinate
-     * @param y The y coordinate
-     */
-    void translate(float x, float y);
-
-    /**
-     * Rotates the GL context by the specified angle. See {@link
-     * GL11#glRotatef(float, float, float, float)} for reference. Note that this
-     * will only ever rotate around one axis as anything else makes little sense
-     * in a 2d game.
-     *
-     * @param angle The angle in degrees to rotate by
-     */
-    void rotate(float angle);
-
-    /**
      * Draws a colored, unfilled rectangle at the specified x and y
      * coordinates.
      *
@@ -219,7 +182,7 @@ public interface IGraphics{
      * @param height The height
      * @param color  The color
      */
-    void drawRect(float x, float y, float width, float height, int color);
+    void addEmptyRect(float x, float y, float width, float height, int color);
 
     /**
      * Draws a colored, unfilled rectangle at the specified x and y
@@ -232,7 +195,7 @@ public interface IGraphics{
      * @param lineWidth The width of the outlines
      * @param color     The color
      */
-    void drawRect(float x, float y, float width, float height, float lineWidth, int color);
+    void addEmptyRect(float x, float y, float width, float height, float lineWidth, int color);
 
     /**
      * Draws a colored, filled rectangle at the spcified x and y coordinates.
@@ -243,7 +206,19 @@ public interface IGraphics{
      * @param height The height
      * @param color  The color
      */
-    void fillRect(float x, float y, float width, float height, int color);
+    void addFilledRect(float x, float y, float width, float height, int color);
+
+    void unbindTexture();
+
+    void unbindVAO();
+
+    void unbindVBO();
+
+    void unbindShaderProgram();
+
+    IVAO createVAO();
+
+    IVBO createVBO(boolean isStatic);
 
     @ApiInternal
     void calcScales();
@@ -277,4 +252,6 @@ public interface IGraphics{
     double getMousedTileX();
 
     double getMousedTileY();
+
+    int getFlushes();
 }

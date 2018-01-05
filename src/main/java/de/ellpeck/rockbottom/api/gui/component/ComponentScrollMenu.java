@@ -22,7 +22,7 @@
 package de.ellpeck.rockbottom.api.gui.component;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
-import de.ellpeck.rockbottom.api.IGraphics;
+import de.ellpeck.rockbottom.api.IRenderer;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.data.settings.Settings;
@@ -31,7 +31,6 @@ import de.ellpeck.rockbottom.api.util.ApiInternal;
 import de.ellpeck.rockbottom.api.util.BoundBox;
 import de.ellpeck.rockbottom.api.util.Util;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
-import org.lwjgl.input.Mouse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,17 +74,17 @@ public class ComponentScrollMenu extends ComponentButton{
     }
 
     @Override
-    public void render(IGameInstance game, IAssetManager manager, IGraphics g, int x, int y){
+    public void render(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y){
         int max = this.getMax();
         float percentage = max <= 0 ? 0 : (float)this.number/(float)max;
         float renderY = y+percentage*(this.height-10);
         int color = this.isMouseOverPrioritized(game) || this.hoverArea.contains(g.getMouseInGuiX(), g.getMouseInGuiY()) ? getElementColor() : getUnselectedElementColor();
 
-        g.fillRect(x, y, 6F, this.height, color);
-        g.drawRect(x, y, 6F, this.height, getElementOutlineColor());
+        g.addFilledRect(x, y, 6F, this.height, color);
+        g.addEmptyRect(x, y, 6F, this.height, getElementOutlineColor());
 
-        g.fillRect(x, renderY, 6F, 10F, color);
-        g.drawRect(x, renderY, 6F, 10F, getElementOutlineColor());
+        g.addFilledRect(x, renderY, 6F, 10F, color);
+        g.addEmptyRect(x, renderY, 6F, 10F, getElementOutlineColor());
     }
 
     public void organize(){
@@ -143,15 +142,15 @@ public class ComponentScrollMenu extends ComponentButton{
     public void update(IGameInstance game){
         if(this.wasMouseDown){
             if(Settings.KEY_GUI_ACTION_1.isDown()){
-                this.onClickOrMove(game.getGraphics().getMouseInGuiY());
+                this.onClickOrMove(game.getRenderer().getMouseInGuiY());
             }
             else{
                 this.wasMouseDown = false;
             }
         }
         else{
-            int scroll = Mouse.getDWheel();
-            if(scroll != 0 && this.hoverArea.contains(game.getGraphics().getMouseInGuiX(), game.getGraphics().getMouseInGuiY())){
+            int scroll = game.getInput().getMouseWheel();
+            if(scroll != 0 && this.hoverArea.contains(game.getRenderer().getMouseInGuiX(), game.getRenderer().getMouseInGuiY())){
                 int number = Util.clamp(this.number+(scroll < 0 ? 1 : -1), 0, this.getMax());
                 if(number != this.number){
                     this.number = number;

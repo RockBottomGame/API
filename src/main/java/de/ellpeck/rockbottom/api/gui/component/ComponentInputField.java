@@ -22,16 +22,16 @@
 package de.ellpeck.rockbottom.api.gui.component;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
-import de.ellpeck.rockbottom.api.IGraphics;
+import de.ellpeck.rockbottom.api.IInputHandler;
+import de.ellpeck.rockbottom.api.IRenderer;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.assets.font.FormattingCode;
 import de.ellpeck.rockbottom.api.assets.font.IFont;
 import de.ellpeck.rockbottom.api.data.settings.Settings;
 import de.ellpeck.rockbottom.api.gui.Gui;
-import de.ellpeck.rockbottom.api.IInputHandler;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
-import org.lwjgl.input.Keyboard;
+import org.lwjgl.glfw.GLFW;
 
 import java.awt.*;
 import java.awt.datatransfer.DataFlavor;
@@ -80,7 +80,7 @@ public class ComponentInputField extends GuiComponent{
     @Override
     public boolean onKeyboardAction(IGameInstance game, int button, char character){
         if(this.isSelected){
-            if(button == Keyboard.KEY_BACK){
+            if(button == GLFW.GLFW_KEY_BACKSPACE){
                 if(!this.text.isEmpty()){
                     this.text = this.text.substring(0, this.text.length()-1);
                     if(this.consumer != null){
@@ -89,7 +89,7 @@ public class ComponentInputField extends GuiComponent{
                 }
                 return true;
             }
-            else if(button == Keyboard.KEY_ESCAPE){
+            else if(button == GLFW.GLFW_KEY_ESCAPE){
                 if(this.selectable){
                     this.isSelected = false;
                     return true;
@@ -97,8 +97,8 @@ public class ComponentInputField extends GuiComponent{
             }
             else{
                 IInputHandler input = game.getInput();
-                if(input.isKeyDown(Keyboard.KEY_LCONTROL) || input.isKeyDown(Keyboard.KEY_RCONTROL)){
-                    if(button == Keyboard.KEY_V){
+                if(input.isKeyDown(GLFW.GLFW_KEY_LEFT_CONTROL) || input.isKeyDown(GLFW.GLFW_KEY_RIGHT_CONTROL)){
+                    if(button == GLFW.GLFW_KEY_V){
                         if(this.text.length() < this.maxLength){
                             try{
                                 this.text += (String)Toolkit.getDefaultToolkit().getSystemClipboard().getData(DataFlavor.stringFlavor);
@@ -152,10 +152,10 @@ public class ComponentInputField extends GuiComponent{
     }
 
     @Override
-    public void render(IGameInstance game, IAssetManager manager, IGraphics g, int x, int y){
+    public void render(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y){
         if(this.renderBox){
-            g.fillRect(x, y, this.width, this.height, this.isMouseOverPrioritized(game) ? getElementColor() : getUnselectedElementColor());
-            g.drawRect(x, y, this.width, this.height, getElementOutlineColor());
+            g.addFilledRect(x, y, this.width, this.height, this.isMouseOverPrioritized(game) ? getElementColor() : getUnselectedElementColor());
+            g.addEmptyRect(x, y, this.width, this.height, getElementOutlineColor());
         }
 
         IFont font = manager.getFont();

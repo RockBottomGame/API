@@ -28,6 +28,7 @@ import de.ellpeck.rockbottom.api.util.ApiInternal;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 
 import java.io.InputStream;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Map;
 
@@ -45,6 +46,8 @@ public interface IAssetManager{
     IAnimation getAnimation(IResourceName path);
 
     ISound getSound(IResourceName path);
+
+    IShaderProgram getShaderProgram(IResourceName path);
 
     @ApiInternal
     Locale getLocale(IResourceName path);
@@ -65,6 +68,8 @@ public interface IAssetManager{
     void setLocale(Locale locale);
 
     InputStream getResourceStream(String s);
+
+    URL getResourceURL(String s);
 
     ITexture getMissingTexture();
 

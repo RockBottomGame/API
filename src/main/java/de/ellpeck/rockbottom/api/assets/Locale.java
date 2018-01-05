@@ -75,4 +75,9 @@ public class Locale implements IAsset{
     public Map<IResourceName, String> getLocalization(){
         return Collections.unmodifiableMap(this.localization);
     }
+
+    @Override
+    public void dispose(){
+
+    }
 }

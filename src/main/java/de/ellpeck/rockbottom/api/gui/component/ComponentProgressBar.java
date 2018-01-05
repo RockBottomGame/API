@@ -22,7 +22,7 @@
 package de.ellpeck.rockbottom.api.gui.component;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
-import de.ellpeck.rockbottom.api.IGraphics;
+import de.ellpeck.rockbottom.api.IRenderer;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.gui.Gui;
@@ -48,23 +48,23 @@ public class ComponentProgressBar extends GuiComponent{
     }
 
     @Override
-    public void render(IGameInstance game, IAssetManager manager, IGraphics g, int x, int y){
+    public void render(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y){
         super.render(game, manager, g, x, y);
 
         float percent = this.supplier.get();
 
-        g.fillRect(x, y, this.width, this.height, this.backgroundColor);
+        g.addFilledRect(x, y, this.width, this.height, this.backgroundColor);
 
         if(this.isVertical){
             float height = percent*this.height;
-            g.fillRect(x, y+this.height-height, this.width, height, this.progressColor);
+            g.addFilledRect(x, y+this.height-height, this.width, height, this.progressColor);
         }
         else{
             float width = percent*this.width;
-            g.fillRect(x, y, width, this.height, this.progressColor);
+            g.addFilledRect(x, y, width, this.height, this.progressColor);
         }
 
-        g.drawRect(x, y, this.width, this.height, Colors.BLACK);
+        g.addEmptyRect(x, y, this.width, this.height, Colors.BLACK);
     }
 
     @Override

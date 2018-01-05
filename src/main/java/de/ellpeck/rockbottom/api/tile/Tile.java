@@ -46,7 +46,6 @@ import de.ellpeck.rockbottom.api.util.Util;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 import de.ellpeck.rockbottom.api.world.IWorld;
 import de.ellpeck.rockbottom.api.world.layer.TileLayer;
-import org.lwjgl.input.Keyboard;
 
 import java.util.*;
 
@@ -306,7 +305,8 @@ public class Tile{
                     desc.add(FormattingCode.GRAY+manager.localize(LOC_LAYER, manager.localize(layer.getName().addPrefix("layer."))));
                 }
                 else{
-                    desc.add(FormattingCode.DARK_GRAY+manager.localize(LOC_ADVANCED, Keyboard.getKeyName(Settings.KEY_ADVANCED_INFO.getKey())));
+                    //TODO Actually make this display the key's name rather than its code
+                    desc.add(FormattingCode.DARK_GRAY+manager.localize(LOC_ADVANCED, Settings.KEY_ADVANCED_INFO.getKey()));
                     break;
                 }
             }

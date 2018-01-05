@@ -22,26 +22,26 @@
 package de.ellpeck.rockbottom.api.event.impl;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
-import de.ellpeck.rockbottom.api.IGraphics;
+import de.ellpeck.rockbottom.api.IRenderer;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.event.Event;
 
 /**
  * This event is fired after an {@link AbstractEntityPlayer} is rendered. Note
- * that during the firing of this event, the {@link IGraphics#getWorldScale()}
+ * that during the firing of this event, the {@link IRenderer#getWorldScale()}
  * is applied to the GL context. This event cannot be cancelled.
  */
 public class PlayerRenderEvent extends Event{
 
     public final IGameInstance game;
     public final IAssetManager assetManager;
-    public final IGraphics graphics;
+    public final IRenderer graphics;
     public final AbstractEntityPlayer player;
     public final float x;
     public final float y;
 
-    public PlayerRenderEvent(IGameInstance game, IAssetManager assetManager, IGraphics graphics, AbstractEntityPlayer player, float x, float y){
+    public PlayerRenderEvent(IGameInstance game, IAssetManager assetManager, IRenderer graphics, AbstractEntityPlayer player, float x, float y){
         this.game = game;
         this.assetManager = assetManager;
         this.graphics = graphics;

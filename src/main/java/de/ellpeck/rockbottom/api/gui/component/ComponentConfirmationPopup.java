@@ -22,7 +22,7 @@
 package de.ellpeck.rockbottom.api.gui.component;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
-import de.ellpeck.rockbottom.api.IGraphics;
+import de.ellpeck.rockbottom.api.IRenderer;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.assets.ITexture;
@@ -60,7 +60,7 @@ public class ComponentConfirmationPopup extends GuiComponent{
     }
 
     @Override
-    public void render(IGameInstance game, IAssetManager manager, IGraphics g, int x, int y){
+    public void render(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y){
         ITexture tex = manager.getTexture(RES);
         IFont font = manager.getFont();
         String text = "Are you sure?";
@@ -79,15 +79,15 @@ public class ComponentConfirmationPopup extends GuiComponent{
         int width = (int)this.buttonArea.getWidth();
         int height = (int)this.buttonArea.getHeight();
 
-        g.fillRect(renderX, renderY, width, height, this.isMouseOverPrioritized(game) && this.buttonArea.contains(game.getGraphics().getMouseInGuiX(), game.getGraphics().getMouseInGuiY()) ? getElementColor() : getUnselectedElementColor());
-        g.drawRect(renderX, renderY, width, height, getElementOutlineColor());
+        g.addFilledRect(renderX, renderY, width, height, this.isMouseOverPrioritized(game) && this.buttonArea.contains(game.getRenderer().getMouseInGuiX(), game.getRenderer().getMouseInGuiY()) ? getElementColor() : getUnselectedElementColor());
+        g.addEmptyRect(renderX, renderY, width, height, getElementOutlineColor());
 
         font.drawCenteredString(renderX+width/2F, renderY+height/2F+0.5F, "Yes", 0.35F, true);
     }
 
     @Override
     public boolean onMouseAction(IGameInstance game, int button, float x, float y){
-        if(Settings.KEY_GUI_ACTION_1.isKey(button) && this.isMouseOverPrioritized(game) && this.buttonArea.contains(game.getGraphics().getMouseInGuiX(), game.getGraphics().getMouseInGuiY())){
+        if(Settings.KEY_GUI_ACTION_1.isKey(button) && this.isMouseOverPrioritized(game) && this.buttonArea.contains(game.getRenderer().getMouseInGuiX(), game.getRenderer().getMouseInGuiY())){
             game.getAssetManager().getSound(RockBottomAPI.createInternalRes("menu.click")).play();
             this.consumer.accept(true);
         }
@@ -106,7 +106,7 @@ public class ComponentConfirmationPopup extends GuiComponent{
 
     @Override
     public boolean shouldDoFingerCursor(IGameInstance game){
-        IGraphics g = game.getGraphics();
+        IRenderer g = game.getRenderer();
         return this.buttonArea.contains(g.getMouseInGuiX(), g.getMouseInGuiY());
     }
 

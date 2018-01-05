@@ -22,7 +22,7 @@
 package de.ellpeck.rockbottom.api.gui.component;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
-import de.ellpeck.rockbottom.api.IGraphics;
+import de.ellpeck.rockbottom.api.IRenderer;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.assets.ITexture;
@@ -60,9 +60,9 @@ public class ComponentColorPicker extends GuiComponent{
     }
 
     @Override
-    public void render(IGameInstance game, IAssetManager manager, IGraphics g, int x, int y){
+    public void render(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y){
         this.texture.draw(x, y, this.width, this.height);
-        g.drawRect(x, y, this.width, this.height, getElementOutlineColor());
+        g.addEmptyRect(x, y, this.width, this.height, getElementOutlineColor());
     }
 
     @Override
@@ -73,8 +73,8 @@ public class ComponentColorPicker extends GuiComponent{
                     this.width *= 4;
                     this.height *= 4;
 
-                    this.x = Util.clamp(this.x-(this.width/2-(this.width/8)), 0, (int)game.getGraphics().getWidthInGui()-this.width);
-                    this.y = Util.clamp(this.y-(this.height/2-(this.height/8)), 0, (int)game.getGraphics().getHeightInGui()-this.height);
+                    this.x = Util.clamp(this.x-(this.width/2-(this.width/8)), 0, (int)game.getRenderer().getWidthInGui()-this.width);
+                    this.y = Util.clamp(this.y-(this.height/2-(this.height/8)), 0, (int)game.getRenderer().getHeightInGui()-this.height);
 
                     this.isEnlarged = true;
                     this.gui.sortComponents();
@@ -128,8 +128,8 @@ public class ComponentColorPicker extends GuiComponent{
     @Override
     public void update(IGameInstance game){
         if(this.wasMouseDown){
-            float mouseX = game.getGraphics().getMouseInGuiX();
-            float mouseY = game.getGraphics().getMouseInGuiY();
+            float mouseX = game.getRenderer().getMouseInGuiX();
+            float mouseY = game.getRenderer().getMouseInGuiY();
 
             if(Settings.KEY_GUI_ACTION_1.isDown()){
                 this.onClickOrMove(game, mouseX, mouseY);

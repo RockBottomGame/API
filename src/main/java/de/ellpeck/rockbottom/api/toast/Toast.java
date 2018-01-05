@@ -22,7 +22,7 @@
 package de.ellpeck.rockbottom.api.toast;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
-import de.ellpeck.rockbottom.api.IGraphics;
+import de.ellpeck.rockbottom.api.IRenderer;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.assets.ITexture;
 import de.ellpeck.rockbottom.api.assets.font.FormattingCode;
@@ -49,12 +49,12 @@ public class Toast{
         this.displayTime = displayTime;
     }
 
-    public void render(IGameInstance game, IAssetManager manager, IGraphics g, float x, float y){
+    public void render(IGameInstance game, IAssetManager manager, IRenderer g, float x, float y){
         float width = this.getWidth();
         float height = this.getHeight();
 
-        g.fillRect(x, y, width, height, GuiComponent.getElementColor());
-        g.drawRect(x, y, width, height, GuiComponent.getElementOutlineColor());
+        g.addFilledRect(x, y, width, height, GuiComponent.getElementColor());
+        g.addEmptyRect(x, y, width, height, GuiComponent.getElementOutlineColor());
 
         float textX = x;
         float textWidth = width;

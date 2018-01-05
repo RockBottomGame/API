@@ -22,13 +22,12 @@
 package de.ellpeck.rockbottom.api.gui.component;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
-import de.ellpeck.rockbottom.api.IGraphics;
+import de.ellpeck.rockbottom.api.IRenderer;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.gui.Gui;
 import de.ellpeck.rockbottom.api.util.Colors;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
-import org.lwjgl.input.Mouse;
 
 public abstract class GuiComponent{
 
@@ -67,11 +66,11 @@ public abstract class GuiComponent{
 
     }
 
-    public void render(IGameInstance game, IAssetManager manager, IGraphics g, int x, int y){
+    public void render(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y){
 
     }
 
-    public void renderOverlay(IGameInstance game, IAssetManager manager, IGraphics g, int x, int y){
+    public void renderOverlay(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y){
 
     }
 
@@ -80,9 +79,9 @@ public abstract class GuiComponent{
     }
 
     public boolean isMouseOver(IGameInstance game){
-        if(this.isActive() && Mouse.isInsideWindow()){
-            int mouseX = (int)game.getGraphics().getMouseInGuiX();
-            int mouseY = (int)game.getGraphics().getMouseInGuiY();
+        if(this.isActive() && game.getInput().isMouseInWindow()){
+            int mouseX = (int)game.getRenderer().getMouseInGuiX();
+            int mouseY = (int)game.getRenderer().getMouseInGuiY();
 
             int renderX = this.getRenderX();
             int renderY = this.getRenderY();

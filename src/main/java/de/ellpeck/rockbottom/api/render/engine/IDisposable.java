@@ -1,5 +1,5 @@
 /*
- * This file ("IAsset.java") is part of the RockBottomAPI by Ellpeck.
+ * This file ("IDisposable.java") is part of the RockBottomAPI by Ellpeck.
  * View the source code at <https://github.com/RockBottomGame/>.
  * View information on the project at <https://rockbottom.ellpeck.de/>.
  *
@@ -16,13 +16,13 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with the RockBottomAPI. If not, see <http://www.gnu.org/licenses/>.
  *
- * © 2017 Ellpeck
+ * © 2018 Ellpeck
  */
 
-package de.ellpeck.rockbottom.api.assets;
+package de.ellpeck.rockbottom.api.render.engine;
 
-import de.ellpeck.rockbottom.api.render.engine.IDisposable;
+public interface IDisposable{
 
-public interface IAsset extends IDisposable{
+    void dispose();
 
 }

@@ -23,7 +23,7 @@ package de.ellpeck.rockbottom.api.render.item;
 
 import com.google.gson.JsonElement;
 import de.ellpeck.rockbottom.api.IGameInstance;
-import de.ellpeck.rockbottom.api.IGraphics;
+import de.ellpeck.rockbottom.api.IRenderer;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
@@ -34,7 +34,7 @@ import de.ellpeck.rockbottom.api.tile.Tile;
 public class ItemTileRenderer implements IItemRenderer<ItemTile>{
 
     @Override
-    public void render(IGameInstance game, IAssetManager manager, IGraphics g, ItemTile item, ItemInstance instance, float x, float y, float scale, int filter){
+    public void render(IGameInstance game, IAssetManager manager, IRenderer g, ItemTile item, ItemInstance instance, float x, float y, float scale, int filter){
         Tile tile = item.getTile();
         if(tile != null){
             ITileRenderer renderer = tile.getRenderer();
@@ -45,14 +45,14 @@ public class ItemTileRenderer implements IItemRenderer<ItemTile>{
     }
 
     @Override
-    public void renderOnMouseCursor(IGameInstance game, IAssetManager manager, IGraphics g, ItemTile item, ItemInstance instance, float x, float y, float scale, int filter, boolean isInPlayerRange){
+    public void renderOnMouseCursor(IGameInstance game, IAssetManager manager, IRenderer g, ItemTile item, ItemInstance instance, float x, float y, float scale, int filter, boolean isInPlayerRange){
         if(isInPlayerRange){
             this.render(game, manager, g, item, instance, x+0.1F*scale, y, scale*0.75F, filter);
         }
     }
 
     @Override
-    public JsonElement getAdditionalTextureData(IGameInstance game, IAssetManager manager, IGraphics g, ItemTile item, ItemInstance instance, AbstractEntityPlayer player, String name){
+    public JsonElement getAdditionalTextureData(IGameInstance game, IAssetManager manager, IRenderer g, ItemTile item, ItemInstance instance, AbstractEntityPlayer player, String name){
         Tile tile = item.getTile();
         if(tile != null){
             ITileRenderer renderer = tile.getRenderer();

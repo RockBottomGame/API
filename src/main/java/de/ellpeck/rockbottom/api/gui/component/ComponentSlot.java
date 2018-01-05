@@ -22,14 +22,14 @@
 package de.ellpeck.rockbottom.api.gui.component;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
-import de.ellpeck.rockbottom.api.IGraphics;
+import de.ellpeck.rockbottom.api.IRenderer;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.gui.GuiContainer;
 import de.ellpeck.rockbottom.api.gui.container.ContainerSlot;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
-import org.lwjgl.input.Keyboard;
+import org.lwjgl.glfw.GLFW;
 
 public class ComponentSlot extends GuiComponent{
 
@@ -47,7 +47,7 @@ public class ComponentSlot extends GuiComponent{
     @Override
     public boolean onMouseAction(IGameInstance game, int button, float x, float y){
         if(this.isMouseOver(game)){
-            if(game.getInput().isKeyDown(Keyboard.KEY_LSHIFT)){
+            if(game.getInput().isKeyDown(GLFW.GLFW_KEY_LEFT_SHIFT)){
                 return RockBottomAPI.getInternalHooks().doDefaultShiftClicking(game, this.container, this);
             }
             else{
@@ -65,12 +65,12 @@ public class ComponentSlot extends GuiComponent{
     }
 
     @Override
-    public void render(IGameInstance game, IAssetManager manager, IGraphics g, int x, int y){
+    public void render(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y){
         g.renderSlotInGui(game, manager, this.slot.get(), x, y, 1F, this.isMouseOver(game));
     }
 
     @Override
-    public void renderOverlay(IGameInstance game, IAssetManager manager, IGraphics g, int x, int y){
+    public void renderOverlay(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y){
         if(this.container.holdingInst == null && this.isMouseOverPrioritized(game)){
             ItemInstance instance = this.slot.get();
             if(instance != null){

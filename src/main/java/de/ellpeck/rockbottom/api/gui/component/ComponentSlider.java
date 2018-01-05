@@ -22,7 +22,7 @@
 package de.ellpeck.rockbottom.api.gui.component;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
-import de.ellpeck.rockbottom.api.IGraphics;
+import de.ellpeck.rockbottom.api.IRenderer;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.data.settings.Settings;
@@ -56,14 +56,14 @@ public class ComponentSlider extends ComponentButton{
     }
 
     @Override
-    public void render(IGameInstance game, IAssetManager manager, IGraphics g, int x, int y){
+    public void render(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y){
         super.render(game, manager, g, x, y);
 
         float percentage = (float)(this.number-this.min)/(float)(this.max-this.min);
         float renderX = x+percentage*(this.width-5);
 
-        g.fillRect(renderX, y, 5F, this.height, this.isMouseOverPrioritized(game) ? getElementColor() : getUnselectedElementColor());
-        g.drawRect(renderX, y, 5F, this.height, getElementOutlineColor());
+        g.addFilledRect(renderX, y, 5F, this.height, this.isMouseOverPrioritized(game) ? getElementColor() : getUnselectedElementColor());
+        g.addEmptyRect(renderX, y, 5F, this.height, getElementOutlineColor());
     }
 
     @Override
@@ -82,7 +82,7 @@ public class ComponentSlider extends ComponentButton{
     @Override
     public void update(IGameInstance game){
         if(this.wasMouseDown){
-            float mouseX = game.getGraphics().getMouseInGuiX();
+            float mouseX = game.getRenderer().getMouseInGuiX();
 
             if(Settings.KEY_GUI_ACTION_1.isDown()){
                 this.onClickOrMove(mouseX);

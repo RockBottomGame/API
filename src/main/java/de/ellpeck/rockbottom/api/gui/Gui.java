@@ -22,7 +22,7 @@
 package de.ellpeck.rockbottom.api.gui;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
-import de.ellpeck.rockbottom.api.IGraphics;
+import de.ellpeck.rockbottom.api.IRenderer;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.data.settings.Settings;
@@ -33,8 +33,6 @@ import de.ellpeck.rockbottom.api.gui.component.GuiComponent;
 import de.ellpeck.rockbottom.api.util.Colors;
 import de.ellpeck.rockbottom.api.util.Util;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
-import org.lwjgl.input.Keyboard;
-import org.lwjgl.input.Mouse;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -73,11 +71,11 @@ public abstract class Gui{
     }
 
     public void onOpened(IGameInstance game){
-        Keyboard.enableRepeatEvents(true);
+        game.getInput().setKeyboardRepeatEvents(true);
     }
 
     public void onClosed(IGameInstance game){
-        Keyboard.enableRepeatEvents(false);
+        game.getInput().setKeyboardRepeatEvents(false);
     }
 
     public void init(IGameInstance game){
@@ -90,15 +88,15 @@ public abstract class Gui{
 
     protected void updateDimensions(IGameInstance game){
         if(!this.hasUnspecifiedBounds){
-            this.x = (int)game.getGraphics().getWidthInGui()/2-this.width/2;
-            this.y = (int)game.getGraphics().getHeightInGui()/2-this.height/2;
+            this.x = (int)game.getRenderer().getWidthInGui()/2-this.width/2;
+            this.y = (int)game.getRenderer().getHeightInGui()/2-this.height/2;
         }
         else{
             this.x = 0;
             this.y = 0;
 
-            this.width = Util.ceil(game.getGraphics().getWidthInGui());
-            this.height = Util.ceil(game.getGraphics().getHeightInGui());
+            this.width = Util.ceil(game.getRenderer().getWidthInGui());
+            this.height = Util.ceil(game.getRenderer().getHeightInGui());
         }
     }
 
@@ -140,7 +138,7 @@ public abstract class Gui{
         return false;
     }
 
-    public void render(IGameInstance game, IAssetManager manager, IGraphics g){
+    public void render(IGameInstance game, IAssetManager manager, IRenderer g){
         for(int i = this.components.size()-1; i >= 0; i--){
             GuiComponent component = this.components.get(i);
             if(component.isActive()){
@@ -151,7 +149,7 @@ public abstract class Gui{
         }
     }
 
-    public void renderOverlay(IGameInstance game, IAssetManager manager, IGraphics g){
+    public void renderOverlay(IGameInstance game, IAssetManager manager, IRenderer g){
         for(int i = this.components.size()-1; i >= 0; i--){
             GuiComponent component = this.components.get(i);
             if(component.isActive()){
@@ -182,9 +180,9 @@ public abstract class Gui{
     }
 
     public boolean isMouseOver(IGameInstance game){
-        if(Mouse.isInsideWindow()){
-            int mouseX = (int)game.getGraphics().getMouseInGuiX();
-            int mouseY = (int)game.getGraphics().getMouseInGuiY();
+        if(game.getInput().isMouseInWindow()){
+            int mouseX = (int)game.getRenderer().getMouseInGuiX();
+            int mouseY = (int)game.getRenderer().getMouseInGuiY();
 
             boolean overSelf = mouseX >= this.x && mouseX < this.x+this.width && mouseY >= this.y && mouseY < this.y+this.height;
             return overSelf || this.isMouseOverComponent(game);

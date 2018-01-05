@@ -46,11 +46,10 @@ import java.net.URLClassLoader;
 import java.util.UUID;
 import java.util.function.BiConsumer;
 import java.util.function.Predicate;
-import java.util.function.Supplier;
 
 /**
  * The game instance that can be used to interact with various game-related
- * values and acces things like {@link IGraphics} and {@link IAssetManager}.
+ * values and acces things like {@link IRenderer} and {@link IAssetManager}.
  * Notice that this instance represents both the server and the client, however
  * some methods that are not implemented on the dedicated server (like graphics
  * and rendering methods) will throw an {@link UnsupportedOperationException}.
@@ -152,12 +151,12 @@ public interface IGameInstance extends IMod{
     IAssetManager getAssetManager();
 
     /**
-     * Gets the {@link IGraphics} context of the current game instance. This can
+     * Gets the {@link IRenderer} context of the current game instance. This can
      * be used to draw various shapes and interact with the OpenGL context.
      *
      * @return The graphics context
      */
-    IGraphics getGraphics();
+    IRenderer getRenderer();
 
     /**
      * Gets the {@link IParticleManager} of the current game instance. This can
@@ -258,4 +257,8 @@ public interface IGameInstance extends IMod{
      * @throws UnsupportedOperationException on the dedicated server
      */
     IToaster getToaster();
+
+    int getWidth();
+
+    int getHeight();
 }

@@ -22,7 +22,7 @@
 package de.ellpeck.rockbottom.api.event.impl;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
-import de.ellpeck.rockbottom.api.IGraphics;
+import de.ellpeck.rockbottom.api.IRenderer;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.event.Event;
 import de.ellpeck.rockbottom.api.gui.Gui;
@@ -30,7 +30,7 @@ import de.ellpeck.rockbottom.api.gui.component.GuiComponent;
 
 /**
  * This event is fired when a {@link GuiComponent} renders its overlay using
- * {@link GuiComponent#renderOverlay(IGameInstance, IAssetManager, IGraphics,
+ * {@link GuiComponent#renderOverlay(IGameInstance, IAssetManager, IRenderer,
  * int, int)}. Cancelling it will result in the overlay not rendering.
  */
 public class ComponentRenderOverlayEvent extends Event{

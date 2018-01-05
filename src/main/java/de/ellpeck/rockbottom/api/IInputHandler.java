@@ -23,6 +23,8 @@ package de.ellpeck.rockbottom.api;
 
 public interface IInputHandler{
 
+    boolean isMouseInWindow();
+
     boolean isMouseDown(int button);
 
     boolean wasMousePressed(int button);
@@ -30,6 +32,10 @@ public interface IInputHandler{
     boolean isKeyDown(int key);
 
     boolean wasKeyPressed(int key);
+
+    void setKeyboardRepeatEvents(boolean should);
+
+    int getMouseWheel();
 
     int getMouseX();
 
