@@ -40,12 +40,12 @@ import de.ellpeck.rockbottom.api.util.Util;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiFunction;
-import java.util.function.Function;
 
 public abstract class GuiContainer extends Gui{
 
     public final List<ShiftClickBehavior> shiftClickBehaviors = new ArrayList<>();
     public final AbstractEntityPlayer player;
+    private ItemContainer container;
     public ItemInstance holdingInst;
 
     public GuiContainer(AbstractEntityPlayer player, int sizeX, int sizeY){
@@ -61,7 +61,9 @@ public abstract class GuiContainer extends Gui{
             this.dropHeldItem();
         }
 
-        this.player.closeContainer();
+        if(this.player.getContainer() == this.container){
+            this.player.closeContainer();
+        }
     }
 
     @Override
@@ -91,9 +93,9 @@ public abstract class GuiContainer extends Gui{
     public void init(IGameInstance game){
         super.init(game);
 
-        ItemContainer container = this.player.getContainer();
-        for(int i = 0; i < container.getSlotAmount(); i++){
-            ContainerSlot slot = container.getSlot(i);
+        this.container = this.player.getContainer();
+        for(int i = 0; i < this.container.getSlotAmount(); i++){
+            ContainerSlot slot = this.container.getSlot(i);
             this.components.add(new ComponentSlot(this, slot, i, slot.x, slot.y));
         }
     }
@@ -150,7 +152,7 @@ public abstract class GuiContainer extends Gui{
         }
 
         public ShiftClickBehavior reversed(){
-           return this.reversed(this.condition == null ? null : (slotFrom, slotTo) -> !this.condition.apply(slotFrom, slotTo));
+            return this.reversed(this.condition == null ? null : (slotFrom, slotTo) -> !this.condition.apply(slotFrom, slotTo));
         }
     }
 }
