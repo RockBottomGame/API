@@ -63,6 +63,11 @@ public class Locale implements IAsset{
         }
     }
 
+    @ApiInternal
+    public void override(Map<IResourceName, String> newLocalization){
+        this.localization.putAll(newLocalization);
+    }
+
     public String getName(){
         return this.name;
     }
