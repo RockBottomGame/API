@@ -35,6 +35,8 @@ public interface ITexture extends IAsset{
 
     void bind();
 
+    void forceBind();
+
     void param(int param, int value);
 
     int getId();
@@ -46,6 +48,8 @@ public interface ITexture extends IAsset{
     ByteBuffer getPixelData();
 
     void unbind();
+
+    void forceUnbind();
 
     void draw(float x, float y);
 
