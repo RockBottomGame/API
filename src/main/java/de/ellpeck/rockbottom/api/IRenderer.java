@@ -30,6 +30,7 @@ import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.render.engine.IDisposable;
 import de.ellpeck.rockbottom.api.render.engine.IVAO;
 import de.ellpeck.rockbottom.api.render.engine.IVBO;
+import de.ellpeck.rockbottom.api.render.engine.TextureBank;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
 
 import java.util.List;
@@ -222,7 +223,11 @@ public interface IRenderer extends IDisposable{
      */
     void addFilledRect(float x, float y, float width, float height, int color);
 
+    void activateTextureBank(TextureBank bank);
+
     void unbindTexture();
+
+    void unbindAllTextures();
 
     void unbindVAO();
 

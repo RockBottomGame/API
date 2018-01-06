@@ -22,6 +22,7 @@
 package de.ellpeck.rockbottom.api.assets;
 
 import com.google.gson.JsonElement;
+import de.ellpeck.rockbottom.api.render.engine.TextureBank;
 
 import java.nio.ByteBuffer;
 import java.util.Random;
@@ -33,9 +34,9 @@ public interface ITexture extends IAsset{
     int BOTTOM_RIGHT = 2;
     int TOP_RIGHT = 3;
 
-    void bind();
+    void bind(TextureBank bank, boolean revertAfterBind);
 
-    void forceBind(boolean overrideBound);
+    void bind();
 
     void param(int param, int value);
 
@@ -47,9 +48,9 @@ public interface ITexture extends IAsset{
 
     ByteBuffer getPixelData();
 
-    void unbind();
+    void unbind(TextureBank bank, boolean revertAfterUnbind);
 
-    void forceUnbind(boolean overrideBound);
+    void unbind();
 
     void draw(float x, float y);
 
