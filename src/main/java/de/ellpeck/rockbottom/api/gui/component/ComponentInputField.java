@@ -222,4 +222,9 @@ public class ComponentInputField extends GuiComponent{
         }
         return false;
     }
+
+    @Override
+    public boolean canCloseWithInvKey(){
+        return !this.isSelected;
+    }
 }

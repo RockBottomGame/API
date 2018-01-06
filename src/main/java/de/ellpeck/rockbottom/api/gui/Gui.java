@@ -71,11 +71,11 @@ public abstract class Gui{
     }
 
     public void onOpened(IGameInstance game){
-        game.getInput().setKeyboardRepeatEvents(true);
+
     }
 
     public void onClosed(IGameInstance game){
-        game.getInput().setKeyboardRepeatEvents(false);
+
     }
 
     public void init(IGameInstance game){
@@ -131,7 +131,7 @@ public abstract class Gui{
             }
         }
 
-        return (Settings.KEY_MENU.isKey(button) || (this.canCloseWithInvKey() && Settings.KEY_INVENTORY.isKey(button))) && this.tryEscape(game);
+        return (Settings.KEY_MENU.isKey(button) || (this.canCloseWithInvKey() && this.components.stream().allMatch(GuiComponent:: canCloseWithInvKey) && Settings.KEY_INVENTORY.isKey(button))) && this.tryEscape(game);
     }
 
     public boolean onCharInput(IGameInstance game, int codePoint, char[] characters){

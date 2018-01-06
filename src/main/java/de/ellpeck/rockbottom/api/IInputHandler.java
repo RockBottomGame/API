@@ -33,8 +33,6 @@ public interface IInputHandler{
 
     boolean wasKeyPressed(int key);
 
-    void setKeyboardRepeatEvents(boolean should);
-
     int getMouseWheelChange();
 
     int getMouseX();

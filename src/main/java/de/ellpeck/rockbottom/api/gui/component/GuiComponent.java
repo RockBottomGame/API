@@ -161,4 +161,8 @@ public abstract class GuiComponent{
     public boolean shouldDoFingerCursor(IGameInstance game){
         return this.isMouseOverPrioritized(game);
     }
+
+    public boolean canCloseWithInvKey(){
+        return true;
+    }
 }

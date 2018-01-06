@@ -55,8 +55,6 @@ public abstract class GuiContainer extends Gui{
 
     @Override
     public void onClosed(IGameInstance game){
-        super.onClosed(game);
-
         if(this.holdingInst != null){
             this.dropHeldItem();
         }
