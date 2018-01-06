@@ -43,6 +43,8 @@ import java.util.List;
  */
 public interface IRenderer extends IDisposable{
 
+    void initDefaultShader(IShaderProgram program);
+
     void setProgram(IShaderProgram program);
 
     void setTexture(ITexture texture);
@@ -249,7 +251,7 @@ public interface IRenderer extends IDisposable{
      *
      * @return the new renderer
      */
-    IRenderer createRenderer();
+    IRenderer createRenderer(IShaderProgram defaultProgram);
 
     @ApiInternal
     void calcScales();
