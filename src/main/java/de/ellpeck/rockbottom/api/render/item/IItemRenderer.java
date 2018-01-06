@@ -38,20 +38,17 @@ public interface IItemRenderer<T extends Item>{
     }
 
     default void renderHolding(IGameInstance game, IAssetManager manager, IRenderer g, T item, ItemInstance instance, AbstractEntityPlayer player, float x, float y, float rotation, float scale, int filter, boolean mirrored){
-        //TODO Fix rotation and scale not working right
         g.translate(x, y);
         g.rotate(rotation);
 
         if(mirrored){
-            g.scale(-1F, 1F);
-            g.translate(-scale, 0F);
+            g.mirror(true, false);
         }
 
         this.render(game, manager, g, item, instance, 0F, 0F, scale*0.5F, filter);
 
         if(mirrored){
-            g.translate(scale, 0F);
-            g.scale(-1F, 1F);
+            g.mirror(true, false);
         }
 
         g.rotate(-rotation);

@@ -46,7 +46,9 @@ public interface IRenderer extends IDisposable{
 
     void setTexture(ITexture texture);
 
-    void addTriangle(float x1, float y1, float x2, float y2, float x3, float y3, int color, float u1, float v1, float u2, float v2, float u3, float v3);
+    void addTexturedRegion(ITexture texture, float x, float y, float x2, float y2, float srcX, float srcY, float srcX2, float srcY2, int[] light, int filter);
+
+    void addTriangle(float x1, float y1, float x2, float y2, float x3, float y3, int color1, int color2, int color3, float u1, float v1, float u2, float v2, float u3, float v3);
 
     void addVertex(float x, float y, int color, float u, float v);
 
@@ -68,6 +70,12 @@ public interface IRenderer extends IDisposable{
 
     void setScale(float x, float y);
 
+    void mirror(boolean hor, boolean vert);
+
+    void setMirrored(boolean hor, boolean vert);
+
+    void resetTransformation();
+
     float getRotation();
 
     float getTranslationX();
@@ -77,6 +85,10 @@ public interface IRenderer extends IDisposable{
     float getScaleX();
 
     float getScaleY();
+
+    boolean isMirroredHor();
+
+    boolean isMirroredVert();
 
     IShaderProgram getProgram();
 
