@@ -35,7 +35,7 @@ public interface ITexture extends IAsset{
 
     void bind();
 
-    void forceBind();
+    void forceBind(boolean overrideBound);
 
     void param(int param, int value);
 
@@ -49,7 +49,7 @@ public interface ITexture extends IAsset{
 
     void unbind();
 
-    void forceUnbind();
+    void forceUnbind(boolean overrideBound);
 
     void draw(float x, float y);
 
