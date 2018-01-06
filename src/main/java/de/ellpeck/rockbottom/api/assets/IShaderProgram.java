@@ -40,7 +40,7 @@ public interface IShaderProgram extends IDisposable, IAsset{
 
     int getUniformLocation(String name);
 
-    void pointVertexAttribute(boolean enable, String name, int size, int stride, int offset);
+    void pointVertexAttribute(String name, int size);
 
     void setUniform(String name, Matrix4f matrix);
 
@@ -59,4 +59,6 @@ public interface IShaderProgram extends IDisposable, IAsset{
     void setComponentsPerVertex(int components);
 
     int getComponentsPerVertex();
+
+    void draw(int amount);
 }
