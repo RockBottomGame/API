@@ -46,7 +46,7 @@ public interface IRenderer extends IDisposable{
 
     void setTexture(ITexture texture);
 
-    void addTexturedRegion(ITexture texture, float x, float y, float x2, float y2, float srcX, float srcY, float srcX2, float srcY2, int[] light, int filter);
+    void addTexturedRegion(ITexture texture, float x, float y, float x2, float y2, float x3, float y3, float x4, float y4, float srcX, float srcY, float srcX2, float srcY2, int[] light, int filter);
 
     void addTriangle(float x1, float y1, float x2, float y2, float x3, float y3, int color1, int color2, int color3, float u1, float v1, float u2, float v2, float u3, float v3);
 
