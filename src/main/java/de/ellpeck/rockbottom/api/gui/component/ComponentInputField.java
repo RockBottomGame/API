@@ -78,7 +78,7 @@ public class ComponentInputField extends GuiComponent{
     }
 
     @Override
-    public boolean onKeyboardAction(IGameInstance game, int button, char character){
+    public boolean onKeyPressed(IGameInstance game, int button){
         if(this.isSelected){
             if(button == GLFW.GLFW_KEY_BACKSPACE){
                 if(!this.text.isEmpty()){
@@ -118,19 +118,26 @@ public class ComponentInputField extends GuiComponent{
                         return false;
                     }
                 }
-
-                if(character >= 32 && character <= 254){
-                    if(this.text.length() < this.maxLength){
-                        this.text += character;
-                        if(this.consumer != null){
-                            this.consumer.accept(this.text);
-                        }
-                        return true;
-                    }
-                }
             }
         }
         return false;
+    }
+
+    @Override
+    public boolean onCharInput(IGameInstance game, int codePoint, char[] characters){
+        boolean did = false;
+        for(char character : characters){
+            if(character >= 32 && character <= 254){
+                if(this.text.length() < this.maxLength){
+                    this.text += character;
+                    if(this.consumer != null){
+                        this.consumer.accept(this.text);
+                    }
+                    did = true;
+                }
+            }
+        }
+        return did;
     }
 
     @Override

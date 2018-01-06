@@ -68,7 +68,7 @@ public interface IRenderer extends IDisposable{
 
     void setScale(float x, float y);
 
-    float getAngle();
+    float getRotation();
 
     float getTranslationX();
 
@@ -254,4 +254,6 @@ public interface IRenderer extends IDisposable{
     double getMousedTileY();
 
     int getFlushes();
+
+    void backgroundColor(int color);
 }

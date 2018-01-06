@@ -121,17 +121,29 @@ public abstract class Gui{
         return false;
     }
 
-    public boolean onKeyboardAction(IGameInstance game, int button, char character){
+    public boolean onKeyPressed(IGameInstance game, int button){
         for(int i = 0; i < this.components.size(); i++){
             GuiComponent component = this.components.get(i);
             if(component.isActive()){
-                if(component.onKeyboardAction(game, button, character)){
+                if(component.onKeyPressed(game, button)){
                     return true;
                 }
             }
         }
 
         return (Settings.KEY_MENU.isKey(button) || (this.canCloseWithInvKey() && Settings.KEY_INVENTORY.isKey(button))) && this.tryEscape(game);
+    }
+
+    public boolean onCharInput(IGameInstance game, int codePoint, char[] characters){
+        for(int i = 0; i < this.components.size(); i++){
+            GuiComponent component = this.components.get(i);
+            if(component.isActive()){
+                if(component.onCharInput(game, codePoint, characters)){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public boolean canCloseWithInvKey(){

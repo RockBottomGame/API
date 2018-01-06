@@ -149,7 +149,7 @@ public class ComponentScrollMenu extends ComponentButton{
             }
         }
         else{
-            int scroll = game.getInput().getMouseWheel();
+            int scroll = game.getInput().getMouseWheelChange();
             if(scroll != 0 && this.hoverArea.contains(game.getRenderer().getMouseInGuiX(), game.getRenderer().getMouseInGuiY())){
                 int number = Util.clamp(this.number+(scroll < 0 ? 1 : -1), 0, this.getMax());
                 if(number != this.number){

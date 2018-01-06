@@ -70,7 +70,6 @@ public class Settings implements IPropSettings{
     public boolean hardwareCursor;
     public boolean cursorInfos;
     public boolean fullscreen;
-    public boolean vsync;
     public boolean smoothLighting;
 
     public float musicVolume;
@@ -100,7 +99,6 @@ public class Settings implements IPropSettings{
         this.hardwareCursor = this.getProp(props, "hardware_cursor", false);
         this.cursorInfos = this.getProp(props, "cursor_infos", true);
         this.fullscreen = this.getProp(props, "fullscreen", false);
-        this.vsync = this.getProp(props, "vsync", false);
         this.smoothLighting = this.getProp(props, "smooth_lighting", true);
 
         this.musicVolume = this.getProp(props, "music_volume", 0.5F);
@@ -130,7 +128,6 @@ public class Settings implements IPropSettings{
         this.setProp(props, "hardware_cursor", this.hardwareCursor);
         this.setProp(props, "cursor_infos", this.cursorInfos);
         this.setProp(props, "fullscreen", this.fullscreen);
-        this.setProp(props, "vsync", this.vsync);
         this.setProp(props, "smooth_lighting", this.smoothLighting);
 
         this.setProp(props, "music_volume", this.musicVolume);

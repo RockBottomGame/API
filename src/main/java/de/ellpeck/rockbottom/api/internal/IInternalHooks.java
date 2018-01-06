@@ -49,4 +49,6 @@ public interface IInternalHooks{
 
     //Liquid behavior kindly provided by superaxander
     void doDefaultLiquidBehavior(IWorld world, int x, int y, TileLayer layer, TileLiquid tile);
+
+    String getKeyOrMouseName(boolean isMouse, int key);
 }

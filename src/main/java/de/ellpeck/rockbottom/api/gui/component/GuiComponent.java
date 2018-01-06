@@ -105,7 +105,11 @@ public abstract class GuiComponent{
         return false;
     }
 
-    public boolean onKeyboardAction(IGameInstance game, int button, char character){
+    public boolean onKeyPressed(IGameInstance game, int button){
+        return false;
+    }
+
+    public boolean onCharInput(IGameInstance game, int codePoint, char[] characters){
         return false;
     }
 

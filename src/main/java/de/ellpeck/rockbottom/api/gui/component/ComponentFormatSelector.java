@@ -67,7 +67,7 @@ public class ComponentFormatSelector extends ComponentButton{
     }
 
     @Override
-    public boolean onKeyboardAction(IGameInstance game, int button, char character){
+    public boolean onKeyPressed(IGameInstance game, int button){
         if(this.menu != null){
             if(Settings.KEY_MENU.isKey(button)){
                 this.closeMenu();

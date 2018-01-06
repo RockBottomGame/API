@@ -66,7 +66,7 @@ public class ComponentConfirmationPopup extends GuiComponent{
         String text = "Are you sure?";
 
         if(this.isUpsideDown){
-            tex.draw(x, y+this.height, x+this.width, y, 0, 0, tex.getWidth(), tex.getHeight());
+            tex.draw(x, y+this.height, x+this.width, y, 0, 0, tex.getTextureWidth(), tex.getTextureHeight());
             font.drawCenteredString(x+this.width/2, y+15, text, 0.25F, false);
         }
         else{

@@ -35,7 +35,7 @@ public interface IInputHandler{
 
     void setKeyboardRepeatEvents(boolean should);
 
-    int getMouseWheel();
+    int getMouseWheelChange();
 
     int getMouseX();
 

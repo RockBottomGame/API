@@ -66,7 +66,7 @@ public class Toast{
             textWidth -= size+1;
 
             ITexture tex = manager.getTexture(this.icon);
-            tex.draw(x+1, y+1, size, ((float)tex.getWidth()/(float)tex.getHeight())*size);
+            tex.draw(x+1, y+1, size, ((float)tex.getTextureWidth()/(float)tex.getTextureHeight())*size);
         }
 
         IFont font = manager.getFont();

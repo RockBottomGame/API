@@ -305,8 +305,7 @@ public class Tile{
                     desc.add(FormattingCode.GRAY+manager.localize(LOC_LAYER, manager.localize(layer.getName().addPrefix("layer."))));
                 }
                 else{
-                    //TODO Actually make this display the key's name rather than its code
-                    desc.add(FormattingCode.DARK_GRAY+manager.localize(LOC_ADVANCED, Settings.KEY_ADVANCED_INFO.getKey()));
+                    desc.add(FormattingCode.DARK_GRAY+manager.localize(LOC_ADVANCED, Settings.KEY_ADVANCED_INFO.getDisplayName()));
                     break;
                 }
             }

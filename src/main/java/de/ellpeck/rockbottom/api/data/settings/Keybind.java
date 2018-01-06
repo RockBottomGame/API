@@ -65,6 +65,10 @@ public class Keybind{
         }
     }
 
+    public String getDisplayName(){
+        return RockBottomAPI.getInternalHooks().getKeyOrMouseName(this.isMouse, this.key);
+    }
+
     public boolean isKey(int key){
         return this.key == key;
     }

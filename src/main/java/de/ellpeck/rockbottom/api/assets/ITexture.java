@@ -39,9 +39,9 @@ public interface ITexture extends IAsset{
 
     int getId();
 
-    int getWidth();
+    int getTextureWidth();
 
-    int getHeight();
+    int getTextureHeight();
 
     ByteBuffer getPixelData();
 
@@ -73,9 +73,17 @@ public interface ITexture extends IAsset{
 
     ITexture getPositionalVariation(int x, int y);
 
-    ITexture getSubTexture(float x, float y, float width, float height);
+    ITexture getSubTexture(int x, int y, int width, int height);
 
-    ITexture getSubTexture(float x, float y, float width, float height, boolean inheritVariations, boolean inheritData);
+    ITexture getSubTexture(int x, int y, int width, int height, boolean inheritVariations, boolean inheritData);
 
     int getTextureColor(int x, int y);
+
+    int getRenderWidth();
+
+    int getRenderHeight();
+
+    int getRenderOffsetX();
+
+    int getRenderOffsetY();
 }

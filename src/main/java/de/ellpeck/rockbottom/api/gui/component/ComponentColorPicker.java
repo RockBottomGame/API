@@ -98,7 +98,7 @@ public class ComponentColorPicker extends GuiComponent{
     }
 
     @Override
-    public boolean onKeyboardAction(IGameInstance game, int button, char character){
+    public boolean onKeyPressed(IGameInstance game, int button){
         if(this.isEnlarged){
             if(Settings.KEY_MENU.isKey(button)){
                 this.unenlarge();
@@ -143,8 +143,8 @@ public class ComponentColorPicker extends GuiComponent{
 
     private void onClickOrMove(IGameInstance game, float mouseX, float mouseY){
         if(this.isMouseOver(game)){
-            float x = (mouseX-this.getRenderX())/this.width*this.texture.getWidth();
-            float y = (mouseY-this.getRenderY())/this.height*this.texture.getHeight();
+            float x = (mouseX-this.getRenderX())/this.width*this.texture.getTextureWidth();
+            float y = (mouseY-this.getRenderY())/this.height*this.texture.getTextureHeight();
             int color = this.texture.getTextureColor((int)x, (int)y);
 
             if(this.color != color){

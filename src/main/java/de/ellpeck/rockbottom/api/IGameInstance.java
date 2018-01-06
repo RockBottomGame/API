@@ -261,4 +261,6 @@ public interface IGameInstance extends IMod{
     int getWidth();
 
     int getHeight();
+
+    long getWindow();
 }
