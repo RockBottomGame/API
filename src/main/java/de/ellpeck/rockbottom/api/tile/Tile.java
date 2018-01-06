@@ -351,10 +351,6 @@ public class Tile{
         return AbstractEntityPlayer.RANGE;
     }
 
-    public boolean shouldShowBreakAnimation(IWorld world, int x, int y, TileLayer layer){
-        return true;
-    }
-
     public boolean hasSolidSurface(IWorld world, int x, int y, TileLayer layer){
         return this.isFullTile();
     }

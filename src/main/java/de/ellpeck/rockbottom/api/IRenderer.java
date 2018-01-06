@@ -50,6 +50,8 @@ public interface IRenderer extends IDisposable{
 
     void addTriangle(float x1, float y1, float x2, float y2, float x3, float y3, int color1, int color2, int color3, float u1, float v1, float u2, float v2, float u3, float v3);
 
+    IRenderer put(float f);
+
     void addVertex(float x, float y, int color, float u, float v);
 
     void begin();
@@ -231,6 +233,18 @@ public interface IRenderer extends IDisposable{
     IVAO createVAO();
 
     IVBO createVBO(boolean isStatic);
+
+    /**
+     * Creates a new renderer to be used to render custom things. It is
+     * discouraged to use this method, instead you should add a custom texture
+     * and shader to the existing renderer (see {@link #setTexture(ITexture)}
+     * and {@link #setProgram(IShaderProgram)}. This method is here for
+     * convenience for people that know what they're doing. Please {@link
+     * IRenderer#dispose()} of this renderer when you're done using it.
+     *
+     * @return the new renderer
+     */
+    IRenderer createRenderer();
 
     @ApiInternal
     void calcScales();

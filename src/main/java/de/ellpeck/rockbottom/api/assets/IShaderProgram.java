@@ -55,4 +55,8 @@ public interface IShaderProgram extends IDisposable, IAsset{
     void unbind();
 
     int getId();
+
+    void setComponentsPerVertex(int components);
+
+    int getComponentsPerVertex();
 }
