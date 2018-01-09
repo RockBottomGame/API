@@ -47,4 +47,16 @@ public class VertexProcessor{
     public void onVertexCompleted(IRenderer renderer){
 
     }
+
+    public void onBegin(IRenderer renderer){
+
+    }
+
+    public void onEnd(IRenderer renderer){
+
+    }
+
+    public void onFlush(IRenderer renderer){
+
+    }
 }
