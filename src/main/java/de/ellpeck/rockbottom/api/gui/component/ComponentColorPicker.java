@@ -25,7 +25,7 @@ import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.IRenderer;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
-import de.ellpeck.rockbottom.api.assets.ITexture;
+import de.ellpeck.rockbottom.api.assets.texture.ITexture;
 import de.ellpeck.rockbottom.api.data.settings.Settings;
 import de.ellpeck.rockbottom.api.gui.Gui;
 import de.ellpeck.rockbottom.api.util.Util;
@@ -143,8 +143,8 @@ public class ComponentColorPicker extends GuiComponent{
 
     private void onClickOrMove(IGameInstance game, float mouseX, float mouseY){
         if(this.isMouseOver(game)){
-            float x = (mouseX-this.getRenderX())/this.width*this.texture.getTextureWidth();
-            float y = (mouseY-this.getRenderY())/this.height*this.texture.getTextureHeight();
+            float x = (mouseX-this.getRenderX())/this.width*this.texture.getRenderWidth();
+            float y = (mouseY-this.getRenderY())/this.height*this.texture.getRenderHeight();
             int color = this.texture.getTextureColor((int)x, (int)y);
 
             if(this.color != color){

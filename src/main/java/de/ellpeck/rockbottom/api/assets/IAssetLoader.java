@@ -26,8 +26,6 @@ import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.mod.IMod;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 
-import java.util.Map;
-
 public interface IAssetLoader<T extends IAsset>{
 
     default void register(){
@@ -36,10 +34,10 @@ public interface IAssetLoader<T extends IAsset>{
 
     IResourceName getAssetIdentifier();
 
-    T loadAsset(IAssetManager manager, IResourceName resourceName, String path, JsonElement element, String elementName, IMod loadingMod) throws Exception;
+    void loadAsset(IAssetManager manager, IResourceName resourceName, String path, JsonElement element, String elementName, IMod loadingMod) throws Exception;
 
-    default Map<IResourceName, T> dealWithSpecialCases(IAssetManager manager, String resourceName, String path, JsonElement element, String elementName, IMod loadingMod) throws Exception{
-        return null;
+    default boolean dealWithSpecialCases(IAssetManager manager, String resourceName, String path, JsonElement element, String elementName, IMod loadingMod) throws Exception{
+        return false;
     }
 
     default void finalize(IAssetManager manager){

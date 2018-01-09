@@ -25,8 +25,8 @@ import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.IRenderer;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
-import de.ellpeck.rockbottom.api.assets.ITexture;
 import de.ellpeck.rockbottom.api.assets.font.IFont;
+import de.ellpeck.rockbottom.api.assets.texture.ITexture;
 import de.ellpeck.rockbottom.api.data.settings.Settings;
 import de.ellpeck.rockbottom.api.gui.Gui;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
@@ -66,7 +66,7 @@ public class ComponentConfirmationPopup extends GuiComponent{
         String text = "Are you sure?";
 
         if(this.isUpsideDown){
-            tex.draw(x, y+this.height, x+this.width, y, 0, 0, tex.getTextureWidth(), tex.getTextureHeight());
+            tex.draw(x, y+this.height, x+this.width, y, 0, 0, tex.getRenderWidth(), tex.getRenderHeight());
             font.drawCenteredString(x+this.width/2, y+15, text, 0.25F, false);
         }
         else{

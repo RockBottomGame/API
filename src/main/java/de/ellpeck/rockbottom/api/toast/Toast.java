@@ -24,9 +24,9 @@ package de.ellpeck.rockbottom.api.toast;
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.IRenderer;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
-import de.ellpeck.rockbottom.api.assets.ITexture;
 import de.ellpeck.rockbottom.api.assets.font.FormattingCode;
 import de.ellpeck.rockbottom.api.assets.font.IFont;
+import de.ellpeck.rockbottom.api.assets.texture.ITexture;
 import de.ellpeck.rockbottom.api.gui.component.GuiComponent;
 import de.ellpeck.rockbottom.api.net.chat.component.ChatComponent;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
@@ -66,7 +66,7 @@ public class Toast{
             textWidth -= size+1;
 
             ITexture tex = manager.getTexture(this.icon);
-            tex.draw(x+1, y+1, size, ((float)tex.getTextureWidth()/(float)tex.getTextureHeight())*size);
+            tex.draw(x+1, y+1, size, ((float)tex.getRenderWidth()/(float)tex.getRenderHeight())*size);
         }
 
         IFont font = manager.getFont();

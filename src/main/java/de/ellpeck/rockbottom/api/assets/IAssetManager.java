@@ -23,6 +23,8 @@ package de.ellpeck.rockbottom.api.assets;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.assets.font.IFont;
+import de.ellpeck.rockbottom.api.assets.texture.ITexture;
+import de.ellpeck.rockbottom.api.assets.texture.stitcher.ITextureStitcher;
 import de.ellpeck.rockbottom.api.gui.ISpecialCursor;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
@@ -77,4 +79,8 @@ public interface IAssetManager{
 
     @ApiInternal
     ISpecialCursor pickCurrentCursor(IGameInstance game);
+
+    ITextureStitcher getTextureStitcher();
+
+    void addAsset(IResourceName name, IAsset asset);
 }

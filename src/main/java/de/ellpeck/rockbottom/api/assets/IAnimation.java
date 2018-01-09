@@ -22,6 +22,7 @@
 package de.ellpeck.rockbottom.api.assets;
 
 import com.google.gson.JsonElement;
+import de.ellpeck.rockbottom.api.assets.texture.ITexture;
 
 public interface IAnimation extends IAsset{
 

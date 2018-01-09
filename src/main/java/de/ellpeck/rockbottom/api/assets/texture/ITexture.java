@@ -19,12 +19,16 @@
  * © 2018 Ellpeck
  */
 
-package de.ellpeck.rockbottom.api.assets;
+package de.ellpeck.rockbottom.api.assets.texture;
 
 import com.google.gson.JsonElement;
+import de.ellpeck.rockbottom.api.assets.IAsset;
 import de.ellpeck.rockbottom.api.render.engine.TextureBank;
+import de.ellpeck.rockbottom.api.util.ApiInternal;
 
 import java.nio.ByteBuffer;
+import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 public interface ITexture extends IAsset{
@@ -73,6 +77,12 @@ public interface ITexture extends IAsset{
     void draw(float x, float y, float x2, float y2, float srcX, float srcY, float srcX2, float srcY2, int[] light, int filter);
 
     void draw(float x, float y, float x2, float y2, float x3, float y3, float x4, float y4, float srcX, float srcY, float srcX2, float srcY2, int[] light, int filter);
+
+    @ApiInternal
+    void setAdditionalData(Map<String, JsonElement> data);
+
+    @ApiInternal
+    void setVariations(List<ITexture> variations);
 
     JsonElement getAdditionalData(String name);
 
