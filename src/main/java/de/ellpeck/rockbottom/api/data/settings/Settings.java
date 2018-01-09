@@ -59,7 +59,6 @@ public class Settings implements IPropSettings{
         }
     }
 
-    public int targetFps;
     public int autosaveIntervalSeconds;
 
     public float textSpeed;
@@ -88,7 +87,6 @@ public class Settings implements IPropSettings{
             keybind.setBind(key, mouse);
         }
 
-        this.targetFps = this.getProp(props, "target_fps", 60);
         this.autosaveIntervalSeconds = this.getProp(props, "autosave_interval", 60);
 
         this.textSpeed = this.getProp(props, "text_speed", 0.5F);
@@ -117,7 +115,6 @@ public class Settings implements IPropSettings{
             this.setProp(props, name+"_is_mouse", keybind.isMouse());
         }
 
-        this.setProp(props, "target_fps", this.targetFps);
         this.setProp(props, "autosave_interval", this.autosaveIntervalSeconds);
 
         this.setProp(props, "text_speed", this.textSpeed);
