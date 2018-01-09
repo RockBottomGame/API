@@ -33,6 +33,7 @@ import de.ellpeck.rockbottom.api.render.engine.IVBO;
 import de.ellpeck.rockbottom.api.render.engine.TextureBank;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
 
+import java.nio.FloatBuffer;
 import java.util.List;
 
 /**
@@ -289,4 +290,8 @@ public interface IRenderer extends IDisposable{
     int getFlushes();
 
     void backgroundColor(int color);
+
+    FloatBuffer getVertices();
+
+    int getVertexAmount();
 }

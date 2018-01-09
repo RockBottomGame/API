@@ -22,6 +22,7 @@
 package de.ellpeck.rockbottom.api.assets;
 
 import de.ellpeck.rockbottom.api.render.engine.IDisposable;
+import de.ellpeck.rockbottom.api.render.engine.VertexProcessor;
 import org.joml.Matrix4f;
 
 public interface IShaderProgram extends IDisposable, IAsset{
@@ -56,9 +57,11 @@ public interface IShaderProgram extends IDisposable, IAsset{
 
     int getId();
 
-    void setComponentsPerVertex(int components);
+    void setVertexProcessing(int componentsPerVertex, VertexProcessor processor);
 
     int getComponentsPerVertex();
+
+    VertexProcessor getProcessor();
 
     void draw(int amount);
 }
