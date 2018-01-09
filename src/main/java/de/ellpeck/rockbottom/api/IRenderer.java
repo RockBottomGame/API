@@ -48,6 +48,8 @@ public interface IRenderer extends IDisposable{
 
     void setProgram(IShaderProgram program);
 
+    void setLastProgram();
+
     void setTexture(ITexture texture);
 
     void addTexturedRegion(ITexture texture, float x, float y, float x2, float y2, float x3, float y3, float x4, float y4, float srcX, float srcY, float srcX2, float srcY2, int[] light, int filter);
@@ -294,4 +296,6 @@ public interface IRenderer extends IDisposable{
     FloatBuffer getVertices();
 
     int getVertexAmount();
+
+    IShaderProgram getLastProgram();
 }
