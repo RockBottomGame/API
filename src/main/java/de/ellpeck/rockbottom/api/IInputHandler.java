@@ -38,4 +38,6 @@ public interface IInputHandler{
     int getMouseX();
 
     int getMouseY();
+
+    void allowKeyboardEvents(boolean allow);
 }

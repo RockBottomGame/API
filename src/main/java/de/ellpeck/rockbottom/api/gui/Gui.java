@@ -71,11 +71,11 @@ public abstract class Gui{
     }
 
     public void onOpened(IGameInstance game){
-
+        game.getInput().allowKeyboardEvents(true);
     }
 
     public void onClosed(IGameInstance game){
-
+        game.getInput().allowKeyboardEvents(false);
     }
 
     public void init(IGameInstance game){
