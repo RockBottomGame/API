@@ -76,7 +76,7 @@ public class Tile{
     }
 
     public List<BoundBox> getBoundBoxes(IWorld world, int x, int y, TileLayer layer, MovableWorldObject object, BoundBox objectBox, BoundBox objectBoxMotion){
-        BoundBox box = this.getBoundBox(world, x, y, TileLayer.MAIN);
+        BoundBox box = this.getBoundBox(world, x, y, layer);
 
         if(box != null && !box.isEmpty()){
             return Collections.singletonList(box.copy().add(x, y));
