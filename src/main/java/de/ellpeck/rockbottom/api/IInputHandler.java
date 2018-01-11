@@ -35,6 +35,8 @@ public interface IInputHandler{
 
     int getMouseWheelChange();
 
+    int getHorizontalMouseWheelChange();
+
     int getMouseX();
 
     int getMouseY();
