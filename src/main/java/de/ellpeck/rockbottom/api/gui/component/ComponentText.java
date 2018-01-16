@@ -68,4 +68,9 @@ public class ComponentText extends GuiComponent{
     public IResourceName getName(){
         return RockBottomAPI.createInternalRes("text");
     }
+
+    @Override
+    public boolean shouldDoFingerCursor(IGameInstance game){
+        return false;
+    }
 }
