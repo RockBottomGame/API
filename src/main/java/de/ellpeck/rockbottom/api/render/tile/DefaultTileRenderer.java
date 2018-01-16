@@ -59,7 +59,7 @@ public class DefaultTileRenderer<T extends Tile> implements ITileRenderer<T>{
 
     @Override
     public void renderInMainMenuBackground(IGameInstance game, IAssetManager manager, IRenderer g, T tile, TileState state, float x, float y, float scale){
-        manager.getTexture(this.texture).draw(x, y, scale, scale);
+        manager.getTexture(this.texture).getPositionalVariation((int)x, (int)y).draw(x, y, scale, scale);
     }
 
     @Override

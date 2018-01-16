@@ -46,6 +46,11 @@ public class TileMetaRenderer implements ITileRenderer<TileMeta>{
     }
 
     @Override
+    public void renderInMainMenuBackground(IGameInstance game, IAssetManager manager, IRenderer g, TileMeta tile, TileState state, float x, float y, float scale){
+        this.getTexture(manager, tile, state.get(tile.metaProp)).getPositionalVariation((int)x, (int)y).draw(x, y, scale, scale);
+    }
+
+    @Override
     public ITexture getParticleTexture(IGameInstance game, IAssetManager manager, IRenderer g, TileMeta tile, TileState state){
         return this.getTexture(manager, tile, state.get(tile.metaProp));
     }

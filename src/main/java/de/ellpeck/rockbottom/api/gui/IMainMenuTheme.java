@@ -27,7 +27,7 @@ public interface IMainMenuTheme{
 
     int TILE_AMOUNT = 16;
 
-    TileState getState(int x, int y);
+    TileState getState(int x, int y, TileState[][] grid);
 
     int getBackgroundColor();
 }
