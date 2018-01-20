@@ -316,13 +316,8 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
             for(ActiveEffect active : this.effects){
                 if(active.getEffect() == underlying){
                     int maxAdd = Math.min(effect.getTime(), active.getEffect().getMaxDuration(this)-active.getTime());
-                    if(maxAdd > 0){
-                        active.addTime(maxAdd);
-                        return effect.getTime()-maxAdd;
-                    }
-                    else{
-                        return effect.getTime();
-                    }
+                    active.addTime(maxAdd);
+                    return effect.getTime()-maxAdd;
                 }
             }
 
