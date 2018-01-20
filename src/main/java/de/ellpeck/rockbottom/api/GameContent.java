@@ -71,6 +71,7 @@ public final class GameContent{
     public static final Biome BIOME_UNDERGROUND = getBiome("underground");
 
     public static final IEffect EFFECT_SPEED = getEffect("speed");
+    public static final IEffect EFFECT_JUMP_HEIGHT = getEffect("jump_height");
 
     @ApiInternal
     private static Biome getBiome(String name){
