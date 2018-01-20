@@ -333,18 +333,15 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
         }
     }
 
-    public int removeEffect(IEffect effect){
-        int time = -1;
+    public boolean removeEffect(IEffect effect){
         for(int i = 0; i < this.effects.size(); i++){
             ActiveEffect active = this.effects.get(i);
             if(active.getEffect() == effect){
                 this.effects.remove(i);
                 effect.onRemovedOrEnded(active, this, false);
-
-                time = active.getTime();
-                break;
+                return true;
             }
         }
-        return time;
+        return false;
     }
 }
