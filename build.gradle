@@ -18,8 +18,8 @@ switch (OperatingSystem.current()) {
         break
 }
 
-project.ext.lwjglVersion = "3.1.5"
-project.ext.jomlVersion = "1.9.7"
+project.ext.lwjglVersion = "3.1.2"
+project.ext.jomlVersion = "1.9.0"
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
