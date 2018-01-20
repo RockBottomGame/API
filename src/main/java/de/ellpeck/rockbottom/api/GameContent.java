@@ -66,6 +66,7 @@ public final class GameContent{
 
     public static final Biome BIOME_SKY = getBiome("sky");
     public static final Biome BIOME_GRASSLAND = getBiome("grassland");
+    public static final Biome BIOME_DESERT = getBiome("desert");
     public static final Biome BIOME_UNDERGROUND = getBiome("underground");
 
     @ApiInternal

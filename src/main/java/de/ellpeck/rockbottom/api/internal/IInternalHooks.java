@@ -22,6 +22,7 @@
 package de.ellpeck.rockbottom.api.internal;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
+import de.ellpeck.rockbottom.api.effect.ActiveEffect;
 import de.ellpeck.rockbottom.api.entity.Entity;
 import de.ellpeck.rockbottom.api.entity.MovableWorldObject;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
@@ -34,10 +35,12 @@ import de.ellpeck.rockbottom.api.util.ApiInternal;
 import de.ellpeck.rockbottom.api.world.IWorld;
 import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 
+import java.util.List;
+
 @ApiInternal
 public interface IInternalHooks{
 
-    void doDefaultEntityUpdate(Entity entity);
+    void doDefaultEntityUpdate(Entity entity, List<ActiveEffect> effects);
 
     void doWorldObjectMovement(MovableWorldObject object);
 

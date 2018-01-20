@@ -25,6 +25,8 @@ import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.data.set.DataSet;
 import de.ellpeck.rockbottom.api.data.set.IAdditionalDataProvider;
+import de.ellpeck.rockbottom.api.effect.ActiveEffect;
+import de.ellpeck.rockbottom.api.effect.IEffect;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.event.EventResult;
 import de.ellpeck.rockbottom.api.event.impl.EntityDeathEvent;
@@ -38,6 +40,8 @@ import de.ellpeck.rockbottom.api.world.IChunk;
 import de.ellpeck.rockbottom.api.world.IWorld;
 import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -50,6 +54,7 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
 
     public Direction facing = Direction.NONE;
 
+    private final List<ActiveEffect> effects = new ArrayList<>();
     public int ticksExisted;
     public double fallStartY;
     public boolean isFalling;
@@ -75,7 +80,7 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
     }
 
     public void update(IGameInstance game){
-        RockBottomAPI.getInternalHooks().doDefaultEntityUpdate(this);
+        RockBottomAPI.getInternalHooks().doDefaultEntityUpdate(this, this.effects);
     }
 
     public boolean doesSync(){
@@ -183,6 +188,14 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
         if(this.additionalData != null){
             set.addDataSet("data", this.additionalData);
         }
+
+        int amount = this.effects.size();
+        for(int i = 0; i < amount; i++){
+            DataSet sub = new DataSet();
+            this.effects.get(i).save(sub);
+            set.addDataSet("effect_"+i, sub);
+        }
+        set.addInt("effect_amount", amount);
     }
 
     public void load(DataSet set){
@@ -198,6 +211,17 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
 
         if(set.hasKey("data")){
             this.additionalData = set.getDataSet("data");
+        }
+
+        this.effects.clear();
+        int amount = set.getInt("effect_amount");
+        for(int i = 0; i < amount; i++){
+            DataSet sub = set.getDataSet("effect_"+i);
+            ActiveEffect effect = ActiveEffect.load(sub);
+            if(effect != null){
+                effect.getEffect().onAddedOrLoaded(effect, this, true);
+                this.effects.add(effect);
+            }
         }
     }
 
@@ -276,5 +300,51 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
     public final void onEntityIntersection(Entity entity, BoundBox thisBox, BoundBox thisBoxMotion, BoundBox otherBox, BoundBox otherBoxMotion){
         this.onIntersectWithEntity(entity, thisBox, thisBoxMotion, otherBox, otherBoxMotion);
         entity.onIntersectWithEntity(this, otherBox, otherBoxMotion, thisBox, thisBoxMotion);
+    }
+
+    public List<ActiveEffect> getActiveEffects(){
+        return Collections.unmodifiableList(this.effects);
+    }
+
+    public int addEffect(ActiveEffect effect){
+        IEffect underlying = effect.getEffect();
+        if(underlying.isInstant(this)){
+            underlying.activateInstant(effect, this);
+            return 0;
+        }
+        else{
+            int remaining = effect.getTime();
+            for(ActiveEffect active : this.effects){
+                if(active.equals(effect)){
+                    int maxAdd = Math.min(remaining, active.getEffect().getMaxDuration(this)-active.getTime());
+                    if(maxAdd > 0){
+                        active.addTime(maxAdd);
+                        remaining -= maxAdd;
+                    }
+                }
+            }
+            if(remaining > 0){
+                this.effects.add(effect);
+                underlying.onAddedOrLoaded(effect, this, false);
+
+                remaining = 0;
+            }
+            return remaining;
+        }
+    }
+
+    public int removeEffect(IEffect effect){
+        int time = -1;
+        for(int i = 0; i < this.effects.size(); i++){
+            ActiveEffect active = this.effects.get(i);
+            if(active.getEffect() == effect){
+                this.effects.remove(i);
+                effect.onRemovedOrEnded(active, this, false);
+
+                time = active.getTime();
+                break;
+            }
+        }
+        return time;
     }
 }

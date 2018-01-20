@@ -122,7 +122,7 @@ public class ItemInstance implements IAdditionalDataProvider{
     }
 
     public void save(DataSet set){
-        set.addString("item_name", RockBottomAPI.ITEM_REGISTRY.getId(this.item).toString());
+        set.addString("item_name", this.item.getName().toString());
         set.addInt("amount", this.amount);
         set.addShort("meta", this.meta);
         if(this.additionalData != null){
