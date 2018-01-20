@@ -43,4 +43,8 @@ public final class Constants{
     public static final int CHUNK_LOAD_TIME = 250;
 
     public static final int ADMIN_PERMISSION = 10;
+
+    public static final String UPDATE_LINK = "https://raw.githubusercontent.com/RockBottomGame/Changelog/master/changelog.json";
+    public static final String ELLPECK_LINK = "https://ellpeck.de";
+    public static final String WEBSITE_LINK = "https://rockbottom.ellpeck.de";
 }
