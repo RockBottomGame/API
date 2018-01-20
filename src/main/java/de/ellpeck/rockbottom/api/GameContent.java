@@ -21,6 +21,7 @@
 
 package de.ellpeck.rockbottom.api;
 
+import de.ellpeck.rockbottom.api.effect.IEffect;
 import de.ellpeck.rockbottom.api.item.Item;
 import de.ellpeck.rockbottom.api.item.ToolType;
 import de.ellpeck.rockbottom.api.tile.Tile;
@@ -69,6 +70,8 @@ public final class GameContent{
     public static final Biome BIOME_DESERT = getBiome("desert");
     public static final Biome BIOME_UNDERGROUND = getBiome("underground");
 
+    public static final IEffect EFFECT_SPEED = getEffect("speed");
+
     @ApiInternal
     private static Biome getBiome(String name){
         return get(name, RockBottomAPI.BIOME_REGISTRY);
@@ -82,6 +85,11 @@ public final class GameContent{
     @ApiInternal
     private static Tile getTile(String name){
         return get(name, RockBottomAPI.TILE_REGISTRY);
+    }
+
+    @ApiInternal
+    private static IEffect getEffect(String name){
+        return get(name, RockBottomAPI.EFFECT_REGISTRY);
     }
 
     @ApiInternal

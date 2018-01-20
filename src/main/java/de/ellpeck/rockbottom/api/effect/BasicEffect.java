@@ -24,15 +24,20 @@ package de.ellpeck.rockbottom.api.effect;
 import de.ellpeck.rockbottom.api.entity.Entity;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 
-public abstract class BasicEffect implements IEffect{
+public class BasicEffect implements IEffect{
 
     private final IResourceName name;
+    private final IResourceName iconName;
+    private final IResourceName unlocName;
+
     private final boolean isBad;
     private final boolean isInstant;
     private final int maxDuration;
 
     public BasicEffect(IResourceName name, boolean isBad, boolean isInstant, int maxDuration){
         this.name = name;
+        this.unlocName = this.name.addPrefix("effect.");
+        this.iconName = this.unlocName.addPrefix("gui.");
         this.isBad = isBad;
         this.isInstant = isInstant;
         this.maxDuration = maxDuration;
@@ -51,6 +56,16 @@ public abstract class BasicEffect implements IEffect{
     @Override
     public IResourceName getName(){
         return this.name;
+    }
+
+    @Override
+    public IResourceName getUnlocalizedName(ActiveEffect effect, Entity entity){
+        return this.unlocName;
+    }
+
+    @Override
+    public IResourceName getIcon(ActiveEffect effect, Entity entity){
+        return this.iconName;
     }
 
     @Override

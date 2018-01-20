@@ -315,11 +315,12 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
         else{
             int remaining = effect.getTime();
             for(ActiveEffect active : this.effects){
-                if(active.equals(effect)){
+                if(active.getEffect() == underlying){
                     int maxAdd = Math.min(remaining, active.getEffect().getMaxDuration(this)-active.getTime());
                     if(maxAdd > 0){
                         active.addTime(maxAdd);
                         remaining -= maxAdd;
+                        break;
                     }
                 }
             }
@@ -339,6 +340,15 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
             if(active.getEffect() == effect){
                 this.effects.remove(i);
                 effect.onRemovedOrEnded(active, this, false);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean hasEffect(IEffect effect){
+        for(ActiveEffect active : this.effects){
+            if(active.getEffect() == effect){
                 return true;
             }
         }

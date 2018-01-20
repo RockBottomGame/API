@@ -43,6 +43,10 @@ public interface IEffect{
 
     IResourceName getName();
 
+    IResourceName getUnlocalizedName(ActiveEffect effect, Entity entity);
+
+    IResourceName getIcon(ActiveEffect effect, Entity entity);
+
     default void register(){
         RockBottomAPI.EFFECT_REGISTRY.register(this.getName(), this);
     }

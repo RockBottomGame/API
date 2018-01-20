@@ -98,4 +98,8 @@ public abstract class AbstractEntityPlayer extends EntityLiving implements IComm
     public abstract boolean isInRange(double x, double y, double maxDistance);
 
     public abstract IKnowledgeManager getKnowledge();
+
+    public abstract double getMoveSpeed();
+
+    public abstract double getClimbSpeed();
 }
