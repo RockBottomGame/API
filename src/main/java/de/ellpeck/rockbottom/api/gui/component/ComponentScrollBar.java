@@ -41,6 +41,7 @@ public class ComponentScrollBar extends GuiComponent{
     protected int max;
 
     protected boolean wasMouseDown;
+    protected boolean drawReversed;
 
     public ComponentScrollBar(Gui gui, int x, int y, int height, BoundBox hoverArea, int max, Consumer<Integer> scrollConsumer){
         super(gui, x, y, 6, height);
@@ -74,10 +75,18 @@ public class ComponentScrollBar extends GuiComponent{
         this.max = max;
     }
 
+    public void setDrawReversed(boolean should){
+        this.drawReversed = should;
+    }
+
     @Override
     public void render(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y){
         int max = this.getMax();
         float percentage = max <= 0 ? 0 : (float)this.number/(float)max;
+        if(this.drawReversed){
+            percentage = 1F-percentage;
+        }
+
         float renderY = y+percentage*(this.height-10);
         int color = this.isMouseOverPrioritized(game) || this.hoverArea.contains(g.getMouseInGuiX(), g.getMouseInGuiY()) ? getElementColor() : getUnselectedElementColor();
 
@@ -93,10 +102,12 @@ public class ComponentScrollBar extends GuiComponent{
         if(this.wasMouseDown){
             if(Settings.KEY_GUI_ACTION_1.isDown()){
                 int max = this.getMax();
-                int y = this.getRenderY();
-                float clickPercentage = (game.getRenderer().getMouseInGuiY()-y)/(float)(this.height-y);
+                float clickPercentage = (game.getRenderer().getMouseInGuiY()-this.getRenderY())/(float)this.height;
+                if(this.drawReversed){
+                    clickPercentage = 1F-clickPercentage;
+                }
 
-                int number = Util.clamp((int)(clickPercentage*(max-1)), 0, max);
+                int number = Util.clamp((int)(clickPercentage*max), 0, max);
                 if(number != this.number){
                     this.number = number;
                     this.onScroll();
@@ -109,6 +120,9 @@ public class ComponentScrollBar extends GuiComponent{
         else{
             int scroll = game.getInput().getMouseWheelChange();
             if(scroll != 0 && this.hoverArea.contains(game.getRenderer().getMouseInGuiX(), game.getRenderer().getMouseInGuiY())){
+                if(this.drawReversed){
+                    scroll = -scroll;
+                }
                 int number = Util.clamp(this.number+(scroll < 0 ? 1 : -1), 0, this.getMax());
                 if(number != this.number){
                     this.number = number;
