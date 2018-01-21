@@ -21,13 +21,8 @@
 
 package de.ellpeck.rockbottom.api.gui.component;
 
-import de.ellpeck.rockbottom.api.IGameInstance;
-import de.ellpeck.rockbottom.api.IRenderer;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
-import de.ellpeck.rockbottom.api.assets.IAssetManager;
-import de.ellpeck.rockbottom.api.data.settings.Settings;
 import de.ellpeck.rockbottom.api.gui.Gui;
-import de.ellpeck.rockbottom.api.util.ApiInternal;
 import de.ellpeck.rockbottom.api.util.BoundBox;
 import de.ellpeck.rockbottom.api.util.Util;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
@@ -35,21 +30,16 @@ import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ComponentScrollMenu extends ComponentButton{
+public class ComponentScrollMenu extends ComponentScrollBar{
 
     private final int contentsX;
     private final int contentsY;
     private final List<GuiComponent> contents = new ArrayList<>();
-    private final BoundBox hoverArea;
-
-    protected int number;
-    private boolean wasMouseDown;
 
     public ComponentScrollMenu(Gui gui, int x, int y, int sizeY, int contentsX, int contentsY, BoundBox hoverArea){
-        super(gui, x, y, 6, sizeY, null, null);
+        super(gui, x, y, sizeY, hoverArea, 0, null);
         this.contentsX = contentsX;
         this.contentsY = contentsY;
-        this.hoverArea = hoverArea;
     }
 
     public void add(GuiComponent component){
@@ -74,17 +64,8 @@ public class ComponentScrollMenu extends ComponentButton{
     }
 
     @Override
-    public void render(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y){
-        int max = this.getMax();
-        float percentage = max <= 0 ? 0 : (float)this.number/(float)max;
-        float renderY = y+percentage*(this.height-10);
-        int color = this.isMouseOverPrioritized(game) || this.hoverArea.contains(g.getMouseInGuiX(), g.getMouseInGuiY()) ? getElementColor() : getUnselectedElementColor();
-
-        g.addFilledRect(x, y, 6F, this.height, color);
-        g.addEmptyRect(x, y, 6F, this.height, getElementOutlineColor());
-
-        g.addFilledRect(x, renderY, 6F, 10F, color);
-        g.addEmptyRect(x, renderY, 6F, 10F, getElementOutlineColor());
+    protected void onScroll(){
+        this.organize();
     }
 
     public void organize(){
@@ -128,57 +109,12 @@ public class ComponentScrollMenu extends ComponentButton{
     }
 
     @Override
-    public boolean onMouseAction(IGameInstance game, int button, float x, float y){
-        if(this.isMouseOver(game)){
-            if(!this.wasMouseDown){
-                this.wasMouseDown = true;
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public void update(IGameInstance game){
-        if(this.wasMouseDown){
-            if(Settings.KEY_GUI_ACTION_1.isDown()){
-                this.onClickOrMove(game.getRenderer().getMouseInGuiY());
-            }
-            else{
-                this.wasMouseDown = false;
-            }
-        }
-        else{
-            int scroll = game.getInput().getMouseWheelChange();
-            if(scroll != 0 && this.hoverArea.contains(game.getRenderer().getMouseInGuiX(), game.getRenderer().getMouseInGuiY())){
-                int number = Util.clamp(this.number+(scroll < 0 ? 1 : -1), 0, this.getMax());
-                if(number != this.number){
-                    this.number = number;
-                    this.organize();
-                }
-            }
-        }
-    }
-
-    @ApiInternal
-    private void onClickOrMove(float mouseY){
-        int max = this.getMax();
-        float clickPercentage = (mouseY-this.getRenderY())/(float)this.height;
-
-        int number = Util.clamp((int)(clickPercentage*(max-1)), 0, max);
-        if(number != this.number){
-            this.number = number;
-            this.organize();
-        }
-    }
-
-    @ApiInternal
-    private int getMax(){
+    public int getMax(){
         return (Util.ceil((float)this.contents.size()/(float)this.contentsX))-this.contentsY;
     }
 
     @Override
     public IResourceName getName(){
-        return RockBottomAPI.createInternalRes("scroll_bar");
+        return RockBottomAPI.createInternalRes("scroll_menu");
     }
 }
