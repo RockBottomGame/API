@@ -41,6 +41,8 @@ public interface IChatLog{
 
     List<ChatComponent> getMessages();
 
+    List<String> getLastInputs();
+
     UUID getPlayerIdFromString(String nameOrId);
 
     List<String> getPlayerSuggestions();
