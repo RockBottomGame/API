@@ -84,7 +84,7 @@ public class ItemInstance implements IAdditionalDataProvider{
             return instance;
         }
         else{
-            RockBottomAPI.logger().info("Could not load item instance from data set "+set+" because name "+name+" is missing!");
+            RockBottomAPI.logger().warning("Could not load item instance from data set "+set+" because name "+name+" is missing!");
             return null;
         }
     }
