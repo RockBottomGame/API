@@ -70,6 +70,12 @@ public interface IRenderer extends IDisposable{
 
     void setRotation(float angle);
 
+    void setRotationCenter(float x, float y);
+
+    float getRotationCenterX();
+
+    float getRotationCenterY();
+
     void translate(float x, float y);
 
     void setTranslation(float x, float y);
