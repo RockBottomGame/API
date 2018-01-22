@@ -44,7 +44,7 @@ import java.util.List;
  */
 public interface IRenderer extends IDisposable{
 
-    void initDefaultShader(IShaderProgram program);
+    void setDefaultProgram(IShaderProgram program);
 
     void setProgram(IShaderProgram program);
 
