@@ -28,6 +28,7 @@ import de.ellpeck.rockbottom.api.inventory.IInventory;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 
+import java.util.Collections;
 import java.util.List;
 
 public interface IRecipe{
@@ -61,7 +62,16 @@ public interface IRecipe{
 
     IResourceName getName();
 
+    /**
+     * @deprecated use {@link #getCustomComponents(IInventory)} instead
+     */
+    @Deprecated
     default GuiComponent getCustomComponent(IInventory inventory){
         return null;
+    }
+
+    default List<GuiComponent> getCustomComponents(IInventory inventory){
+        GuiComponent custom = this.getCustomComponent(inventory);
+        return custom != null ? Collections.singletonList(custom) : Collections.emptyList();
     }
 }
