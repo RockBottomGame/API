@@ -58,6 +58,7 @@ public final class GameContent{
     public static final Tile TILE_WATER = getTile("water");
     public static final TileMeta WOOD_BOARDS = (TileMeta)getTile("wood_boards").setHardness(2F).addEffectiveTool(ToolType.AXE, 0).setForceDrop();
     public static final Tile TILE_WOOD_DOOR = getTile("wood_door").setHardness(4F).addEffectiveTool(ToolType.AXE, 0).setForceDrop();
+    public static final Tile TILE_WOOD_DOOR_OLD = getTile("wood_door_old").setHardness(3.5F).addEffectiveTool(ToolType.AXE, 0).setForceDrop();
     public static final Tile TILE_REMAINS_GOO = getTile("remains_goo");
 
     public static final Item ITEM_BRITTLE_PICKAXE = getItem("brittle_pickaxe");

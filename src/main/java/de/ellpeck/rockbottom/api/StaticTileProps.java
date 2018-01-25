@@ -56,16 +56,17 @@ public final class StaticTileProps{
     public static final IntProp SAPLING_GROWTH = new IntProp("growth", 0, 5);
     /**
      * Determines if a tile is the top or bottom half of a door. Used by {@link
-     * GameContent#TILE_WOOD_DOOR}
+     * GameContent#TILE_WOOD_DOOR} and {@link GameContent#TILE_WOOD_DOOR_OLD}
      */
     public static final BoolProp TOP_HALF = new BoolProp("top_half", false);
     /**
      * Determines if a tile is opened. Used by {@link GameContent#TILE_WOOD_DOOR}
+     * and {@link GameContent#TILE_WOOD_DOOR_OLD}
      */
     public static final BoolProp OPEN = new BoolProp("open", false);
     /**
      * Determines if a tile is facing right (rather than left). Used by {@link
-     * GameContent#TILE_WOOD_DOOR}
+     * GameContent#TILE_WOOD_DOOR} and {@link GameContent#TILE_WOOD_DOOR_OLD}
      */
     public static final BoolProp FACING_RIGHT = new BoolProp("facing_right", false);
 
