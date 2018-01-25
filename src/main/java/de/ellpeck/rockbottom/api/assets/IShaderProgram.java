@@ -21,11 +21,15 @@
 
 package de.ellpeck.rockbottom.api.assets;
 
+import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.render.engine.IDisposable;
 import de.ellpeck.rockbottom.api.render.engine.VertexProcessor;
+import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 import org.joml.Matrix4f;
 
 public interface IShaderProgram extends IDisposable, IAsset{
+
+    IResourceName ID = RockBottomAPI.createInternalRes("shader");
 
     void setDefaultValues(int width, int height);
 

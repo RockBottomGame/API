@@ -103,7 +103,7 @@ public class Settings implements IPropSettings{
         this.soundVolume = this.getProp(props, "sound_volume", 1F);
 
         this.lastServerIp = this.getProp(props, "last_server_ip", "");
-        this.currentLocale = this.getProp(props, "curr_locale", "rockbottom/loc.us_english");
+        this.currentLocale = this.getProp(props, "curr_locale", "rockbottom/us_english");
     }
 
     @Override

@@ -31,6 +31,8 @@ import java.util.Map;
 @ApiInternal
 public class Locale implements IAsset{
 
+    public static final IResourceName ID = RockBottomAPI.createInternalRes("loc");
+
     private final String name;
     private final Map<IResourceName, String> localization;
 

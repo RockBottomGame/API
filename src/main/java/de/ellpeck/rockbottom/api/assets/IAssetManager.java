@@ -39,9 +39,9 @@ public interface IAssetManager{
     @ApiInternal
     void setCursor(IGameInstance game, ISpecialCursor cursor);
 
-    <T extends IAsset> Map<IResourceName, T> getAllOfType(Class<T> type);
+    <T extends IAsset> Map<IResourceName, T> getAllOfType(IResourceName identifier);
 
-    <T extends IAsset> T getAssetWithFallback(IResourceName path, T fallback);
+    <T extends IAsset> T getAssetWithFallback(IResourceName identifier, IResourceName path, T fallback);
 
     ITexture getTexture(IResourceName path);
 
@@ -82,5 +82,5 @@ public interface IAssetManager{
 
     ITextureStitcher getTextureStitcher();
 
-    void addAsset(IResourceName name, IAsset asset);
+    void addAsset(IAssetLoader loader, IResourceName name, IAsset asset);
 }
