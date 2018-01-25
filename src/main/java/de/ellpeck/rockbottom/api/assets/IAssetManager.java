@@ -43,6 +43,8 @@ public interface IAssetManager{
 
     <T extends IAsset> T getAssetWithFallback(IResourceName identifier, IResourceName path, T fallback);
 
+    boolean hasAsset(IResourceName identifier, IResourceName path);
+
     ITexture getTexture(IResourceName path);
 
     IAnimation getAnimation(IResourceName path);
