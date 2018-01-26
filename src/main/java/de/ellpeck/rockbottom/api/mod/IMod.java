@@ -89,7 +89,15 @@ public interface IMod{
 
     }
 
+    default void preInitAssets(IGameInstance game, IAssetManager assetManager, IApiHandler apiHandler){
+
+    }
+
     default void initAssets(IGameInstance game, IAssetManager assetManager, IApiHandler apiHandler){
+
+    }
+
+    default void postInitAssets(IGameInstance game, IAssetManager assetManager, IApiHandler apiHandler){
 
     }
 }

@@ -49,7 +49,13 @@ public interface IModLoader{
     void init();
 
     @ApiInternal
+    void preInitAssets();
+
+    @ApiInternal
     void initAssets();
+
+    @ApiInternal
+    void postInitAssets();
 
     @ApiInternal
     void postInit();
