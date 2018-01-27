@@ -30,6 +30,9 @@ import org.joml.Matrix4f;
 public interface IShaderProgram extends IDisposable, IAsset{
 
     IResourceName ID = RockBottomAPI.createInternalRes("shader");
+    IResourceName GUI_SHADER = RockBottomAPI.createInternalRes("gui");
+    IResourceName WORLD_SHADER = RockBottomAPI.createInternalRes("world");
+    IResourceName BREAK_SHADER = RockBottomAPI.createInternalRes("break");
 
     void setDefaultValues(int width, int height);
 

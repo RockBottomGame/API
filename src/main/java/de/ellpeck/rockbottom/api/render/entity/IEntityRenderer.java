@@ -24,11 +24,16 @@ package de.ellpeck.rockbottom.api.render.entity;
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.IRenderer;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
+import de.ellpeck.rockbottom.api.assets.IShaderProgram;
 import de.ellpeck.rockbottom.api.entity.Entity;
+import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 import de.ellpeck.rockbottom.api.world.IWorld;
 
 public interface IEntityRenderer<T extends Entity>{
 
     void render(IGameInstance game, IAssetManager manager, IRenderer g, IWorld world, T entity, float x, float y, int light);
 
+    default IResourceName getRenderShader(IGameInstance game, IAssetManager manager, IRenderer g, IWorld world, T entity){
+        return IShaderProgram.WORLD_SHADER;
+    }
 }
