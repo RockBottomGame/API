@@ -28,7 +28,6 @@ import de.ellpeck.rockbottom.api.tile.state.TileState;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 import de.ellpeck.rockbottom.api.util.reg.NameToIndexInfo;
-import de.ellpeck.rockbottom.api.world.gen.IRetroactiveGenerator;
 import de.ellpeck.rockbottom.api.world.gen.IWorldGenerator;
 import de.ellpeck.rockbottom.api.world.gen.biome.Biome;
 import de.ellpeck.rockbottom.api.world.layer.TileLayer;
@@ -88,7 +87,7 @@ public interface IWorld extends IChunkOrWorld{
     List<IWorldGenerator> getSortedGenerators();
 
     @ApiInternal
-    List<IRetroactiveGenerator> getSortedRetroactiveGenerators();
+    List<IWorldGenerator> getSortedRetroactiveGenerators();
 
     @ApiInternal
     void save();

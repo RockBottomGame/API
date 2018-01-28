@@ -44,4 +44,8 @@ public interface IWorldGenerator{
     default boolean doesPlayerAllowGeneration(IWorld world, IChunk chunk, AbstractEntityPlayer player){
         return true;
     }
+
+    default boolean generatesRetroactively(){
+        return false;
+    }
 }

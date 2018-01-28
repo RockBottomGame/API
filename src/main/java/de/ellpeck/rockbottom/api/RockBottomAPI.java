@@ -52,7 +52,6 @@ import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 import de.ellpeck.rockbottom.api.util.reg.IndexRegistry;
 import de.ellpeck.rockbottom.api.util.reg.NameRegistry;
 import de.ellpeck.rockbottom.api.world.IWorld;
-import de.ellpeck.rockbottom.api.world.gen.IRetroactiveGenerator;
 import de.ellpeck.rockbottom.api.world.gen.IWorldGenerator;
 import de.ellpeck.rockbottom.api.world.gen.biome.Biome;
 import de.ellpeck.rockbottom.api.world.layer.TileLayer;
@@ -134,11 +133,12 @@ public final class RockBottomAPI{
     public static final NameRegistry<BasicRecipe> MANUAL_CONSTRUCTION_RECIPES = new NameRegistry<>("manual_recipe_registry").register();
     /**
      * The registry for all {@link IWorldGenerator} types. The {@link
-     * IResourceName} is used to save a generator to disk if it is a {@link
-     * IRetroactiveGenerator} to mark that it has already generated in a certain
-     * chunk. However, a registry name needs to be supplied regardless if the
-     * generator is retroactive. Note that, to instantiate a world generator, it
-     * needs to contain a default constructor.
+     * IResourceName} is used to save a generator to disk if it is a retroactive
+     * generator ({@link IWorldGenerator#generatesRetroactively()}) to mark that
+     * it has already generated in a certain chunk. However, a registry name
+     * needs to be supplied regardless if the generator is retroactive. Note
+     * that, to instantiate a world generator, it needs to contain a default
+     * constructor.
      */
     public static final NameRegistry<Class<? extends IWorldGenerator>> WORLD_GENERATORS = new NameRegistry<>("world_generator_registry").register();
     /**
