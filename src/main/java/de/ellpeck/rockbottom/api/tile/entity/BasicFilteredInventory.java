@@ -24,6 +24,7 @@ package de.ellpeck.rockbottom.api.tile.entity;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.util.Direction;
 
+import java.util.Collections;
 import java.util.List;
 
 public class BasicFilteredInventory extends FilteredInventory{
@@ -37,8 +38,8 @@ public class BasicFilteredInventory extends FilteredInventory{
 
     public BasicFilteredInventory(int slotAmount, List<Integer> inputSlots, List<Integer> outputSlots){
         super(slotAmount);
-        this.inputSlots = inputSlots;
-        this.outputSlots = outputSlots;
+        this.inputSlots = Collections.unmodifiableList(inputSlots);
+        this.outputSlots = Collections.unmodifiableList(outputSlots);
     }
 
     @Override
