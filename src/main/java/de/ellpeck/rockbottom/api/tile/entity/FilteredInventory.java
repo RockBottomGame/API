@@ -1,5 +1,5 @@
 /*
- * This file ("TileInventory.java") is part of the RockBottomAPI by Ellpeck.
+ * This file ("FilteredInventory.java") is part of the RockBottomAPI by Ellpeck.
  * View the source code at <https://github.com/RockBottomGame/>.
  * View information on the project at <https://rockbottom.ellpeck.de/>.
  *
@@ -16,17 +16,24 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with the RockBottomAPI. If not, see <http://www.gnu.org/licenses/>.
  *
- * © 2017 Ellpeck
+ * © 2018 Ellpeck
  */
 
-package de.ellpeck.rockbottom.api.inventory;
+package de.ellpeck.rockbottom.api.tile.entity;
 
-import de.ellpeck.rockbottom.api.tile.entity.TileEntity;
+import de.ellpeck.rockbottom.api.inventory.Inventory;
+import de.ellpeck.rockbottom.api.item.ItemInstance;
+import de.ellpeck.rockbottom.api.util.Direction;
 
-public class TileInventory extends Inventory{
+import java.util.List;
 
-    public TileInventory(TileEntity tile, int slotAmount){
+public abstract class FilteredInventory extends Inventory{
+
+    public FilteredInventory(int slotAmount){
         super(slotAmount);
-        this.addChangeCallback((inv, slot) -> tile.world.setDirty(tile.x, tile.y));
     }
+
+    public abstract List<Integer> getInputSlots(ItemInstance instance, Direction dir);
+
+    public abstract List<Integer> getOutputSlots(Direction dir);
 }

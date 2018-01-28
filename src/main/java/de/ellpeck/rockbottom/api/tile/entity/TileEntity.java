@@ -97,4 +97,8 @@ public class TileEntity{
             }
         }
     }
+
+    public FilteredInventory getInventory(){
+        return null;
+    }
 }

@@ -1,5 +1,5 @@
 /*
- * This file ("IInventoryHolder.java") is part of the RockBottomAPI by Ellpeck.
+ * This file ("TileInventory.java") is part of the RockBottomAPI by Ellpeck.
  * View the source code at <https://github.com/RockBottomGame/>.
  * View information on the project at <https://rockbottom.ellpeck.de/>.
  *
@@ -16,22 +16,21 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with the RockBottomAPI. If not, see <http://www.gnu.org/licenses/>.
  *
- * © 2017 Ellpeck
+ * © 2018 Ellpeck
  */
 
 package de.ellpeck.rockbottom.api.tile.entity;
 
-import de.ellpeck.rockbottom.api.inventory.IInventory;
-import de.ellpeck.rockbottom.api.item.ItemInstance;
-import de.ellpeck.rockbottom.api.util.Direction;
-
 import java.util.List;
 
-public interface IInventoryHolder{
+public class TileInventory extends BasicFilteredInventory{
 
-    IInventory getInventory();
+    public TileInventory(TileEntity tile, int slotAmount, List<Integer> inputOutputSlots){
+        this(tile, slotAmount, inputOutputSlots, inputOutputSlots);
+    }
 
-    List<Integer> getInputSlots(ItemInstance instance, Direction dir);
-
-    List<Integer> getOutputSlots(Direction dir);
+    public TileInventory(TileEntity tile, int slotAmount, List<Integer> inputSlots, List<Integer> outputSlots){
+        super(slotAmount, inputSlots, outputSlots);
+        this.addChangeCallback((inv, slot) -> tile.world.setDirty(tile.x, tile.y));
+    }
 }
