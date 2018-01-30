@@ -46,7 +46,7 @@ public interface IInternalHooks{
 
     boolean doDefaultSlotMovement(IGameInstance game, int button, float x, float y, ComponentSlot slot);
 
-    boolean doDefaultShiftClicking(IGameInstance game, GuiContainer gui, ComponentSlot slot);
+    boolean doDefaultShiftClicking(IGameInstance game, int button, GuiContainer gui, ComponentSlot slot);
 
     boolean placeTile(int x, int y, TileLayer layer, AbstractEntityPlayer player, ItemInstance selected, Tile tile, boolean removeItem, boolean simulate);
 
