@@ -107,6 +107,12 @@ public interface IChunkOrWorld extends IAdditionalDataProvider{
 
     boolean isServer();
 
+    boolean isDedicatedServer();
+
+    boolean hasLocalPlayer();
+
+    boolean isLocalPlayer(Entity entity);
+
     void callRetroactiveGeneration();
 
     long getSeed();

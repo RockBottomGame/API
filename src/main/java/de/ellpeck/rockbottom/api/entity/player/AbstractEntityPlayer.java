@@ -104,4 +104,6 @@ public abstract class AbstractEntityPlayer extends EntityLiving implements IComm
     public abstract double getClimbSpeed();
 
     public abstract double getJumpHeight();
+
+    public abstract boolean isLocalPlayer();
 }

@@ -32,7 +32,7 @@ import java.util.UUID;
 
 public interface INetHandler{
 
-    boolean isThePlayer(AbstractEntityPlayer player);
+    boolean isThePlayer(Entity entity);
 
     boolean isClient();
 
