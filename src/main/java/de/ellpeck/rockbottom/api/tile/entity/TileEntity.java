@@ -48,7 +48,7 @@ public class TileEntity{
 
     public void update(IGameInstance game){
         if(this.world.isServer()){
-            if(this.world.getWorldInfo().totalTimeInWorld%this.getSyncInterval() == 0 && this.needsSync()){
+            if(this.world.getTotalTime()%this.getSyncInterval() == 0 && this.needsSync()){
                 this.sendToClients();
                 this.onSync();
             }

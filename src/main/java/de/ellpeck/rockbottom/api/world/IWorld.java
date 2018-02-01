@@ -61,7 +61,17 @@ public interface IWorld extends IChunkOrWorld{
 
     DynamicRegistryInfo getRegInfo();
 
+    @ApiInternal
     WorldInfo getWorldInfo();
+
+    int getCurrentTime();
+
+    int getTotalTime();
+
+    void setCurrentTime(int time);
+
+    @ApiInternal
+    void setTotalTime(int time);
 
     void notifyNeighborsOfChange(int x, int y, TileLayer layer);
 
