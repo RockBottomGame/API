@@ -44,7 +44,7 @@ public abstract class ChatComponent{
         try{
             Class<? extends ChatComponent> theClass = RockBottomAPI.CHAT_COMPONENT_REGISTRY.get(id);
 
-            ChatComponent component = theClass.newInstance();
+            ChatComponent component = theClass.getConstructor().newInstance();
             component.load(set);
 
             return component;
