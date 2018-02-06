@@ -96,7 +96,7 @@ public abstract class GuiContainer extends Gui{
         this.container = this.player.getContainer();
         for(int i = 0; i < this.container.getSlotAmount(); i++){
             ContainerSlot slot = this.container.getSlot(i);
-            this.components.add(new ComponentSlot(this, slot, i, slot.x, slot.y));
+            this.components.add(new ComponentSlot(this, slot, i, this.getSlotOffsetX()+slot.x, this.getSlotOffsetY()+slot.y));
         }
     }
 
@@ -154,5 +154,13 @@ public abstract class GuiContainer extends Gui{
         public ShiftClickBehavior reversed(){
             return this.reversed(this.condition == null ? null : (slotFrom, slotTo) -> !this.condition.apply(slotFrom, slotTo));
         }
+    }
+
+    public int getSlotOffsetX(){
+        return 0;
+    }
+
+    public int getSlotOffsetY(){
+        return 0;
     }
 }

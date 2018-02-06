@@ -38,6 +38,7 @@ public class Settings implements IPropSettings{
     public static final Keybind KEY_GUI_ACTION_2 = new Keybind(RockBottomAPI.createInternalRes("gui_action_2"), 1, true).register();
 
     public static final Keybind KEY_INVENTORY = new Keybind(RockBottomAPI.createInternalRes("inventory"), GLFW.GLFW_KEY_E, false).register();
+    public static final Keybind KEY_COMPENDIUM = new Keybind(RockBottomAPI.createInternalRes("compendium"), GLFW.GLFW_KEY_C, false).register();
     public static final Keybind KEY_MENU = new Keybind(RockBottomAPI.createInternalRes("menu"), GLFW.GLFW_KEY_ESCAPE, false).register();
     public static final Keybind KEY_LEFT = new Keybind(RockBottomAPI.createInternalRes("left"), GLFW.GLFW_KEY_A, false).register();
     public static final Keybind KEY_RIGHT = new Keybind(RockBottomAPI.createInternalRes("right"), GLFW.GLFW_KEY_D, false).register();

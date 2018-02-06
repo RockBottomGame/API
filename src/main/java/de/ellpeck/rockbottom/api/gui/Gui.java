@@ -252,4 +252,13 @@ public abstract class Gui{
     public int getHeight(){
         return this.height;
     }
+
+    public boolean shouldDoFingerCursor(IGameInstance game){
+        for(GuiComponent component : this.components){
+            if(component.shouldDoFingerCursor(game)){
+                return true;
+            }
+        }
+        return false;
+    }
 }
