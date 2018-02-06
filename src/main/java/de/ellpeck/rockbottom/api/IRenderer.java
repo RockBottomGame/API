@@ -138,6 +138,8 @@ public interface IRenderer extends IDisposable{
      */
     void renderItemInGui(IGameInstance game, IAssetManager manager, ItemInstance slot, float x, float y, float scale, int color);
 
+    void renderItemInGui(IGameInstance game, IAssetManager manager, ItemInstance slot, float x, float y, float scale, int color, boolean displayAmount);
+
     /**
      * Renders an item's hover over information on the mouse cursor position.
      * Additionally, it draws the {@link IRenderer#isItemInfoDebug()} text and

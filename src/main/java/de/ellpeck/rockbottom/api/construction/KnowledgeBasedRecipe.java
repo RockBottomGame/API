@@ -40,14 +40,4 @@ public class KnowledgeBasedRecipe extends BasicRecipe{
     public boolean isKnown(AbstractEntityPlayer player){
         return player.getKnowledge().knowsRecipe(this);
     }
-
-    @Override
-    public boolean shouldDisplayIngredient(AbstractEntityPlayer player, IUseInfo info){
-        return player.getKnowledge().knowsIngredient(this, info);
-    }
-
-    @Override
-    public boolean shouldDisplayOutput(AbstractEntityPlayer player, ItemInstance output){
-        return player.getKnowledge().knowsOutput(this, output);
-    }
 }

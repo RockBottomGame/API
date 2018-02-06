@@ -30,27 +30,15 @@ public interface IKnowledgeManager{
 
     boolean knowsRecipe(IRecipe recipe);
 
-    boolean knowsIngredient(IRecipe recipe, IUseInfo info);
-
-    boolean knowsOutput(IRecipe recipe, ItemInstance instance);
-
     boolean knowsInformation(IResourceName name);
 
     Information getInformation(IResourceName name);
 
     <T extends Information> T getInformation(IResourceName name, Class<T> infoClass);
 
-    void teachRecipe(IRecipe recipe, boolean teachAllParts, boolean announce);
+    void teachRecipe(IRecipe recipe, boolean announce);
 
-    void teachRecipe(IRecipe recipe, boolean teachAllParts);
-
-    void teachIngredient(IRecipe recipe, IUseInfo info, boolean announce);
-
-    void teachIngredient(IRecipe recipe, IUseInfo info);
-
-    void teachOutput(IRecipe recipe, ItemInstance instance, boolean announce);
-
-    void teachOutput(IRecipe recipe, ItemInstance instance);
+    void teachRecipe(IRecipe recipe);
 
     void teachInformation(Information information, boolean announce);
 
@@ -60,15 +48,95 @@ public interface IKnowledgeManager{
 
     void forgetRecipe(IRecipe recipe, boolean forgetAllParts);
 
-    void forgetIngredient(IRecipe recipe, IUseInfo info, boolean announce);
-
-    void forgetIngredient(IRecipe recipe, IUseInfo info);
-
-    void forgetOutput(IRecipe recipe, ItemInstance instance, boolean announce);
-
-    void forgetOutput(IRecipe recipe, ItemInstance instance);
-
     void forgetInformation(IResourceName name, boolean announce);
 
     void forgetInformation(IResourceName name);
+
+    /**
+     * @deprecated Partly known recipes have been removed
+     */
+    @Deprecated
+    default boolean knowsIngredient(IRecipe recipe, IUseInfo info){
+        return false;
+    }
+
+    /**
+     * @deprecated Partly known recipes have been removed
+     */
+    @Deprecated
+    default boolean knowsOutput(IRecipe recipe, ItemInstance instance){
+        return false;
+    }
+
+    /**
+     * @deprecated Partly known recipes have been removed
+     */
+    @Deprecated
+    default void teachRecipe(IRecipe recipe, boolean teachAllParts, boolean announce){
+
+    }
+
+    /**
+     * @deprecated Partly known recipes have been removed
+     */
+    @Deprecated
+    default void teachIngredient(IRecipe recipe, IUseInfo info, boolean announce){
+
+    }
+
+    /**
+     * @deprecated Partly known recipes have been removed
+     */
+    @Deprecated
+    default void teachIngredient(IRecipe recipe, IUseInfo info){
+
+    }
+
+    /**
+     * @deprecated Partly known recipes have been removed
+     */
+    @Deprecated
+    default void teachOutput(IRecipe recipe, ItemInstance instance, boolean announce){
+
+    }
+
+    /**
+     * @deprecated Partly known recipes have been removed
+     */
+    @Deprecated
+    default void teachOutput(IRecipe recipe, ItemInstance instance){
+
+    }
+
+    /**
+     * @deprecated Partly known recipes have been removed
+     */
+    @Deprecated
+    default void forgetIngredient(IRecipe recipe, IUseInfo info, boolean announce){
+
+    }
+
+    /**
+     * @deprecated Partly known recipes have been removed
+     */
+    @Deprecated
+    default void forgetIngredient(IRecipe recipe, IUseInfo info){
+
+    }
+
+    /**
+     * @deprecated Partly known recipes have been removed
+     */
+    @Deprecated
+    default void forgetOutput(IRecipe recipe, ItemInstance instance, boolean announce){
+
+    }
+
+    /**
+     * @deprecated Partly known recipes have been removed
+     */
+    @Deprecated
+    default void forgetOutput(IRecipe recipe, ItemInstance instance){
+
+    }
 }

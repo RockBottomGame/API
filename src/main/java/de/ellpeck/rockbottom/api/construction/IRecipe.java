@@ -23,11 +23,16 @@ package de.ellpeck.rockbottom.api.construction;
 
 import de.ellpeck.rockbottom.api.construction.resource.IUseInfo;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
+import de.ellpeck.rockbottom.api.gui.Gui;
 import de.ellpeck.rockbottom.api.gui.component.GuiComponent;
+import de.ellpeck.rockbottom.api.gui.component.construction.ComponentConstruct;
+import de.ellpeck.rockbottom.api.gui.component.construction.ComponentIngredient;
+import de.ellpeck.rockbottom.api.gui.component.construction.ComponentPolaroid;
 import de.ellpeck.rockbottom.api.inventory.IInventory;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -56,22 +61,56 @@ public interface IRecipe{
 
     boolean isKnown(AbstractEntityPlayer player);
 
-    boolean shouldDisplayIngredient(AbstractEntityPlayer player, IUseInfo info);
-
-    boolean shouldDisplayOutput(AbstractEntityPlayer player, ItemInstance output);
-
     IResourceName getName();
 
+    default List<ComponentIngredient> getIngredientButtons(Gui gui, AbstractEntityPlayer player){
+        List<ComponentIngredient> ingredients = new ArrayList<>();
+        for(IUseInfo info : this.getInputs()){
+            ingredients.add(new ComponentIngredient(gui, player.getInv().containsResource(info), info.getItems()));
+        }
+        return ingredients;
+    }
+
+    default List<ComponentPolaroid> getPolaroidButtons(Gui gui, AbstractEntityPlayer player, boolean canConstruct){
+        return Collections.singletonList(new ComponentPolaroid(gui, this, canConstruct));
+    }
+
+    default ComponentConstruct getConstructButton(Gui gui, AbstractEntityPlayer player, boolean canConstruct){
+        return new ComponentConstruct(gui, this, canConstruct);
+    }
+
     /**
-     * @deprecated use {@link #getCustomComponents(IInventory)} instead
+     * @deprecated use {@link #getPolaroidButtons(Gui, AbstractEntityPlayer, boolean)}
+     * instead
      */
     @Deprecated
     default GuiComponent getCustomComponent(IInventory inventory){
         return null;
     }
 
+    /**
+     * @deprecated Use {@link #getPolaroidButtons(Gui, AbstractEntityPlayer,
+     * boolean)} instead
+     */
+    @Deprecated
     default List<GuiComponent> getCustomComponents(IInventory inventory){
         GuiComponent custom = this.getCustomComponent(inventory);
         return custom != null ? Collections.singletonList(custom) : Collections.emptyList();
+    }
+
+    /**
+     * @deprecated Partly known recipes have been removed
+     */
+    @Deprecated
+    default boolean shouldDisplayIngredient(AbstractEntityPlayer player, IUseInfo info){
+        return false;
+    }
+
+    /**
+     * @deprecated Partly known recipes have been removed
+     */
+    @Deprecated
+    default boolean shouldDisplayOutput(AbstractEntityPlayer player, ItemInstance output){
+        return false;
     }
 }

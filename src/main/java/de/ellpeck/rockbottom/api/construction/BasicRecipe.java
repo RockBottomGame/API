@@ -64,16 +64,6 @@ public class BasicRecipe implements IRecipe{
     }
 
     @Override
-    public boolean shouldDisplayIngredient(AbstractEntityPlayer player, IUseInfo info){
-        return true;
-    }
-
-    @Override
-    public boolean shouldDisplayOutput(AbstractEntityPlayer player, ItemInstance output){
-        return true;
-    }
-
-    @Override
     public IResourceName getName(){
         return this.name;
     }

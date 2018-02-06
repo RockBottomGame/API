@@ -76,9 +76,9 @@ public abstract class ItemContainer{
         for(int i = start; i < end; i++){
             this.addSlot(new ContainerSlot(inventory, i, x, y));
 
-            x += 20;
+            x += 17;
             if((i+1)%width == 0){
-                y += 20;
+                y += 17;
                 x = xStart;
             }
         }
@@ -86,7 +86,7 @@ public abstract class ItemContainer{
 
     protected void addPlayerInventory(AbstractEntityPlayer player, int x, int y){
         this.addSlotGrid(player.getInv(), 0, 8, x, y, 8);
-        this.addSlotGrid(player.getInv(), 8, player.getInv().getSlotAmount(), x, y+25, 8);
+        this.addSlotGrid(player.getInv(), 8, player.getInv().getSlotAmount(), x, y+20, 8);
     }
 
     public void onOpened(){

@@ -46,6 +46,11 @@ public abstract class GuiComponent{
         this.height = height;
     }
 
+    public void setPos(int x, int y){
+        this.x = x;
+        this.y = y;
+    }
+
     public static int getGuiColor(){
         return RockBottomAPI.getGame().getSettings().guiColor;
     }

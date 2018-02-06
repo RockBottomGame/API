@@ -38,7 +38,7 @@ public class ComponentSlot extends GuiComponent{
     public final GuiContainer container;
 
     public ComponentSlot(GuiContainer container, ContainerSlot slot, int componentId, int x, int y){
-        super(container, x, y, 18, 18);
+        super(container, x, y, 16, 16);
         this.container = container;
         this.slot = slot;
         this.componentId = componentId;

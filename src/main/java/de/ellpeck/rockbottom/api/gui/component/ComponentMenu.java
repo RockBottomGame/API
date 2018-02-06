@@ -1,5 +1,5 @@
 /*
- * This file ("ComponentScrollMenu.java") is part of the RockBottomAPI by Ellpeck.
+ * This file ("ComponentMenu.java") is part of the RockBottomAPI by Ellpeck.
  * View the source code at <https://github.com/RockBottomGame/>.
  * View information on the project at <https://rockbottom.ellpeck.de/>.
  *
@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with the RockBottomAPI. If not, see <http://www.gnu.org/licenses/>.
  *
- * © 2017 Ellpeck
+ * © 2018 Ellpeck
  */
 
 package de.ellpeck.rockbottom.api.gui.component;
@@ -30,35 +30,33 @@ import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * This scroll menu is deprecated. Use {@link ComponentMenu} instead
- */
-@Deprecated
-public class ComponentScrollMenu extends ComponentScrollBar{
+public class ComponentMenu extends ComponentScrollBar{
 
-    private final int contentsX;
-    private final int contentsY;
-    private final List<GuiComponent> contents = new ArrayList<>();
+    private final int displayedComponentsX;
+    private final int displayedComponentsY;
+    private final List<MenuComponent> contents = new ArrayList<>();
 
-    public ComponentScrollMenu(Gui gui, int x, int y, int sizeY, int contentsX, int contentsY, BoundBox hoverArea){
-        super(gui, x, y, sizeY, hoverArea, 0, null);
-        this.contentsX = contentsX;
-        this.contentsY = contentsY;
+    public ComponentMenu(Gui gui, int x, int y, int height, int displayedComponentsX, int displayedComponentsY, BoundBox hoverArea){
+        super(gui, x, y, height, hoverArea, 0, null);
+        this.displayedComponentsX = displayedComponentsX;
+        this.displayedComponentsY = displayedComponentsY;
     }
 
-    public void add(GuiComponent component){
+    public void add(MenuComponent component){
         this.contents.add(component);
-        this.gui.getComponents().add(component);
+        component.init(this.gui);
     }
 
-    public void remove(GuiComponent component){
+    public void remove(MenuComponent component){
         this.contents.remove(component);
-        this.gui.getComponents().remove(component);
+        component.onRemoved(this.gui);
     }
 
     public void clear(){
         if(!this.contents.isEmpty()){
-            this.gui.getComponents().removeAll(this.contents);
+            for(MenuComponent component : this.contents){
+                component.onRemoved(this.gui);
+            }
             this.contents.clear();
         }
     }
@@ -76,21 +74,20 @@ public class ComponentScrollMenu extends ComponentScrollBar{
         this.number = Util.clamp(this.number, 0, this.getMax());
 
         int index = 0;
-        while(index < this.contents.size() && index < this.number*this.contentsX){
+        while(index < this.contents.size() && index < this.number*this.displayedComponentsX){
             this.contents.get(index).setActive(false);
             index++;
         }
 
         if(this.contents.size() > index){
-            int showY = this.y;
-            for(int y = 0; y < this.contentsY; y++){
-                int showX = this.x+8;
+            int showY = this.getY();
+            for(int y = 0; y < this.displayedComponentsY; y++){
+                int showX = this.getX()+8;
                 int highestHeight = 0;
-                for(int x = 0; x < this.contentsX; x++){
-                    GuiComponent component = this.contents.get(index);
+                for(int x = 0; x < this.displayedComponentsX; x++){
+                    MenuComponent component = this.contents.get(index);
                     component.setActive(true);
-                    component.x = showX;
-                    component.y = showY;
+                    component.setPos(showX, showY);
 
                     showX += component.width+2;
                     if(component.height > highestHeight){
@@ -114,11 +111,11 @@ public class ComponentScrollMenu extends ComponentScrollBar{
 
     @Override
     public int getMax(){
-        return (Util.ceil((float)this.contents.size()/(float)this.contentsX))-this.contentsY;
+        return (Util.ceil((float)this.contents.size()/(float)this.displayedComponentsX))-this.displayedComponentsY;
     }
 
     @Override
     public IResourceName getName(){
-        return RockBottomAPI.createInternalRes("scroll_menu_deprecated");
+        return RockBottomAPI.createInternalRes("scroll_menu");
     }
 }
