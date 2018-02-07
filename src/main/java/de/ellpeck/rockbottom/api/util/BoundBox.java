@@ -144,42 +144,6 @@ public class BoundBox{
         return this.maxY-this.minY;
     }
 
-    public double getXDistanceWithMax(BoundBox other, double offsetX){
-        if(other.maxY > this.minY && other.minY < this.maxY){
-            if(offsetX > 0 && other.maxX <= this.minX){
-                double diff = this.minX-other.maxX;
-                if(diff < offsetX){
-                    offsetX = diff;
-                }
-            }
-            else if(offsetX < 0 && other.minX >= this.maxX){
-                double diff = this.maxX-other.minX;
-                if(diff > offsetX){
-                    offsetX = diff;
-                }
-            }
-        }
-        return offsetX;
-    }
-
-    public double getYDistanceWithMax(BoundBox other, double offsetY){
-        if(other.maxX > this.minX && other.minX < this.maxX){
-            if(offsetY > 0 && other.maxY <= this.minY){
-                double diff = this.minY-other.maxY;
-                if(diff < offsetY){
-                    offsetY = diff;
-                }
-            }
-            else if(offsetY < 0 && other.minY >= this.maxY){
-                double diff = this.maxY-other.minY;
-                if(diff > offsetY){
-                    offsetY = diff;
-                }
-            }
-        }
-        return offsetY;
-    }
-
     public BoundBox copy(){
         return new BoundBox(this.minX, this.minY, this.maxX, this.maxY);
     }
