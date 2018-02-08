@@ -20,8 +20,8 @@ switch (OperatingSystem.current()) {
 
 project.ext.lwjglVersion = "3.1.6"
 
-sourceCompatibility = 1.9
-targetCompatibility = 1.9
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 if (hasProperty('buildnumber')) {
     version = "${version}-${this.properties['buildnumber']}"

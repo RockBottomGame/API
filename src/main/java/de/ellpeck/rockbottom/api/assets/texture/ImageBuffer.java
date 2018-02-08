@@ -23,6 +23,7 @@ package de.ellpeck.rockbottom.api.assets.texture;
 
 import org.lwjgl.BufferUtils;
 
+import java.nio.Buffer;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
@@ -42,7 +43,7 @@ public class ImageBuffer{
     public ByteBuffer getRGBA(){
         ByteBuffer buffer = BufferUtils.createByteBuffer(this.rawData.length);
         buffer.put(this.rawData);
-        buffer.flip();
+        ((Buffer)buffer).flip();
         return buffer;
     }
 
