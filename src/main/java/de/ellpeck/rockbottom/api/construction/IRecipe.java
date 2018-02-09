@@ -21,6 +21,7 @@
 
 package de.ellpeck.rockbottom.api.construction;
 
+import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.construction.resource.IUseInfo;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.gui.Gui;
@@ -29,8 +30,10 @@ import de.ellpeck.rockbottom.api.gui.component.construction.ComponentConstruct;
 import de.ellpeck.rockbottom.api.gui.component.construction.ComponentIngredient;
 import de.ellpeck.rockbottom.api.gui.component.construction.ComponentPolaroid;
 import de.ellpeck.rockbottom.api.inventory.IInventory;
+import de.ellpeck.rockbottom.api.inventory.Inventory;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
+import de.ellpeck.rockbottom.api.world.IWorld;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +41,7 @@ import java.util.List;
 public interface IRecipe{
 
     /**
-     * @deprecated Use {@link #canConstruct(AbstractEntityPlayer)} instead
+     * @deprecated Use {@link #canConstruct(IInventory)} instead
      */
     @Deprecated
     static boolean matchesInv(IRecipe recipe, IInventory inventory){
@@ -50,14 +53,18 @@ public interface IRecipe{
         return true;
     }
 
+    IResourceName getName();
+
+    boolean isKnown(AbstractEntityPlayer player);
+
+    default boolean canConstruct(IInventory inventory){
+        return matchesInv(this, inventory);
+    }
+
     List<IUseInfo> getInputs();
 
     default List<IUseInfo> getActualInputs(IInventory inventory){
         return this.getInputs();
-    }
-
-    default boolean canConstruct(AbstractEntityPlayer player){
-        return matchesInv(this, player.getInv());
     }
 
     List<ItemInstance> getOutputs();
@@ -66,9 +73,9 @@ public interface IRecipe{
         return this.getOutputs();
     }
 
-    boolean isKnown(AbstractEntityPlayer player);
-
-    IResourceName getName();
+    default void construct(IWorld world, double x, double y, Inventory inv, int amount){
+        RockBottomAPI.getApiHandler().construct(world, x, y, inv, this, amount, this.getActualInputs(inv), used -> this.getActualOutputs(inv, used));
+    }
 
     default List<ComponentIngredient> getIngredientButtons(Gui gui, AbstractEntityPlayer player){
         List<ComponentIngredient> ingredients = new ArrayList<>();

@@ -21,8 +21,13 @@
 
 package de.ellpeck.rockbottom.api;
 
+import de.ellpeck.rockbottom.api.construction.IRecipe;
+import de.ellpeck.rockbottom.api.construction.resource.IUseInfo;
 import de.ellpeck.rockbottom.api.data.set.DataSet;
 import de.ellpeck.rockbottom.api.data.set.part.DataPart;
+import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
+import de.ellpeck.rockbottom.api.inventory.Inventory;
+import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
 import de.ellpeck.rockbottom.api.world.IWorld;
 import de.ellpeck.rockbottom.api.world.gen.INoiseGen;
@@ -31,6 +36,8 @@ import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.File;
+import java.util.List;
+import java.util.function.Function;
 import java.util.logging.Logger;
 
 /**
@@ -122,6 +129,8 @@ public interface IApiHandler{
      * @return The four colors
      */
     int[] interpolateWorldColor(int[] interpolatedLight, TileLayer layer);
+
+    void construct(IWorld world, double x, double y, Inventory inventory, IRecipe recipe, int amount, List<IUseInfo> inputs, Function<List<ItemInstance>, List<ItemInstance>> outputGetter);
 
     /**
      * Gets a color in the world based on a light value between 0 and {@link
