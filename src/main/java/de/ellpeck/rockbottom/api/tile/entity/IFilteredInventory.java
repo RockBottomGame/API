@@ -1,5 +1,5 @@
 /*
- * This file ("BasicFilteredInventory.java") is part of the RockBottomAPI by Ellpeck.
+ * This file ("IFilteredInventory.java") is part of the RockBottomAPI by Ellpeck.
  * View the source code at <https://github.com/RockBottomGame/>.
  * View information on the project at <https://rockbottom.ellpeck.de/>.
  *
@@ -21,35 +21,15 @@
 
 package de.ellpeck.rockbottom.api.tile.entity;
 
-import de.ellpeck.rockbottom.api.inventory.Inventory;
+import de.ellpeck.rockbottom.api.inventory.IInventory;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.util.Direction;
 
-import java.util.Collections;
 import java.util.List;
 
-public class BasicFilteredInventory extends Inventory implements IFilteredInventory{
+public interface IFilteredInventory extends IInventory{
 
-    private final List<Integer> inputSlots;
-    private final List<Integer> outputSlots;
+    List<Integer> getInputSlots(ItemInstance instance, Direction dir);
 
-    public BasicFilteredInventory(int slotAmount, List<Integer> inputOutputSlots){
-        this(slotAmount, inputOutputSlots, inputOutputSlots);
-    }
-
-    public BasicFilteredInventory(int slotAmount, List<Integer> inputSlots, List<Integer> outputSlots){
-        super(slotAmount);
-        this.inputSlots = Collections.unmodifiableList(inputSlots);
-        this.outputSlots = Collections.unmodifiableList(outputSlots);
-    }
-
-    @Override
-    public List<Integer> getInputSlots(ItemInstance instance, Direction dir){
-        return this.inputSlots;
-    }
-
-    @Override
-    public List<Integer> getOutputSlots(Direction dir){
-        return this.outputSlots;
-    }
+    List<Integer> getOutputSlots(Direction dir);
 }

@@ -22,18 +22,15 @@
 package de.ellpeck.rockbottom.api.tile.entity;
 
 import de.ellpeck.rockbottom.api.inventory.Inventory;
-import de.ellpeck.rockbottom.api.item.ItemInstance;
-import de.ellpeck.rockbottom.api.util.Direction;
 
-import java.util.List;
-
-public abstract class FilteredInventory extends Inventory{
+/**
+ * @deprecated Use {@link IFilteredInventory} or {@link BasicFilteredInventory}
+ * instead
+ */
+@Deprecated
+public abstract class FilteredInventory extends Inventory implements IFilteredInventory{
 
     public FilteredInventory(int slotAmount){
         super(slotAmount);
     }
-
-    public abstract List<Integer> getInputSlots(ItemInstance instance, Direction dir);
-
-    public abstract List<Integer> getOutputSlots(Direction dir);
 }
