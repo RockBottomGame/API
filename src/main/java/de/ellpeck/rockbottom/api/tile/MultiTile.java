@@ -130,7 +130,7 @@ public abstract class MultiTile extends TileBasic{
 
     @Override
     public void onDestroyed(IWorld world, int x, int y, Entity destroyer, TileLayer layer, boolean shouldDrop){
-        super.onDestroyed(world, x, y, destroyer, layer, shouldDrop && this.isMainPos(x, y, world.getState(x, y)));
+        super.onDestroyed(world, x, y, destroyer, layer, shouldDrop && this.isMainPos(x, y, world.getState(layer, x, y)));
     }
 
     public boolean isMainPos(int x, int y, TileState state){
