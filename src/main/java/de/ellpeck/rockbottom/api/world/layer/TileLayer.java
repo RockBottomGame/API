@@ -148,7 +148,7 @@ public class TileLayer{
             allLayers.get(i).assignedIndex = i;
         }
 
-        layersByIntPrio = makeList(Comparator.comparingInt(TileLayer:: getInteractionPriority));
+        layersByIntPrio = makeList(Comparator.comparingInt(TileLayer:: getInteractionPriority).reversed());
         layersByRenderPrio = makeList(Comparator.comparingInt(TileLayer:: getRenderPriority).reversed());
 
         RockBottomAPI.logger().info("Sorting a total of "+allLayers.size()+" tile layers");
