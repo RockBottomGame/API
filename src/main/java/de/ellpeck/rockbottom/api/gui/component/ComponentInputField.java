@@ -22,32 +22,24 @@
 package de.ellpeck.rockbottom.api.gui.component;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
-import de.ellpeck.rockbottom.api.IInputHandler;
 import de.ellpeck.rockbottom.api.IRenderer;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
-import de.ellpeck.rockbottom.api.assets.font.FormattingCode;
-import de.ellpeck.rockbottom.api.assets.font.IFont;
 import de.ellpeck.rockbottom.api.data.settings.Settings;
 import de.ellpeck.rockbottom.api.gui.Gui;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
-import org.lwjgl.glfw.GLFW;
 
-import java.awt.*;
-import java.awt.datatransfer.DataFlavor;
-import java.util.Arrays;
 import java.util.function.Consumer;
 
 public class ComponentInputField extends GuiComponent{
 
-    private final boolean renderBox;
-    private final boolean selectable;
-    private final int maxLength;
-    private final boolean displaxMaxLength;
-    private final Consumer<String> consumer;
+    public final boolean renderBox;
+    public final boolean selectable;
+    public final int maxLength;
+    public final boolean displaxMaxLength;
+    public final Consumer<String> consumer;
     private String text = "";
     private boolean isSelected;
-    private int counter;
     private boolean censored;
 
     public ComponentInputField(Gui gui, int x, int y, int sizeX, int sizeY, boolean renderBox, boolean selectable, boolean defaultActive, int maxLength, boolean displayMaxLength){
@@ -72,6 +64,10 @@ public class ComponentInputField extends GuiComponent{
         this.isSelected = selected;
     }
 
+    public boolean isCensored(){
+        return this.censored;
+    }
+
     public ComponentInputField setCensored(boolean censored){
         this.censored = censored;
         return this;
@@ -79,77 +75,18 @@ public class ComponentInputField extends GuiComponent{
 
     @Override
     public boolean onKeyPressed(IGameInstance game, int button){
-        if(this.isSelected){
-            if(button == GLFW.GLFW_KEY_BACKSPACE){
-                if(!this.text.isEmpty()){
-                    this.text = this.text.substring(0, this.text.length()-1);
-                    if(this.consumer != null){
-                        this.consumer.accept(this.text);
-                    }
-                }
-                return true;
-            }
-            else if(button == GLFW.GLFW_KEY_ESCAPE){
-                if(this.selectable){
-                    this.isSelected = false;
-                    return true;
-                }
-            }
-            else{
-                IInputHandler input = game.getInput();
-                if(input.isKeyDown(GLFW.GLFW_KEY_LEFT_CONTROL) || input.isKeyDown(GLFW.GLFW_KEY_RIGHT_CONTROL)){
-                    if(button == GLFW.GLFW_KEY_V){
-                        if(this.text.length() < this.maxLength){
-                            try{
-                                this.text += (String)Toolkit.getDefaultToolkit().getSystemClipboard().getData(DataFlavor.stringFlavor);
-                            }
-                            catch(Exception ignored){
-                            }
-
-                            if(this.text.length() > this.maxLength){
-                                this.text = this.text.substring(0, this.maxLength);
-                            }
-
-                            if(this.consumer != null){
-                                this.consumer.accept(this.text);
-                            }
-                            return true;
-                        }
-                        return false;
-                    }
-                }
-            }
-        }
-        return false;
+        return RockBottomAPI.getInternalHooks().doInputFieldKeyPress(game, button, this);
     }
 
     @Override
     public boolean onCharInput(IGameInstance game, int codePoint, char[] characters){
-        boolean did = false;
-        if(this.isSelected){
-            for(char character : characters){
-                if(character >= 32 && character <= 254){
-                    if(this.text.length() < this.maxLength){
-                        this.text += character;
-                        if(this.consumer != null){
-                            this.consumer.accept(this.text);
-                        }
-                        did = true;
-                    }
-                }
-            }
-        }
-        return did;
+        return RockBottomAPI.getInternalHooks().doInputFieldCharInput(game, characters, this);
+
     }
 
     @Override
     public IResourceName getName(){
         return RockBottomAPI.createInternalRes("input_field");
-    }
-
-    @Override
-    public void update(IGameInstance game){
-        this.counter++;
     }
 
     public String getText(){
@@ -162,29 +99,7 @@ public class ComponentInputField extends GuiComponent{
 
     @Override
     public void render(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y){
-        if(this.renderBox){
-            g.addFilledRect(x, y, this.width, this.height, this.isMouseOverPrioritized(game) ? getElementColor() : getUnselectedElementColor());
-            g.addEmptyRect(x, y, this.width, this.height, getElementOutlineColor());
-        }
-
-        IFont font = manager.getFont();
-
-        String text = this.getDisplayText();
-        if(this.censored){
-            char[] chars = new char[text.length()];
-            Arrays.fill(chars, '*');
-            text = new String(chars);
-        }
-
-        String display = text+(this.isSelected ? ((this.counter/15)%2 == 0 ? "|" : " ") : "");
-        font.drawCutOffString(x+3, y+this.height/2F-font.getHeight(0.35F)/2F, display, 0.35F, this.width-6, true, false);
-
-        if(this.displaxMaxLength){
-            String unformattedText = font.removeFormatting(text);
-            int diff = this.maxLength-unformattedText.length();
-            FormattingCode format = diff <= 0 ? FormattingCode.RED : (diff <= this.maxLength/8 ? FormattingCode.ORANGE : (diff <= this.maxLength/4 ? FormattingCode.YELLOW : FormattingCode.NONE));
-            font.drawStringFromRight(x+this.width-1, y+this.height-font.getHeight(0.2F), format.toString()+unformattedText.length()+"/"+this.maxLength, 0.2F);
-        }
+        RockBottomAPI.getInternalHooks().doInputFieldRender(game, manager, g, x, y, this);
     }
 
     public void setText(String text){
