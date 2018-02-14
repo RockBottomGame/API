@@ -42,7 +42,7 @@ public final class GameContent{
     public static final Tile TILE_SOIL = getTile("soil").addEffectiveTool(ToolType.SHOVEL, 0).setForceDrop();
     public static final Tile TILE_GRASS = getTile("grass").addEffectiveTool(ToolType.SHOVEL, 0).setForceDrop();
     public static final Tile TILE_STONE = getTile("stone").setHardness(5F).addEffectiveTool(ToolType.PICKAXE, 0);
-    public static final TileMeta TILE_GRASS_TUFT = (TileMeta)getTile("grass_tuft").setHardness(0F);
+    public static final TileMeta TILE_GRASS_TUFT = (TileMeta)getTile("grass_tuft").setHardness(0F).setForceDrop();
     public static final Tile TILE_LOG = getTile("log").setHardness(3F).addEffectiveTool(ToolType.AXE, 0).setForceDrop();
     public static final Tile TILE_LEAVES = getTile("leaves").setHardness(0.5F).setForceDrop();
     public static final TileMeta TILE_FLOWER = (TileMeta)getTile("flower").setHardness(0F).setForceDrop();
@@ -67,6 +67,7 @@ public final class GameContent{
     public static final Item ITEM_BRITTLE_SHOVEL = getItem("brittle_shovel");
     public static final Item ITEM_FIREWORK = getItem("firework");
     public static final Item ITEM_STAT_NOTE = getItem("start_note");
+    public static final Item ITEM_PLANT_FIBER = getItem("plant_fiber");
 
     public static final Biome BIOME_SKY = getBiome("sky");
     public static final Biome BIOME_GRASSLAND = getBiome("grassland");

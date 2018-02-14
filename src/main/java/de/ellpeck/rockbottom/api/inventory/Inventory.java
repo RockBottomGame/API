@@ -26,6 +26,8 @@ import de.ellpeck.rockbottom.api.data.set.DataSet;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 
 import java.util.HashSet;
+import java.util.List;
+import java.util.Random;
 import java.util.Set;
 import java.util.function.BiConsumer;
 
@@ -115,38 +117,6 @@ public class Inventory implements IInventory{
         }
     }
 
-    public ItemInstance add(ItemInstance instance, boolean simulate){
-        ItemInstance copy = instance.copy();
-
-        for(int i = 0; i < this.slots.length; i++){
-            copy = this.addToSlot(i, copy, simulate);
-
-            if(copy == null){
-                return null;
-            }
-        }
-
-        return copy;
-    }
-
-    public ItemInstance addExistingFirst(ItemInstance instance, boolean simulate){
-        ItemInstance copy = instance.copy();
-
-        for(int i = 0; i < 2; i++){
-            for(int j = 0; j < this.slots.length; j++){
-                if(i == 1 || (this.slots[j] != null && this.slots[j].isEffectivelyEqual(instance))){
-                    copy = this.addToSlot(j, copy, simulate);
-
-                    if(copy == null){
-                        return null;
-                    }
-                }
-            }
-        }
-
-        return copy;
-    }
-
     @Override
     public ItemInstance addToSlot(int slot, ItemInstance instance, boolean simulate){
         ItemInstance slotInst = this.slots[slot];
@@ -201,6 +171,62 @@ public class Inventory implements IInventory{
             else{
                 this.slots[i] = null;
             }
+        }
+    }
+
+    public ItemInstance add(ItemInstance instance, boolean simulate){
+        return add(this, instance, simulate);
+    }
+
+    public static ItemInstance add(IInventory inv, ItemInstance instance, boolean simulate){
+        ItemInstance copy = instance.copy();
+
+        for(int i = 0; i < inv.getSlotAmount(); i++){
+            copy = inv.addToSlot(i, copy, simulate);
+
+            if(copy == null){
+                return null;
+            }
+        }
+
+        return copy;
+    }
+
+    public ItemInstance addExistingFirst(ItemInstance instance, boolean simulate){
+        return addExistingFirst(this, instance, simulate);
+    }
+
+    public static ItemInstance addExistingFirst(IInventory inv, ItemInstance instance, boolean simulate){
+        ItemInstance copy = instance.copy();
+
+        for(int i = 0; i < 2; i++){
+            for(int j = 0; j < inv.getSlotAmount(); j++){
+                if(i == 1 || (inv.get(j) != null && inv.get(j).isEffectivelyEqual(instance))){
+                    copy = inv.addToSlot(j, copy, simulate);
+
+                    if(copy == null){
+                        return null;
+                    }
+                }
+            }
+        }
+
+        return copy;
+    }
+
+    public void fillRandomly(Random random, List<ItemInstance> items){
+        fillRandomly(this, random, items);
+    }
+
+    public static void fillRandomly(IInventory inv, Random random, List<ItemInstance> items){
+        for(ItemInstance instance : items){
+            int slot;
+            do{
+                slot = random.nextInt(inv.getSlotAmount());
+            }
+            while(inv.get(slot) != null);
+
+            inv.set(slot, instance);
         }
     }
 }
