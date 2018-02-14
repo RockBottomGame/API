@@ -66,6 +66,8 @@ public interface IChunkOrWorld extends IAdditionalDataProvider{
 
     List<TileEntity> getAllTileEntities();
 
+    List<TileEntity> getAllTickingTileEntities();
+
     Entity getEntity(UUID id);
 
     List<Entity> getEntities(BoundBox area);

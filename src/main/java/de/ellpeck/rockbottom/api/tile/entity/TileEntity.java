@@ -32,7 +32,7 @@ import de.ellpeck.rockbottom.api.util.Util;
 import de.ellpeck.rockbottom.api.world.IWorld;
 import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 
-public class TileEntity{
+public abstract class TileEntity{
 
     public final IWorld world;
     public final int x;
@@ -109,4 +109,6 @@ public class TileEntity{
     public FilteredInventory getInventory(){
         return null;
     }
+
+    public abstract boolean doesTick();
 }
