@@ -28,12 +28,9 @@ import de.ellpeck.rockbottom.api.tile.Tile;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 
-import java.util.Iterator;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.TreeMap;
 
-public class TileState{
+public final class TileState{
 
     private final Tile tile;
     private final IResourceName name;
@@ -46,52 +43,7 @@ public class TileState{
         this.properties = properties;
         this.name = name;
 
-        RockBottomAPI.TILE_STATE_REGISTRY.register(name, this);
-
-        for(TileProp prop : tile.getProps()){
-            String propName = prop.getName();
-            for(int i = 0; i < prop.getVariants(); i++){
-                Comparable value = prop.getValue(i);
-                if(!properties.get(propName).equals(value)){
-                    Map<String, Comparable> subProps = new TreeMap<>(properties);
-                    subProps.put(propName, value);
-
-                    IResourceName subName = generateName(tile, subProps);
-                    if(tile.hasState(subName, subProps)){
-                        TileState state = RockBottomAPI.TILE_STATE_REGISTRY.get(subName);
-
-                        if(state == null){
-                            state = new TileState(subName, tile, subProps);
-                        }
-
-                        this.subStates.put(propName, value, state);
-                    }
-                }
-            }
-        }
-    }
-
-    @ApiInternal
-    public static IResourceName generateName(Tile tile, Map<String, Comparable> properties){
-        String suffix = "";
-
-        if(!properties.isEmpty()){
-            suffix += ";";
-
-            Iterator<Entry<String, Comparable>> iterator = properties.entrySet().iterator();
-            while(iterator.hasNext()){
-                Entry<String, Comparable> entry = iterator.next();
-
-                String append = entry.getKey()+"@"+entry.getValue();
-                if(iterator.hasNext()){
-                    append += ",";
-                }
-
-                suffix += append;
-            }
-        }
-
-        return tile.getName().addSuffix(suffix);
+        RockBottomAPI.getInternalHooks().doTileStateInit(this, name, tile, properties, this.subStates);
     }
 
     public IResourceName getName(){

@@ -38,7 +38,7 @@ import de.ellpeck.rockbottom.api.item.ItemTile;
 import de.ellpeck.rockbottom.api.item.ToolType;
 import de.ellpeck.rockbottom.api.render.tile.ITileRenderer;
 import de.ellpeck.rockbottom.api.tile.entity.TileEntity;
-import de.ellpeck.rockbottom.api.tile.state.StateHandler;
+import de.ellpeck.rockbottom.api.tile.state.IStateHandler;
 import de.ellpeck.rockbottom.api.tile.state.TileProp;
 import de.ellpeck.rockbottom.api.tile.state.TileState;
 import de.ellpeck.rockbottom.api.util.BoundBox;
@@ -57,14 +57,13 @@ public class Tile{
     private static final IResourceName LOC_LAYER = RockBottomAPI.createInternalRes("info.layer_placement");
 
     protected final IResourceName name;
-    private final StateHandler stateHandler;
+    private final IStateHandler stateHandler = RockBottomAPI.getInternalHooks().makeStateHandler(this);
     protected Map<ToolType, Integer> effectiveTools = new HashMap<>();
     protected boolean forceDrop;
     protected float hardness = 1F;
 
     public Tile(IResourceName name){
         this.name = name;
-        this.stateHandler = new StateHandler(this);
     }
 
     public ITileRenderer getRenderer(){
