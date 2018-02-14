@@ -41,9 +41,14 @@ public final class StaticTileProps{
     public static final BoolProp NATURAL = new BoolProp("natural", true);
     /**
      * Determines which direction a torch is facing. Used by {@link
-     * GameContent#TILE_TORCH}
+     * GameContent#TILE_TORCH} and {@link GameContent#TILE_GRASS_TORCH}
      */
     public static final IntProp TORCH_FACING = new IntProp("facing", 0, 4);
+    /**
+     * Determines how long it will take for a torch to turn off. Used by {@link
+     * GameContent#TILE_GRASS_TORCH}
+     */
+    public static final IntProp TORCH_TIMER = new IntProp("timer", 0, 5);
     /**
      * Determines which type of variation a log tile is. Used by {@link
      * GameContent#TILE_LOG}
