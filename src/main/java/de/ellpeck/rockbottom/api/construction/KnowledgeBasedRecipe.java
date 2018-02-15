@@ -38,6 +38,6 @@ public class KnowledgeBasedRecipe extends BasicRecipe{
 
     @Override
     public boolean isKnown(AbstractEntityPlayer player){
-        return player.getKnowledge().knowsRecipe(this);
+        return !player.world.isStoryMode() || player.getKnowledge().knowsRecipe(this);
     }
 }

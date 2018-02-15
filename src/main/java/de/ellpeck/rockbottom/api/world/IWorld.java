@@ -131,4 +131,6 @@ public interface IWorld extends IChunkOrWorld{
     void broadcastSound(IResourceName name, float pitch, float volume);
 
     byte getCombinedVisualLight(int x, int y);
+
+    boolean isStoryMode();
 }
