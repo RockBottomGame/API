@@ -62,6 +62,8 @@ public interface IChunkOrWorld extends IAdditionalDataProvider{
 
     <T extends TileEntity> T getTileEntity(int x, int y, Class<T> tileClass);
 
+    void reevaluateTickBehavior(TileEntity tile);
+
     List<Entity> getAllEntities();
 
     List<TileEntity> getAllTileEntities();
