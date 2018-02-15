@@ -27,18 +27,18 @@ import de.ellpeck.rockbottom.api.data.set.part.num.*;
 import de.ellpeck.rockbottom.api.data.set.part.num.array.PartByteArray;
 import de.ellpeck.rockbottom.api.data.set.part.num.array.PartIntArray;
 import de.ellpeck.rockbottom.api.data.set.part.num.array.PartShortArray;
-import de.ellpeck.rockbottom.api.util.ApiInternal;
 
 import java.io.File;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
 public class DataSet{
 
-    public final Map<String, DataPart> data = new HashMap<>();
+    private final Map<String, DataPart> data = new HashMap<>();
+    private final Map<String, DataPart> dataUnmodifiable = Collections.unmodifiableMap(this.data);
 
-    @ApiInternal
     public void addPart(DataPart part){
         this.data.put(part.getName(), part);
     }
@@ -47,7 +47,18 @@ public class DataSet{
         return this.data.containsKey(key);
     }
 
-    @ApiInternal
+    public DataPart remove(String key){
+        return this.data.remove(key);
+    }
+
+    public void clear(){
+        this.data.clear();
+    }
+
+    public int size(){
+        return this.data.size();
+    }
+
     public <T> T getPartContent(String key, Class<? extends DataPart<T>> typeClass, T defaultValue){
         DataPart part = this.data.get(key);
 
@@ -178,9 +189,8 @@ public class DataSet{
         return this.data.toString();
     }
 
-    @ApiInternal
     public Map<String, DataPart> getData(){
-        return this.data;
+        return this.dataUnmodifiable;
     }
 
     public boolean isEmpty(){
