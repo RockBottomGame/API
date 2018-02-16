@@ -1,7 +1,7 @@
 import org.gradle.internal.os.OperatingSystem
 
 group 'de.ellpeck.rockbottom'
-version '0.2.10'
+version '0.2.11'
 
 apply plugin: 'java'
 apply plugin: 'idea'
