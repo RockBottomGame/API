@@ -58,21 +58,23 @@ public abstract class TileLiquid extends TileBasic{
 
     @Override
     public void onChangeAround(IWorld world, int x, int y, TileLayer layer, int changedX, int changedY, TileLayer changedLayer){
-        if(changedLayer == TileLayer.MAIN && changedX == x && changedY == y){
-            TileState state = world.getState(x, y);
-            if(state.getTile().isFullTile()){
-                world.setState(layer, x, y, GameContent.TILE_AIR.getDefState());
+        if(!world.isClient()){
+            if(changedLayer == TileLayer.MAIN && changedX == x && changedY == y){
+                TileState state = world.getState(x, y);
+                if(state.getTile().isFullTile()){
+                    world.setState(layer, x, y, GameContent.TILE_AIR.getDefState());
+                }
             }
-        }
 
-        if(this.doesFlow()){
-            world.scheduleUpdate(x, y, layer, this.getFlowSpeed());
+            if(this.doesFlow()){
+                world.scheduleUpdate(x, y, layer, this.getFlowSpeed());
+            }
         }
     }
 
     @Override
     public void onAdded(IWorld world, int x, int y, TileLayer layer){
-        if(this.doesFlow()){
+        if(this.doesFlow() && !world.isClient()){
             world.scheduleUpdate(x, y, layer, this.getFlowSpeed());
         }
     }
