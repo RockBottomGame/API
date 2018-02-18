@@ -1,22 +1,8 @@
-import org.gradle.internal.os.OperatingSystem
-
 group 'de.ellpeck.rockbottom'
 version '0.2.11'
 
 apply plugin: 'java'
 apply plugin: 'idea'
-
-switch (OperatingSystem.current()) {
-    case OperatingSystem.WINDOWS:
-        project.ext.lwjglNatives = "natives-windows"
-        break
-    case OperatingSystem.LINUX:
-        project.ext.lwjglNatives = "natives-linux"
-        break
-    case OperatingSystem.MAC_OS:
-        project.ext.lwjglNatives = "natives-macos"
-        break
-}
 
 project.ext.lwjglVersion = "3.1.6"
 
@@ -34,18 +20,28 @@ repositories {
 dependencies {
     //LWJGL stuff
     compile "org.lwjgl:lwjgl:$lwjglVersion"
-    compile "org.lwjgl:lwjgl-assimp:$lwjglVersion"
     compile "org.lwjgl:lwjgl-glfw:$lwjglVersion"
     compile "org.lwjgl:lwjgl-openal:$lwjglVersion"
     compile "org.lwjgl:lwjgl-opengl:$lwjglVersion"
     compile "org.lwjgl:lwjgl-stb:$lwjglVersion"
-    compile "org.lwjgl:lwjgl:$lwjglVersion:$lwjglNatives"
-    compile "org.lwjgl:lwjgl-assimp:$lwjglVersion:$lwjglNatives"
-    compile "org.lwjgl:lwjgl-glfw:$lwjglVersion:$lwjglNatives"
-    compile "org.lwjgl:lwjgl-openal:$lwjglVersion:$lwjglNatives"
-    compile "org.lwjgl:lwjgl-opengl:$lwjglVersion:$lwjglNatives"
-    compile "org.lwjgl:lwjgl-stb:$lwjglVersion:$lwjglNatives"
     compile "org.joml:joml:1.9.8"
+
+    //Those natives though
+    compile "org.lwjgl:lwjgl:$lwjglVersion:natives-windows"
+    compile "org.lwjgl:lwjgl-glfw:$lwjglVersion:natives-windows"
+    compile "org.lwjgl:lwjgl-openal:$lwjglVersion:natives-windows"
+    compile "org.lwjgl:lwjgl-opengl:$lwjglVersion:natives-windows"
+    compile "org.lwjgl:lwjgl-stb:$lwjglVersion:natives-windows"
+    compile "org.lwjgl:lwjgl:$lwjglVersion:natives-linux"
+    compile "org.lwjgl:lwjgl-glfw:$lwjglVersion:natives-linux"
+    compile "org.lwjgl:lwjgl-openal:$lwjglVersion:natives-linux"
+    compile "org.lwjgl:lwjgl-opengl:$lwjglVersion:natives-linux"
+    compile "org.lwjgl:lwjgl-stb:$lwjglVersion:natives-linux"
+    compile "org.lwjgl:lwjgl:$lwjglVersion:natives-macos"
+    compile "org.lwjgl:lwjgl-glfw:$lwjglVersion:natives-macos"
+    compile "org.lwjgl:lwjgl-openal:$lwjglVersion:natives-macos"
+    compile "org.lwjgl:lwjgl-opengl:$lwjglVersion:natives-macos"
+    compile "org.lwjgl:lwjgl-stb:$lwjglVersion:natives-macos"
 
     //Netty
     compile group: 'io.netty', name: 'netty-all', version: '4.1.20.Final'
