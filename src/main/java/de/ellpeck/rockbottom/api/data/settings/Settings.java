@@ -21,16 +21,16 @@
 
 package de.ellpeck.rockbottom.api.data.settings;
 
-import com.google.gson.annotations.SerializedName;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
+import de.ellpeck.rockbottom.api.data.IDataManager;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
 import org.lwjgl.glfw.GLFW;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.io.File;
+import java.util.Properties;
 
 @ApiInternal
-public class Settings implements IJsonSettings{
+public class Settings implements IPropSettings{
 
     public static final Keybind KEY_PLACE = new Keybind(RockBottomAPI.createInternalRes("place"), 1, true).register();
     public static final Keybind KEY_DESTROY = new Keybind(RockBottomAPI.createInternalRes("destroy"), 0, true).register();
@@ -60,48 +60,89 @@ public class Settings implements IJsonSettings{
         }
     }
 
-    @SerializedName("autosave_interval")
-    public int autosaveIntervalSeconds = 60;
+    public int autosaveIntervalSeconds;
 
-    @SerializedName("text_speed")
-    public float textSpeed = 0.5F;
-    @SerializedName("gui_scale")
-    public float guiScale = 1F;
-    @SerializedName("world_scale")
-    public float renderScale = 1F;
-    @SerializedName("gui_color")
-    public int guiColor = DEFAULT_GUI_COLOR;
+    public float textSpeed;
+    public float guiScale;
+    public float renderScale;
+    public int guiColor;
 
-    @SerializedName("hardware_cursor")
-    public boolean hardwareCursor = false;
-    @SerializedName("cursor_infos")
-    public boolean cursorInfos = true;
-    @SerializedName("fullscreen")
-    public boolean fullscreen = false;
-    @SerializedName("smooth_lighting")
-    public boolean smoothLighting = true;
+    public boolean hardwareCursor;
+    public boolean cursorInfos;
+    public boolean fullscreen;
+    public boolean smoothLighting;
 
-    @SerializedName("music")
-    public float musicVolume = 0.5F;
-    @SerializedName("sound")
-    public float soundVolume = 1F;
+    public float musicVolume;
+    public float soundVolume;
 
-    @SerializedName("last_server")
-    public String lastServerIp = "";
-    @SerializedName("locale")
-    public String currentLocale = "rockbottom/us_english";
+    public String lastServerIp;
+    public String currentLocale;
 
-    @SerializedName("keybinds")
-    public final Map<String, BindInfo> keybinds = new HashMap<>();
+    @Override
+    public void load(Properties props){
+        for(Keybind keybind : RockBottomAPI.KEYBIND_REGISTRY.getUnmodifiable().values()){
+            String name = keybind.getName().toString();
 
-    public static class BindInfo{
-
-        public int key;
-        public boolean isMouse;
-
-        public BindInfo(int key, boolean isMouse){
-            this.key = key;
-            this.isMouse = isMouse;
+            int key = this.getProp(props, name, keybind.getKey());
+            boolean mouse = this.getProp(props, name+"_is_mouse", keybind.isMouse());
+            keybind.setBind(key, mouse);
         }
+
+        this.autosaveIntervalSeconds = this.getProp(props, "autosave_interval", 60);
+
+        this.textSpeed = this.getProp(props, "text_speed", 0.5F);
+        this.guiScale = this.getProp(props, "scale_gui", 1F);
+        this.renderScale = this.getProp(props, "scale_world", 1F);
+        this.guiColor = this.getProp(props, "gui_colors", DEFAULT_GUI_COLOR);
+
+        this.hardwareCursor = this.getProp(props, "hardware_cursor", false);
+        this.cursorInfos = this.getProp(props, "cursor_infos", true);
+        this.fullscreen = this.getProp(props, "fullscreen", false);
+        this.smoothLighting = this.getProp(props, "smooth_lighting", true);
+
+        this.musicVolume = this.getProp(props, "music_volume", 0.5F);
+        this.soundVolume = this.getProp(props, "sound_volume", 1F);
+
+        this.lastServerIp = this.getProp(props, "last_server_ip", "");
+        this.currentLocale = this.getProp(props, "curr_locale", "rockbottom/us_english");
     }
+
+    @Override
+    public void save(Properties props){
+        for(Keybind keybind : RockBottomAPI.KEYBIND_REGISTRY.getUnmodifiable().values()){
+            String name = keybind.getName().toString();
+
+            this.setProp(props, name, keybind.getKey());
+            this.setProp(props, name+"_is_mouse", keybind.isMouse());
+        }
+
+        this.setProp(props, "autosave_interval", this.autosaveIntervalSeconds);
+
+        this.setProp(props, "text_speed", this.textSpeed);
+        this.setProp(props, "scale_gui", this.guiScale);
+        this.setProp(props, "scale_world", this.renderScale);
+        this.setProp(props, "gui_colors", this.guiColor);
+
+        this.setProp(props, "hardware_cursor", this.hardwareCursor);
+        this.setProp(props, "cursor_infos", this.cursorInfos);
+        this.setProp(props, "fullscreen", this.fullscreen);
+        this.setProp(props, "smooth_lighting", this.smoothLighting);
+
+        this.setProp(props, "music_volume", this.musicVolume);
+        this.setProp(props, "sound_volume", this.soundVolume);
+
+        this.setProp(props, "last_server_ip", this.lastServerIp);
+        this.setProp(props, "curr_locale", this.currentLocale);
+    }
+
+    @Override
+    public File getFile(IDataManager manager){
+        return manager.getSettingsFile();
+    }
+
+    @Override
+    public String getName(){
+        return "Game settings";
+    }
+
 }
