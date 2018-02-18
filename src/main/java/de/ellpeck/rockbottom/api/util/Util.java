@@ -22,6 +22,7 @@
 package de.ellpeck.rockbottom.api.util;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonParser;
 import de.ellpeck.rockbottom.api.Constants;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
@@ -40,7 +41,7 @@ import java.util.logging.Level;
 public final class Util{
 
     public static final Random RANDOM = new Random();
-    public static final Gson GSON = new Gson();
+    public static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     public static final JsonParser JSON_PARSER = new JsonParser();
 
     public static double distance(double x1, double y1, double x2, double y2){

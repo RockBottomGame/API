@@ -22,6 +22,7 @@
 package de.ellpeck.rockbottom.api.data;
 
 import de.ellpeck.rockbottom.api.data.set.DataSet;
+import de.ellpeck.rockbottom.api.data.settings.IJsonSettings;
 import de.ellpeck.rockbottom.api.data.settings.IPropSettings;
 
 import java.io.File;
@@ -58,4 +59,7 @@ public interface IDataManager{
 
     void savePropSettings(IPropSettings settings);
 
+    <T extends IJsonSettings> T loadSettings(File file, Class<T> settingsClass, T defaultSettings);
+
+    void saveSettings(IJsonSettings settings, File file);
 }

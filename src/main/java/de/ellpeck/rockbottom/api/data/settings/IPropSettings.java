@@ -22,10 +22,15 @@
 package de.ellpeck.rockbottom.api.data.settings;
 
 import de.ellpeck.rockbottom.api.data.IDataManager;
+import de.ellpeck.rockbottom.api.util.Util;
 
 import java.io.File;
 import java.util.Properties;
 
+/**
+ * @deprecated Use {@link Util#GSON} to load and save settings instead
+ */
+@Deprecated
 public interface IPropSettings{
 
     void load(Properties props);

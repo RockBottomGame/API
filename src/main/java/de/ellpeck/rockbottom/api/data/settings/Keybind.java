@@ -28,61 +28,74 @@ import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 public class Keybind{
 
     private final IResourceName name;
+    private final String stringName;
 
-    private int key;
-    private boolean isMouse;
+    private final int defaultKey;
+    private final boolean defaultIsMouse;
 
     public Keybind(IResourceName name, int defKey, boolean defIsMouse){
         this.name = name;
-        this.key = defKey;
-        this.isMouse = defIsMouse;
-    }
-
-    public void setBind(int key, boolean isMouse){
-        this.key = key;
-        this.isMouse = isMouse;
+        this.stringName = name.toString();
+        this.defaultKey = defKey;
+        this.defaultIsMouse = defIsMouse;
     }
 
     public boolean isDown(){
         IInputHandler input = RockBottomAPI.getGame().getInput();
 
-        if(this.isMouse){
-            return input.isMouseDown(this.key);
+        if(this.isMouse()){
+            return input.isMouseDown(this.getKey());
         }
         else{
-            return input.isKeyDown(this.key);
+            return input.isKeyDown(this.getKey());
         }
     }
 
     public boolean isPressed(){
         IInputHandler input = RockBottomAPI.getGame().getInput();
 
-        if(this.isMouse){
-            return input.wasMousePressed(this.key);
+        if(this.isMouse()){
+            return input.wasMousePressed(this.getKey());
         }
         else{
-            return input.wasKeyPressed(this.key);
+            return input.wasKeyPressed(this.getKey());
         }
     }
 
     public String getDisplayName(){
-        return RockBottomAPI.getInternalHooks().getKeyOrMouseName(this.isMouse, this.key);
+        return RockBottomAPI.getInternalHooks().getKeyOrMouseName(this.isMouse(), this.getKey());
     }
 
     public boolean isKey(int key){
-        return this.key == key;
+        return this.getKey() == key;
     }
 
     public IResourceName getName(){
         return this.name;
     }
 
+    public String getStringName(){
+        return this.stringName;
+    }
+
     public int getKey(){
-        return this.key;
+        return this.getBindInfo().key;
     }
 
     public boolean isMouse(){
-        return this.isMouse;
+        return this.getBindInfo().isMouse;
+    }
+
+    private Settings.BindInfo getBindInfo(){
+        return RockBottomAPI.getGame().getSettings().keybinds.get(this.stringName);
+    }
+
+    public int getDefaultKey(){
+        return this.defaultKey;
+    }
+
+    public boolean isDefaultMouse(){
+        return this.defaultIsMouse;
     }
 
     public Keybind register(){
