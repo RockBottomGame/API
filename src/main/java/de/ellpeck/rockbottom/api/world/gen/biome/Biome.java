@@ -21,6 +21,7 @@
 
 package de.ellpeck.rockbottom.api.world.gen.biome;
 
+import de.ellpeck.rockbottom.api.Constants;
 import de.ellpeck.rockbottom.api.GameContent;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.tile.state.TileState;
@@ -46,8 +47,12 @@ public abstract class Biome{
 
     public abstract TileState getState(IWorld world, IChunk chunk, int x, int y, TileLayer layer, INoiseGen noise);
 
-    public int getNoiseSeedModifier(IWorld world){
-        return this.getName().hashCode();
+    public int getExpectedSurfaceHeight(IWorld world, IChunk chunk, int x, TileLayer layer, INoiseGen noise){
+        return Constants.CHUNK_SIZE;
+    }
+
+    public long getBiomeSeed(IWorld world){
+        return world.getSeed();
     }
 
     public IResourceName getName(){
@@ -77,5 +82,13 @@ public abstract class Biome{
 
     public TileState getFillerTile(IWorld world, IChunk chunk, int x, int y){
         return GameContent.TILE_SOIL.getDefState();
+    }
+
+    /**
+     * @deprecated Use {@link #getBiomeSeed(IWorld)} instead
+     */
+    @Deprecated
+    public int getNoiseSeedModifier(IWorld world){
+        return 0;
     }
 }
