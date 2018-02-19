@@ -63,6 +63,11 @@ public class Item{
         return this;
     }
 
+    public Item setMaxAmount(int amount){
+        this.maxAmount = amount;
+        return this;
+    }
+
     public int getMaxAmount(){
         return this.maxAmount;
     }

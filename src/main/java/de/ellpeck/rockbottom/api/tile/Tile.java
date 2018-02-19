@@ -365,4 +365,12 @@ public class Tile{
     public boolean isLiquid(){
         return false;
     }
+
+    public Tile setMaxAmount(int amount){
+        Item item = this.getItem();
+        if(item != null){
+            item.setMaxAmount(amount);
+        }
+        return this;
+    }
 }
