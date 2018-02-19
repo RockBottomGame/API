@@ -99,14 +99,6 @@ public abstract class TileEntity{
     }
 
     public IFilteredInventory getTileInventory(){
-        return this.getInventory();
-    }
-
-    /**
-     * @deprecated Use {@link #getTileInventory()} instead
-     */
-    @Deprecated
-    public FilteredInventory getInventory(){
         return null;
     }
 

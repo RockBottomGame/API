@@ -22,8 +22,6 @@
 package de.ellpeck.rockbottom.api.entity.player.knowledge;
 
 import de.ellpeck.rockbottom.api.construction.IRecipe;
-import de.ellpeck.rockbottom.api.construction.resource.IUseInfo;
-import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 
 public interface IKnowledgeManager{
@@ -51,92 +49,4 @@ public interface IKnowledgeManager{
     void forgetInformation(IResourceName name, boolean announce);
 
     void forgetInformation(IResourceName name);
-
-    /**
-     * @deprecated Partly known recipes have been removed
-     */
-    @Deprecated
-    default boolean knowsIngredient(IRecipe recipe, IUseInfo info){
-        return false;
-    }
-
-    /**
-     * @deprecated Partly known recipes have been removed
-     */
-    @Deprecated
-    default boolean knowsOutput(IRecipe recipe, ItemInstance instance){
-        return false;
-    }
-
-    /**
-     * @deprecated Partly known recipes have been removed
-     */
-    @Deprecated
-    default void teachRecipe(IRecipe recipe, boolean teachAllParts, boolean announce){
-
-    }
-
-    /**
-     * @deprecated Partly known recipes have been removed
-     */
-    @Deprecated
-    default void teachIngredient(IRecipe recipe, IUseInfo info, boolean announce){
-
-    }
-
-    /**
-     * @deprecated Partly known recipes have been removed
-     */
-    @Deprecated
-    default void teachIngredient(IRecipe recipe, IUseInfo info){
-
-    }
-
-    /**
-     * @deprecated Partly known recipes have been removed
-     */
-    @Deprecated
-    default void teachOutput(IRecipe recipe, ItemInstance instance, boolean announce){
-
-    }
-
-    /**
-     * @deprecated Partly known recipes have been removed
-     */
-    @Deprecated
-    default void teachOutput(IRecipe recipe, ItemInstance instance){
-
-    }
-
-    /**
-     * @deprecated Partly known recipes have been removed
-     */
-    @Deprecated
-    default void forgetIngredient(IRecipe recipe, IUseInfo info, boolean announce){
-
-    }
-
-    /**
-     * @deprecated Partly known recipes have been removed
-     */
-    @Deprecated
-    default void forgetIngredient(IRecipe recipe, IUseInfo info){
-
-    }
-
-    /**
-     * @deprecated Partly known recipes have been removed
-     */
-    @Deprecated
-    default void forgetOutput(IRecipe recipe, ItemInstance instance, boolean announce){
-
-    }
-
-    /**
-     * @deprecated Partly known recipes have been removed
-     */
-    @Deprecated
-    default void forgetOutput(IRecipe recipe, ItemInstance instance){
-
-    }
 }

@@ -27,11 +27,6 @@ public interface IResourceName extends Comparable<IResourceName>{
 
     String getResourceName();
 
-    @Deprecated //This is always false anyway
-    default boolean isEmpty(){
-        return false;
-    }
-
     IResourceName addPrefix(String prefix);
 
     IResourceName addSuffix(String suffix);
