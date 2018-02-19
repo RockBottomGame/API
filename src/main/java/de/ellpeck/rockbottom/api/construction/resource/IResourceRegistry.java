@@ -21,10 +21,28 @@
 
 package de.ellpeck.rockbottom.api.construction.resource;
 
+import de.ellpeck.rockbottom.api.item.Item;
+import de.ellpeck.rockbottom.api.item.ItemInstance;
+import de.ellpeck.rockbottom.api.tile.Tile;
+
 import java.util.List;
 import java.util.Set;
 
 public interface IResourceRegistry{
+
+    String addResources(String name, Item item);
+
+    String addResources(String name, Item item, int meta);
+
+    String addResources(String name, Item item, int lowestMeta, int highestMeta);
+
+    String addResources(String name, Tile tile);
+
+    String addResources(String name, Tile tile, int meta);
+
+    String addResources(String name, Tile tile, int lowestMeta, int highestMeta);
+
+    String addResources(String name, ItemInstance instance);
 
     String addResources(String name, ResInfo... resources);
 

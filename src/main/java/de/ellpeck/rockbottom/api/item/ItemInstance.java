@@ -58,8 +58,9 @@ public class ItemInstance implements IAdditionalDataProvider{
         if(item == null){
             throw new NullPointerException("Tried to create an ItemInstance with null item!");
         }
-        if(meta < 0 || meta > Short.MAX_VALUE){
-            throw new IndexOutOfBoundsException("Tried assigning meta "+meta+" to item instance with item "+item+" and amount "+amount+" which is less than 0 or greater than max "+Short.MAX_VALUE+"!");
+        int max = Math.min(Short.MAX_VALUE, item.getHighestPossibleMeta());
+        if(meta < 0 || meta > max){
+            throw new IndexOutOfBoundsException("Tried assigning meta "+meta+" to item instance with item "+item+" and amount "+amount+" which is less than 0 or greater than max "+max+"!");
         }
 
         this.item = item;

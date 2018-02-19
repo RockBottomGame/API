@@ -24,6 +24,7 @@ package de.ellpeck.rockbottom.api.tile;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.assets.font.FormattingCode;
+import de.ellpeck.rockbottom.api.construction.resource.IResourceRegistry;
 import de.ellpeck.rockbottom.api.construction.resource.ResInfo;
 import de.ellpeck.rockbottom.api.data.settings.Settings;
 import de.ellpeck.rockbottom.api.entity.Entity;
@@ -106,11 +107,6 @@ public class Tile{
 
         this.stateHandler.init();
 
-        return this;
-    }
-
-    public Tile addResource(String name){
-        RockBottomAPI.getResourceRegistry().addResources(name, new ResInfo(this));
         return this;
     }
 
@@ -371,6 +367,15 @@ public class Tile{
         if(item != null){
             item.setMaxAmount(amount);
         }
+        return this;
+    }
+
+    /**
+     * Use {@link IResourceRegistry} calls directly instead
+     */
+    @Deprecated
+    public Tile addResource(String name){
+        RockBottomAPI.getResourceRegistry().addResources(name, new ResInfo(this));
         return this;
     }
 }

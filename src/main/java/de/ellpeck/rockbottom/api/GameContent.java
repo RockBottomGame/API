@@ -21,6 +21,7 @@
 
 package de.ellpeck.rockbottom.api;
 
+import de.ellpeck.rockbottom.api.construction.resource.IResourceRegistry;
 import de.ellpeck.rockbottom.api.effect.IEffect;
 import de.ellpeck.rockbottom.api.item.Item;
 import de.ellpeck.rockbottom.api.item.ToolType;
@@ -69,6 +70,18 @@ public final class GameContent{
     public static final Item ITEM_STAT_NOTE = getItem("start_note").setMaxAmount(1);
     public static final Item ITEM_PLANT_FIBER = getItem("plant_fiber").setMaxAmount(150);
 
+    public static final String RES_SOIL = res().addResources("soil", TILE_SOIL);
+    public static final String RES_GRASS = res().addResources("grass", TILE_GRASS);
+    public static final String RES_STONE = res().addResources("stone", TILE_STONE);
+    public static final String RES_WOOD_RAW = res().addResources("wood_raw", TILE_LOG);
+    public static final String RES_LEAVES = res().addResources("leaves", TILE_LEAVES);
+    public static final String RES_PEBBLES = res().addResources("pebbles", TILE_PEBBLES);
+    public static final String RES_SAND = res().addResources("sand", TILE_SAND);
+    public static final String RES_COAL = res().addResources("coal", TILE_COAL);
+    public static final String RES_SAPLING = res().addResources("sapling", TILE_SAPLING);
+    public static final String RES_WOOD_PROCESSED = res().addResources("wood_processed", WOOD_BOARDS, 0, WOOD_BOARDS.metaProp.getVariants()-1);
+    public static final String RES_PLANT_FIBER = res().addResources("plant_fiber", ITEM_PLANT_FIBER);
+
     public static final Biome BIOME_SKY = getBiome("sky");
     public static final Biome BIOME_GRASSLAND = getBiome("grassland");
     public static final Biome BIOME_DESERT = getBiome("desert");
@@ -108,5 +121,10 @@ public final class GameContent{
         else{
             return thing;
         }
+    }
+
+    @ApiInternal
+    private static IResourceRegistry res(){
+        return RockBottomAPI.getResourceRegistry();
     }
 }
