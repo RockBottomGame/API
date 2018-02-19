@@ -26,6 +26,7 @@ import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.data.set.DataSet;
 import de.ellpeck.rockbottom.api.event.EventResult;
 import de.ellpeck.rockbottom.api.event.impl.EntityDamageEvent;
+import de.ellpeck.rockbottom.api.event.impl.RegenEvent;
 import de.ellpeck.rockbottom.api.world.IWorld;
 
 public abstract class EntityLiving extends Entity{
@@ -61,8 +62,11 @@ public abstract class EntityLiving extends Entity{
             }
             else{
                 if(this.health < this.getMaxHealth()){
-                    if(this.world.getTotalTime()%this.getRegenRate() == 0){
-                        this.health++;
+                    RegenEvent event = new RegenEvent(this, this.getRegenRate(), 1);
+                    if(RockBottomAPI.getEventHandler().fireEvent(event) != EventResult.CANCELLED){
+                        if(this.world.getTotalTime()%event.regenRate == 0){
+                            this.health += event.addedHealth;
+                        }
                     }
                 }
             }
