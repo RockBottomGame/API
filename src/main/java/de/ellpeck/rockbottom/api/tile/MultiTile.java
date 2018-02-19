@@ -179,7 +179,7 @@ public abstract class MultiTile extends TileBasic{
 
         if(isAdvanced){
             desc.add("");
-            desc.add(FormattingCode.GRAY+manager.localize(RockBottomAPI.createInternalRes("info.size"), this.getWidth(), this.getHeight()));
+            desc.add(FormattingCode.LIGHT_GRAY+manager.localize(RockBottomAPI.createInternalRes("info.size"), this.getWidth(), this.getHeight()));
         }
     }
 }

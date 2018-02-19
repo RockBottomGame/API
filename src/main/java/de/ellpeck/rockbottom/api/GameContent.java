@@ -69,6 +69,7 @@ public final class GameContent{
     public static final Item ITEM_FIREWORK = getItem("firework").setMaxAmount(25);
     public static final Item ITEM_STAT_NOTE = getItem("start_note").setMaxAmount(1);
     public static final Item ITEM_PLANT_FIBER = getItem("plant_fiber").setMaxAmount(150);
+    public static final Item ITEM_TWIG = getItem("twig").setMaxAmount(150);
 
     public static final String RES_SOIL = res().addResources("soil", TILE_SOIL);
     public static final String RES_GRASS = res().addResources("grass", TILE_GRASS);
@@ -81,6 +82,7 @@ public final class GameContent{
     public static final String RES_SAPLING = res().addResources("sapling", TILE_SAPLING);
     public static final String RES_WOOD_PROCESSED = res().addResources("wood_processed", WOOD_BOARDS, 0, WOOD_BOARDS.metaProp.getVariants()-1);
     public static final String RES_PLANT_FIBER = res().addResources("plant_fiber", ITEM_PLANT_FIBER);
+    public static final String RES_STICK = res().addResources("stick", ITEM_TWIG);
 
     public static final Biome BIOME_SKY = getBiome("sky");
     public static final Biome BIOME_GRASSLAND = getBiome("grassland");

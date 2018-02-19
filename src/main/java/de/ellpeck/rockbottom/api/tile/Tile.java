@@ -301,10 +301,10 @@ public class Tile{
         for(TileLayer layer : TileLayer.getLayersByInteractionPrio()){
             if(this.canPlaceInLayer(layer)){
                 if(isAdvanced){
-                    desc.add(FormattingCode.GRAY+manager.localize(LOC_LAYER, manager.localize(layer.getName().addPrefix("layer."))));
+                    desc.add(FormattingCode.LIGHT_GRAY+manager.localize(LOC_LAYER, manager.localize(layer.getName().addPrefix("layer."))));
                 }
                 else{
-                    desc.add(FormattingCode.DARK_GRAY+manager.localize(LOC_ADVANCED, Settings.KEY_ADVANCED_INFO.getDisplayName()));
+                    desc.add(FormattingCode.GRAY+manager.localize(LOC_ADVANCED, Settings.KEY_ADVANCED_INFO.getDisplayName()));
                     break;
                 }
             }
