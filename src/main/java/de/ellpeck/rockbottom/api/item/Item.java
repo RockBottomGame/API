@@ -87,6 +87,10 @@ public class Item{
         return false;
     }
 
+    public int getInteractionPriority(IWorld world, int x, int y, TileLayer layer, double mouseX, double mouseY, AbstractEntityPlayer player, ItemInstance instance){
+        return 100;
+    }
+
     @Override
     public String toString(){
         return this.getName().toString();

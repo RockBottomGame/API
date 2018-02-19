@@ -143,6 +143,10 @@ public class Tile{
         return false;
     }
 
+    public int getInteractionPriority(IWorld world, int x, int y, TileLayer layer, double mouseX, double mouseY, AbstractEntityPlayer player){
+        return 0;
+    }
+
     public boolean canReplace(IWorld world, int x, int y, TileLayer layer){
         return false;
     }
