@@ -21,6 +21,7 @@
 
 package de.ellpeck.rockbottom.api.gui.component.construction;
 
+import de.ellpeck.rockbottom.api.Constants;
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.IRenderer;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
@@ -31,6 +32,8 @@ import de.ellpeck.rockbottom.api.gui.component.GuiComponent;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.util.Colors;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
+
+import java.util.List;
 
 public class ComponentPolaroid extends GuiComponent{
 
@@ -58,7 +61,7 @@ public class ComponentPolaroid extends GuiComponent{
         manager.getTexture(res).draw(x, y, this.width, this.height);
 
         if(this.recipe != null){
-            g.renderItemInGui(game, manager, this.recipe.getOutputs().get(0), x+1, y+1, 1.6F, this.canConstruct ? Colors.WHITE : Colors.multiplyA(Colors.WHITE, 0.35F), false);
+            g.renderItemInGui(game, manager, this.getOutput(game), x+1, y+1, 1.6F, this.canConstruct ? Colors.WHITE : Colors.multiplyA(Colors.WHITE, 0.35F), false);
         }
         else{
             manager.getFont().drawString(x+4, y+1, "?", 0, 1, 0.9F, Colors.DARK_GRAY, Colors.NO_COLOR);
@@ -69,13 +72,18 @@ public class ComponentPolaroid extends GuiComponent{
     public void renderOverlay(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y){
         if(this.isMouseOver(game)){
             if(this.recipe != null){
-                ItemInstance instance = this.recipe.getOutputs().get(0);
+                ItemInstance instance = this.getOutput(game);
                 g.drawHoverInfoAtMouse(game, manager, true, 200, instance.getDisplayName()+" x"+instance.getAmount());
             }
             else{
                 g.drawHoverInfoAtMouse(game, manager, false, 200, "Unknown Recipe");
             }
         }
+    }
+
+    protected ItemInstance getOutput(IGameInstance game){
+        List<ItemInstance> outputs = this.recipe.getOutputs();
+        return outputs.get((game.getTotalTicks()/Constants.TARGET_TPS)%outputs.size());
     }
 
     @Override

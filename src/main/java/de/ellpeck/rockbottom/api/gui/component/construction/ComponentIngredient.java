@@ -21,6 +21,7 @@
 
 package de.ellpeck.rockbottom.api.gui.component.construction;
 
+import de.ellpeck.rockbottom.api.Constants;
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.IRenderer;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
@@ -50,7 +51,7 @@ public class ComponentIngredient extends GuiComponent{
     @Override
     public void render(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y){
         if(!this.inputs.isEmpty()){
-            ItemInstance input = this.inputs.get(0);
+            ItemInstance input = this.getInput(game);
             manager.getTexture(RES).draw(x, y, this.width, this.height);
             g.renderItemInGui(game, manager, input, x+1, y+1, 1.2F, this.hasItem ? Colors.WHITE : Colors.multiplyA(Colors.WHITE, 0.35F));
         }
@@ -62,9 +63,13 @@ public class ComponentIngredient extends GuiComponent{
     @Override
     public void renderOverlay(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y){
         if(!this.inputs.isEmpty() && this.isMouseOver(game)){
-            ItemInstance instance = this.inputs.get(0);
+            ItemInstance instance = this.getInput(game);
             g.drawHoverInfoAtMouse(game, manager, false, 200, instance.getDisplayName()+" x"+instance.getAmount());
         }
+    }
+
+    protected ItemInstance getInput(IGameInstance game){
+        return this.inputs.get((game.getTotalTicks()/Constants.TARGET_TPS)%this.inputs.size());
     }
 
     @Override

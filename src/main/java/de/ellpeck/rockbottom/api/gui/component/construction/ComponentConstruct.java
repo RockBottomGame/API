@@ -21,6 +21,7 @@
 
 package de.ellpeck.rockbottom.api.gui.component.construction;
 
+import de.ellpeck.rockbottom.api.Constants;
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.IRenderer;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
@@ -32,6 +33,8 @@ import de.ellpeck.rockbottom.api.gui.component.GuiComponent;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.util.Colors;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
+
+import java.util.List;
 
 public class ComponentConstruct extends GuiComponent{
 
@@ -47,16 +50,21 @@ public class ComponentConstruct extends GuiComponent{
     @Override
     public void render(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y){
         if(this.recipe != null){
-            g.renderItemInGui(game, manager, this.recipe.getOutputs().get(0), x+2, y+2, 2.6F, Colors.WHITE);
+            g.renderItemInGui(game, manager, this.getOutput(game), x+2, y+2, 2.6F, Colors.WHITE);
         }
     }
 
     @Override
     public void renderOverlay(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y){
         if(this.isMouseOver(game)){
-            ItemInstance instance = this.recipe.getOutputs().get(0);
+            ItemInstance instance = this.getOutput(game);
             g.drawHoverInfoAtMouse(game, manager, true, 200, instance.getDisplayName()+" x"+instance.getAmount(), this.canConstruct ? "Click to construct" : FormattingCode.RED+"Missing Items");
         }
+    }
+
+    protected ItemInstance getOutput(IGameInstance game){
+        List<ItemInstance> outputs = this.recipe.getOutputs();
+        return outputs.get((game.getTotalTicks()/Constants.TARGET_TPS)%outputs.size());
     }
 
     @Override
