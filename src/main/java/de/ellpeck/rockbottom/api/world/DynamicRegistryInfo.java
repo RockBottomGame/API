@@ -48,10 +48,10 @@ public class DynamicRegistryInfo{
     }
 
     public void fromBuffer(ByteBuf buf){
-        this.tileRegInfo = new NameToIndexInfo("tile_reg_client_world", null, Integer.MAX_VALUE);
+        this.tileRegInfo = new NameToIndexInfo("tile_reg_client_world", null, null, Integer.MAX_VALUE);
         this.tileRegInfo.fromBuffer(buf);
 
-        this.biomeRegInfo = new NameToIndexInfo("biome_reg_client_world", null, Short.MAX_VALUE);
+        this.biomeRegInfo = new NameToIndexInfo("biome_reg_client_world", null, null, Short.MAX_VALUE);
         this.biomeRegInfo.fromBuffer(buf);
     }
 

@@ -21,6 +21,7 @@
 
 package de.ellpeck.rockbottom.api.data.settings;
 
+import com.google.gson.JsonObject;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.data.IDataManager;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
@@ -30,7 +31,7 @@ import java.io.File;
 import java.util.Properties;
 
 @ApiInternal
-public class Settings implements IPropSettings{
+public class Settings implements IPropSettings, IJsonSettings{
 
     public static final Keybind KEY_PLACE = new Keybind(RockBottomAPI.createInternalRes("place"), 1, true).register();
     public static final Keybind KEY_DESTROY = new Keybind(RockBottomAPI.createInternalRes("destroy"), 0, true).register();
@@ -108,35 +109,75 @@ public class Settings implements IPropSettings{
     }
 
     @Override
-    public void save(Properties props){
+    public void load(JsonObject object){
+        JsonObject keybinds = object.get("keybinds").getAsJsonObject();
         for(Keybind keybind : RockBottomAPI.KEYBIND_REGISTRY.getUnmodifiable().values()){
             String name = keybind.getName().toString();
 
-            this.setProp(props, name, keybind.getKey());
-            this.setProp(props, name+"_is_mouse", keybind.isMouse());
+            JsonObject sub = keybinds.get(name).getAsJsonObject();
+            int key = this.get(sub, "key", keybind.getKey());
+            boolean mouse = this.get(sub, "is_mouse", keybind.isMouse());
+            keybind.setBind(key, mouse);
         }
 
-        this.setProp(props, "autosave_interval", this.autosaveIntervalSeconds);
+        this.autosaveIntervalSeconds = this.get(object, "autosave_interval", 60);
 
-        this.setProp(props, "text_speed", this.textSpeed);
-        this.setProp(props, "scale_gui", this.guiScale);
-        this.setProp(props, "scale_world", this.renderScale);
-        this.setProp(props, "gui_colors", this.guiColor);
+        this.textSpeed = this.get(object, "text_speed", 0.5F);
+        this.guiScale = this.get(object, "scale_gui", 1F);
+        this.renderScale = this.get(object, "scale_world", 1F);
+        this.guiColor = this.get(object, "gui_colors", DEFAULT_GUI_COLOR);
 
-        this.setProp(props, "hardware_cursor", this.hardwareCursor);
-        this.setProp(props, "cursor_infos", this.cursorInfos);
-        this.setProp(props, "fullscreen", this.fullscreen);
-        this.setProp(props, "smooth_lighting", this.smoothLighting);
+        this.hardwareCursor = this.get(object, "hardware_cursor", false);
+        this.cursorInfos = this.get(object, "cursor_infos", true);
+        this.fullscreen = this.get(object, "fullscreen", false);
+        this.smoothLighting = this.get(object, "smooth_lighting", true);
 
-        this.setProp(props, "music_volume", this.musicVolume);
-        this.setProp(props, "sound_volume", this.soundVolume);
+        this.musicVolume = this.get(object, "music_volume", 0.5F);
+        this.soundVolume = this.get(object, "sound_volume", 1F);
 
-        this.setProp(props, "last_server_ip", this.lastServerIp);
-        this.setProp(props, "curr_locale", this.currentLocale);
+        this.lastServerIp = this.get(object, "last_server_ip", "");
+        this.currentLocale = this.get(object, "curr_locale", "rockbottom/us_english");
+    }
+
+    @Override
+    public void save(JsonObject object){
+        JsonObject keybinds = new JsonObject();
+        for(Keybind keybind : RockBottomAPI.KEYBIND_REGISTRY.getUnmodifiable().values()){
+            String name = keybind.getName().toString();
+
+            JsonObject sub = new JsonObject();
+            this.set(sub, "key", keybind.getKey());
+            this.set(sub, "is_mouse", keybind.isMouse());
+            keybinds.add(name, sub);
+        }
+        object.add("keybinds", keybinds);
+
+        this.set(object, "autosave_interval", this.autosaveIntervalSeconds);
+
+        this.set(object, "text_speed", this.textSpeed);
+        this.set(object, "scale_gui", this.guiScale);
+        this.set(object, "scale_world", this.renderScale);
+        this.set(object, "gui_colors", this.guiColor);
+
+        this.set(object, "hardware_cursor", this.hardwareCursor);
+        this.set(object, "cursor_infos", this.cursorInfos);
+        this.set(object, "fullscreen", this.fullscreen);
+        this.set(object, "smooth_lighting", this.smoothLighting);
+
+        this.set(object, "music_volume", this.musicVolume);
+        this.set(object, "sound_volume", this.soundVolume);
+
+        this.set(object, "last_server_ip", this.lastServerIp);
+        this.set(object, "curr_locale", this.currentLocale);
     }
 
     @Override
     public File getFile(IDataManager manager){
+        return new File(manager.getGameDir(), "settings.properties");
+    }
+
+    @Override
+    public File getSettingsFile(IDataManager manager){
         return manager.getSettingsFile();
     }
 

@@ -26,11 +26,17 @@ import de.ellpeck.rockbottom.api.data.IDataManager;
 import java.io.File;
 import java.util.Properties;
 
+/**
+ * @deprecated Use {@link IJsonSettings} instead
+ */
+@Deprecated
 public interface IPropSettings{
 
     void load(Properties props);
 
-    void save(Properties props);
+    default void save(Properties props){
+
+    }
 
     File getFile(IDataManager manager);
 

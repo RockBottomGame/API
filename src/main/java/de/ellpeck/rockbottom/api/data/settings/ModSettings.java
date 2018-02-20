@@ -21,6 +21,9 @@
 
 package de.ellpeck.rockbottom.api.data.settings;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import de.ellpeck.rockbottom.api.data.IDataManager;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
 
@@ -30,7 +33,7 @@ import java.util.List;
 import java.util.Properties;
 
 @ApiInternal
-public class ModSettings implements IPropSettings{
+public class ModSettings implements IPropSettings, IJsonSettings{
 
     private final List<String> disabledMods = new ArrayList<>();
 
@@ -46,14 +49,31 @@ public class ModSettings implements IPropSettings{
     }
 
     @Override
-    public void save(Properties props){
-        for(String id : this.disabledMods){
-            props.setProperty(id, "disabled");
+    public File getFile(IDataManager manager){
+        return new File(manager.getGameDir(), "mod_settings.properties");
+    }
+
+    @Override
+    public void load(JsonObject object){
+        this.disabledMods.clear();
+
+        JsonArray array = object.get("disabled").getAsJsonArray();
+        for(JsonElement s : array){
+            this.disabledMods.add(s.getAsString());
         }
     }
 
     @Override
-    public File getFile(IDataManager manager){
+    public void save(JsonObject object){
+        JsonArray array = new JsonArray();
+        for(String s : this.disabledMods){
+            array.add(s);
+        }
+        object.add("disabled", array);
+    }
+
+    @Override
+    public File getSettingsFile(IDataManager manager){
         return manager.getModSettingsFile();
     }
 

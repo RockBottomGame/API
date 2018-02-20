@@ -21,8 +21,11 @@
 
 package de.ellpeck.rockbottom.api.util.reg;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.data.IDataManager;
+import de.ellpeck.rockbottom.api.data.settings.IJsonSettings;
 import de.ellpeck.rockbottom.api.data.settings.IPropSettings;
 import de.ellpeck.rockbottom.api.net.NetUtil;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
@@ -33,13 +36,15 @@ import java.util.Map;
 import java.util.Properties;
 
 @ApiInternal
-public class NameToIndexInfo implements IPropSettings{
+public class NameToIndexInfo implements IPropSettings, IJsonSettings{
 
     private final IndexRegistry<IResourceName> reg;
+    private final File legacyFile;
     private final File file;
     private boolean needsSave;
 
-    public NameToIndexInfo(String name, File file, int max){
+    public NameToIndexInfo(String name, File legacyFile, File file, int max){
+        this.legacyFile = legacyFile;
         this.file = file;
         this.reg = new IndexRegistry<>(name, max);
     }
@@ -86,15 +91,6 @@ public class NameToIndexInfo implements IPropSettings{
         }
     }
 
-    @Override
-    public void save(Properties props){
-        for(Map.Entry<Integer, IResourceName> entry : this.reg.map.entrySet()){
-            props.setProperty(entry.getKey().toString(), entry.getValue().toString());
-        }
-
-        this.needsSave = false;
-    }
-
     public void toBuffer(ByteBuf buf){
         buf.writeInt(this.reg.getSize());
 
@@ -106,6 +102,30 @@ public class NameToIndexInfo implements IPropSettings{
 
     @Override
     public File getFile(IDataManager manager){
+        return this.legacyFile;
+    }
+
+    @Override
+    public void load(JsonObject object){
+        this.reg.map.clear();
+
+        for(Map.Entry<String, JsonElement> entry : object.entrySet()){
+            IResourceName name = RockBottomAPI.createRes(entry.getKey());
+            int id = entry.getValue().getAsInt();
+            this.reg.map.put(id, name);
+        }
+    }
+
+    @Override
+    public void save(JsonObject object){
+        for(Map.Entry<Integer, IResourceName> entry : this.reg.map.entrySet()){
+            object.addProperty(entry.getValue().toString(), entry.getKey());
+        }
+        this.needsSave = false;
+    }
+
+    @Override
+    public File getSettingsFile(IDataManager manager){
         return this.file;
     }
 
