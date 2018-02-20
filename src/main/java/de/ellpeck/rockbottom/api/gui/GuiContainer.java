@@ -28,7 +28,6 @@ import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.data.settings.Settings;
 import de.ellpeck.rockbottom.api.entity.EntityItem;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
-import de.ellpeck.rockbottom.api.gui.component.ComponentSlot;
 import de.ellpeck.rockbottom.api.gui.container.ContainerSlot;
 import de.ellpeck.rockbottom.api.gui.container.ItemContainer;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
@@ -96,7 +95,7 @@ public abstract class GuiContainer extends Gui{
         this.container = this.player.getContainer();
         for(int i = 0; i < this.container.getSlotAmount(); i++){
             ContainerSlot slot = this.container.getSlot(i);
-            this.components.add(new ComponentSlot(this, slot, i, this.getSlotOffsetX()+slot.x, this.getSlotOffsetY()+slot.y));
+            this.components.add(slot.getGraphicalSlot(this, i, this.getSlotOffsetX(), this.getSlotOffsetY()));
         }
     }
 

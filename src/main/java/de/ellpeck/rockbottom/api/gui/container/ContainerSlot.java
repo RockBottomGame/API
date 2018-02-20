@@ -21,6 +21,8 @@
 
 package de.ellpeck.rockbottom.api.gui.container;
 
+import de.ellpeck.rockbottom.api.gui.GuiContainer;
+import de.ellpeck.rockbottom.api.gui.component.ComponentSlot;
 import de.ellpeck.rockbottom.api.inventory.IInventory;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 
@@ -53,5 +55,9 @@ public class ContainerSlot{
 
     public ItemInstance get(){
         return this.inventory.get(this.slot);
+    }
+
+    public ComponentSlot getGraphicalSlot(GuiContainer gui, int index, int xOffset, int yOffset){
+        return new ComponentSlot(gui, this, index, xOffset+this.x, yOffset+this.y);
     }
 }
