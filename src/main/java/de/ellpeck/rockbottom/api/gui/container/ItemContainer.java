@@ -27,22 +27,33 @@ import de.ellpeck.rockbottom.api.inventory.IInventory;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public abstract class ItemContainer{
 
-    public final IInventory[] containedInventories;
     public final AbstractEntityPlayer player;
     private final List<ContainerSlot> slots = new ArrayList<>();
+    private final Set<IInventory> containedInventories = new HashSet<>();
 
+    public ItemContainer(AbstractEntityPlayer player){
+        this.player = player;
+    }
+
+    /**
+     * @deprecated Use constructor {@link #ItemContainer(AbstractEntityPlayer)}
+     * instead, as contained inventories are now added automatically
+     */
+    @Deprecated
     public ItemContainer(AbstractEntityPlayer player, IInventory... containedInventories){
         this.player = player;
-        this.containedInventories = containedInventories;
     }
 
     public ContainerSlot getSlot(int id){
         return this.slots.get(id);
+    }
+
+    public Set<IInventory> getContainedInventories(){
+        return Collections.unmodifiableSet(this.containedInventories);
     }
 
     public int getSlotAmount(){
@@ -50,14 +61,13 @@ public abstract class ItemContainer{
     }
 
     public void addSlot(ContainerSlot slot){
-        for(IInventory inv : this.containedInventories){
-            if(inv == slot.inventory){
-                this.slots.add(slot);
-                return;
-            }
+        if(!this.containedInventories.contains(slot.inventory)){
+            this.containedInventories.add(slot.inventory);
+
+            RockBottomAPI.logger().config("Added inventory "+slot.inventory+" as contained inventory of "+this);
         }
 
-        RockBottomAPI.logger().warning("Tried adding slot "+slot+" with inventory "+slot.inventory+" to container "+this+" that doesn't contain it!");
+        this.slots.add(slot);
     }
 
     public int getIndexForInvSlot(IInventory inv, int id){
@@ -70,7 +80,7 @@ public abstract class ItemContainer{
         return -1;
     }
 
-    protected void addSlotGrid(IInventory inventory, int start, int end, int xStart, int yStart, int width){
+    public void addSlotGrid(IInventory inventory, int start, int end, int xStart, int yStart, int width){
         int x = xStart;
         int y = yStart;
         for(int i = start; i < end; i++){
@@ -84,7 +94,7 @@ public abstract class ItemContainer{
         }
     }
 
-    protected void addPlayerInventory(AbstractEntityPlayer player, int x, int y){
+    public void addPlayerInventory(AbstractEntityPlayer player, int x, int y){
         this.addSlotGrid(player.getInv(), 0, 8, x, y, 8);
         this.addSlotGrid(player.getInv(), 8, player.getInv().getSlotAmount(), x, y+20, 8);
     }

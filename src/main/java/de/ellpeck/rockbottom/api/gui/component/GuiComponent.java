@@ -25,6 +25,7 @@ import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.IRenderer;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
+import de.ellpeck.rockbottom.api.event.impl.InitGuiComponentEvent;
 import de.ellpeck.rockbottom.api.gui.Gui;
 import de.ellpeck.rockbottom.api.util.Colors;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
@@ -44,6 +45,8 @@ public abstract class GuiComponent{
         this.y = y;
         this.width = width;
         this.height = height;
+
+        RockBottomAPI.getEventHandler().fireEvent(new InitGuiComponentEvent(this.gui, this));
     }
 
     public void setPos(int x, int y){
