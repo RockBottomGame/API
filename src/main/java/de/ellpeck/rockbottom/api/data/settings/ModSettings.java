@@ -57,9 +57,11 @@ public class ModSettings implements IPropSettings, IJsonSettings{
     public void load(JsonObject object){
         this.disabledMods.clear();
 
-        JsonArray array = object.get("disabled").getAsJsonArray();
-        for(JsonElement s : array){
-            this.disabledMods.add(s.getAsString());
+        if(object.has("disabled")){
+            JsonArray array = object.get("disabled").getAsJsonArray();
+            for(JsonElement s : array){
+                this.disabledMods.add(s.getAsString());
+            }
         }
     }
 

@@ -110,14 +110,16 @@ public class Settings implements IPropSettings, IJsonSettings{
 
     @Override
     public void load(JsonObject object){
-        JsonObject keybinds = object.get("keybinds").getAsJsonObject();
-        for(Keybind keybind : RockBottomAPI.KEYBIND_REGISTRY.getUnmodifiable().values()){
-            String name = keybind.getName().toString();
+        if(object.has("keybinds")){
+            JsonObject keybinds = object.get("keybinds").getAsJsonObject();
+            for(Keybind keybind : RockBottomAPI.KEYBIND_REGISTRY.getUnmodifiable().values()){
+                String name = keybind.getName().toString();
 
-            JsonObject sub = keybinds.get(name).getAsJsonObject();
-            int key = this.get(sub, "key", keybind.getKey());
-            boolean mouse = this.get(sub, "is_mouse", keybind.isMouse());
-            keybind.setBind(key, mouse);
+                JsonObject sub = keybinds.get(name).getAsJsonObject();
+                int key = this.get(sub, "key", keybind.getKey());
+                boolean mouse = this.get(sub, "is_mouse", keybind.isMouse());
+                keybind.setBind(key, mouse);
+            }
         }
 
         this.autosaveIntervalSeconds = this.get(object, "autosave_interval", 60);
