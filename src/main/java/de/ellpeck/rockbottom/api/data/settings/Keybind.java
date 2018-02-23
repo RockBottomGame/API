@@ -23,30 +23,37 @@ package de.ellpeck.rockbottom.api.data.settings;
 
 import de.ellpeck.rockbottom.api.IInputHandler;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
+import de.ellpeck.rockbottom.api.util.ApiInternal;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
+import org.lwjgl.glfw.GLFW;
 
 public class Keybind{
 
     private final IResourceName name;
-
     private int key;
-    private boolean isMouse;
 
+    /**
+     * @deprecated Use the {@link #Keybind(IResourceName, int)} constructor
+     */
+    @Deprecated
     public Keybind(IResourceName name, int defKey, boolean defIsMouse){
-        this.name = name;
-        this.key = defKey;
-        this.isMouse = defIsMouse;
+        this(name, defKey);
     }
 
-    public void setBind(int key, boolean isMouse){
+    public Keybind(IResourceName name, int defKey){
+        this.name = name;
+        this.key = defKey;
+    }
+
+    @ApiInternal
+    public void setBind(int key){
         this.key = key;
-        this.isMouse = isMouse;
     }
 
     public boolean isDown(){
         IInputHandler input = RockBottomAPI.getGame().getInput();
 
-        if(this.isMouse){
+        if(this.isMouse()){
             return input.isMouseDown(this.key);
         }
         else{
@@ -57,7 +64,7 @@ public class Keybind{
     public boolean isPressed(){
         IInputHandler input = RockBottomAPI.getGame().getInput();
 
-        if(this.isMouse){
+        if(this.isMouse()){
             return input.wasMousePressed(this.key);
         }
         else{
@@ -66,7 +73,7 @@ public class Keybind{
     }
 
     public String getDisplayName(){
-        return RockBottomAPI.getInternalHooks().getKeyOrMouseName(this.isMouse, this.key);
+        return RockBottomAPI.getInternalHooks().getKeyOrMouseName(this.key);
     }
 
     public boolean isKey(int key){
@@ -82,11 +89,15 @@ public class Keybind{
     }
 
     public boolean isMouse(){
-        return this.isMouse;
+        return isMouse(this.key);
     }
 
     public Keybind register(){
         RockBottomAPI.KEYBIND_REGISTRY.register(this.getName(), this);
         return this;
+    }
+
+    public static boolean isMouse(int key){
+        return key <= GLFW.GLFW_MOUSE_BUTTON_8;
     }
 }

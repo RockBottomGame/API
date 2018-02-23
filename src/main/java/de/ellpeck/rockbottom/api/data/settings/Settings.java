@@ -21,6 +21,7 @@
 
 package de.ellpeck.rockbottom.api.data.settings;
 
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.data.IDataManager;
@@ -33,23 +34,23 @@ import java.util.Properties;
 @ApiInternal
 public class Settings implements IPropSettings, IJsonSettings{
 
-    public static final Keybind KEY_PLACE = new Keybind(RockBottomAPI.createInternalRes("place"), 1, true).register();
-    public static final Keybind KEY_DESTROY = new Keybind(RockBottomAPI.createInternalRes("destroy"), 0, true).register();
-    public static final Keybind KEY_GUI_ACTION_1 = new Keybind(RockBottomAPI.createInternalRes("gui_action_1"), 0, true).register();
-    public static final Keybind KEY_GUI_ACTION_2 = new Keybind(RockBottomAPI.createInternalRes("gui_action_2"), 1, true).register();
+    public static final Keybind KEY_PLACE = new Keybind(RockBottomAPI.createInternalRes("place"), 1).register();
+    public static final Keybind KEY_DESTROY = new Keybind(RockBottomAPI.createInternalRes("destroy"), 0).register();
+    public static final Keybind KEY_GUI_ACTION_1 = new Keybind(RockBottomAPI.createInternalRes("gui_action_1"), 0).register();
+    public static final Keybind KEY_GUI_ACTION_2 = new Keybind(RockBottomAPI.createInternalRes("gui_action_2"), 1).register();
 
-    public static final Keybind KEY_INVENTORY = new Keybind(RockBottomAPI.createInternalRes("inventory"), GLFW.GLFW_KEY_E, false).register();
-    public static final Keybind KEY_COMPENDIUM = new Keybind(RockBottomAPI.createInternalRes("compendium"), GLFW.GLFW_KEY_C, false).register();
-    public static final Keybind KEY_MENU = new Keybind(RockBottomAPI.createInternalRes("menu"), GLFW.GLFW_KEY_ESCAPE, false).register();
-    public static final Keybind KEY_LEFT = new Keybind(RockBottomAPI.createInternalRes("left"), GLFW.GLFW_KEY_A, false).register();
-    public static final Keybind KEY_RIGHT = new Keybind(RockBottomAPI.createInternalRes("right"), GLFW.GLFW_KEY_D, false).register();
-    public static final Keybind KEY_UP = new Keybind(RockBottomAPI.createInternalRes("up"), GLFW.GLFW_KEY_W, false).register();
-    public static final Keybind KEY_DOWN = new Keybind(RockBottomAPI.createInternalRes("down"), GLFW.GLFW_KEY_S, false).register();
-    public static final Keybind KEY_JUMP = new Keybind(RockBottomAPI.createInternalRes("jump"), GLFW.GLFW_KEY_SPACE, false).register();
-    public static final Keybind KEY_BACKGROUND = new Keybind(RockBottomAPI.createInternalRes("background"), GLFW.GLFW_KEY_LEFT_SHIFT, false).register();
-    public static final Keybind KEY_CHAT = new Keybind(RockBottomAPI.createInternalRes("chat"), GLFW.GLFW_KEY_ENTER, false).register();
-    public static final Keybind KEY_ADVANCED_INFO = new Keybind(RockBottomAPI.createInternalRes("advanced_info"), GLFW.GLFW_KEY_LEFT_SHIFT, false).register();
-    public static final Keybind KEY_SCREENSHOT = new Keybind(RockBottomAPI.createInternalRes("screenshot"), GLFW.GLFW_KEY_F10, false).register();
+    public static final Keybind KEY_INVENTORY = new Keybind(RockBottomAPI.createInternalRes("inventory"), GLFW.GLFW_KEY_E).register();
+    public static final Keybind KEY_COMPENDIUM = new Keybind(RockBottomAPI.createInternalRes("compendium"), GLFW.GLFW_KEY_C).register();
+    public static final Keybind KEY_MENU = new Keybind(RockBottomAPI.createInternalRes("menu"), GLFW.GLFW_KEY_ESCAPE).register();
+    public static final Keybind KEY_LEFT = new Keybind(RockBottomAPI.createInternalRes("left"), GLFW.GLFW_KEY_A).register();
+    public static final Keybind KEY_RIGHT = new Keybind(RockBottomAPI.createInternalRes("right"), GLFW.GLFW_KEY_D).register();
+    public static final Keybind KEY_UP = new Keybind(RockBottomAPI.createInternalRes("up"), GLFW.GLFW_KEY_W).register();
+    public static final Keybind KEY_DOWN = new Keybind(RockBottomAPI.createInternalRes("down"), GLFW.GLFW_KEY_S).register();
+    public static final Keybind KEY_JUMP = new Keybind(RockBottomAPI.createInternalRes("jump"), GLFW.GLFW_KEY_SPACE).register();
+    public static final Keybind KEY_BACKGROUND = new Keybind(RockBottomAPI.createInternalRes("background"), GLFW.GLFW_KEY_LEFT_SHIFT).register();
+    public static final Keybind KEY_CHAT = new Keybind(RockBottomAPI.createInternalRes("chat"), GLFW.GLFW_KEY_ENTER).register();
+    public static final Keybind KEY_ADVANCED_INFO = new Keybind(RockBottomAPI.createInternalRes("advanced_info"), GLFW.GLFW_KEY_LEFT_SHIFT).register();
+    public static final Keybind KEY_SCREENSHOT = new Keybind(RockBottomAPI.createInternalRes("screenshot"), GLFW.GLFW_KEY_F10).register();
     public static final Keybind[] KEYS_ITEM_SELECTION = new Keybind[8];
     public static final int DEFAULT_GUI_COLOR = 0xFF30704E;
 
@@ -57,7 +58,7 @@ public class Settings implements IPropSettings, IJsonSettings{
         int[] defKeys = new int[]{GLFW.GLFW_KEY_1, GLFW.GLFW_KEY_2, GLFW.GLFW_KEY_3, GLFW.GLFW_KEY_4, GLFW.GLFW_KEY_5, GLFW.GLFW_KEY_6, GLFW.GLFW_KEY_7, GLFW.GLFW_KEY_8};
 
         for(int i = 0; i < KEYS_ITEM_SELECTION.length; i++){
-            KEYS_ITEM_SELECTION[i] = new Keybind(RockBottomAPI.createInternalRes("item_selection_"+i), defKeys[i], false).register();
+            KEYS_ITEM_SELECTION[i] = new Keybind(RockBottomAPI.createInternalRes("item_selection_"+i), defKeys[i]).register();
         }
     }
 
@@ -85,8 +86,7 @@ public class Settings implements IPropSettings, IJsonSettings{
             String name = keybind.getName().toString();
 
             int key = this.getProp(props, name, keybind.getKey());
-            boolean mouse = this.getProp(props, name+"_is_mouse", keybind.isMouse());
-            keybind.setBind(key, mouse);
+            keybind.setBind(key);
         }
 
         this.autosaveIntervalSeconds = this.getProp(props, "autosave_interval", 60);
@@ -115,10 +115,15 @@ public class Settings implements IPropSettings, IJsonSettings{
             for(Keybind keybind : RockBottomAPI.KEYBIND_REGISTRY.getUnmodifiable().values()){
                 String name = keybind.getName().toString();
 
-                JsonObject sub = keybinds.get(name).getAsJsonObject();
-                int key = this.get(sub, "key", keybind.getKey());
-                boolean mouse = this.get(sub, "is_mouse", keybind.isMouse());
-                keybind.setBind(key, mouse);
+                //TODO Remove legacy keybind check
+                JsonElement sub = keybinds.get(name);
+                if(sub.isJsonObject()){
+                    int key = this.get(sub.getAsJsonObject(), "key", keybind.getKey());
+                    keybind.setBind(key);
+                }
+                else{
+                    keybind.setBind(sub.getAsInt());
+                }
             }
         }
 
@@ -146,11 +151,7 @@ public class Settings implements IPropSettings, IJsonSettings{
         JsonObject keybinds = new JsonObject();
         for(Keybind keybind : RockBottomAPI.KEYBIND_REGISTRY.getUnmodifiable().values()){
             String name = keybind.getName().toString();
-
-            JsonObject sub = new JsonObject();
-            this.set(sub, "key", keybind.getKey());
-            this.set(sub, "is_mouse", keybind.isMouse());
-            keybinds.add(name, sub);
+            keybinds.addProperty(name, keybind.getKey());
         }
         object.add("keybinds", keybinds);
 
