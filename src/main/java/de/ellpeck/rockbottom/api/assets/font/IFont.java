@@ -49,6 +49,8 @@ public interface IFont extends IAsset{
 
     void drawString(float x, float y, String s, int drawStart, int drawEnd, float scale, int color);
 
+    void drawAutoScaledString(float x, float y, String s, float maxScale, int width, int color, int shadowColor, boolean centeredOnX, boolean centeredOnY);
+
     void drawCharacter(float x, float y, char character, float scale, int color, FontProp prop, int shadowColor);
 
     void drawCharacter(float x, float y, char character, float scale, int color, FontProp prop);

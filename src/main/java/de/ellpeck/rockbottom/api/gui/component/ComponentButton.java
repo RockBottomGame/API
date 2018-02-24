@@ -27,6 +27,7 @@ import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.data.settings.Settings;
 import de.ellpeck.rockbottom.api.gui.Gui;
+import de.ellpeck.rockbottom.api.util.Colors;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 
 import java.util.function.Supplier;
@@ -63,7 +64,7 @@ public class ComponentButton extends GuiComponent{
 
         String text = this.getText();
         if(text != null){
-            manager.getFont().drawCenteredString(x+this.width/2F, y+this.height/2F+0.5F, text, 0.35F, true);
+            manager.getFont().drawAutoScaledString(x+this.width/2F, y+this.height/2F+0.5F, text, 0.35F, this.width-2, Colors.WHITE, Colors.BLACK, true, true);
         }
     }
 
