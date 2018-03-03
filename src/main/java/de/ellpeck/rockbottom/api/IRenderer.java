@@ -291,6 +291,8 @@ public interface IRenderer extends IDisposable{
 
     boolean isGuiDebug();
 
+    boolean isLineDebug();
+
     double getMousedTileX();
 
     double getMousedTileY();
