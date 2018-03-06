@@ -41,6 +41,8 @@ public interface IDataManager{
 
     File getSettingsFile();
 
+    File getServerSettingsFile();
+
     File getCommandPermsFile();
 
     File getWhitelistFile();
