@@ -25,6 +25,7 @@ import com.google.common.collect.Table;
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.IRenderer;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
+import de.ellpeck.rockbottom.api.assets.font.FormattingCode;
 import de.ellpeck.rockbottom.api.effect.ActiveEffect;
 import de.ellpeck.rockbottom.api.entity.Entity;
 import de.ellpeck.rockbottom.api.entity.MovableWorldObject;
@@ -72,4 +73,6 @@ public interface IInternalHooks{
     void doTileStateInit(TileState thisState, IResourceName name, Tile tile, Map<String, Comparable> properties, Table<String, Comparable, TileState> subStates);
 
     IStateHandler makeStateHandler(Tile tile);
+
+    FormattingCode getFormattingCode(String s, int index, Map<Character, FormattingCode> defaults);
 }

@@ -21,8 +21,8 @@
 
 package de.ellpeck.rockbottom.api.assets.font;
 
+import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.util.Colors;
-import de.ellpeck.rockbottom.api.util.Util;
 
 import java.util.Collections;
 import java.util.Map;
@@ -78,35 +78,7 @@ public class FormattingCode{
     }
 
     public static FormattingCode getFormat(String s, int index){
-        if(s.length() > index+1 && s.charAt(index) == '&'){
-            char formatChar = s.charAt(index+1);
-
-            if(formatChar == '('){
-                int closingIndex = s.indexOf(")", index+2);
-                if(closingIndex > index+2){
-                    String code = s.substring(index+2, closingIndex);
-                    String[] colors = code.split(",");
-
-                    if(colors.length == 3){
-                        try{
-                            return new FormattingCode(' ', Colors.rgb(Float.parseFloat(colors[0]), Float.parseFloat(colors[1]), Float.parseFloat(colors[2])), FontProp.NONE, code.length()+3, "&("+code+")");
-                        }
-                        catch(Exception ignored){
-                        }
-                    }
-                }
-            }
-            else if(formatChar == 'r'){
-                return new FormattingCode('r', Colors.rainbow((Util.getTimeMillis()/10)%256));
-            }
-            else{
-                FormattingCode def = DEFAULT_CODES.get(formatChar);
-                if(def != null){
-                    return def;
-                }
-            }
-        }
-        return NONE;
+       return RockBottomAPI.getInternalHooks().getFormattingCode(s, index, DEFAULT_CODES);
     }
 
     public FormattingCode registerAsDefault(){
