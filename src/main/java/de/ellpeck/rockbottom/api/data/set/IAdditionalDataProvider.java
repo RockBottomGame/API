@@ -25,9 +25,9 @@ public interface IAdditionalDataProvider{
 
     boolean hasAdditionalData();
 
-    DataSet getAdditionalData();
+    ModBasedDataSet getAdditionalData();
 
-    void setAdditionalData(DataSet set);
+    void setAdditionalData(ModBasedDataSet set);
 
-    DataSet getOrCreateAdditionalData();
+    ModBasedDataSet getOrCreateAdditionalData();
 }

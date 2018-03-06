@@ -29,12 +29,12 @@ public abstract class BasicRetroactiveGenerator implements IWorldGenerator{
 
     @Override
     public boolean shouldGenerate(IWorld world, IChunk chunk){
-        return (!chunk.hasAdditionalData() || !chunk.getAdditionalData().getBoolean(RockBottomAPI.WORLD_GENERATORS.getId(this.getClass()).toString())) && this.shouldGenerateRetroactively(world, chunk);
+        return (!chunk.hasAdditionalData() || !chunk.getAdditionalData().getBoolean(RockBottomAPI.WORLD_GENERATORS.getId(this.getClass()))) && this.shouldGenerateRetroactively(world, chunk);
     }
 
     @Override
     public void generate(IWorld world, IChunk chunk){
-        chunk.getOrCreateAdditionalData().addBoolean(RockBottomAPI.WORLD_GENERATORS.getId(this.getClass()).toString(), true);
+        chunk.getOrCreateAdditionalData().addBoolean(RockBottomAPI.WORLD_GENERATORS.getId(this.getClass()), true);
         this.generateRetroactively(world, chunk);
     }
 

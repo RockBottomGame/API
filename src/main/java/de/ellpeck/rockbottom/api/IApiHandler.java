@@ -23,9 +23,9 @@ package de.ellpeck.rockbottom.api;
 
 import de.ellpeck.rockbottom.api.construction.IRecipe;
 import de.ellpeck.rockbottom.api.construction.resource.IUseInfo;
+import de.ellpeck.rockbottom.api.data.set.AbstractDataSet;
 import de.ellpeck.rockbottom.api.data.set.DataSet;
 import de.ellpeck.rockbottom.api.data.set.part.DataPart;
-import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.inventory.Inventory;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
@@ -48,12 +48,12 @@ import java.util.logging.Logger;
 public interface IApiHandler{
 
     /**
-     * Writes a {@link DataSet} to the location of the specified {@link File}.
+     * Writes a {@link AbstractDataSet} to the location of the specified {@link File}.
      *
      * @param set  The data set
      * @param file The file
      */
-    void writeDataSet(DataSet set, File file);
+    void writeDataSet(AbstractDataSet set, File file);
 
     /**
      * Reads a {@link DataSet} from the location of the specified {@link File}.
@@ -61,27 +61,27 @@ public interface IApiHandler{
      * @param set  The data set
      * @param file The file
      */
-    void readDataSet(DataSet set, File file);
+    void readDataSet(AbstractDataSet set, File file);
 
     /**
-     * Writes a {@link DataSet} to the specified {@link DataOutput}.
+     * Writes a {@link AbstractDataSet} to the specified {@link DataOutput}.
      *
      * @param stream The data output
      * @param set    The data set
      *
      * @throws Exception when anything goes wrong during saving
      */
-    void writeSet(DataOutput stream, DataSet set) throws Exception;
+    void writeSet(DataOutput stream, AbstractDataSet set) throws Exception;
 
     /**
-     * Reads a {@link DataSet} from the specified {@link DataInput}.
+     * Reads a {@link AbstractDataSet} from the specified {@link DataInput}.
      *
      * @param stream The data input
      * @param set    The data set
      *
      * @throws Exception when anything goes wrong during saving
      */
-    void readSet(DataInput stream, DataSet set) throws Exception;
+    void readSet(DataInput stream, AbstractDataSet set) throws Exception;
 
     /**
      * Writes a {@link DataPart} to the specified {@link DataOutput}.

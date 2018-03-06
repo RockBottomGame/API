@@ -23,7 +23,6 @@ package de.ellpeck.rockbottom.api.world;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.data.set.DataSet;
-import de.ellpeck.rockbottom.api.data.set.IAdditionalDataProvider;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.tile.state.TileState;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
@@ -86,6 +85,8 @@ public interface IChunk extends IChunkOrWorld{
 
     @ApiInternal
     boolean shouldUnload();
+
+    void setDirty();
 
     @ApiInternal
     void save(DataSet set);

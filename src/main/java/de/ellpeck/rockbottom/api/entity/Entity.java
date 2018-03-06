@@ -25,6 +25,7 @@ import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.data.set.DataSet;
 import de.ellpeck.rockbottom.api.data.set.IAdditionalDataProvider;
+import de.ellpeck.rockbottom.api.data.set.ModBasedDataSet;
 import de.ellpeck.rockbottom.api.effect.ActiveEffect;
 import de.ellpeck.rockbottom.api.effect.IEffect;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
@@ -64,7 +65,7 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
     public boolean canClimb;
     protected boolean dead;
     protected UUID uniqueId;
-    private DataSet additionalData;
+    private ModBasedDataSet additionalData;
 
     public Entity(IWorld world){
         super(world);
@@ -156,19 +157,19 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
     }
 
     @Override
-    public DataSet getAdditionalData(){
+    public ModBasedDataSet getAdditionalData(){
         return this.additionalData;
     }
 
     @Override
-    public void setAdditionalData(DataSet set){
+    public void setAdditionalData(ModBasedDataSet set){
         this.additionalData = set;
     }
 
     @Override
-    public DataSet getOrCreateAdditionalData(){
+    public ModBasedDataSet getOrCreateAdditionalData(){
         if(this.additionalData == null){
-            this.additionalData = new DataSet();
+            this.additionalData = new ModBasedDataSet();
         }
         return this.additionalData;
     }
@@ -186,7 +187,7 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
         set.addInt("facing", this.facing.ordinal());
 
         if(this.additionalData != null){
-            set.addDataSet("data", this.additionalData);
+            set.addModBasedDataSet("data", this.additionalData);
         }
 
         int amount = this.effects.size();
@@ -210,7 +211,7 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
         this.facing = Direction.DIRECTIONS[set.getInt("facing")];
 
         if(set.hasKey("data")){
-            this.additionalData = set.getDataSet("data");
+            this.additionalData = set.getModBasedDataSet("data");
         }
 
         this.effects.clear();

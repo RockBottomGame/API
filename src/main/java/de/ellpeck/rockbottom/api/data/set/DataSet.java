@@ -21,56 +21,15 @@
 
 package de.ellpeck.rockbottom.api.data.set;
 
-import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.data.set.part.*;
 import de.ellpeck.rockbottom.api.data.set.part.num.*;
 import de.ellpeck.rockbottom.api.data.set.part.num.array.PartByteArray;
 import de.ellpeck.rockbottom.api.data.set.part.num.array.PartIntArray;
 import de.ellpeck.rockbottom.api.data.set.part.num.array.PartShortArray;
 
-import java.io.File;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 
-public class DataSet{
-
-    private final Map<String, DataPart> data = new HashMap<>();
-    private final Map<String, DataPart> dataUnmodifiable = Collections.unmodifiableMap(this.data);
-
-    public void addPart(DataPart part){
-        this.data.put(part.getName(), part);
-    }
-
-    public boolean hasKey(String key){
-        return this.data.containsKey(key);
-    }
-
-    public DataPart remove(String key){
-        return this.data.remove(key);
-    }
-
-    public void clear(){
-        this.data.clear();
-    }
-
-    public int size(){
-        return this.data.size();
-    }
-
-    public <T> T getPartContent(String key, Class<? extends DataPart<T>> typeClass, T defaultValue){
-        DataPart part = this.data.get(key);
-
-        if(part != null && part.getClass() == typeClass){
-            T result = (T)part.get();
-            if(result != null){
-                return result;
-            }
-        }
-
-        return defaultValue;
-    }
+public class DataSet extends AbstractDataSet{
 
     public int getInt(String key){
         return this.getPartContent(key, PartInt.class, 0);
@@ -110,6 +69,14 @@ public class DataSet{
 
     public void addDataSet(String key, DataSet set){
         this.addPart(new PartDataSet(key, set));
+    }
+
+    public ModBasedDataSet getModBasedDataSet(String key){
+        return this.getPartContent(key, PartModBasedDataSet.class, new ModBasedDataSet());
+    }
+
+    public void addModBasedDataSet(String key, ModBasedDataSet set){
+        this.addPart(new PartModBasedDataSet(key, set));
     }
 
     public byte[] getByteArray(String key, int defaultSize){
@@ -174,45 +141,6 @@ public class DataSet{
 
     public void addString(String key, String s){
         this.addPart(new PartString(key, s));
-    }
-
-    public void write(File file){
-        RockBottomAPI.getApiHandler().writeDataSet(this, file);
-    }
-
-    public void read(File file){
-        RockBottomAPI.getApiHandler().readDataSet(this, file);
-    }
-
-    @Override
-    public String toString(){
-        return this.data.toString();
-    }
-
-    public Map<String, DataPart> getData(){
-        return this.dataUnmodifiable;
-    }
-
-    public boolean isEmpty(){
-        return this.data.isEmpty();
-    }
-
-    @Override
-    public boolean equals(Object o){
-        if(this == o){
-            return true;
-        }
-        if(o == null || this.getClass() != o.getClass()){
-            return false;
-        }
-
-        DataSet dataSet = (DataSet)o;
-        return this.data.equals(dataSet.data);
-    }
-
-    @Override
-    public int hashCode(){
-        return this.data.hashCode();
     }
 
     public DataSet copy(){

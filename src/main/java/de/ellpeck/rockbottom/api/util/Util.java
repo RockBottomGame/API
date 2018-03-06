@@ -166,4 +166,9 @@ public final class Util{
         }
         return list;
     }
+
+    public static boolean isResourceName(String s){
+        int index = s.indexOf(Constants.RESOURCE_SEPARATOR);
+        return index > 0 && index < s.length()-1;
+    }
 }

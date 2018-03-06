@@ -24,6 +24,7 @@ package de.ellpeck.rockbottom.api.item;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.data.set.DataSet;
 import de.ellpeck.rockbottom.api.data.set.IAdditionalDataProvider;
+import de.ellpeck.rockbottom.api.data.set.ModBasedDataSet;
 import de.ellpeck.rockbottom.api.tile.Tile;
 
 public class ItemInstance implements IAdditionalDataProvider{
@@ -32,7 +33,7 @@ public class ItemInstance implements IAdditionalDataProvider{
 
     private short meta;
     private int amount;
-    private DataSet additionalData;
+    private ModBasedDataSet additionalData;
 
     public ItemInstance(Tile tile){
         this(tile, 1);
@@ -79,7 +80,7 @@ public class ItemInstance implements IAdditionalDataProvider{
             ItemInstance instance = new ItemInstance(item, amount, meta);
 
             if(set.hasKey("data")){
-                instance.additionalData = set.getDataSet("data");
+                instance.additionalData = set.getModBasedDataSet("data");
             }
 
             return instance;
@@ -127,7 +128,7 @@ public class ItemInstance implements IAdditionalDataProvider{
         set.addInt("amount", this.amount);
         set.addShort("meta", this.meta);
         if(this.additionalData != null){
-            set.addDataSet("data", this.additionalData);
+            set.addModBasedDataSet("data", this.additionalData);
         }
     }
 
@@ -186,19 +187,19 @@ public class ItemInstance implements IAdditionalDataProvider{
     }
 
     @Override
-    public DataSet getAdditionalData(){
+    public ModBasedDataSet getAdditionalData(){
         return this.additionalData;
     }
 
     @Override
-    public void setAdditionalData(DataSet set){
+    public void setAdditionalData(ModBasedDataSet set){
         this.additionalData = set;
     }
 
     @Override
-    public DataSet getOrCreateAdditionalData(){
+    public ModBasedDataSet getOrCreateAdditionalData(){
         if(this.additionalData == null){
-            this.additionalData = new DataSet();
+            this.additionalData = new ModBasedDataSet();
         }
         return this.additionalData;
     }
