@@ -84,5 +84,5 @@ public interface IAssetManager{
 
     ITextureStitcher getTextureStitcher();
 
-    void addAsset(IAssetLoader loader, IResourceName name, IAsset asset);
+    boolean addAsset(IAssetLoader loader, IResourceName name, IAsset asset);
 }

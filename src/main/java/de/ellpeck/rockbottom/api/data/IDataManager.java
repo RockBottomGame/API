@@ -33,6 +33,8 @@ public interface IDataManager{
 
     File getModsDir();
 
+    File getContentPacksDir();
+
     File getWorldsDir();
 
     File getScreenshotDir();
@@ -50,6 +52,8 @@ public interface IDataManager{
     File getBlacklistFile();
 
     File getModSettingsFile();
+
+    File getContentPackSettingsFile();
 
     File getPlayerDesignFile();
 

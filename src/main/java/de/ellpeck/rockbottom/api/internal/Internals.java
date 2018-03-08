@@ -24,6 +24,7 @@ package de.ellpeck.rockbottom.api.internal;
 import de.ellpeck.rockbottom.api.IApiHandler;
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.construction.resource.IResourceRegistry;
+import de.ellpeck.rockbottom.api.content.pack.IContentPackLoader;
 import de.ellpeck.rockbottom.api.event.IEventHandler;
 import de.ellpeck.rockbottom.api.mod.IModLoader;
 import de.ellpeck.rockbottom.api.net.INetHandler;
@@ -37,6 +38,7 @@ public class Internals{
     private IEventHandler event;
     private INetHandler net;
     private IModLoader mod;
+    private IContentPackLoader content;
     private IResourceRegistry resource;
     private IInternalHooks hooks;
 
@@ -68,6 +70,10 @@ public class Internals{
         this.mod = mod;
     }
 
+    public void setContent(IContentPackLoader content){
+        this.content = content;
+    }
+
     public IResourceRegistry getResource(){
         return this.resource;
     }
@@ -94,5 +100,9 @@ public class Internals{
 
     public IInternalHooks getHooks(){
         return this.hooks;
+    }
+
+    public IContentPackLoader getContent(){
+        return this.content;
     }
 }

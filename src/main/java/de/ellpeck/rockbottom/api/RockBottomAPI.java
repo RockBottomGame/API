@@ -26,6 +26,7 @@ import de.ellpeck.rockbottom.api.construction.BasicRecipe;
 import de.ellpeck.rockbottom.api.construction.IRecipe;
 import de.ellpeck.rockbottom.api.construction.resource.IResourceRegistry;
 import de.ellpeck.rockbottom.api.content.IContentLoader;
+import de.ellpeck.rockbottom.api.content.pack.IContentPackLoader;
 import de.ellpeck.rockbottom.api.data.set.DataSet;
 import de.ellpeck.rockbottom.api.data.set.part.DataPart;
 import de.ellpeck.rockbottom.api.data.settings.Keybind;
@@ -71,7 +72,7 @@ public final class RockBottomAPI{
     /**
      * The current API version equal to the version in the build.gradle file.
      */
-    public static final String VERSION = "0.2.18";
+    public static final String VERSION = "0.2.19";
 
     @ApiInternal
     private static final List<IRegistry> ALL_REGISTRIES = new ArrayList<>();
@@ -278,6 +279,10 @@ public final class RockBottomAPI{
      */
     public static IModLoader getModLoader(){
         return internals.getMod();
+    }
+
+    public static IContentPackLoader getContentPackLoader(){
+        return internals.getContent();
     }
 
     /**
