@@ -121,14 +121,18 @@ public final class RockBottomAPI{
      * items through the input-output system of the construction in the player's
      * inventory. Do not manually register recipes into this registry as this is
      * automatically done using {@link BasicRecipe#register(NameRegistry)}. This
-     * is a convenience registry to help with packets and networking.
+     * is a convenience registry to help with packets and networking. If you
+     * want to get a recipe instance by its name, use {@link
+     * IRecipe#forName(IResourceName)}.
      */
     @ApiInternal
     public static final NameRegistry<IRecipe> ALL_CONSTRUCTION_RECIPES = new NameRegistry<>("all_recipe_registry").register();
     /**
      * The registry for all {@link BasicRecipe} objects that are displayed on
      * the left side of the player's inventory. Use {@link
-     * BasicRecipe#registerManual()} to register recipes into this registry.
+     * BasicRecipe#registerManual()} to register recipes into this registry. If
+     * you want to get a recipe instance by its name, use {@link
+     * IRecipe#forName(IResourceName)}.
      */
     @ApiInternal
     public static final NameRegistry<BasicRecipe> MANUAL_CONSTRUCTION_RECIPES = new NameRegistry<>("manual_recipe_registry").register();

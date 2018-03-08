@@ -42,6 +42,10 @@ public interface IRecipe extends IContent{
 
     IResourceName ID = RockBottomAPI.createInternalRes("recipe");
 
+    static IRecipe forName(IResourceName name){
+        return RockBottomAPI.ALL_CONSTRUCTION_RECIPES.get(name);
+    }
+
     IResourceName getName();
 
     boolean isKnown(AbstractEntityPlayer player);
