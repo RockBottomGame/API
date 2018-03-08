@@ -37,6 +37,10 @@ public interface IMod{
 
     String getResourceLocation();
 
+    default String getContentLocation(){
+        return "";
+    }
+
     default String getDescription(){
         return "";
     }

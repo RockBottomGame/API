@@ -25,6 +25,7 @@ import de.ellpeck.rockbottom.api.assets.IAssetLoader;
 import de.ellpeck.rockbottom.api.construction.BasicRecipe;
 import de.ellpeck.rockbottom.api.construction.IRecipe;
 import de.ellpeck.rockbottom.api.construction.resource.IResourceRegistry;
+import de.ellpeck.rockbottom.api.content.IContentLoader;
 import de.ellpeck.rockbottom.api.data.set.DataSet;
 import de.ellpeck.rockbottom.api.data.set.part.DataPart;
 import de.ellpeck.rockbottom.api.data.settings.Keybind;
@@ -70,7 +71,7 @@ public final class RockBottomAPI{
     /**
      * The current API version equal to the version in the build.gradle file.
      */
-    public static final String VERSION = "0.2.17";
+    public static final String VERSION = "0.2.18";
 
     @ApiInternal
     private static final List<IRegistry> ALL_REGISTRIES = new ArrayList<>();
@@ -198,6 +199,12 @@ public final class RockBottomAPI{
      */
     @ApiInternal
     public static final NameRegistry<IAssetLoader> ASSET_LOADER_REGISTRY = new NameRegistry<>("asset_loader_registry").register();
+    /**
+     * The registry for all {@link IContentLoader} objects. To register one into
+     * this registry, use {@link IContentLoader#register()}.
+     */
+    @ApiInternal
+    public static final NameRegistry<IContentLoader> CONTENT_LOADER_REGISTRY = new NameRegistry<>("content_loader_registry").register();
     /**
      * The list of all {@link ISpecialCursor} instance. Adding cursors into this
      * list will allow them to be displayed in place of the regular cursor when
