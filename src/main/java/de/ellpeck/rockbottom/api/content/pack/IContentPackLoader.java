@@ -39,4 +39,6 @@ public interface IContentPackLoader{
     List<ContentPack> getDisabledPacks();
 
     ContentPackSettings getPackSettings();
+
+    ContentPack getPack(String id);
 }
