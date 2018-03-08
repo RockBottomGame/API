@@ -38,6 +38,12 @@ public class BasicRecipe implements IRecipe{
     private final List<IUseInfo> inputs;
     private final List<ItemInstance> outputs;
 
+    public BasicRecipe(IResourceName name, List<IUseInfo> inputs, List<ItemInstance> outputs){
+        this.name = name;
+        this.inputs = inputs;
+        this.outputs = outputs;
+    }
+
     public BasicRecipe(IResourceName name, ItemInstance output, IUseInfo... inputs){
         this.name = name;
         this.inputs = Arrays.asList(inputs);

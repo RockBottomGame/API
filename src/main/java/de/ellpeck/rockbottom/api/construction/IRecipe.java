@@ -23,6 +23,7 @@ package de.ellpeck.rockbottom.api.construction;
 
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.construction.resource.IUseInfo;
+import de.ellpeck.rockbottom.api.content.IContent;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.gui.Gui;
 import de.ellpeck.rockbottom.api.gui.component.construction.ComponentConstruct;
@@ -37,7 +38,9 @@ import de.ellpeck.rockbottom.api.world.IWorld;
 import java.util.ArrayList;
 import java.util.List;
 
-public interface IRecipe{
+public interface IRecipe extends IContent{
+
+    IResourceName ID = RockBottomAPI.createInternalRes("recipe");
 
     IResourceName getName();
 
