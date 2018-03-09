@@ -38,6 +38,8 @@ public interface IContentLoader<T extends IContent>{
 
     void loadContent(IGameInstance game, IResourceName resourceName, String path, JsonElement element, String elementName, IMod loadingMod, ContentPack pack) throws Exception;
 
+    void disableContent(IGameInstance game, IResourceName resourceName);
+
     default boolean dealWithSpecialCases(IGameInstance game, String resourceName, String path, JsonElement element, String elementName, IMod loadingMod, ContentPack pack) throws Exception{
         return false;
     }

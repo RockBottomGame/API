@@ -37,6 +37,8 @@ public interface IAssetLoader<T extends IAsset>{
 
     void loadAsset(IAssetManager manager, IResourceName resourceName, String path, JsonElement element, String elementName, IMod loadingMod, ContentPack pack) throws Exception;
 
+    void disableAsset(IAssetManager manager, IResourceName resourceName);
+
     default boolean dealWithSpecialCases(IAssetManager manager, String resourceName, String path, JsonElement element, String elementName, IMod loadingMod, ContentPack pack) throws Exception{
         return false;
     }
