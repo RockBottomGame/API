@@ -48,6 +48,8 @@ public interface IRecipe extends IContent{
 
     IResourceName getName();
 
+    IResourceName getKnowledgeInformationName();
+
     boolean isKnown(AbstractEntityPlayer player);
 
     default boolean canConstruct(IInventory inventory){

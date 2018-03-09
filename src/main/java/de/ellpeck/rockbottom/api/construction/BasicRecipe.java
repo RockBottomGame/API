@@ -35,19 +35,19 @@ import java.util.List;
 public class BasicRecipe implements IRecipe{
 
     private final IResourceName name;
+    private final IResourceName infoName;
     private final List<IUseInfo> inputs;
     private final List<ItemInstance> outputs;
 
     public BasicRecipe(IResourceName name, List<IUseInfo> inputs, List<ItemInstance> outputs){
         this.name = name;
+        this.infoName = name.addPrefix("recipe_");
         this.inputs = inputs;
         this.outputs = outputs;
     }
 
     public BasicRecipe(IResourceName name, ItemInstance output, IUseInfo... inputs){
-        this.name = name;
-        this.inputs = Arrays.asList(inputs);
-        this.outputs = Collections.singletonList(output);
+        this(name, Arrays.asList(inputs), Collections.singletonList(output));
     }
 
     public BasicRecipe(ItemInstance output, IUseInfo... inputs){
@@ -72,6 +72,11 @@ public class BasicRecipe implements IRecipe{
     @Override
     public IResourceName getName(){
         return this.name;
+    }
+
+    @Override
+    public IResourceName getKnowledgeInformationName(){
+        return this.infoName;
     }
 
     public BasicRecipe register(NameRegistry<BasicRecipe> registry){
