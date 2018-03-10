@@ -250,18 +250,6 @@ public interface IRenderer extends IDisposable{
 
     IVBO createVBO(boolean isStatic);
 
-    /**
-     * Creates a new renderer to be used to render custom things. It is
-     * discouraged to use this method, instead you should add a custom texture
-     * and shader to the existing renderer (see {@link #setTexture(ITexture)}
-     * and {@link #setProgram(IShaderProgram)}. This method is here for
-     * convenience for people that know what they're doing. Please {@link
-     * IRenderer#dispose()} of this renderer when you're done using it.
-     *
-     * @return the new renderer
-     */
-    IRenderer createRenderer(IShaderProgram defaultProgram);
-
     @ApiInternal
     void calcScales();
 

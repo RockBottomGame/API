@@ -21,7 +21,6 @@
 
 package de.ellpeck.rockbottom.api.assets;
 
-import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.assets.font.IFont;
 import de.ellpeck.rockbottom.api.assets.texture.ITexture;
 import de.ellpeck.rockbottom.api.assets.texture.stitcher.ITextureStitcher;
@@ -37,7 +36,7 @@ import java.util.Map;
 public interface IAssetManager{
 
     @ApiInternal
-    void setCursor(IGameInstance game, ISpecialCursor cursor);
+    void setCursor(ISpecialCursor cursor);
 
     <T extends IAsset> Map<IResourceName, T> getAllOfType(IResourceName identifier);
 
@@ -80,7 +79,7 @@ public interface IAssetManager{
     SimpleDateFormat getLocalizedDateFormat();
 
     @ApiInternal
-    ISpecialCursor pickCurrentCursor(IGameInstance game);
+    ISpecialCursor pickCurrentCursor();
 
     ITextureStitcher getTextureStitcher();
 
