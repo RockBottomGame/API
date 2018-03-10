@@ -46,7 +46,7 @@ public class NameToIndexInfo implements IPropSettings, IJsonSettings{
     public NameToIndexInfo(String name, File legacyFile, File file, int max){
         this.legacyFile = legacyFile;
         this.file = file;
-        this.reg = new IndexRegistry<>(name, max);
+        this.reg = new IndexRegistry<>(name, max, false);
     }
 
     public <T> void populate(NameRegistry<T> registry){

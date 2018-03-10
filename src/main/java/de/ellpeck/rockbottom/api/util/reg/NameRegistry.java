@@ -29,11 +29,13 @@ import de.ellpeck.rockbottom.api.RockBottomAPI;
 public class NameRegistry<T> implements IRegistry<IResourceName, T>{
 
     protected final String name;
+    protected final boolean canUnregister;
     protected final BiMap<IResourceName, T> map = HashBiMap.create();
     protected final BiMap<IResourceName, T> unmodifiableMap;
 
-    public NameRegistry(String name){
+    public NameRegistry(String name, boolean canUnregister){
         this.name = name;
+        this.canUnregister = canUnregister;
         this.unmodifiableMap = Maps.unmodifiableBiMap(this.map);
     }
 
@@ -43,7 +45,7 @@ public class NameRegistry<T> implements IRegistry<IResourceName, T>{
             throw new IndexOutOfBoundsException("Tried registering "+value+" with name "+name+" which is invalid into registry "+this);
         }
         if(this.map.containsKey(name)){
-            throw new RuntimeException("Cannot register "+value+" with name "+name+" twice into registry "+this);
+            throw new IllegalArgumentException("Cannot register "+value+" with name "+name+" twice into registry "+this);
         }
 
         this.map.put(name, value);
@@ -70,6 +72,17 @@ public class NameRegistry<T> implements IRegistry<IResourceName, T>{
     @Override
     public int getSize(){
         return this.map.size();
+    }
+
+    @Override
+    public void unregister(IResourceName name){
+        if(this.canUnregister){
+            this.map.remove(name);
+            RockBottomAPI.logger().config("Unregistered "+name+" from registry "+this);
+        }
+        else{
+            throw new UnsupportedOperationException("Unregistering from registry "+this+" is disallowed");
+        }
     }
 
     @Override

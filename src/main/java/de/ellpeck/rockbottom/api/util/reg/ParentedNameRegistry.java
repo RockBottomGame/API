@@ -1,5 +1,5 @@
 /*
- * This file ("IRegistry.java") is part of the RockBottomAPI by Ellpeck.
+ * This file ("ParentedNameRegistry.java") is part of the RockBottomAPI by Ellpeck.
  * View the source code at <https://github.com/RockBottomGame/>.
  * View information on the project at <https://rockbottom.ellpeck.de/>.
  *
@@ -16,30 +16,29 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with the RockBottomAPI. If not, see <http://www.gnu.org/licenses/>.
  *
- * © 2017 Ellpeck
+ * © 2018 Ellpeck
  */
 
 package de.ellpeck.rockbottom.api.util.reg;
 
-import com.google.common.collect.BiMap;
-import de.ellpeck.rockbottom.api.RockBottomAPI;
+public class ParentedNameRegistry<T> extends NameRegistry<T>{
 
-public interface IRegistry<T, U>{
+    private final NameRegistry<T> parent;
 
-    void register(T id, U value);
+    public ParentedNameRegistry(String name, boolean canUnregister, NameRegistry<T> parent){
+        super(name, canUnregister);
+        this.parent = parent;
+    }
 
-    U get(T id);
+    @Override
+    public void register(IResourceName name, T value){
+        this.parent.register(name, value);
+        super.register(name, value);
+    }
 
-    T getId(U value);
-
-    int getSize();
-
-    void unregister(T id);
-
-    BiMap<T, U> getUnmodifiable();
-
-    default <V extends IRegistry> V register(){
-        RockBottomAPI.registerRegistry(this);
-        return (V)this;
+    @Override
+    public void unregister(IResourceName name){
+        this.parent.unregister(name);
+        super.unregister(name);
     }
 }

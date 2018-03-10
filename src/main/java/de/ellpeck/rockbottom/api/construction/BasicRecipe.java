@@ -80,7 +80,6 @@ public class BasicRecipe implements IRecipe{
     }
 
     public BasicRecipe register(NameRegistry<BasicRecipe> registry){
-        RockBottomAPI.ALL_CONSTRUCTION_RECIPES.register(this.getName(), this);
         registry.register(this.getName(), this);
         return this;
     }

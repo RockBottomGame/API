@@ -30,12 +30,14 @@ public class IndexRegistry<T> implements IRegistry<Integer, T>{
 
     protected final int max;
     protected final String name;
+    protected final boolean canUnregister;
     protected final BiMap<Integer, T> map = HashBiMap.create();
     protected final BiMap<Integer, T> unmodifiableMap;
 
-    public IndexRegistry(String name, int max){
+    public IndexRegistry(String name, int max, boolean canUnregister){
         this.name = name;
         this.max = max;
+        this.canUnregister = canUnregister;
         this.unmodifiableMap = Maps.unmodifiableBiMap(this.map);
     }
 
@@ -45,7 +47,7 @@ public class IndexRegistry<T> implements IRegistry<Integer, T>{
             throw new IndexOutOfBoundsException("Tried registering "+value+" with id "+id+" which is less than 0 or greater than max "+this.max+" in registry "+this);
         }
         if(this.map.containsKey(id)){
-            throw new RuntimeException("Cannot register "+value+" with id "+id+" twice into registry "+this);
+            throw new IllegalArgumentException("Cannot register "+value+" with id "+id+" twice into registry "+this);
         }
 
         this.map.put(id, value);
@@ -81,6 +83,17 @@ public class IndexRegistry<T> implements IRegistry<Integer, T>{
     @Override
     public int getSize(){
         return this.map.size();
+    }
+
+    @Override
+    public void unregister(Integer id){
+        if(this.canUnregister){
+            this.map.remove(id);
+            RockBottomAPI.logger().config("Unregistered "+id+" from registry "+this);
+        }
+        else{
+            throw new UnsupportedOperationException("Unregistering from registry "+this+" is disallowed");
+        }
     }
 
     @Override
