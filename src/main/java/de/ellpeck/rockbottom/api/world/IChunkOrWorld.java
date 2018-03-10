@@ -98,9 +98,7 @@ public interface IChunkOrWorld extends IAdditionalDataProvider{
 
     void setDirty(int x, int y);
 
-    int getLowestAirUpwards(TileLayer layer, int x, int y);
-
-    int getLowestAirUpwards(TileLayer layer, int x, int y, boolean ignoreReplaceableTiles);
+    int getHeight(TileLayer layer, int x, int bottomY);
 
     Biome getBiome(int x, int y);
 
@@ -118,4 +116,16 @@ public interface IChunkOrWorld extends IAdditionalDataProvider{
     void callRetroactiveGeneration();
 
     long getSeed();
+
+    /**
+     * @deprecated Use {@link #getHeight(TileLayer, int, int)} instead
+     */
+    @Deprecated
+    int getLowestAirUpwards(TileLayer layer, int x, int y);
+
+    /**
+     * @deprecated Use {@link #getHeight(TileLayer, int, int)} instead
+     */
+    @Deprecated
+    int getLowestAirUpwards(TileLayer layer, int x, int y, boolean ignoreReplaceableTiles);
 }

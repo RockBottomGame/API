@@ -378,4 +378,8 @@ public class Tile{
         RockBottomAPI.getResourceRegistry().addResources(name, new ResInfo(this));
         return this;
     }
+
+    public boolean factorsIntoHeightMap(IWorld world, int x, int y, TileLayer layer){
+        return this.isFullTile() && !this.isAir();
+    }
 }

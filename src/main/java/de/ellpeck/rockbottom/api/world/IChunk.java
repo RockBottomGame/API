@@ -55,9 +55,9 @@ public interface IChunk extends IChunkOrWorld{
 
     int getY();
 
-    int getLowestAirUpwardsInner(TileLayer layer, int x, int y);
+    int getHeight(TileLayer layer, int x);
 
-    int getLowestAirUpwardsInner(TileLayer layer, int x, int y, boolean ignoreReplaceableTiles);
+    int getHeightInner(TileLayer layer, int x);
 
     TileState getStateInner(TileLayer layer, int x, int y);
 
@@ -101,9 +101,25 @@ public interface IChunk extends IChunkOrWorld{
 
     Biome getBiomeInner(int x, int y);
 
+    Biome getMostProminentBiome();
+
+    int getAverageHeight(TileLayer layer);
+
     @ApiInternal
     void setBiomeInner(int x, int y, Biome biome);
 
     @ApiInternal
     Set<TileLayer> getLoadedLayers();
+
+    /**
+     * @deprecated Use {@link #getHeight(TileLayer, int, int)} instead
+     */
+    @Deprecated
+    int getLowestAirUpwardsInner(TileLayer layer, int x, int y);
+
+    /**
+     * @deprecated Use {@link #getHeight(TileLayer, int, int)} instead
+     */
+    @Deprecated
+    int getLowestAirUpwardsInner(TileLayer layer, int x, int y, boolean ignoreReplaceableTiles);
 }

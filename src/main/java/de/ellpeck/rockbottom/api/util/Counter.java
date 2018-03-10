@@ -42,4 +42,9 @@ public class Counter{
     public int get(){
         return this.value;
     }
+
+    @Override
+    public String toString(){
+        return String.valueOf(this.value);
+    }
 }
