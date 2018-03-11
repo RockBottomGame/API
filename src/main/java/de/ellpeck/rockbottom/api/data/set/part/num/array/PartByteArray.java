@@ -21,6 +21,8 @@
 
 package de.ellpeck.rockbottom.api.data.set.part.num.array;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import de.ellpeck.rockbottom.api.data.set.part.BasicDataPart;
 
 import java.io.DataInput;
@@ -52,6 +54,25 @@ public class PartByteArray extends BasicDataPart<byte[]>{
 
         for(int i = 0; i < amount; i++){
             this.data[i] = stream.readByte();
+        }
+    }
+
+    @Override
+    public JsonElement write() throws Exception{
+        JsonArray array = new JsonArray();
+        for(int i = 0; i < this.data.length; i++){
+            array.add(this.data[i]);
+        }
+        return array;
+    }
+
+    @Override
+    public void read(JsonElement element) throws Exception{
+        JsonArray array = element.getAsJsonArray();
+        this.data = new byte[array.size()];
+
+        for(int i = 0; i < array.size(); i++){
+            this.data[i] = array.get(i).getAsByte();
         }
     }
 

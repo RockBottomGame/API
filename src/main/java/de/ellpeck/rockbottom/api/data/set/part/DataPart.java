@@ -21,6 +21,8 @@
 
 package de.ellpeck.rockbottom.api.data.set.part;
 
+import com.google.gson.JsonElement;
+
 import java.io.DataInput;
 import java.io.DataOutput;
 
@@ -37,6 +39,10 @@ public abstract class DataPart<T>{
     public abstract void write(DataOutput stream) throws Exception;
 
     public abstract void read(DataInput stream) throws Exception;
+
+    public abstract JsonElement write() throws Exception;
+
+    public abstract void read(JsonElement element) throws Exception;
 
     public String getName(){
         return this.name;

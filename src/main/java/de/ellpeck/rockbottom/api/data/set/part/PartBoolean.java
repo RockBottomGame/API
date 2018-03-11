@@ -21,6 +21,9 @@
 
 package de.ellpeck.rockbottom.api.data.set.part;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonPrimitive;
+
 import java.io.DataInput;
 import java.io.DataOutput;
 
@@ -42,5 +45,15 @@ public class PartBoolean extends BasicDataPart<Boolean>{
     @Override
     public void read(DataInput stream) throws Exception{
         this.data = stream.readBoolean();
+    }
+
+    @Override
+    public JsonElement write() throws Exception{
+        return new JsonPrimitive(this.data);
+    }
+
+    @Override
+    public void read(JsonElement element) throws Exception{
+        this.data = element.getAsBoolean();
     }
 }

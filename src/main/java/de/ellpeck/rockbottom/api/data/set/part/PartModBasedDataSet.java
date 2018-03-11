@@ -21,6 +21,8 @@
 
 package de.ellpeck.rockbottom.api.data.set.part;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.data.set.ModBasedDataSet;
 
@@ -39,12 +41,25 @@ public class PartModBasedDataSet extends BasicDataPart<ModBasedDataSet>{
 
     @Override
     public void write(DataOutput stream) throws Exception{
-        RockBottomAPI.getApiHandler().writeSet(stream, this.data);
+        RockBottomAPI.getApiHandler().writeDataSet(stream, this.data);
     }
 
     @Override
     public void read(DataInput stream) throws Exception{
         this.data = new ModBasedDataSet();
-        RockBottomAPI.getApiHandler().readSet(stream, this.data);
+        RockBottomAPI.getApiHandler().readDataSet(stream, this.data);
+    }
+
+    @Override
+    public JsonElement write() throws Exception{
+        JsonObject object = new JsonObject();
+        RockBottomAPI.getApiHandler().writeDataSet(object, this.data);
+        return object;
+    }
+
+    @Override
+    public void read(JsonElement element) throws Exception{
+        this.data = new ModBasedDataSet();
+        RockBottomAPI.getApiHandler().readDataSet(element.getAsJsonObject(), this.data);
     }
 }

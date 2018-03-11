@@ -21,6 +21,9 @@
 
 package de.ellpeck.rockbottom.api.data.set.part;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+
 import java.io.DataInput;
 import java.io.DataOutput;
 import java.util.UUID;
@@ -44,5 +47,19 @@ public class PartUniqueId extends BasicDataPart<UUID>{
     @Override
     public void read(DataInput stream) throws Exception{
         this.data = new UUID(stream.readLong(), stream.readLong());
+    }
+
+    @Override
+    public JsonElement write() throws Exception{
+        JsonObject object = new JsonObject();
+        object.addProperty("most", this.data.getMostSignificantBits());
+        object.addProperty("least", this.data.getLeastSignificantBits());
+        return object;
+    }
+
+    @Override
+    public void read(JsonElement element) throws Exception{
+        JsonObject object = element.getAsJsonObject();
+        this.data = new UUID(object.get("most").getAsLong(), object.get("least").getAsLong());
     }
 }

@@ -21,6 +21,8 @@
 
 package de.ellpeck.rockbottom.api.data.set.part.num;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonPrimitive;
 import de.ellpeck.rockbottom.api.data.set.part.BasicDataPart;
 
 import java.io.DataInput;
@@ -44,5 +46,15 @@ public class PartLong extends BasicDataPart<Long>{
     @Override
     public void read(DataInput stream) throws Exception{
         this.data = stream.readLong();
+    }
+
+    @Override
+    public JsonElement write() throws Exception{
+        return new JsonPrimitive(this.data);
+    }
+
+    @Override
+    public void read(JsonElement element) throws Exception{
+
     }
 }

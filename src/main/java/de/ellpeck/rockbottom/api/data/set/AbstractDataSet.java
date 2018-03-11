@@ -99,10 +99,18 @@ public abstract class AbstractDataSet{
     }
 
     public void write(File file){
-        RockBottomAPI.getApiHandler().writeDataSet(this, file);
+        RockBottomAPI.getApiHandler().writeDataSet(this, file, false);
     }
 
     public void read(File file){
-        RockBottomAPI.getApiHandler().readDataSet(this, file);
+        RockBottomAPI.getApiHandler().readDataSet(this, file, false);
+    }
+
+    public void writeAsJson(File file){
+        RockBottomAPI.getApiHandler().writeDataSet(this, file, true);
+    }
+
+    public void readAsJson(File file){
+        RockBottomAPI.getApiHandler().readDataSet(this, file, true);
     }
 }
