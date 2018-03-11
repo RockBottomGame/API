@@ -51,6 +51,7 @@ import de.ellpeck.rockbottom.api.tile.state.TileState;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
 import de.ellpeck.rockbottom.api.util.reg.*;
 import de.ellpeck.rockbottom.api.world.IWorld;
+import de.ellpeck.rockbottom.api.world.gen.IStructure;
 import de.ellpeck.rockbottom.api.world.gen.IWorldGenerator;
 import de.ellpeck.rockbottom.api.world.gen.biome.Biome;
 import de.ellpeck.rockbottom.api.world.layer.TileLayer;
@@ -150,6 +151,12 @@ public final class RockBottomAPI{
      */
     @ApiInternal
     public static final NameRegistry<Biome> BIOME_REGISTRY = new NameRegistry<>("biome_registry", false).register();
+    /**
+     * The registry for all {@link IStructure} objects. Use the contents.json
+     * file to create a new structure and have it loaded through the content
+     * manager.
+     */
+    public static final NameRegistry<IStructure> STRUCTURE_REGISTRY = new NameRegistry<>("structure_registry", true).register();
     /**
      * The registry for all {@link TileState} objects. This registry
      * automatically has objects registered into it by registering the
