@@ -83,8 +83,4 @@ public abstract class Biome{
     public TileState getFillerTile(IWorld world, IChunk chunk, int x, int y){
         return GameContent.TILE_SOIL.getDefState();
     }
-
-    public boolean hasPonds(){
-        return false;
-    }
 }
