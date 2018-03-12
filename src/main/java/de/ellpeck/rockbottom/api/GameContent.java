@@ -44,13 +44,13 @@ public final class GameContent{
     public static final Tile TILE_GRASS = getTile("grass").addEffectiveTool(ToolType.SHOVEL, 0).setForceDrop().setMaxAmount(100);
     public static final Tile TILE_STONE = getTile("stone").setHardness(5F).addEffectiveTool(ToolType.PICKAXE, 0).setMaxAmount(50);
     public static final TileMeta TILE_GRASS_TUFT = (TileMeta)getTile("grass_tuft").setHardness(0F).setForceDrop().setMaxAmount(150);
-    public static final Tile TILE_LOG = getTile("log").setHardness(3F).addEffectiveTool(ToolType.AXE, 0).setForceDrop().setMaxAmount(75);
+    public static final Tile TILE_LOG = getTile("log").setHardness(3F).addEffectiveTool(ToolType.AXE, 0).setMaxAmount(75);
     public static final Tile TILE_LEAVES = getTile("leaves").setHardness(0.5F).setForceDrop().setMaxAmount(150);
     public static final TileMeta TILE_FLOWER = (TileMeta)getTile("flower").setHardness(0F).setForceDrop().setMaxAmount(150);
     public static final Tile TILE_PEBBLES = getTile("pebbles").setHardness(0F).setForceDrop().setMaxAmount(200);
     public static final Tile TILE_SAND = getTile("sand").setHardness(0.75F).addEffectiveTool(ToolType.SHOVEL, 0).setForceDrop().setMaxAmount(100);
     public static final Tile TILE_SANDSTONE = getTile("sandstone").setHardness(4F).addEffectiveTool(ToolType.PICKAXE, 0).setMaxAmount(75);
-    public static final Tile TILE_COAL = getTile("coal").setHardness(6F).addEffectiveTool(ToolType.PICKAXE, 0).setMaxAmount(45);
+    public static final Tile TILE_COAL = getTile("coal").setHardness(6F).addEffectiveTool(ToolType.PICKAXE, 1).setMaxAmount(45);
     public static final Tile TILE_TORCH = getTile("torch").setHardness(0F).setForceDrop().setMaxAmount(50);
     public static final Tile TILE_LADDER = getTile("ladder").setHardness(1.5F).addEffectiveTool(ToolType.AXE, 0).setForceDrop().setMaxAmount(100);
     public static final Tile TILE_CHEST = getTile("chest").setHardness(4F).addEffectiveTool(ToolType.AXE, 0).setForceDrop().setMaxAmount(5);
@@ -62,6 +62,7 @@ public final class GameContent{
     public static final Tile TILE_WOOD_DOOR_OLD = getTile("wood_door_old").setHardness(3.5F).addEffectiveTool(ToolType.AXE, 0).setForceDrop().setMaxAmount(5);
     public static final Tile TILE_REMAINS_GOO = getTile("remains_goo");
     public static final Tile TILE_GRASS_TORCH = getTile("torch_grass").setHardness(0F).setForceDrop().setMaxAmount(50);
+    public static final Tile TILE_COPPER = getTile("copper").setHardness(10F).addEffectiveTool(ToolType.PICKAXE, 2).setMaxAmount(35);
 
     public static final Item ITEM_BRITTLE_PICKAXE = getItem("brittle_pickaxe");
     public static final Item ITEM_BRITTLE_AXE = getItem("brittle_axe");
@@ -70,6 +71,10 @@ public final class GameContent{
     public static final Item ITEM_STAT_NOTE = getItem("start_note").setMaxAmount(1);
     public static final Item ITEM_PLANT_FIBER = getItem("plant_fiber").setMaxAmount(150);
     public static final Item ITEM_TWIG = getItem("twig").setMaxAmount(150);
+    public static final Item ITEM_STONE_PICKAXE = getItem("stone_pickaxe");
+    public static final Item ITEM_STONE_AXE = getItem("stone_axe");
+    public static final Item ITEM_STONE_SHOVEL = getItem("stone_shovel");
+    public static final Item ITEM_COPPER_CANISTER = getItem("copper_canister").setMaxAmount(15);
 
     public static final String RES_SOIL = res().addResources("soil", TILE_SOIL);
     public static final String RES_GRASS = res().addResources("grass", TILE_GRASS);

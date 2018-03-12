@@ -77,7 +77,7 @@ public abstract class MultiTile extends TileBasic{
     }
 
     @Override
-    public boolean canPlace(IWorld world, int x, int y, TileLayer layer){
+    public boolean canPlace(IWorld world, int x, int y, TileLayer layer, AbstractEntityPlayer player){
         int startX = x-this.getMainX();
         int startY = y-this.getMainY();
 

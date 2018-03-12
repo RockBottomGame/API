@@ -86,12 +86,12 @@ public class Tile{
         }
     }
 
-    public boolean canBreak(IWorld world, int x, int y, TileLayer layer){
-        return true;
+    public boolean canBreak(IWorld world, int x, int y, TileLayer layer, AbstractEntityPlayer player, boolean isRightTool){
+        return this.canBreak(world, x, y, layer);
     }
 
-    public boolean canPlace(IWorld world, int x, int y, TileLayer layer){
-        return true;
+    public boolean canPlace(IWorld world, int x, int y, TileLayer layer, AbstractEntityPlayer player){
+        return this.canPlace(world, x, y, layer);
     }
 
     public boolean canPlaceInLayer(TileLayer layer){
@@ -168,13 +168,14 @@ public class Tile{
     }
 
     public List<ItemInstance> getDrops(IWorld world, int x, int y, TileLayer layer, Entity destroyer){
+        List<ItemInstance> drops = new ArrayList<>();
+
         Item item = this.getItem();
         if(item != null){
-            return Collections.singletonList(new ItemInstance(item));
+            drops.add(new ItemInstance(item));
         }
-        else{
-            return Collections.emptyList();
-        }
+
+        return drops;
     }
 
     public TileEntity provideTileEntity(IWorld world, int x, int y, TileLayer layer){
@@ -381,5 +382,23 @@ public class Tile{
 
     public boolean factorsIntoHeightMap(IWorld world, int x, int y, TileLayer layer){
         return this.isFullTile() && !this.isAir();
+    }
+
+    /**
+     * @deprecated Use {@link #canBreak(IWorld, int, int, TileLayer,
+     * AbstractEntityPlayer, boolean)}
+     */
+    @Deprecated
+    public boolean canBreak(IWorld world, int x, int y, TileLayer layer){
+        return true;
+    }
+
+    /**
+     * @deprecated Use {@link #canPlace(IWorld, int, int, TileLayer,
+     * AbstractEntityPlayer)}
+     */
+    @Deprecated
+    public boolean canPlace(IWorld world, int x, int y, TileLayer layer){
+        return true;
     }
 }

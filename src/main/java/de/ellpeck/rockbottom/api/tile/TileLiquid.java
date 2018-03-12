@@ -23,6 +23,7 @@ package de.ellpeck.rockbottom.api.tile;
 
 import de.ellpeck.rockbottom.api.GameContent;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
+import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.render.tile.ITileRenderer;
 import de.ellpeck.rockbottom.api.render.tile.TileLiquidRenderer;
 import de.ellpeck.rockbottom.api.tile.state.IntProp;
@@ -80,7 +81,7 @@ public abstract class TileLiquid extends TileBasic{
     }
 
     @Override
-    public boolean canBreak(IWorld world, int x, int y, TileLayer layer){
+    public boolean canBreak(IWorld world, int x, int y, TileLayer layer, AbstractEntityPlayer player, boolean isRightTool){
         return false;
     }
 

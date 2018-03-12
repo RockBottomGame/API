@@ -74,6 +74,11 @@ public final class StaticTileProps{
      * GameContent#TILE_WOOD_DOOR} and {@link GameContent#TILE_WOOD_DOOR_OLD}
      */
     public static final BoolProp FACING_RIGHT = new BoolProp("facing_right", false);
+    /**
+     * Determines if a tile has a copper canister inside of it. Used by {@link
+     * GameContent#TILE_COPPER}
+     */
+    public static final BoolProp HAS_CANISTER = new BoolProp("has_canister", false);
 
     public enum LogType{
         PLACED,
