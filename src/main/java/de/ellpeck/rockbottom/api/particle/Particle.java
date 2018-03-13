@@ -24,7 +24,6 @@ package de.ellpeck.rockbottom.api.particle;
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.IRenderer;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
-import de.ellpeck.rockbottom.api.assets.IShaderProgram;
 import de.ellpeck.rockbottom.api.entity.MovableWorldObject;
 import de.ellpeck.rockbottom.api.util.BoundBox;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
@@ -80,7 +79,7 @@ public class Particle extends MovableWorldObject{
     }
 
     public IResourceName getRenderShader(IGameInstance game, IAssetManager manager, IRenderer g){
-        return IShaderProgram.WORLD_SHADER;
+        return null;
     }
 
     public boolean isDead(){

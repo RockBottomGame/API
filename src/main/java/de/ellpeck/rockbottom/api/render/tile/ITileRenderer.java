@@ -25,7 +25,6 @@ import com.google.gson.JsonElement;
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.IRenderer;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
-import de.ellpeck.rockbottom.api.assets.IShaderProgram;
 import de.ellpeck.rockbottom.api.assets.texture.ITexture;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
@@ -60,6 +59,6 @@ public interface ITileRenderer<T extends Tile>{
     }
 
     default IResourceName getRenderShader(IGameInstance game, IAssetManager manager, IRenderer g, IWorld world, T tile, TileState state, int x, int y, TileLayer layer){
-        return IShaderProgram.WORLD_SHADER;
+        return null;
     }
 }
