@@ -47,7 +47,7 @@ public abstract class Biome{
 
     public abstract TileState getState(IWorld world, IChunk chunk, int x, int y, TileLayer layer, INoiseGen noise);
 
-    public int getExpectedSurfaceHeight(IWorld world, IChunk chunk, int x, TileLayer layer, INoiseGen noise){
+    public int getExpectedSurfaceHeight(IWorld world, int x, TileLayer layer, INoiseGen noise){
         return Constants.CHUNK_SIZE;
     }
 

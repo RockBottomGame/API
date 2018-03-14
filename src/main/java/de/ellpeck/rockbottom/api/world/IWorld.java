@@ -100,6 +100,9 @@ public interface IWorld extends IChunkOrWorld{
     List<IWorldGenerator> getSortedRetroactiveGenerators();
 
     @ApiInternal
+    IWorldGenerator getGenerator(IResourceName name);
+
+    @ApiInternal
     void save();
 
     List<AbstractEntityPlayer> getAllPlayers();

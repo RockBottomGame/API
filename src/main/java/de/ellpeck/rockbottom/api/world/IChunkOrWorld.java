@@ -128,4 +128,8 @@ public interface IChunkOrWorld extends IAdditionalDataProvider{
      */
     @Deprecated
     int getLowestAirUpwards(TileLayer layer, int x, int y, boolean ignoreReplaceableTiles);
+
+    Biome getExpectedBiome(int x, int y);
+
+    int getExpectedSurfaceHeight(TileLayer layer, int x, int y);
 }
