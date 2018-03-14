@@ -21,6 +21,8 @@
 
 package de.ellpeck.rockbottom.api.tile.state;
 
+import com.google.common.base.Preconditions;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -43,9 +45,7 @@ public class EnumProp<T extends Enum<T>> extends TileProp<T>{
         this.def = def;
         this.allowedValues = Collections.unmodifiableList(allowedValues);
 
-        if(!this.allowedValues.contains(this.def)){
-            throw new IllegalArgumentException();
-        }
+        Preconditions.checkArgument(this.allowedValues.contains(this.def), "The default value for an Enum property has to be an allowed value as well!");
     }
 
     @Override

@@ -21,6 +21,7 @@
 
 package de.ellpeck.rockbottom.api.util.reg;
 
+import com.google.common.base.Preconditions;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.Maps;
@@ -41,15 +42,10 @@ public class NameRegistry<T> implements IRegistry<IResourceName, T>{
 
     @Override
     public void register(IResourceName name, T value){
-        if(name == null){
-            throw new IndexOutOfBoundsException("Tried registering "+value+" with name "+name+" which is invalid into registry "+this);
-        }
-        if(this.map.containsKey(name)){
-            throw new IllegalArgumentException("Cannot register "+value+" with name "+name+" twice into registry "+this);
-        }
+        Preconditions.checkArgument(name != null, "Tried registering "+value+" with name "+name+" which is invalid into registry "+this);
+        Preconditions.checkArgument(!this.map.containsKey(name), "Cannot register "+value+" with name "+name+" twice into registry "+this);
 
         this.map.put(name, value);
-
         RockBottomAPI.logger().config("Registered "+value+" with name "+name+" into registry "+this);
     }
 

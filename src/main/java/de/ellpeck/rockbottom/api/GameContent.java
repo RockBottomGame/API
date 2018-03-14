@@ -21,6 +21,7 @@
 
 package de.ellpeck.rockbottom.api;
 
+import com.google.common.base.Preconditions;
 import de.ellpeck.rockbottom.api.construction.resource.IResourceRegistry;
 import de.ellpeck.rockbottom.api.effect.IEffect;
 import de.ellpeck.rockbottom.api.item.Item;
@@ -120,14 +121,7 @@ public final class GameContent{
     @ApiInternal
     private static <T> T get(String name, NameRegistry<T> registry){
         IResourceName res = RockBottomAPI.createInternalRes(name);
-        T thing = registry.get(res);
-
-        if(thing == null){
-            throw new IllegalStateException("Object with name "+res+" was not found in registry "+registry+"! This is probably due to GameContent being accessed before the game has initialized!");
-        }
-        else{
-            return thing;
-        }
+        return Preconditions.checkNotNull(registry.get(res), "Object with name "+res+" was not found in registry "+registry+"! This is probably due to GameContent being accessed before the game has initialized!");
     }
 
     @ApiInternal

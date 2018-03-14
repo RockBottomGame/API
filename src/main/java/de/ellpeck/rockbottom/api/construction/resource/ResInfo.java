@@ -21,6 +21,7 @@
 
 package de.ellpeck.rockbottom.api.construction.resource;
 
+import com.google.common.base.Preconditions;
 import de.ellpeck.rockbottom.api.item.Item;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.tile.Tile;
@@ -48,9 +49,7 @@ public class ResInfo{
 
     public ResInfo(Item item, int meta){
         int max = Math.min(Short.MAX_VALUE, item.getHighestPossibleMeta());
-        if(meta < 0 || meta > max){
-            throw new IndexOutOfBoundsException("Tried assigning meta "+meta+" to resource info with item "+item+" which is less than 0 or greater than max "+max+"!");
-        }
+        Preconditions.checkArgument(meta >= 0 && meta <= max, "Tried assigning meta "+meta+" to resource info with item "+item+" which is less than 0 or greater than max "+max+"!");
 
         this.item = item;
         this.meta = meta;

@@ -21,6 +21,7 @@
 
 package de.ellpeck.rockbottom.api.tile;
 
+import com.google.common.base.Preconditions;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.assets.font.FormattingCode;
@@ -67,10 +68,7 @@ public abstract class MultiTile extends TileBasic{
     public boolean isStructurePart(int x, int y){
         if(this.structure == null){
             this.structure = this.makeStructure();
-
-            if(!this.areDimensionsValid()){
-                throw new RuntimeException("MultiTile with name "+this.name+" has invalid structure dimensions!");
-            }
+            Preconditions.checkState(this.areDimensionsValid(), "MultiTile with name "+this.name+" has invalid structure dimensions!");
         }
 
         return this.structure[this.getHeight()-1-y][x];

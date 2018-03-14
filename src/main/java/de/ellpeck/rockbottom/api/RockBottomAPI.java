@@ -21,6 +21,7 @@
 
 package de.ellpeck.rockbottom.api;
 
+import com.google.common.base.Preconditions;
 import de.ellpeck.rockbottom.api.assets.IAssetLoader;
 import de.ellpeck.rockbottom.api.construction.BasicRecipe;
 import de.ellpeck.rockbottom.api.construction.IRecipe;
@@ -379,12 +380,8 @@ public final class RockBottomAPI{
     }
 
     public static void registerRegistry(IRegistry registry){
-        if(!ALL_REGISTRIES.contains(registry)){
-            ALL_REGISTRIES.add(registry);
-        }
-        else{
-            throw new RuntimeException("Registry "+registry+" was already registered!");
-        }
+        Preconditions.checkArgument(!ALL_REGISTRIES.contains(registry), "Registry "+registry+" was already registered!");
+        ALL_REGISTRIES.add(registry);
     }
 
     public static List<IRegistry> getAllRegistries(){
@@ -393,12 +390,8 @@ public final class RockBottomAPI{
 
     @ApiInternal
     public static void setInternals(Internals intern){
-        if(internals == null){
-            internals = intern;
-        }
-        else{
-            throw new RuntimeException("Mod tried to modify internal handlers - This is not allowed!");
-        }
+        Preconditions.checkState(internals == null, "Mod tried to modify internal handlers - This is not allowed!");
+        internals = intern;
     }
 }
 

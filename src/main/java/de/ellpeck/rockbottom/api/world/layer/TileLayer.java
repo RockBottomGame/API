@@ -21,6 +21,7 @@
 
 package de.ellpeck.rockbottom.api.world.layer;
 
+import com.google.common.base.Preconditions;
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.data.settings.Settings;
@@ -133,12 +134,8 @@ public class TileLayer{
     }
 
     public int index(){
-        if(this.assignedIndex >= 0){
-            return this.assignedIndex;
-        }
-        else{
-            throw new RuntimeException("Cannot access layer index before layer list has been initialized!");
-        }
+        Preconditions.checkState(this.assignedIndex >= 0, "Cannot access layer index before layer list has been initialized!");
+        return this.assignedIndex;
     }
 
     @ApiInternal

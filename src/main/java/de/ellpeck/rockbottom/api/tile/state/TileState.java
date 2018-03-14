@@ -21,6 +21,7 @@
 
 package de.ellpeck.rockbottom.api.tile.state;
 
+import com.google.common.base.Preconditions;
 import com.google.common.collect.Table;
 import com.google.common.collect.TreeBasedTable;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
@@ -55,13 +56,7 @@ public final class TileState{
             return this;
         }
         else{
-            TileState state = this.subStates.get(prop, value);
-            if(state == null){
-                throw new IllegalArgumentException("The tile "+this.tile.getName()+" does not have property "+prop+" with value "+value);
-            }
-            else{
-                return state;
-            }
+            return Preconditions.checkNotNull(this.subStates.get(prop, value), "The tile "+this.tile.getName()+" does not have property "+prop+" with value "+value);
         }
     }
 
@@ -78,13 +73,7 @@ public final class TileState{
     }
 
     public <T extends Comparable> T get(String prop){
-        Comparable value = this.properties.get(prop);
-        if(value == null){
-            throw new IllegalArgumentException("The tile "+this.tile.getName()+" does not support property "+prop);
-        }
-        else{
-            return (T)value;
-        }
+        return Preconditions.checkNotNull((T)this.properties.get(prop), "The tile "+this.tile.getName()+" does not support property "+prop);
     }
 
     public <T extends Comparable> T get(TileProp<T> prop){
@@ -92,16 +81,13 @@ public final class TileState{
     }
 
     public TileState overrideProps(TileState other, TileProp... props){
-        if(other.tile != this.tile){
-            throw new IllegalArgumentException("Cannot override properties of state "+this+" with "+other+" because they are not the same tile");
+        Preconditions.checkArgument(other.tile == this.tile, "Cannot override properties of state "+this+" with "+other+" because they are not the same tile");
+
+        TileState overriden = this;
+        for(TileProp prop : props){
+            overriden = overriden.prop(prop, other.get(prop));
         }
-        else{
-            TileState overriden = this;
-            for(TileProp prop : props){
-                overriden = overriden.prop(prop, other.get(prop));
-            }
-            return overriden;
-        }
+        return overriden;
     }
 
     public Tile getTile(){

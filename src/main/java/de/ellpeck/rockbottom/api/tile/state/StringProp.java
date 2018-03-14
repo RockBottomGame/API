@@ -21,6 +21,8 @@
 
 package de.ellpeck.rockbottom.api.tile.state;
 
+import com.google.common.base.Preconditions;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -39,9 +41,7 @@ public class StringProp extends TileProp<String>{
         this.def = def;
         this.allowedValues = Collections.unmodifiableList(allowedValues);
 
-        if(!this.allowedValues.contains(this.def)){
-            throw new IllegalArgumentException();
-        }
+        Preconditions.checkArgument(this.allowedValues.contains(this.def), "The default value of a String property has to be an allowed value too!");
     }
 
     @Override

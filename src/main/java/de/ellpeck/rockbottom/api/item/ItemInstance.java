@@ -21,6 +21,7 @@
 
 package de.ellpeck.rockbottom.api.item;
 
+import com.google.common.base.Preconditions;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.data.set.DataSet;
 import de.ellpeck.rockbottom.api.data.set.IAdditionalDataProvider;
@@ -56,13 +57,10 @@ public class ItemInstance implements IAdditionalDataProvider{
     }
 
     public ItemInstance(Item item, int amount, int meta){
-        if(item == null){
-            throw new NullPointerException("Tried to create an ItemInstance with null item!");
-        }
+        Preconditions.checkNotNull(item, "Tried to create an ItemInstance with null item!");
+
         int max = Math.min(Short.MAX_VALUE, item.getHighestPossibleMeta());
-        if(meta < 0 || meta > max){
-            throw new IndexOutOfBoundsException("Tried assigning meta "+meta+" to item instance with item "+item+" and amount "+amount+" which is less than 0 or greater than max "+max+"!");
-        }
+        Preconditions.checkArgument(meta >= 0 && meta <= max, "Tried assigning meta "+meta+" to item instance with item "+item+" and amount "+amount+" which is less than 0 or greater than max "+max+"!");
 
         this.item = item;
         this.amount = amount;

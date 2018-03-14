@@ -21,6 +21,7 @@
 
 package de.ellpeck.rockbottom.api.util.reg;
 
+import com.google.common.base.Preconditions;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.Maps;
@@ -43,15 +44,10 @@ public class IndexRegistry<T> implements IRegistry<Integer, T>{
 
     @Override
     public void register(Integer id, T value){
-        if(id < 0 || id > this.max){
-            throw new IndexOutOfBoundsException("Tried registering "+value+" with id "+id+" which is less than 0 or greater than max "+this.max+" in registry "+this);
-        }
-        if(this.map.containsKey(id)){
-            throw new IllegalArgumentException("Cannot register "+value+" with id "+id+" twice into registry "+this);
-        }
+        Preconditions.checkArgument(id >= 0 && id <= this.max, "Tried registering "+value+" with id "+id+" which is less than 0 or greater than max "+this.max+" in registry "+this);
+        Preconditions.checkArgument(!this.map.containsKey(id), "Cannot register "+value+" with id "+id+" twice into registry "+this);
 
         this.map.put(id, value);
-
         RockBottomAPI.logger().config("Registered "+value+" with id "+id+" into registry "+this);
     }
 

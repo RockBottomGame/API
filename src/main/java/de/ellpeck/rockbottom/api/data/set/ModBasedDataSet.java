@@ -21,6 +21,7 @@
 
 package de.ellpeck.rockbottom.api.data.set;
 
+import com.google.common.base.Preconditions;
 import de.ellpeck.rockbottom.api.data.set.part.*;
 import de.ellpeck.rockbottom.api.data.set.part.num.*;
 import de.ellpeck.rockbottom.api.data.set.part.num.array.PartByteArray;
@@ -35,12 +36,8 @@ public class ModBasedDataSet extends AbstractDataSet{
 
     @Override
     public void addPart(DataPart part){
-        if(Util.isResourceName(part.getName())){
-            super.addPart(part);
-        }
-        else{
-            throw new IllegalArgumentException("The name "+part.getName()+" of data part "+part+" which is being added to mod based data set "+this+" is not a valid resource name!");
-        }
+        Preconditions.checkArgument(Util.isResourceName(part.getName()), "The name "+part.getName()+" of data part "+part+" which is being added to mod based data set "+this+" is not a valid resource name!");
+        super.addPart(part);
     }
 
     public int getInt(IResourceName key){

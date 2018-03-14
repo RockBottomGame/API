@@ -21,6 +21,7 @@
 
 package de.ellpeck.rockbottom.api.assets.font;
 
+import com.google.common.base.Preconditions;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.util.Colors;
 
@@ -78,17 +79,13 @@ public class FormattingCode{
     }
 
     public static FormattingCode getFormat(String s, int index){
-       return RockBottomAPI.getInternalHooks().getFormattingCode(s, index, DEFAULT_CODES);
+        return RockBottomAPI.getInternalHooks().getFormattingCode(s, index, DEFAULT_CODES);
     }
 
     public FormattingCode registerAsDefault(){
-        if(this.format != ' ' && !DEFAULT_CODES.containsKey(this.format)){
-            DEFAULT_CODES.put(this.format, this);
-            return this;
-        }
-        else{
-            throw new RuntimeException("Tried to register two formatting codes as a default with key "+this.format+"!");
-        }
+        Preconditions.checkArgument(this.format != ' ' && !DEFAULT_CODES.containsKey(this.format), "Tried to register two formatting codes as a default with key "+this.format+"!");
+        DEFAULT_CODES.put(this.format, this);
+        return this;
     }
 
     public int getColor(){

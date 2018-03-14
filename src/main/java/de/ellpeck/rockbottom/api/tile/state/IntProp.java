@@ -21,6 +21,8 @@
 
 package de.ellpeck.rockbottom.api.tile.state;
 
+import com.google.common.base.Preconditions;
+
 public class IntProp extends TileProp<Integer>{
 
     private final int def;
@@ -30,10 +32,7 @@ public class IntProp extends TileProp<Integer>{
         super(name);
         this.def = def;
         this.possibilities = possibilities;
-
-        if(this.def < 0 || this.def >= this.possibilities){
-            throw new IllegalArgumentException();
-        }
+        Preconditions.checkArgument(this.def >= 0 && this.def < this.possibilities, "The default value of an Integer prop has to be an allowed value too!");
     }
 
     @Override

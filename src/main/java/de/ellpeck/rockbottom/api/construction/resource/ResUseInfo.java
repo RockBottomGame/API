@@ -21,6 +21,7 @@
 
 package de.ellpeck.rockbottom.api.construction.resource;
 
+import com.google.common.base.Preconditions;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 
@@ -59,17 +60,13 @@ public class ResUseInfo implements IUseInfo{
     @Override
     public List<ItemInstance> getItems(){
         List<ResInfo> resources = RockBottomAPI.getResourceRegistry().getResources(this.name);
+        Preconditions.checkState(!resources.isEmpty(), "Found resource usage info "+this+" that uses resource "+this.name+" that does not have any resource items assigned to it. This is not allowed!");
 
-        if(!resources.isEmpty()){
-            List<ItemInstance> list = new ArrayList<>();
-            for(ResInfo info : resources){
-                list.add(info.asInstance(this.amount));
-            }
-            return list;
+        List<ItemInstance> list = new ArrayList<>();
+        for(ResInfo info : resources){
+            list.add(info.asInstance(this.amount));
         }
-        else{
-            throw new IllegalStateException("Found resource usage info "+this+" that uses resource "+this.name+" that does not have any resource items assigned to it. This is not allowed!");
-        }
+        return list;
     }
 
     @Override
