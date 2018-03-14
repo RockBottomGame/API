@@ -63,7 +63,7 @@ public class ComponentConfirmationPopup extends GuiComponent{
     public void render(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y){
         ITexture tex = manager.getTexture(RES);
         IFont font = manager.getFont();
-        String text = "Are you sure?";
+        String text = manager.localize(RockBottomAPI.createInternalRes("info.are_you_sure"));
 
         if(this.isUpsideDown){
             tex.draw(x, y+this.height, x+this.width, y, 0, 0, tex.getRenderWidth(), tex.getRenderHeight());
@@ -82,7 +82,7 @@ public class ComponentConfirmationPopup extends GuiComponent{
         g.addFilledRect(renderX, renderY, width, height, this.isMouseOverPrioritized(game) && this.buttonArea.contains(game.getRenderer().getMouseInGuiX(), game.getRenderer().getMouseInGuiY()) ? getElementColor() : getUnselectedElementColor());
         g.addEmptyRect(renderX, renderY, width, height, getElementOutlineColor());
 
-        font.drawCenteredString(renderX+width/2F, renderY+height/2F+0.5F, "Yes", 0.35F, true);
+        font.drawCenteredString(renderX+width/2F, renderY+height/2F+0.5F, manager.localize(RockBottomAPI.createInternalRes("button.yes")), 0.35F, true);
     }
 
     @Override

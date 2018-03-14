@@ -76,7 +76,7 @@ public class ComponentPolaroid extends GuiComponent{
                 g.drawHoverInfoAtMouse(game, manager, true, 200, instance.getDisplayName()+" x"+instance.getAmount());
             }
             else{
-                g.drawHoverInfoAtMouse(game, manager, false, 200, "Unknown Recipe");
+                g.drawHoverInfoAtMouse(game, manager, false, 200, manager.localize(RockBottomAPI.createInternalRes("info.unknown_recipe")));
             }
         }
     }

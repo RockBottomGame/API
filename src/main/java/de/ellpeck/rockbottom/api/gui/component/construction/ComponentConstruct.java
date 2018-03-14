@@ -26,7 +26,6 @@ import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.IRenderer;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
-import de.ellpeck.rockbottom.api.assets.font.FormattingCode;
 import de.ellpeck.rockbottom.api.construction.IRecipe;
 import de.ellpeck.rockbottom.api.gui.Gui;
 import de.ellpeck.rockbottom.api.gui.component.GuiComponent;
@@ -58,7 +57,9 @@ public class ComponentConstruct extends GuiComponent{
     public void renderOverlay(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y){
         if(this.isMouseOver(game)){
             ItemInstance instance = this.getOutput(game);
-            g.drawHoverInfoAtMouse(game, manager, true, 200, instance.getDisplayName()+" x"+instance.getAmount(), this.canConstruct ? "Click to construct" : FormattingCode.RED+"Missing Items");
+
+            String s = manager.localize(RockBottomAPI.createInternalRes("info."+(this.canConstruct ? "click_to_construct":"missing_items")));
+            g.drawHoverInfoAtMouse(game, manager, true, 200, instance.getDisplayName()+" x"+instance.getAmount(), s);
         }
     }
 
