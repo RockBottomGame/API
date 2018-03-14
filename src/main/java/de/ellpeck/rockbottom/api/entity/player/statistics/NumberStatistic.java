@@ -22,7 +22,6 @@
 package de.ellpeck.rockbottom.api.entity.player.statistics;
 
 import de.ellpeck.rockbottom.api.data.set.DataSet;
-import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 
 public class NumberStatistic extends Statistic{
@@ -40,8 +39,7 @@ public class NumberStatistic extends Statistic{
         this.value = defaultValue;
     }
 
-    @Override
-    public void notify(AbstractEntityPlayer player){
+    public void update(){
         this.value++;
     }
 

@@ -25,7 +25,7 @@ import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 
 public interface IStatistics{
 
-    void notify(IResourceName name);
-
     Statistic getOrInit(IResourceName name);
+
+    <T extends Statistic> T getOrInit(IResourceName name, Class<T> statClass);
 }

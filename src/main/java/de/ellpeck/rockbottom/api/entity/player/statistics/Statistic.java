@@ -23,7 +23,6 @@ package de.ellpeck.rockbottom.api.entity.player.statistics;
 
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.data.set.DataSet;
-import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 
 public abstract class Statistic{
@@ -33,8 +32,6 @@ public abstract class Statistic{
     public Statistic(IResourceName name){
         this.name = name;
     }
-
-    public abstract void notify(AbstractEntityPlayer player);
 
     public abstract void reset();
 
