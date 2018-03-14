@@ -24,6 +24,7 @@ package de.ellpeck.rockbottom.api.entity.player;
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.entity.EntityLiving;
 import de.ellpeck.rockbottom.api.entity.player.knowledge.IKnowledgeManager;
+import de.ellpeck.rockbottom.api.entity.player.statistics.IStatistics;
 import de.ellpeck.rockbottom.api.gui.Gui;
 import de.ellpeck.rockbottom.api.gui.container.ItemContainer;
 import de.ellpeck.rockbottom.api.inventory.Inventory;
@@ -98,6 +99,8 @@ public abstract class AbstractEntityPlayer extends EntityLiving implements IComm
     public abstract boolean isInRange(double x, double y, double maxDistance);
 
     public abstract IKnowledgeManager getKnowledge();
+
+    public abstract IStatistics getStatistics();
 
     public abstract double getMoveSpeed();
 

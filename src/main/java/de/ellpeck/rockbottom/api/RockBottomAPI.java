@@ -35,6 +35,7 @@ import de.ellpeck.rockbottom.api.data.settings.Settings;
 import de.ellpeck.rockbottom.api.effect.IEffect;
 import de.ellpeck.rockbottom.api.entity.Entity;
 import de.ellpeck.rockbottom.api.entity.player.knowledge.Information;
+import de.ellpeck.rockbottom.api.entity.player.statistics.Statistic;
 import de.ellpeck.rockbottom.api.event.IEventHandler;
 import de.ellpeck.rockbottom.api.gui.IMainMenuTheme;
 import de.ellpeck.rockbottom.api.gui.ISpecialCursor;
@@ -221,7 +222,10 @@ public final class RockBottomAPI{
      * their condition is met.
      */
     public static final IndexRegistry<ISpecialCursor> SPECIAL_CURSORS = new IndexRegistry<>("special_cursor_registry", Integer.MAX_VALUE, true).register();
+    @ApiInternal
     public static final NameRegistry<IEffect> EFFECT_REGISTRY = new NameRegistry<>("effect_registry", false).register();
+    @ApiInternal
+    public static final NameRegistry<Statistic> STATISTICS_REGISTRY = new NameRegistry<>("statistics_registry", false).register();
 
     /**
      * A set of internal references to API classes that are initialized by the
