@@ -113,7 +113,9 @@ public class ContentPackSettings implements IJsonSettings{
     }
 
     public void setDisabled(String id){
-        this.enabledPacks.remove(this.getEntry(id));
+        if(!id.equals(this.defaultPack.id)){
+            this.enabledPacks.remove(this.getEntry(id));
+        }
     }
 
     private static class SettingsEntry{
