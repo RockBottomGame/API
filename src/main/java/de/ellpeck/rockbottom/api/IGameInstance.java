@@ -82,6 +82,9 @@ public interface IGameInstance extends IMod{
      */
     IDataManager getDataManager();
 
+    @ApiInternal
+    void restart();
+
     /**
      * Gets the {@link Settings} of the current game instance. These store all
      * of the values that can be edited in the settings gui.

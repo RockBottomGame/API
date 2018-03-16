@@ -30,7 +30,9 @@ import de.ellpeck.rockbottom.api.util.ApiInternal;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.function.ToIntFunction;
 
 @ApiInternal
 public class ContentPackSettings implements IJsonSettings{
@@ -96,10 +98,28 @@ public class ContentPackSettings implements IJsonSettings{
         }
     }
 
+    public Comparator<ContentPack> getPriorityComparator(){
+        return Comparator.comparingInt((ToIntFunction<ContentPack>)value -> this.getPriority(value.getId())).reversed();
+    }
+
+    public void setEnabledPriority(String id, int priority){
+        SettingsEntry entry = this.getEntry(id);
+        if(entry == null){
+            this.enabledPacks.add(new SettingsEntry(id, priority));
+        }
+        else if(!id.equals(this.defaultPack.id)){
+            entry.priority = priority;
+        }
+    }
+
+    public void setDisabled(String id){
+        this.enabledPacks.remove(this.getEntry(id));
+    }
+
     private static class SettingsEntry{
 
         public final String id;
-        public final int priority;
+        public int priority;
 
         public SettingsEntry(String id, int priority){
             this.id = id;

@@ -36,6 +36,9 @@ import java.util.Map;
 public interface IAssetManager{
 
     @ApiInternal
+    void load();
+
+    @ApiInternal
     void setCursor(ISpecialCursor cursor);
 
     <T extends IAsset> Map<IResourceName, T> getAllOfType(IResourceName identifier);
