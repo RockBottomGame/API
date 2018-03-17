@@ -105,7 +105,7 @@ public final class RockBottomAPI{
      * only use existing {@link DataPart}s.
      */
     @ApiInternal
-    public static final IndexRegistry<Class<? extends DataPart>> PART_REGISTRY = new IndexRegistry<>("part_registry", Byte.MAX_VALUE, false).register();
+    public static final DoubleRegistry<Class<? extends DataPart>> PART_REGISTRY = new DoubleRegistry<>("part_registry", Byte.MAX_VALUE, false).register();
     /**
      * The registry for all {@link IPacket} types. To register into this
      * registry, you can use {@link IndexRegistry#getNextFreeId()} to determine
