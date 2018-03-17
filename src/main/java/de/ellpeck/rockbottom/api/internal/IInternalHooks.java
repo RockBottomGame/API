@@ -53,7 +53,7 @@ public interface IInternalHooks{
 
     void doWorldObjectMovement(MovableWorldObject object);
 
-    boolean doDefaultSlotMovement(IGameInstance game, int button, float x, float y, ComponentSlot slot);
+    boolean doDefaultSlotMovement(IGameInstance game, int button, float x, float y, GuiContainer gui, ComponentSlot slot);
 
     boolean doDefaultShiftClicking(IGameInstance game, int button, GuiContainer gui, ComponentSlot slot);
 

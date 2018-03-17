@@ -24,6 +24,7 @@ package de.ellpeck.rockbottom.api.gui.container;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.inventory.IInventory;
+import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 
@@ -34,6 +35,7 @@ public abstract class ItemContainer{
     public final AbstractEntityPlayer player;
     private final List<ContainerSlot> slots = new ArrayList<>();
     private final Set<IInventory> containedInventories = new HashSet<>();
+    public ItemInstance holdingInst;
 
     public ItemContainer(AbstractEntityPlayer player){
         this.player = player;
@@ -50,6 +52,10 @@ public abstract class ItemContainer{
 
     public ContainerSlot getSlot(int id){
         return this.slots.get(id);
+    }
+
+    public int getIdForSlot(ContainerSlot slot){
+        return this.slots.indexOf(slot);
     }
 
     public Set<IInventory> getContainedInventories(){

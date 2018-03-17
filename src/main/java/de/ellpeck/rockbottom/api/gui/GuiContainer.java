@@ -23,16 +23,12 @@ package de.ellpeck.rockbottom.api.gui;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.IRenderer;
-import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.data.settings.Settings;
-import de.ellpeck.rockbottom.api.entity.EntityItem;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.gui.container.ContainerSlot;
 import de.ellpeck.rockbottom.api.gui.container.ItemContainer;
-import de.ellpeck.rockbottom.api.item.ItemInstance;
-import de.ellpeck.rockbottom.api.net.packet.toserver.PacketDropItem;
-import de.ellpeck.rockbottom.api.util.ApiInternal;
+import de.ellpeck.rockbottom.api.net.packet.toserver.PacketDrop;
 import de.ellpeck.rockbottom.api.util.Colors;
 import de.ellpeck.rockbottom.api.util.Util;
 
@@ -45,7 +41,6 @@ public abstract class GuiContainer extends Gui{
     public final List<ShiftClickBehavior> shiftClickBehaviors = new ArrayList<>();
     public final AbstractEntityPlayer player;
     private ItemContainer container;
-    public ItemInstance holdingInst;
 
     public GuiContainer(AbstractEntityPlayer player, int sizeX, int sizeY){
         super(sizeX, sizeY);
@@ -56,8 +51,8 @@ public abstract class GuiContainer extends Gui{
     public void onClosed(IGameInstance game){
         super.onClosed(game);
 
-        if(this.holdingInst != null){
-            this.dropHeldItem();
+        if(this.container.holdingInst != null){
+            PacketDrop.dropHeldItem(this.player, this.container);
         }
 
         if(this.player.getContainer() == this.container){
@@ -71,11 +66,9 @@ public abstract class GuiContainer extends Gui{
             return true;
         }
 
-        if(this.holdingInst != null && Settings.KEY_GUI_ACTION_1.isKey(button)){
+        if(this.container.holdingInst != null && Settings.KEY_GUI_ACTION_1.isKey(button)){
             if(!this.isMouseOver(game)){
-                this.dropHeldItem();
-                this.holdingInst = null;
-
+                PacketDrop.dropHeldItem(this.player, this.container);
                 return true;
             }
         }
@@ -103,21 +96,11 @@ public abstract class GuiContainer extends Gui{
     public void render(IGameInstance game, IAssetManager manager, IRenderer g){
         super.render(game, manager, g);
 
-        if(this.holdingInst != null){
+        if(this.container.holdingInst != null){
             float mouseX = g.getMouseInGuiX();
             float mouseY = g.getMouseInGuiY();
 
-            g.renderItemInGui(game, manager, this.holdingInst, mouseX-4F, mouseY-4F, 0.8F, Colors.WHITE);
-        }
-    }
-
-    @ApiInternal
-    private void dropHeldItem(){
-        if(RockBottomAPI.getNet().isClient()){
-            RockBottomAPI.getNet().sendToServer(new PacketDropItem(this.player.getUniqueId(), this.holdingInst));
-        }
-        else{
-            EntityItem.spawn(this.player.world, this.holdingInst, this.player.x, this.player.y+1, this.player.facing.x*0.25, 0);
+            g.renderItemInGui(game, manager, this.container.holdingInst, mouseX-4F, mouseY-4F, 0.8F, Colors.WHITE);
         }
     }
 
@@ -161,5 +144,9 @@ public abstract class GuiContainer extends Gui{
 
     public int getSlotOffsetY(){
         return 0;
+    }
+
+    public ItemContainer getContainer(){
+        return this.container;
     }
 }

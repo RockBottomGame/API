@@ -51,7 +51,7 @@ public class ComponentSlot extends GuiComponent{
                 return RockBottomAPI.getInternalHooks().doDefaultShiftClicking(game, button, this.container, this);
             }
             else{
-                return RockBottomAPI.getInternalHooks().doDefaultSlotMovement(game, button, x, y, this);
+                return RockBottomAPI.getInternalHooks().doDefaultSlotMovement(game, button, x, y, this.container, this);
             }
         }
         else{
@@ -71,7 +71,7 @@ public class ComponentSlot extends GuiComponent{
 
     @Override
     public void renderOverlay(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y){
-        if(this.container.holdingInst == null && this.isMouseOverPrioritized(game)){
+        if(this.container.getContainer().holdingInst == null && this.isMouseOverPrioritized(game)){
             ItemInstance instance = this.slot.get();
             if(instance != null){
                 g.describeItem(game, manager, instance);

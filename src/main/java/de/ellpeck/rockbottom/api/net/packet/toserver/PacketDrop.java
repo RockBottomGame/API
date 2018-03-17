@@ -1,5 +1,5 @@
 /*
- * This file ("PacketDropItem.java") is part of the RockBottomAPI by Ellpeck.
+ * This file ("PacketDrop.java") is part of the RockBottomAPI by Ellpeck.
  * View the source code at <https://github.com/RockBottomGame/>.
  * View information on the project at <https://rockbottom.ellpeck.de/>.
  *
@@ -16,65 +16,71 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with the RockBottomAPI. If not, see <http://www.gnu.org/licenses/>.
  *
- * © 2017 Ellpeck
+ * © 2018 Ellpeck
  */
 
 package de.ellpeck.rockbottom.api.net.packet.toserver;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
-import de.ellpeck.rockbottom.api.data.set.DataSet;
+import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.entity.EntityItem;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
-import de.ellpeck.rockbottom.api.item.ItemInstance;
-import de.ellpeck.rockbottom.api.net.NetUtil;
+import de.ellpeck.rockbottom.api.gui.container.ItemContainer;
 import de.ellpeck.rockbottom.api.net.packet.IPacket;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
+import de.ellpeck.rockbottom.api.world.IWorld;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 
 import java.io.IOException;
 import java.util.UUID;
 
-@ApiInternal
-public class PacketDropItem implements IPacket{
+public class PacketDrop implements IPacket{
 
     private UUID playerId;
-    private ItemInstance instance;
 
-    public PacketDropItem(UUID playerId, ItemInstance instance){
-        this.playerId = playerId;
-        this.instance = instance;
+    public PacketDrop(){
     }
 
-    public PacketDropItem(){
+    public PacketDrop(UUID playerId){
+        this.playerId = playerId;
     }
 
     @Override
     public void toBuffer(ByteBuf buf) throws IOException{
         buf.writeLong(this.playerId.getMostSignificantBits());
         buf.writeLong(this.playerId.getLeastSignificantBits());
-
-        DataSet set = new DataSet();
-        this.instance.save(set);
-        NetUtil.writeSetToBuffer(set, buf);
     }
 
     @Override
     public void fromBuffer(ByteBuf buf) throws IOException{
         this.playerId = new UUID(buf.readLong(), buf.readLong());
-
-        DataSet set = new DataSet();
-        NetUtil.readSetFromBuffer(set, buf);
-        this.instance = ItemInstance.load(set);
     }
 
     @Override
     public void handle(IGameInstance game, ChannelHandlerContext context){
-        if(game.getWorld() != null){
-            AbstractEntityPlayer player = game.getWorld().getPlayer(this.playerId);
+        IWorld world = game.getWorld();
+        if(world != null){
+            AbstractEntityPlayer player = world.getPlayer(this.playerId);
             if(player != null){
-                EntityItem.spawn(player.world, this.instance, player.x, player.y+1, player.facing.x*0.25, 0);
+                ItemContainer container = player.getContainer();
+                if(container != null){
+                    dropHeldItem(player, container);
+                }
             }
+        }
+    }
+
+    @ApiInternal
+    public static void dropHeldItem(AbstractEntityPlayer player, ItemContainer container){
+        if(container.holdingInst != null){
+            if(RockBottomAPI.getNet().isClient()){
+                RockBottomAPI.getNet().sendToServer(new PacketDrop(player.getUniqueId()));
+            }
+            else{
+                EntityItem.spawn(player.world, container.holdingInst, player.x, player.y+1, player.facing.x*0.25, 0);
+            }
+            container.holdingInst = null;
         }
     }
 }
