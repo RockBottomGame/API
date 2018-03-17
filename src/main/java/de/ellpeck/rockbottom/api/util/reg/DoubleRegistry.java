@@ -38,9 +38,9 @@ public class DoubleRegistry<T> extends IndexRegistry<T>{
     }
 
     public void unregister(IResourceName name, Integer id){
-        super.unregister(id);
-
         Preconditions.checkArgument(id.equals(this.nameRegistry.get(name)), "Can't unregister name "+name+" and id "+id+" that weren't registered as a matching pair from registry "+this);
+
+        super.unregister(id);
         this.nameRegistry.unregister(name);
     }
 
