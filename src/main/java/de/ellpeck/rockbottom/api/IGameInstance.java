@@ -266,4 +266,7 @@ public interface IGameInstance extends IMod{
     int getHeight();
 
     long getWindow();
+
+    @ApiInternal
+    int getPlayerCap();
 }

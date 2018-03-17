@@ -31,15 +31,18 @@ import java.io.File;
 public class ServerSettings implements IJsonSettings{
 
     public int autosaveIntervalSeconds;
+    public int maxPlayerAmount;
 
     @Override
     public void load(JsonObject object){
         this.autosaveIntervalSeconds = this.get(object, "autosave_interval", 60);
+        this.maxPlayerAmount = this.get(object, "max_players", 100);
     }
 
     @Override
     public void save(JsonObject object){
         this.set(object, "autosave_interval", this.autosaveIntervalSeconds);
+        this.set(object, "max_players", this.maxPlayerAmount);
     }
 
     @Override
