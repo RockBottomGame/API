@@ -54,11 +54,11 @@ public class DoubleRegistry<T> extends IndexRegistry<T>{
 
     @Override
     public void register(Integer id, T value){
-        throw new UnsupportedOperationException("Can't register to double registry "+this.name+" using just the integer key");
+        throw new UnsupportedOperationException("Can't register to double registry "+this+" using just the integer key");
     }
 
     @Override
     public void unregister(Integer id){
-        throw new UnsupportedOperationException("Can't unregister from double registry "+this.name+" using just the integer key");
+        throw new UnsupportedOperationException("Can't unregister from double registry "+this+" using just the integer key");
     }
 }
