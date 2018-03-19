@@ -333,7 +333,7 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
     }
 
     public boolean removeEffect(IEffect effect){
-        for(int i = 0; i < this.effects.size(); i++){
+        for(int i = this.effects.size()-1; i >= 0; i--){
             ActiveEffect active = this.effects.get(i);
             if(active.getEffect() == effect){
                 this.effects.remove(i);
