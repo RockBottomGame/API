@@ -122,4 +122,8 @@ public interface IChunk extends IChunkOrWorld{
      */
     @Deprecated
     int getLowestAirUpwardsInner(TileLayer layer, int x, int y, boolean ignoreReplaceableTiles);
+
+    boolean isPersistent();
+
+    boolean isGenerating();
 }

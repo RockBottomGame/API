@@ -171,4 +171,12 @@ public final class Util{
         int index = s.indexOf(Constants.RESOURCE_SEPARATOR);
         return index > 0 && index < s.length()-1;
     }
+
+    public static void sleepSafe(long time){
+        try{
+            Thread.sleep(time);
+        }
+        catch(InterruptedException ignored){
+        }
+    }
 }

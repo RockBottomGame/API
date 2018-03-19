@@ -45,7 +45,11 @@ public interface IWorld extends IChunkOrWorld{
 
     boolean isPosLoaded(int x, int y);
 
+    boolean isPosLoaded(int x, int y, boolean checkGenerating);
+
     boolean isChunkLoaded(int x, int y);
+
+    boolean isChunkLoaded(int x, int y, boolean checkGenerating);
 
     int getIdForState(TileState state);
 
