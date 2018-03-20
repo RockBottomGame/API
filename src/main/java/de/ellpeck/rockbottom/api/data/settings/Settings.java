@@ -117,12 +117,14 @@ public class Settings implements IPropSettings, IJsonSettings{
 
                 //TODO Remove legacy keybind check
                 JsonElement sub = keybinds.get(name);
-                if(sub.isJsonObject()){
-                    int key = this.get(sub.getAsJsonObject(), "key", keybind.getKey());
-                    keybind.setBind(key);
-                }
-                else{
-                    keybind.setBind(sub.getAsInt());
+                if(sub != null){
+                    if(sub.isJsonObject()){
+                        int key = this.get(sub.getAsJsonObject(), "key", keybind.getKey());
+                        keybind.setBind(key);
+                    }
+                    else{
+                        keybind.setBind(sub.getAsInt());
+                    }
                 }
             }
         }
