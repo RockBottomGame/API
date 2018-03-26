@@ -45,6 +45,9 @@ public interface ISound extends IAsset{
 
     void playAt(float pitch, float volume, double x, double y, double z, boolean loop, float rolloffFactor, float refDistance, float maxDistance);
 
+    @ApiInternal
+    boolean isIndexPlaying(int index);
+
     boolean isPlaying();
 
     void stop();
