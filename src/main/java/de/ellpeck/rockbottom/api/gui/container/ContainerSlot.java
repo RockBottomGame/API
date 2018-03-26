@@ -45,7 +45,7 @@ public class ContainerSlot{
         return true;
     }
 
-    public boolean canRemove(){
+    public boolean canRemove(int amount){
         return true;
     }
 
