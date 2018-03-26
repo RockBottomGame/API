@@ -22,7 +22,10 @@
 package de.ellpeck.rockbottom.api.assets;
 
 import de.ellpeck.rockbottom.api.RockBottomAPI;
+import de.ellpeck.rockbottom.api.util.ApiInternal;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
+
+import java.util.Set;
 
 public interface ISound extends IAsset{
 
@@ -45,4 +48,10 @@ public interface ISound extends IAsset{
     boolean isPlaying();
 
     void stop();
+
+    @ApiInternal
+    void stopIndex(int index);
+
+    @ApiInternal
+    Set<Integer> getPlayingSourceIds();
 }
