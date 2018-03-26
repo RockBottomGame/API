@@ -64,14 +64,7 @@ public class Inventory implements IInventory{
     public ItemInstance remove(int id, int amount){
         ItemInstance inst = this.slots[id];
         if(inst != null){
-            inst.removeAmount(amount);
-
-            if(inst.getAmount() <= 0){
-                this.set(id, null);
-                return null;
-            }
-
-            this.notifyChange(id);
+            this.set(id, inst.removeAmount(amount).nullIfEmpty());
             return inst;
         }
         else{
@@ -139,15 +132,11 @@ public class Inventory implements IInventory{
             else{
                 if(!simulate){
                     this.add(slot, space);
-
                     instance.removeAmount(space);
-                    if(instance.getAmount() <= 0){
-                        return null;
-                    }
                 }
             }
         }
-        return instance;
+        return instance.nullIfEmpty();
     }
 
     public void save(DataSet set){

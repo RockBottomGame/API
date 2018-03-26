@@ -171,6 +171,10 @@ public class ItemInstance implements IAdditionalDataProvider{
         return this.setAmount(this.amount-amount);
     }
 
+    public ItemInstance nullIfEmpty(){
+        return this.getAmount() > 0 ? this : null;
+    }
+
     public ItemInstance copy(){
         ItemInstance instance = new ItemInstance(this.item, this.amount, this.meta);
         if(this.additionalData != null){
