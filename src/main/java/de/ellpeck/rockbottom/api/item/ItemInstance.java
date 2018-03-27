@@ -89,7 +89,7 @@ public class ItemInstance implements IAdditionalDataProvider{
         }
     }
 
-    public static boolean compare(ItemInstance one, ItemInstance other, boolean item, boolean meta, boolean data){
+    public static boolean compare(ItemInstance one, ItemInstance other, boolean item, boolean amount, boolean meta, boolean data){
         if(one == null && other == null){
             return true;
         }
@@ -99,6 +99,12 @@ public class ItemInstance implements IAdditionalDataProvider{
         else{
             if(item){
                 if(one.item != other.item){
+                    return false;
+                }
+            }
+
+            if(amount){
+                if(one.amount != other.amount){
                     return false;
                 }
             }
@@ -207,7 +213,7 @@ public class ItemInstance implements IAdditionalDataProvider{
     }
 
     public boolean isEffectivelyEqual(ItemInstance instance){
-        return compare(this, instance, true, true, true);
+        return compare(this, instance, true, false, true, true);
     }
 
     public String getDisplayName(){
@@ -216,16 +222,7 @@ public class ItemInstance implements IAdditionalDataProvider{
 
     @Override
     public boolean equals(Object o){
-        if(this == o){
-            return true;
-        }
-        if(o instanceof ItemInstance){
-            ItemInstance instance = (ItemInstance)o;
-            return this.meta == instance.meta && this.amount == instance.amount && this.item.equals(instance.item) && (this.additionalData != null ? this.additionalData.equals(instance.additionalData) : instance.additionalData == null);
-        }
-        else{
-            return false;
-        }
+        return this == o || (o instanceof ItemInstance && compare(this, (ItemInstance)o, true, true, true, true));
     }
 
     @Override

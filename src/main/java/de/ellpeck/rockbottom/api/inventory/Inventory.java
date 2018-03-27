@@ -132,8 +132,8 @@ public class Inventory implements IInventory{
             else{
                 if(!simulate){
                     this.add(slot, space);
-                    instance.removeAmount(space);
                 }
+                instance.removeAmount(space);
             }
         }
         return instance.nullIfEmpty();
