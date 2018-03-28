@@ -26,6 +26,8 @@ import de.ellpeck.rockbottom.api.assets.IAssetLoader;
 import de.ellpeck.rockbottom.api.construction.BasicRecipe;
 import de.ellpeck.rockbottom.api.construction.IRecipe;
 import de.ellpeck.rockbottom.api.construction.resource.IResourceRegistry;
+import de.ellpeck.rockbottom.api.construction.smelting.FuelInput;
+import de.ellpeck.rockbottom.api.construction.smelting.SmeltingRecipe;
 import de.ellpeck.rockbottom.api.content.IContentLoader;
 import de.ellpeck.rockbottom.api.content.pack.IContentPackLoader;
 import de.ellpeck.rockbottom.api.data.set.DataSet;
@@ -229,6 +231,20 @@ public final class RockBottomAPI{
     public static final NameRegistry<IEffect> EFFECT_REGISTRY = new NameRegistry<>("effect_registry", false).register();
     @ApiInternal
     public static final NameRegistry<Statistic> STATISTICS_REGISTRY = new NameRegistry<>("statistics_registry", false).register();
+    /**
+     * The registry for all {@link FuelInput} objects that determine which kinds
+     * of items burn for how long as furnace fuel. To register something into
+     * this registry, please use {@link FuelInput#register()}.
+     */
+    @ApiInternal
+    public static final NameRegistry<FuelInput> FUEL_REGISTRY = new NameRegistry<>("fuel_registry", true).register();
+    /**
+     * The registry for all {@link SmeltingRecipe} objects that can be smelted
+     * in any kind of furnace. To register something into this registry, please
+     * use {@link SmeltingRecipe#register()}.
+     */
+    @ApiInternal
+    public static final NameRegistry<SmeltingRecipe> SMELTING_REGISTRY = new NameRegistry<>("smelting_registry", true).register();
 
     /**
      * A set of internal references to API classes that are initialized by the

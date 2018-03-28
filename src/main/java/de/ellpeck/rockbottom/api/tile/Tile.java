@@ -38,6 +38,7 @@ import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.item.ItemTile;
 import de.ellpeck.rockbottom.api.item.ToolType;
 import de.ellpeck.rockbottom.api.render.tile.ITileRenderer;
+import de.ellpeck.rockbottom.api.tile.entity.IFilteredInventory;
 import de.ellpeck.rockbottom.api.tile.entity.TileEntity;
 import de.ellpeck.rockbottom.api.tile.state.IStateHandler;
 import de.ellpeck.rockbottom.api.tile.state.TileProp;
@@ -128,7 +129,15 @@ public class Tile{
     }
 
     public void onRemoved(IWorld world, int x, int y, TileLayer layer){
-
+        if(!world.isClient() && this.canProvideTileEntity()){
+            TileEntity tile = world.getTileEntity(x, y);
+            if(tile != null){
+                IFilteredInventory inv = tile.getTileInventory();
+                if(inv != null){
+                    tile.dropInventory(inv);
+                }
+            }
+        }
     }
 
     public void onAdded(IWorld world, int x, int y, TileLayer layer){
