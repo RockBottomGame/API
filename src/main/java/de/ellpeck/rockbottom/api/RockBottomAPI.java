@@ -156,8 +156,11 @@ public final class RockBottomAPI{
     /**
      * The registry for all {@link IStructure} objects. Use the contents.json
      * file to create a new structure and have it loaded through the content
-     * manager.
+     * manager. If you want to get a structure by its name, use {@link
+     * IStructure#forName(IResourceName)} or if you want to get multiple
+     * structures with similar names, use {@link IStructure#forNamePart(String)}.
      */
+    @ApiInternal
     public static final NameRegistry<IStructure> STRUCTURE_REGISTRY = new NameRegistry<>("structure_registry", true).register();
     /**
      * The registry for all {@link TileState} objects. This registry

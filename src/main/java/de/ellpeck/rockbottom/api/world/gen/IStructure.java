@@ -26,9 +26,27 @@ import de.ellpeck.rockbottom.api.content.IContent;
 import de.ellpeck.rockbottom.api.tile.state.TileState;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 public interface IStructure extends IContent{
 
     IResourceName ID = RockBottomAPI.createInternalRes("structure");
+
+    static IStructure forName(IResourceName name){
+        return RockBottomAPI.STRUCTURE_REGISTRY.get(name);
+    }
+
+    static List<IStructure> forNamePart(String part){
+        List<IStructure> list = new ArrayList<>();
+        for(Map.Entry<IResourceName, IStructure> entry : RockBottomAPI.STRUCTURE_REGISTRY.getUnmodifiable().entrySet()){
+            if(entry.getKey().toString().contains(part)){
+                list.add(entry.getValue());
+            }
+        }
+        return list;
+    }
 
     int getWidth();
 
