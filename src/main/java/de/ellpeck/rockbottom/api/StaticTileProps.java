@@ -80,6 +80,10 @@ public final class StaticTileProps{
      */
     public static final BoolProp HAS_CANISTER = new BoolProp("has_canister", false);
 
+    /**
+     * An enum of log types that are used for the {@link #LOG_VARIANT}
+     * property.
+     */
     public enum LogType{
         PLACED,
         BRANCH_LEFT,
@@ -90,6 +94,10 @@ public final class StaticTileProps{
         ROOT_LEFT,
         ROOT_RIGHT;
 
+        /**
+         * @return If a certain log type is considered to be natural, meaning
+         * not player-placed
+         */
         public boolean isNatural(){
             return this != PLACED;
         }

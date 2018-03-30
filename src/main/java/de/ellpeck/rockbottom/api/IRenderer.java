@@ -32,6 +32,7 @@ import de.ellpeck.rockbottom.api.render.engine.IVAO;
 import de.ellpeck.rockbottom.api.render.engine.IVBO;
 import de.ellpeck.rockbottom.api.render.engine.TextureBank;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
+import org.lwjgl.opengl.GL15;
 
 import java.nio.FloatBuffer;
 import java.util.List;
@@ -44,66 +45,276 @@ import java.util.List;
  */
 public interface IRenderer extends IDisposable{
 
+    /**
+     * Sets the {@link IShaderProgram} that the game should fall back to when
+     * {@link #setProgram(IShaderProgram)} is called with a null parameter. This
+     * should only be used internally to set the world and gui shaders.
+     *
+     * @param program The new default shader program
+     */
+    @ApiInternal
     void setDefaultProgram(IShaderProgram program);
 
+    /**
+     * Sets the {@link IShaderProgram} that the renderer should use to draw.
+     * Calling this method while the renderer is active will cause the current
+     * vertices to be flushed and rendered with the last set shader program.
+     *
+     * @param program The new shader program
+     */
     void setProgram(IShaderProgram program);
 
+    /**
+     * Sets the {@link ITexture} that the renderer should render any vertices
+     * with. Calling this method while the renderer is active will cause the
+     * current vertices to be flushed and rendererd with the last set texture.
+     *
+     * @param texture The new texture
+     */
     void setTexture(ITexture texture);
 
+    /**
+     * Adds a certain region of a texture to this renderer. This method gets
+     * called by all {@link ITexture#draw(float, float)} methods, so using those
+     * will be more convenient in most cases.
+     *
+     * @param texture The texture to set
+     * @param x       The top left x coordinate
+     * @param y       The top left y coordinate
+     * @param x2      The top right x coordinate
+     * @param y2      The top right y coordinate
+     * @param x3      The bottom right x coordinate
+     * @param y3      The bottom right y coordinate
+     * @param x4      The bottom left x coordinate
+     * @param y4      The bottom left y coordinate
+     * @param srcX    The top left x coordinate of the texture
+     * @param srcY    The top left y coordinate of the texture
+     * @param srcX2   The bottom right x coordinate of the texture
+     * @param srcY2   The bottom right y coordinate of the texture
+     * @param light   The light that the four corners of the drawn region should
+     *                interpolate between, or null if there should be no light
+     *                influence
+     * @param filter  A filter color to modify this texture by
+     */
     void addTexturedRegion(ITexture texture, float x, float y, float x2, float y2, float x3, float y3, float x4, float y4, float srcX, float srcY, float srcX2, float srcY2, int[] light, int filter);
 
+    /**
+     * Adds a triangle to this renderer. This method gets called by {@link
+     * #addTexturedRegion(ITexture, float, float, float, float, float, float,
+     * float, float, float, float, float, float, int[], int)} twice to draw the
+     * two triangles of the square (or square-ish) region.
+     *
+     * @param x1     The first x coordinate
+     * @param y1     The first y coordinate
+     * @param x2     The second x coordinate
+     * @param y2     The second y coordinate
+     * @param x3     The third x coordinate
+     * @param y3     The third y coordinate
+     * @param color1 The color at the first corner
+     * @param color2 The color at the second corner
+     * @param color3 The color at the third corner
+     * @param u1     The first texture x
+     * @param v1     The first texture y
+     * @param u2     The second texture x
+     * @param v2     The second texture y
+     * @param u3     The third texture x
+     * @param v3     The third texture y
+     */
     void addTriangle(float x1, float y1, float x2, float y2, float x3, float y3, int color1, int color2, int color3, float u1, float v1, float u2, float v2, float u3, float v3);
 
+    /**
+     * Puts a single vertex component into this renderer and returns it for
+     * convenience
+     *
+     * @param f The component to add
+     *
+     * @return This renderer
+     */
     IRenderer put(float f);
 
+    /**
+     * Puts a single vertex into this renderer. This method gets called three
+     * times by {@link #addTriangle(float, float, float, float, float, float,
+     * int, int, int, float, float, float, float, float, float)} to add the
+     * three vertices for the three corners.
+     *
+     * @param x     The x coordinate
+     * @param y     The y coordinate
+     * @param color The color
+     * @param u     The texture x
+     * @param v     The texture y
+     */
     void addVertex(float x, float y, int color, float u, float v);
 
+    /**
+     * Begins rendering with this renderer. This method is internal and there
+     * should not be any reasons for a mod to call it.
+     */
+    @ApiInternal
     void begin();
 
+    /**
+     * Finishes rendering with this renderer and flushes the current rendering
+     * context. This method is internal and there should not be any reasons for
+     * a mod to call it.
+     */
+    @ApiInternal
     void end();
 
+    /**
+     * Flushes the current rendering context, rendering everything that has been
+     * added to the renderer since the last call to this method. This method is
+     * internal and there should not be any reasons for a mod to call it.
+     */
+    @ApiInternal
     void flush();
 
+    /**
+     * Rotates this renderer's rendering context by the given angle. This will
+     * only affect any vertices that are added to this renderer after calling
+     * this method.
+     *
+     * @param angle The angle
+     */
     void rotate(float angle);
 
+    /**
+     * Rather than rotating by a given angle (see {@link #rotate(float)}), this
+     * method merely sets the rotation of this renderer to the given rotation.
+     * You can use this to reset the rotation back to 0 or its original state.
+     *
+     * @param angle The angle
+     */
     void setRotation(float angle);
 
+    /**
+     * Sets the center of rotation for this renderer. This will only affect any
+     * vertices that are added to this renerer after calling this method.
+     *
+     * @param x The rotation center's x
+     * @param y The rotation center's y
+     */
     void setRotationCenter(float x, float y);
 
+    /**
+     * @return This renderer's rotation center's x
+     */
     float getRotationCenterX();
 
+    /**
+     * @return This renderer's rotation center's y
+     */
     float getRotationCenterY();
 
+    /**
+     * Translates this renderer's origin by the given amount. This will only
+     * affect any vertices that are added to this renderer after calling this
+     * method.
+     *
+     * @param x The origin x
+     * @param y The origin y
+     */
     void translate(float x, float y);
 
+    /**
+     * Rather than translating by a certain amount (see {@link #translate(float,
+     * float)}), this method sets the translation of this renderer to the given
+     * x and y coordinates.
+     *
+     * @param x The origin x
+     * @param y The origin y
+     */
     void setTranslation(float x, float y);
 
+    /**
+     * Scales the renderer by the given amount. This will only affect any
+     * vertices that are added to this renderer after calling this method.
+     *
+     * @param x The x scale
+     * @param y The y scale
+     */
     void scale(float x, float y);
 
+    /**
+     * Rather than scaling by a given amount (see {@link #scale(float, float)}),
+     * this method sets the scale of the renderer directly.
+     *
+     * @param x The x scale
+     * @param y The y scale
+     */
     void setScale(float x, float y);
 
+    /**
+     * Mirrors the renderer either horizontally or vertically. This will only
+     * affect any vertices that are added to this renderer after calling this
+     * method.
+     *
+     * @param hor  If the renderer should be mirrored horizontally
+     * @param vert If the renderer should be mirrored vertically
+     */
     void mirror(boolean hor, boolean vert);
 
+    /**
+     * Rather than mirroring the renderer (see {@link #mirror(boolean,
+     * boolean)}), this method sets the mirrored states of this renderer to the
+     * given values.
+     *
+     * @param hor  If the renderer should be mirrored horizontally
+     * @param vert If the renderer should be mirrored vertically
+     */
     void setMirrored(boolean hor, boolean vert);
 
+    /**
+     * Resets this renderer's translation, rotation, scale, mirrored states and
+     * texture origin back to their default values.
+     */
     void resetTransformation();
 
+    /**
+     * @return This renderer's rotation
+     */
     float getRotation();
 
+    /**
+     * @return This renderer's translation x
+     */
     float getTranslationX();
 
+    /**
+     * @return This renderer's translation y
+     */
     float getTranslationY();
 
+    /**
+     * @return This renderer's x scale
+     */
     float getScaleX();
 
+    /**
+     * @return This renderer's y scale
+     */
     float getScaleY();
 
+    /**
+     * @return Whether this renderer is mirrored horizontally
+     */
     boolean isMirroredHor();
 
+    /**
+     * @return Whether this renderer is mirrored vertically
+     */
     boolean isMirroredVert();
 
+    /**
+     * @return The renderer's current shader program, set using {@link
+     * #setProgram(IShaderProgram)}
+     */
     IShaderProgram getProgram();
 
+    /**
+     * @return The renderer's current texture, set using {@link
+     * #setTexture(ITexture)}
+     */
     ITexture getTexture();
 
     /**
@@ -138,6 +349,22 @@ public interface IRenderer extends IDisposable{
      */
     void renderItemInGui(IGameInstance game, IAssetManager manager, ItemInstance slot, float x, float y, float scale, int color);
 
+    /**
+     * Renders an item and its amount. This is similar to {@link
+     * #renderSlotInGui(IGameInstance, IAssetManager, ItemInstance, float,
+     * float, float, boolean)}, only that it doesn't render the box below the
+     * item.
+     *
+     * @param game          The game instance
+     * @param manager       The asset manager
+     * @param slot          The item to draw
+     * @param x             The x coordinate
+     * @param y             The y coordinate
+     * @param scale         The scale
+     * @param color         The color to filter the item's renderer with
+     * @param displayAmount If the amount of items in this instance should be
+     *                      displayed as a little number below the item
+     */
     void renderItemInGui(IGameInstance game, IAssetManager manager, ItemInstance slot, float x, float y, float scale, int color, boolean displayAmount);
 
     /**
@@ -234,29 +461,80 @@ public interface IRenderer extends IDisposable{
      */
     void addFilledRect(float x, float y, float width, float height, int color);
 
+    /**
+     * Activates a certain texture bank. This can be used to draw from multiple
+     * textures at the same time, however it requires a custom shader to do so.
+     *
+     * @param bank The texture bank to read/write to and from
+     */
     void activateTextureBank(TextureBank bank);
 
+    /**
+     * Unbinds the currently bound texture
+     */
     void unbindTexture();
 
+    /**
+     * Unbinds all currently bound textures in all banks
+     */
     void unbindAllTextures();
 
+    /**
+     * Unbinds the currently bound vao
+     */
     void unbindVAO();
 
+    /**
+     * Unbinds the currently bound vbo
+     */
     void unbindVBO();
 
+    /**
+     * Unbinds the currently bound shader program
+     */
     void unbindShaderProgram();
 
+    /**
+     * Creates a new vao for any modder to use
+     *
+     * @return A new vao
+     */
     IVAO createVAO();
 
+    /**
+     * Creates a new vbo for any modder to use
+     *
+     * @param isStatic Wether or not this vbo should use {@link
+     *                 GL15#GL_STATIC_DRAW} or {@link GL15#GL_DYNAMIC_DRAW}
+     */
     IVBO createVBO(boolean isStatic);
 
+    /**
+     * Calculates the gui and world scale. This is an internal method that
+     * should not be called by modders.
+     */
     @ApiInternal
     void calcScales();
 
+    /**
+     * Gets the display's ratio as a float. For example, if the window's current
+     * display ratio was 16/9, that is the value that this method would return.
+     *
+     * @return The display ratio
+     */
     float getDisplayRatio();
 
+    /**
+     * @return The scale with which the gui is currently being rendered. This
+     * factors in both the gui scale option and the {@link #getDisplayRatio()}.
+     */
     float getGuiScale();
 
+    /**
+     * @return The scale with which the world is currently being rendered. This
+     * factors in both the world scale option and the {@link
+     * #getDisplayRatio()}.
+     */
     float getWorldScale();
 
     float getWidthInWorld();

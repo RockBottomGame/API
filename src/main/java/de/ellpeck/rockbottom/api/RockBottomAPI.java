@@ -36,7 +36,9 @@ import de.ellpeck.rockbottom.api.data.settings.Keybind;
 import de.ellpeck.rockbottom.api.data.settings.Settings;
 import de.ellpeck.rockbottom.api.effect.IEffect;
 import de.ellpeck.rockbottom.api.entity.Entity;
+import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.entity.player.knowledge.Information;
+import de.ellpeck.rockbottom.api.entity.player.statistics.IStatistics;
 import de.ellpeck.rockbottom.api.entity.player.statistics.Statistic;
 import de.ellpeck.rockbottom.api.event.IEventHandler;
 import de.ellpeck.rockbottom.api.gui.IMainMenuTheme;
@@ -76,6 +78,12 @@ public final class RockBottomAPI{
      */
     public static final String VERSION = "0.2.22";
 
+    /**
+     * A list of all the registries in the game. This is only used for
+     * outputting the amount of registered items in each registry and does not
+     * serve a deeper purpose. If you want to, you can register your registry
+     * using {@link IRegistry#register()}.
+     */
     @ApiInternal
     private static final List<IRegistry> ALL_REGISTRIES = new ArrayList<>();
     /**
@@ -228,8 +236,20 @@ public final class RockBottomAPI{
      * their condition is met.
      */
     public static final IndexRegistry<ISpecialCursor> SPECIAL_CURSORS = new IndexRegistry<>("special_cursor_registry", Integer.MAX_VALUE, true).register();
+    /**
+     * The registry for all {@link IEffect} objects that can be applied to any
+     * entity. To register something into this registry, use {@link
+     * IEffect#register()}.
+     */
     @ApiInternal
     public static final NameRegistry<IEffect> EFFECT_REGISTRY = new NameRegistry<>("effect_registry", false).register();
+    /**
+     * The registry for all {@link Statistic} objects that track certain things
+     * in the game. To registry something into this registry, use {@link
+     * Statistic#register()}. To get a registry and/or modify its value, use
+     * {@link IStatistics} which you can obtain from any {@link
+     * AbstractEntityPlayer}.
+     */
     @ApiInternal
     public static final NameRegistry<Statistic> STATISTICS_REGISTRY = new NameRegistry<>("statistics_registry", false).register();
     /**
@@ -310,6 +330,14 @@ public final class RockBottomAPI{
         return internals.getMod();
     }
 
+    /**
+     * Returns the {@link IContentPackLoader} object initialized by the game on
+     * startup. The content pack loader contains a set of methods to deal with
+     * content pack interaction and loading, finding and organizing content
+     * packs.
+     *
+     * @return The content pack loader
+     */
     public static IContentPackLoader getContentPackLoader(){
         return internals.getContent();
     }
@@ -403,15 +431,37 @@ public final class RockBottomAPI{
         return getApiHandler().logger();
     }
 
+
+    /**
+     * This method is used to register a registry. For more information, see
+     * {@link #ALL_REGISTRIES}. Use {@link IRegistry#register()} to register a
+     * registry.
+     *
+     * @param registry The registry to register
+     */
+    @ApiInternal
     public static void registerRegistry(IRegistry registry){
         Preconditions.checkArgument(!ALL_REGISTRIES.contains(registry), "Registry "+registry+" was already registered!");
         ALL_REGISTRIES.add(registry);
     }
 
+    /**
+     * Returns a list of all the registries in the game
+     *
+     * @return The list of registries
+     */
     public static List<IRegistry> getAllRegistries(){
         return Collections.unmodifiableList(ALL_REGISTRIES);
     }
 
+    /**
+     * This is an internal method that sets all of the important game-related
+     * constants like the {@link IGameInstance} or {@link IApiHandler}. Do not
+     * call this method as it will throw an {@link IllegalStateException} at all
+     * circumstances
+     *
+     * @param intern The internals
+     */
     @ApiInternal
     public static void setInternals(Internals intern){
         Preconditions.checkState(internals == null, "Mod tried to modify internal handlers - This is not allowed!");
