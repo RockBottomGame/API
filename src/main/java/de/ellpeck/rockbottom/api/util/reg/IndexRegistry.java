@@ -51,6 +51,10 @@ public class IndexRegistry<T> implements IRegistry<Integer, T>{
         RockBottomAPI.logger().config("Registered "+value+" with id "+id+" into registry "+this);
     }
 
+    public void registerNextFree(T value){
+        this.register(this.getNextFreeId(), value);
+    }
+
     @Override
     public T get(Integer id){
         if(id > this.max){

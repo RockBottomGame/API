@@ -111,7 +111,8 @@ public final class RockBottomAPI{
     /**
      * The registry for all {@link IPacket} types. To register into this
      * registry, you can use {@link IndexRegistry#getNextFreeId()} to determine
-     * an id for the packet.
+     * an id for the packet, or directly register it using {@link
+     * IndexRegistry#registerNextFree(Object)}.
      */
     public static final IndexRegistry<Class<? extends IPacket>> PACKET_REGISTRY = new IndexRegistry<>("packet_registry", Byte.MAX_VALUE, false).register();
     /**

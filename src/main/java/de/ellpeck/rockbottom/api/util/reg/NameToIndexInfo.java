@@ -54,7 +54,7 @@ public class NameToIndexInfo implements IPropSettings, IJsonSettings{
             IResourceName key = entry.getKey();
 
             if(this.getId(key) < 0){
-                this.reg.register(this.reg.getNextFreeId(), key);
+                this.reg.registerNextFree(key);
                 this.needsSave = true;
             }
         }
