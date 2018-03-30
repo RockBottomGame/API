@@ -25,7 +25,6 @@ import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.inventory.IInventory;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
-import de.ellpeck.rockbottom.api.util.ApiInternal;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 
 import java.util.*;
@@ -111,11 +110,6 @@ public abstract class ItemContainer{
 
     public void onClosed(){
 
-    }
-
-    @ApiInternal
-    public int getUnboundId(){
-        return -1;
     }
 
     public abstract IResourceName getName();

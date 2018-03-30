@@ -55,7 +55,7 @@ public abstract class GuiContainer extends Gui{
             PacketDrop.dropHeldItem(this.player, this.container);
         }
 
-        if(this.player.getContainer() == this.container){
+        if(this.shouldCloseContainer() && this.player.getContainer() == this.container){
             this.player.closeContainer();
         }
     }
@@ -107,6 +107,10 @@ public abstract class GuiContainer extends Gui{
     @Override
     public boolean doesPauseGame(){
         return false;
+    }
+
+    public boolean shouldCloseContainer(){
+        return true;
     }
 
     public static class ShiftClickBehavior{
