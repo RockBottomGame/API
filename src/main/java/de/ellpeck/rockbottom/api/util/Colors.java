@@ -108,7 +108,7 @@ public final class Colors{
     }
 
     public static String toFormattingCode(float r, float g, float b){
-        return "&("+r+","+g+","+b+")";
+        return "&("+r+','+g+','+b+')';
     }
 
     public static void bind(float r, float g, float b, float a){

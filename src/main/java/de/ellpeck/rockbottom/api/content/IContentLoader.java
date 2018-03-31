@@ -40,7 +40,7 @@ public interface IContentLoader<T extends IContent>{
 
     void disableContent(IGameInstance game, IResourceName resourceName);
 
-    default boolean dealWithSpecialCases(IGameInstance game, String resourceName, String path, JsonElement element, String elementName, IMod loadingMod, ContentPack pack) throws Exception{
+    default boolean dealWithSpecialCases(IGameInstance game, String resourceName, String path, JsonElement element, String elementName, IMod loadingMod, ContentPack pack){
         return false;
     }
 

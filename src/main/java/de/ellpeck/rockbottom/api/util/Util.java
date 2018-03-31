@@ -80,7 +80,7 @@ public final class Util{
         return gridPos*Constants.CHUNK_SIZE;
     }
 
-    public static void deleteFolder(File file) throws Exception{
+    public static void deleteFolder(File file){
         if(file.isDirectory()){
             for(File child : file.listFiles()){
                 deleteFolder(child);

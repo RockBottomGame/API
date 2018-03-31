@@ -49,7 +49,7 @@ public class ResInfo{
 
     public ResInfo(Item item, int meta){
         int max = Math.min(Short.MAX_VALUE, item.getHighestPossibleMeta());
-        Preconditions.checkArgument(meta >= 0 && meta <= max, "Tried assigning meta "+meta+" to resource info with item "+item+" which is less than 0 or greater than max "+max+"!");
+        Preconditions.checkArgument(meta >= 0 && meta <= max, "Tried assigning meta "+meta+" to resource info with item "+item+" which is less than 0 or greater than max "+max+'!');
 
         this.item = item;
         this.meta = meta;

@@ -29,7 +29,6 @@ import de.ellpeck.rockbottom.api.world.IWorld;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 
-import java.io.IOException;
 import java.util.UUID;
 
 @ApiInternal
@@ -45,13 +44,13 @@ public class PacketDeath implements IPacket{
     }
 
     @Override
-    public void toBuffer(ByteBuf buf) throws IOException{
+    public void toBuffer(ByteBuf buf){
         buf.writeLong(this.entityId.getMostSignificantBits());
         buf.writeLong(this.entityId.getLeastSignificantBits());
     }
 
     @Override
-    public void fromBuffer(ByteBuf buf) throws IOException{
+    public void fromBuffer(ByteBuf buf){
         this.entityId = new UUID(buf.readLong(), buf.readLong());
     }
 

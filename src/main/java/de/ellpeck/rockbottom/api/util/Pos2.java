@@ -75,6 +75,6 @@ public class Pos2{
 
     @Override
     public String toString(){
-        return "{"+this.x+", "+this.y+"}";
+        return "{"+this.x+", "+this.y+'}';
     }
 }

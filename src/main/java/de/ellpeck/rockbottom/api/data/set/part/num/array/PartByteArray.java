@@ -58,7 +58,7 @@ public class PartByteArray extends BasicDataPart<byte[]>{
     }
 
     @Override
-    public JsonElement write() throws Exception{
+    public JsonElement write(){
         JsonArray array = new JsonArray();
         for(int i = 0; i < this.data.length; i++){
             array.add(this.data[i]);
@@ -67,7 +67,7 @@ public class PartByteArray extends BasicDataPart<byte[]>{
     }
 
     @Override
-    public void read(JsonElement element) throws Exception{
+    public void read(JsonElement element){
         JsonArray array = element.getAsJsonArray();
         this.data = new byte[array.size()];
 

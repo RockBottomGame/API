@@ -49,12 +49,12 @@ public class PartDouble extends BasicDataPart<Double>{
     }
 
     @Override
-    public JsonElement write() throws Exception{
+    public JsonElement write(){
         return new JsonPrimitive(this.data);
     }
 
     @Override
-    public void read(JsonElement element) throws Exception{
+    public void read(JsonElement element){
         this.data = element.getAsDouble();
     }
 }

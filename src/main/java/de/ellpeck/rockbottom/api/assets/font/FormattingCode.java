@@ -83,7 +83,7 @@ public class FormattingCode{
     }
 
     public FormattingCode registerAsDefault(){
-        Preconditions.checkArgument(this.format != ' ' && !DEFAULT_CODES.containsKey(this.format), "Tried to register two formatting codes as a default with key "+this.format+"!");
+        Preconditions.checkArgument(this.format != ' ' && !DEFAULT_CODES.containsKey(this.format), "Tried to register two formatting codes as a default with key "+this.format+'!');
         DEFAULT_CODES.put(this.format, this);
         return this;
     }

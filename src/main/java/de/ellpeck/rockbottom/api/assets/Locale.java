@@ -54,7 +54,7 @@ public class Locale implements IAsset{
 
             this.localization.put(unloc, loc);
 
-            RockBottomAPI.logger().warning("Localization with name "+unloc+" is missing from locale with name "+this.name+"!");
+            RockBottomAPI.logger().warning("Localization with name "+unloc+" is missing from locale with name "+this.name+'!');
         }
 
         if(format == null || format.length <= 0){

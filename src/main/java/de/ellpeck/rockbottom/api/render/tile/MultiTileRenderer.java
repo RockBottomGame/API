@@ -50,7 +50,7 @@ public class MultiTileRenderer<T extends MultiTile> extends DefaultTileRenderer<
         for(int x = 0; x < tile.getWidth(); x++){
             for(int y = 0; y < tile.getHeight(); y++){
                 if(tile.isStructurePart(x, y)){
-                    this.textures.put(new Pos2(x, y), this.texture.addSuffix("."+x+"."+y));
+                    this.textures.put(new Pos2(x, y), this.texture.addSuffix("."+x+'.'+y));
                 }
             }
         }

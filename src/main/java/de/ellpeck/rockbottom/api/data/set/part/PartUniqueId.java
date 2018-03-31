@@ -50,7 +50,7 @@ public class PartUniqueId extends BasicDataPart<UUID>{
     }
 
     @Override
-    public JsonElement write() throws Exception{
+    public JsonElement write(){
         JsonObject object = new JsonObject();
         object.addProperty("most", this.data.getMostSignificantBits());
         object.addProperty("least", this.data.getLeastSignificantBits());
@@ -58,7 +58,7 @@ public class PartUniqueId extends BasicDataPart<UUID>{
     }
 
     @Override
-    public void read(JsonElement element) throws Exception{
+    public void read(JsonElement element){
         JsonObject object = element.getAsJsonObject();
         this.data = new UUID(object.get("most").getAsLong(), object.get("least").getAsLong());
     }
