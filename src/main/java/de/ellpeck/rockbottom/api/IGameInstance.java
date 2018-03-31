@@ -40,6 +40,7 @@ import de.ellpeck.rockbottom.api.util.ApiInternal;
 import de.ellpeck.rockbottom.api.world.DynamicRegistryInfo;
 import de.ellpeck.rockbottom.api.world.IWorld;
 import de.ellpeck.rockbottom.api.world.WorldInfo;
+import org.lwjgl.glfw.GLFW;
 
 import java.io.File;
 import java.net.URLClassLoader;
@@ -69,8 +70,31 @@ public interface IGameInstance extends IMod{
     @ApiInternal
     void openIngameMenu();
 
+    /**
+     * Enqueues an action to be executed next tick. This is done synchronously,
+     * meaning that you can call this function from a different thread without
+     * causing concurrent modification issues.
+     *
+     * @param action    The action to be executed
+     * @param object    An object you can pass for later use in the action
+     *                  consumer
+     * @param condition The condition for this action to be performed. If not
+     *                  met, the action will be kept in the queue until the
+     *                  condition is met, at which point it will be executed and
+     *                  removed from the queue
+     * @param <T>       A user-chosen generic type for the passed additional
+     *                  object
+     */
     <T> void enqueueAction(BiConsumer<IGameInstance, T> action, T object, Predicate<IGameInstance> condition);
 
+    /**
+     * @param action The action to be executed
+     * @param object An object you can pass for later use in the action
+     *               consumer
+     * @param <T>    A user-chosen generic typ for the passed additional object
+     *
+     * @see #enqueueAction(BiConsumer, Object)
+     */
     <T> void enqueueAction(BiConsumer<IGameInstance, T> action, T object);
 
     /**
@@ -261,10 +285,35 @@ public interface IGameInstance extends IMod{
      */
     IToaster getToaster();
 
+    /**
+     * Gets the current width of the window in pixels
+     *
+     * @return The width
+     *
+     * @throws UnsupportedOperationException on the dedicated server
+     * @see IRenderer#getWidthInGui()
+     * @see IRenderer#getWidthInWorld()
+     */
     int getWidth();
 
+    /**
+     * Gets the current height of the window in pixels
+     *
+     * @return The height
+     *
+     * @throws UnsupportedOperationException on the dedicated server
+     * @see IRenderer#getHeightInGui()
+     * @see IRenderer#getHeightInWorld()
+     */
     int getHeight();
 
+    /**
+     * Gets the {@link GLFW} pointer to the window that is open.
+     *
+     * @return The window pointer
+     *
+     * @throws UnsupportedOperationException on the dedicated server
+     */
     long getWindow();
 
     @ApiInternal

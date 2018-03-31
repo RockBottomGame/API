@@ -27,11 +27,9 @@ import de.ellpeck.rockbottom.api.assets.texture.ITexture;
 import de.ellpeck.rockbottom.api.event.impl.TooltipEvent;
 import de.ellpeck.rockbottom.api.gui.container.ItemContainer;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
-import de.ellpeck.rockbottom.api.render.engine.IDisposable;
-import de.ellpeck.rockbottom.api.render.engine.IVAO;
-import de.ellpeck.rockbottom.api.render.engine.IVBO;
-import de.ellpeck.rockbottom.api.render.engine.TextureBank;
+import de.ellpeck.rockbottom.api.render.engine.*;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
+import de.ellpeck.rockbottom.api.util.Util;
 import org.lwjgl.opengl.GL15;
 
 import java.nio.FloatBuffer;
@@ -95,6 +93,10 @@ public interface IRenderer extends IDisposable{
      *                interpolate between, or null if there should be no light
      *                influence
      * @param filter  A filter color to modify this texture by
+     *
+     * @see VertexProcessor#addTexturedRegion(IRenderer, ITexture, float, float,
+     * float, float, float, float, float, float, float, float, float, float,
+     * int, int, int, int)
      */
     void addTexturedRegion(ITexture texture, float x, float y, float x2, float y2, float x3, float y3, float x4, float y4, float srcX, float srcY, float srcX2, float srcY2, int[] light, int filter);
 
@@ -119,6 +121,9 @@ public interface IRenderer extends IDisposable{
      * @param v2     The second texture y
      * @param u3     The third texture x
      * @param v3     The third texture y
+     *
+     * @see VertexProcessor#addTriangle(IRenderer, float, float, float, float,
+     * float, float, int, int, int, float, float, float, float, float, float)
      */
     void addTriangle(float x1, float y1, float x2, float y2, float x3, float y3, int color1, int color2, int color3, float u1, float v1, float u2, float v2, float u3, float v3);
 
@@ -143,6 +148,9 @@ public interface IRenderer extends IDisposable{
      * @param color The color
      * @param u     The texture x
      * @param v     The texture y
+     *
+     * @see VertexProcessor#addVertex(IRenderer, float, float, int, float,
+     * float)
      */
     void addVertex(float x, float y, int color, float u, float v);
 
@@ -537,37 +545,134 @@ public interface IRenderer extends IDisposable{
      */
     float getWorldScale();
 
+    /**
+     * @return The width of the currently visible area of the world, in pixels.
+     *
+     * @see #getWidthInGui()
+     */
     float getWidthInWorld();
 
+    /**
+     * @return The height of the currently visible area of the world, in pixels.
+     *
+     * @see #getHeightInGui()
+     */
     float getHeightInWorld();
 
+    /**
+     * @return The width of the currently visible area of a gui, in pixels. This
+     * is {@link IGameInstance#getWidth()} multiplied by {@link
+     * #getGuiScale()}.
+     *
+     * @see #getWidthInWorld()
+     */
     float getWidthInGui();
 
+    /**
+     * @return The height of the currently visible area of a gui, in pixels.
+     * This is {@link IGameInstance#getHeight()} multiplied by {@link
+     * #getGuiScale()}.
+     *
+     * @see #getHeightInWorld()
+     */
     float getHeightInGui();
 
+    /**
+     * @return The y position of the mouse on gui scale level
+     *
+     * @see #getGuiScale()
+     */
     float getMouseInGuiX();
 
+    /**
+     * @return The y position of the mouse on gui scale level
+     *
+     * @see #getGuiScale()
+     */
     float getMouseInGuiY();
 
+    /**
+     * @return If the renderer is currently in debug mode, meaning the debug
+     * menu with a lot of additional information is open. This is activated by
+     * pressing F1.
+     */
     boolean isDebug();
 
+    /**
+     * @return If the renderer is currently in item info debug mode, meaning
+     * hovering over an item in an inventory will reveal additional information
+     * about its status. This is activated by pressing F5.
+     */
     boolean isItemInfoDebug();
 
+    /**
+     * @return If the renderer is currently in chunk border debug mode, meaning
+     * that the borders of chunks will be shown in the world as green lines.
+     * This is activated by pressing F6.
+     */
     boolean isChunkBorderDebug();
 
+    /**
+     * @return If the renderer is currently in gui debug mode, meaning that
+     * opening and looking at a gui will show the bounding boxes of all of their
+     * components, along with their names and positions. This is activated by
+     * pressing F4.
+     */
     boolean isGuiDebug();
 
+    /**
+     * @return If the renderer is currently in line debug mode, meaning that it
+     * will render a direct line between the drawn vertices rather than actually
+     * filling them with color or a texture. This is activated by pressing F2.
+     */
     boolean isLineDebug();
 
+    /**
+     * Returns the x position of the tile that the mouse is currently over.
+     * Rounding this value down using something like {@link Util#floor(double)}
+     * will reveal the tile's grid position in the world, whereas the decimal
+     * will reveal the percentage of how far into the tile the mouse cursor is.
+     *
+     * @return The x position of the moused tile
+     */
     double getMousedTileX();
 
+    /**
+     * Returns the y position of the tile that the mouse is currently over.
+     * Rounding this value down using something like {@link Util#floor(double)}
+     * will reveal the tile's grid position in the world, whereas the decimal
+     * will reveal the percentage of how far into the tile the mouse cursor is.
+     *
+     * @return The y position of the moused tile
+     */
     double getMousedTileY();
 
+    /**
+     * @return The amount of flushes that this renderer has done since the last
+     * render frame.
+     *
+     * @see #flush()
+     */
     int getFlushes();
 
+    /**
+     * Sets the background color for this renderer to clear the screen with.
+     * This is used for the sky and the main menu background's color.
+     *
+     * @param color The color
+     */
     void backgroundColor(int color);
 
+    /**
+     * Gets the current vertices that this renderer is about to render. These
+     * should only be modified using {@link #put(float)}.
+     *
+     * @return The vertices
+     */
     FloatBuffer getVertices();
 
+    /**
+     * @return The amount of vertices that are currently in the buffer
+     */
     int getVertexAmount();
 }

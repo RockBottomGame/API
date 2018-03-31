@@ -35,11 +35,15 @@ import de.ellpeck.rockbottom.api.world.gen.biome.Biome;
 
 /**
  * This class houses all of the game's default content like all the {@link
- * Tile}, {@link Item}, {@link Biome} objects as static variables that can be
- * accessed from anywhere.
+ * Tile}, {@link Item}, {@link Biome}, {@link IEffect} and {@link
+ * IResourceRegistry} entry objects as static variables that can be accessed
+ * from anywhere.
  */
 public final class GameContent{
 
+    /*
+        ---TILES---
+     */
     public static final Tile TILE_AIR = getTile("air");
     public static final Tile TILE_SOIL = getTile("soil").addEffectiveTool(ToolType.SHOVEL, 0).setForceDrop().setMaxAmount(100);
     public static final Tile TILE_GRASS = getTile("grass").addEffectiveTool(ToolType.SHOVEL, 0).setForceDrop().setMaxAmount(100);
@@ -66,6 +70,9 @@ public final class GameContent{
     public static final Tile TILE_COPPER = getTile("copper").setHardness(10F).addEffectiveTool(ToolType.PICKAXE, 2).setMaxAmount(35);
     public static final Tile TILE_SIMPLE_FURNACE = getTile("simple_furnace").setHardness(15F).addEffectiveTool(ToolType.PICKAXE, 2).setMaxAmount(1);
 
+    /*
+        ---ITEMS---
+     */
     public static final Item ITEM_BRITTLE_PICKAXE = getItem("brittle_pickaxe");
     public static final Item ITEM_BRITTLE_AXE = getItem("brittle_axe");
     public static final Item ITEM_BRITTLE_SHOVEL = getItem("brittle_shovel");
@@ -78,6 +85,9 @@ public final class GameContent{
     public static final Item ITEM_STONE_SHOVEL = getItem("stone_shovel");
     public static final Item ITEM_COPPER_CANISTER = getItem("copper_canister").setMaxAmount(15);
 
+    /*
+        ---RESOURCE REGISTRY ENTRIES---
+     */
     public static final String RES_SOIL = res().addResources("soil", TILE_SOIL);
     public static final String RES_GRASS = res().addResources("grass", TILE_GRASS);
     public static final String RES_STONE = res().addResources("stone", TILE_STONE);
@@ -91,11 +101,17 @@ public final class GameContent{
     public static final String RES_PLANT_FIBER = res().addResources("plant_fiber", ITEM_PLANT_FIBER);
     public static final String RES_STICK = res().addResources("stick", ITEM_TWIG);
 
+    /*
+        ---BIOMES---
+     */
     public static final Biome BIOME_SKY = getBiome("sky");
     public static final Biome BIOME_GRASSLAND = getBiome("grassland");
     public static final Biome BIOME_DESERT = getBiome("desert");
     public static final Biome BIOME_UNDERGROUND = getBiome("underground");
 
+    /*
+        ---ENTITY EFFECTS---
+     */
     public static final IEffect EFFECT_SPEED = getEffect("speed");
     public static final IEffect EFFECT_JUMP_HEIGHT = getEffect("jump_height");
 

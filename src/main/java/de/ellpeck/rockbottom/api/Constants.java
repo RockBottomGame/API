@@ -21,6 +21,13 @@
 
 package de.ellpeck.rockbottom.api;
 
+import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
+import de.ellpeck.rockbottom.api.tile.Tile;
+import de.ellpeck.rockbottom.api.util.reg.IResourceName;
+import de.ellpeck.rockbottom.api.world.IChunk;
+import de.ellpeck.rockbottom.api.world.IWorld;
+import de.ellpeck.rockbottom.api.world.layer.TileLayer;
+
 /**
  * This class houses a list of constant values that are used by the game to do
  * different things. It might be useful to have access to these values for
@@ -28,24 +35,91 @@ package de.ellpeck.rockbottom.api;
  */
 public final class Constants{
 
+    /**
+     * The seperator for any resources, game or mod based.
+     *
+     * @see IResourceName
+     */
     public static final String RESOURCE_SEPARATOR = "/";
 
+    /**
+     * The amount of ticks that a second should have
+     */
     public static final int TARGET_TPS = 40;
+    /**
+     * The amount of random tile updates that should take place per second
+     *
+     * @see Tile#updateRandomly(IWorld, int, int, TileLayer)
+     */
     public static final int RANDOM_TILE_UPDATES = 5;
+    /**
+     * The amount of random tile render updates that should take place per
+     * second
+     *
+     * @see Tile#updateRandomlyForRendering(IWorld, int, int, TileLayer,
+     * AbstractEntityPlayer)
+     */
     public static final int RANDOM_TILE_RENDER_UPDATES = 150;
 
+    /**
+     * The amount of tiles that there are, horizontally and vertically, in a
+     * chunk
+     */
     public static final int CHUNK_SIZE = 32;
+    /**
+     * The maximum light value that any given position in the world can have
+     *
+     * @see IWorld#getSkyLight(int, int)
+     * @see IWorld#getArtificialLight(int, int)
+     * @see IWorld#getCombinedLight(int, int)
+     */
     public static final byte MAX_LIGHT = 30;
 
+    /**
+     * The amount of ticks that a full day in the world should have
+     */
     public static final int TIME_PER_DAY = 24000;
 
+    /**
+     * The amount of chunks in each direction (the radius) that any given player
+     * should load in the world
+     *
+     * @see IWorld#isChunkLoaded(int, int)
+     * @see IWorld#isPosLoaded(int, int)
+     */
     public static final int CHUNK_LOAD_DISTANCE = 3;
+    /**
+     * The amount of chunks in each direction (the radius) that should be
+     * persistent surrounding the chunk at 0, 0.
+     *
+     * @see IChunk#isPersistent()
+     */
     public static final int PERSISTENT_CHUNK_DISTANCE = 1;
+    /**
+     * The amount of time that a chunk should stay loaded at minimum. This is a
+     * buffer timer in case players rapidly move around on a chunk border to
+     * avoid lag. Additionally, this reduces performance loss with entities or
+     * tiles accidentally loading neighboring chunks.
+     */
     public static final int CHUNK_LOAD_TIME = 250;
 
+    /**
+     * The permission level that the server admin (the host of the local server)
+     * should have by default.
+     */
     public static final int ADMIN_PERMISSION = 10;
 
+    /**
+     * This is a link to the changelog file that the update gui gets its data
+     * from on startup
+     */
     public static final String UPDATE_LINK = "https://raw.githubusercontent.com/RockBottomGame/Changelog/master/changelog.json";
+    /**
+     * This is a link to the website of the author of the game, Ellpeck
+     */
     public static final String ELLPECK_LINK = "https://ellpeck.de";
+    /**
+     * This is a link to the website of the game
+     */
     public static final String WEBSITE_LINK = "https://rockbottom.ellpeck.de";
 }
