@@ -21,13 +21,63 @@
 
 package de.ellpeck.rockbottom.api.util.reg;
 
+import de.ellpeck.rockbottom.api.Constants;
+import de.ellpeck.rockbottom.api.RockBottomAPI;
+import de.ellpeck.rockbottom.api.mod.IMod;
+
+/**
+ * A resource name that defines the name of a resource and the domain that it is
+ * created from. A resource name is structured in the following way: The domain,
+ * followed by {@link Constants#RESOURCE_SEPARATOR}, followed by the actual
+ * resource name. New resource names can be created using {@link
+ * RockBottomAPI#createRes(IMod, String)} or {@link RockBottomAPI#createRes(String)}.
+ * Creating a custom implementation of this class is discouraged.
+ */
 public interface IResourceName extends Comparable<IResourceName>{
 
+    /**
+     * Returns the domain of this resource name.
+     *
+     * @return The domain
+     *
+     * @see #getResourceName()
+     * @see Constants#RESOURCE_SEPARATOR
+     */
     String getDomain();
 
+    /**
+     * Returns the name of this resource
+     *
+     * @return The name
+     *
+     * @see #getDomain()
+     * @see Constants#RESOURCE_SEPARATOR
+     */
     String getResourceName();
 
+    /**
+     * Returns a new resource name with the given prefix added to the front of
+     * the resource. For example, the resource name rockbottom/stone with the
+     * prefix dirty_ added to it would result in a new resource name
+     * rockbottom/dirty_stone, meaning the domain of the resource name stays
+     * unaffected by this action.
+     *
+     * @param prefix The prefix to add
+     *
+     * @return A new name with the prefix added
+     */
     IResourceName addPrefix(String prefix);
 
+    /**
+     * Returns a new resource name with the given suffix added to the end of the
+     * resource. For example, the resource name rockbottom/stone with the suffix
+     * _pickaxe added to it would result in a new resource name
+     * rockbottom/stone_pickaxe, meaning the domain of the resource name stays
+     * unaffected by this action.
+     *
+     * @param suffix The suffix to add
+     *
+     * @return A new name with the suffix added
+     */
     IResourceName addSuffix(String suffix);
 }
