@@ -45,6 +45,8 @@ public interface IFont extends IAsset{
 
     void drawSplitString(float x, float y, String s, float scale, int length);
 
+    void drawSplitString(float x, float y, String s, float scale, int... lengths);
+
     void drawString(float x, float y, String s, int drawStart, int drawEnd, float scale, int color, int shadowColor);
 
     void drawString(float x, float y, String s, int drawStart, int drawEnd, float scale, int color);
@@ -64,4 +66,8 @@ public interface IFont extends IAsset{
     List<String> splitTextToLength(int length, float scale, boolean wrapFormatting, String... lines);
 
     List<String> splitTextToLength(int length, float scale, boolean wrapFormatting, List<String> lines);
+
+    List<String> splitTextToLength(int[] lengths, float scale, boolean wrapFormatting, String... lines);
+
+    List<String> splitTextToLength(float scale, boolean wrapFormatting, List<String> lines, int... lengths);
 }
