@@ -60,7 +60,7 @@ public class FuelInput{
     }
 
     public static int getFuelTime(ItemInstance instance){
-        for(FuelInput input : RockBottomAPI.FUEL_REGISTRY.getUnmodifiable().values()){
+        for(FuelInput input : RockBottomAPI.FUEL_REGISTRY.values()){
             if(input.getFuel().containsItem(instance)){
                 return input.fuelTime;
             }

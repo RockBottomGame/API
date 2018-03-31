@@ -27,6 +27,9 @@ import com.google.common.collect.HashBiMap;
 import com.google.common.collect.Maps;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 
+import java.util.Map;
+import java.util.Set;
+
 public class IndexRegistry<T> implements IRegistry<Integer, T>{
 
     protected final int max;
@@ -99,6 +102,21 @@ public class IndexRegistry<T> implements IRegistry<Integer, T>{
     @Override
     public BiMap<Integer, T> getUnmodifiable(){
         return this.unmodifiableMap;
+    }
+
+    @Override
+    public Set<Integer> keySet(){
+        return this.unmodifiableMap.keySet();
+    }
+
+    @Override
+    public Set<T> values(){
+        return this.unmodifiableMap.values();
+    }
+
+    @Override
+    public Set<Map.Entry<Integer, T>> entrySet(){
+        return this.unmodifiableMap.entrySet();
     }
 
     @Override

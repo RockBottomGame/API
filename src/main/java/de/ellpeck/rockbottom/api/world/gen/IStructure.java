@@ -40,7 +40,7 @@ public interface IStructure extends IContent{
 
     static List<IStructure> forNamePart(String part){
         List<IStructure> list = new ArrayList<>();
-        for(Map.Entry<IResourceName, IStructure> entry : RockBottomAPI.STRUCTURE_REGISTRY.getUnmodifiable().entrySet()){
+        for(Map.Entry<IResourceName, IStructure> entry : RockBottomAPI.STRUCTURE_REGISTRY.entrySet()){
             if(entry.getKey().toString().contains(part)){
                 list.add(entry.getValue());
             }

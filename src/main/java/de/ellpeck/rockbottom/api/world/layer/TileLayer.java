@@ -152,7 +152,7 @@ public class TileLayer{
     }
 
     private static List<TileLayer> makeList(Comparator comparator){
-        List<TileLayer> list = new ArrayList<>(RockBottomAPI.TILE_LAYER_REGISTRY.getUnmodifiable().values());
+        List<TileLayer> list = new ArrayList<>(RockBottomAPI.TILE_LAYER_REGISTRY.values());
         list.sort(comparator);
         return Collections.unmodifiableList(list);
     }

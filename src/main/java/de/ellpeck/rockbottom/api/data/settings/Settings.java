@@ -82,7 +82,7 @@ public class Settings implements IPropSettings, IJsonSettings{
 
     @Override
     public void load(Properties props){
-        for(Keybind keybind : RockBottomAPI.KEYBIND_REGISTRY.getUnmodifiable().values()){
+        for(Keybind keybind : RockBottomAPI.KEYBIND_REGISTRY.values()){
             String name = keybind.getName().toString();
 
             int key = this.getProp(props, name, keybind.getKey());
@@ -112,7 +112,7 @@ public class Settings implements IPropSettings, IJsonSettings{
     public void load(JsonObject object){
         if(object.has("keybinds")){
             JsonObject keybinds = object.get("keybinds").getAsJsonObject();
-            for(Keybind keybind : RockBottomAPI.KEYBIND_REGISTRY.getUnmodifiable().values()){
+            for(Keybind keybind : RockBottomAPI.KEYBIND_REGISTRY.values()){
                 String name = keybind.getName().toString();
 
                 //TODO Remove legacy keybind check
@@ -151,7 +151,7 @@ public class Settings implements IPropSettings, IJsonSettings{
     @Override
     public void save(JsonObject object){
         JsonObject keybinds = new JsonObject();
-        for(Keybind keybind : RockBottomAPI.KEYBIND_REGISTRY.getUnmodifiable().values()){
+        for(Keybind keybind : RockBottomAPI.KEYBIND_REGISTRY.values()){
             String name = keybind.getName().toString();
             keybinds.addProperty(name, keybind.getKey());
         }

@@ -24,6 +24,9 @@ package de.ellpeck.rockbottom.api.util.reg;
 import com.google.common.collect.BiMap;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 
+import java.util.Map;
+import java.util.Set;
+
 public interface IRegistry<T, U>{
 
     void register(T id, U value);
@@ -37,6 +40,12 @@ public interface IRegistry<T, U>{
     void unregister(T id);
 
     BiMap<T, U> getUnmodifiable();
+
+    Set<T> keySet();
+
+    Set<U> values();
+
+    Set<Map.Entry<T, U>> entrySet();
 
     default <V extends IRegistry> V register(){
         RockBottomAPI.registerRegistry(this);

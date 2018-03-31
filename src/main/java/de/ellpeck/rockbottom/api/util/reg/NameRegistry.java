@@ -27,6 +27,9 @@ import com.google.common.collect.HashBiMap;
 import com.google.common.collect.Maps;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 
+import java.util.Map;
+import java.util.Set;
+
 public class NameRegistry<T> implements IRegistry<IResourceName, T>{
 
     protected final String name;
@@ -84,6 +87,21 @@ public class NameRegistry<T> implements IRegistry<IResourceName, T>{
     @Override
     public BiMap<IResourceName, T> getUnmodifiable(){
         return this.unmodifiableMap;
+    }
+
+    @Override
+    public Set<IResourceName> keySet(){
+        return this.unmodifiableMap.keySet();
+    }
+
+    @Override
+    public Set<T> values(){
+        return this.unmodifiableMap.values();
+    }
+
+    @Override
+    public Set<Map.Entry<IResourceName, T>> entrySet(){
+        return this.unmodifiableMap.entrySet();
     }
 
     @Override

@@ -100,7 +100,7 @@ public abstract class WorldGenOre implements IWorldGenerator{
     protected abstract TileState getOreState();
 
     protected Set<Biome> getAllowedBiomes(){
-        return RockBottomAPI.BIOME_REGISTRY.getUnmodifiable().values();
+        return RockBottomAPI.BIOME_REGISTRY.values();
     }
 
     protected Set<TileState> getAllwedTiles(){

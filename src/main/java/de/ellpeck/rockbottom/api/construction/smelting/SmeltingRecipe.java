@@ -69,7 +69,7 @@ public class SmeltingRecipe implements IContent{
     }
 
     public static SmeltingRecipe forInput(ItemInstance input){
-        for(SmeltingRecipe recipe : RockBottomAPI.SMELTING_REGISTRY.getUnmodifiable().values()){
+        for(SmeltingRecipe recipe : RockBottomAPI.SMELTING_REGISTRY.values()){
             if(recipe.getInput().containsItem(input)){
                 return recipe;
             }
