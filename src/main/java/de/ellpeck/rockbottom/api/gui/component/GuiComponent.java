@@ -74,6 +74,10 @@ public abstract class GuiComponent{
 
     }
 
+    public void updateInactive(IGameInstance game){
+
+    }
+
     public void render(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y){
 
     }

@@ -106,6 +106,9 @@ public abstract class Gui{
             if(component.isActive()){
                 component.update(game);
             }
+            else{
+                component.updateInactive(game);
+            }
         }
     }
 
@@ -131,7 +134,7 @@ public abstract class Gui{
             }
         }
 
-        return (Settings.KEY_MENU.isKey(button) || (this.canCloseWithInvKey() && this.components.stream().allMatch(GuiComponent:: canCloseWithInvKey) && Settings.KEY_INVENTORY.isKey(button))) && this.tryEscape(game);
+        return (Settings.KEY_MENU.isKey(button) || (this.canCloseWithInvKey() && this.components.stream().allMatch(GuiComponent :: canCloseWithInvKey) && Settings.KEY_INVENTORY.isKey(button))) && this.tryEscape(game);
     }
 
     public boolean onCharInput(IGameInstance game, int codePoint, char[] characters){
@@ -209,7 +212,7 @@ public abstract class Gui{
     }
 
     public void sortComponents(){
-        this.components.sort(Comparator.comparingInt(GuiComponent:: getPriority).reversed());
+        this.components.sort(Comparator.comparingInt(GuiComponent :: getPriority).reversed());
     }
 
     public boolean isMouseOverPrioritized(IGameInstance game, GuiComponent component){
