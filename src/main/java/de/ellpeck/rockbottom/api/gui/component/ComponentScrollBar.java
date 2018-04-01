@@ -25,9 +25,11 @@ import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.IRenderer;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
+import de.ellpeck.rockbottom.api.assets.texture.ITexture;
 import de.ellpeck.rockbottom.api.data.settings.Settings;
 import de.ellpeck.rockbottom.api.gui.Gui;
 import de.ellpeck.rockbottom.api.util.BoundBox;
+import de.ellpeck.rockbottom.api.util.Colors;
 import de.ellpeck.rockbottom.api.util.Util;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 
@@ -42,12 +44,18 @@ public class ComponentScrollBar extends GuiComponent{
 
     protected boolean wasMouseDown;
     protected boolean drawReversed;
+    protected final IResourceName scrollTexture;
 
-    public ComponentScrollBar(Gui gui, int x, int y, int height, BoundBox hoverArea, int max, Consumer<Integer> scrollConsumer){
-        super(gui, x, y, 6, height);
+    public ComponentScrollBar(Gui gui, int x, int y, int width, int height, BoundBox hoverArea, int max, Consumer<Integer> scrollConsumer, IResourceName scrollTexture){
+        super(gui, x, y, width, height);
         this.scrollConsumer = scrollConsumer;
         this.hoverArea = hoverArea;
         this.max = max;
+        this.scrollTexture = scrollTexture;
+    }
+
+    public ComponentScrollBar(Gui gui, int x, int y, int height, BoundBox hoverArea, int max, Consumer<Integer> scrollConsumer){
+        this(gui, x, y, 6, height, hoverArea, max, scrollConsumer, null);
     }
 
     @Override
@@ -87,14 +95,23 @@ public class ComponentScrollBar extends GuiComponent{
             percentage = 1F-percentage;
         }
 
-        float renderY = y+percentage*(this.height-10);
-        int color = this.isMouseOverPrioritized(game) || this.hoverArea.contains(g.getMouseInGuiX(), g.getMouseInGuiY()) ? getElementColor() : getUnselectedElementColor();
+        boolean active = this.isMouseOverPrioritized(game) || this.hoverArea.contains(g.getMouseInGuiX(), g.getMouseInGuiY());
+        if(this.scrollTexture == null){
+            int color = active ? getElementColor() : getUnselectedElementColor();
 
-        g.addFilledRect(x, y, 6F, this.height, color);
-        g.addEmptyRect(x, y, 6F, this.height, getElementOutlineColor());
+            g.addFilledRect(x, y, 6F, this.height, color);
+            g.addEmptyRect(x, y, 6F, this.height, getElementOutlineColor());
 
-        g.addFilledRect(x, renderY, 6F, 10F, color);
-        g.addEmptyRect(x, renderY, 6F, 10F, getElementOutlineColor());
+            float renderY = y+percentage*(this.height-10);
+            g.addFilledRect(x, renderY, 6F, 10F, color);
+            g.addEmptyRect(x, renderY, 6F, 10F, getElementOutlineColor());
+        }
+        else{
+            ITexture texture = manager.getTexture(this.scrollTexture);
+
+            float renderY = y+percentage*(this.height-texture.getRenderHeight());
+            texture.draw(x, renderY, this.width, texture.getRenderHeight(), active ? Colors.WHITE : Colors.LIGHT_GRAY);
+        }
     }
 
     @Override

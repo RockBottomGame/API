@@ -34,12 +34,20 @@ public class ComponentMenu extends ComponentScrollBar{
 
     private final int displayedComponentsX;
     private final int displayedComponentsY;
+    private final int componentsOffsetX;
+    private final int componentsOffsetY;
     private final List<MenuComponent> contents = new ArrayList<>();
 
-    public ComponentMenu(Gui gui, int x, int y, int height, int displayedComponentsX, int displayedComponentsY, BoundBox hoverArea){
-        super(gui, x, y, height, hoverArea, 0, null);
+    public ComponentMenu(Gui gui, int x, int y, int barWidth, int height, int displayedComponentsX, int displayedComponentsY, int componentsOffsetX, int componentsOffsetY, BoundBox hoverArea, IResourceName scrollTexture){
+        super(gui, x, y, barWidth, height, hoverArea, 0, null, scrollTexture);
         this.displayedComponentsX = displayedComponentsX;
         this.displayedComponentsY = displayedComponentsY;
+        this.componentsOffsetX = componentsOffsetX;
+        this.componentsOffsetY = componentsOffsetY;
+    }
+
+    public ComponentMenu(Gui gui, int x, int y, int height, int displayedComponentsX, int displayedComponentsY, BoundBox hoverArea){
+        this(gui, x, y, 6, height, displayedComponentsX, displayedComponentsY, 0, 0, hoverArea, null);
     }
 
     public void add(MenuComponent component){
@@ -80,9 +88,9 @@ public class ComponentMenu extends ComponentScrollBar{
         }
 
         if(this.contents.size() > index){
-            int showY = this.getY();
+            int showY = this.getY()+this.componentsOffsetY;
             for(int y = 0; y < this.displayedComponentsY; y++){
-                int showX = this.getX()+8;
+                int showX = this.getX()+this.componentsOffsetX+8;
                 int highestHeight = 0;
                 for(int x = 0; x < this.displayedComponentsX; x++){
                     MenuComponent component = this.contents.get(index);
