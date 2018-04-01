@@ -25,10 +25,12 @@ import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.content.IContent;
 import de.ellpeck.rockbottom.api.tile.state.TileState;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
+import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public interface IStructure extends IContent{
 
@@ -52,5 +54,9 @@ public interface IStructure extends IContent{
 
     int getHeight();
 
+    Set<TileLayer> getInvolvedLayers();
+
     TileState getTile(int x, int y);
+
+    TileState getTile(TileLayer layer, int x, int y);
 }
