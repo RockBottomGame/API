@@ -21,6 +21,15 @@
 
 package de.ellpeck.rockbottom.api.event;
 
+/**
+ * The result of any {@link Event} being fired in the {@link IEventHandler},
+ * where {@link #DEFAULT} means that the event was unchanged, {@link #MODIFIED}
+ * means that the data in the event was modified and {@link #CANCELLED} meaning
+ * that the event was cancelled. The first two values have a dynamic usage, but
+ * generally speaking, if you change any of the values in the event's class, you
+ * should use {@link #MODIFIED} as the result if not otherwise stated in the
+ * description of the event's class.
+ */
 public enum EventResult{
     DEFAULT,
     MODIFIED,

@@ -22,11 +22,14 @@
 package de.ellpeck.rockbottom.api;
 
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
+import de.ellpeck.rockbottom.api.net.INetHandler;
 import de.ellpeck.rockbottom.api.tile.Tile;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 import de.ellpeck.rockbottom.api.world.IChunk;
 import de.ellpeck.rockbottom.api.world.IWorld;
 import de.ellpeck.rockbottom.api.world.layer.TileLayer;
+
+import java.util.UUID;
 
 /**
  * This class houses a list of constant values that are used by the game to do
@@ -106,6 +109,9 @@ public final class Constants{
     /**
      * The permission level that the server admin (the host of the local server)
      * should have by default.
+     *
+     * @see INetHandler#getCommandLevel(AbstractEntityPlayer)
+     * @see INetHandler#setCommandLevel(UUID, int)
      */
     public static final int ADMIN_PERMISSION = 10;
 

@@ -30,6 +30,11 @@ import de.ellpeck.rockbottom.api.mod.IModLoader;
 import de.ellpeck.rockbottom.api.net.INetHandler;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
 
+/**
+ * An API-Internal class that holds all of the interfaces referencing back to
+ * non-API classes that handle their execution. Creating instances of or using
+ * this class directly in any way is discouraged and rather useless.
+ */
 @ApiInternal
 public class Internals{
 
