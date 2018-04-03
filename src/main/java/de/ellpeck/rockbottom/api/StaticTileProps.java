@@ -48,7 +48,7 @@ public final class StaticTileProps{
      * Determines how long it will take for a torch to turn off. Used by {@link
      * GameContent#TILE_GRASS_TORCH}
      */
-    public static final IntProp TORCH_TIMER = new IntProp("timer", 0, 5);
+    public static final IntProp TORCH_TIMER = new IntProp("timer", 0, 10);
     /**
      * Determines which type of variation a log tile is. Used by {@link
      * GameContent#TILE_LOG}
