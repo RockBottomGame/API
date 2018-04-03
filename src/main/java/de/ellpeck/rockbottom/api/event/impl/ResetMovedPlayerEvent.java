@@ -33,7 +33,7 @@ import de.ellpeck.rockbottom.api.event.Event;
  * however) or the allowed distance (which is not squared!) if you want the
  * player to be allowed to move further.
  */
-public class ResetMovedPlayerEvent extends Event{
+public final class ResetMovedPlayerEvent extends Event{
 
     public final AbstractEntityPlayer player;
     public final double lastCalcX;

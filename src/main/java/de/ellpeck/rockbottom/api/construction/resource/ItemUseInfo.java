@@ -28,7 +28,7 @@ import de.ellpeck.rockbottom.api.tile.Tile;
 import java.util.Collections;
 import java.util.List;
 
-public class ItemUseInfo implements IUseInfo{
+public final class ItemUseInfo implements IUseInfo{
 
     private final ItemInstance instance;
 

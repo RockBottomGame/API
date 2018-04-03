@@ -33,7 +33,7 @@ import java.util.List;
 import java.util.Properties;
 
 @ApiInternal
-public class ModSettings implements IPropSettings, IJsonSettings{
+public final class ModSettings implements IPropSettings, IJsonSettings{
 
     private final List<String> disabledMods = new ArrayList<>();
 

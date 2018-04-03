@@ -23,7 +23,7 @@ package de.ellpeck.rockbottom.api.tile.entity;
 
 import de.ellpeck.rockbottom.api.data.set.DataSet;
 
-public class SyncedInt{
+public final class SyncedInt{
 
     private final String name;
     private int value;

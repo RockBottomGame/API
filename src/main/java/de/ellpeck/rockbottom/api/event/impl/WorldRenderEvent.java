@@ -35,7 +35,7 @@ import de.ellpeck.rockbottom.api.world.IWorld;
  * applied the {@link IRenderer#getWorldScale()} to the GL context. The event
  * cannot be cancelled.
  */
-public class WorldRenderEvent extends Event{
+public final class WorldRenderEvent extends Event{
 
     public final IGameInstance game;
     public final IAssetManager assetManager;

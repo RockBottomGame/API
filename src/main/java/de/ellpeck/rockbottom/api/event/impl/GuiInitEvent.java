@@ -29,7 +29,7 @@ import de.ellpeck.rockbottom.api.gui.Gui;
  * components are sorted. If you want to add or remove components to a gui,
  * listen to this event. This event cannot be cancelled.
  */
-public class GuiInitEvent extends Event{
+public final class GuiInitEvent extends Event{
 
     public final Gui gui;
 

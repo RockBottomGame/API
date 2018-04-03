@@ -32,7 +32,7 @@ import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 
 @ApiInternal
-public class PacketTileEntityData implements IPacket{
+public final class PacketTileEntityData implements IPacket{
 
     private final DataSet set = new DataSet();
     private int x;

@@ -27,7 +27,7 @@ import de.ellpeck.rockbottom.api.util.ApiInternal;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 import org.lwjgl.glfw.GLFW;
 
-public class Keybind{
+public final class Keybind{
 
     private final IResourceName name;
     private int key;

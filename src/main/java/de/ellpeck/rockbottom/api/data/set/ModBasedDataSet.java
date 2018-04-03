@@ -32,7 +32,7 @@ import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 
 import java.util.UUID;
 
-public class ModBasedDataSet extends AbstractDataSet{
+public final class ModBasedDataSet extends AbstractDataSet{
 
     @Override
     public void addPart(DataPart part){

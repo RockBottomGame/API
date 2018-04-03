@@ -29,7 +29,7 @@ import de.ellpeck.rockbottom.api.event.Event;
  * world. The isConnected variable determines if the player was part of a server
  * that they didn't host. The event cannot be cancelled.
  */
-public class PlayerLeaveWorldEvent extends Event{
+public final class PlayerLeaveWorldEvent extends Event{
 
     public final AbstractEntityPlayer player;
     public final boolean isConnected;

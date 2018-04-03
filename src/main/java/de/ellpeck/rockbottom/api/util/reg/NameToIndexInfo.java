@@ -36,7 +36,7 @@ import java.util.Map;
 import java.util.Properties;
 
 @ApiInternal
-public class NameToIndexInfo implements IPropSettings, IJsonSettings{
+public final class NameToIndexInfo implements IPropSettings, IJsonSettings{
 
     private final IndexRegistry<IResourceName> reg;
     private final File legacyFile;

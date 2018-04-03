@@ -28,7 +28,7 @@ import de.ellpeck.rockbottom.api.util.ApiInternal;
 import java.io.File;
 
 @ApiInternal
-public class ServerSettings implements IJsonSettings{
+public final class ServerSettings implements IJsonSettings{
 
     public int autosaveIntervalSeconds;
     public int maxPlayerAmount;

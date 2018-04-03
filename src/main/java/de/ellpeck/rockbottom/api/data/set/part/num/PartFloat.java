@@ -28,7 +28,7 @@ import de.ellpeck.rockbottom.api.data.set.part.BasicDataPart;
 import java.io.DataInput;
 import java.io.DataOutput;
 
-public class PartFloat extends BasicDataPart<Float>{
+public final class PartFloat extends BasicDataPart<Float>{
 
     public PartFloat(String name){
         super(name);

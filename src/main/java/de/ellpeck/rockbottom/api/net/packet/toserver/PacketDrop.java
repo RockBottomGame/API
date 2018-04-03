@@ -34,7 +34,8 @@ import io.netty.channel.ChannelHandlerContext;
 
 import java.util.UUID;
 
-public class PacketDrop implements IPacket{
+@ApiInternal
+public final class PacketDrop implements IPacket{
 
     private UUID playerId;
 

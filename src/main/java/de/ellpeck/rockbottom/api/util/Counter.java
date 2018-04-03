@@ -21,7 +21,7 @@
 
 package de.ellpeck.rockbottom.api.util;
 
-public class Counter{
+public final class Counter{
 
     private int value;
 

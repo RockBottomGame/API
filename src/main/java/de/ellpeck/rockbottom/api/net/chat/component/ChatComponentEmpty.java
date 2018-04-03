@@ -24,7 +24,7 @@ package de.ellpeck.rockbottom.api.net.chat.component;
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 
-public class ChatComponentEmpty extends ChatComponent{
+public final class ChatComponentEmpty extends ChatComponent{
 
     @Override
     public String getDisplayString(IGameInstance game, IAssetManager manager){

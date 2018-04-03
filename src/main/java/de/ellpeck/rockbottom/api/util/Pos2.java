@@ -21,7 +21,7 @@
 
 package de.ellpeck.rockbottom.api.util;
 
-public class Pos2{
+public final class Pos2{
 
     private int x;
     private int y;

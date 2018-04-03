@@ -36,7 +36,7 @@ import de.ellpeck.rockbottom.api.util.ApiInternal;
  * this class directly in any way is discouraged and rather useless.
  */
 @ApiInternal
-public class Internals{
+public final class Internals{
 
     private IGameInstance game;
     private IApiHandler api;

@@ -29,7 +29,7 @@ import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
 
-public class PartInt extends BasicDataPart<Integer>{
+public final class PartInt extends BasicDataPart<Integer>{
 
     public PartInt(String name){
         super(name);

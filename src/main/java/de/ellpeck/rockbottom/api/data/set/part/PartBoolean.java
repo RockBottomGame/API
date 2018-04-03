@@ -27,7 +27,7 @@ import com.google.gson.JsonPrimitive;
 import java.io.DataInput;
 import java.io.DataOutput;
 
-public class PartBoolean extends BasicDataPart<Boolean>{
+public final class PartBoolean extends BasicDataPart<Boolean>{
 
     public PartBoolean(String name, Boolean data){
         super(name, data);

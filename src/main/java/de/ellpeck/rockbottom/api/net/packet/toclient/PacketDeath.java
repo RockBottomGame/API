@@ -32,7 +32,7 @@ import io.netty.channel.ChannelHandlerContext;
 import java.util.UUID;
 
 @ApiInternal
-public class PacketDeath implements IPacket{
+public final class PacketDeath implements IPacket{
 
     private UUID entityId;
 

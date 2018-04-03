@@ -29,7 +29,7 @@ import de.ellpeck.rockbottom.api.data.set.part.num.array.PartShortArray;
 
 import java.util.UUID;
 
-public class DataSet extends AbstractDataSet{
+public final class DataSet extends AbstractDataSet{
 
     public int getInt(String key){
         return this.getPartContent(key, PartInt.class, 0);

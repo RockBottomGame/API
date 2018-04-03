@@ -35,7 +35,7 @@ import java.util.List;
  * point and information of interaction being changed. Cancelling the event will
  * result in no interaction taking place.
  */
-public class InteractionEvent extends Event{
+public final class InteractionEvent extends Event{
 
     public final AbstractEntityPlayer player;
     public List<Entity> entities;

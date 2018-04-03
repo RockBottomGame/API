@@ -29,7 +29,7 @@ import de.ellpeck.rockbottom.api.data.set.ModBasedDataSet;
 import java.io.DataInput;
 import java.io.DataOutput;
 
-public class PartModBasedDataSet extends BasicDataPart<ModBasedDataSet>{
+public final class PartModBasedDataSet extends BasicDataPart<ModBasedDataSet>{
 
     public PartModBasedDataSet(String name){
         super(name);

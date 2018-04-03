@@ -29,7 +29,7 @@ import de.ellpeck.rockbottom.api.event.Event;
  * The isConnected variable determines if the player is connecting to a server
  * that they aren't hosting themselves.
  */
-public class PlayerJoinWorldEvent extends Event{
+public final class PlayerJoinWorldEvent extends Event{
 
     public final AbstractEntityPlayer player;
     public final boolean isConnected;

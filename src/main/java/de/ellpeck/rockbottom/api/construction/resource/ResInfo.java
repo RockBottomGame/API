@@ -26,7 +26,7 @@ import de.ellpeck.rockbottom.api.item.Item;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.tile.Tile;
 
-public class ResInfo{
+public final class ResInfo{
 
     private final Item item;
     private final int meta;

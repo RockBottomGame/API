@@ -28,7 +28,7 @@ import de.ellpeck.rockbottom.api.tile.entity.TileEntity;
  * This event is fired every tick when a {@link TileEntity} updates. Cancelling
  * this event will cause the tile entity not to update for one tick.
  */
-public class TileEntityTickEvent extends Event{
+public final class TileEntityTickEvent extends Event{
 
     public final TileEntity tileEntity;
 

@@ -29,7 +29,7 @@ import de.ellpeck.rockbottom.api.world.IWorld;
  * This event is fired when an {@link IWorld} is saved using the specified
  * {@link IDataManager}. This event cannot be cancelled.
  */
-public class WorldSaveEvent extends Event{
+public final class WorldSaveEvent extends Event{
 
     public final IWorld world;
     public final IDataManager dataManager;

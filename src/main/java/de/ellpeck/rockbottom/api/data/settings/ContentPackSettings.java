@@ -35,7 +35,7 @@ import java.util.List;
 import java.util.function.ToIntFunction;
 
 @ApiInternal
-public class ContentPackSettings implements IJsonSettings{
+public final class ContentPackSettings implements IJsonSettings{
 
     private final List<SettingsEntry> enabledPacks = new ArrayList<>();
     private final SettingsEntry defaultPack = new SettingsEntry(ContentPack.DEFAULT_PACK_ID, 0);

@@ -28,7 +28,7 @@ import de.ellpeck.rockbottom.api.world.IWorld;
  * This event is fired when an {@link IWorld} is unloaded. It cannot be
  * cancelled.
  */
-public class WorldUnloadEvent extends Event{
+public final class WorldUnloadEvent extends Event{
 
     public final IWorld world;
 

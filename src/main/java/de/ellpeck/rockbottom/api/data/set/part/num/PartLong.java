@@ -28,7 +28,7 @@ import de.ellpeck.rockbottom.api.data.set.part.BasicDataPart;
 import java.io.DataInput;
 import java.io.DataOutput;
 
-public class PartLong extends BasicDataPart<Long>{
+public final class PartLong extends BasicDataPart<Long>{
 
     public PartLong(String name){
         super(name);

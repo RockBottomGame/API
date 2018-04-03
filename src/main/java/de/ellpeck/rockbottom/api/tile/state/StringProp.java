@@ -27,7 +27,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class StringProp extends TileProp<String>{
+public final class StringProp extends TileProp<String>{
 
     private final String def;
     private final List<String> allowedValues;

@@ -28,7 +28,7 @@ import de.ellpeck.rockbottom.api.event.Event;
  * This event gets fired when an {@link EntityLiving} tries to regenerate
  * health. Cancelling it will make it not regenerate any health.
  */
-public class RegenEvent extends Event{
+public final class RegenEvent extends Event{
 
     public final EntityLiving living;
     public int regenRate;

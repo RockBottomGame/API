@@ -29,7 +29,7 @@ import java.util.Collections;
 import java.util.Map;
 
 @ApiInternal
-public class Locale implements IAsset{
+public final class Locale implements IAsset{
 
     public static final IResourceName ID = RockBottomAPI.createInternalRes("loc");
 

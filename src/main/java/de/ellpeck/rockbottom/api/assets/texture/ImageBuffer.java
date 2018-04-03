@@ -27,7 +27,7 @@ import java.nio.Buffer;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
-public class ImageBuffer{
+public final class ImageBuffer{
 
     private final int width;
     private final int height;

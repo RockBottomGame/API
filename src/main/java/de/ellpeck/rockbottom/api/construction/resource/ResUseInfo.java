@@ -28,7 +28,7 @@ import de.ellpeck.rockbottom.api.item.ItemInstance;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ResUseInfo implements IUseInfo{
+public final class ResUseInfo implements IUseInfo{
 
     private final String name;
     private int amount;

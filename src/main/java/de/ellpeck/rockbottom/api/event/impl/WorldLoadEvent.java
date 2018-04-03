@@ -30,7 +30,7 @@ import de.ellpeck.rockbottom.api.world.WorldInfo;
  * This event is fired when an {@link IWorld} is loaded. It cannot be
  * cancelled.
  */
-public class WorldLoadEvent extends Event{
+public final class WorldLoadEvent extends Event{
 
     public final IWorld world;
     public final WorldInfo worldInfo;

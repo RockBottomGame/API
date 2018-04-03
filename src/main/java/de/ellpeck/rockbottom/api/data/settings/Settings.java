@@ -32,7 +32,7 @@ import java.io.File;
 import java.util.Properties;
 
 @ApiInternal
-public class Settings implements IPropSettings, IJsonSettings{
+public final class Settings implements IPropSettings, IJsonSettings{
 
     public static final Keybind KEY_PLACE = new Keybind(RockBottomAPI.createInternalRes("place"), 1).register();
     public static final Keybind KEY_DESTROY = new Keybind(RockBottomAPI.createInternalRes("destroy"), 0).register();

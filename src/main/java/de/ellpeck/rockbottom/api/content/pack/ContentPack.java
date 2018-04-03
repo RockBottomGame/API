@@ -21,7 +21,7 @@
 
 package de.ellpeck.rockbottom.api.content.pack;
 
-public class ContentPack{
+public final class ContentPack{
 
     public static final String DEFAULT_PACK_ID = "default";
 

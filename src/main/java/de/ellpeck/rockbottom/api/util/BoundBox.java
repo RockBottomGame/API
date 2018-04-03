@@ -21,7 +21,7 @@
 
 package de.ellpeck.rockbottom.api.util;
 
-public class BoundBox{
+public final class BoundBox{
 
     private double minX;
     private double minY;

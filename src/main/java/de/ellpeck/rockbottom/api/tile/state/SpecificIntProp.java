@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class SpecificIntProp extends TileProp<Integer>{
+public final class SpecificIntProp extends TileProp<Integer>{
 
     private final int def;
     private final List<Integer> allowedValues;

@@ -29,7 +29,7 @@ import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
 
-public class PartShort extends BasicDataPart<Short>{
+public final class PartShort extends BasicDataPart<Short>{
 
     public PartShort(String name){
         super(name);

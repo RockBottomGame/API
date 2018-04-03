@@ -28,7 +28,7 @@ import de.ellpeck.rockbottom.api.data.set.IAdditionalDataProvider;
 import de.ellpeck.rockbottom.api.data.set.ModBasedDataSet;
 import de.ellpeck.rockbottom.api.tile.Tile;
 
-public class ItemInstance implements IAdditionalDataProvider{
+public final class ItemInstance implements IAdditionalDataProvider{
 
     private final Item item;
 

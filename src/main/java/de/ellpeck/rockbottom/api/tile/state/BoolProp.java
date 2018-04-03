@@ -21,7 +21,7 @@
 
 package de.ellpeck.rockbottom.api.tile.state;
 
-public class BoolProp extends TileProp<Boolean>{
+public final class BoolProp extends TileProp<Boolean>{
 
     private final boolean def;
 

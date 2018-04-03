@@ -29,7 +29,7 @@ import java.io.DataInput;
 import java.io.DataOutput;
 import java.util.Arrays;
 
-public class PartByteArray extends BasicDataPart<byte[]>{
+public final class PartByteArray extends BasicDataPart<byte[]>{
 
     public PartByteArray(String name){
         super(name);

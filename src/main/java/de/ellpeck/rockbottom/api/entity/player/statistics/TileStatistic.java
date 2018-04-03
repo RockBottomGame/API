@@ -30,7 +30,7 @@ import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TileStatistic extends StatisticInitializer<TileStatistic.Stat>{
+public final class TileStatistic extends StatisticInitializer<TileStatistic.Stat>{
 
     public TileStatistic(IResourceName name){
         super(name);

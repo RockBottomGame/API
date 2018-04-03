@@ -23,7 +23,7 @@ package de.ellpeck.rockbottom.api.tile.state;
 
 import com.google.common.base.Preconditions;
 
-public class IntProp extends TileProp<Integer>{
+public final class IntProp extends TileProp<Integer>{
 
     private final int def;
     private final int possibilities;

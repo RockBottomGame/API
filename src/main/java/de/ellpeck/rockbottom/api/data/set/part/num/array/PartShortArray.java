@@ -29,7 +29,7 @@ import java.io.DataInput;
 import java.io.DataOutput;
 import java.util.Arrays;
 
-public class PartShortArray extends BasicDataPart<short[]>{
+public final class PartShortArray extends BasicDataPart<short[]>{
 
     public PartShortArray(String name){
         super(name);

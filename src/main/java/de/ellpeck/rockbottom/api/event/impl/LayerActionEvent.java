@@ -37,7 +37,7 @@ import de.ellpeck.rockbottom.api.world.layer.TileLayer;
  * TileLayer#canEditLayer(IGameInstance, AbstractEntityPlayer)} method to be
  * ignored.
  */
-public class LayerActionEvent extends Event{
+public final class LayerActionEvent extends Event{
 
     public final Type type;
     public final IWorld world;

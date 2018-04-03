@@ -28,7 +28,7 @@ import java.io.DataInput;
 import java.io.DataOutput;
 import java.util.UUID;
 
-public class PartUniqueId extends BasicDataPart<UUID>{
+public final class PartUniqueId extends BasicDataPart<UUID>{
 
     public PartUniqueId(String name, UUID data){
         super(name, data);

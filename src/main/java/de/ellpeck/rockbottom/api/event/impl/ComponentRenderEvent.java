@@ -33,7 +33,7 @@ import de.ellpeck.rockbottom.api.gui.component.GuiComponent;
  * GuiComponent#render(IGameInstance, IAssetManager, IRenderer, int, int)}.
  * Cancelling it will result in the component not being rendered.
  */
-public class ComponentRenderEvent extends Event{
+public final class ComponentRenderEvent extends Event{
 
     public final Gui gui;
     public final int id;

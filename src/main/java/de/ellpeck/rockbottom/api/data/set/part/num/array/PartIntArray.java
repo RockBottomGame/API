@@ -29,7 +29,7 @@ import java.io.DataInput;
 import java.io.DataOutput;
 import java.util.Arrays;
 
-public class PartIntArray extends BasicDataPart<int[]>{
+public final class PartIntArray extends BasicDataPart<int[]>{
 
     public PartIntArray(String name){
         super(name);

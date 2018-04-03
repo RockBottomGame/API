@@ -37,7 +37,7 @@ import java.util.List;
  * from the surrounding {@link Tile} objects in the world. This event cannot be
  * cancelled.
  */
-public class WorldObjectCollisionEvent extends Event{
+public final class WorldObjectCollisionEvent extends Event{
 
     public final MovableWorldObject object;
     public final BoundBox entityBoundBox;

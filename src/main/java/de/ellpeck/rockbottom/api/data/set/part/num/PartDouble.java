@@ -28,7 +28,7 @@ import de.ellpeck.rockbottom.api.data.set.part.BasicDataPart;
 import java.io.DataInput;
 import java.io.DataOutput;
 
-public class PartDouble extends BasicDataPart<Double>{
+public final class PartDouble extends BasicDataPart<Double>{
 
     public PartDouble(String name){
         super(name);

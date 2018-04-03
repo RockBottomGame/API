@@ -29,7 +29,7 @@ import de.ellpeck.rockbottom.api.data.set.DataSet;
 import java.io.DataInput;
 import java.io.DataOutput;
 
-public class PartDataSet extends BasicDataPart<DataSet>{
+public final class PartDataSet extends BasicDataPart<DataSet>{
 
     public PartDataSet(String name){
         super(name);

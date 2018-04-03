@@ -27,7 +27,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class EnumProp<T extends Enum<T>> extends TileProp<T>{
+public final class EnumProp<T extends Enum<T>> extends TileProp<T>{
 
     private final T def;
     private final List<T> allowedValues;

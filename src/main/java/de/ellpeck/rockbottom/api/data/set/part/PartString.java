@@ -27,7 +27,7 @@ import com.google.gson.JsonPrimitive;
 import java.io.DataInput;
 import java.io.DataOutput;
 
-public class PartString extends BasicDataPart<String>{
+public final class PartString extends BasicDataPart<String>{
 
     public PartString(String name, String data){
         super(name, data);

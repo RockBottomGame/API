@@ -36,7 +36,7 @@ import java.util.List;
  * within the event. This is most likely {@link IRenderer#getGuiScale()}. This
  * event cannot be cancelled.
  */
-public class TooltipEvent extends Event{
+public final class TooltipEvent extends Event{
 
     public final ItemInstance instance;
     public final IGameInstance game;

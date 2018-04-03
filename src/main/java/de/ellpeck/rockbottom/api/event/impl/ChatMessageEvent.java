@@ -31,7 +31,7 @@ import de.ellpeck.rockbottom.api.net.chat.ICommandSender;
  * changing it to a command will execute a command). Cancelling the event will
  * result in no message being sent.
  */
-public class ChatMessageEvent extends Event{
+public final class ChatMessageEvent extends Event{
 
     public final IChatLog log;
     public final ICommandSender sender;
