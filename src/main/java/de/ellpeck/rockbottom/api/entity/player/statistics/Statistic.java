@@ -21,29 +21,21 @@
 
 package de.ellpeck.rockbottom.api.entity.player.statistics;
 
-import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.data.set.DataSet;
-import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 
 public abstract class Statistic{
 
-    private final IResourceName name;
+    private final StatisticInitializer initializer;
 
-    public Statistic(IResourceName name){
-        this.name = name;
+    public Statistic(StatisticInitializer initializer){
+        this.initializer = initializer;
     }
-
-    public abstract void reset();
 
     public abstract void save(DataSet set);
 
     public abstract void load(DataSet set);
 
-    public IResourceName getName(){
-        return this.name;
-    }
-
-    public void register(){
-        RockBottomAPI.STATISTICS_REGISTRY.register(this.getName(), this);
+    public StatisticInitializer getInitializer(){
+        return this.initializer;
     }
 }

@@ -24,10 +24,9 @@ package de.ellpeck.rockbottom.api.entity.player.statistics;
 import de.ellpeck.rockbottom.api.data.set.DataSet;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 
-public class NumberStatistic extends Statistic{
+public class NumberStatistic extends StatisticInitializer<NumberStatistic.Stat>{
 
     private final int defaultValue;
-    private int value;
 
     public NumberStatistic(IResourceName name){
         this(name, 0);
@@ -36,29 +35,43 @@ public class NumberStatistic extends Statistic{
     public NumberStatistic(IResourceName name, int defaultValue){
         super(name);
         this.defaultValue = defaultValue;
-        this.value = defaultValue;
-    }
-
-    public void update(){
-        this.value++;
     }
 
     @Override
-    public void reset(){
-        this.value = this.defaultValue;
+    public Stat makeStatistic(IStatistics statistics){
+        return new Stat(this, this.defaultValue);
     }
 
-    @Override
-    public void save(DataSet set){
-        set.addInt("value", this.value);
-    }
+    public static class Stat extends Statistic{
 
-    @Override
-    public void load(DataSet set){
-        this.value = set.getInt("value");
-    }
+        private int value;
 
-    public int getValue(){
-        return this.value;
+        public Stat(StatisticInitializer initializer, int defaultValue){
+            super(initializer);
+            this.value = defaultValue;
+        }
+
+        public void update(){
+            this.value++;
+        }
+
+        @Override
+        public void save(DataSet set){
+            set.addInt("value", this.value);
+        }
+
+        @Override
+        public void load(DataSet set){
+            this.value = set.getInt("value");
+        }
+
+        public int getValue(){
+            return this.value;
+        }
+
+        @Override
+        public String toString(){
+            return String.valueOf(this.value);
+        }
     }
 }

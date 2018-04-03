@@ -39,7 +39,7 @@ import de.ellpeck.rockbottom.api.entity.Entity;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.entity.player.knowledge.Information;
 import de.ellpeck.rockbottom.api.entity.player.statistics.IStatistics;
-import de.ellpeck.rockbottom.api.entity.player.statistics.Statistic;
+import de.ellpeck.rockbottom.api.entity.player.statistics.StatisticInitializer;
 import de.ellpeck.rockbottom.api.event.IEventHandler;
 import de.ellpeck.rockbottom.api.gui.IMainMenuTheme;
 import de.ellpeck.rockbottom.api.gui.ISpecialCursor;
@@ -244,14 +244,14 @@ public final class RockBottomAPI{
     @ApiInternal
     public static final NameRegistry<IEffect> EFFECT_REGISTRY = new NameRegistry<>("effect_registry", false).register();
     /**
-     * The registry for all {@link Statistic} objects that track certain things
+     * The registry for all {@link StatisticInitializer} objects that track certain things
      * in the game. To registry something into this registry, use {@link
-     * Statistic#register()}. To get a registry and/or modify its value, use
+     * StatisticInitializer#register()}. To get a statistic and/or modify its value, use
      * {@link IStatistics} which you can obtain from any {@link
      * AbstractEntityPlayer}.
      */
     @ApiInternal
-    public static final NameRegistry<Statistic> STATISTICS_REGISTRY = new NameRegistry<>("statistics_registry", false).register();
+    public static final NameRegistry<StatisticInitializer> STATISTICS_REGISTRY = new NameRegistry<>("statistics_registry", false).register();
     /**
      * The registry for all {@link FuelInput} objects that determine which kinds
      * of items burn for how long as furnace fuel. To register something into

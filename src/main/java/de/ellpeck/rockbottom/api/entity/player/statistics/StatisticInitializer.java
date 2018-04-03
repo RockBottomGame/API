@@ -1,5 +1,5 @@
 /*
- * This file ("IStatistics.java") is part of the RockBottomAPI by Ellpeck.
+ * This file ("StatisticInitializer.java") is part of the RockBottomAPI by Ellpeck.
  * View the source code at <https://github.com/RockBottomGame/>.
  * View information on the project at <https://rockbottom.ellpeck.de/>.
  *
@@ -21,11 +21,26 @@
 
 package de.ellpeck.rockbottom.api.entity.player.statistics;
 
+import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 
-public interface IStatistics{
+public abstract class StatisticInitializer<T extends Statistic>{
 
-    Statistic getOrInit(IResourceName name);
+    private final IResourceName name;
 
-    <T extends Statistic> T getOrInit(IResourceName name, Class<? extends StatisticInitializer<T>> statClass);
+    public StatisticInitializer(IResourceName name){
+        this.name = name;
+    }
+
+    public IResourceName getName(){
+        return this.name;
+    }
+
+    public abstract T makeStatistic(IStatistics statistics);
+
+    public StatisticInitializer<T> register(){
+        RockBottomAPI.STATISTICS_REGISTRY.register(this.getName(), this);
+        return this;
+    }
+
 }
