@@ -50,14 +50,14 @@ public final class Constants{
      */
     public static final int TARGET_TPS = 40;
     /**
-     * The amount of random tile updates that should take place per second
+     * The amount of random tile updates that should take place per tick
      *
      * @see Tile#updateRandomly(IWorld, int, int, TileLayer)
      */
     public static final int RANDOM_TILE_UPDATES = 5;
     /**
      * The amount of random tile render updates that should take place per
-     * second
+     * tick
      *
      * @see Tile#updateRandomlyForRendering(IWorld, int, int, TileLayer,
      * AbstractEntityPlayer)
