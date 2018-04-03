@@ -27,6 +27,7 @@ import de.ellpeck.rockbottom.api.IRenderer;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.assets.font.FormattingCode;
 import de.ellpeck.rockbottom.api.effect.ActiveEffect;
+import de.ellpeck.rockbottom.api.entity.AbstractEntityItem;
 import de.ellpeck.rockbottom.api.entity.Entity;
 import de.ellpeck.rockbottom.api.entity.MovableWorldObject;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
@@ -75,4 +76,6 @@ public interface IInternalHooks{
     IStateHandler makeStateHandler(Tile tile);
 
     FormattingCode getFormattingCode(String s, int index, Map<Character, FormattingCode> defaults);
+
+    AbstractEntityItem makeItem(IWorld world, ItemInstance inst, double x, double y, double motionX, double motionY);
 }

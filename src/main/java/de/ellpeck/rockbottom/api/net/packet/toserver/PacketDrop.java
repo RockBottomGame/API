@@ -23,7 +23,7 @@ package de.ellpeck.rockbottom.api.net.packet.toserver;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
-import de.ellpeck.rockbottom.api.entity.EntityItem;
+import de.ellpeck.rockbottom.api.entity.AbstractEntityItem;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.gui.container.ItemContainer;
 import de.ellpeck.rockbottom.api.net.packet.IPacket;
@@ -77,7 +77,7 @@ public class PacketDrop implements IPacket{
                 RockBottomAPI.getNet().sendToServer(new PacketDrop(player.getUniqueId()));
             }
             else{
-                EntityItem.spawn(player.world, container.holdingInst, player.x, player.y+1, player.facing.x*0.25, 0);
+                AbstractEntityItem.spawn(player.world, container.holdingInst, player.x, player.y+1, player.facing.x*0.25, 0);
             }
             container.holdingInst = null;
         }
