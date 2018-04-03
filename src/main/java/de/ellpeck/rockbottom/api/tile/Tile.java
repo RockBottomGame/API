@@ -217,10 +217,6 @@ public class Tile{
 
     }
 
-    public void updateRandomlyForRendering(IWorld world, int x, int y, TileLayer layer, AbstractEntityPlayer player){
-
-    }
-
     public void doBreak(IWorld world, int x, int y, TileLayer layer, AbstractEntityPlayer breaker, boolean isRightTool, boolean allowDrop){
         if(!world.isClient()){
             world.destroyTile(x, y, layer, breaker, allowDrop && (this.forceDrop || isRightTool));
@@ -409,5 +405,15 @@ public class Tile{
     @Deprecated
     public boolean canPlace(IWorld world, int x, int y, TileLayer layer){
         return true;
+    }
+
+    /**
+     * @deprecated This method will not be called by the game anymore, as the
+     * feature was too rarely used to justify such a high performance impact on
+     * random rendering updates
+     */
+    @Deprecated
+    public void updateRandomlyForRendering(IWorld world, int x, int y, TileLayer layer, AbstractEntityPlayer player){
+
     }
 }

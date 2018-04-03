@@ -55,14 +55,6 @@ public final class Constants{
      * @see Tile#updateRandomly(IWorld, int, int, TileLayer)
      */
     public static final int RANDOM_TILE_UPDATES = 5;
-    /**
-     * The amount of random tile render updates that should take place per
-     * tick
-     *
-     * @see Tile#updateRandomlyForRendering(IWorld, int, int, TileLayer,
-     * AbstractEntityPlayer)
-     */
-    public static final int RANDOM_TILE_RENDER_UPDATES = 150;
 
     /**
      * The amount of tiles that there are, horizontally and vertically, in a
