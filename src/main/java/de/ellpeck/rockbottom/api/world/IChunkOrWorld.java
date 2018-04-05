@@ -98,7 +98,7 @@ public interface IChunkOrWorld extends IAdditionalDataProvider{
 
     void setDirty(int x, int y);
 
-    int getHeight(TileLayer layer, int x, int bottomY);
+    int getChunkHeight(TileLayer layer, int x, int bottomY);
 
     Biome getBiome(int x, int y);
 
@@ -118,13 +118,13 @@ public interface IChunkOrWorld extends IAdditionalDataProvider{
     long getSeed();
 
     /**
-     * @deprecated Use {@link #getHeight(TileLayer, int, int)} instead
+     * @deprecated Use {@link #getChunkHeight(TileLayer, int, int)} instead
      */
     @Deprecated
     int getLowestAirUpwards(TileLayer layer, int x, int y);
 
     /**
-     * @deprecated Use {@link #getHeight(TileLayer, int, int)} instead
+     * @deprecated Use {@link #getChunkHeight(TileLayer, int, int)} instead
      */
     @Deprecated
     int getLowestAirUpwards(TileLayer layer, int x, int y, boolean ignoreReplaceableTiles);
