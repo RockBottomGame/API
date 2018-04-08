@@ -25,7 +25,7 @@ import de.ellpeck.rockbottom.api.Constants;
 import de.ellpeck.rockbottom.api.GameContent;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.tile.state.TileState;
-import de.ellpeck.rockbottom.api.util.reg.IResourceName;
+import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 import de.ellpeck.rockbottom.api.world.IChunk;
 import de.ellpeck.rockbottom.api.world.IWorld;
 import de.ellpeck.rockbottom.api.world.gen.INoiseGen;
@@ -33,9 +33,9 @@ import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 
 public abstract class Biome{
 
-    protected final IResourceName name;
+    protected final ResourceName name;
 
-    public Biome(IResourceName name){
+    public Biome(ResourceName name){
         this.name = name;
     }
 
@@ -55,7 +55,7 @@ public abstract class Biome{
         return world.getSeed();
     }
 
-    public IResourceName getName(){
+    public ResourceName getName(){
         return this.name;
     }
 

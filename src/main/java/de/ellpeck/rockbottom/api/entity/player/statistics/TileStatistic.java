@@ -25,14 +25,14 @@ import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.data.set.DataSet;
 import de.ellpeck.rockbottom.api.tile.Tile;
 import de.ellpeck.rockbottom.api.util.Counter;
-import de.ellpeck.rockbottom.api.util.reg.IResourceName;
+import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public final class TileStatistic extends StatisticInitializer<TileStatistic.Stat>{
 
-    public TileStatistic(IResourceName name){
+    public TileStatistic(ResourceName name){
         super(name);
     }
 
@@ -70,7 +70,7 @@ public final class TileStatistic extends StatisticInitializer<TileStatistic.Stat
 
             int amount = set.getInt("amount");
             for(int i = 0; i < amount; i++){
-                IResourceName name = RockBottomAPI.createRes(set.getString("tile_"+i));
+                ResourceName name = new ResourceName(set.getString("tile_"+i));
                 Tile tile = RockBottomAPI.TILE_REGISTRY.get(name);
                 if(tile != null){
                     int counter = set.getInt("value_"+i);

@@ -21,9 +21,8 @@
 
 package de.ellpeck.rockbottom.api.render;
 
-import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
-import de.ellpeck.rockbottom.api.util.reg.IResourceName;
+import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -32,111 +31,111 @@ import java.util.List;
 public interface IPlayerDesign{
 
     @ApiInternal
-    IResourceName EYES = RockBottomAPI.createInternalRes("player.base.eyes");
+    ResourceName EYES = ResourceName.intern("player.base.eyes");
 
     @ApiInternal
-    List<IResourceName> BASE = Arrays.asList(
-            RockBottomAPI.createInternalRes("player.base.1"),
-            RockBottomAPI.createInternalRes("player.base.2"),
-            RockBottomAPI.createInternalRes("player.base.3"),
-            RockBottomAPI.createInternalRes("player.base.4"),
-            RockBottomAPI.createInternalRes("player.base.5")
+    List<ResourceName> BASE = Arrays.asList(
+            ResourceName.intern("player.base.1"),
+            ResourceName.intern("player.base.2"),
+            ResourceName.intern("player.base.3"),
+            ResourceName.intern("player.base.4"),
+            ResourceName.intern("player.base.5")
     );
 
-    List<IResourceName> SHIRT = new ArrayList<>(Arrays.asList(
-            RockBottomAPI.createInternalRes("player.shirt.1"),
-            RockBottomAPI.createInternalRes("player.shirt.2"),
-            RockBottomAPI.createInternalRes("player.shirt.3"),
-            RockBottomAPI.createInternalRes("player.shirt.4"),
+    List<ResourceName> SHIRT = new ArrayList<>(Arrays.asList(
+            ResourceName.intern("player.shirt.1"),
+            ResourceName.intern("player.shirt.2"),
+            ResourceName.intern("player.shirt.3"),
+            ResourceName.intern("player.shirt.4"),
             null
     ));
 
     @ApiInternal
-    List<IResourceName> ARMS = Arrays.asList(
-            RockBottomAPI.createInternalRes("player.arm.skin_1"),
-            RockBottomAPI.createInternalRes("player.arm.skin_2"),
-            RockBottomAPI.createInternalRes("player.arm.skin_3"),
-            RockBottomAPI.createInternalRes("player.arm.skin_4"),
-            RockBottomAPI.createInternalRes("player.arm.skin_5")
+    List<ResourceName> ARMS = Arrays.asList(
+            ResourceName.intern("player.arm.skin_1"),
+            ResourceName.intern("player.arm.skin_2"),
+            ResourceName.intern("player.arm.skin_3"),
+            ResourceName.intern("player.arm.skin_4"),
+            ResourceName.intern("player.arm.skin_5")
     );
 
-    List<IResourceName> SLEEVES = new ArrayList<>(Arrays.asList(
-            RockBottomAPI.createInternalRes("player.sleeve.1"),
-            RockBottomAPI.createInternalRes("player.sleeve.2"),
-            RockBottomAPI.createInternalRes("player.sleeve.3"),
-            RockBottomAPI.createInternalRes("player.sleeve.4"),
+    List<ResourceName> SLEEVES = new ArrayList<>(Arrays.asList(
+            ResourceName.intern("player.sleeve.1"),
+            ResourceName.intern("player.sleeve.2"),
+            ResourceName.intern("player.sleeve.3"),
+            ResourceName.intern("player.sleeve.4"),
             null
     ));
 
-    List<IResourceName> PANTS = new ArrayList<>(Arrays.asList(
-            RockBottomAPI.createInternalRes("player.pants.1"),
-            RockBottomAPI.createInternalRes("player.pants.2"),
+    List<ResourceName> PANTS = new ArrayList<>(Arrays.asList(
+            ResourceName.intern("player.pants.1"),
+            ResourceName.intern("player.pants.2"),
             null
     ));
 
-    List<IResourceName> FOOTWEAR = new ArrayList<>(Arrays.asList(
-            RockBottomAPI.createInternalRes("player.footwear.1"),
-            RockBottomAPI.createInternalRes("player.footwear.2"),
-            RockBottomAPI.createInternalRes("player.footwear.3"),
-            RockBottomAPI.createInternalRes("player.footwear.4"),
-            RockBottomAPI.createInternalRes("player.footwear.5"),
+    List<ResourceName> FOOTWEAR = new ArrayList<>(Arrays.asList(
+            ResourceName.intern("player.footwear.1"),
+            ResourceName.intern("player.footwear.2"),
+            ResourceName.intern("player.footwear.3"),
+            ResourceName.intern("player.footwear.4"),
+            ResourceName.intern("player.footwear.5"),
             null
     ));
 
-    List<IResourceName> HAIR = new ArrayList<>(Arrays.asList(
-            RockBottomAPI.createInternalRes("player.hair.1"),
-            RockBottomAPI.createInternalRes("player.hair.2"),
-            RockBottomAPI.createInternalRes("player.hair.3"),
-            RockBottomAPI.createInternalRes("player.hair.4"),
-            RockBottomAPI.createInternalRes("player.hair.5"),
-            RockBottomAPI.createInternalRes("player.hair.6"),
-            RockBottomAPI.createInternalRes("player.hair.7"),
-            RockBottomAPI.createInternalRes("player.hair.8"),
-            RockBottomAPI.createInternalRes("player.hair.9"),
+    List<ResourceName> HAIR = new ArrayList<>(Arrays.asList(
+            ResourceName.intern("player.hair.1"),
+            ResourceName.intern("player.hair.2"),
+            ResourceName.intern("player.hair.3"),
+            ResourceName.intern("player.hair.4"),
+            ResourceName.intern("player.hair.5"),
+            ResourceName.intern("player.hair.6"),
+            ResourceName.intern("player.hair.7"),
+            ResourceName.intern("player.hair.8"),
+            ResourceName.intern("player.hair.9"),
             null
     ));
 
-    List<IResourceName> ACCESSORIES = new ArrayList<>(Arrays.asList(
+    List<ResourceName> ACCESSORIES = new ArrayList<>(Arrays.asList(
             null,
-            RockBottomAPI.createInternalRes("player.accessory.monocle_1"),
-            RockBottomAPI.createInternalRes("player.accessory.monocle_2"),
-            RockBottomAPI.createInternalRes("player.accessory.sunglasses_1"),
-            RockBottomAPI.createInternalRes("player.accessory.sunglasses_2"),
-            RockBottomAPI.createInternalRes("player.accessory.sunglasses_3"),
-            RockBottomAPI.createInternalRes("player.accessory.glasses_1"),
-            RockBottomAPI.createInternalRes("player.accessory.glasses_2"),
-            RockBottomAPI.createInternalRes("player.accessory.glasses_3"),
-            RockBottomAPI.createInternalRes("player.accessory.eyeliner")
+            ResourceName.intern("player.accessory.monocle_1"),
+            ResourceName.intern("player.accessory.monocle_2"),
+            ResourceName.intern("player.accessory.sunglasses_1"),
+            ResourceName.intern("player.accessory.sunglasses_2"),
+            ResourceName.intern("player.accessory.sunglasses_3"),
+            ResourceName.intern("player.accessory.glasses_1"),
+            ResourceName.intern("player.accessory.glasses_2"),
+            ResourceName.intern("player.accessory.glasses_3"),
+            ResourceName.intern("player.accessory.eyeliner")
     ));
 
-    List<IResourceName> EYEBROWS = new ArrayList<>(Arrays.asList(
-            RockBottomAPI.createInternalRes("player.eyebrows.1"),
-            RockBottomAPI.createInternalRes("player.eyebrows.2"),
-            RockBottomAPI.createInternalRes("player.eyebrows.3"),
-            RockBottomAPI.createInternalRes("player.eyebrows.4"),
-            RockBottomAPI.createInternalRes("player.eyebrows.5"),
-            RockBottomAPI.createInternalRes("player.eyebrows.6"),
+    List<ResourceName> EYEBROWS = new ArrayList<>(Arrays.asList(
+            ResourceName.intern("player.eyebrows.1"),
+            ResourceName.intern("player.eyebrows.2"),
+            ResourceName.intern("player.eyebrows.3"),
+            ResourceName.intern("player.eyebrows.4"),
+            ResourceName.intern("player.eyebrows.5"),
+            ResourceName.intern("player.eyebrows.6"),
             null
     ));
 
-    List<IResourceName> MOUTH = new ArrayList<>(Arrays.asList(
+    List<ResourceName> MOUTH = new ArrayList<>(Arrays.asList(
             null,
-            RockBottomAPI.createInternalRes("player.mouth.1"),
-            RockBottomAPI.createInternalRes("player.mouth.2"),
-            RockBottomAPI.createInternalRes("player.mouth.3"),
-            RockBottomAPI.createInternalRes("player.mouth.4"),
-            RockBottomAPI.createInternalRes("player.mouth.5"),
-            RockBottomAPI.createInternalRes("player.mouth.6"),
-            RockBottomAPI.createInternalRes("player.mouth.7"),
-            RockBottomAPI.createInternalRes("player.mouth.8"),
-            RockBottomAPI.createInternalRes("player.mouth.9"),
-            RockBottomAPI.createInternalRes("player.mouth.10")
+            ResourceName.intern("player.mouth.1"),
+            ResourceName.intern("player.mouth.2"),
+            ResourceName.intern("player.mouth.3"),
+            ResourceName.intern("player.mouth.4"),
+            ResourceName.intern("player.mouth.5"),
+            ResourceName.intern("player.mouth.6"),
+            ResourceName.intern("player.mouth.7"),
+            ResourceName.intern("player.mouth.8"),
+            ResourceName.intern("player.mouth.9"),
+            ResourceName.intern("player.mouth.10")
     ));
 
-    List<IResourceName> BEARD = new ArrayList<>(Arrays.asList(
+    List<ResourceName> BEARD = new ArrayList<>(Arrays.asList(
             null,
-            RockBottomAPI.createInternalRes("player.beard.1"),
-            RockBottomAPI.createInternalRes("player.beard.2")
+            ResourceName.intern("player.beard.1"),
+            ResourceName.intern("player.beard.2")
     ));
 
     int getFavoriteColor();

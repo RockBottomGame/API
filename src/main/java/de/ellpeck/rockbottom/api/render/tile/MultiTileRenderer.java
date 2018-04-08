@@ -31,7 +31,7 @@ import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.tile.MultiTile;
 import de.ellpeck.rockbottom.api.tile.state.TileState;
 import de.ellpeck.rockbottom.api.util.Pos2;
-import de.ellpeck.rockbottom.api.util.reg.IResourceName;
+import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 import de.ellpeck.rockbottom.api.world.IWorld;
 import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 
@@ -40,10 +40,10 @@ import java.util.Map;
 
 public class MultiTileRenderer<T extends MultiTile> extends DefaultTileRenderer<T>{
 
-    protected final IResourceName texItem;
-    protected final Map<Pos2, IResourceName> textures = new HashMap<>();
+    protected final ResourceName texItem;
+    protected final Map<Pos2, ResourceName> textures = new HashMap<>();
 
-    public MultiTileRenderer(IResourceName texture, T tile){
+    public MultiTileRenderer(ResourceName texture, T tile){
         super(texture);
         this.texItem = this.texture.addSuffix(".item");
 

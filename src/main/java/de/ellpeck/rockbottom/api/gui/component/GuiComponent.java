@@ -28,7 +28,7 @@ import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.event.impl.InitGuiComponentEvent;
 import de.ellpeck.rockbottom.api.gui.Gui;
 import de.ellpeck.rockbottom.api.util.Colors;
-import de.ellpeck.rockbottom.api.util.reg.IResourceName;
+import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 public abstract class GuiComponent{
 
@@ -130,7 +130,7 @@ public abstract class GuiComponent{
         return this.getName().toString();
     }
 
-    public abstract IResourceName getName();
+    public abstract ResourceName getName();
 
     public int getX(){
         return this.x;

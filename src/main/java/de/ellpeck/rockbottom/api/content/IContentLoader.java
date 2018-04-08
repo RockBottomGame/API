@@ -26,7 +26,7 @@ import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.content.pack.ContentPack;
 import de.ellpeck.rockbottom.api.mod.IMod;
-import de.ellpeck.rockbottom.api.util.reg.IResourceName;
+import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 public interface IContentLoader<T extends IContent>{
 
@@ -34,11 +34,11 @@ public interface IContentLoader<T extends IContent>{
         RockBottomAPI.CONTENT_LOADER_REGISTRY.register(this.getContentIdentifier(), this);
     }
 
-    IResourceName getContentIdentifier();
+    ResourceName getContentIdentifier();
 
-    void loadContent(IGameInstance game, IResourceName resourceName, String path, JsonElement element, String elementName, IMod loadingMod, ContentPack pack) throws Exception;
+    void loadContent(IGameInstance game, ResourceName resourceName, String path, JsonElement element, String elementName, IMod loadingMod, ContentPack pack) throws Exception;
 
-    void disableContent(IGameInstance game, IResourceName resourceName);
+    void disableContent(IGameInstance game, ResourceName resourceName);
 
     default boolean dealWithSpecialCases(IGameInstance game, String resourceName, String path, JsonElement element, String elementName, IMod loadingMod, ContentPack pack){
         return false;

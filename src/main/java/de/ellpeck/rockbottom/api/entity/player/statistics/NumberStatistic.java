@@ -22,17 +22,17 @@
 package de.ellpeck.rockbottom.api.entity.player.statistics;
 
 import de.ellpeck.rockbottom.api.data.set.DataSet;
-import de.ellpeck.rockbottom.api.util.reg.IResourceName;
+import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 public final class NumberStatistic extends StatisticInitializer<NumberStatistic.Stat>{
 
     private final int defaultValue;
 
-    public NumberStatistic(IResourceName name){
+    public NumberStatistic(ResourceName name){
         this(name, 0);
     }
 
-    public NumberStatistic(IResourceName name, int defaultValue){
+    public NumberStatistic(ResourceName name, int defaultValue){
         super(name);
         this.defaultValue = defaultValue;
     }

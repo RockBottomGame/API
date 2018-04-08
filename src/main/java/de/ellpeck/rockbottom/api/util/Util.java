@@ -29,7 +29,7 @@ import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.entity.Entity;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.tile.entity.IFilteredInventory;
-import de.ellpeck.rockbottom.api.util.reg.IResourceName;
+import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 import de.ellpeck.rockbottom.api.world.IChunk;
 import de.ellpeck.rockbottom.api.world.IWorld;
 
@@ -233,7 +233,7 @@ public final class Util{
      *
      * @see RockBottomAPI#ENTITY_REGISTRY
      */
-    public static Entity createEntity(IResourceName name, IWorld world){
+    public static Entity createEntity(ResourceName name, IWorld world){
         Class<? extends Entity> entityClass = RockBottomAPI.ENTITY_REGISTRY.get(name);
 
         try{

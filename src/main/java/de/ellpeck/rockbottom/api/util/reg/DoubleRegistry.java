@@ -32,23 +32,23 @@ public class DoubleRegistry<T> extends IndexRegistry<T>{
         this.nameRegistry = new NameRegistry(name+"_named", canUnregister);
     }
 
-    public void register(IResourceName name, Integer id, T value){
+    public void register(ResourceName name, Integer id, T value){
         super.register(id, value);
         this.nameRegistry.register(name, id);
     }
 
-    public void unregister(IResourceName name, Integer id){
+    public void unregister(ResourceName name, Integer id){
         Preconditions.checkArgument(id.equals(this.nameRegistry.get(name)), "Can't unregister name "+name+" and id "+id+" that weren't registered as a matching pair from registry "+this);
 
         super.unregister(id);
         this.nameRegistry.unregister(name);
     }
 
-    public T get(IResourceName name){
+    public T get(ResourceName name){
         return this.get(this.nameRegistry.get(name));
     }
 
-    public IResourceName getName(T value){
+    public ResourceName getName(T value){
         return this.nameRegistry.getId(this.getId(value));
     }
 

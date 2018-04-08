@@ -24,11 +24,11 @@ package de.ellpeck.rockbottom.api.construction.smelting;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.construction.resource.IUseInfo;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
-import de.ellpeck.rockbottom.api.util.reg.IResourceName;
+import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 public class FuelInput{
 
-    private final IResourceName name;
+    private final ResourceName name;
     private final IUseInfo fuel;
     private final int fuelTime;
 
@@ -36,7 +36,7 @@ public class FuelInput{
         this(fuel.getItems().get(0).getItem().getName(), fuel, fuelTime);
     }
 
-    public FuelInput(IResourceName name, IUseInfo fuel, int fuelTime){
+    public FuelInput(ResourceName name, IUseInfo fuel, int fuelTime){
         this.name = name;
         this.fuel = fuel;
         this.fuelTime = fuelTime;
@@ -50,7 +50,7 @@ public class FuelInput{
         return this.fuelTime;
     }
 
-    public IResourceName getName(){
+    public ResourceName getName(){
         return this.name;
     }
 

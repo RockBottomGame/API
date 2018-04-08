@@ -23,7 +23,7 @@ package de.ellpeck.rockbottom.api.effect;
 
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.entity.Entity;
-import de.ellpeck.rockbottom.api.util.reg.IResourceName;
+import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 public interface IEffect{
 
@@ -41,11 +41,11 @@ public interface IEffect{
 
     int getMaxDuration(Entity entity);
 
-    IResourceName getName();
+    ResourceName getName();
 
-    IResourceName getUnlocalizedName(ActiveEffect effect, Entity entity);
+    ResourceName getUnlocalizedName(ActiveEffect effect, Entity entity);
 
-    IResourceName getIcon(ActiveEffect effect, Entity entity);
+    ResourceName getIcon(ActiveEffect effect, Entity entity);
 
     default void register(){
         RockBottomAPI.EFFECT_REGISTRY.register(this.getName(), this);

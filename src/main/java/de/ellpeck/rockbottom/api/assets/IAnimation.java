@@ -22,13 +22,12 @@
 package de.ellpeck.rockbottom.api.assets;
 
 import com.google.gson.JsonElement;
-import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.texture.ITexture;
-import de.ellpeck.rockbottom.api.util.reg.IResourceName;
+import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 public interface IAnimation extends IAsset{
 
-    IResourceName ID = RockBottomAPI.createInternalRes("anim");
+    ResourceName ID = ResourceName.intern("anim");
 
     void drawFrame(int row, int frame, float x, float y, float width, float height, int filter);
 

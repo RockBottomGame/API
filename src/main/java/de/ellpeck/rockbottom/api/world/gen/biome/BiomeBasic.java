@@ -21,7 +21,7 @@
 
 package de.ellpeck.rockbottom.api.world.gen.biome;
 
-import de.ellpeck.rockbottom.api.util.reg.IResourceName;
+import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 public abstract class BiomeBasic extends Biome{
 
@@ -29,7 +29,7 @@ public abstract class BiomeBasic extends Biome{
     private final int lowestY;
     private final int weight;
 
-    public BiomeBasic(IResourceName name, int highestY, int lowestY, int weight){
+    public BiomeBasic(ResourceName name, int highestY, int lowestY, int weight){
         super(name);
         this.highestY = highestY;
         this.lowestY = lowestY;

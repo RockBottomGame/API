@@ -21,15 +21,14 @@
 
 package de.ellpeck.rockbottom.api.assets.font;
 
-import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAsset;
-import de.ellpeck.rockbottom.api.util.reg.IResourceName;
+import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 import java.util.List;
 
 public interface IFont extends IAsset{
 
-    IResourceName ID = RockBottomAPI.createInternalRes("font");
+    ResourceName ID = ResourceName.intern("font");
 
     void drawStringFromRight(float x, float y, String s, float scale);
 

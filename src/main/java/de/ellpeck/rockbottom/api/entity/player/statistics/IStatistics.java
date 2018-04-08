@@ -21,11 +21,11 @@
 
 package de.ellpeck.rockbottom.api.entity.player.statistics;
 
-import de.ellpeck.rockbottom.api.util.reg.IResourceName;
+import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 public interface IStatistics{
 
-    Statistic getOrInit(IResourceName name);
+    Statistic getOrInit(ResourceName name);
 
-    <T extends Statistic> T getOrInit(IResourceName name, Class<? extends StatisticInitializer<T>> statClass);
+    <T extends Statistic> T getOrInit(ResourceName name, Class<? extends StatisticInitializer<T>> statClass);
 }

@@ -23,12 +23,11 @@ package de.ellpeck.rockbottom.api.gui.component;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.IRenderer;
-import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.data.settings.Settings;
 import de.ellpeck.rockbottom.api.gui.Gui;
 import de.ellpeck.rockbottom.api.util.Colors;
-import de.ellpeck.rockbottom.api.util.reg.IResourceName;
+import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 import java.util.function.Supplier;
 
@@ -90,7 +89,7 @@ public class ComponentButton extends GuiComponent{
     public boolean onMouseAction(IGameInstance game, int button, float x, float y){
         if(Settings.KEY_GUI_ACTION_1.isKey(button) && this.isMouseOver(game)){
             if(this.onPressed(game) || (this.supplier != null && this.supplier.get())){
-                game.getAssetManager().getSound(RockBottomAPI.createInternalRes("menu.click")).play();
+                game.getAssetManager().getSound(ResourceName.intern("menu.click")).play();
                 return true;
             }
         }
@@ -98,8 +97,8 @@ public class ComponentButton extends GuiComponent{
     }
 
     @Override
-    public IResourceName getName(){
-        return RockBottomAPI.createInternalRes("button");
+    public ResourceName getName(){
+        return ResourceName.intern("button");
     }
 
     public boolean onPressed(IGameInstance game){

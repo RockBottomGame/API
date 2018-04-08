@@ -23,13 +23,12 @@ package de.ellpeck.rockbottom.api.gui.component;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.IRenderer;
-import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.data.settings.Settings;
 import de.ellpeck.rockbottom.api.gui.Gui;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
 import de.ellpeck.rockbottom.api.util.Util;
-import de.ellpeck.rockbottom.api.util.reg.IResourceName;
+import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 import java.util.function.BiConsumer;
 
@@ -89,7 +88,7 @@ public class ComponentSlider extends ComponentButton{
             }
             else{
                 this.consumer.accept(this.number, true);
-                game.getAssetManager().getSound(RockBottomAPI.createInternalRes("menu.click")).play();
+                game.getAssetManager().getSound(ResourceName.intern("menu.click")).play();
                 this.wasMouseDown = false;
             }
         }
@@ -107,7 +106,7 @@ public class ComponentSlider extends ComponentButton{
     }
 
     @Override
-    public IResourceName getName(){
-        return RockBottomAPI.createInternalRes("slider");
+    public ResourceName getName(){
+        return ResourceName.intern("slider");
     }
 }

@@ -27,7 +27,7 @@ import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.render.item.IItemRenderer;
 import de.ellpeck.rockbottom.api.render.item.ItemTileRenderer;
 import de.ellpeck.rockbottom.api.tile.Tile;
-import de.ellpeck.rockbottom.api.util.reg.IResourceName;
+import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 import de.ellpeck.rockbottom.api.world.IWorld;
 import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 
@@ -35,12 +35,12 @@ import java.util.List;
 
 public class ItemTile extends ItemBasic{
 
-    public ItemTile(IResourceName name){
+    public ItemTile(ResourceName name){
         super(name);
     }
 
     @Override
-    protected IItemRenderer createRenderer(IResourceName name){
+    protected IItemRenderer createRenderer(ResourceName name){
         return new ItemTileRenderer();
     }
 

@@ -23,6 +23,7 @@ package de.ellpeck.rockbottom.api.effect;
 
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.data.set.DataSet;
+import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 import java.util.Objects;
 
@@ -91,7 +92,7 @@ public class ActiveEffect{
 
     public static ActiveEffect load(DataSet set){
         String name = set.getString("effect_name");
-        IEffect effect = RockBottomAPI.EFFECT_REGISTRY.get(RockBottomAPI.createRes(name));
+        IEffect effect = RockBottomAPI.EFFECT_REGISTRY.get(new ResourceName(name));
 
         if(effect != null){
             int time = set.getInt("time");

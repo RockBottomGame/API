@@ -32,7 +32,7 @@ import de.ellpeck.rockbottom.api.event.impl.ComponentRenderOverlayEvent;
 import de.ellpeck.rockbottom.api.gui.component.GuiComponent;
 import de.ellpeck.rockbottom.api.util.Colors;
 import de.ellpeck.rockbottom.api.util.Util;
-import de.ellpeck.rockbottom.api.util.reg.IResourceName;
+import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -238,7 +238,7 @@ public abstract class Gui{
         return this.getName().toString();
     }
 
-    public abstract IResourceName getName();
+    public abstract ResourceName getName();
 
     public int getX(){
         return this.x;

@@ -23,7 +23,6 @@ package de.ellpeck.rockbottom.api.mod;
 
 import de.ellpeck.rockbottom.api.data.settings.ModSettings;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
-import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 
 import java.io.File;
 import java.util.List;
@@ -64,10 +63,6 @@ public interface IModLoader{
     void postPostInit();
 
     IMod getMod(String id);
-
-    IResourceName createResourceName(IMod mod, String resource);
-
-    IResourceName createResourceName(String combined);
 
     List<IMod> getAllTheMods();
 

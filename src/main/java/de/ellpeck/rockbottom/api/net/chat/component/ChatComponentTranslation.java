@@ -22,22 +22,21 @@
 package de.ellpeck.rockbottom.api.net.chat.component;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
-import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.data.set.DataSet;
-import de.ellpeck.rockbottom.api.util.reg.IResourceName;
+import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 import java.util.Arrays;
 
 public class ChatComponentTranslation extends ChatComponent{
 
-    private IResourceName key;
+    private ResourceName key;
     private String[] formatting;
 
     public ChatComponentTranslation(){
     }
 
-    public ChatComponentTranslation(IResourceName key, String... formatting){
+    public ChatComponentTranslation(ResourceName key, String... formatting){
         this.key = key;
         this.formatting = formatting;
     }
@@ -56,7 +55,7 @@ public class ChatComponentTranslation extends ChatComponent{
     @Override
     public void load(DataSet set){
         super.load(set);
-        this.key = RockBottomAPI.createRes(set.getString("key"));
+        this.key = new ResourceName(set.getString("key"));
 
         this.formatting = new String[set.getInt("format_amount")];
         for(int i = 0; i < this.formatting.length; i++){

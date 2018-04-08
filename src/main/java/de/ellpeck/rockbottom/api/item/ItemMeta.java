@@ -23,21 +23,21 @@ package de.ellpeck.rockbottom.api.item;
 
 import de.ellpeck.rockbottom.api.render.item.IItemRenderer;
 import de.ellpeck.rockbottom.api.render.item.ItemMetaRenderer;
-import de.ellpeck.rockbottom.api.util.reg.IResourceName;
+import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ItemMeta extends ItemBasic{
 
-    public final List<IResourceName> subResourceNames = new ArrayList<>();
-    public final List<IResourceName> subUnlocNames = new ArrayList<>();
+    public final List<ResourceName> subResourceNames = new ArrayList<>();
+    public final List<ResourceName> subUnlocNames = new ArrayList<>();
 
-    public ItemMeta(IResourceName name){
+    public ItemMeta(ResourceName name){
         this(name, true);
     }
 
-    public ItemMeta(IResourceName name, boolean addDirectly){
+    public ItemMeta(ResourceName name, boolean addDirectly){
         super(name);
 
         if(addDirectly){
@@ -45,19 +45,19 @@ public class ItemMeta extends ItemBasic{
         }
     }
 
-    public ItemMeta addSubItem(IResourceName name){
+    public ItemMeta addSubItem(ResourceName name){
         this.subResourceNames.add(name.addPrefix("items."));
         this.subUnlocNames.add(name.addPrefix("item."));
         return this;
     }
 
     @Override
-    protected IItemRenderer createRenderer(IResourceName name){
+    protected IItemRenderer createRenderer(ResourceName name){
         return new ItemMetaRenderer(name);
     }
 
     @Override
-    public IResourceName getUnlocalizedName(ItemInstance instance){
+    public ResourceName getUnlocalizedName(ItemInstance instance){
         int meta = instance.getMeta();
 
         if(meta >= 0 && this.subUnlocNames.size() > meta){

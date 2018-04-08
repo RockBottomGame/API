@@ -23,18 +23,18 @@ package de.ellpeck.rockbottom.api.tile;
 
 import de.ellpeck.rockbottom.api.render.tile.DefaultTileRenderer;
 import de.ellpeck.rockbottom.api.render.tile.ITileRenderer;
-import de.ellpeck.rockbottom.api.util.reg.IResourceName;
+import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 public class TileBasic extends Tile{
 
     protected final ITileRenderer renderer;
 
-    public TileBasic(IResourceName name){
+    public TileBasic(ResourceName name){
         super(name);
         this.renderer = this.createRenderer(name);
     }
 
-    protected ITileRenderer createRenderer(IResourceName name){
+    protected ITileRenderer createRenderer(ResourceName name){
         return new DefaultTileRenderer(name);
     }
 

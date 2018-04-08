@@ -26,7 +26,7 @@ import de.ellpeck.rockbottom.api.assets.texture.ITexture;
 import de.ellpeck.rockbottom.api.assets.texture.stitcher.ITextureStitcher;
 import de.ellpeck.rockbottom.api.gui.ISpecialCursor;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
-import de.ellpeck.rockbottom.api.util.reg.IResourceName;
+import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 import java.io.InputStream;
 import java.net.URL;
@@ -41,27 +41,27 @@ public interface IAssetManager{
     @ApiInternal
     void setCursor(ISpecialCursor cursor);
 
-    <T extends IAsset> Map<IResourceName, T> getAllOfType(IResourceName identifier);
+    <T extends IAsset> Map<ResourceName, T> getAllOfType(ResourceName identifier);
 
-    <T extends IAsset> T getAssetWithFallback(IResourceName identifier, IResourceName path, T fallback);
+    <T extends IAsset> T getAssetWithFallback(ResourceName identifier, ResourceName path, T fallback);
 
-    boolean hasAsset(IResourceName identifier, IResourceName path);
+    boolean hasAsset(ResourceName identifier, ResourceName path);
 
-    ITexture getTexture(IResourceName path);
+    ITexture getTexture(ResourceName path);
 
-    IAnimation getAnimation(IResourceName path);
+    IAnimation getAnimation(ResourceName path);
 
-    ISound getSound(IResourceName path);
+    ISound getSound(ResourceName path);
 
-    IShaderProgram getShaderProgram(IResourceName path);
-
-    @ApiInternal
-    Locale getLocale(IResourceName path);
+    IShaderProgram getShaderProgram(ResourceName path);
 
     @ApiInternal
-    IFont getFont(IResourceName path);
+    Locale getLocale(ResourceName path);
 
-    String localize(IResourceName unloc, Object... format);
+    @ApiInternal
+    IFont getFont(ResourceName path);
+
+    String localize(ResourceName unloc, Object... format);
 
     IFont getFont();
 
@@ -86,5 +86,5 @@ public interface IAssetManager{
 
     ITextureStitcher getTextureStitcher();
 
-    boolean addAsset(IAssetLoader loader, IResourceName name, IAsset asset);
+    boolean addAsset(IAssetLoader loader, ResourceName name, IAsset asset);
 }

@@ -24,21 +24,20 @@ package de.ellpeck.rockbottom.api.gui.component.construction;
 import de.ellpeck.rockbottom.api.Constants;
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.IRenderer;
-import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.construction.IRecipe;
 import de.ellpeck.rockbottom.api.gui.Gui;
 import de.ellpeck.rockbottom.api.gui.component.GuiComponent;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.util.Colors;
-import de.ellpeck.rockbottom.api.util.reg.IResourceName;
+import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 import java.util.List;
 
 public class ComponentPolaroid extends GuiComponent{
 
-    private static final IResourceName RES = RockBottomAPI.createInternalRes("gui.construction.item_background");
-    private static final IResourceName RES_HIGHLIGHTED = RockBottomAPI.createInternalRes("gui.construction.item_background_highlighted");
+    private static final ResourceName RES = ResourceName.intern("gui.construction.item_background");
+    private static final ResourceName RES_HIGHLIGHTED = ResourceName.intern("gui.construction.item_background_highlighted");
 
     public boolean isSelected;
     public final IRecipe recipe;
@@ -51,13 +50,13 @@ public class ComponentPolaroid extends GuiComponent{
     }
 
     @Override
-    public IResourceName getName(){
-        return RockBottomAPI.createInternalRes("polaroid");
+    public ResourceName getName(){
+        return ResourceName.intern("polaroid");
     }
 
     @Override
     public void render(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y){
-        IResourceName res = this.recipe != null && (this.isSelected || this.isMouseOverPrioritized(game)) ? RES_HIGHLIGHTED : RES;
+        ResourceName res = this.recipe != null && (this.isSelected || this.isMouseOverPrioritized(game)) ? RES_HIGHLIGHTED : RES;
         manager.getTexture(res).draw(x, y, this.width, this.height);
 
         if(this.recipe != null){
@@ -76,7 +75,7 @@ public class ComponentPolaroid extends GuiComponent{
                 g.drawHoverInfoAtMouse(game, manager, true, 200, instance.getDisplayName()+" x"+instance.getAmount());
             }
             else{
-                g.drawHoverInfoAtMouse(game, manager, false, 200, manager.localize(RockBottomAPI.createInternalRes("info.unknown_recipe")));
+                g.drawHoverInfoAtMouse(game, manager, false, 200, manager.localize(ResourceName.intern("info.unknown_recipe")));
             }
         }
     }

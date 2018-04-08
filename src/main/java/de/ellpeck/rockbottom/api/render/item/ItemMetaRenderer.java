@@ -28,11 +28,11 @@ import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.item.ItemMeta;
-import de.ellpeck.rockbottom.api.util.reg.IResourceName;
+import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 public class ItemMetaRenderer extends DefaultItemRenderer<ItemMeta>{
 
-    public ItemMetaRenderer(IResourceName texture){
+    public ItemMetaRenderer(ResourceName texture){
         super(texture);
     }
 

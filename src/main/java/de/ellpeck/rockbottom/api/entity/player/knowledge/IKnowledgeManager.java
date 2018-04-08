@@ -22,17 +22,17 @@
 package de.ellpeck.rockbottom.api.entity.player.knowledge;
 
 import de.ellpeck.rockbottom.api.construction.IRecipe;
-import de.ellpeck.rockbottom.api.util.reg.IResourceName;
+import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 public interface IKnowledgeManager{
 
     boolean knowsRecipe(IRecipe recipe);
 
-    boolean knowsInformation(IResourceName name);
+    boolean knowsInformation(ResourceName name);
 
-    Information getInformation(IResourceName name);
+    Information getInformation(ResourceName name);
 
-    <T extends Information> T getInformation(IResourceName name, Class<T> infoClass);
+    <T extends Information> T getInformation(ResourceName name, Class<T> infoClass);
 
     void teachRecipe(IRecipe recipe, boolean announce);
 
@@ -46,7 +46,7 @@ public interface IKnowledgeManager{
 
     void forgetRecipe(IRecipe recipe, boolean forgetAllParts);
 
-    void forgetInformation(IResourceName name, boolean announce);
+    void forgetInformation(ResourceName name, boolean announce);
 
-    void forgetInformation(IResourceName name);
+    void forgetInformation(ResourceName name);
 }

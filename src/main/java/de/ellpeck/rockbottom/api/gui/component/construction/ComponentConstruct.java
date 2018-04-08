@@ -24,14 +24,13 @@ package de.ellpeck.rockbottom.api.gui.component.construction;
 import de.ellpeck.rockbottom.api.Constants;
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.IRenderer;
-import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.construction.IRecipe;
 import de.ellpeck.rockbottom.api.gui.Gui;
 import de.ellpeck.rockbottom.api.gui.component.GuiComponent;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.util.Colors;
-import de.ellpeck.rockbottom.api.util.reg.IResourceName;
+import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 import java.util.List;
 
@@ -58,7 +57,7 @@ public class ComponentConstruct extends GuiComponent{
         if(this.isMouseOver(game)){
             ItemInstance instance = this.getOutput(game);
 
-            String s = manager.localize(RockBottomAPI.createInternalRes("info."+(this.canConstruct ? "click_to_construct":"missing_items")));
+            String s = manager.localize(ResourceName.intern("info."+(this.canConstruct ? "click_to_construct" : "missing_items")));
             g.drawHoverInfoAtMouse(game, manager, true, 200, instance.getDisplayName()+" x"+instance.getAmount(), s);
         }
     }
@@ -69,7 +68,7 @@ public class ComponentConstruct extends GuiComponent{
     }
 
     @Override
-    public IResourceName getName(){
-        return RockBottomAPI.createInternalRes("construct");
+    public ResourceName getName(){
+        return ResourceName.intern("construct");
     }
 }

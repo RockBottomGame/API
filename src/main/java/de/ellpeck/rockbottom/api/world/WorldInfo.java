@@ -72,7 +72,7 @@ public class WorldInfo{
         dataSet.addLong("seed", this.seed);
         dataSet.addInt("total_time", this.totalTimeInWorld);
         dataSet.addInt("curr_time", this.currentWorldTime);
-        dataSet.addBoolean("story_mode",this.storyMode);
+        dataSet.addBoolean("story_mode", this.storyMode);
 
         dataSet.write(this.dataFile);
     }

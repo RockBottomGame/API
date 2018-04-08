@@ -26,6 +26,7 @@ import com.google.gson.JsonObject;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.data.IDataManager;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
+import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 import org.lwjgl.glfw.GLFW;
 
 import java.io.File;
@@ -34,23 +35,23 @@ import java.util.Properties;
 @ApiInternal
 public final class Settings implements IPropSettings, IJsonSettings{
 
-    public static final Keybind KEY_PLACE = new Keybind(RockBottomAPI.createInternalRes("place"), 1).register();
-    public static final Keybind KEY_DESTROY = new Keybind(RockBottomAPI.createInternalRes("destroy"), 0).register();
-    public static final Keybind KEY_GUI_ACTION_1 = new Keybind(RockBottomAPI.createInternalRes("gui_action_1"), 0).register();
-    public static final Keybind KEY_GUI_ACTION_2 = new Keybind(RockBottomAPI.createInternalRes("gui_action_2"), 1).register();
+    public static final Keybind KEY_PLACE = new Keybind(ResourceName.intern("place"), 1).register();
+    public static final Keybind KEY_DESTROY = new Keybind(ResourceName.intern("destroy"), 0).register();
+    public static final Keybind KEY_GUI_ACTION_1 = new Keybind(ResourceName.intern("gui_action_1"), 0).register();
+    public static final Keybind KEY_GUI_ACTION_2 = new Keybind(ResourceName.intern("gui_action_2"), 1).register();
 
-    public static final Keybind KEY_INVENTORY = new Keybind(RockBottomAPI.createInternalRes("inventory"), GLFW.GLFW_KEY_E).register();
-    public static final Keybind KEY_COMPENDIUM = new Keybind(RockBottomAPI.createInternalRes("compendium"), GLFW.GLFW_KEY_C).register();
-    public static final Keybind KEY_MENU = new Keybind(RockBottomAPI.createInternalRes("menu"), GLFW.GLFW_KEY_ESCAPE).register();
-    public static final Keybind KEY_LEFT = new Keybind(RockBottomAPI.createInternalRes("left"), GLFW.GLFW_KEY_A).register();
-    public static final Keybind KEY_RIGHT = new Keybind(RockBottomAPI.createInternalRes("right"), GLFW.GLFW_KEY_D).register();
-    public static final Keybind KEY_UP = new Keybind(RockBottomAPI.createInternalRes("up"), GLFW.GLFW_KEY_W).register();
-    public static final Keybind KEY_DOWN = new Keybind(RockBottomAPI.createInternalRes("down"), GLFW.GLFW_KEY_S).register();
-    public static final Keybind KEY_JUMP = new Keybind(RockBottomAPI.createInternalRes("jump"), GLFW.GLFW_KEY_SPACE).register();
-    public static final Keybind KEY_BACKGROUND = new Keybind(RockBottomAPI.createInternalRes("background"), GLFW.GLFW_KEY_LEFT_SHIFT).register();
-    public static final Keybind KEY_CHAT = new Keybind(RockBottomAPI.createInternalRes("chat"), GLFW.GLFW_KEY_ENTER).register();
-    public static final Keybind KEY_ADVANCED_INFO = new Keybind(RockBottomAPI.createInternalRes("advanced_info"), GLFW.GLFW_KEY_LEFT_SHIFT).register();
-    public static final Keybind KEY_SCREENSHOT = new Keybind(RockBottomAPI.createInternalRes("screenshot"), GLFW.GLFW_KEY_F10).register();
+    public static final Keybind KEY_INVENTORY = new Keybind(ResourceName.intern("inventory"), GLFW.GLFW_KEY_E).register();
+    public static final Keybind KEY_COMPENDIUM = new Keybind(ResourceName.intern("compendium"), GLFW.GLFW_KEY_C).register();
+    public static final Keybind KEY_MENU = new Keybind(ResourceName.intern("menu"), GLFW.GLFW_KEY_ESCAPE).register();
+    public static final Keybind KEY_LEFT = new Keybind(ResourceName.intern("left"), GLFW.GLFW_KEY_A).register();
+    public static final Keybind KEY_RIGHT = new Keybind(ResourceName.intern("right"), GLFW.GLFW_KEY_D).register();
+    public static final Keybind KEY_UP = new Keybind(ResourceName.intern("up"), GLFW.GLFW_KEY_W).register();
+    public static final Keybind KEY_DOWN = new Keybind(ResourceName.intern("down"), GLFW.GLFW_KEY_S).register();
+    public static final Keybind KEY_JUMP = new Keybind(ResourceName.intern("jump"), GLFW.GLFW_KEY_SPACE).register();
+    public static final Keybind KEY_BACKGROUND = new Keybind(ResourceName.intern("background"), GLFW.GLFW_KEY_LEFT_SHIFT).register();
+    public static final Keybind KEY_CHAT = new Keybind(ResourceName.intern("chat"), GLFW.GLFW_KEY_ENTER).register();
+    public static final Keybind KEY_ADVANCED_INFO = new Keybind(ResourceName.intern("advanced_info"), GLFW.GLFW_KEY_LEFT_SHIFT).register();
+    public static final Keybind KEY_SCREENSHOT = new Keybind(ResourceName.intern("screenshot"), GLFW.GLFW_KEY_F10).register();
     public static final Keybind[] KEYS_ITEM_SELECTION = new Keybind[8];
     public static final int DEFAULT_GUI_COLOR = 0xFF30704E;
 
@@ -58,7 +59,7 @@ public final class Settings implements IPropSettings, IJsonSettings{
         int[] defKeys = new int[]{GLFW.GLFW_KEY_1, GLFW.GLFW_KEY_2, GLFW.GLFW_KEY_3, GLFW.GLFW_KEY_4, GLFW.GLFW_KEY_5, GLFW.GLFW_KEY_6, GLFW.GLFW_KEY_7, GLFW.GLFW_KEY_8};
 
         for(int i = 0; i < KEYS_ITEM_SELECTION.length; i++){
-            KEYS_ITEM_SELECTION[i] = new Keybind(RockBottomAPI.createInternalRes("item_selection_"+i), defKeys[i]).register();
+            KEYS_ITEM_SELECTION[i] = new Keybind(ResourceName.intern("item_selection_"+i), defKeys[i]).register();
         }
     }
 

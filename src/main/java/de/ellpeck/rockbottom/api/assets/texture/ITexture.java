@@ -22,11 +22,10 @@
 package de.ellpeck.rockbottom.api.assets.texture;
 
 import com.google.gson.JsonElement;
-import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAsset;
 import de.ellpeck.rockbottom.api.render.engine.TextureBank;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
-import de.ellpeck.rockbottom.api.util.reg.IResourceName;
+import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 import java.nio.ByteBuffer;
 import java.util.List;
@@ -35,7 +34,7 @@ import java.util.Random;
 
 public interface ITexture extends IAsset{
 
-    IResourceName ID = RockBottomAPI.createInternalRes("tex");
+    ResourceName ID = ResourceName.intern("tex");
     int TOP_LEFT = 0;
     int BOTTOM_LEFT = 1;
     int BOTTOM_RIGHT = 2;

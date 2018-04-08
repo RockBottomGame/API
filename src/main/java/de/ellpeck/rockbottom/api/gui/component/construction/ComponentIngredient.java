@@ -24,20 +24,19 @@ package de.ellpeck.rockbottom.api.gui.component.construction;
 import de.ellpeck.rockbottom.api.Constants;
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.IRenderer;
-import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.gui.Gui;
 import de.ellpeck.rockbottom.api.gui.component.GuiComponent;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.util.Colors;
-import de.ellpeck.rockbottom.api.util.reg.IResourceName;
+import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 import java.util.List;
 
 public class ComponentIngredient extends GuiComponent{
 
-    private static final IResourceName RES = RockBottomAPI.createInternalRes("gui.construction.ingredient_background");
-    private static final IResourceName RES_NONE = RockBottomAPI.createInternalRes("gui.construction.ingredient_background_none");
+    private static final ResourceName RES = ResourceName.intern("gui.construction.ingredient_background");
+    private static final ResourceName RES_NONE = ResourceName.intern("gui.construction.ingredient_background_none");
 
     private final boolean hasItem;
     private final List<ItemInstance> inputs;
@@ -78,8 +77,8 @@ public class ComponentIngredient extends GuiComponent{
     }
 
     @Override
-    public IResourceName getName(){
-        return RockBottomAPI.createInternalRes("ingredient");
+    public ResourceName getName(){
+        return ResourceName.intern("ingredient");
     }
 
     @Override

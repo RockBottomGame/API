@@ -23,7 +23,6 @@ package de.ellpeck.rockbottom.api.gui.component;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.IRenderer;
-import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.assets.texture.ITexture;
 import de.ellpeck.rockbottom.api.data.settings.Settings;
@@ -31,7 +30,7 @@ import de.ellpeck.rockbottom.api.gui.Gui;
 import de.ellpeck.rockbottom.api.util.BoundBox;
 import de.ellpeck.rockbottom.api.util.Colors;
 import de.ellpeck.rockbottom.api.util.Util;
-import de.ellpeck.rockbottom.api.util.reg.IResourceName;
+import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 import java.util.function.Consumer;
 
@@ -44,9 +43,9 @@ public class ComponentScrollBar extends GuiComponent{
 
     protected boolean wasMouseDown;
     protected boolean drawReversed;
-    protected final IResourceName scrollTexture;
+    protected final ResourceName scrollTexture;
 
-    public ComponentScrollBar(Gui gui, int x, int y, int width, int height, BoundBox hoverArea, int max, Consumer<Integer> scrollConsumer, IResourceName scrollTexture){
+    public ComponentScrollBar(Gui gui, int x, int y, int width, int height, BoundBox hoverArea, int max, Consumer<Integer> scrollConsumer, ResourceName scrollTexture){
         super(gui, x, y, width, height);
         this.scrollConsumer = scrollConsumer;
         this.hoverArea = hoverArea;
@@ -59,8 +58,8 @@ public class ComponentScrollBar extends GuiComponent{
     }
 
     @Override
-    public IResourceName getName(){
-        return RockBottomAPI.createInternalRes("scroll_bar");
+    public ResourceName getName(){
+        return ResourceName.intern("scroll_bar");
     }
 
     public BoundBox getHoverArea(){

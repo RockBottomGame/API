@@ -29,13 +29,13 @@ import de.ellpeck.rockbottom.api.assets.texture.ITexture;
 import de.ellpeck.rockbottom.api.data.settings.Settings;
 import de.ellpeck.rockbottom.api.gui.Gui;
 import de.ellpeck.rockbottom.api.util.Util;
-import de.ellpeck.rockbottom.api.util.reg.IResourceName;
+import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 import java.util.function.BiConsumer;
 
 public class ComponentColorPicker extends GuiComponent{
 
-    private final ITexture texture = RockBottomAPI.getGame().getAssetManager().getTexture(RockBottomAPI.createInternalRes("gui.colorpick"));
+    private final ITexture texture = RockBottomAPI.getGame().getAssetManager().getTexture(ResourceName.intern("gui.colorpick"));
 
     private final BiConsumer<Integer, Boolean> consumer;
     private final boolean isEnlargable;
@@ -109,8 +109,8 @@ public class ComponentColorPicker extends GuiComponent{
     }
 
     @Override
-    public IResourceName getName(){
-        return RockBottomAPI.createInternalRes("color_picker");
+    public ResourceName getName(){
+        return ResourceName.intern("color_picker");
     }
 
     private void unenlarge(){

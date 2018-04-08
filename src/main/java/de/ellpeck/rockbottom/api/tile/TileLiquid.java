@@ -28,7 +28,7 @@ import de.ellpeck.rockbottom.api.render.tile.ITileRenderer;
 import de.ellpeck.rockbottom.api.render.tile.TileLiquidRenderer;
 import de.ellpeck.rockbottom.api.tile.state.IntProp;
 import de.ellpeck.rockbottom.api.tile.state.TileState;
-import de.ellpeck.rockbottom.api.util.reg.IResourceName;
+import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 import de.ellpeck.rockbottom.api.world.IWorld;
 import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 
@@ -36,13 +36,13 @@ public abstract class TileLiquid extends TileBasic{
 
     public final IntProp level = new IntProp("level", 0, this.getLevels());
 
-    public TileLiquid(IResourceName name){
+    public TileLiquid(ResourceName name){
         super(name);
         this.addProps(this.level);
     }
 
     @Override
-    protected ITileRenderer createRenderer(IResourceName name){
+    protected ITileRenderer createRenderer(ResourceName name){
         return new TileLiquidRenderer(name, this);
     }
 

@@ -29,8 +29,8 @@ import de.ellpeck.rockbottom.api.item.ToolType;
 import de.ellpeck.rockbottom.api.tile.Tile;
 import de.ellpeck.rockbottom.api.tile.TileMeta;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
-import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 import de.ellpeck.rockbottom.api.util.reg.NameRegistry;
+import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 import de.ellpeck.rockbottom.api.world.gen.biome.Biome;
 
 /**
@@ -137,7 +137,7 @@ public final class GameContent{
 
     @ApiInternal
     private static <T> T get(String name, NameRegistry<T> registry){
-        IResourceName res = RockBottomAPI.createInternalRes(name);
+        ResourceName res = ResourceName.intern(name);
         return Preconditions.checkNotNull(registry.get(res), "Object with name "+res+" was not found in registry "+registry+"! This is probably due to GameContent being accessed before the game has initialized!");
     }
 

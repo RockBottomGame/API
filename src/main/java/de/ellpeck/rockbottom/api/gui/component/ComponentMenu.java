@@ -21,11 +21,10 @@
 
 package de.ellpeck.rockbottom.api.gui.component;
 
-import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.gui.Gui;
 import de.ellpeck.rockbottom.api.util.BoundBox;
 import de.ellpeck.rockbottom.api.util.Util;
-import de.ellpeck.rockbottom.api.util.reg.IResourceName;
+import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +37,7 @@ public class ComponentMenu extends ComponentScrollBar{
     private final int componentsOffsetY;
     private final List<MenuComponent> contents = new ArrayList<>();
 
-    public ComponentMenu(Gui gui, int x, int y, int barWidth, int height, int displayedComponentsX, int displayedComponentsY, int componentsOffsetX, int componentsOffsetY, BoundBox hoverArea, IResourceName scrollTexture){
+    public ComponentMenu(Gui gui, int x, int y, int barWidth, int height, int displayedComponentsX, int displayedComponentsY, int componentsOffsetX, int componentsOffsetY, BoundBox hoverArea, ResourceName scrollTexture){
         super(gui, x, y, barWidth, height, hoverArea, 0, null, scrollTexture);
         this.displayedComponentsX = displayedComponentsX;
         this.displayedComponentsY = displayedComponentsY;
@@ -123,7 +122,7 @@ public class ComponentMenu extends ComponentScrollBar{
     }
 
     @Override
-    public IResourceName getName(){
-        return RockBottomAPI.createInternalRes("scroll_menu");
+    public ResourceName getName(){
+        return ResourceName.intern("scroll_menu");
     }
 }

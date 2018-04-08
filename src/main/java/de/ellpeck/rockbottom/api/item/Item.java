@@ -28,7 +28,7 @@ import de.ellpeck.rockbottom.api.construction.resource.ResInfo;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.render.item.IItemRenderer;
 import de.ellpeck.rockbottom.api.tile.Tile;
-import de.ellpeck.rockbottom.api.util.reg.IResourceName;
+import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 import de.ellpeck.rockbottom.api.world.IWorld;
 import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 
@@ -38,12 +38,12 @@ import java.util.Map;
 
 public class Item{
 
-    protected final IResourceName name;
-    protected final IResourceName unlocName;
+    protected final ResourceName name;
+    protected final ResourceName unlocName;
 
     protected int maxAmount = 999;
 
-    public Item(IResourceName name){
+    public Item(ResourceName name){
         this.name = name;
         this.unlocName = this.name.addPrefix("item.");
     }
@@ -66,11 +66,11 @@ public class Item{
         return this.maxAmount;
     }
 
-    public IResourceName getName(){
+    public ResourceName getName(){
         return this.name;
     }
 
-    public IResourceName getUnlocalizedName(ItemInstance instance){
+    public ResourceName getUnlocalizedName(ItemInstance instance){
         return this.unlocName;
     }
 

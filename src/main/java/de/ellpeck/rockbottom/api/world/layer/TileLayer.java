@@ -29,7 +29,7 @@ import de.ellpeck.rockbottom.api.entity.MovableWorldObject;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.tile.Tile;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
-import de.ellpeck.rockbottom.api.util.reg.IResourceName;
+import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 import de.ellpeck.rockbottom.api.world.IChunk;
 import de.ellpeck.rockbottom.api.world.IWorld;
 
@@ -40,31 +40,31 @@ import java.util.List;
 
 public class TileLayer{
 
-    public static final TileLayer MAIN = new TileLayer(RockBottomAPI.createInternalRes("main"), 0).register();
-    public static final TileLayer LIQUIDS = new TileLayer(RockBottomAPI.createInternalRes("liquids"), -5).register();
-    public static final TileLayer BACKGROUND = new TileLayer(RockBottomAPI.createInternalRes("background"), -10).register();
+    public static final TileLayer MAIN = new TileLayer(ResourceName.intern("main"), 0).register();
+    public static final TileLayer LIQUIDS = new TileLayer(ResourceName.intern("liquids"), -5).register();
+    public static final TileLayer BACKGROUND = new TileLayer(ResourceName.intern("background"), -10).register();
 
     private static List<TileLayer> allLayers;
     private static List<TileLayer> layersByIntPrio;
     private static List<TileLayer> layersByRenderPrio;
 
-    private final IResourceName name;
+    private final ResourceName name;
     private final int renderPriority;
     private final int interactionPriority;
 
     private int assignedIndex = -1;
 
-    public TileLayer(IResourceName name, int priority){
+    public TileLayer(ResourceName name, int priority){
         this(name, priority, priority);
     }
 
-    public TileLayer(IResourceName name, int renderPriority, int interactionPriority){
+    public TileLayer(ResourceName name, int renderPriority, int interactionPriority){
         this.name = name;
         this.renderPriority = renderPriority;
         this.interactionPriority = interactionPriority;
     }
 
-    public IResourceName getName(){
+    public ResourceName getName(){
         return this.name;
     }
 
@@ -140,13 +140,13 @@ public class TileLayer{
 
     @ApiInternal
     public static void init(){
-        allLayers = makeList(Comparator.comparing(TileLayer:: getName));
+        allLayers = makeList(Comparator.comparing(TileLayer :: getName));
         for(int i = 0; i < allLayers.size(); i++){
             allLayers.get(i).assignedIndex = i;
         }
 
-        layersByIntPrio = makeList(Comparator.comparingInt(TileLayer:: getInteractionPriority).reversed());
-        layersByRenderPrio = makeList(Comparator.comparingInt(TileLayer:: getRenderPriority).reversed());
+        layersByIntPrio = makeList(Comparator.comparingInt(TileLayer :: getInteractionPriority).reversed());
+        layersByRenderPrio = makeList(Comparator.comparingInt(TileLayer :: getRenderPriority).reversed());
 
         RockBottomAPI.logger().info("Sorting a total of "+allLayers.size()+" tile layers");
     }

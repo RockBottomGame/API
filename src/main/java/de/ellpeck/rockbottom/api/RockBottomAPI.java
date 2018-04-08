@@ -76,7 +76,7 @@ public final class RockBottomAPI{
     /**
      * The current API version equal to the version in the build.gradle file.
      */
-    public static final String VERSION = "0.2.22";
+    public static final String VERSION = "0.3";
 
     /**
      * A list of all the registries in the game. This is only used for
@@ -99,7 +99,7 @@ public final class RockBottomAPI{
     @ApiInternal
     public static final NameRegistry<Item> ITEM_REGISTRY = new NameRegistry<>("item_registry", false).register();
     /**
-     * The registry for all {@link Entity} types. The {@link IResourceName}
+     * The registry for all {@link Entity} types. The {@link ResourceName}
      * refers to the way the entity will be saved to disk when it is present in
      * the world. Note that, to be able to be loaded back in when the game is
      * started, an {@link Entity} needs to have a constructor containing only an
@@ -135,7 +135,7 @@ public final class RockBottomAPI{
      * automatically done using {@link BasicRecipe#register(NameRegistry)}. This
      * is a convenience registry to help with packets and networking. If you
      * want to get a recipe instance by its name, use {@link
-     * IRecipe#forName(IResourceName)}.
+     * IRecipe#forName(ResourceName)}.
      */
     @ApiInternal
     public static final NameRegistry<IRecipe> ALL_CONSTRUCTION_RECIPES = new NameRegistry<>("all_recipe_registry", true).register();
@@ -144,13 +144,13 @@ public final class RockBottomAPI{
      * the left side of the player's inventory. Use {@link
      * BasicRecipe#registerManual()} to register recipes into this registry. If
      * you want to get a recipe instance by its name, use {@link
-     * IRecipe#forName(IResourceName)}.
+     * IRecipe#forName(ResourceName)}.
      */
     @ApiInternal
     public static final ParentedNameRegistry<BasicRecipe> MANUAL_CONSTRUCTION_RECIPES = new ParentedNameRegistry<>("manual_recipe_registry", true, ALL_CONSTRUCTION_RECIPES).register();
     /**
      * The registry for all {@link IWorldGenerator} types. The {@link
-     * IResourceName} is used to save a generator to disk if it is a retroactive
+     * ResourceName} is used to save a generator to disk if it is a retroactive
      * generator ({@link IWorldGenerator#generatesRetroactively()}) to mark that
      * it has already generated in a certain chunk. However, a registry name
      * needs to be supplied regardless if the generator is retroactive. Note
@@ -168,7 +168,7 @@ public final class RockBottomAPI{
      * The registry for all {@link IStructure} objects. Use the contents.json
      * file to create a new structure and have it loaded through the content
      * manager. If you want to get a structure by its name, use {@link
-     * IStructure#forName(IResourceName)} or if you want to get multiple
+     * IStructure#forName(ResourceName)} or if you want to get multiple
      * structures with similar names, use {@link IStructure#forNamePart(String)}.
      */
     @ApiInternal
@@ -214,7 +214,7 @@ public final class RockBottomAPI{
     /**
      * The registry for all {@link Information} types. Note that, to save and
      * load information from and to disk, they need to contain a constructor
-     * that takes an {@link IResourceName} similar to the one that {@link
+     * that takes an {@link ResourceName} similar to the one that {@link
      * Information} provides.
      */
     public static final NameRegistry<Class<? extends Information>> INFORMATION_REGISTRY = new NameRegistry<>("information_registry", false).register();
@@ -244,10 +244,10 @@ public final class RockBottomAPI{
     @ApiInternal
     public static final NameRegistry<IEffect> EFFECT_REGISTRY = new NameRegistry<>("effect_registry", false).register();
     /**
-     * The registry for all {@link StatisticInitializer} objects that track certain things
-     * in the game. To registry something into this registry, use {@link
-     * StatisticInitializer#register()}. To get a statistic and/or modify its value, use
-     * {@link IStatistics} which you can obtain from any {@link
+     * The registry for all {@link StatisticInitializer} objects that track
+     * certain things in the game. To registry something into this registry, use
+     * {@link StatisticInitializer#register()}. To get a statistic and/or modify
+     * its value, use {@link IStatistics} which you can obtain from any {@link
      * AbstractEntityPlayer}.
      */
     @ApiInternal
@@ -366,46 +366,6 @@ public final class RockBottomAPI{
      */
     public static IInternalHooks getInternalHooks(){
         return internals.getHooks();
-    }
-
-    /**
-     * Convenience call to {@link IModLoader#createResourceName(IMod, String)}
-     * that creates a resource with {@link IGameInstance} as the holding mod.
-     *
-     * @param resource The name of the resource
-     *
-     * @return The resource name bound to the game instance
-     */
-    @ApiInternal
-    public static IResourceName createInternalRes(String resource){
-        return createRes(getGame(), resource);
-    }
-
-    /**
-     * Convenience call to {@link IModLoader#createResourceName(IMod, String)}
-     * that creates an {@link IResourceName} bound to the specified {@link
-     * IMod}.
-     *
-     * @param mod      The mod
-     * @param resource The resource
-     *
-     * @return The resource name bound to the mod
-     */
-    public static IResourceName createRes(IMod mod, String resource){
-        return getModLoader().createResourceName(mod, resource);
-    }
-
-    /**
-     * Convenience call to {@link IModLoader#createResourceName(String)} that
-     * creates an {@link IResourceName} from a combined string.
-     *
-     * @param combined The combined string representing a resource bound to a
-     *                 mod
-     *
-     * @return The resource name bound to the mod
-     */
-    public static IResourceName createRes(String combined){
-        return getModLoader().createResourceName(combined);
     }
 
     /**

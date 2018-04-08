@@ -30,11 +30,11 @@ import de.ellpeck.rockbottom.api.assets.texture.ITexture;
 import de.ellpeck.rockbottom.api.gui.component.GuiComponent;
 import de.ellpeck.rockbottom.api.net.chat.component.ChatComponent;
 import de.ellpeck.rockbottom.api.util.Colors;
-import de.ellpeck.rockbottom.api.util.reg.IResourceName;
+import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 public class Toast{
 
-    private final IResourceName icon;
+    private final ResourceName icon;
     private final ChatComponent title;
     private final ChatComponent description;
     private final int displayTime;
@@ -43,7 +43,7 @@ public class Toast{
         this(null, title, description, displayTime);
     }
 
-    public Toast(IResourceName icon, ChatComponent title, ChatComponent description, int displayTime){
+    public Toast(ResourceName icon, ChatComponent title, ChatComponent description, int displayTime){
         this.icon = icon;
         this.title = title;
         this.description = description;

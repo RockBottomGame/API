@@ -25,13 +25,13 @@ import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.construction.resource.IUseInfo;
 import de.ellpeck.rockbottom.api.content.IContent;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
-import de.ellpeck.rockbottom.api.util.reg.IResourceName;
+import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 public class SmeltingRecipe implements IContent{
 
-    public static final IResourceName ID = RockBottomAPI.createInternalRes("smelting");
+    public static final ResourceName ID = ResourceName.intern("smelting");
 
-    private final IResourceName name;
+    private final ResourceName name;
     private final IUseInfo input;
     private final ItemInstance output;
     private final int time;
@@ -40,7 +40,7 @@ public class SmeltingRecipe implements IContent{
         this(output.getItem().getName(), input, output, time);
     }
 
-    public SmeltingRecipe(IResourceName name, IUseInfo input, ItemInstance output, int time){
+    public SmeltingRecipe(ResourceName name, IUseInfo input, ItemInstance output, int time){
         this.name = name;
         this.input = input;
         this.output = output;
@@ -59,7 +59,7 @@ public class SmeltingRecipe implements IContent{
         return this.time;
     }
 
-    public IResourceName getName(){
+    public ResourceName getName(){
         return this.name;
     }
 

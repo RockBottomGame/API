@@ -23,23 +23,22 @@ package de.ellpeck.rockbottom.api.gui.component;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.IRenderer;
-import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.gui.Gui;
-import de.ellpeck.rockbottom.api.util.reg.IResourceName;
+import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 import java.util.function.Supplier;
 
 public class ComponentFancyButton extends ComponentButton{
 
-    protected final IResourceName texture;
+    protected final ResourceName texture;
 
-    public ComponentFancyButton(Gui gui, int x, int y, int sizeX, int sizeY, Supplier<Boolean> supplier, IResourceName texture, String... hover){
+    public ComponentFancyButton(Gui gui, int x, int y, int sizeX, int sizeY, Supplier<Boolean> supplier, ResourceName texture, String... hover){
         super(gui, x, y, sizeX, sizeY, supplier, null, hover);
         this.texture = texture;
     }
 
-    protected IResourceName getTexture(){
+    protected ResourceName getTexture(){
         return this.texture;
     }
 
@@ -51,7 +50,7 @@ public class ComponentFancyButton extends ComponentButton{
     }
 
     @Override
-    public IResourceName getName(){
-        return RockBottomAPI.createInternalRes("fancy_button");
+    public ResourceName getName(){
+        return ResourceName.intern("fancy_button");
     }
 }

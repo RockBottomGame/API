@@ -29,7 +29,7 @@ import de.ellpeck.rockbottom.api.render.tile.ITileRenderer;
 import de.ellpeck.rockbottom.api.render.tile.TileMetaRenderer;
 import de.ellpeck.rockbottom.api.tile.state.IntProp;
 import de.ellpeck.rockbottom.api.tile.state.TileState;
-import de.ellpeck.rockbottom.api.util.reg.IResourceName;
+import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 import de.ellpeck.rockbottom.api.world.IWorld;
 import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 
@@ -39,15 +39,15 @@ import java.util.List;
 
 public class TileMeta extends TileBasic{
 
-    public final List<IResourceName> subResourceNames = new ArrayList<>();
-    public final List<IResourceName> subUnlocNames = new ArrayList<>();
+    public final List<ResourceName> subResourceNames = new ArrayList<>();
+    public final List<ResourceName> subUnlocNames = new ArrayList<>();
     public IntProp metaProp;
 
-    public TileMeta(IResourceName name){
+    public TileMeta(ResourceName name){
         this(name, true);
     }
 
-    public TileMeta(IResourceName name, boolean addDirectly){
+    public TileMeta(ResourceName name, boolean addDirectly){
         super(name);
 
         if(addDirectly){
@@ -56,7 +56,7 @@ public class TileMeta extends TileBasic{
     }
 
     @Override
-    protected ITileRenderer createRenderer(IResourceName name){
+    protected ITileRenderer createRenderer(ResourceName name){
         return new TileMetaRenderer();
     }
 
@@ -68,7 +68,7 @@ public class TileMeta extends TileBasic{
         return super.register();
     }
 
-    public TileMeta addSubTile(IResourceName name){
+    public TileMeta addSubTile(ResourceName name){
         this.subResourceNames.add(name.addPrefix("tiles."));
         this.subUnlocNames.add(name.addPrefix("item."));
         return this;
@@ -78,7 +78,7 @@ public class TileMeta extends TileBasic{
     protected ItemTile createItemTile(){
         return new ItemTile(this.getName()){
             @Override
-            public IResourceName getUnlocalizedName(ItemInstance instance){
+            public ResourceName getUnlocalizedName(ItemInstance instance){
                 int meta = instance.getMeta();
 
                 if(meta >= 0 && TileMeta.this.subUnlocNames.size() > meta){

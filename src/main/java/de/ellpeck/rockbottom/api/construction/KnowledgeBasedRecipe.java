@@ -24,17 +24,17 @@ package de.ellpeck.rockbottom.api.construction;
 import de.ellpeck.rockbottom.api.construction.resource.IUseInfo;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
-import de.ellpeck.rockbottom.api.util.reg.IResourceName;
+import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 import java.util.List;
 
 public class KnowledgeBasedRecipe extends BasicRecipe{
 
-    public KnowledgeBasedRecipe(IResourceName name, List<IUseInfo> inputs, List<ItemInstance> outputs){
+    public KnowledgeBasedRecipe(ResourceName name, List<IUseInfo> inputs, List<ItemInstance> outputs){
         super(name, inputs, outputs);
     }
 
-    public KnowledgeBasedRecipe(IResourceName name, ItemInstance output, IUseInfo... inputs){
+    public KnowledgeBasedRecipe(ResourceName name, ItemInstance output, IUseInfo... inputs){
         super(name, output, inputs);
     }
 

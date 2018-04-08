@@ -23,7 +23,6 @@ package de.ellpeck.rockbottom.api.util.reg;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.data.IDataManager;
 import de.ellpeck.rockbottom.api.data.settings.IJsonSettings;
 import de.ellpeck.rockbottom.api.data.settings.IPropSettings;
@@ -38,7 +37,7 @@ import java.util.Properties;
 @ApiInternal
 public final class NameToIndexInfo implements IPropSettings, IJsonSettings{
 
-    private final IndexRegistry<IResourceName> reg;
+    private final IndexRegistry<ResourceName> reg;
     private final File legacyFile;
     private final File file;
     private boolean needsSave;
@@ -50,8 +49,8 @@ public final class NameToIndexInfo implements IPropSettings, IJsonSettings{
     }
 
     public <T> void populate(NameRegistry<T> registry){
-        for(Map.Entry<IResourceName, T> entry : registry.map.entrySet()){
-            IResourceName key = entry.getKey();
+        for(Map.Entry<ResourceName, T> entry : registry.map.entrySet()){
+            ResourceName key = entry.getKey();
 
             if(this.getId(key) < 0){
                 this.reg.registerNextFree(key);
@@ -60,11 +59,11 @@ public final class NameToIndexInfo implements IPropSettings, IJsonSettings{
         }
     }
 
-    public int getId(IResourceName name){
+    public int getId(ResourceName name){
         return this.reg.getId(name);
     }
 
-    public IResourceName get(int id){
+    public ResourceName get(int id){
         return this.reg.get(id);
     }
 
@@ -78,7 +77,7 @@ public final class NameToIndexInfo implements IPropSettings, IJsonSettings{
 
         for(String key : props.stringPropertyNames()){
             int index = Integer.parseInt(key);
-            this.reg.map.put(index, RockBottomAPI.createRes(props.getProperty(key)));
+            this.reg.map.put(index, new ResourceName(props.getProperty(key)));
         }
     }
 
@@ -87,14 +86,14 @@ public final class NameToIndexInfo implements IPropSettings, IJsonSettings{
 
         int amount = buf.readInt();
         for(int i = 0; i < amount; i++){
-            this.reg.map.put(buf.readInt(), RockBottomAPI.createRes(NetUtil.readStringFromBuffer(buf)));
+            this.reg.map.put(buf.readInt(), new ResourceName(NetUtil.readStringFromBuffer(buf)));
         }
     }
 
     public void toBuffer(ByteBuf buf){
         buf.writeInt(this.reg.getSize());
 
-        for(Map.Entry<Integer, IResourceName> entry : this.reg.map.entrySet()){
+        for(Map.Entry<Integer, ResourceName> entry : this.reg.map.entrySet()){
             buf.writeInt(entry.getKey());
             NetUtil.writeStringToBuffer(entry.getValue().toString(), buf);
         }
@@ -110,7 +109,7 @@ public final class NameToIndexInfo implements IPropSettings, IJsonSettings{
         this.reg.map.clear();
 
         for(Map.Entry<String, JsonElement> entry : object.entrySet()){
-            IResourceName name = RockBottomAPI.createRes(entry.getKey());
+            ResourceName name = new ResourceName(entry.getKey());
             int id = entry.getValue().getAsInt();
             this.reg.map.put(id, name);
         }
@@ -118,7 +117,7 @@ public final class NameToIndexInfo implements IPropSettings, IJsonSettings{
 
     @Override
     public void save(JsonObject object){
-        for(Map.Entry<Integer, IResourceName> entry : this.reg.map.entrySet()){
+        for(Map.Entry<Integer, ResourceName> entry : this.reg.map.entrySet()){
             object.addProperty(entry.getValue().toString(), entry.getKey());
         }
         this.needsSave = false;

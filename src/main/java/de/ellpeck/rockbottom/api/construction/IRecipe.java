@@ -32,7 +32,7 @@ import de.ellpeck.rockbottom.api.gui.component.construction.ComponentPolaroid;
 import de.ellpeck.rockbottom.api.inventory.IInventory;
 import de.ellpeck.rockbottom.api.inventory.Inventory;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
-import de.ellpeck.rockbottom.api.util.reg.IResourceName;
+import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 import de.ellpeck.rockbottom.api.world.IWorld;
 
 import java.util.ArrayList;
@@ -40,15 +40,15 @@ import java.util.List;
 
 public interface IRecipe extends IContent{
 
-    IResourceName ID = RockBottomAPI.createInternalRes("recipe");
+    ResourceName ID = ResourceName.intern("recipe");
 
-    static IRecipe forName(IResourceName name){
+    static IRecipe forName(ResourceName name){
         return RockBottomAPI.ALL_CONSTRUCTION_RECIPES.get(name);
     }
 
-    IResourceName getName();
+    ResourceName getName();
 
-    IResourceName getKnowledgeInformationName();
+    ResourceName getKnowledgeInformationName();
 
     boolean isKnown(AbstractEntityPlayer player);
 

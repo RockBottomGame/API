@@ -30,15 +30,15 @@ import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.tile.Tile;
 import de.ellpeck.rockbottom.api.tile.state.TileState;
-import de.ellpeck.rockbottom.api.util.reg.IResourceName;
+import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 import de.ellpeck.rockbottom.api.world.IWorld;
 import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 
 public class DefaultTileRenderer<T extends Tile> implements ITileRenderer<T>{
 
-    public final IResourceName texture;
+    public final ResourceName texture;
 
-    public DefaultTileRenderer(IResourceName texture){
+    public DefaultTileRenderer(ResourceName texture){
         this.texture = texture.addPrefix("tiles.");
     }
 

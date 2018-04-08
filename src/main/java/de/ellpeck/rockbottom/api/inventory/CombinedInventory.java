@@ -68,7 +68,7 @@ public class CombinedInventory implements IInventory{
 
     @Override
     public ItemInstance get(int id){
-        return this.executeOnInv(id, IInventory:: get);
+        return this.executeOnInv(id, IInventory :: get);
     }
 
     @Override

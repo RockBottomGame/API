@@ -27,6 +27,7 @@ import de.ellpeck.rockbottom.api.data.set.DataSet;
 import de.ellpeck.rockbottom.api.data.set.IAdditionalDataProvider;
 import de.ellpeck.rockbottom.api.data.set.ModBasedDataSet;
 import de.ellpeck.rockbottom.api.tile.Tile;
+import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 public final class ItemInstance implements IAdditionalDataProvider{
 
@@ -69,7 +70,7 @@ public final class ItemInstance implements IAdditionalDataProvider{
 
     public static ItemInstance load(DataSet set){
         String name = set.getString("item_name");
-        Item item = RockBottomAPI.ITEM_REGISTRY.get(RockBottomAPI.createRes(name));
+        Item item = RockBottomAPI.ITEM_REGISTRY.get(new ResourceName(name));
 
         if(item != null){
             int amount = set.getInt("amount");

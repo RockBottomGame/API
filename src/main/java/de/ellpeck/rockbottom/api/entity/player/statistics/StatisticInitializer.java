@@ -22,17 +22,17 @@
 package de.ellpeck.rockbottom.api.entity.player.statistics;
 
 import de.ellpeck.rockbottom.api.RockBottomAPI;
-import de.ellpeck.rockbottom.api.util.reg.IResourceName;
+import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 public abstract class StatisticInitializer<T extends Statistic>{
 
-    private final IResourceName name;
+    private final ResourceName name;
 
-    public StatisticInitializer(IResourceName name){
+    public StatisticInitializer(ResourceName name){
         this.name = name;
     }
 
-    public IResourceName getName(){
+    public ResourceName getName(){
         return this.name;
     }
 

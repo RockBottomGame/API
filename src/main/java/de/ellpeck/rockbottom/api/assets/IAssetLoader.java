@@ -25,7 +25,7 @@ import com.google.gson.JsonElement;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.content.pack.ContentPack;
 import de.ellpeck.rockbottom.api.mod.IMod;
-import de.ellpeck.rockbottom.api.util.reg.IResourceName;
+import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 public interface IAssetLoader<T extends IAsset>{
 
@@ -33,11 +33,11 @@ public interface IAssetLoader<T extends IAsset>{
         RockBottomAPI.ASSET_LOADER_REGISTRY.register(this.getAssetIdentifier(), this);
     }
 
-    IResourceName getAssetIdentifier();
+    ResourceName getAssetIdentifier();
 
-    void loadAsset(IAssetManager manager, IResourceName resourceName, String path, JsonElement element, String elementName, IMod loadingMod, ContentPack pack) throws Exception;
+    void loadAsset(IAssetManager manager, ResourceName resourceName, String path, JsonElement element, String elementName, IMod loadingMod, ContentPack pack) throws Exception;
 
-    void disableAsset(IAssetManager manager, IResourceName resourceName);
+    void disableAsset(IAssetManager manager, ResourceName resourceName);
 
     default boolean dealWithSpecialCases(IAssetManager manager, String resourceName, String path, JsonElement element, String elementName, IMod loadingMod, ContentPack pack) throws Exception{
         return false;

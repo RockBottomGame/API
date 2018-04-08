@@ -23,13 +23,13 @@ package de.ellpeck.rockbottom.api.entity.player.knowledge;
 
 import de.ellpeck.rockbottom.api.data.set.DataSet;
 import de.ellpeck.rockbottom.api.toast.Toast;
-import de.ellpeck.rockbottom.api.util.reg.IResourceName;
+import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 public class Information{
 
-    private final IResourceName name;
+    private final ResourceName name;
 
-    public Information(IResourceName name){
+    public Information(ResourceName name){
         this.name = name;
     }
 
@@ -49,11 +49,11 @@ public class Information{
         return null;
     }
 
-    public IResourceName getName(){
+    public ResourceName getName(){
         return this.name;
     }
 
-    public IResourceName getRegistryName(){
+    public ResourceName getRegistryName(){
         return this.name;
     }
 }

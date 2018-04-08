@@ -22,7 +22,6 @@
 package de.ellpeck.rockbottom.api.tile;
 
 import com.google.common.base.Preconditions;
-import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.assets.font.FormattingCode;
 import de.ellpeck.rockbottom.api.entity.Entity;
@@ -33,7 +32,7 @@ import de.ellpeck.rockbottom.api.render.tile.MultiTileRenderer;
 import de.ellpeck.rockbottom.api.tile.state.IntProp;
 import de.ellpeck.rockbottom.api.tile.state.TileState;
 import de.ellpeck.rockbottom.api.util.Pos2;
-import de.ellpeck.rockbottom.api.util.reg.IResourceName;
+import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 import de.ellpeck.rockbottom.api.world.IWorld;
 import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 
@@ -45,13 +44,13 @@ public abstract class MultiTile extends TileBasic{
     public IntProp propSubY = new IntProp("subY", 0, this.getHeight());
     private boolean[][] structure;
 
-    public MultiTile(IResourceName name){
+    public MultiTile(ResourceName name){
         super(name);
         this.addProps(this.propSubX, this.propSubY);
     }
 
     @Override
-    protected ITileRenderer createRenderer(IResourceName name){
+    protected ITileRenderer createRenderer(ResourceName name){
         return new MultiTileRenderer(name, this);
     }
 
@@ -177,7 +176,7 @@ public abstract class MultiTile extends TileBasic{
 
         if(isAdvanced){
             desc.add("");
-            desc.add(FormattingCode.LIGHT_GRAY+manager.localize(RockBottomAPI.createInternalRes("info.size"), this.getWidth(), this.getHeight()));
+            desc.add(FormattingCode.LIGHT_GRAY+manager.localize(ResourceName.intern("info.size"), this.getWidth(), this.getHeight()));
         }
     }
 }

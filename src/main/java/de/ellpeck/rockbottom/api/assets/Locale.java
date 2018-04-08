@@ -23,7 +23,7 @@ package de.ellpeck.rockbottom.api.assets;
 
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
-import de.ellpeck.rockbottom.api.util.reg.IResourceName;
+import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 import java.util.Collections;
 import java.util.Map;
@@ -31,17 +31,17 @@ import java.util.Map;
 @ApiInternal
 public final class Locale implements IAsset{
 
-    public static final IResourceName ID = RockBottomAPI.createInternalRes("loc");
+    public static final ResourceName ID = ResourceName.intern("loc");
 
     private final String name;
-    private final Map<IResourceName, String> localization;
+    private final Map<ResourceName, String> localization;
 
-    public Locale(String name, Map<IResourceName, String> localization){
+    public Locale(String name, Map<ResourceName, String> localization){
         this.name = name;
         this.localization = localization;
     }
 
-    public String localize(Locale fallback, IResourceName unloc, Object... format){
+    public String localize(Locale fallback, ResourceName unloc, Object... format){
         String loc = this.localization.get(unloc);
 
         if(loc == null){
@@ -66,7 +66,7 @@ public final class Locale implements IAsset{
     }
 
     @ApiInternal
-    public void override(Map<IResourceName, String> newLocalization){
+    public void override(Map<ResourceName, String> newLocalization){
         this.localization.putAll(newLocalization);
     }
 
@@ -74,7 +74,7 @@ public final class Locale implements IAsset{
         return this.name;
     }
 
-    public Map<IResourceName, String> getLocalization(){
+    public Map<ResourceName, String> getLocalization(){
         return Collections.unmodifiableMap(this.localization);
     }
 

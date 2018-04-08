@@ -25,7 +25,7 @@ import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.gui.Gui;
 import de.ellpeck.rockbottom.api.mod.IMod;
-import de.ellpeck.rockbottom.api.util.reg.IResourceName;
+import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 import java.util.function.Supplier;
 
@@ -49,7 +49,7 @@ public class ComponentToggleButton extends ComponentButton{
     @Override
     protected String getText(){
         String resource = this.locKey+(this.isToggled ? "_toggled" : "");
-        return RockBottomAPI.getGame().getAssetManager().localize(RockBottomAPI.createRes(this.locDomain, resource));
+        return RockBottomAPI.getGame().getAssetManager().localize(new ResourceName(this.locDomain, resource));
     }
 
     @Override
@@ -59,7 +59,7 @@ public class ComponentToggleButton extends ComponentButton{
     }
 
     @Override
-    public IResourceName getName(){
-        return RockBottomAPI.createInternalRes("toggle_button");
+    public ResourceName getName(){
+        return ResourceName.intern("toggle_button");
     }
 }

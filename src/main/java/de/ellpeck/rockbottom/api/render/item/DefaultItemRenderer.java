@@ -28,13 +28,13 @@ import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.item.Item;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
-import de.ellpeck.rockbottom.api.util.reg.IResourceName;
+import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 public class DefaultItemRenderer<T extends Item> implements IItemRenderer<T>{
 
-    protected final IResourceName texture;
+    protected final ResourceName texture;
 
-    public DefaultItemRenderer(IResourceName texture){
+    public DefaultItemRenderer(ResourceName texture){
         this.texture = texture.addPrefix("items.");
     }
 

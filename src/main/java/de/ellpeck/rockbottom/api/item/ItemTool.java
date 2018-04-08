@@ -24,7 +24,7 @@ package de.ellpeck.rockbottom.api.item;
 import de.ellpeck.rockbottom.api.render.item.IItemRenderer;
 import de.ellpeck.rockbottom.api.render.item.ItemToolRenderer;
 import de.ellpeck.rockbottom.api.tile.Tile;
-import de.ellpeck.rockbottom.api.util.reg.IResourceName;
+import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 import de.ellpeck.rockbottom.api.world.IWorld;
 import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 
@@ -36,7 +36,7 @@ public class ItemTool extends ItemBasic{
     private final float miningSpeed;
     private final Map<ToolType, Integer> toolTypes = new HashMap<>();
 
-    public ItemTool(IResourceName name, float miningSpeed, ToolType type, int level){
+    public ItemTool(ResourceName name, float miningSpeed, ToolType type, int level){
         super(name);
         this.miningSpeed = miningSpeed;
 
@@ -45,7 +45,7 @@ public class ItemTool extends ItemBasic{
     }
 
     @Override
-    protected IItemRenderer createRenderer(IResourceName name){
+    protected IItemRenderer createRenderer(ResourceName name){
         return new ItemToolRenderer(name);
     }
 

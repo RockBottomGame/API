@@ -30,12 +30,12 @@ import de.ellpeck.rockbottom.api.RockBottomAPI;
 import java.util.Map;
 import java.util.Set;
 
-public class NameRegistry<T> implements IRegistry<IResourceName, T>{
+public class NameRegistry<T> implements IRegistry<ResourceName, T>{
 
     protected final String name;
     protected final boolean canUnregister;
-    protected final BiMap<IResourceName, T> map = HashBiMap.create();
-    protected final BiMap<IResourceName, T> unmodifiableMap;
+    protected final BiMap<ResourceName, T> map = HashBiMap.create();
+    protected final BiMap<ResourceName, T> unmodifiableMap;
 
     public NameRegistry(String name, boolean canUnregister){
         this.name = name;
@@ -44,7 +44,7 @@ public class NameRegistry<T> implements IRegistry<IResourceName, T>{
     }
 
     @Override
-    public void register(IResourceName name, T value){
+    public void register(ResourceName name, T value){
         Preconditions.checkArgument(name != null, "Tried registering "+value+" with name "+name+" which is invalid into registry "+this);
         Preconditions.checkArgument(!this.map.containsKey(name), "Cannot register "+value+" with name "+name+" twice into registry "+this);
 
@@ -53,7 +53,7 @@ public class NameRegistry<T> implements IRegistry<IResourceName, T>{
     }
 
     @Override
-    public T get(IResourceName name){
+    public T get(ResourceName name){
         if(name == null){
             RockBottomAPI.logger().warning("Tried getting value of "+name+" for registry "+this+" which is invalid");
             return null;
@@ -64,7 +64,7 @@ public class NameRegistry<T> implements IRegistry<IResourceName, T>{
     }
 
     @Override
-    public IResourceName getId(T value){
+    public ResourceName getId(T value){
         return this.map.inverse().get(value);
     }
 
@@ -74,7 +74,7 @@ public class NameRegistry<T> implements IRegistry<IResourceName, T>{
     }
 
     @Override
-    public void unregister(IResourceName name){
+    public void unregister(ResourceName name){
         if(this.canUnregister){
             this.map.remove(name);
             RockBottomAPI.logger().config("Unregistered "+name+" from registry "+this);
@@ -85,12 +85,12 @@ public class NameRegistry<T> implements IRegistry<IResourceName, T>{
     }
 
     @Override
-    public BiMap<IResourceName, T> getUnmodifiable(){
+    public BiMap<ResourceName, T> getUnmodifiable(){
         return this.unmodifiableMap;
     }
 
     @Override
-    public Set<IResourceName> keySet(){
+    public Set<ResourceName> keySet(){
         return this.unmodifiableMap.keySet();
     }
 
@@ -100,7 +100,7 @@ public class NameRegistry<T> implements IRegistry<IResourceName, T>{
     }
 
     @Override
-    public Set<Map.Entry<IResourceName, T>> entrySet(){
+    public Set<Map.Entry<ResourceName, T>> entrySet(){
         return this.unmodifiableMap.entrySet();
     }
 

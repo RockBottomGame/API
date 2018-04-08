@@ -24,23 +24,23 @@ package de.ellpeck.rockbottom.api.data.settings;
 import de.ellpeck.rockbottom.api.IInputHandler;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
-import de.ellpeck.rockbottom.api.util.reg.IResourceName;
+import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 import org.lwjgl.glfw.GLFW;
 
 public final class Keybind{
 
-    private final IResourceName name;
+    private final ResourceName name;
     private int key;
 
     /**
-     * @deprecated Use the {@link #Keybind(IResourceName, int)} constructor
+     * @deprecated Use the {@link #Keybind(ResourceName, int)} constructor
      */
     @Deprecated
-    public Keybind(IResourceName name, int defKey, boolean defIsMouse){
+    public Keybind(ResourceName name, int defKey, boolean defIsMouse){
         this(name, defKey);
     }
 
-    public Keybind(IResourceName name, int defKey){
+    public Keybind(ResourceName name, int defKey){
         this.name = name;
         this.key = defKey;
     }
@@ -80,7 +80,7 @@ public final class Keybind{
         return this.key == key;
     }
 
-    public IResourceName getName(){
+    public ResourceName getName(){
         return this.name;
     }
 

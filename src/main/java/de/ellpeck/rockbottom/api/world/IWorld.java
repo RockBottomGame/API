@@ -26,8 +26,8 @@ import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.render.IPlayerDesign;
 import de.ellpeck.rockbottom.api.tile.state.TileState;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
-import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 import de.ellpeck.rockbottom.api.util.reg.NameToIndexInfo;
+import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 import de.ellpeck.rockbottom.api.world.gen.IWorldGenerator;
 import de.ellpeck.rockbottom.api.world.gen.biome.Biome;
 import de.ellpeck.rockbottom.api.world.layer.TileLayer;
@@ -104,7 +104,7 @@ public interface IWorld extends IChunkOrWorld{
     List<IWorldGenerator> getSortedRetroactiveGenerators();
 
     @ApiInternal
-    IWorldGenerator getGenerator(IResourceName name);
+    IWorldGenerator getGenerator(ResourceName name);
 
     @ApiInternal
     void save();
@@ -125,17 +125,17 @@ public interface IWorld extends IChunkOrWorld{
 
     String getName();
 
-    void playSound(AbstractEntityPlayer player, IResourceName name, double x, double y, double z, float pitch, float volume);
+    void playSound(AbstractEntityPlayer player, ResourceName name, double x, double y, double z, float pitch, float volume);
 
-    void broadcastSound(AbstractEntityPlayer player, IResourceName name, float pitch, float volume);
+    void broadcastSound(AbstractEntityPlayer player, ResourceName name, float pitch, float volume);
 
-    void playSound(IResourceName name, double x, double y, double z, float pitch, float volume, AbstractEntityPlayer except);
+    void playSound(ResourceName name, double x, double y, double z, float pitch, float volume, AbstractEntityPlayer except);
 
-    void broadcastSound(IResourceName name, float pitch, float volume, AbstractEntityPlayer except);
+    void broadcastSound(ResourceName name, float pitch, float volume, AbstractEntityPlayer except);
 
-    void playSound(IResourceName name, double x, double y, double z, float pitch, float volume);
+    void playSound(ResourceName name, double x, double y, double z, float pitch, float volume);
 
-    void broadcastSound(IResourceName name, float pitch, float volume);
+    void broadcastSound(ResourceName name, float pitch, float volume);
 
     byte getCombinedVisualLight(int x, int y);
 

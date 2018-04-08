@@ -29,7 +29,7 @@ import de.ellpeck.rockbottom.api.assets.font.FormattingCode;
 import de.ellpeck.rockbottom.api.data.settings.Settings;
 import de.ellpeck.rockbottom.api.gui.Gui;
 import de.ellpeck.rockbottom.api.util.Colors;
-import de.ellpeck.rockbottom.api.util.reg.IResourceName;
+import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -98,8 +98,8 @@ public class ComponentFormatSelector extends ComponentButton{
     }
 
     @Override
-    public IResourceName getName(){
-        return RockBottomAPI.createInternalRes("format_selector_button");
+    public ResourceName getName(){
+        return ResourceName.intern("format_selector_button");
     }
 
     @Override
@@ -141,7 +141,7 @@ public class ComponentFormatSelector extends ComponentButton{
                     else{
                         return false;
                     }
-                }, code+"Aa", RockBottomAPI.getGame().getAssetManager().localize(RockBottomAPI.createInternalRes("info.format."+code)), "Code: "+code.toString().replaceAll("&", "<&>")){
+                }, code+"Aa", RockBottomAPI.getGame().getAssetManager().localize(ResourceName.intern("info.format."+code)), "Code: "+code.toString().replaceAll("&", "<&>")){
                     @Override
                     public int getPriority(){
                         return 2000;
@@ -163,8 +163,8 @@ public class ComponentFormatSelector extends ComponentButton{
         }
 
         @Override
-        public IResourceName getName(){
-            return RockBottomAPI.createInternalRes("format_selector_menu");
+        public ResourceName getName(){
+            return ResourceName.intern("format_selector_menu");
         }
 
         @Override

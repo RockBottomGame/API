@@ -31,13 +31,13 @@ public class ParentedNameRegistry<T> extends NameRegistry<T>{
     }
 
     @Override
-    public void register(IResourceName name, T value){
+    public void register(ResourceName name, T value){
         this.parent.register(name, value);
         super.register(name, value);
     }
 
     @Override
-    public void unregister(IResourceName name){
+    public void unregister(ResourceName name){
         this.parent.unregister(name);
         super.unregister(name);
     }

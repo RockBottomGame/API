@@ -25,8 +25,8 @@ import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.construction.resource.IUseInfo;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
-import de.ellpeck.rockbottom.api.util.reg.IResourceName;
 import de.ellpeck.rockbottom.api.util.reg.NameRegistry;
+import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -34,19 +34,19 @@ import java.util.List;
 
 public class BasicRecipe implements IRecipe{
 
-    private final IResourceName name;
-    private final IResourceName infoName;
+    private final ResourceName name;
+    private final ResourceName infoName;
     private final List<IUseInfo> inputs;
     private final List<ItemInstance> outputs;
 
-    public BasicRecipe(IResourceName name, List<IUseInfo> inputs, List<ItemInstance> outputs){
+    public BasicRecipe(ResourceName name, List<IUseInfo> inputs, List<ItemInstance> outputs){
         this.name = name;
         this.infoName = name.addPrefix("recipe_");
         this.inputs = inputs;
         this.outputs = outputs;
     }
 
-    public BasicRecipe(IResourceName name, ItemInstance output, IUseInfo... inputs){
+    public BasicRecipe(ResourceName name, ItemInstance output, IUseInfo... inputs){
         this(name, Arrays.asList(inputs), Collections.singletonList(output));
     }
 
@@ -70,12 +70,12 @@ public class BasicRecipe implements IRecipe{
     }
 
     @Override
-    public IResourceName getName(){
+    public ResourceName getName(){
         return this.name;
     }
 
     @Override
-    public IResourceName getKnowledgeInformationName(){
+    public ResourceName getKnowledgeInformationName(){
         return this.infoName;
     }
 

@@ -45,7 +45,7 @@ import de.ellpeck.rockbottom.api.tile.state.TileProp;
 import de.ellpeck.rockbottom.api.tile.state.TileState;
 import de.ellpeck.rockbottom.api.util.BoundBox;
 import de.ellpeck.rockbottom.api.util.Util;
-import de.ellpeck.rockbottom.api.util.reg.IResourceName;
+import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 import de.ellpeck.rockbottom.api.world.IWorld;
 import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 
@@ -53,18 +53,18 @@ import java.util.*;
 
 public class Tile{
 
-    private static final IResourceName SOUND_GENERIC_TILE = RockBottomAPI.createInternalRes("tiles.generic_tile");
+    private static final ResourceName SOUND_GENERIC_TILE = ResourceName.intern("tiles.generic_tile");
     public static final BoundBox DEFAULT_BOUNDS = new BoundBox(0, 0, 1, 1);
-    private static final IResourceName LOC_ADVANCED = RockBottomAPI.createInternalRes("info.advanced_info");
-    private static final IResourceName LOC_LAYER = RockBottomAPI.createInternalRes("info.layer_placement");
+    private static final ResourceName LOC_ADVANCED = ResourceName.intern("info.advanced_info");
+    private static final ResourceName LOC_LAYER = ResourceName.intern("info.layer_placement");
 
-    protected final IResourceName name;
+    protected final ResourceName name;
     private final IStateHandler stateHandler = RockBottomAPI.getInternalHooks().makeStateHandler(this);
     protected Map<ToolType, Integer> effectiveTools = new HashMap<>();
     protected boolean forceDrop;
     protected float hardness = 1F;
 
-    public Tile(IResourceName name){
+    public Tile(ResourceName name){
         this.name = name;
     }
 
@@ -278,7 +278,7 @@ public class Tile{
         return false;
     }
 
-    public IResourceName getName(){
+    public ResourceName getName(){
         return this.name;
     }
 
@@ -340,15 +340,15 @@ public class Tile{
         return this.stateHandler.getProps();
     }
 
-    public boolean hasState(IResourceName name, Map<String, Comparable> props){
+    public boolean hasState(ResourceName name, Map<String, Comparable> props){
         return true;
     }
 
-    public IResourceName getBreakSound(IWorld world, int x, int y, TileLayer layer, Entity destroyer){
+    public ResourceName getBreakSound(IWorld world, int x, int y, TileLayer layer, Entity destroyer){
         return SOUND_GENERIC_TILE;
     }
 
-    public IResourceName getPlaceSound(IWorld world, int x, int y, TileLayer layer, Entity placer, TileState state){
+    public ResourceName getPlaceSound(IWorld world, int x, int y, TileLayer layer, Entity placer, TileState state){
         return SOUND_GENERIC_TILE;
     }
 

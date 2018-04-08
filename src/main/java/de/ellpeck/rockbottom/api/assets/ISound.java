@@ -21,15 +21,14 @@
 
 package de.ellpeck.rockbottom.api.assets;
 
-import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
-import de.ellpeck.rockbottom.api.util.reg.IResourceName;
+import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 import java.util.Set;
 
 public interface ISound extends IAsset{
 
-    IResourceName ID = RockBottomAPI.createInternalRes("sound");
+    ResourceName ID = ResourceName.intern("sound");
 
     void play();
 
