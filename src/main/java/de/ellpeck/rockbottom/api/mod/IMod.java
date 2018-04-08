@@ -29,6 +29,7 @@ import de.ellpeck.rockbottom.api.assets.IAsset;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.assets.texture.stitcher.ITextureStitcher;
 import de.ellpeck.rockbottom.api.content.IContent;
+import de.ellpeck.rockbottom.api.data.settings.ModConfig;
 import de.ellpeck.rockbottom.api.data.settings.ServerSettings;
 import de.ellpeck.rockbottom.api.data.settings.Settings;
 import de.ellpeck.rockbottom.api.effect.IEffect;
@@ -167,6 +168,25 @@ public interface IMod{
      * @return A gui class
      */
     default Class<? extends Gui> getModGuiClass(){
+        return null;
+    }
+
+    /**
+     * Gets an optional {@link ModConfig} instance that you can use to save and
+     * load settings for your mod that the player will be able to change. The
+     * {@link ModConfig} class automatically picks a location for your settings
+     * to be, along with automatically loading them from disk before this mod's
+     * {@link #preInit(IGameInstance, IApiHandler, IEventHandler)} phase. If you
+     * want to change the settings in game, say, using the {@link
+     * #getModGuiClass()}, you will still have to call {@link ModConfig#save()}
+     * for them to be saved to file.
+     * <p>
+     * Keep in mind that the config returned does actually have to be cached as
+     * a class variable for loading and saving to properly function.
+     *
+     * @return A config for the mod
+     */
+    default ModConfig getModConfig(){
         return null;
     }
 
