@@ -37,8 +37,6 @@ public interface IDataManager{
 
     File getScreenshotDir();
 
-    File getGameDataFile();
-
     File getSettingsFile();
 
     File getServerSettingsFile();
