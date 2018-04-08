@@ -24,6 +24,7 @@ package de.ellpeck.rockbottom.api;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.data.IDataManager;
 import de.ellpeck.rockbottom.api.data.set.DataSet;
+import de.ellpeck.rockbottom.api.data.settings.IJsonSettings;
 import de.ellpeck.rockbottom.api.data.settings.Keybind;
 import de.ellpeck.rockbottom.api.data.settings.Settings;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
@@ -99,7 +100,7 @@ public interface IGameInstance extends IMod{
     /**
      * Gets the {@link IDataManager} of the current game instance. This can be
      * used for accessing locations on disk like the save folder or the game
-     * folder itself. Additionally, it can save {@link IPropSettings}.
+     * folder itself. Additionally, it can save {@link IJsonSettings}.
      *
      * @return The data manager
      */
