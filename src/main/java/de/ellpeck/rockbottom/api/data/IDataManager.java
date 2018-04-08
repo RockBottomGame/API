@@ -21,7 +21,6 @@
 
 package de.ellpeck.rockbottom.api.data;
 
-import de.ellpeck.rockbottom.api.data.set.DataSet;
 import de.ellpeck.rockbottom.api.data.settings.IJsonSettings;
 
 import java.io.File;
@@ -57,8 +56,6 @@ public interface IDataManager{
     File getPlayerDesignFile();
 
     File getModConfigFolder();
-
-    DataSet getGameInfo();
 
     void loadSettings(IJsonSettings settings);
 

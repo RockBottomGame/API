@@ -199,13 +199,24 @@ public interface IGameInstance extends IMod{
     /**
      * Gets the {@link UUID} of the current game instance. This will be applied
      * to the player as soon as a world starts. Note that the dedicated server
-     * does not have a unique id.
+     * does not have a unique id. In case the current unique id does not exist
+     * for one reason or another, the {@link #getDefaultUniqueId()} will be
+     * returned.
      *
      * @return The game's unique id
      *
      * @throws UnsupportedOperationException on the dedicated server
      */
     UUID getUniqueId();
+
+    /**
+     * Gets the default {@link UUID} that will be applied to the game while
+     * there is no logged in account. This is also the UUID that the default
+     * player will be saved to disk with.
+     *
+     * @return The default unique id
+     */
+    UUID getDefaultUniqueId();
 
     @ApiInternal
     int getTpsAverage();
@@ -253,9 +264,6 @@ public interface IGameInstance extends IMod{
      * @return If the instance is a dedicated server.
      */
     boolean isDedicatedServer();
-
-    @ApiInternal
-    void setUniqueId(UUID id);
 
     /**
      * Gets the {@link IInputHandler} of the current game instance. This is a

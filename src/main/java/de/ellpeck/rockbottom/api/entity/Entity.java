@@ -64,16 +64,19 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
     public boolean isClimbing;
     public boolean canClimb;
     protected boolean dead;
-    protected UUID uniqueId;
+    private UUID uniqueId = UUID.randomUUID();
     private ModBasedDataSet additionalData;
 
     public Entity(IWorld world){
         super(world);
-        this.uniqueId = UUID.randomUUID();
     }
 
     public UUID getUniqueId(){
         return this.uniqueId;
+    }
+
+    public void setUniqueId(UUID uniqueId){
+        this.uniqueId = uniqueId;
     }
 
     public IEntityRenderer getRenderer(){
@@ -181,7 +184,6 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
         set.addDouble("motion_y", this.motionY);
         set.addInt("ticks", this.ticksExisted);
         set.addBoolean("dead", this.isDead());
-        set.addUniqueId("uuid", this.uniqueId);
         set.addBoolean("falling", this.isFalling);
         set.addDouble("fall_start_y", this.fallStartY);
         set.addInt("facing", this.facing.ordinal());
@@ -205,7 +207,6 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
         this.motionY = set.getDouble("motion_y");
         this.ticksExisted = set.getInt("ticks");
         this.setDead(set.getBoolean("dead"));
-        this.uniqueId = set.getUniqueId("uuid");
         this.isFalling = set.getBoolean("falling");
         this.fallStartY = set.getDouble("fall_start_y");
         this.facing = Direction.DIRECTIONS[set.getInt("facing")];

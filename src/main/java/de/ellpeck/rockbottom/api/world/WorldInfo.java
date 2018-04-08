@@ -26,6 +26,7 @@ import de.ellpeck.rockbottom.api.util.ApiInternal;
 import io.netty.buffer.ByteBuf;
 
 import java.io.File;
+import java.util.UUID;
 
 public class WorldInfo{
 
@@ -37,6 +38,7 @@ public class WorldInfo{
     public int totalTimeInWorld;
     public int currentWorldTime = 3000;
     public boolean storyMode = true;
+    public UUID lastPlayerId;
 
     @ApiInternal
     public WorldInfo(File worldDirectory){
@@ -63,6 +65,7 @@ public class WorldInfo{
         if(dataSet.hasKey("story_mode")){
             this.storyMode = dataSet.getBoolean("story_mode");
         }
+        this.lastPlayerId = dataSet.getUniqueId("last_player");
     }
 
     @ApiInternal
@@ -73,6 +76,7 @@ public class WorldInfo{
         dataSet.addInt("total_time", this.totalTimeInWorld);
         dataSet.addInt("curr_time", this.currentWorldTime);
         dataSet.addBoolean("story_mode", this.storyMode);
+        dataSet.addUniqueId("last_player",this.lastPlayerId);
 
         dataSet.write(this.dataFile);
     }
