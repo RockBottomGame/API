@@ -76,7 +76,9 @@ public class WorldInfo{
         dataSet.addInt("total_time", this.totalTimeInWorld);
         dataSet.addInt("curr_time", this.currentWorldTime);
         dataSet.addBoolean("story_mode", this.storyMode);
-        dataSet.addUniqueId("last_player",this.lastPlayerId);
+        if(this.lastPlayerId != null){
+            dataSet.addUniqueId("last_player", this.lastPlayerId);
+        }
 
         dataSet.write(this.dataFile);
     }
