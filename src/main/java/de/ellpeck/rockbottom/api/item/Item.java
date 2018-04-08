@@ -23,8 +23,6 @@ package de.ellpeck.rockbottom.api.item;
 
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
-import de.ellpeck.rockbottom.api.construction.resource.IResourceRegistry;
-import de.ellpeck.rockbottom.api.construction.resource.ResInfo;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.render.item.IItemRenderer;
 import de.ellpeck.rockbottom.api.tile.Tile;
@@ -117,16 +115,5 @@ public class Item{
 
     public double getMaxInteractionDistance(IWorld world, int x, int y, TileLayer layer, double mouseX, double mouseY, AbstractEntityPlayer player){
         return AbstractEntityPlayer.RANGE;
-    }
-
-    /**
-     * Use {@link IResourceRegistry} calls directly instead
-     */
-    @Deprecated
-    public Item addResource(String name){
-        for(int i = 0; i <= this.getHighestPossibleMeta(); i++){
-            RockBottomAPI.getResourceRegistry().addResources(name, new ResInfo(this, i));
-        }
-        return this;
     }
 }

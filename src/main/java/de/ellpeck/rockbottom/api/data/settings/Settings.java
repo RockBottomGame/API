@@ -30,10 +30,9 @@ import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 import org.lwjgl.glfw.GLFW;
 
 import java.io.File;
-import java.util.Properties;
 
 @ApiInternal
-public final class Settings implements IPropSettings, IJsonSettings{
+public final class Settings implements IJsonSettings{
 
     public static final Keybind KEY_PLACE = new Keybind(ResourceName.intern("place"), 1).register();
     public static final Keybind KEY_DESTROY = new Keybind(ResourceName.intern("destroy"), 0).register();
@@ -80,34 +79,6 @@ public final class Settings implements IPropSettings, IJsonSettings{
 
     public String lastServerIp;
     public String currentLocale;
-
-    @Override
-    public void load(Properties props){
-        for(Keybind keybind : RockBottomAPI.KEYBIND_REGISTRY.values()){
-            String name = keybind.getName().toString();
-
-            int key = this.getProp(props, name, keybind.getKey());
-            keybind.setBind(key);
-        }
-
-        this.autosaveIntervalSeconds = this.getProp(props, "autosave_interval", 60);
-
-        this.textSpeed = this.getProp(props, "text_speed", 0.5F);
-        this.guiScale = this.getProp(props, "scale_gui", 1F);
-        this.renderScale = this.getProp(props, "scale_world", 1F);
-        this.guiColor = this.getProp(props, "gui_colors", DEFAULT_GUI_COLOR);
-
-        this.hardwareCursor = this.getProp(props, "hardware_cursor", false);
-        this.cursorInfos = this.getProp(props, "cursor_infos", true);
-        this.fullscreen = this.getProp(props, "fullscreen", false);
-        this.smoothLighting = this.getProp(props, "smooth_lighting", true);
-
-        this.musicVolume = this.getProp(props, "music_volume", 0.5F);
-        this.soundVolume = this.getProp(props, "sound_volume", 1F);
-
-        this.lastServerIp = this.getProp(props, "last_server_ip", "");
-        this.currentLocale = this.getProp(props, "curr_locale", "rockbottom/us_english");
-    }
 
     @Override
     public void load(JsonObject object){
@@ -175,11 +146,6 @@ public final class Settings implements IPropSettings, IJsonSettings{
 
         this.set(object, "last_server_ip", this.lastServerIp);
         this.set(object, "curr_locale", this.currentLocale);
-    }
-
-    @Override
-    public File getFile(IDataManager manager){
-        return new File(manager.getGameDir(), "settings.properties");
     }
 
     @Override

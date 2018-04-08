@@ -593,16 +593,4 @@ public interface IChunkOrWorld extends IAdditionalDataProvider{
      * @return The expected height for that position
      */
     int getExpectedSurfaceHeight(TileLayer layer, int x, int y);
-
-    /**
-     * @deprecated Use {@link #getChunkHeight(TileLayer, int, int)} instead
-     */
-    @Deprecated
-    int getLowestAirUpwards(TileLayer layer, int x, int y);
-
-    /**
-     * @deprecated Use {@link #getChunkHeight(TileLayer, int, int)} instead
-     */
-    @Deprecated
-    int getLowestAirUpwards(TileLayer layer, int x, int y, boolean ignoreReplaceableTiles);
 }

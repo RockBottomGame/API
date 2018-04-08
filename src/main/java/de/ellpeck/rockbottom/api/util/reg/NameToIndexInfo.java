@@ -25,17 +25,15 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import de.ellpeck.rockbottom.api.data.IDataManager;
 import de.ellpeck.rockbottom.api.data.settings.IJsonSettings;
-import de.ellpeck.rockbottom.api.data.settings.IPropSettings;
 import de.ellpeck.rockbottom.api.net.NetUtil;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
 import io.netty.buffer.ByteBuf;
 
 import java.io.File;
 import java.util.Map;
-import java.util.Properties;
 
 @ApiInternal
-public final class NameToIndexInfo implements IPropSettings, IJsonSettings{
+public final class NameToIndexInfo implements IJsonSettings{
 
     private final IndexRegistry<ResourceName> reg;
     private final File legacyFile;
@@ -71,16 +69,6 @@ public final class NameToIndexInfo implements IPropSettings, IJsonSettings{
         return this.needsSave;
     }
 
-    @Override
-    public void load(Properties props){
-        this.reg.map.clear();
-
-        for(String key : props.stringPropertyNames()){
-            int index = Integer.parseInt(key);
-            this.reg.map.put(index, new ResourceName(props.getProperty(key)));
-        }
-    }
-
     public void fromBuffer(ByteBuf buf){
         this.reg.map.clear();
 
@@ -97,11 +85,6 @@ public final class NameToIndexInfo implements IPropSettings, IJsonSettings{
             buf.writeInt(entry.getKey());
             NetUtil.writeStringToBuffer(entry.getValue().toString(), buf);
         }
-    }
-
-    @Override
-    public File getFile(IDataManager manager){
-        return this.legacyFile;
     }
 
     @Override

@@ -111,18 +111,6 @@ public interface IChunk extends IChunkOrWorld{
     @ApiInternal
     Set<TileLayer> getLoadedLayers();
 
-    /**
-     * @deprecated Use {@link #getHeightInner(TileLayer, int)} instead
-     */
-    @Deprecated
-    int getLowestAirUpwardsInner(TileLayer layer, int x, int y);
-
-    /**
-     * @deprecated Use {@link #getHeightInner(TileLayer, int)} instead
-     */
-    @Deprecated
-    int getLowestAirUpwardsInner(TileLayer layer, int x, int y, boolean ignoreReplaceableTiles);
-
     boolean isPersistent();
 
     boolean isGenerating();

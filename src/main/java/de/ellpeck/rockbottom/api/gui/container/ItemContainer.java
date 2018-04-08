@@ -40,15 +40,6 @@ public abstract class ItemContainer{
         this.player = player;
     }
 
-    /**
-     * @deprecated Use constructor {@link #ItemContainer(AbstractEntityPlayer)}
-     * instead, as contained inventories are now added automatically
-     */
-    @Deprecated
-    public ItemContainer(AbstractEntityPlayer player, IInventory... containedInventories){
-        this.player = player;
-    }
-
     public ContainerSlot getSlot(int id){
         return this.slots.get(id);
     }

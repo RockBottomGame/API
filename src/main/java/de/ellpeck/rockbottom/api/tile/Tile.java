@@ -24,8 +24,6 @@ package de.ellpeck.rockbottom.api.tile;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.assets.font.FormattingCode;
-import de.ellpeck.rockbottom.api.construction.resource.IResourceRegistry;
-import de.ellpeck.rockbottom.api.construction.resource.ResInfo;
 import de.ellpeck.rockbottom.api.data.settings.Settings;
 import de.ellpeck.rockbottom.api.entity.AbstractEntityItem;
 import de.ellpeck.rockbottom.api.entity.Entity;
@@ -88,11 +86,11 @@ public class Tile{
     }
 
     public boolean canBreak(IWorld world, int x, int y, TileLayer layer, AbstractEntityPlayer player, boolean isRightTool){
-        return this.canBreak(world, x, y, layer);
+        return true;
     }
 
     public boolean canPlace(IWorld world, int x, int y, TileLayer layer, AbstractEntityPlayer player){
-        return this.canPlace(world, x, y, layer);
+        return true;
     }
 
     public boolean canPlaceInLayer(TileLayer layer){
@@ -376,44 +374,7 @@ public class Tile{
         return this;
     }
 
-    /**
-     * Use {@link IResourceRegistry} calls directly instead
-     */
-    @Deprecated
-    public Tile addResource(String name){
-        RockBottomAPI.getResourceRegistry().addResources(name, new ResInfo(this));
-        return this;
-    }
-
     public boolean factorsIntoHeightMap(IWorld world, int x, int y, TileLayer layer){
         return this.isFullTile() && !this.isAir();
-    }
-
-    /**
-     * @deprecated Use {@link #canBreak(IWorld, int, int, TileLayer,
-     * AbstractEntityPlayer, boolean)}
-     */
-    @Deprecated
-    public boolean canBreak(IWorld world, int x, int y, TileLayer layer){
-        return true;
-    }
-
-    /**
-     * @deprecated Use {@link #canPlace(IWorld, int, int, TileLayer,
-     * AbstractEntityPlayer)}
-     */
-    @Deprecated
-    public boolean canPlace(IWorld world, int x, int y, TileLayer layer){
-        return true;
-    }
-
-    /**
-     * @deprecated This method will not be called by the game anymore, as the
-     * feature was too rarely used to justify such a high performance impact on
-     * random rendering updates
-     */
-    @Deprecated
-    public void updateRandomlyForRendering(IWorld world, int x, int y, TileLayer layer, AbstractEntityPlayer player){
-
     }
 }

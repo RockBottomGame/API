@@ -32,14 +32,6 @@ public final class Keybind{
     private final ResourceName name;
     private int key;
 
-    /**
-     * @deprecated Use the {@link #Keybind(ResourceName, int)} constructor
-     */
-    @Deprecated
-    public Keybind(ResourceName name, int defKey, boolean defIsMouse){
-        this(name, defKey);
-    }
-
     public Keybind(ResourceName name, int defKey){
         this.name = name;
         this.key = defKey;

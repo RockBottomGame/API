@@ -30,28 +30,11 @@ import de.ellpeck.rockbottom.api.util.ApiInternal;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 
 @ApiInternal
-public final class ModSettings implements IPropSettings, IJsonSettings{
+public final class ModSettings implements IJsonSettings{
 
     private final List<String> disabledMods = new ArrayList<>();
-
-    @Override
-    public void load(Properties props){
-        this.disabledMods.clear();
-
-        for(String key : props.stringPropertyNames()){
-            if("disabled".equals(props.getProperty(key))){
-                this.disabledMods.add(key);
-            }
-        }
-    }
-
-    @Override
-    public File getFile(IDataManager manager){
-        return new File(manager.getGameDir(), "mod_settings.properties");
-    }
 
     @Override
     public void load(JsonObject object){
