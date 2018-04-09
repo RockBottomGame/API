@@ -22,6 +22,7 @@
 package de.ellpeck.rockbottom.api.inventory;
 
 import de.ellpeck.rockbottom.api.RockBottomAPI;
+import de.ellpeck.rockbottom.api.event.impl.InventoryChangeEvent;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 
 import java.util.HashSet;
@@ -62,6 +63,8 @@ public abstract class AbstractInventory implements IInventory{
 
     @Override
     public void notifyChange(int slot){
+        RockBottomAPI.getEventHandler().fireEvent(new InventoryChangeEvent(this, slot));
+
         for(BiConsumer<IInventory, Integer> callback : this.callbacks){
             callback.accept(this, slot);
         }
