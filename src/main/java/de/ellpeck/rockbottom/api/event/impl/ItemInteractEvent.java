@@ -34,7 +34,7 @@ import de.ellpeck.rockbottom.api.world.layer.TileLayer;
  * AbstractEntityPlayer, ItemInstance)} method is called. Cancelling the event
  * will make the interaction not take place.
  */
-public class ItemInteractEvent extends Event{
+public final class ItemInteractEvent extends Event{
 
     public final AbstractEntityPlayer player;
     public final ItemInstance instance;

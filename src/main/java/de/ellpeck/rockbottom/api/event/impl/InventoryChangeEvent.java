@@ -29,7 +29,7 @@ import de.ellpeck.rockbottom.api.inventory.IInventory;
  * This event is fired when an {@link AbstractInventory} changes and its {@link
  * IInventory#notifyChange(int)} method is called. It cannot be cancelled.
  */
-public class InventoryChangeEvent extends Event{
+public final class InventoryChangeEvent extends Event{
 
     public final IInventory inventory;
     public final int changedSlot;

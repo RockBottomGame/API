@@ -38,7 +38,7 @@ import de.ellpeck.rockbottom.api.world.layer.TileLayer;
  * implementation. Cancelling the event will cause {@link Tile#doPlace(IWorld,
  * int, int, TileLayer, ItemInstance, AbstractEntityPlayer)} not to be called.
  */
-public class PlaceTileEvent extends Event{
+public final class PlaceTileEvent extends Event{
 
     public final AbstractEntityPlayer player;
     public ItemInstance instance;

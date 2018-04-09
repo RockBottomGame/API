@@ -31,7 +31,7 @@ import de.ellpeck.rockbottom.api.event.Event;
  * double)} method is called. Cancelling the event will make the interaction not
  * take place.
  */
-public class EntityInteractEvent extends Event{
+public final class EntityInteractEvent extends Event{
 
     public final AbstractEntityPlayer player;
     public final Entity entity;
