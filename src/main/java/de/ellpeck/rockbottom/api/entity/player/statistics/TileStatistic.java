@@ -21,13 +21,26 @@
 
 package de.ellpeck.rockbottom.api.entity.player.statistics;
 
+import de.ellpeck.rockbottom.api.Constants;
+import de.ellpeck.rockbottom.api.IGameInstance;
+import de.ellpeck.rockbottom.api.IRenderer;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
+import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.data.set.DataSet;
+import de.ellpeck.rockbottom.api.gui.Gui;
+import de.ellpeck.rockbottom.api.gui.component.ComponentMenu;
+import de.ellpeck.rockbottom.api.gui.component.ComponentStatistic;
+import de.ellpeck.rockbottom.api.item.Item;
+import de.ellpeck.rockbottom.api.item.ItemInstance;
+import de.ellpeck.rockbottom.api.render.tile.ITileRenderer;
 import de.ellpeck.rockbottom.api.tile.Tile;
+import de.ellpeck.rockbottom.api.util.Colors;
 import de.ellpeck.rockbottom.api.util.Counter;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public final class TileStatistic extends StatisticInitializer<TileStatistic.Stat>{
@@ -39,6 +52,34 @@ public final class TileStatistic extends StatisticInitializer<TileStatistic.Stat
     @Override
     public Stat makeStatistic(IStatistics statistics){
         return new Stat(this);
+    }
+
+    @Override
+    public List<ComponentStatistic> getDisplayComponents(IGameInstance game, Stat stat, Gui gui, ComponentMenu menu){
+        List<ComponentStatistic> list = new ArrayList<>();
+        for(Map.Entry<Tile, Counter> entry : stat.map.entrySet()){
+            Tile tile = entry.getKey();
+            Item item = tile.getItem();
+            if(item != null){
+                Counter value = entry.getValue();
+                ItemInstance instance = new ItemInstance(item);
+                String statName = game.getAssetManager().localize(this.getName().addPrefix("stat."));
+
+                list.add(new ComponentStatistic(gui, () -> {
+                    instance.setMeta((game.getTotalTicks()/Constants.TARGET_TPS)%(item.getHighestPossibleMeta()+1));
+                    return String.format(statName, instance.getDisplayName());
+                }, value :: toString, value.get()){
+                    @Override
+                    public void renderStatGraphic(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y){
+                        ITileRenderer renderer = tile.getRenderer();
+                        if(renderer != null){
+                            renderer.renderItem(game, manager, g, tile, instance, x+1, y+1, 12F, Colors.WHITE);
+                        }
+                    }
+                });
+            }
+        }
+        return list;
     }
 
     public static class Stat extends Statistic{

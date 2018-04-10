@@ -21,11 +21,23 @@
 
 package de.ellpeck.rockbottom.api.entity.player.statistics;
 
+import de.ellpeck.rockbottom.api.data.set.DataSet;
+import de.ellpeck.rockbottom.api.util.ApiInternal;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
+
+import java.util.Map;
 
 public interface IStatistics{
 
     Statistic getOrInit(ResourceName name);
 
     <T extends Statistic> T getOrInit(ResourceName name, Class<? extends StatisticInitializer<T>> statClass);
+
+    Map<ResourceName, Statistic> getActiveStats();
+
+    @ApiInternal
+    void save(DataSet set);
+
+    @ApiInternal
+    void load(DataSet set);
 }
