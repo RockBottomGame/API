@@ -101,11 +101,13 @@ public class ComponentScrollBar extends GuiComponent{
             g.addFilledRect(x, y, 6F, this.height, color);
             g.addEmptyRect(x, y, 6F, this.height, getElementOutlineColor());
 
-            float renderY = y+percentage*(this.height-10);
-            g.addFilledRect(x, renderY, 6F, 10F, color);
-            g.addEmptyRect(x, renderY, 6F, 10F, getElementOutlineColor());
+            if(this.getMax() > 0){
+                float renderY = y+percentage*(this.height-10);
+                g.addFilledRect(x, renderY, 6F, 10F, color);
+                g.addEmptyRect(x, renderY, 6F, 10F, getElementOutlineColor());
+            }
         }
-        else{
+        else if(this.getMax() > 0){
             ITexture texture = manager.getTexture(this.scrollTexture);
 
             float renderY = y+percentage*(this.height-texture.getRenderHeight());
