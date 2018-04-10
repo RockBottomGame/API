@@ -133,7 +133,7 @@ public class ComponentInputField extends GuiComponent{
                     this.isSelected = true;
                 }
             }
-            else{
+            else if(this.selectable){
                 this.isSelected = false;
             }
         }
