@@ -31,15 +31,21 @@ import de.ellpeck.rockbottom.api.entity.AbstractEntityItem;
 import de.ellpeck.rockbottom.api.entity.Entity;
 import de.ellpeck.rockbottom.api.entity.MovableWorldObject;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
+import de.ellpeck.rockbottom.api.entity.player.statistics.ItemStatistic;
+import de.ellpeck.rockbottom.api.gui.AbstractStatGui;
 import de.ellpeck.rockbottom.api.gui.GuiContainer;
 import de.ellpeck.rockbottom.api.gui.component.ComponentInputField;
+import de.ellpeck.rockbottom.api.gui.component.ComponentMenu;
 import de.ellpeck.rockbottom.api.gui.component.ComponentSlot;
+import de.ellpeck.rockbottom.api.gui.component.ComponentStatistic;
+import de.ellpeck.rockbottom.api.item.Item;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.tile.Tile;
 import de.ellpeck.rockbottom.api.tile.TileLiquid;
 import de.ellpeck.rockbottom.api.tile.state.IStateHandler;
 import de.ellpeck.rockbottom.api.tile.state.TileState;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
+import de.ellpeck.rockbottom.api.util.Counter;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 import de.ellpeck.rockbottom.api.world.IWorld;
 import de.ellpeck.rockbottom.api.world.layer.TileLayer;
@@ -78,4 +84,6 @@ public interface IInternalHooks{
     FormattingCode getFormattingCode(String s, int index, Map<Character, FormattingCode> defaults);
 
     AbstractEntityItem makeItem(IWorld world, ItemInstance inst, double x, double y, double motionX, double motionY);
+
+    List<ComponentStatistic> makeItemStatComponents(IGameInstance game, ItemStatistic.Stat stat, Map<Item, Counter> statMap, AbstractStatGui gui, ComponentMenu menu, ResourceName textureLocation);
 }
