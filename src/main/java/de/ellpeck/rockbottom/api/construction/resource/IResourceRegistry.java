@@ -48,6 +48,8 @@ public interface IResourceRegistry{
 
     List<ResInfo> getResources(String name);
 
+    List<String> getNames(ItemInstance instance);
+
     List<String> getNames(ResInfo resource);
 
     Set<ResInfo> getAllResources();

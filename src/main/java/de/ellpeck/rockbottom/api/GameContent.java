@@ -84,6 +84,10 @@ public final class GameContent{
     public static final Item ITEM_STONE_AXE = getItem("stone_axe");
     public static final Item ITEM_STONE_SHOVEL = getItem("stone_shovel");
     public static final Item ITEM_COPPER_CANISTER = getItem("copper_canister").setMaxAmount(15);
+    public static final Item ITEM_COPPER_INGOT = getItem("copper_ingot").setMaxAmount(50);
+    public static final Item ITEM_COPPER_PICKAXE = getItem("copper_pickaxe");
+    public static final Item ITEM_COPPER_AXE = getItem("copper_axe");
+    public static final Item ITEM_COPPER_SHOVEL = getItem("copper_shovel");
 
     /*
         ---RESOURCE REGISTRY ENTRIES---
@@ -100,6 +104,8 @@ public final class GameContent{
     public static final String RES_WOOD_PROCESSED = res().addResources("wood_processed", WOOD_BOARDS, 0, WOOD_BOARDS.metaProp.getVariants()-1);
     public static final String RES_PLANT_FIBER = res().addResources("plant_fiber", ITEM_PLANT_FIBER);
     public static final String RES_STICK = res().addResources("stick", ITEM_TWIG);
+    public static final String RES_COPPER_RAW = res().addResources("copper_raw", TILE_COPPER);
+    public static final String RES_COPPER_PROCESSED = res().addResources("copper_processed", ITEM_COPPER_INGOT);
 
     /*
         ---BIOMES---
