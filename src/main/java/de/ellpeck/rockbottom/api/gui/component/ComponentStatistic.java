@@ -24,9 +24,11 @@ package de.ellpeck.rockbottom.api.gui.component;
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.IRenderer;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
+import de.ellpeck.rockbottom.api.assets.font.FormattingCode;
 import de.ellpeck.rockbottom.api.assets.font.IFont;
 import de.ellpeck.rockbottom.api.data.settings.Settings;
 import de.ellpeck.rockbottom.api.gui.Gui;
+import de.ellpeck.rockbottom.api.util.Colors;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 import java.util.function.Supplier;
@@ -61,6 +63,10 @@ public abstract class ComponentStatistic extends GuiComponent{
         IFont font = manager.getFont();
         font.drawSplitString(x+20, y+2, this.nameSupplier.get(), 0.35F, this.width-50);
         font.drawStringFromRight(x+this.width-1, y+this.height-17, this.valueSupplier.get(), 0.8F);
+
+        if(this.clickSupplier != null){
+            font.drawString(x+20, y+11, FormattingCode.ITALICS+"Click for details", 0.25F, Colors.LIGHT_GRAY);
+        }
     }
 
     @Override
