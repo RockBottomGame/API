@@ -125,7 +125,7 @@ public class ComponentScrollBar extends GuiComponent{
                     clickPercentage = 1F-clickPercentage;
                 }
 
-                int number = Util.clamp((int)(clickPercentage*max), 0, max);
+                int number = Util.clamp(Math.round(clickPercentage*max), 0, max);
                 if(number != this.number){
                     this.number = number;
                     this.onScroll();
