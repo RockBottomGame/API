@@ -82,4 +82,8 @@ public abstract class Biome{
     public Biome getVariationToGenerate(IWorld world,int x, int y){
         return this;
     }
+
+    public boolean canGenerateNaturally(){
+        return true;
+    }
 }
