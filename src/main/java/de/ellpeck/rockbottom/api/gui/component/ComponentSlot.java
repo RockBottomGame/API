@@ -66,7 +66,8 @@ public class ComponentSlot extends GuiComponent{
 
     @Override
     public void render(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y){
-        g.renderSlotInGui(game, manager, this.slot.get(), x, y, 1F, this.isMouseOver(game));
+        ItemInstance holding = this.container.getContainer().holdingInst;
+        g.renderSlotInGui(game, manager, this.slot.get(), x, y, 1F, this.isMouseOver(game), holding == null || this.slot.canPlace(holding));
     }
 
     @Override

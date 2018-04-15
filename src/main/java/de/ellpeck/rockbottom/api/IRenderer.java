@@ -330,22 +330,26 @@ public interface IRenderer extends IDisposable{
      * color as well as the item inside and the amount. To make a slot that has
      * functionality, use {@link ItemContainer} to create functioning slots.
      *
-     * @param game    The game instance
-     * @param manager The asset manager
-     * @param slot    The content of the slot to draw
-     * @param x       The x coordinate
-     * @param y       The y coordinate
-     * @param scale   The scale
-     * @param hovered If the slot is currently being hovered or not (ie if it
-     *                should show the hover info of what is in the slot)
+     * @param game         The game instance
+     * @param manager      The asset manager
+     * @param slot         The content of the slot to draw
+     * @param x            The x coordinate
+     * @param y            The y coordinate
+     * @param scale        The scale
+     * @param hovered      If the slot is currently being hovered or not. If
+     *                     this value is true, then the slot will be rendered
+     *                     with a slightly brighter color
+     * @param canPlaceInto If the slot can contain the item that is currently on
+     *                     the cursor. If this value is true, then the slot will
+     *                     be rendered in grayscale
      */
-    void renderSlotInGui(IGameInstance game, IAssetManager manager, ItemInstance slot, float x, float y, float scale, boolean hovered);
+    void renderSlotInGui(IGameInstance game, IAssetManager manager, ItemInstance slot, float x, float y, float scale, boolean hovered, boolean canPlaceInto);
 
     /**
      * Renders an item and its amount. This is similar to {@link
      * #renderSlotInGui(IGameInstance, IAssetManager, ItemInstance, float,
-     * float, float, boolean)}, only that it doesn't render the box below the
-     * item.
+     * float, float, boolean, boolean)}, only that it doesn't render the box
+     * below the item.
      *
      * @param game    The game instance
      * @param manager The asset manager
@@ -360,8 +364,8 @@ public interface IRenderer extends IDisposable{
     /**
      * Renders an item and its amount. This is similar to {@link
      * #renderSlotInGui(IGameInstance, IAssetManager, ItemInstance, float,
-     * float, float, boolean)}, only that it doesn't render the box below the
-     * item.
+     * float, float, boolean, boolean)}, only that it doesn't render the box
+     * below the item.
      *
      * @param game          The game instance
      * @param manager       The asset manager
