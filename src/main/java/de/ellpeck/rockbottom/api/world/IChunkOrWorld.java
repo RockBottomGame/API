@@ -21,7 +21,6 @@
 
 package de.ellpeck.rockbottom.api.world;
 
-import de.ellpeck.rockbottom.api.GameContent;
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.data.set.IAdditionalDataProvider;
 import de.ellpeck.rockbottom.api.entity.Entity;
@@ -571,26 +570,18 @@ public interface IChunkOrWorld extends IAdditionalDataProvider{
 
     /**
      * Gets the height at the given position in the world without loading the
-     * chunk at that position. The semantics and usage of this method can be
-     * rather complicated, as it doesn't make intuitive sense as to why the
-     * returned height would be any different from the passed in {@code y}
-     * parameter.
+     * chunk at that position. The height of the world is calculated
+     * independently of biomes or any other world generation features.
      * <p>
-     * As an example, imagine a flat terrain filled with the {@link
-     * GameContent#BIOME_GRASSLAND} biome. It has slightly varying heights, but
-     * all in all, it is a big grassland biome. Calling this method on any of
-     * the positions in that world would yield the height that the terrain
-     * actually has on that postition, because the method first checks the
-     * {@link #getExpectedBiome(int, int)} at the given position, and then
-     * checks what surface height a biome at that position would have in case it
-     * spanned the whole height of the area using {@link
-     * Biome#getExpectedSurfaceHeight(IWorld, int, TileLayer, INoiseGen)}.
+     * Note that, if caves or structures generate at any given position, the
+     * {@link #getChunkHeight(TileLayer, int, int)} will be different from this
+     * method's return value. The same will be true if a player places tiles in
+     * the world.
      *
      * @param layer The layer
      * @param x     The world x coordinate
-     * @param y     The world y coordinate
      *
      * @return The expected height for that position
      */
-    int getExpectedSurfaceHeight(TileLayer layer, int x, int y);
+    int getExpectedSurfaceHeight(TileLayer layer, int x);
 }
