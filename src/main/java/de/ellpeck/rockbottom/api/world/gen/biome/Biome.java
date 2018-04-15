@@ -79,7 +79,7 @@ public abstract class Biome{
         return GameContent.TILE_SOIL.getDefState();
     }
 
-    public Biome getVariationToGenerate(IWorld world,int x, int y){
+    public Biome getVariationToGenerate(IWorld world, int x, int y){
         return this;
     }
 

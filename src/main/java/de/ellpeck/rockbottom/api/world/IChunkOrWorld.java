@@ -584,4 +584,11 @@ public interface IChunkOrWorld extends IAdditionalDataProvider{
      * @return The expected height for that position
      */
     int getExpectedSurfaceHeight(TileLayer layer, int x);
+
+    /**
+     * Returns the {@link INoiseGen} from the biome generator. This noise generator is the one given to {@link Biome#getState(IWorld, IChunk, int, int, TileLayer, INoiseGen, int)} and it is influenced by {@link Biome#getBiomeSeed(IWorld)}.
+     * @param biome The biome whose noise generator to get
+     * @return The noise generator
+     */
+    INoiseGen getNoiseGenForBiome(Biome biome);
 }
