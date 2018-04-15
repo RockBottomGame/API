@@ -38,6 +38,7 @@ public class ComponentPolaroid extends GuiComponent{
 
     private static final ResourceName RES = ResourceName.intern("gui.construction.item_background");
     private static final ResourceName RES_HIGHLIGHTED = ResourceName.intern("gui.construction.item_background_highlighted");
+    private static final ResourceName RES_SELECTED = ResourceName.intern("gui.construction.item_background_selected");
 
     public boolean isSelected;
     public final IRecipe recipe;
@@ -56,7 +57,7 @@ public class ComponentPolaroid extends GuiComponent{
 
     @Override
     public void render(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y){
-        ResourceName res = this.recipe != null && (this.isSelected || this.isMouseOverPrioritized(game)) ? RES_HIGHLIGHTED : RES;
+        ResourceName res = this.recipe != null && this.isSelected ? RES_SELECTED : (this.isMouseOverPrioritized(game) ? RES_HIGHLIGHTED : RES);
         manager.getTexture(res).draw(x, y, this.width, this.height);
 
         if(this.recipe != null){
