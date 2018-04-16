@@ -91,6 +91,8 @@ public interface IWorld extends IChunkOrWorld{
 
     void causeLightUpdate(int x, int y);
 
+    IWorldGenerator getGenerator(ResourceName name);
+
     @ApiInternal
     void unloadChunk(IChunk chunk);
 
@@ -101,10 +103,10 @@ public interface IWorld extends IChunkOrWorld{
     List<IWorldGenerator> getSortedGenerators();
 
     @ApiInternal
-    List<IWorldGenerator> getSortedRetroactiveGenerators();
+    List<IWorldGenerator> getSortedLoopingGenerators();
 
     @ApiInternal
-    IWorldGenerator getGenerator(ResourceName name);
+    List<IWorldGenerator> getSortedRetroactiveGenerators();
 
     @ApiInternal
     void save();

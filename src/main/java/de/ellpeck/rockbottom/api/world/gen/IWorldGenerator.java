@@ -48,4 +48,8 @@ public interface IWorldGenerator{
     default boolean generatesRetroactively(){
         return false;
     }
+
+    default boolean generatesPerChunk(){
+        return true;
+    }
 }
