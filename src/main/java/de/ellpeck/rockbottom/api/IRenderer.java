@@ -632,6 +632,20 @@ public interface IRenderer extends IDisposable{
     boolean isLineDebug();
 
     /**
+     * @return If the renderer is currently in biome debug mode, meaning that
+     * semi-transparent colored squares will be shown over every tile indicating
+     * its biome.
+     */
+    boolean isBiomeDebug();
+
+    /**
+     * @return If the renderer is currently in height debug mode, meaning that a
+     * line will be shown on every tile to indicate the height of that position
+     * in the chunk.
+     */
+    boolean isHeightDebug();
+
+    /**
      * Returns the x position of the tile that the mouse is currently over.
      * Rounding this value down using something like {@link Util#floor(double)}
      * will reveal the tile's grid position in the world, whereas the decimal

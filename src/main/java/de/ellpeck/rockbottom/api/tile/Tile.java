@@ -375,6 +375,6 @@ public class Tile{
     }
 
     public boolean factorsIntoHeightMap(IWorld world, int x, int y, TileLayer layer){
-        return this.isFullTile() && !this.isAir();
+        return (this.isFullTile() || this.isLiquid()) && !this.isAir();
     }
 }
