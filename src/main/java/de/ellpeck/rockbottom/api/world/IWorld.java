@@ -35,6 +35,7 @@ import io.netty.channel.Channel;
 
 import java.io.File;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 public interface IWorld extends IChunkOrWorld{
@@ -100,7 +101,7 @@ public interface IWorld extends IChunkOrWorld{
     void savePlayer(AbstractEntityPlayer player);
 
     @ApiInternal
-    List<IWorldGenerator> getSortedGenerators();
+    Map<ResourceName, IWorldGenerator> getAllGenerators();
 
     @ApiInternal
     List<IWorldGenerator> getSortedLoopingGenerators();
