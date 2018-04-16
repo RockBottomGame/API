@@ -32,7 +32,6 @@ import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 public interface IChunk extends IChunkOrWorld{
 
@@ -109,7 +108,7 @@ public interface IChunk extends IChunkOrWorld{
     void setBiomeInner(int x, int y, Biome biome);
 
     @ApiInternal
-    Set<TileLayer> getLoadedLayers();
+    List<TileLayer> getLoadedLayers();
 
     boolean isPersistent();
 
