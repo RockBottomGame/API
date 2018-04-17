@@ -34,5 +34,7 @@ public interface IParticleManager{
 
     void addSmokeParticle(IWorld world, double x, double y, double motionX, double motionY, float scale);
 
+    void addSnowParticle(IWorld world, double x, double y, double motionX, double motionY, int maxLife);
+
     int getAmount();
 }

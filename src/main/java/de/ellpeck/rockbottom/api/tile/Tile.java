@@ -377,4 +377,8 @@ public class Tile{
     public boolean factorsIntoHeightMap(IWorld world, int x, int y, TileLayer layer){
         return (this.isFullTile() || this.isLiquid()) && !this.isAir();
     }
+
+    public boolean makesGrassSnowy(IWorld world, int x, int y, TileLayer layer){
+        return false;
+    }
 }
