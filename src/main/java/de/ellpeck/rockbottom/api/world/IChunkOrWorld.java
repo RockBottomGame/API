@@ -475,6 +475,39 @@ public interface IChunkOrWorld extends IAdditionalDataProvider{
     int getChunkHeight(TileLayer layer, int x, int bottomY);
 
     /**
+     * Gets the average height of the chunk at the given position. First of all,
+     * the chunk at the given position is queried and then the average hight of
+     * the chunk at that position is returned. Note that neither {@code x} nor
+     * {@code bottomY} have a direct influence on the actual flatness of the
+     * position, just the chunk at the position.
+     *
+     * @param layer   The layer
+     * @param x       The world x coordinate
+     * @param bottomY The world y coordiate whose chunk should be queried for
+     *                the height
+     *
+     * @return The height of the chunk at the given x coordinate
+     */
+    int getAverageChunkHeight(TileLayer layer, int x, int bottomY);
+
+    /**
+     * Gets the flatness of the chunk at the given position. First of all, the
+     * chunk at the given position is queried and then the flatness of the chunk
+     * at that position is returned. Note that neither {@code x} nor {@code y}
+     * have a direct influence on the actual flatness of the position, just the
+     * chunk at the position.
+     *
+     * @param layer The layer
+     * @param x     The world x coordinate of the chunk to query
+     * @param y     The world y coordinate of the chunk to query
+     *
+     * @return The flatness of the chunk. This will be a number between 0 and 1,
+     * where 1 means that all of the heights in the chunk are the same, and 0
+     * means that none of the heights in the chunk are the same.
+     */
+    float getChunkFlatness(TileLayer layer, int x, int y);
+
+    /**
      * Gets the {@link Biome} in the world at the given position.
      *
      * @param x The world x coordinate
@@ -586,8 +619,13 @@ public interface IChunkOrWorld extends IAdditionalDataProvider{
     int getExpectedSurfaceHeight(TileLayer layer, int x);
 
     /**
-     * Returns the {@link INoiseGen} from the biome generator. This noise generator is the one given to {@link Biome#getState(IWorld, IChunk, int, int, TileLayer, INoiseGen, int)} and it is influenced by {@link Biome#getBiomeSeed(IWorld)}.
+     * Returns the {@link INoiseGen} from the biome generator. This noise
+     * generator is the one given to {@link Biome#getState(IWorld, IChunk, int,
+     * int, TileLayer, INoiseGen, int)} and it is influenced by {@link
+     * Biome#getBiomeSeed(IWorld)}.
+     *
      * @param biome The biome whose noise generator to get
+     *
      * @return The noise generator
      */
     INoiseGen getNoiseGenForBiome(Biome biome);

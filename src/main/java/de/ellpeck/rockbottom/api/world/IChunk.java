@@ -104,6 +104,8 @@ public interface IChunk extends IChunkOrWorld{
 
     int getAverageHeight(TileLayer layer);
 
+    float getFlatness(TileLayer layer);
+
     @ApiInternal
     void setBiomeInner(int x, int y, Biome biome);
 

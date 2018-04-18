@@ -38,11 +38,11 @@ public abstract class Biome{
         this.name = name;
     }
 
-    public abstract int getWeight();
+    public abstract int getWeight(IWorld world, int x, int y);
 
-    public abstract int getHighestY();
+    public abstract int getHighestY(IWorld world, int x, int y);
 
-    public abstract int getLowestY();
+    public abstract int getLowestY(IWorld world, int x, int y);
 
     public abstract TileState getState(IWorld world, IChunk chunk, int x, int y, TileLayer layer, INoiseGen noise, int surfaceHeight);
 

@@ -1,5 +1,5 @@
 /*
- * This file ("BiomeBasic.java") is part of the RockBottomAPI by Ellpeck.
+ * This file ("BiomeBasicVariation.java") is part of the RockBottomAPI by Ellpeck.
  * View the source code at <https://github.com/RockBottomGame/>.
  * View information on the project at <https://rockbottom.ellpeck.de/>.
  *
@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with the RockBottomAPI. If not, see <http://www.gnu.org/licenses/>.
  *
- * © 2017 Ellpeck
+ * © 2018 Ellpeck
  */
 
 package de.ellpeck.rockbottom.api.world.gen.biome;
@@ -24,31 +24,29 @@ package de.ellpeck.rockbottom.api.world.gen.biome;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 import de.ellpeck.rockbottom.api.world.IWorld;
 
-public abstract class BiomeBasic extends Biome{
+public abstract class BiomeBasicVariation extends Biome{
 
-    private final int highestY;
-    private final int lowestY;
-    private final int weight;
-
-    public BiomeBasic(ResourceName name, int highestY, int lowestY, int weight){
+    public BiomeBasicVariation(ResourceName name){
         super(name);
-        this.highestY = highestY;
-        this.lowestY = lowestY;
-        this.weight = weight;
     }
 
     @Override
     public int getWeight(IWorld world, int x, int y){
-        return this.weight;
+        return 0;
     }
 
     @Override
     public int getHighestY(IWorld world, int x, int y){
-        return this.highestY;
+        return 0;
     }
 
     @Override
     public int getLowestY(IWorld world, int x, int y){
-        return this.lowestY;
+        return 0;
+    }
+
+    @Override
+    public boolean canGenerateNaturally(){
+        return false;
     }
 }

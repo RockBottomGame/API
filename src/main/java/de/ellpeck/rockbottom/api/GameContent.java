@@ -115,6 +115,7 @@ public final class GameContent{
     public static final Biome BIOME_GRASSLAND = getBiome("grassland");
     public static final Biome BIOME_DESERT = getBiome("desert");
     public static final Biome BIOME_UNDERGROUND = getBiome("underground");
+    public static final Biome BIOME_COLD_GRASSLAND = getBiome("cold_grassland");
 
     /*
         ---ENTITY EFFECTS---
