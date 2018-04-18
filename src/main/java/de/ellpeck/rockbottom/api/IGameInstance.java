@@ -324,6 +324,12 @@ public interface IGameInstance extends IMod{
      */
     long getWindow();
 
+    /**
+     * @return True if the game's update loop should continue. This can be
+     * useful when working with different {@link Thread} instances that loop.
+     */
+    boolean isRunning();
+
     @ApiInternal
     int getPlayerCap();
 }
