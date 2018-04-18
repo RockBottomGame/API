@@ -619,6 +619,44 @@ public interface IChunkOrWorld extends IAdditionalDataProvider{
     int getExpectedSurfaceHeight(TileLayer layer, int x);
 
     /**
+     * Gets the average height in the given interval in the world without
+     * loading the chunk at any position. The height of the world is calculated
+     * independently of biomes or any other world generation features.
+     * <p>
+     * Note that, if caves or structures generate at any given position, the
+     * {@link #getAverageChunkHeight(TileLayer, int, int)} will be different
+     * from this method's return value. The same will be true if a player places
+     * tiles in the world.
+     *
+     * @param layer  The layer
+     * @param startX The leftmost world x coordinate, inclusive
+     * @param endX   The rightmost world x coordinate, exclusive
+     *
+     * @return The expected average height for that interval
+     */
+    int getExpectedAverageHeight(TileLayer layer, int startX, int endX);
+
+    /**
+     * Gets the flatness in the given interval in the world without loading the
+     * chunk at any position. The height of the world is calculated
+     * independently of biomes or any other world generation features.
+     * <p>
+     * Note that, if caves or structures generate at any given position, the
+     * {@link #getChunkFlatness(TileLayer, int, int)} will be different from
+     * this method's return value. The same will be true if a player places
+     * tiles in the world.
+     *
+     * @param layer  The layer
+     * @param startX The leftmost world x coordinate, inclusive
+     * @param endX   The rightmost world x coordinate, exclusive
+     *
+     * @return The flatness in the interval. This will be a number between 0 and
+     * 1, where 1 means that all of the heights in the interval are the same,
+     * and 0 means that none of the heights in the interval are the same.
+     */
+    float getExpectedSurfaceFlatness(TileLayer layer, int startX, int endX);
+
+    /**
      * Returns the {@link INoiseGen} from the biome generator. This noise
      * generator is the one given to {@link Biome#getState(IWorld, IChunk, int,
      * int, TileLayer, INoiseGen, int)} and it is influenced by {@link
