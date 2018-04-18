@@ -32,17 +32,20 @@ public final class ServerSettings implements IJsonSettings{
 
     public int autosaveIntervalSeconds;
     public int maxPlayerAmount;
+    public String worldName;
 
     @Override
     public void load(JsonObject object){
         this.autosaveIntervalSeconds = this.get(object, "autosave_interval", 60);
         this.maxPlayerAmount = this.get(object, "max_players", 100);
+        this.worldName = this.get(object, "world_name", "world_server");
     }
 
     @Override
     public void save(JsonObject object){
         this.set(object, "autosave_interval", this.autosaveIntervalSeconds);
         this.set(object, "max_players", this.maxPlayerAmount);
+        this.set(object, "world_name", this.worldName);
     }
 
     @Override

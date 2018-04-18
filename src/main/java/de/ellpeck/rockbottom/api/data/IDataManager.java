@@ -55,6 +55,8 @@ public interface IDataManager{
 
     File getModConfigFolder();
 
+    File getSettingsFolder();
+
     void loadSettings(IJsonSettings settings);
 
     void saveSettings(IJsonSettings settings);
