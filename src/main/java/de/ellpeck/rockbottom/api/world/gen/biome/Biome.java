@@ -28,7 +28,10 @@ import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 import de.ellpeck.rockbottom.api.world.IChunk;
 import de.ellpeck.rockbottom.api.world.IWorld;
 import de.ellpeck.rockbottom.api.world.gen.INoiseGen;
+import de.ellpeck.rockbottom.api.world.gen.biome.level.BiomeLevel;
 import de.ellpeck.rockbottom.api.world.layer.TileLayer;
+
+import java.util.List;
 
 public abstract class Biome{
 
@@ -38,13 +41,9 @@ public abstract class Biome{
         this.name = name;
     }
 
-    public abstract int getWeight(IWorld world, int x, int y);
-
-    public abstract int getHighestY(IWorld world, int x, int y);
-
-    public abstract int getLowestY(IWorld world, int x, int y);
-
     public abstract TileState getState(IWorld world, IChunk chunk, int x, int y, TileLayer layer, INoiseGen noise, int surfaceHeight);
+
+    public abstract List<BiomeLevel> getGenerationLevels(IWorld world);
 
     public long getBiomeSeed(IWorld world){
         return world.getSeed();
@@ -79,11 +78,7 @@ public abstract class Biome{
         return GameContent.TILE_SOIL.getDefState();
     }
 
-    public Biome getVariationToGenerate(IWorld world, int x, int y){
+    public Biome getVariationToGenerate(IWorld world, int x, int y, int surfaceHeight){
         return this;
-    }
-
-    public boolean canGenerateNaturally(){
-        return true;
     }
 }

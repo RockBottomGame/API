@@ -32,6 +32,7 @@ import de.ellpeck.rockbottom.api.util.ApiInternal;
 import de.ellpeck.rockbottom.api.util.reg.NameRegistry;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 import de.ellpeck.rockbottom.api.world.gen.biome.Biome;
+import de.ellpeck.rockbottom.api.world.gen.biome.level.BiomeLevel;
 
 /**
  * This class houses all of the game's default content like all the {@link
@@ -118,6 +119,13 @@ public final class GameContent{
     public static final Biome BIOME_COLD_GRASSLAND = getBiome("cold_grassland");
 
     /*
+        ---BIOME LEVELS---
+     */
+    public static final BiomeLevel BIOME_LEVEL_SKY = getBiomeLevel("sky");
+    public static final BiomeLevel BIOME_LEVEL_SURFACE = getBiomeLevel("surface");
+    public static final BiomeLevel BIOME_LEVEL_UNDERGROUND = getBiomeLevel("underground");
+
+    /*
         ---ENTITY EFFECTS---
      */
     public static final IEffect EFFECT_SPEED = getEffect("speed");
@@ -141,6 +149,11 @@ public final class GameContent{
     @ApiInternal
     private static IEffect getEffect(String name){
         return get(name, RockBottomAPI.EFFECT_REGISTRY);
+    }
+
+    @ApiInternal
+    private static BiomeLevel getBiomeLevel(String name){
+        return get(name, RockBottomAPI.BIOME_LEVEL_REGISTRY);
     }
 
     @ApiInternal

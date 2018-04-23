@@ -33,6 +33,7 @@ import de.ellpeck.rockbottom.api.util.BoundBox;
 import de.ellpeck.rockbottom.api.world.gen.INoiseGen;
 import de.ellpeck.rockbottom.api.world.gen.IWorldGenerator;
 import de.ellpeck.rockbottom.api.world.gen.biome.Biome;
+import de.ellpeck.rockbottom.api.world.gen.biome.level.BiomeLevel;
 import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 
 import java.util.List;
@@ -600,6 +601,8 @@ public interface IChunkOrWorld extends IAdditionalDataProvider{
      * @return The expected biome for that position
      */
     Biome getExpectedBiome(int x, int y);
+
+    BiomeLevel getExpectedBiomeLevel(int x, int y);
 
     /**
      * Gets the height at the given position in the world without loading the

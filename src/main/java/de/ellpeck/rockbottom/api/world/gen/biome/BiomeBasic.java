@@ -23,32 +23,23 @@ package de.ellpeck.rockbottom.api.world.gen.biome;
 
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 import de.ellpeck.rockbottom.api.world.IWorld;
+import de.ellpeck.rockbottom.api.world.gen.biome.level.BiomeLevel;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public abstract class BiomeBasic extends Biome{
 
-    private final int highestY;
-    private final int lowestY;
-    private final int weight;
+    private final List<BiomeLevel> levels;
 
-    public BiomeBasic(ResourceName name, int highestY, int lowestY, int weight){
+    public BiomeBasic(ResourceName name, BiomeLevel... levels){
         super(name);
-        this.highestY = highestY;
-        this.lowestY = lowestY;
-        this.weight = weight;
+        this.levels = Collections.unmodifiableList(Arrays.asList(levels));
     }
 
     @Override
-    public int getWeight(IWorld world, int x, int y){
-        return this.weight;
-    }
-
-    @Override
-    public int getHighestY(IWorld world, int x, int y){
-        return this.highestY;
-    }
-
-    @Override
-    public int getLowestY(IWorld world, int x, int y){
-        return this.lowestY;
+    public List<BiomeLevel> getGenerationLevels(IWorld world){
+        return this.levels;
     }
 }

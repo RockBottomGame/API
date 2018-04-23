@@ -1,5 +1,5 @@
 /*
- * This file ("BiomeBasicVariation.java") is part of the RockBottomAPI by Ellpeck.
+ * This file ("BiomeLevel.java") is part of the RockBottomAPI by Ellpeck.
  * View the source code at <https://github.com/RockBottomGame/>.
  * View information on the project at <https://rockbottom.ellpeck.de/>.
  *
@@ -19,34 +19,26 @@
  * © 2018 Ellpeck
  */
 
-package de.ellpeck.rockbottom.api.world.gen.biome;
+package de.ellpeck.rockbottom.api.world.gen.biome.level;
 
+import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 import de.ellpeck.rockbottom.api.world.IWorld;
 
-public abstract class BiomeBasicVariation extends Biome{
+public abstract class BiomeLevel{
 
-    public BiomeBasicVariation(ResourceName name){
-        super(name);
-    }
+    public abstract int getMinY(IWorld world, int x, int y, int surfaceHeight);
 
-    @Override
-    public int getWeight(IWorld world, int x, int y){
-        return 0;
-    }
+    public abstract int getMaxY(IWorld world, int x, int y, int surfaceHeight);
 
-    @Override
-    public int getHighestY(IWorld world, int x, int y){
-        return 0;
-    }
+    public abstract boolean isForcedSideBySide();
 
-    @Override
-    public int getLowestY(IWorld world, int x, int y){
-        return 0;
-    }
+    public abstract int getPriority();
 
-    @Override
-    public boolean canGenerateNaturally(){
-        return false;
+    public abstract ResourceName getName();
+
+    public BiomeLevel register(){
+        RockBottomAPI.BIOME_LEVEL_REGISTRY.register(this.getName(), this);
+        return this;
     }
 }

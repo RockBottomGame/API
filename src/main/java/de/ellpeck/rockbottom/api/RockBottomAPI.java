@@ -60,6 +60,7 @@ import de.ellpeck.rockbottom.api.world.IWorld;
 import de.ellpeck.rockbottom.api.world.gen.IStructure;
 import de.ellpeck.rockbottom.api.world.gen.IWorldGenerator;
 import de.ellpeck.rockbottom.api.world.gen.biome.Biome;
+import de.ellpeck.rockbottom.api.world.gen.biome.level.BiomeLevel;
 import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 
 import java.util.ArrayList;
@@ -164,6 +165,11 @@ public final class RockBottomAPI{
      */
     @ApiInternal
     public static final NameRegistry<Biome> BIOME_REGISTRY = new NameRegistry<>("biome_registry", false).register();
+    /**
+     * The registry for all {@link BiomeLevel} objects. Use {@link BiomeLevel#register()} to register biomes into this registry.
+     */
+    @ApiInternal
+    public static final NameRegistry<BiomeLevel> BIOME_LEVEL_REGISTRY = new NameRegistry<>("biome_level_registry", false).register();
     /**
      * The registry for all {@link IStructure} objects. Use the contents.json
      * file to create a new structure and have it loaded through the content
