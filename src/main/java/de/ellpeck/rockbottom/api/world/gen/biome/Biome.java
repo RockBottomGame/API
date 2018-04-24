@@ -45,6 +45,8 @@ public abstract class Biome{
 
     public abstract List<BiomeLevel> getGenerationLevels(IWorld world);
 
+    public abstract int getWeight(IWorld world);
+
     public long getBiomeSeed(IWorld world){
         return world.getSeed();
     }
