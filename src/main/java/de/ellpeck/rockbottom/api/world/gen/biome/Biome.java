@@ -32,6 +32,7 @@ import de.ellpeck.rockbottom.api.world.gen.biome.level.BiomeLevel;
 import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 
 import java.util.List;
+import java.util.Random;
 
 public abstract class Biome{
 
@@ -80,7 +81,7 @@ public abstract class Biome{
         return GameContent.TILE_SOIL.getDefState();
     }
 
-    public Biome getVariationToGenerate(IWorld world, int x, int y, int surfaceHeight){
+    public Biome getVariationToGenerate(IWorld world, int x, int y, int surfaceHeight, Random random){
         return this;
     }
 }
