@@ -77,7 +77,7 @@ public final class RockBottomAPI{
     /**
      * The current API version equal to the version in the build.gradle file.
      */
-    public static final String VERSION = "0.3";
+    public static final String VERSION = "0.3.1";
 
     /**
      * A list of all the registries in the game. This is only used for
