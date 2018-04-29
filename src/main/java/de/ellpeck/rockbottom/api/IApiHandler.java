@@ -21,10 +21,8 @@
 
 package de.ellpeck.rockbottom.api;
 
-import com.google.gson.JsonObject;
 import de.ellpeck.rockbottom.api.construction.IRecipe;
 import de.ellpeck.rockbottom.api.construction.resource.IUseInfo;
-import de.ellpeck.rockbottom.api.data.set.AbstractDataSet;
 import de.ellpeck.rockbottom.api.inventory.Inventory;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
@@ -32,9 +30,6 @@ import de.ellpeck.rockbottom.api.world.IWorld;
 import de.ellpeck.rockbottom.api.world.gen.INoiseGen;
 import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 
-import java.io.DataInput;
-import java.io.DataOutput;
-import java.io.File;
 import java.util.List;
 import java.util.function.Function;
 import java.util.logging.Logger;
@@ -45,69 +40,6 @@ import java.util.logging.Logger;
  * handler, use {@link RockBottomAPI#getApiHandler()}.
  */
 public interface IApiHandler{
-
-    /**
-     * Writes a data set to the given file either as binary or as a json
-     *
-     * @param set    The data set to write to file
-     * @param file   The file to write to
-     * @param asJson Wether it should be stored as json
-     */
-    void writeDataSet(AbstractDataSet set, File file, boolean asJson);
-
-    /**
-     * Reads a data set from the given file either as binary or as a json and
-     * stores the data in the set.
-     *
-     * @param set    The set to store the data in
-     * @param file   The file to read from
-     * @param asJson Wether or not it should be stored as json
-     */
-    void readDataSet(AbstractDataSet set, File file, boolean asJson);
-
-    /**
-     * Writes a data set directly to a data output of any kind, throwing an
-     * exception if something fails.
-     *
-     * @param stream The output to write to
-     * @param set    The set to write to the output
-     *
-     * @throws Exception if writing fails for some reason
-     */
-    void writeDataSet(DataOutput stream, AbstractDataSet set) throws Exception;
-
-    /**
-     * Reads a data set directly from a data input of any kind, throwing an
-     * exception if something fails.
-     *
-     * @param stream The input to read from
-     * @param set    The set to save the input in
-     *
-     * @throws Exception if reading fails for some reason
-     */
-    void readDataSet(DataInput stream, AbstractDataSet set) throws Exception;
-
-    /**
-     * Writes a data set directly to a json object head, throwing an exception
-     * if something fails.
-     *
-     * @param main The json object to write to
-     * @param set  The set to write
-     *
-     * @throws Exception if writing fails for some reason
-     */
-    void writeDataSet(JsonObject main, AbstractDataSet set) throws Exception;
-
-    /**
-     * Reads a data set directly from a json object head, throwing an exception
-     * if something fails.
-     *
-     * @param main The json object to read from
-     * @param set  The set to save the input in
-     *
-     * @throws Exception if reading fails for some reason
-     */
-    void readDataSet(JsonObject main, AbstractDataSet set) throws Exception;
 
     /**
      * Interpolates the light at a position in the world. The four integers in

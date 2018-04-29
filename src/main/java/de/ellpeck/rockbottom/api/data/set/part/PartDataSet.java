@@ -23,7 +23,6 @@ package de.ellpeck.rockbottom.api.data.set.part;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.data.set.DataSet;
 
 import java.io.DataInput;
@@ -41,25 +40,25 @@ public final class PartDataSet extends BasicDataPart<DataSet>{
 
     @Override
     public void write(DataOutput stream) throws Exception{
-        RockBottomAPI.getApiHandler().writeDataSet(stream, this.data);
+        this.data.write(stream);
     }
 
     @Override
     public void read(DataInput stream) throws Exception{
         this.data = new DataSet();
-        RockBottomAPI.getApiHandler().readDataSet(stream, this.data);
+        this.data.read(stream);
     }
 
     @Override
     public JsonElement write() throws Exception{
         JsonObject object = new JsonObject();
-        RockBottomAPI.getApiHandler().writeDataSet(object, this.data);
+        this.data.write(object);
         return object;
     }
 
     @Override
     public void read(JsonElement element) throws Exception{
         this.data = new DataSet();
-        RockBottomAPI.getApiHandler().readDataSet(element.getAsJsonObject(), this.data);
+        this.data.read(element.getAsJsonObject());
     }
 }
