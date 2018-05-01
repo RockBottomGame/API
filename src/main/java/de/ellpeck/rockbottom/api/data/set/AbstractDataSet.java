@@ -21,20 +21,13 @@
 
 package de.ellpeck.rockbottom.api.data.set;
 
-import com.google.common.base.Charsets;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.data.set.part.DataPart;
-import de.ellpeck.rockbottom.api.util.Util;
-import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
-import java.io.*;
+import java.io.File;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
 
 public abstract class AbstractDataSet{
 
@@ -105,171 +98,19 @@ public abstract class AbstractDataSet{
         return this.data.hashCode();
     }
 
-    /**
-     * Writes a data set to the given file either as binary or as a json
-     *
-     * @param file   The file to write to
-     * @param asJson Wether it should be stored as json
-     */
-    public void write(File file, boolean asJson){
-        try{
-            if(!file.exists()){
-                file.getParentFile().mkdirs();
-                file.createNewFile();
-            }
-
-            if(asJson){
-                JsonObject object = new JsonObject();
-                this.write(object);
-
-                OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(file), Charsets.UTF_8);
-                Util.GSON.toJson(object, writer);
-                writer.close();
-            }
-            else{
-                DataOutputStream stream = new DataOutputStream(new FileOutputStream(file));
-                this.write(stream);
-                stream.close();
-            }
-        }
-        catch(Exception e){
-            RockBottomAPI.logger().log(Level.SEVERE, "Exception saving a data set to disk!", e);
-        }
+    public void write(File file){
+        RockBottomAPI.getApiHandler().writeDataSet(this, file, false);
     }
 
-    /**
-     * Reads a data set from the given file either as binary or as a json and
-     * stores the data in the set.
-     *
-     * @param file   The file to read from
-     * @param asJson Wether or not it should be stored as json
-     */
-    public void read(File file, boolean asJson){
-        if(!this.isEmpty()){
-            this.clear();
-        }
-
-        try{
-            if(file.exists()){
-                if(asJson){
-                    InputStreamReader reader = new InputStreamReader(new FileInputStream(file), Charsets.UTF_8);
-                    JsonObject object = Util.JSON_PARSER.parse(reader).getAsJsonObject();
-                    reader.close();
-
-                    this.read(object);
-                }
-                else{
-                    DataInputStream stream = new DataInputStream(new FileInputStream(file));
-                    this.read(stream);
-                    stream.close();
-                }
-            }
-        }
-        catch(Exception e){
-            RockBottomAPI.logger().log(Level.SEVERE, "Exception loading a data set from disk!", e);
-        }
+    public void read(File file){
+        RockBottomAPI.getApiHandler().readDataSet(this, file, false);
     }
 
-    /**
-     * Writes a data set directly to a data output of any kind, throwing an
-     * exception if something fails.
-     *
-     * @param stream The output to write to
-     *
-     * @throws Exception if writing fails for some reason
-     */
-    public void write(DataOutput stream) throws Exception{
-        stream.writeInt(this.size());
-
-        for(DataPart part : this.data.values()){
-            this.writePart(stream, part);
-        }
+    public void writeAsJson(File file){
+        RockBottomAPI.getApiHandler().writeDataSet(this, file, true);
     }
 
-    /**
-     * Reads a data set directly from a data input of any kind, throwing an
-     * exception if something fails.
-     *
-     * @param stream The input to read from
-     *
-     * @throws Exception if reading fails for some reason
-     */
-    public void read(DataInput stream) throws Exception{
-        int amount = stream.readInt();
-
-        for(int i = 0; i < amount; i++){
-            DataPart part = this.readPart(stream);
-            this.addPart(part);
-        }
-    }
-
-    /**
-     * Writes a data set directly to a json object head, throwing an exception
-     * if something fails.
-     *
-     * @param main The json object to write to
-     *
-     * @throws Exception if writing fails for some reason
-     */
-    public void write(JsonObject main) throws Exception{
-        JsonArray data = new JsonArray();
-        for(DataPart part : this.data.values()){
-            this.writePart(data, part);
-        }
-        main.add("data", data);
-    }
-
-    /**
-     * Reads a data set directly from a json object head, throwing an exception
-     * if something fails.
-     *
-     * @param main The json object to read from
-     *
-     * @throws Exception if reading fails for some reason
-     */
-    public void read(JsonObject main) throws Exception{
-        JsonArray data = main.get("data").getAsJsonArray();
-        for(int i = 0; i < data.size(); i++){
-            DataPart part = this.readPart(data, i);
-            this.addPart(part);
-        }
-    }
-
-    private void writePart(DataOutput stream, DataPart part) throws Exception{
-        stream.writeByte(RockBottomAPI.PART_REGISTRY.getId(part.getClass()));
-        stream.writeUTF(part.getName());
-        part.write(stream);
-    }
-
-    private DataPart readPart(DataInput stream) throws Exception{
-        int id = stream.readByte();
-        String name = stream.readUTF();
-
-        Class<? extends DataPart> partClass = RockBottomAPI.PART_REGISTRY.get(id);
-        DataPart part = partClass.getConstructor(String.class).newInstance(name);
-        part.read(stream);
-
-        return part;
-    }
-
-    private void writePart(JsonArray array, DataPart part) throws Exception{
-        JsonObject object = new JsonObject();
-        object.addProperty("type", RockBottomAPI.PART_REGISTRY.getName(part.getClass()).toString());
-        object.addProperty("name", part.getName());
-        object.add("data", part.write());
-        array.add(object);
-    }
-
-    private DataPart readPart(JsonArray array, int i) throws Exception{
-        JsonObject object = array.get(i).getAsJsonObject();
-        ResourceName type = new ResourceName(object.get("type").getAsString());
-        String name = object.get("name").getAsString();
-        JsonElement data = object.get("data");
-
-        Class<? extends DataPart> partClass = RockBottomAPI.PART_REGISTRY.get(type);
-        DataPart part = partClass.getConstructor(String.class).newInstance(name);
-        part.read(data);
-
-        return part;
+    public void readAsJson(File file){
+        RockBottomAPI.getApiHandler().readDataSet(this, file, true);
     }
 }

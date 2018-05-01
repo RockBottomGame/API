@@ -33,7 +33,7 @@ public final class NetUtil{
 
     public static void writeSetToBuffer(DataSet set, ByteBuf buf){
         try{
-            set.write(new ByteBufOutputStream(buf));
+            RockBottomAPI.getApiHandler().writeDataSet(new ByteBufOutputStream(buf), set);
         }
         catch(Exception e){
             RockBottomAPI.logger().log(Level.SEVERE, "Couldn't write data set to buffer", e);
@@ -42,7 +42,7 @@ public final class NetUtil{
 
     public static void readSetFromBuffer(DataSet set, ByteBuf buf){
         try{
-            set.read(new ByteBufInputStream(buf));
+            RockBottomAPI.getApiHandler().readDataSet(new ByteBufInputStream(buf), set);
         }
         catch(Exception e){
             RockBottomAPI.logger().log(Level.SEVERE, "Couldn't read data set from buffer", e);
