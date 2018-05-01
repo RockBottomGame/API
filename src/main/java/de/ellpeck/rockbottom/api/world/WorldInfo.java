@@ -56,7 +56,7 @@ public class WorldInfo{
     @ApiInternal
     public void load(){
         DataSet dataSet = new DataSet();
-        dataSet.readSafe(this.dataFile, false);
+        dataSet.read(this.dataFile, false);
 
         this.seed = dataSet.getLong("seed");
         this.totalTimeInWorld = dataSet.getInt("total_time");
@@ -80,7 +80,7 @@ public class WorldInfo{
             dataSet.addUniqueId("last_player", this.lastPlayerId);
         }
 
-        dataSet.writeSafe(this.dataFile, false);
+        dataSet.write(this.dataFile, false);
     }
 
     @ApiInternal

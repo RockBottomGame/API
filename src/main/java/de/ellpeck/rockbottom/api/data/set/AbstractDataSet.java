@@ -106,42 +106,31 @@ public abstract class AbstractDataSet{
     }
 
     /**
-     * Writes a data set to the given file either as binary or as a json. Use
-     * {@link #writeSafe(File, boolean)} for automatic exception handling.
+     * Writes a data set to the given file either as binary or as a json
      *
      * @param file   The file to write to
      * @param asJson Wether it should be stored as json
      */
-    public void write(File file, boolean asJson) throws Exception{
-        if(!file.exists()){
-            file.getParentFile().mkdirs();
-            file.createNewFile();
-        }
-
-        if(asJson){
-            JsonObject object = new JsonObject();
-            this.write(object);
-
-            OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(file), Charsets.UTF_8);
-            Util.GSON.toJson(object, writer);
-            writer.close();
-        }
-        else{
-            DataOutputStream stream = new DataOutputStream(new FileOutputStream(file));
-            this.write(stream);
-            stream.close();
-        }
-    }
-
-    /**
-     * @param file   The file to write to
-     * @param asJson Wether it should be stored as json
-     *
-     * @see #write(JsonObject)
-     */
-    public void writeSafe(File file, boolean asJson){
+    public void write(File file, boolean asJson){
         try{
-            this.write(file, asJson);
+            if(!file.exists()){
+                file.getParentFile().mkdirs();
+                file.createNewFile();
+            }
+
+            if(asJson){
+                JsonObject object = new JsonObject();
+                this.write(object);
+
+                OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(file), Charsets.UTF_8);
+                Util.GSON.toJson(object, writer);
+                writer.close();
+            }
+            else{
+                DataOutputStream stream = new DataOutputStream(new FileOutputStream(file));
+                this.write(stream);
+                stream.close();
+            }
         }
         catch(Exception e){
             RockBottomAPI.logger().log(Level.SEVERE, "Exception saving a data set to disk!", e);
@@ -150,42 +139,31 @@ public abstract class AbstractDataSet{
 
     /**
      * Reads a data set from the given file either as binary or as a json and
-     * stores the data in the set. Use {@link #readSafe(File, boolean)} for
-     * automatic exception handling.
+     * stores the data in the set.
      *
      * @param file   The file to read from
      * @param asJson Wether or not it should be stored as json
      */
-    public void read(File file, boolean asJson) throws Exception{
+    public void read(File file, boolean asJson){
         if(!this.isEmpty()){
             this.clear();
         }
 
-        if(file.exists()){
-            if(asJson){
-                InputStreamReader reader = new InputStreamReader(new FileInputStream(file), Charsets.UTF_8);
-                JsonObject object = Util.JSON_PARSER.parse(reader).getAsJsonObject();
-                reader.close();
-
-                this.read(object);
-            }
-            else{
-                DataInputStream stream = new DataInputStream(new FileInputStream(file));
-                this.read(stream);
-                stream.close();
-            }
-        }
-    }
-
-    /**
-     * @param file   The file to read from
-     * @param asJson Wether or not it should be stored as json
-     *
-     * @see #read(JsonObject)
-     */
-    public void readSafe(File file, boolean asJson){
         try{
-            this.read(file, asJson);
+            if(file.exists()){
+                if(asJson){
+                    InputStreamReader reader = new InputStreamReader(new FileInputStream(file), Charsets.UTF_8);
+                    JsonObject object = Util.JSON_PARSER.parse(reader).getAsJsonObject();
+                    reader.close();
+
+                    this.read(object);
+                }
+                else{
+                    DataInputStream stream = new DataInputStream(new FileInputStream(file));
+                    this.read(stream);
+                    stream.close();
+                }
+            }
         }
         catch(Exception e){
             RockBottomAPI.logger().log(Level.SEVERE, "Exception loading a data set from disk!", e);
