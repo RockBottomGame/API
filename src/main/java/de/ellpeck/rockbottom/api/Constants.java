@@ -38,6 +38,10 @@ import java.util.UUID;
  */
 public final class Constants{
 
+    public static final String GAME_VERSION = "0.2.3.1";
+    public static final String GAME_NAME = "Rock Bottom";
+    public static final String GAME_ID = "rockbottom";
+
     /**
      * The seperator for any resources, game or mod based.
      *

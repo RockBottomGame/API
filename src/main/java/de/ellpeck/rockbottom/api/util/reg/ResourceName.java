@@ -78,10 +78,10 @@ public final class ResourceName implements Comparable<ResourceName>{
     }
 
     /**
-     * Creates an internal resource name that uses the {@link IGameInstance}
-     * instance from {@link RockBottomAPI#getGame()} as the domain. Using this
-     * in mods is highly discouraged and, if anything, should only be used to
-     * access existing internal resources, not create new ones.
+     * Creates an internal resource name that uses the game's {@link
+     * Constants#GAME_ID} as the domain. Using this in mods is highly
+     * discouraged and, if anything, should only be used to access existing
+     * internal resources, not create new ones.
      *
      * @param resourceName The name of the resource
      *
@@ -89,7 +89,7 @@ public final class ResourceName implements Comparable<ResourceName>{
      */
     @ApiInternal
     public static ResourceName intern(String resourceName){
-        return new ResourceName(RockBottomAPI.getGame(), resourceName);
+        return new ResourceName(Constants.GAME_ID, resourceName);
     }
 
     /**
