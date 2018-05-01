@@ -26,11 +26,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
-import de.ellpeck.rockbottom.api.data.set.part.*;
-import de.ellpeck.rockbottom.api.data.set.part.num.*;
-import de.ellpeck.rockbottom.api.data.set.part.num.array.PartByteArray;
-import de.ellpeck.rockbottom.api.data.set.part.num.array.PartIntArray;
-import de.ellpeck.rockbottom.api.data.set.part.num.array.PartShortArray;
+import de.ellpeck.rockbottom.api.data.set.part.DataPart;
 import de.ellpeck.rockbottom.api.util.Util;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
@@ -44,23 +40,6 @@ public abstract class AbstractDataSet{
 
     protected final Map<String, DataPart> data = new HashMap<>();
     protected final Map<String, DataPart> dataUnmodifiable = Collections.unmodifiableMap(this.data);
-
-    static{
-        RockBottomAPI.PART_REGISTRY.register(ResourceName.intern("int"), 0, PartInt.class);
-        RockBottomAPI.PART_REGISTRY.register(ResourceName.intern("float"), 1, PartFloat.class);
-        RockBottomAPI.PART_REGISTRY.register(ResourceName.intern("double"), 2, PartDouble.class);
-        RockBottomAPI.PART_REGISTRY.register(ResourceName.intern("int_array"), 3, PartIntArray.class);
-        RockBottomAPI.PART_REGISTRY.register(ResourceName.intern("short_array"), 4, PartShortArray.class);
-        RockBottomAPI.PART_REGISTRY.register(ResourceName.intern("byte_array"), 5, PartByteArray.class);
-        RockBottomAPI.PART_REGISTRY.register(ResourceName.intern("data_set"), 6, PartDataSet.class);
-        RockBottomAPI.PART_REGISTRY.register(ResourceName.intern("long"), 7, PartLong.class);
-        RockBottomAPI.PART_REGISTRY.register(ResourceName.intern("uuid"), 8, PartUniqueId.class);
-        RockBottomAPI.PART_REGISTRY.register(ResourceName.intern("byte"), 9, PartByte.class);
-        RockBottomAPI.PART_REGISTRY.register(ResourceName.intern("short"), 10, PartShort.class);
-        RockBottomAPI.PART_REGISTRY.register(ResourceName.intern("boolean"), 11, PartBoolean.class);
-        RockBottomAPI.PART_REGISTRY.register(ResourceName.intern("string"), 12, PartString.class);
-        RockBottomAPI.PART_REGISTRY.register(ResourceName.intern("mod_data_set"), 13, PartModBasedDataSet.class);
-    }
 
     public void addPart(DataPart part){
         this.data.put(part.getName(), part);
