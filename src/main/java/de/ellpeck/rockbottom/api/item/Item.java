@@ -23,6 +23,7 @@ package de.ellpeck.rockbottom.api.item;
 
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
+import de.ellpeck.rockbottom.api.entity.Entity;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.render.item.IItemRenderer;
 import de.ellpeck.rockbottom.api.tile.Tile;
@@ -115,5 +116,21 @@ public class Item{
 
     public double getMaxInteractionDistance(IWorld world, int x, int y, TileLayer layer, double mouseX, double mouseY, AbstractEntityPlayer player){
         return AbstractEntityPlayer.RANGE;
+    }
+
+    public boolean canHoldButtonToAttack(IWorld world, double mouseX, double mouseY, AbstractEntityPlayer player){
+        return false;
+    }
+
+    public List<Entity> getCustomAttackableEntities(IWorld world, double mouseX, double mouseY, AbstractEntityPlayer player){
+        return null;
+    }
+
+    public boolean attackEntity(IWorld world, Entity entity, double mouseX, double mouseY, AbstractEntityPlayer player){
+        return true;
+    }
+
+    public int getAttackCooldown(IWorld world, double mouseX, double mouseY, AbstractEntityPlayer player){
+        return 40;
     }
 }
