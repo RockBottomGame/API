@@ -52,7 +52,7 @@ public class ComponentMessageBox extends GuiComponent{
 
         IFont font = RockBottomAPI.getGame().getAssetManager().getFont();
         this.message = font.splitTextToLength(width-4, scale, true, message);
-        this.letterAmount = message.length();
+        this.letterAmount = font.removeFormatting(message).length();
     }
 
     @Override
@@ -69,9 +69,10 @@ public class ComponentMessageBox extends GuiComponent{
 
         for(String s : this.message){
             if(this.appearsSlowly){
-                if(this.letterCounter >= accum+s.length()){
+                int sLength = font.removeFormatting(s).length();
+                if(this.letterCounter >= accum+sLength){
                     font.drawString(x+2, y+2+yAdd, s, this.scale);
-                    accum += s.length();
+                    accum += sLength;
                 }
                 else{
                     font.drawCutOffString(x+2, y+2+yAdd, s, this.scale, (int)this.letterCounter-accum, false, true);

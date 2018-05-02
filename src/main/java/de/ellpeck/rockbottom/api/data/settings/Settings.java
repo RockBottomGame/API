@@ -80,6 +80,8 @@ public final class Settings implements IJsonSettings{
     public String lastServerIp;
     public String currentLocale;
 
+    public boolean betaTextDisplayed;
+
     @Override
     public void load(JsonObject object){
         if(object.has("keybinds")){
@@ -118,6 +120,8 @@ public final class Settings implements IJsonSettings{
 
         this.lastServerIp = this.get(object, "last_server_ip", "");
         this.currentLocale = this.get(object, "curr_locale", "rockbottom/us_english");
+
+        this.betaTextDisplayed = this.get(object, "beta_text_displayed", false);
     }
 
     @Override
@@ -146,6 +150,8 @@ public final class Settings implements IJsonSettings{
 
         this.set(object, "last_server_ip", this.lastServerIp);
         this.set(object, "curr_locale", this.currentLocale);
+
+        this.set(object, "beta_text_displayed", this.betaTextDisplayed);
     }
 
     @Override
