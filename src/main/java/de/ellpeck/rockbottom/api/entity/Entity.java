@@ -255,7 +255,7 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
         return -100;
     }
 
-    public boolean onAttack(AbstractEntityPlayer player, double mouseX, double mouseY){
+    public boolean onAttack(AbstractEntityPlayer player, double mouseX, double mouseY, int intendedDamage){
         return false;
     }
 

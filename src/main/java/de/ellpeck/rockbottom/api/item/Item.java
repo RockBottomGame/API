@@ -119,15 +119,15 @@ public class Item{
     }
 
     public boolean canHoldButtonToAttack(IWorld world, double mouseX, double mouseY, AbstractEntityPlayer player){
-        return false;
+        return true;
     }
 
     public List<Entity> getCustomAttackableEntities(IWorld world, double mouseX, double mouseY, AbstractEntityPlayer player){
         return null;
     }
 
-    public boolean attackEntity(IWorld world, Entity entity, double mouseX, double mouseY, AbstractEntityPlayer player){
-        return true;
+    public int getAttackDamage(IWorld world, Entity entity, double mouseX, double mouseY, AbstractEntityPlayer player){
+        return 5;
     }
 
     public int getAttackCooldown(IWorld world, double mouseX, double mouseY, AbstractEntityPlayer player){

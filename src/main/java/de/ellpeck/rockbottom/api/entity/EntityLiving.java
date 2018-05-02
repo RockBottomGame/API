@@ -24,6 +24,7 @@ package de.ellpeck.rockbottom.api.entity;
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.data.set.DataSet;
+import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.event.EventResult;
 import de.ellpeck.rockbottom.api.event.impl.EntityDamageEvent;
 import de.ellpeck.rockbottom.api.event.impl.RegenEvent;
@@ -119,5 +120,11 @@ public abstract class EntityLiving extends Entity{
         this.jumping = set.getBoolean("jumping");
         this.jumpTimeout = set.getInt("jump_timeout");
         this.health = set.getInt("health");
+    }
+
+    @Override
+    public boolean onAttack(AbstractEntityPlayer player, double mouseX, double mouseY, int intendedDamage){
+        this.takeDamage(intendedDamage);
+        return true;
     }
 }
