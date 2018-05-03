@@ -30,6 +30,7 @@ import de.ellpeck.rockbottom.api.effect.ActiveEffect;
 import de.ellpeck.rockbottom.api.entity.AbstractEntityItem;
 import de.ellpeck.rockbottom.api.entity.Entity;
 import de.ellpeck.rockbottom.api.entity.MovableWorldObject;
+import de.ellpeck.rockbottom.api.entity.ai.AITask;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.entity.player.statistics.ItemStatistic;
 import de.ellpeck.rockbottom.api.gui.AbstractStatGui;
@@ -56,7 +57,7 @@ import java.util.Map;
 @ApiInternal
 public interface IInternalHooks{
 
-    void doDefaultEntityUpdate(Entity entity, List<ActiveEffect> effects);
+    void doDefaultEntityUpdate(IGameInstance game, Entity entity, List<ActiveEffect> effects, List<AITask> aiTasks);
 
     void doWorldObjectMovement(MovableWorldObject object);
 

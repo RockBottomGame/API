@@ -28,6 +28,7 @@ import de.ellpeck.rockbottom.api.data.set.IAdditionalDataProvider;
 import de.ellpeck.rockbottom.api.data.set.ModBasedDataSet;
 import de.ellpeck.rockbottom.api.effect.ActiveEffect;
 import de.ellpeck.rockbottom.api.effect.IEffect;
+import de.ellpeck.rockbottom.api.entity.ai.AITask;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.event.EventResult;
 import de.ellpeck.rockbottom.api.event.impl.EntityDeathEvent;
@@ -41,10 +42,8 @@ import de.ellpeck.rockbottom.api.world.IChunk;
 import de.ellpeck.rockbottom.api.world.IWorld;
 import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
+import java.util.function.ToIntFunction;
 
 public class Entity extends MovableWorldObject implements IAdditionalDataProvider{
 
@@ -56,6 +55,8 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
     public Direction facing = Direction.NONE;
 
     private final List<ActiveEffect> effects = new ArrayList<>();
+    private final List<AITask> aiTasks = new ArrayList<>();
+    public AITask currentAiTask;
     public int ticksExisted;
     public double fallStartY;
     public boolean isFalling;
@@ -84,7 +85,7 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
     }
 
     public void update(IGameInstance game){
-        RockBottomAPI.getInternalHooks().doDefaultEntityUpdate(this, this.effects);
+        RockBottomAPI.getInternalHooks().doDefaultEntityUpdate(game, this, this.effects, this.aiTasks);
     }
 
     public boolean doesSync(){
@@ -352,5 +353,10 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
             }
         }
         return false;
+    }
+
+    public void addAiTask(AITask task){
+        this.aiTasks.add(task);
+        this.aiTasks.sort(Comparator.comparingInt((ToIntFunction<AITask>)AITask :: getPriority).reversed());
     }
 }
