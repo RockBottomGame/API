@@ -49,4 +49,8 @@ public abstract class AITask<T extends Entity>{
     public void onExecutionEnded(AITask<T> nextTask, T entity){
 
     }
+
+    public AITask getNextTask(AITask<T> expectedNextTask, T entity){
+        return expectedNextTask;
+    }
 }
