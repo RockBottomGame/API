@@ -25,13 +25,10 @@ import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.IRenderer;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.entity.MovableWorldObject;
-import de.ellpeck.rockbottom.api.util.BoundBox;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 import de.ellpeck.rockbottom.api.world.IWorld;
 
 public class Particle extends MovableWorldObject{
-
-    protected final BoundBox boundingBox = new BoundBox(-0.125, -0.125, 0.125, 0.125);
 
     protected int maxLife;
     protected int life;
@@ -45,11 +42,6 @@ public class Particle extends MovableWorldObject{
         this.maxLife = maxLife;
 
         this.setPos(x, y);
-    }
-
-    @Override
-    public BoundBox getBoundingBox(){
-        return this.boundingBox;
     }
 
     public void update(IGameInstance game){
@@ -88,5 +80,15 @@ public class Particle extends MovableWorldObject{
 
     public void setDead(){
         this.dead = true;
+    }
+
+    @Override
+    public float getWidth(){
+        return 0.25F;
+    }
+
+    @Override
+    public float getHeight(){
+        return 0.25F;
     }
 }

@@ -47,8 +47,6 @@ import java.util.function.ToIntFunction;
 
 public class Entity extends MovableWorldObject implements IAdditionalDataProvider{
 
-    protected final BoundBox boundingBox = new BoundBox(-0.5, -0.5, 0.5, 0.5);
-
     public int chunkX;
     public int chunkY;
 
@@ -143,11 +141,6 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
 
     public void onGroundHit(double fallDistance){
 
-    }
-
-    @Override
-    public BoundBox getBoundingBox(){
-        return this.boundingBox;
     }
 
     public void moveToChunk(IChunk chunk){
@@ -307,6 +300,16 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
     public final void onEntityIntersection(Entity entity, BoundBox thisBox, BoundBox thisBoxMotion, BoundBox otherBox, BoundBox otherBoxMotion){
         this.onIntersectWithEntity(entity, thisBox, thisBoxMotion, otherBox, otherBoxMotion);
         entity.onIntersectWithEntity(this, otherBox, otherBoxMotion, thisBox, thisBoxMotion);
+    }
+
+    @Override
+    public float getWidth(){
+        return 1F;
+    }
+
+    @Override
+    public float getHeight(){
+        return 1F;
     }
 
     public List<ActiveEffect> getActiveEffects(){

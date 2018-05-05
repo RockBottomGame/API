@@ -645,6 +645,8 @@ public interface IRenderer extends IDisposable{
      */
     boolean isHeightDebug();
 
+    boolean isBoundBoxDebug();
+
     /**
      * Returns the x position of the tile that the mouse is currently over.
      * Rounding this value down using something like {@link Util#floor(double)}

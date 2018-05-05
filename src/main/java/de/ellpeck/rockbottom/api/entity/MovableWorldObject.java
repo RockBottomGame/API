@@ -40,17 +40,25 @@ public abstract class MovableWorldObject{
     public double motionX;
     public double motionY;
 
+    public final BoundBox currentBounds = new BoundBox();
+    public final BoundBox currentBoundsWithMotion = new BoundBox();
+
     public boolean collidedHor;
     public boolean collidedVert;
     public boolean onGround;
 
     public MovableWorldObject(IWorld world){
         this.world = world;
+        this.setPos(0D, 0D);
     }
 
     public void setPos(double x, double y){
         this.x = x;
         this.y = y;
+
+        double halfWidth = this.getWidth()/2D;
+        double halfHeight = this.getHeight()/2D;
+        this.currentBounds.set(this.x-halfWidth, this.y-halfHeight, this.x+halfWidth, this.y+halfHeight);
     }
 
     @ApiInternal
@@ -82,5 +90,7 @@ public abstract class MovableWorldObject{
         return true;
     }
 
-    public abstract BoundBox getBoundingBox();
+    public abstract float getWidth();
+
+    public abstract float getHeight();
 }
