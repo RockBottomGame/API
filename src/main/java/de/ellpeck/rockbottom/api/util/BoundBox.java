@@ -61,14 +61,18 @@ public final class BoundBox{
         return this;
     }
 
-    public BoundBox expand(double amount){
-        this.minX -= amount;
-        this.minY -= amount;
+    public BoundBox expand(double x, double y){
+        this.minX -= x;
+        this.maxX += x;
 
-        this.maxX += amount;
-        this.maxY += amount;
+        this.minY -= y;
+        this.maxY += y;
 
         return this;
+    }
+
+    public BoundBox expand(double amount){
+        return this.expand(amount, amount);
     }
 
     public boolean intersects(BoundBox other){
