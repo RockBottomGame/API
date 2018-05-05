@@ -24,6 +24,10 @@ package de.ellpeck.rockbottom.api.world.gen.biome.level;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 import de.ellpeck.rockbottom.api.world.IWorld;
+import de.ellpeck.rockbottom.api.world.gen.biome.Biome;
+
+import java.util.Collections;
+import java.util.List;
 
 public abstract class BiomeLevel{
 
@@ -40,5 +44,9 @@ public abstract class BiomeLevel{
     public BiomeLevel register(){
         RockBottomAPI.BIOME_LEVEL_REGISTRY.register(this.getName(), this);
         return this;
+    }
+
+    public List<Biome> getAdditionalGenBiomes(IWorld world){
+        return Collections.emptyList();
     }
 }
