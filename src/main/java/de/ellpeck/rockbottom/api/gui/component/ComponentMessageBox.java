@@ -86,7 +86,7 @@ public class ComponentMessageBox extends GuiComponent{
             yAdd += height;
         }
 
-        String[] info = this.letterCounter < this.letterAmount ? new String[]{".  ", ".. ", "...", ""} : new String[]{"■", "■", "", ""};
+        String[] info = this.letterCounter < this.letterAmount ? new String[]{".  ", ".. ", "...", ""} : new String[]{"->", "->", "", ""};
         String used = info[(game.getTotalTicks()/10)%info.length];
         font.drawString(x+this.width-font.getWidth(used, 0.3F)-2, y+this.height-8, used, 0.3F);
     }
