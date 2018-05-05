@@ -59,6 +59,7 @@ public abstract class MovableWorldObject{
         double halfWidth = this.getWidth()/2D;
         double halfHeight = this.getHeight()/2D;
         this.currentBounds.set(this.x-halfWidth, this.y-halfHeight, this.x+halfWidth, this.y+halfHeight);
+        this.currentBoundsWithMotion.set(this.currentBounds).add(this.motionX, this.motionY);
     }
 
     @ApiInternal
