@@ -332,4 +332,12 @@ public interface IGameInstance extends IMod{
 
     @ApiInternal
     int getPlayerCap();
+
+    /**
+     * @return The amount of ticks that have passed since the last tick. This
+     * will always return 0 when called from an update loop, but can return
+     * values between 0 and 1 when called from a rendering loop, as there are
+     * more FPS than TPS.
+     */
+    float getTickDelta();
 }

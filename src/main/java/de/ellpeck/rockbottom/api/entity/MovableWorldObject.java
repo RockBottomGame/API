@@ -41,7 +41,6 @@ public abstract class MovableWorldObject{
     public double motionY;
 
     public final BoundBox currentBounds = new BoundBox();
-    public final BoundBox currentBoundsWithMotion = new BoundBox();
 
     public boolean collidedHor;
     public boolean collidedVert;
@@ -55,9 +54,11 @@ public abstract class MovableWorldObject{
     public void setPos(double x, double y){
         this.x = x;
         this.y = y;
+        this.updateBounds();
+    }
 
+    public void updateBounds(){
         this.currentBounds.set(this.x, this.y, this.x, this.y).expand(this.getWidth()/2D, this.getHeight()/2D);
-        this.currentBoundsWithMotion.set(this.currentBounds).add(this.motionX, this.motionY);
     }
 
     @ApiInternal
