@@ -22,7 +22,7 @@
 package de.ellpeck.rockbottom.api.net;
 
 import de.ellpeck.rockbottom.api.RockBottomAPI;
-import de.ellpeck.rockbottom.api.data.set.DataSet;
+import de.ellpeck.rockbottom.api.data.set.AbstractDataSet;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufInputStream;
 import io.netty.buffer.ByteBufOutputStream;
@@ -31,7 +31,7 @@ import java.util.logging.Level;
 
 public final class NetUtil{
 
-    public static void writeSetToBuffer(DataSet set, ByteBuf buf){
+    public static void writeSetToBuffer(AbstractDataSet set, ByteBuf buf){
         try{
             RockBottomAPI.getApiHandler().writeDataSet(new ByteBufOutputStream(buf), set);
         }
@@ -40,7 +40,7 @@ public final class NetUtil{
         }
     }
 
-    public static void readSetFromBuffer(DataSet set, ByteBuf buf){
+    public static void readSetFromBuffer(AbstractDataSet set, ByteBuf buf){
         try{
             RockBottomAPI.getApiHandler().readDataSet(new ByteBufInputStream(buf), set);
         }
