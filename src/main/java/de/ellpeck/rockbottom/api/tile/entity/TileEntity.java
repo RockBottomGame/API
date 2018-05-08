@@ -29,6 +29,7 @@ import de.ellpeck.rockbottom.api.inventory.IInventory;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.net.packet.toclient.PacketTileEntityData;
 import de.ellpeck.rockbottom.api.util.Util;
+import de.ellpeck.rockbottom.api.world.IChunk;
 import de.ellpeck.rockbottom.api.world.IWorld;
 import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 
@@ -100,6 +101,10 @@ public abstract class TileEntity{
 
     public IFilteredInventory getTileInventory(){
         return null;
+    }
+
+    public boolean shouldMakeChunkPersist(IChunk chunk){
+        return false;
     }
 
     public abstract boolean doesTick();

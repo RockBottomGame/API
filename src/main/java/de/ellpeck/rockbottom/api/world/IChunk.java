@@ -112,7 +112,9 @@ public interface IChunk extends IChunkOrWorld{
     @ApiInternal
     List<TileLayer> getLoadedLayers();
 
-    boolean isPersistent();
+    boolean isConstantlyPersistent();
+
+    boolean doesEntityForcePersistence();
 
     boolean isGenerating();
 }

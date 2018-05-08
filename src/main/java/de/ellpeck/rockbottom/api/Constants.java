@@ -87,7 +87,7 @@ public final class Constants{
      * The amount of chunks in each direction (the radius) that should be
      * persistent surrounding the chunk at 0, 0.
      *
-     * @see IChunk#isPersistent()
+     * @see IChunk#isConstantlyPersistent()
      */
     public static final int PERSISTENT_CHUNK_DISTANCE = 1;
     /**

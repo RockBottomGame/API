@@ -302,6 +302,10 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
         entity.onIntersectWithEntity(this, otherBox, otherBoxMotion, thisBox, thisBoxMotion);
     }
 
+    public boolean shouldMakeChunkPersist(IChunk chunk){
+        return false;
+    }
+
     @Override
     public float getWidth(){
         return 1F;
