@@ -166,7 +166,8 @@ public final class RockBottomAPI{
     @ApiInternal
     public static final NameRegistry<Biome> BIOME_REGISTRY = new NameRegistry<>("biome_registry", false).register();
     /**
-     * The registry for all {@link BiomeLevel} objects. Use {@link BiomeLevel#register()} to register biomes into this registry.
+     * The registry for all {@link BiomeLevel} objects. Use {@link
+     * BiomeLevel#register()} to register biomes into this registry.
      */
     @ApiInternal
     public static final NameRegistry<BiomeLevel> BIOME_LEVEL_REGISTRY = new NameRegistry<>("biome_level_registry", false).register();
@@ -387,14 +388,14 @@ public final class RockBottomAPI{
     }
 
     /**
-     * Convenience call to {@link IApiHandler#logger()} that returns the game's
-     * internal logger
+     * Convenience call to {@link IInternalHooks#logger()} that returns the
+     * game's internal logger
      *
      * @return The game's logger
      */
     @ApiInternal
     public static Logger logger(){
-        return getApiHandler().logger();
+        return getInternalHooks().logger();
     }
 
 

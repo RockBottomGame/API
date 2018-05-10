@@ -53,6 +53,7 @@ import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 @ApiInternal
 public interface IInternalHooks{
@@ -87,4 +88,6 @@ public interface IInternalHooks{
     AbstractEntityItem makeItem(IWorld world, ItemInstance inst, double x, double y, double motionX, double motionY);
 
     List<ComponentStatistic> makeItemStatComponents(IGameInstance game, ItemStatistic.Stat stat, Map<Item, Counter> statMap, AbstractStatGui gui, ComponentMenu menu, ResourceName textureLocation);
+
+    Logger logger();
 }
