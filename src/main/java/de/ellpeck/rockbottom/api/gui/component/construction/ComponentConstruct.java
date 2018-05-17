@@ -48,7 +48,7 @@ public class ComponentConstruct extends GuiComponent{
     @Override
     public void render(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y){
         if(this.recipe != null){
-            g.renderItemInGui(game, manager, this.getOutput(game), x+2, y+2, 2.6F, Colors.WHITE);
+            g.renderItemInGui(game, manager, this.getOutput(game), x+5, y+5, 2.0F, Colors.WHITE);
         }
     }
 

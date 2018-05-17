@@ -61,10 +61,10 @@ public class ComponentPolaroid extends GuiComponent{
         manager.getTexture(res).draw(x, y, this.width, this.height);
 
         if(this.recipe != null){
-            g.renderItemInGui(game, manager, this.getOutput(game), x+1, y+1, 1.6F, this.canConstruct ? Colors.WHITE : Colors.multiplyA(Colors.WHITE, 0.35F), false);
+            g.renderItemInGui(game, manager, this.getOutput(game), x+4, y+4, 1.0F, this.canConstruct ? Colors.WHITE : Colors.multiplyA(Colors.WHITE, 0.35F), false);
         }
         else{
-            manager.getFont().drawString(x+4, y+1, "?", 0, 1, 0.9F, Colors.DARK_GRAY, Colors.NO_COLOR);
+            manager.getFont().drawString(x+6, y+5, "?", 0, 1, 0.5F, Colors.DARK_GRAY, Colors.NO_COLOR);
         }
     }
 
