@@ -695,4 +695,8 @@ public interface IRenderer extends IDisposable{
      * @return The amount of vertices that are currently in the buffer
      */
     int getVertexAmount();
+
+    double getCameraX();
+
+    double getCameraY();
 }
