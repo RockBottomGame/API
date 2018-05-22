@@ -33,7 +33,8 @@ import de.ellpeck.rockbottom.api.world.IWorld;
 public abstract class EntityLiving extends Entity{
 
     public boolean jumping;
-    protected int jumpTimeout;
+    public int jumpTicks;
+    public int jumpTimeout;
     protected int health;
 
     public EntityLiving(IWorld world){
@@ -45,10 +46,16 @@ public abstract class EntityLiving extends Entity{
     public void update(IGameInstance game){
         super.update(game);
 
-        if(this.jumping && this.collidedVert){
-            this.motionY = 0;
-            this.jumping = false;
-            this.jumpTimeout = this.getJumpTimeout();
+        if(this.jumping){
+            if(this.jumpTicks > 0 && this.collidedVert){
+                this.motionY = 0;
+                this.jumping = false;
+                this.jumpTicks = 0;
+                this.jumpTimeout = this.getJumpTimeout();
+            }
+            else{
+                this.jumpTicks++;
+            }
         }
 
         if(this.jumpTimeout > 0){
@@ -74,10 +81,14 @@ public abstract class EntityLiving extends Entity{
         }
     }
 
-    public void jump(double motion){
+    public boolean jump(double motion){
         if(this.onGround && !this.jumping && this.jumpTimeout <= 0){
             this.motionY += motion;
             this.jumping = true;
+            return true;
+        }
+        else{
+            return false;
         }
     }
 
@@ -109,6 +120,7 @@ public abstract class EntityLiving extends Entity{
         super.save(set);
 
         set.addBoolean("jumping", this.jumping);
+        set.addInt("jump_ticks", this.jumpTicks);
         set.addInt("jump_timeout", this.jumpTimeout);
         set.addInt("health", this.health);
     }
@@ -118,6 +130,7 @@ public abstract class EntityLiving extends Entity{
         super.load(set);
 
         this.jumping = set.getBoolean("jumping");
+        this.jumpTicks = set.getInt("jump_ticks");
         this.jumpTimeout = set.getInt("jump_timeout");
         this.health = set.getInt("health");
     }
