@@ -366,4 +366,12 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
         this.aiTasks.add(task);
         this.aiTasks.sort(Comparator.comparingInt((ToIntFunction<AITask>)AITask :: getPriority).reversed());
     }
+
+    public AITask getTask(int id){
+        return id >= 0 && id < this.aiTasks.size() ? this.aiTasks.get(id) : null;
+    }
+
+    public int getTaskId(AITask task){
+        return this.aiTasks.indexOf(task);
+    }
 }
