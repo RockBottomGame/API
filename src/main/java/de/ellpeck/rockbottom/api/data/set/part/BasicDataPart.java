@@ -37,7 +37,7 @@ public abstract class BasicDataPart<T> extends DataPart<T>{
 
     @Override
     public String toString(){
-        return this.data.toString();
+        return this.getClass().getSimpleName()+"@"+this.data.toString();
     }
 
     @Override
