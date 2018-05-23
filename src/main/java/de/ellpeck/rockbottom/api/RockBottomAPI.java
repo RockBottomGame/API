@@ -32,6 +32,7 @@ import de.ellpeck.rockbottom.api.content.IContentLoader;
 import de.ellpeck.rockbottom.api.content.pack.IContentPackLoader;
 import de.ellpeck.rockbottom.api.data.set.DataSet;
 import de.ellpeck.rockbottom.api.data.set.part.DataPart;
+import de.ellpeck.rockbottom.api.data.set.part.IPartFactory;
 import de.ellpeck.rockbottom.api.data.settings.Keybind;
 import de.ellpeck.rockbottom.api.data.settings.Settings;
 import de.ellpeck.rockbottom.api.effect.IEffect;
@@ -116,7 +117,7 @@ public final class RockBottomAPI{
      * only use existing {@link DataPart}s.
      */
     @ApiInternal
-    public static final DoubleRegistry<Class<? extends DataPart>> PART_REGISTRY = new DoubleRegistry<>("part_registry", Byte.MAX_VALUE, false).register();
+    public static final IndexRegistry<IPartFactory> PART_REGISTRY = new IndexRegistry<>("part_registry", Byte.MAX_VALUE, false).register();
     /**
      * The registry for all {@link IPacket} types. To register into this
      * registry, you can use {@link IndexRegistry#getNextFreeId()} to determine

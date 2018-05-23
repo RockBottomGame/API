@@ -23,17 +23,57 @@ package de.ellpeck.rockbottom.api.data.set.part.num.array;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonPrimitive;
 import de.ellpeck.rockbottom.api.data.set.part.BasicDataPart;
+import de.ellpeck.rockbottom.api.data.set.part.DataPart;
+import de.ellpeck.rockbottom.api.data.set.part.IPartFactory;
 
 import java.io.DataInput;
 import java.io.DataOutput;
 import java.util.Arrays;
+import java.util.Locale;
 
 public final class PartShortArray extends BasicDataPart<short[]>{
 
-    public PartShortArray(String name){
-        super(name);
-    }
+    public static final IPartFactory<PartShortArray> FACTORY = new IPartFactory<PartShortArray>(){
+        @Override
+        public PartShortArray parse(String name, JsonElement element){
+            if(element.isJsonArray()){
+                JsonArray array = element.getAsJsonArray();
+                if(array.size() > 0){
+                    JsonElement first = array.get(0);
+                    if(first.isJsonPrimitive()){
+                        JsonPrimitive prim = first.getAsJsonPrimitive();
+                        if(prim.isString()){
+                            if(prim.getAsString().toLowerCase(Locale.ROOT).endsWith("s")){
+                                try{
+                                    short[] data = new short[array.size()];
+                                    for(int i = 0; i < array.size(); i++){
+                                        String string = array.get(i).getAsString();
+                                        data[i] = Short.parseShort(string.substring(0, string.length()-1));
+                                    }
+                                    return new PartShortArray(name, data);
+                                }
+                                catch(Exception ignored){
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return null;
+        }
+
+        @Override
+        public PartShortArray parse(String name, DataInput stream) throws Exception{
+            int amount = stream.readInt();
+            short[] data = new short[amount];
+            for(int i = 0; i < amount; i++){
+                data[i] = stream.readShort();
+            }
+            return new PartShortArray(name, data);
+        }
+    };
 
     public PartShortArray(String name, short[] data){
         super(name, data);
@@ -48,36 +88,21 @@ public final class PartShortArray extends BasicDataPart<short[]>{
     }
 
     @Override
-    public void read(DataInput stream) throws Exception{
-        int amount = stream.readInt();
-        this.data = new short[amount];
-
-        for(int i = 0; i < amount; i++){
-            this.data[i] = stream.readShort();
-        }
-    }
-
-    @Override
     public JsonElement write(){
         JsonArray array = new JsonArray();
         for(int i = 0; i < this.data.length; i++){
-            array.add(this.data[i]);
+            array.add(this.data[i]+"s");
         }
         return array;
     }
 
     @Override
-    public void read(JsonElement element){
-        JsonArray array = element.getAsJsonArray();
-        this.data = new short[array.size()];
-
-        for(int i = 0; i < array.size(); i++){
-            this.data[i] = array.get(i).getAsShort();
-        }
+    public String toString(){
+        return Arrays.toString(this.data);
     }
 
     @Override
-    public String toString(){
-        return Arrays.toString(this.data);
+    public IPartFactory<? extends DataPart<short[]>> getFactory(){
+        return FACTORY;
     }
 }

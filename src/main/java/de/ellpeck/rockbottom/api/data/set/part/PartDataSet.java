@@ -31,9 +31,28 @@ import java.io.DataOutput;
 
 public final class PartDataSet extends BasicDataPart<DataSet>{
 
-    public PartDataSet(String name){
-        super(name);
-    }
+    public static final IPartFactory<PartDataSet> FACTORY = new IPartFactory<PartDataSet>(){
+        @Override
+        public PartDataSet parse(String name, JsonElement element){
+            if(element.isJsonObject()){
+                try{
+                    DataSet set = new DataSet();
+                    RockBottomAPI.getApiHandler().readDataSet(element.getAsJsonObject(), set);
+                    return new PartDataSet(name, set);
+                }
+                catch(Exception ignored){
+                }
+            }
+            return null;
+        }
+
+        @Override
+        public PartDataSet parse(String name, DataInput stream) throws Exception{
+            DataSet data = new DataSet();
+            RockBottomAPI.getApiHandler().readDataSet(stream, data);
+            return new PartDataSet(name, data);
+        }
+    };
 
     public PartDataSet(String name, DataSet data){
         super(name, data);
@@ -45,12 +64,6 @@ public final class PartDataSet extends BasicDataPart<DataSet>{
     }
 
     @Override
-    public void read(DataInput stream) throws Exception{
-        this.data = new DataSet();
-        RockBottomAPI.getApiHandler().readDataSet(stream, this.data);
-    }
-
-    @Override
     public JsonElement write() throws Exception{
         JsonObject object = new JsonObject();
         RockBottomAPI.getApiHandler().writeDataSet(object, this.data);
@@ -58,8 +71,7 @@ public final class PartDataSet extends BasicDataPart<DataSet>{
     }
 
     @Override
-    public void read(JsonElement element) throws Exception{
-        this.data = new DataSet();
-        RockBottomAPI.getApiHandler().readDataSet(element.getAsJsonObject(), this.data);
+    public IPartFactory getFactory(){
+        return FACTORY;
     }
 }

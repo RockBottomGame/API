@@ -31,9 +31,33 @@ import java.io.DataOutput;
 
 public final class PartModBasedDataSet extends BasicDataPart<ModBasedDataSet>{
 
-    public PartModBasedDataSet(String name){
-        super(name);
-    }
+    public static final IPartFactory<PartModBasedDataSet> FACTORY = new IPartFactory<PartModBasedDataSet>(){
+        @Override
+        public PartModBasedDataSet parse(String name, JsonElement element){
+            if(element.isJsonObject()){
+                try{
+                    ModBasedDataSet set = new ModBasedDataSet();
+                    RockBottomAPI.getApiHandler().readDataSet(element.getAsJsonObject(), set);
+                    return new PartModBasedDataSet(name, set);
+                }
+                catch(Exception ignored){
+                }
+            }
+            return null;
+        }
+
+        @Override
+        public PartModBasedDataSet parse(String name, DataInput stream) throws Exception{
+            ModBasedDataSet data = new ModBasedDataSet();
+            RockBottomAPI.getApiHandler().readDataSet(stream, data);
+            return new PartModBasedDataSet(name, data);
+        }
+
+        @Override
+        public int getPriority(){
+            return 100;
+        }
+    };
 
     public PartModBasedDataSet(String name, ModBasedDataSet data){
         super(name, data);
@@ -45,12 +69,6 @@ public final class PartModBasedDataSet extends BasicDataPart<ModBasedDataSet>{
     }
 
     @Override
-    public void read(DataInput stream) throws Exception{
-        this.data = new ModBasedDataSet();
-        RockBottomAPI.getApiHandler().readDataSet(stream, this.data);
-    }
-
-    @Override
     public JsonElement write() throws Exception{
         JsonObject object = new JsonObject();
         RockBottomAPI.getApiHandler().writeDataSet(object, this.data);
@@ -58,8 +76,7 @@ public final class PartModBasedDataSet extends BasicDataPart<ModBasedDataSet>{
     }
 
     @Override
-    public void read(JsonElement element) throws Exception{
-        this.data = new ModBasedDataSet();
-        RockBottomAPI.getApiHandler().readDataSet(element.getAsJsonObject(), this.data);
+    public IPartFactory<? extends DataPart<ModBasedDataSet>> getFactory(){
+        return FACTORY;
     }
 }

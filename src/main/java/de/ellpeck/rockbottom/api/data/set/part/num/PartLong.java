@@ -24,15 +24,39 @@ package de.ellpeck.rockbottom.api.data.set.part.num;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonPrimitive;
 import de.ellpeck.rockbottom.api.data.set.part.BasicDataPart;
+import de.ellpeck.rockbottom.api.data.set.part.DataPart;
+import de.ellpeck.rockbottom.api.data.set.part.IPartFactory;
 
 import java.io.DataInput;
 import java.io.DataOutput;
+import java.util.Locale;
 
 public final class PartLong extends BasicDataPart<Long>{
 
-    public PartLong(String name){
-        super(name);
-    }
+    public static final IPartFactory<PartLong> FACTORY = new IPartFactory<PartLong>(){
+        @Override
+        public PartLong parse(String name, JsonElement element){
+            if(element.isJsonPrimitive()){
+                JsonPrimitive prim = element.getAsJsonPrimitive();
+                if(prim.isString()){
+                    String string = prim.getAsString().toLowerCase(Locale.ROOT);
+                    if(string.endsWith("l")){
+                        try{
+                            return new PartLong(name, Long.parseLong(string.substring(0, string.length()-1)));
+                        }
+                        catch(Exception ignored){
+                        }
+                    }
+                }
+            }
+            return null;
+        }
+
+        @Override
+        public PartLong parse(String name, DataInput stream) throws Exception{
+            return new PartLong(name, stream.readLong());
+        }
+    };
 
     public PartLong(String name, Long data){
         super(name, data);
@@ -44,17 +68,12 @@ public final class PartLong extends BasicDataPart<Long>{
     }
 
     @Override
-    public void read(DataInput stream) throws Exception{
-        this.data = stream.readLong();
-    }
-
-    @Override
     public JsonElement write(){
-        return new JsonPrimitive(this.data);
+        return new JsonPrimitive(this.data+"l");
     }
 
     @Override
-    public void read(JsonElement element){
-
+    public IPartFactory<? extends DataPart<Long>> getFactory(){
+        return FACTORY;
     }
 }

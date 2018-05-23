@@ -24,15 +24,39 @@ package de.ellpeck.rockbottom.api.data.set.part.num;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonPrimitive;
 import de.ellpeck.rockbottom.api.data.set.part.BasicDataPart;
+import de.ellpeck.rockbottom.api.data.set.part.DataPart;
+import de.ellpeck.rockbottom.api.data.set.part.IPartFactory;
 
 import java.io.DataInput;
 import java.io.DataOutput;
+import java.util.Locale;
 
 public final class PartFloat extends BasicDataPart<Float>{
 
-    public PartFloat(String name){
-        super(name);
-    }
+    public static final IPartFactory<PartFloat> FACTORY = new IPartFactory<PartFloat>(){
+        @Override
+        public PartFloat parse(String name, JsonElement element){
+            if(element.isJsonPrimitive()){
+                JsonPrimitive prim = element.getAsJsonPrimitive();
+                if(prim.isString()){
+                    String string = prim.getAsString().toLowerCase(Locale.ROOT);
+                    if(string.endsWith("f")){
+                        try{
+                            return new PartFloat(name, Float.parseFloat(string));
+                        }
+                        catch(Exception ignored){
+                        }
+                    }
+                }
+            }
+            return null;
+        }
+
+        @Override
+        public PartFloat parse(String name, DataInput stream) throws Exception{
+            return new PartFloat(name, stream.readFloat());
+        }
+    };
 
     public PartFloat(String name, Float data){
         super(name, data);
@@ -44,17 +68,12 @@ public final class PartFloat extends BasicDataPart<Float>{
     }
 
     @Override
-    public void read(DataInput stream) throws Exception{
-        this.data = stream.readFloat();
-    }
-
-    @Override
     public JsonElement write(){
-        return new JsonPrimitive(this.data);
+        return new JsonPrimitive(this.data+"f");
     }
 
     @Override
-    public void read(JsonElement element){
-        this.data = element.getAsFloat();
+    public IPartFactory<? extends DataPart<Float>> getFactory(){
+        return FACTORY;
     }
 }

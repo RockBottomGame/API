@@ -24,15 +24,39 @@ package de.ellpeck.rockbottom.api.data.set.part.num;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonPrimitive;
 import de.ellpeck.rockbottom.api.data.set.part.BasicDataPart;
+import de.ellpeck.rockbottom.api.data.set.part.DataPart;
+import de.ellpeck.rockbottom.api.data.set.part.IPartFactory;
 
 import java.io.DataInput;
 import java.io.DataOutput;
+import java.util.Locale;
 
 public final class PartDouble extends BasicDataPart<Double>{
 
-    public PartDouble(String name){
-        super(name);
-    }
+    public static final IPartFactory<PartDouble> FACTORY = new IPartFactory<PartDouble>(){
+        @Override
+        public PartDouble parse(String name, JsonElement element){
+            if(element.isJsonPrimitive()){
+                JsonPrimitive prim = element.getAsJsonPrimitive();
+                if(prim.isString()){
+                    String string = prim.getAsString().toLowerCase(Locale.ROOT);
+                    if(string.endsWith("d")){
+                        try{
+                            return new PartDouble(name, Double.parseDouble(string));
+                        }
+                        catch(Exception ignored){
+                        }
+                    }
+                }
+            }
+            return null;
+        }
+
+        @Override
+        public PartDouble parse(String name, DataInput stream) throws Exception{
+            return new PartDouble(name, stream.readDouble());
+        }
+    };
 
     public PartDouble(String name, Double data){
         super(name, data);
@@ -44,17 +68,12 @@ public final class PartDouble extends BasicDataPart<Double>{
     }
 
     @Override
-    public void read(DataInput stream) throws Exception{
-        this.data = stream.readDouble();
-    }
-
-    @Override
     public JsonElement write(){
-        return new JsonPrimitive(this.data);
+        return new JsonPrimitive(this.data+"d");
     }
 
     @Override
-    public void read(JsonElement element){
-        this.data = element.getAsDouble();
+    public IPartFactory<? extends DataPart<Double>> getFactory(){
+        return FACTORY;
     }
 }

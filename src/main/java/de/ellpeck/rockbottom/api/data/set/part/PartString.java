@@ -29,12 +29,35 @@ import java.io.DataOutput;
 
 public final class PartString extends BasicDataPart<String>{
 
+    public static final IPartFactory<PartString> FACTORY = new IPartFactory<PartString>(){
+        @Override
+        public PartString parse(String name, JsonElement element){
+            if(element.isJsonPrimitive()){
+                JsonPrimitive prim = element.getAsJsonPrimitive();
+                if(prim.isString()){
+                    return new PartString(name, prim.getAsString());
+                }
+            }
+            return null;
+        }
+
+        @Override
+        public PartString parse(String name, DataInput stream) throws Exception{
+            char[] chars = new char[stream.readInt()];
+            for(int i = 0; i < chars.length; i++){
+                chars[i] = stream.readChar();
+            }
+            return new PartString(name, new String(chars));
+        }
+
+        @Override
+        public int getPriority(){
+            return -50;
+        }
+    };
+
     public PartString(String name, String data){
         super(name, data);
-    }
-
-    public PartString(String name){
-        super(name);
     }
 
     @Override
@@ -47,23 +70,12 @@ public final class PartString extends BasicDataPart<String>{
     }
 
     @Override
-    public void read(DataInput stream) throws Exception{
-        char[] chars = new char[stream.readInt()];
-
-        for(int i = 0; i < chars.length; i++){
-            chars[i] = stream.readChar();
-        }
-
-        this.data = new String(chars);
-    }
-
-    @Override
     public JsonElement write(){
         return new JsonPrimitive(this.data);
     }
 
     @Override
-    public void read(JsonElement element){
-        this.data = element.getAsString();
+    public IPartFactory<? extends DataPart<String>> getFactory(){
+        return FACTORY;
     }
 }

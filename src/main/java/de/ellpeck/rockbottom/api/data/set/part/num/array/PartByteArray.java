@@ -23,17 +23,57 @@ package de.ellpeck.rockbottom.api.data.set.part.num.array;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonPrimitive;
 import de.ellpeck.rockbottom.api.data.set.part.BasicDataPart;
+import de.ellpeck.rockbottom.api.data.set.part.DataPart;
+import de.ellpeck.rockbottom.api.data.set.part.IPartFactory;
 
 import java.io.DataInput;
 import java.io.DataOutput;
 import java.util.Arrays;
+import java.util.Locale;
 
 public final class PartByteArray extends BasicDataPart<byte[]>{
 
-    public PartByteArray(String name){
-        super(name);
-    }
+    public static final IPartFactory<PartByteArray> FACTORY = new IPartFactory<PartByteArray>(){
+        @Override
+        public PartByteArray parse(String name, JsonElement element){
+            if(element.isJsonArray()){
+                JsonArray array = element.getAsJsonArray();
+                if(array.size() > 0){
+                    JsonElement first = array.get(0);
+                    if(first.isJsonPrimitive()){
+                        JsonPrimitive prim = first.getAsJsonPrimitive();
+                        if(prim.isString()){
+                            if(prim.getAsString().toLowerCase(Locale.ROOT).endsWith("b")){
+                                try{
+                                    byte[] data = new byte[array.size()];
+                                    for(int i = 0; i < array.size(); i++){
+                                        String string = array.get(i).getAsString();
+                                        data[i] = Byte.parseByte(string.substring(0, string.length()-1));
+                                    }
+                                    return new PartByteArray(name, data);
+                                }
+                                catch(Exception ignored){
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return null;
+        }
+
+        @Override
+        public PartByteArray parse(String name, DataInput stream) throws Exception{
+            int amount = stream.readInt();
+            byte[] data = new byte[amount];
+            for(int i = 0; i < amount; i++){
+                data[i] = stream.readByte();
+            }
+            return new PartByteArray(name, data);
+        }
+    };
 
     public PartByteArray(String name, byte[] data){
         super(name, data);
@@ -48,36 +88,21 @@ public final class PartByteArray extends BasicDataPart<byte[]>{
     }
 
     @Override
-    public void read(DataInput stream) throws Exception{
-        int amount = stream.readInt();
-        this.data = new byte[amount];
-
-        for(int i = 0; i < amount; i++){
-            this.data[i] = stream.readByte();
-        }
-    }
-
-    @Override
     public JsonElement write(){
         JsonArray array = new JsonArray();
         for(int i = 0; i < this.data.length; i++){
-            array.add(this.data[i]);
+            array.add(this.data[i]+"b");
         }
         return array;
     }
 
     @Override
-    public void read(JsonElement element){
-        JsonArray array = element.getAsJsonArray();
-        this.data = new byte[array.size()];
-
-        for(int i = 0; i < array.size(); i++){
-            this.data[i] = array.get(i).getAsByte();
-        }
+    public String toString(){
+        return Arrays.toString(this.data);
     }
 
     @Override
-    public String toString(){
-        return Arrays.toString(this.data);
+    public IPartFactory<? extends DataPart<byte[]>> getFactory(){
+        return FACTORY;
     }
 }

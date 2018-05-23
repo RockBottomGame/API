@@ -24,16 +24,40 @@ package de.ellpeck.rockbottom.api.data.set.part.num;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonPrimitive;
 import de.ellpeck.rockbottom.api.data.set.part.BasicDataPart;
+import de.ellpeck.rockbottom.api.data.set.part.DataPart;
+import de.ellpeck.rockbottom.api.data.set.part.IPartFactory;
 
 import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
+import java.util.Locale;
 
 public final class PartShort extends BasicDataPart<Short>{
 
-    public PartShort(String name){
-        super(name);
-    }
+    public static final IPartFactory<PartShort> FACTORY = new IPartFactory<PartShort>(){
+        @Override
+        public PartShort parse(String name, JsonElement element){
+            if(element.isJsonPrimitive()){
+                JsonPrimitive prim = element.getAsJsonPrimitive();
+                if(prim.isString()){
+                    String string = prim.getAsString().toLowerCase(Locale.ROOT);
+                    if(string.endsWith("s")){
+                        try{
+                            return new PartShort(name, Short.parseShort(string.substring(0, string.length()-1)));
+                        }
+                        catch(Exception ignored){
+                        }
+                    }
+                }
+            }
+            return null;
+        }
+
+        @Override
+        public PartShort parse(String name, DataInput stream) throws Exception{
+            return new PartShort(name, stream.readShort());
+        }
+    };
 
     public PartShort(String name, Short data){
         super(name, data);
@@ -45,17 +69,12 @@ public final class PartShort extends BasicDataPart<Short>{
     }
 
     @Override
-    public void read(DataInput stream) throws IOException{
-        this.data = stream.readShort();
-    }
-
-    @Override
     public JsonElement write(){
         return new JsonPrimitive(this.data);
     }
 
     @Override
-    public void read(JsonElement element){
-        this.data = element.getAsShort();
+    public IPartFactory<? extends DataPart<Short>> getFactory(){
+        return FACTORY;
     }
 }

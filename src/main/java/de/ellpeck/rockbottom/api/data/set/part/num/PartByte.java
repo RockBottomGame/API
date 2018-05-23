@@ -24,16 +24,40 @@ package de.ellpeck.rockbottom.api.data.set.part.num;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonPrimitive;
 import de.ellpeck.rockbottom.api.data.set.part.BasicDataPart;
+import de.ellpeck.rockbottom.api.data.set.part.DataPart;
+import de.ellpeck.rockbottom.api.data.set.part.IPartFactory;
 
 import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
+import java.util.Locale;
 
 public final class PartByte extends BasicDataPart<Byte>{
 
-    public PartByte(String name){
-        super(name);
-    }
+    public static final IPartFactory<PartByte> FACTORY = new IPartFactory<PartByte>(){
+        @Override
+        public PartByte parse(String name, JsonElement element){
+            if(element.isJsonPrimitive()){
+                JsonPrimitive prim = element.getAsJsonPrimitive();
+                if(prim.isString()){
+                    String string = prim.getAsString().toLowerCase(Locale.ROOT);
+                    if(string.endsWith("b")){
+                        try{
+                            return new PartByte(name, Byte.parseByte(string.substring(0, string.length()-1)));
+                        }
+                        catch(Exception ignored){
+                        }
+                    }
+                }
+            }
+            return null;
+        }
+
+        @Override
+        public PartByte parse(String name, DataInput stream) throws Exception{
+            return new PartByte(name, stream.readByte());
+        }
+    };
 
     public PartByte(String name, Byte data){
         super(name, data);
@@ -45,17 +69,12 @@ public final class PartByte extends BasicDataPart<Byte>{
     }
 
     @Override
-    public void read(DataInput stream) throws IOException{
-        this.data = stream.readByte();
-    }
-
-    @Override
     public JsonElement write(){
-        return new JsonPrimitive(this.data);
+        return new JsonPrimitive(this.data+"b");
     }
 
     @Override
-    public void read(JsonElement element){
-        this.data = element.getAsByte();
+    public IPartFactory<? extends DataPart<Byte>> getFactory(){
+        return FACTORY;
     }
 }

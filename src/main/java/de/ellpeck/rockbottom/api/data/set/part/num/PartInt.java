@@ -24,16 +24,39 @@ package de.ellpeck.rockbottom.api.data.set.part.num;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonPrimitive;
 import de.ellpeck.rockbottom.api.data.set.part.BasicDataPart;
+import de.ellpeck.rockbottom.api.data.set.part.IPartFactory;
 
 import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
+import java.util.Locale;
 
 public final class PartInt extends BasicDataPart<Integer>{
 
-    public PartInt(String name){
-        super(name);
-    }
+    public static final IPartFactory<PartInt> FACTORY = new IPartFactory<PartInt>(){
+        @Override
+        public PartInt parse(String name, JsonElement element){
+            if(element.isJsonPrimitive()){
+                JsonPrimitive prim = element.getAsJsonPrimitive();
+                if(prim.isString()){
+                    String string = prim.getAsString().toLowerCase(Locale.ROOT);
+                    if(string.endsWith("i")){
+                        try{
+                            return new PartInt(name, Integer.parseInt(string.substring(0, string.length()-1)));
+                        }
+                        catch(Exception ignored){
+                        }
+                    }
+                }
+            }
+            return null;
+        }
+
+        @Override
+        public PartInt parse(String name, DataInput stream) throws Exception{
+            return new PartInt(name, stream.readInt());
+        }
+    };
 
     public PartInt(String name, Integer data){
         super(name, data);
@@ -45,17 +68,12 @@ public final class PartInt extends BasicDataPart<Integer>{
     }
 
     @Override
-    public void read(DataInput stream) throws IOException{
-        this.data = stream.readInt();
-    }
-
-    @Override
     public JsonElement write(){
-        return new JsonPrimitive(this.data);
+        return new JsonPrimitive(this.data+"i");
     }
 
     @Override
-    public void read(JsonElement element){
-        this.data = element.getAsInt();
+    public IPartFactory getFactory(){
+        return FACTORY;
     }
 }

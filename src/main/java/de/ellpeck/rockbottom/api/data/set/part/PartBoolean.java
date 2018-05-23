@@ -29,12 +29,26 @@ import java.io.DataOutput;
 
 public final class PartBoolean extends BasicDataPart<Boolean>{
 
+    public static final IPartFactory<PartBoolean> FACTORY = new IPartFactory<PartBoolean>(){
+        @Override
+        public PartBoolean parse(String name, JsonElement element){
+            if(element.isJsonPrimitive()){
+                JsonPrimitive prim = element.getAsJsonPrimitive();
+                if(prim.isBoolean()){
+                    return new PartBoolean(name, prim.getAsBoolean());
+                }
+            }
+            return null;
+        }
+
+        @Override
+        public PartBoolean parse(String name, DataInput stream) throws Exception{
+            return new PartBoolean(name, stream.readBoolean());
+        }
+    };
+
     public PartBoolean(String name, Boolean data){
         super(name, data);
-    }
-
-    public PartBoolean(String name){
-        super(name);
     }
 
     @Override
@@ -43,17 +57,12 @@ public final class PartBoolean extends BasicDataPart<Boolean>{
     }
 
     @Override
-    public void read(DataInput stream) throws Exception{
-        this.data = stream.readBoolean();
-    }
-
-    @Override
     public JsonElement write(){
         return new JsonPrimitive(this.data);
     }
 
     @Override
-    public void read(JsonElement element){
-        this.data = element.getAsBoolean();
+    public IPartFactory getFactory(){
+        return FACTORY;
     }
 }

@@ -22,7 +22,7 @@
 package de.ellpeck.rockbottom.api.data.set.part;
 
 import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
+import com.google.gson.JsonPrimitive;
 
 import java.io.DataInput;
 import java.io.DataOutput;
@@ -30,12 +30,35 @@ import java.util.UUID;
 
 public final class PartUniqueId extends BasicDataPart<UUID>{
 
+    public static final IPartFactory<PartUniqueId> FACTORY = new IPartFactory<PartUniqueId>(){
+        @Override
+        public PartUniqueId parse(String name, JsonElement element){
+            if(element.isJsonPrimitive()){
+                JsonPrimitive prim = element.getAsJsonPrimitive();
+                if(prim.isString()){
+                    try{
+                        return new PartUniqueId(name, UUID.fromString(prim.getAsString()));
+                    }
+                    catch(Exception ignored){
+                    }
+                }
+            }
+            return null;
+        }
+
+        @Override
+        public PartUniqueId parse(String name, DataInput stream) throws Exception{
+            return new PartUniqueId(name, new UUID(stream.readLong(), stream.readLong()));
+        }
+
+        @Override
+        public int getPriority(){
+            return 50;
+        }
+    };
+
     public PartUniqueId(String name, UUID data){
         super(name, data);
-    }
-
-    public PartUniqueId(String name){
-        super(name);
     }
 
     @Override
@@ -45,21 +68,12 @@ public final class PartUniqueId extends BasicDataPart<UUID>{
     }
 
     @Override
-    public void read(DataInput stream) throws Exception{
-        this.data = new UUID(stream.readLong(), stream.readLong());
-    }
-
-    @Override
     public JsonElement write(){
-        JsonObject object = new JsonObject();
-        object.addProperty("most", this.data.getMostSignificantBits());
-        object.addProperty("least", this.data.getLeastSignificantBits());
-        return object;
+        return new JsonPrimitive(this.data.toString());
     }
 
     @Override
-    public void read(JsonElement element){
-        JsonObject object = element.getAsJsonObject();
-        this.data = new UUID(object.get("most").getAsLong(), object.get("least").getAsLong());
+    public IPartFactory<? extends DataPart<UUID>> getFactory(){
+        return FACTORY;
     }
 }
