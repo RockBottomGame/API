@@ -27,10 +27,11 @@ import de.ellpeck.rockbottom.api.util.Direction;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Function;
 
 public class BasicFilteredInventory extends Inventory implements IFilteredInventory{
 
-    private final List<Integer> inputSlots;
+    private final Function<ItemInstance, List<Integer>> inputSlotFunction;
     private final List<Integer> outputSlots;
 
     public BasicFilteredInventory(int slotAmount, List<Integer> inputOutputSlots){
@@ -38,14 +39,18 @@ public class BasicFilteredInventory extends Inventory implements IFilteredInvent
     }
 
     public BasicFilteredInventory(int slotAmount, List<Integer> inputSlots, List<Integer> outputSlots){
+        this(slotAmount, inst -> inputSlots, outputSlots);
+    }
+
+    public BasicFilteredInventory(int slotAmount, Function<ItemInstance, List<Integer>> inputSlotFunction, List<Integer> outputSlots){
         super(slotAmount);
-        this.inputSlots = Collections.unmodifiableList(inputSlots);
+        this.inputSlotFunction = inputSlotFunction;
         this.outputSlots = Collections.unmodifiableList(outputSlots);
     }
 
     @Override
     public List<Integer> getInputSlots(ItemInstance instance, Direction dir){
-        return this.inputSlots;
+        return this.inputSlotFunction.apply(instance);
     }
 
     @Override

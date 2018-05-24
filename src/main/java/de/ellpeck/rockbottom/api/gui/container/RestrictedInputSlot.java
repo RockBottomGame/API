@@ -1,5 +1,5 @@
 /*
- * This file ("TileInventory.java") is part of the RockBottomAPI by Ellpeck.
+ * This file ("RestrictedInputSlot.java") is part of the RockBottomAPI by Ellpeck.
  * View the source code at <https://github.com/RockBottomGame/>.
  * View information on the project at <https://rockbottom.ellpeck.de/>.
  *
@@ -19,25 +19,24 @@
  * © 2018 Ellpeck
  */
 
-package de.ellpeck.rockbottom.api.tile.entity;
+package de.ellpeck.rockbottom.api.gui.container;
 
+import de.ellpeck.rockbottom.api.gui.container.ContainerSlot;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
+import de.ellpeck.rockbottom.api.tile.entity.IFilteredInventory;
+import de.ellpeck.rockbottom.api.util.Direction;
 
-import java.util.List;
-import java.util.function.Function;
+public class RestrictedInputSlot extends ContainerSlot{
 
-public class TileInventory extends BasicFilteredInventory{
+    private final IFilteredInventory inv;
 
-    public TileInventory(TileEntity tile, int slotAmount, List<Integer> inputOutputSlots){
-        this(tile, slotAmount, inputOutputSlots, inputOutputSlots);
+    public RestrictedInputSlot(IFilteredInventory inventory, int slot, int x, int y){
+        super(inventory, slot, x, y);
+        this.inv = inventory;
     }
 
-    public TileInventory(TileEntity tile, int slotAmount, List<Integer> inputSlots, List<Integer> outputSlots){
-        this(tile, slotAmount, inst -> inputSlots, outputSlots);
-    }
-
-    public TileInventory(TileEntity tile, int slotAmount, Function<ItemInstance, List<Integer>> inputSlotFunction, List<Integer> outputSlots){
-        super(slotAmount, inputSlotFunction, outputSlots);
-        this.addChangeCallback((inv, slot) -> tile.world.setDirty(tile.x, tile.y));
+    @Override
+    public boolean canPlace(ItemInstance instance){
+        return this.inv.getInputSlots(instance, Direction.NONE).contains(this.slot);
     }
 }
