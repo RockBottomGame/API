@@ -46,7 +46,7 @@ public class ComponentFormatSelector extends ComponentButton{
 
     public void openMenu(){
         int width = 86;
-        int height = 58;
+        int height = 72;
 
         this.menu = new ComponentSelectorMenu(this.gui, this.x+this.width/2-width/2, this.y-height-2, width, height, this.inputFields);
         this.gui.getComponents().add(this.menu);

@@ -44,7 +44,7 @@ public final class Colors{
     public static final int GREEN = 0xFF00820F;
     public static final int PURPLE = 0xFFB200FF;
     public static final int CYAN = 0xFF00FFFF;
-    public static final int BROWN = 0xFF7F5736F;
+    public static final int BROWN = 0xFF7F5736;
     public static final int LIME = 0xFF00FF21;
     public static final int BLUE = 0xFF0000FF;
     public static final int LIGHT_BLUE = 0xFF0094FF;
