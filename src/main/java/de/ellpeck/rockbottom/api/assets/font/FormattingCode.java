@@ -48,6 +48,12 @@ public class FormattingCode{
     public static final FormattingCode PINK = new FormattingCode('8', Colors.PINK).registerAsDefault();
     public static final FormattingCode MAGENTA = new FormattingCode('9', Colors.MAGENTA).registerAsDefault();
     public static final FormattingCode GREEN = new FormattingCode('a', Colors.GREEN).registerAsDefault();
+    public static final FormattingCode PURPLE = new FormattingCode('d', Colors.PURPLE).registerAsDefault();
+    public static final FormattingCode CYAN = new FormattingCode('e', Colors.CYAN).registerAsDefault();
+    public static final FormattingCode BROWN = new FormattingCode('f', Colors.BROWN).registerAsDefault();
+    public static final FormattingCode LIME = new FormattingCode('g', Colors.LIME).registerAsDefault();
+    public static final FormattingCode BLUE = new FormattingCode('j', Colors.BLUE).registerAsDefault();
+    public static final FormattingCode LIGHT_BLUE = new FormattingCode('k', Colors.LIGHT_BLUE).registerAsDefault();
 
     public static final FormattingCode UNDERLINED = new FormattingCode('u', FontProp.UNDERLINED).registerAsDefault();
     public static final FormattingCode STRIKETHROUGH = new FormattingCode('s', FontProp.STRIKETHROUGH).registerAsDefault();
