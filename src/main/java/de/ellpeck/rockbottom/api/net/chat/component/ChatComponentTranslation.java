@@ -72,4 +72,12 @@ public class ChatComponentTranslation extends ChatComponent{
     public String getUnformattedString(){
         return "Locale("+this.key+", "+Arrays.toString(this.formatting)+')';
     }
+
+    public ResourceName getKey(){
+        return this.key;
+    }
+
+    public String[] getFormatting(){
+        return this.formatting;
+    }
 }
