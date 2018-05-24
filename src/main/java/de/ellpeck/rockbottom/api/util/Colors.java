@@ -33,15 +33,21 @@ public final class Colors{
     public static final int TRANSPARENT = 0x00FFFFFF;
     public static final int WHITE = 0xFFFFFFFF;
     public static final int BLACK = 0xFF000000;
-    public static final int DARK_GRAY = 0xFF262626;
-    public static final int GRAY = 0xFF515151;
-    public static final int LIGHT_GRAY = 0xFF878787;
+    public static final int DARK_GRAY = 0xFF404040;
+    public static final int GRAY = 0xFF808080;
+    public static final int LIGHT_GRAY = 0xFFC0C0C0;
     public static final int YELLOW = 0xFFFFD800;
     public static final int ORANGE = 0xFFFF6A00;
     public static final int RED = 0xFFFF0000;
     public static final int PINK = 0xFFFF006E;
     public static final int MAGENTA = 0xFFFF00DC;
-    public static final int GREEN = 0xFF267F00;
+    public static final int GREEN = 0xFF00820F;
+    public static final int PURPLE = 0xFFB200FF;
+    public static final int CYAN = 0xFF00FFFF;
+    public static final int BROWN = 0xFF7F5736F;
+    public static final int LIME = 0xFF00FF21;
+    public static final int BLUE = 0xFF0000FF;
+    public static final int LIGHT_BLUE = 0xFF0094FF;
 
     public static int rgb(int r, int g, int b){
         return rgb(r, g, b, 255);
