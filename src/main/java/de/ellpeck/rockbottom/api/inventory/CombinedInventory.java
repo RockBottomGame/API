@@ -21,8 +21,11 @@
 
 package de.ellpeck.rockbottom.api.inventory;
 
+import de.ellpeck.rockbottom.api.construction.resource.IUseInfo;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 
+import java.util.List;
+import java.util.Random;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 
@@ -106,5 +109,73 @@ public class CombinedInventory implements IInventory{
     @Override
     public ItemInstance addToSlot(int slot, ItemInstance instance, boolean simulate){
         return this.executeOnInv(slot, (inv, i) -> inv.addToSlot(i, instance, simulate));
+    }
+
+    @Override
+    public boolean containsResource(IUseInfo info){
+        for(IInventory inventory : this.inventories){
+            if(inventory.containsResource(info)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean containsItem(ItemInstance inst){
+        for(IInventory inventory : this.inventories){
+            if(inventory.containsItem(inst)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public int getItemIndex(ItemInstance inst){
+        for(int i = 0; i < this.getSlotAmount(); i++){
+            ItemInstance instance = this.get(i);
+            if(instance != null && instance.getAmount() >= inst.getAmount() && instance.isEffectivelyEqual(inst)){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    @Override
+    public ItemInstance add(ItemInstance instance, boolean simulate){
+        ItemInstance remaining = instance;
+        for(IInventory inventory : this.inventories){
+            remaining = inventory.add(remaining, simulate);
+            if(remaining == null){
+                break;
+            }
+        }
+        return remaining;
+    }
+
+    @Override
+    public ItemInstance addExistingFirst(ItemInstance instance, boolean simulate){
+        ItemInstance remaining = instance;
+        for(IInventory inventory : this.inventories){
+            remaining = inventory.addExistingFirst(remaining, simulate);
+            if(remaining == null){
+                break;
+            }
+        }
+        return remaining;
+    }
+
+    @Override
+    public void fillRandomly(Random random, List<ItemInstance> items){
+        for(ItemInstance instance : items){
+            int slot;
+            do{
+                slot = random.nextInt(this.getSlotAmount());
+            }
+            while(this.get(slot) != null);
+
+            this.set(slot, instance);
+        }
     }
 }

@@ -22,6 +22,7 @@
 package de.ellpeck.rockbottom.api.inventory;
 
 import de.ellpeck.rockbottom.api.RockBottomAPI;
+import de.ellpeck.rockbottom.api.construction.resource.IUseInfo;
 import de.ellpeck.rockbottom.api.event.impl.InventoryChangeEvent;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 
@@ -120,15 +121,12 @@ public abstract class AbstractInventory implements IInventory{
         return instance.nullIfEmpty();
     }
 
+    @Override
     public ItemInstance add(ItemInstance instance, boolean simulate){
-        return add(this, instance, simulate);
-    }
-
-    public static ItemInstance add(IInventory inv, ItemInstance instance, boolean simulate){
         ItemInstance copy = instance.copy();
 
-        for(int i = 0; i < inv.getSlotAmount(); i++){
-            copy = inv.addToSlot(i, copy, simulate);
+        for(int i = 0; i < this.getSlotAmount(); i++){
+            copy = this.addToSlot(i, copy, simulate);
 
             if(copy == null){
                 return null;
@@ -138,17 +136,14 @@ public abstract class AbstractInventory implements IInventory{
         return copy;
     }
 
+    @Override
     public ItemInstance addExistingFirst(ItemInstance instance, boolean simulate){
-        return addExistingFirst(this, instance, simulate);
-    }
-
-    public static ItemInstance addExistingFirst(IInventory inv, ItemInstance instance, boolean simulate){
         ItemInstance copy = instance.copy();
 
         for(int i = 0; i < 2; i++){
-            for(int j = 0; j < inv.getSlotAmount(); j++){
-                if(i == 1 || (inv.get(j) != null && inv.get(j).isEffectivelyEqual(instance))){
-                    copy = inv.addToSlot(j, copy, simulate);
+            for(int j = 0; j < this.getSlotAmount(); j++){
+                if(i == 1 || (this.get(j) != null && this.get(j).isEffectivelyEqual(instance))){
+                    copy = this.addToSlot(j, copy, simulate);
 
                     if(copy == null){
                         return null;
@@ -160,19 +155,42 @@ public abstract class AbstractInventory implements IInventory{
         return copy;
     }
 
+    @Override
     public void fillRandomly(Random random, List<ItemInstance> items){
-        fillRandomly(this, random, items);
-    }
-
-    public static void fillRandomly(IInventory inv, Random random, List<ItemInstance> items){
         for(ItemInstance instance : items){
             int slot;
             do{
-                slot = random.nextInt(inv.getSlotAmount());
+                slot = random.nextInt(this.getSlotAmount());
             }
-            while(inv.get(slot) != null);
+            while(this.get(slot) != null);
 
-            inv.set(slot, instance);
+            this.set(slot, instance);
         }
+    }
+
+    @Override
+    public boolean containsItem(ItemInstance inst){
+        return this.getItemIndex(inst) >= 0;
+    }
+
+    @Override
+    public int getItemIndex(ItemInstance inst){
+        for(int i = 0; i < this.getSlotAmount(); i++){
+            ItemInstance instance = this.get(i);
+            if(instance != null && instance.getAmount() >= inst.getAmount() && instance.isEffectivelyEqual(inst)){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    @Override
+    public boolean containsResource(IUseInfo info){
+        for(ItemInstance inst : info.getItems()){
+            if(this.containsItem(inst)){
+                return true;
+            }
+        }
+        return false;
     }
 }

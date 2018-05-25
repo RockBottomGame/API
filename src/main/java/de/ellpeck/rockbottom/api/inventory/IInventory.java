@@ -24,6 +24,8 @@ package de.ellpeck.rockbottom.api.inventory;
 import de.ellpeck.rockbottom.api.construction.resource.IUseInfo;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 
+import java.util.List;
+import java.util.Random;
 import java.util.function.BiConsumer;
 
 public interface IInventory{
@@ -46,26 +48,15 @@ public interface IInventory{
 
     ItemInstance addToSlot(int slot, ItemInstance instance, boolean simulate);
 
-    default boolean containsResource(IUseInfo info){
-        for(ItemInstance inst : info.getItems()){
-            if(this.containsItem(inst)){
-                return true;
-            }
-        }
-        return false;
-    }
+    boolean containsResource(IUseInfo info);
 
-    default boolean containsItem(ItemInstance inst){
-        return this.getItemIndex(inst) >= 0;
-    }
+    boolean containsItem(ItemInstance inst);
 
-    default int getItemIndex(ItemInstance inst){
-        for(int i = 0; i < this.getSlotAmount(); i++){
-            ItemInstance instance = this.get(i);
-            if(instance != null && instance.getAmount() >= inst.getAmount() && instance.isEffectivelyEqual(inst)){
-                return i;
-            }
-        }
-        return -1;
-    }
+    int getItemIndex(ItemInstance inst);
+
+    ItemInstance add(ItemInstance instance, boolean simulate);
+
+    ItemInstance addExistingFirst(ItemInstance instance, boolean simulate);
+
+    void fillRandomly(Random random, List<ItemInstance> items);
 }
