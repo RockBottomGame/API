@@ -44,9 +44,9 @@ public interface IWorld extends IChunkOrWorld{
 
     IChunk getChunk(double x, double y);
 
-    boolean isPosLoaded(int x, int y);
+    boolean isPosLoaded(double x, double y);
 
-    boolean isPosLoaded(int x, int y, boolean checkGenerating);
+    boolean isPosLoaded(double x, double y, boolean checkGenerating);
 
     boolean isChunkLoaded(int x, int y);
 
