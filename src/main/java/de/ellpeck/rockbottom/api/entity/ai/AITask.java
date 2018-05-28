@@ -22,6 +22,7 @@
 package de.ellpeck.rockbottom.api.entity.ai;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
+import de.ellpeck.rockbottom.api.data.set.DataSet;
 import de.ellpeck.rockbottom.api.entity.Entity;
 
 public abstract class AITask<T extends Entity>{
@@ -52,5 +53,13 @@ public abstract class AITask<T extends Entity>{
 
     public AITask getNextTask(AITask<T> expectedNextTask, T entity){
         return expectedNextTask;
+    }
+
+    public void save(DataSet set, boolean forSync){
+
+    }
+
+    public void load(DataSet set, boolean forSync){
+
     }
 }

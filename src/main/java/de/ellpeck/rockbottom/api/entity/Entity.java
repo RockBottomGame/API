@@ -193,6 +193,13 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
             set.addDataSet("effect_"+i, sub);
         }
         set.addInt("effect_amount", amount);
+
+        if(this.currentAiTask != null){
+            DataSet sub = new DataSet();
+            sub.addInt("id", this.getTaskId(this.currentAiTask));
+            this.currentAiTask.save(sub, false);
+            set.addDataSet("task", sub);
+        }
     }
 
     public void load(DataSet set){
@@ -217,6 +224,14 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
             if(effect != null){
                 effect.getEffect().onAddedOrLoaded(effect, this, true);
                 this.effects.add(effect);
+            }
+        }
+
+        DataSet sub = set.getDataSet("task");
+        if(!sub.isEmpty()){
+            this.currentAiTask = this.aiTasks.get(sub.getInt("id"));
+            if(this.currentAiTask != null){
+                this.currentAiTask.load(sub, false);
             }
         }
     }

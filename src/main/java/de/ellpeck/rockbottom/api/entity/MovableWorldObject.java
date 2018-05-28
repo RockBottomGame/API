@@ -58,7 +58,7 @@ public abstract class MovableWorldObject{
     }
 
     public void updateBounds(){
-        this.currentBounds.set(this.x, this.y, this.x, this.y).expand(this.getWidth()/2D, this.getHeight()/2D);
+        this.currentBounds.set(this.x, this.y, this.x, this.y).expand(this.getWidth()/2F, this.getHeight()/2F);
     }
 
     @ApiInternal
