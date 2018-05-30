@@ -70,7 +70,7 @@ public final class PartShort extends BasicDataPart<Short>{
 
     @Override
     public JsonElement write(){
-        return new JsonPrimitive(this.data);
+        return new JsonPrimitive(this.data+"s");
     }
 
     @Override
