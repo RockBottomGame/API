@@ -80,7 +80,7 @@ public final class Constants{
      * should load in the world
      *
      * @see IWorld#isChunkLoaded(int, int)
-     * @see IWorld#isPosLoaded(int, int)
+     * @see IWorld#isPosLoaded(double, double)
      */
     public static final int CHUNK_LOAD_DISTANCE = 3;
     /**
