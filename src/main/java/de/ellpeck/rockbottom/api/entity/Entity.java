@@ -125,7 +125,7 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
                 this.dead = dead;
 
                 if(this.world.isServer()){
-                    RockBottomAPI.getNet().sendToAllPlayersWithLoadedPos(this.world, new PacketDeath(this.getUniqueId()), this.x, this.y);
+                    RockBottomAPI.getNet().sendToAllPlayersWithLoadedPos(this.world, new PacketDeath(this.getUniqueId()), this.getX(), this.getY());
                 }
             }
         }
@@ -172,8 +172,10 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
     }
 
     public void save(DataSet set){
-        set.addDouble("x", this.x);
-        set.addDouble("y", this.y);
+        set.addDouble("min_x", this.currentBounds.getMinX());
+        set.addDouble("min_y", this.currentBounds.getMinY());
+        set.addDouble("max_x", this.currentBounds.getMaxX());
+        set.addDouble("max_y", this.currentBounds.getMaxY());
         set.addDouble("motion_x", this.motionX);
         set.addDouble("motion_y", this.motionY);
         set.addInt("ticks", this.ticksExisted);
@@ -203,7 +205,7 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
     }
 
     public void load(DataSet set){
-        this.setPos(set.getDouble("x"), set.getDouble("y"));
+        this.currentBounds.set(set.getDouble("min_x"), set.getDouble("min_y"), set.getDouble("max_x"), set.getDouble("max_y"));
         this.motionX = set.getDouble("motion_x");
         this.motionY = set.getDouble("motion_y");
         this.ticksExisted = set.getInt("ticks");

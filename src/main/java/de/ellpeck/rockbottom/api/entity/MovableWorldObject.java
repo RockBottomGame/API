@@ -34,9 +34,6 @@ public abstract class MovableWorldObject{
 
     public IWorld world;
 
-    public double x;
-    public double y;
-
     public double motionX;
     public double motionY;
 
@@ -52,13 +49,15 @@ public abstract class MovableWorldObject{
     }
 
     public void setPos(double x, double y){
-        this.x = x;
-        this.y = y;
-        this.updateBounds();
+        this.currentBounds.set(x, y, x, y).expand(this.getWidth()/2D, this.getHeight()/2D);
     }
 
-    public void updateBounds(){
-        this.currentBounds.set(this.x, this.y, this.x, this.y).expand(this.getWidth()/2D, this.getHeight()/2D);
+    public double getX(){
+        return (this.currentBounds.getMinX()+this.currentBounds.getMaxX())/2D;
+    }
+
+    public double getY(){
+        return (this.currentBounds.getMinY()+this.currentBounds.getMaxY())/2D;
     }
 
     @ApiInternal

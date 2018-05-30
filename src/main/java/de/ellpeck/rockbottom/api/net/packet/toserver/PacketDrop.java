@@ -78,7 +78,7 @@ public final class PacketDrop implements IPacket{
                 RockBottomAPI.getNet().sendToServer(new PacketDrop(player.getUniqueId()));
             }
             else{
-                AbstractEntityItem.spawn(player.world, container.holdingInst, player.x, player.y+1, player.facing.x*0.25, 0);
+                AbstractEntityItem.spawn(player.world, container.holdingInst, player.getX(), player.getY()+1, player.facing.x*0.25, 0);
             }
             container.holdingInst = null;
         }
