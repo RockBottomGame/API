@@ -49,15 +49,35 @@ public abstract class MovableWorldObject{
     }
 
     public void setPos(double x, double y){
+        this.setBounds(x, y);
+    }
+
+    public void resetBounds(){
+        this.setBounds(this.getX(), this.getY());
+    }
+
+    public void setBounds(double x, double y){
         this.currentBounds.set(x, y, x, y).expand(this.getWidth()/2D, this.getHeight()/2D);
     }
 
+    public void setBoundsOrigin(double x, double y){
+        this.currentBounds.set(x, y, x+this.getWidth(), y+this.getHeight());
+    }
+
     public double getX(){
-        return (this.currentBounds.getMinX()+this.currentBounds.getMaxX())/2D;
+        return (this.getOriginX()+this.currentBounds.getMaxX())/2D;
     }
 
     public double getY(){
-        return (this.currentBounds.getMinY()+this.currentBounds.getMaxY())/2D;
+        return (this.getOriginY()+this.currentBounds.getMaxY())/2D;
+    }
+
+    public double getOriginX(){
+        return this.currentBounds.getMinX();
+    }
+
+    public double getOriginY(){
+        return this.currentBounds.getMinY();
     }
 
     @ApiInternal
