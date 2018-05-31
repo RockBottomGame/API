@@ -172,8 +172,8 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
     }
 
     public void save(DataSet set){
-        set.addDouble("x", this.currentBounds.getMinX());
-        set.addDouble("y", this.currentBounds.getMinY());
+        set.addDouble("x", this.getOriginX());
+        set.addDouble("y", this.getOriginY());
         set.addDouble("motion_x", this.motionX);
         set.addDouble("motion_y", this.motionY);
         set.addInt("ticks", this.ticksExisted);
