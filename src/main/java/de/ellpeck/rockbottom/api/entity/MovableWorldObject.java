@@ -45,7 +45,7 @@ public abstract class MovableWorldObject{
 
     public MovableWorldObject(IWorld world){
         this.world = world;
-        this.setPos(0D, 0D);
+        this.resetBounds();
     }
 
     public void setPos(double x, double y){
