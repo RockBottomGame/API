@@ -71,6 +71,7 @@ public final class GameContent{
     public static final Tile TILE_COPPER = getTile("copper").setHardness(10F).addEffectiveTool(ToolType.PICKAXE, 2).setMaxAmount(35);
     public static final Tile TILE_SIMPLE_FURNACE = getTile("simple_furnace").setHardness(15F).addEffectiveTool(ToolType.PICKAXE, 2).setMaxAmount(1);
     public static final Tile TILE_SNOW = getTile("snow").setHardness(0.75F).addEffectiveTool(ToolType.SHOVEL, 0).setMaxAmount(200);
+    public static final TileMeta TILE_CAVE_MUSHROOM = (TileMeta)getTile("cave_mushroom").setHardness(0.25F).setMaxAmount(50).setForceDrop();
 
     /*
         ---ITEMS---

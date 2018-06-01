@@ -84,4 +84,8 @@ public abstract class Biome{
     public Biome getVariationToGenerate(IWorld world, int x, int y, int surfaceHeight, Random random){
         return this;
     }
+
+    public boolean hasUndergroundFeatures(IWorld world, IChunk chunk){
+        return false;
+    }
 }
