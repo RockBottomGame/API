@@ -87,4 +87,6 @@ public interface IAssetManager{
     ITextureStitcher getTextureStitcher();
 
     boolean addAsset(IAssetLoader loader, ResourceName name, IAsset asset);
+
+    float getCursorScale();
 }
