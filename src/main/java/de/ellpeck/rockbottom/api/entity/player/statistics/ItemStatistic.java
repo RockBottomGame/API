@@ -35,9 +35,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public final class ItemStatistic extends StatisticInitializer<ItemStatistic.Stat>{
+public class ItemStatistic extends StatisticInitializer<ItemStatistic.Stat>{
 
-    private final ResourceName textureLocation;
+    protected final ResourceName textureLocation;
 
     public ItemStatistic(ResourceName name, ResourceName textureLocation){
         super(name);

@@ -33,10 +33,10 @@ import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 import java.util.Collections;
 import java.util.List;
 
-public final class NumberStatistic extends StatisticInitializer<NumberStatistic.Stat>{
+public class NumberStatistic extends StatisticInitializer<NumberStatistic.Stat>{
 
-    private final int defaultValue;
-    private final ResourceName textureLocation;
+    protected final int defaultValue;
+    protected final ResourceName textureLocation;
 
     public NumberStatistic(ResourceName name, ResourceName textureLocation){
         this(name, textureLocation, 0);
