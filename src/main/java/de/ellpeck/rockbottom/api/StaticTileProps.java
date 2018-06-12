@@ -79,6 +79,11 @@ public final class StaticTileProps{
      * GameContent#TILE_COPPER}
      */
     public static final BoolProp HAS_CANISTER = new BoolProp("has_canister", false);
+    /**
+     * Determines how far grown a sapling is. Used by {@link
+     * GameContent#TILE_STARDROP}
+     */
+    public static final IntProp STARDROP_GROWTH = new IntProp("growth", 0, 3);
 
     /**
      * An enum of log types that are used for the {@link #LOG_VARIANT}
