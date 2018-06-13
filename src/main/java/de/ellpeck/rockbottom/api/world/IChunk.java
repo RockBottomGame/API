@@ -117,4 +117,7 @@ public interface IChunk extends IChunkOrWorld{
     boolean doesEntityForcePersistence();
 
     boolean isGenerating();
+
+    @ApiInternal
+    float getFadePercentage();
 }
