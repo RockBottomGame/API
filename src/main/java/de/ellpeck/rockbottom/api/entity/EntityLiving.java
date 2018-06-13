@@ -36,9 +36,11 @@ public abstract class EntityLiving extends Entity{
     public int jumpTicks;
     public int jumpTimeout;
     protected int health;
+    protected int maxHealth;
 
     public EntityLiving(IWorld world){
         super(world);
+        this.maxHealth = this.getInitialMaxHealth();
         this.health = this.getMaxHealth();
     }
 
@@ -111,7 +113,15 @@ public abstract class EntityLiving extends Entity{
         }
     }
 
-    public abstract int getMaxHealth();
+    public int getMaxHealth(){
+        return this.maxHealth;
+    }
+
+    public void setMaxHealth(int maxHealth){
+        this.maxHealth = maxHealth;
+    }
+
+    public abstract int getInitialMaxHealth();
 
     public abstract int getRegenRate();
 
@@ -123,6 +133,7 @@ public abstract class EntityLiving extends Entity{
         set.addInt("jump_ticks", this.jumpTicks);
         set.addInt("jump_timeout", this.jumpTimeout);
         set.addInt("health", this.health);
+        set.addInt("max_health", this.maxHealth);
     }
 
     @Override
@@ -133,6 +144,9 @@ public abstract class EntityLiving extends Entity{
         this.jumpTicks = set.getInt("jump_ticks");
         this.jumpTimeout = set.getInt("jump_timeout");
         this.health = set.getInt("health");
+        if(set.hasKey("max_health")){ //TODO Remove this legacy compat check
+            this.maxHealth = set.getInt("max_health");
+        }
     }
 
     @Override

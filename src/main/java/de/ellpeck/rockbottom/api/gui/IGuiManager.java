@@ -28,6 +28,9 @@ public interface IGuiManager{
     @ApiInternal
     void updateDimensions();
 
+    @ApiInternal
+    void initOnScreenComponents();
+
     void openGui(Gui gui);
 
     void closeGui();
