@@ -100,7 +100,7 @@ public abstract class GuiContainer extends Gui{
             float mouseX = g.getMouseInGuiX();
             float mouseY = g.getMouseInGuiY();
 
-            g.renderItemInGui(game, manager, this.container.holdingInst, mouseX-2F, mouseY-2F, 0.85F, Colors.WHITE);
+            g.renderItemInGui(game, manager, this.container.holdingInst, mouseX-2F, mouseY-2F, 0.85F, Colors.WHITE, true, false);
         }
     }
 

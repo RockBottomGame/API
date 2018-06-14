@@ -367,17 +367,19 @@ public interface IRenderer extends IDisposable{
      * float, float, boolean, boolean)}, only that it doesn't render the box
      * below the item.
      *
-     * @param game          The game instance
-     * @param manager       The asset manager
-     * @param slot          The item to draw
-     * @param x             The x coordinate
-     * @param y             The y coordinate
-     * @param scale         The scale
-     * @param color         The color to filter the item's renderer with
-     * @param displayAmount If the amount of items in this instance should be
-     *                      displayed as a little number below the item
+     * @param game              The game instance
+     * @param manager           The asset manager
+     * @param slot              The item to draw
+     * @param x                 The x coordinate
+     * @param y                 The y coordinate
+     * @param scale             The scale
+     * @param color             The color to filter the item's renderer with
+     * @param displayAmount     If the amount of items in this instance should
+     *                          be displayed as a little number below the item
+     * @param displayDurability If the durability of the item should be
+     *                          displayed
      */
-    void renderItemInGui(IGameInstance game, IAssetManager manager, ItemInstance slot, float x, float y, float scale, int color, boolean displayAmount);
+    void renderItemInGui(IGameInstance game, IAssetManager manager, ItemInstance slot, float x, float y, float scale, int color, boolean displayAmount, boolean displayDurability);
 
     /**
      * Renders an item's hover over information on the mouse cursor position.
