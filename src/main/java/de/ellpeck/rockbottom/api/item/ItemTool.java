@@ -21,6 +21,9 @@
 
 package de.ellpeck.rockbottom.api.item;
 
+import de.ellpeck.rockbottom.api.assets.IAssetManager;
+import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
+import de.ellpeck.rockbottom.api.inventory.IInventory;
 import de.ellpeck.rockbottom.api.render.item.IItemRenderer;
 import de.ellpeck.rockbottom.api.render.item.ItemToolRenderer;
 import de.ellpeck.rockbottom.api.tile.Tile;
@@ -29,16 +32,19 @@ import de.ellpeck.rockbottom.api.world.IWorld;
 import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ItemTool extends ItemBasic{
 
+    private final int durability;
     private final float miningSpeed;
     private final Map<ToolType, Integer> toolTypes = new HashMap<>();
 
-    public ItemTool(ResourceName name, float miningSpeed, ToolType type, int level){
+    public ItemTool(ResourceName name, float miningSpeed, int durability, ToolType type, int level){
         super(name);
         this.miningSpeed = miningSpeed;
+        this.durability = durability;
 
         this.addToolType(type, level);
         this.maxAmount = 1;
@@ -63,4 +69,41 @@ public class ItemTool extends ItemBasic{
     public float getMiningSpeed(IWorld world, int x, int y, TileLayer layer, Tile tile, boolean isRightTool){
         return isRightTool ? this.miningSpeed : super.getMiningSpeed(world, x, y, layer, tile, isRightTool);
     }
+
+    @Override
+    public void onTileBroken(IWorld world, int x, int y, TileLayer layer, AbstractEntityPlayer player, Tile tile, ItemInstance instance){
+        if(!world.isClient()){
+            IInventory inv = player.getInv();
+            int selected = player.getSelectedSlot();
+
+            int meta = instance.getMeta();
+            if(meta < this.getHighestPossibleMeta()){
+                instance.setMeta(meta+1);
+                inv.notifyChange(selected);
+            }
+            else{
+                inv.set(selected, null);
+            }
+        }
+    }
+
+    @Override
+    public void describeItem(IAssetManager manager, ItemInstance instance, List<String> desc, boolean isAdvanced){
+        super.describeItem(manager, instance, desc, isAdvanced);
+
+        int highest = this.getHighestPossibleMeta()+1;
+        desc.add(manager.localize(ResourceName.intern("info.durability"), highest-instance.getMeta(), highest));
+    }
+
+    @Override
+    public boolean useMetaAsDurability(ItemInstance instance){
+        return true;
+    }
+
+    @Override
+    public int getHighestPossibleMeta(){
+        return this.durability-1;
+    }
+
+
 }

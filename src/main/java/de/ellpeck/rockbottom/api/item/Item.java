@@ -110,6 +110,10 @@ public class Item{
         return 1F;
     }
 
+    public void onTileBroken(IWorld world, int x, int y, TileLayer layer, AbstractEntityPlayer player, Tile tile, ItemInstance instance){
+
+    }
+
     public int getHighestPossibleMeta(){
         return 0;
     }
@@ -132,5 +136,9 @@ public class Item{
 
     public int getAttackCooldown(IWorld world, double mouseX, double mouseY, AbstractEntityPlayer player){
         return 40;
+    }
+
+    public boolean useMetaAsDurability(ItemInstance instance){
+        return false;
     }
 }
