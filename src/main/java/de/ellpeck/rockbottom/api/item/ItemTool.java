@@ -21,6 +21,7 @@
 
 package de.ellpeck.rockbottom.api.item;
 
+import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.inventory.IInventory;
@@ -83,6 +84,7 @@ public class ItemTool extends ItemBasic{
             }
             else{
                 inv.set(selected, null);
+                RockBottomAPI.getInternalHooks().onToolBroken(world, player, instance);
             }
         }
     }

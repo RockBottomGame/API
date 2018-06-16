@@ -25,6 +25,7 @@ import com.google.gson.JsonElement;
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.IRenderer;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
+import de.ellpeck.rockbottom.api.assets.texture.ITexture;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.item.Item;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
@@ -46,5 +47,10 @@ public class DefaultItemRenderer<T extends Item> implements IItemRenderer<T>{
     @Override
     public JsonElement getAdditionalTextureData(IGameInstance game, IAssetManager manager, IRenderer g, T item, ItemInstance instance, AbstractEntityPlayer player, String name){
         return manager.getTexture(this.texture).getAdditionalData(name);
+    }
+
+    @Override
+    public ITexture getParticleTexture(IGameInstance game, IAssetManager manager, IRenderer g, T item, ItemInstance instance){
+        return manager.getTexture(this.texture);
     }
 }

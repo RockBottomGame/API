@@ -21,6 +21,7 @@
 
 package de.ellpeck.rockbottom.api.particle;
 
+import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.tile.state.TileState;
 import de.ellpeck.rockbottom.api.world.IWorld;
 
@@ -35,6 +36,10 @@ public interface IParticleManager{
     void addSmokeParticle(IWorld world, double x, double y, double motionX, double motionY, float scale);
 
     void addSnowParticle(IWorld world, double x, double y, double motionX, double motionY, int maxLife);
+
+    void addItemParticles(IWorld world, double x, double y, ItemInstance instance);
+
+    void addSingleItemParticle(IWorld world, double x, double y, double motionX, double motionY, ItemInstance instance);
 
     int getAmount();
 }

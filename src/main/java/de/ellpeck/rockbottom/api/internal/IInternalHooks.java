@@ -90,4 +90,6 @@ public interface IInternalHooks{
     List<ComponentStatistic> makeItemStatComponents(IGameInstance game, ItemStatistic.Stat stat, Map<Item, Counter> statMap, AbstractStatGui gui, ComponentMenu menu, ResourceName textureLocation);
 
     Logger logger();
+
+    void onToolBroken(IWorld world, AbstractEntityPlayer player, ItemInstance instance);
 }
