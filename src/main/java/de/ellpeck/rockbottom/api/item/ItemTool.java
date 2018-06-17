@@ -98,7 +98,7 @@ public class ItemTool extends ItemBasic{
     }
 
     @Override
-    public boolean useMetaAsDurability(ItemInstance instance){
+    public boolean useMetaAsDurability(){
         return true;
     }
 

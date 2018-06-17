@@ -138,7 +138,7 @@ public class Item{
         return 40;
     }
 
-    public boolean useMetaAsDurability(ItemInstance instance){
+    public boolean useMetaAsDurability(){
         return false;
     }
 }

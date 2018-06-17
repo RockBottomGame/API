@@ -60,8 +60,10 @@ public final class ItemInstance implements IAdditionalDataProvider{
     public ItemInstance(Item item, int amount, int meta){
         Preconditions.checkNotNull(item, "Tried to create an ItemInstance with null item!");
 
-        int max = Math.min(Short.MAX_VALUE, item.getHighestPossibleMeta());
-        Preconditions.checkArgument(meta >= 0 && meta <= max, "Tried assigning meta "+meta+" to item instance with item "+item+" and amount "+amount+" which is less than 0 or greater than max "+max+'!');
+        if(!item.useMetaAsDurability()){
+            int max = Math.min(Short.MAX_VALUE, item.getHighestPossibleMeta());
+            Preconditions.checkArgument(meta >= 0 && meta <= max, "Tried assigning meta "+meta+" to item instance with item "+item+" and amount "+amount+" which is less than 0 or greater than max "+max+'!');
+        }
 
         this.item = item;
         this.amount = amount;
