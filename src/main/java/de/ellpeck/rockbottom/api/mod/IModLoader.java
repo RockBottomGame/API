@@ -27,7 +27,7 @@ import de.ellpeck.rockbottom.api.util.ApiInternal;
 import java.io.File;
 import java.util.List;
 
-public interface IModLoader{
+public interface IModLoader {
 
     @ApiInternal
     void loadJarMods(File dir);

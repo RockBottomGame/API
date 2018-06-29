@@ -36,7 +36,7 @@ import java.util.UUID;
  * different things. It might be useful to have access to these values for
  * modders.
  */
-public final class Constants{
+public final class Constants {
 
     /**
      * The seperator for any resources, game or mod based.

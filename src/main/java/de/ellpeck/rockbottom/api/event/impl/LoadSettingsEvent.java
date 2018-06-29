@@ -32,11 +32,11 @@ import de.ellpeck.rockbottom.api.event.IEventHandler;
  * IGameInstance#preInit(IGameInstance, IApiHandler, IEventHandler)}. It cannot
  * be cancelled.
  */
-public final class LoadSettingsEvent extends Event{
+public final class LoadSettingsEvent extends Event {
 
     public final Settings settings;
 
-    public LoadSettingsEvent(Settings settings){
+    public LoadSettingsEvent(Settings settings) {
         this.settings = settings;
     }
 }

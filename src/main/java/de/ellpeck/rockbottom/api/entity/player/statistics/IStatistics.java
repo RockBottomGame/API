@@ -27,7 +27,7 @@ import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 import java.util.Map;
 
-public interface IStatistics{
+public interface IStatistics {
 
     Statistic getOrInit(ResourceName name);
 

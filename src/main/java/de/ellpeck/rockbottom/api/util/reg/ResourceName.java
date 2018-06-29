@@ -40,7 +40,7 @@ import de.ellpeck.rockbottom.api.util.Util;
  * highly discouraged and, if anything, should only be used to access existing
  * internal resources, not create new ones.
  */
-public final class ResourceName implements Comparable<ResourceName>{
+public final class ResourceName implements Comparable<ResourceName> {
 
     private final String domain;
     private final String resourceName;
@@ -51,7 +51,7 @@ public final class ResourceName implements Comparable<ResourceName>{
      * @param mod          The mod domain
      * @param resourceName The resource name
      */
-    public ResourceName(IMod mod, String resourceName){
+    public ResourceName(IMod mod, String resourceName) {
         this(mod.getId(), resourceName);
     }
 
@@ -61,18 +61,17 @@ public final class ResourceName implements Comparable<ResourceName>{
      * {@link IllegalArgumentException}.
      *
      * @param combined The combined resource string
-     *
      * @see #toString()
      */
-    public ResourceName(String combined){
-        Preconditions.checkArgument(Util.isResourceName(combined), "Cannot create a resource name from combined string "+combined);
+    public ResourceName(String combined) {
+        Preconditions.checkArgument(Util.isResourceName(combined), "Cannot create a resource name from combined string " + combined);
 
         String[] split = combined.split(Constants.RESOURCE_SEPARATOR, 2);
         this.domain = split[0];
         this.resourceName = split[1];
     }
 
-    private ResourceName(String domain, String resourceName){
+    private ResourceName(String domain, String resourceName) {
         this.domain = domain;
         this.resourceName = resourceName;
     }
@@ -84,11 +83,10 @@ public final class ResourceName implements Comparable<ResourceName>{
      * access existing internal resources, not create new ones.
      *
      * @param resourceName The name of the resource
-     *
      * @return A new internal resource name
      */
     @ApiInternal
-    public static ResourceName intern(String resourceName){
+    public static ResourceName intern(String resourceName) {
         return new ResourceName(RockBottomAPI.getGame(), resourceName);
     }
 
@@ -96,11 +94,10 @@ public final class ResourceName implements Comparable<ResourceName>{
      * Returns the domain of this resource name.
      *
      * @return The domain
-     *
      * @see #getResourceName()
      * @see Constants#RESOURCE_SEPARATOR
      */
-    public String getDomain(){
+    public String getDomain() {
         return this.domain;
     }
 
@@ -108,11 +105,10 @@ public final class ResourceName implements Comparable<ResourceName>{
      * Returns the name of this resource
      *
      * @return The name
-     *
      * @see #getDomain()
      * @see Constants#RESOURCE_SEPARATOR
      */
-    public String getResourceName(){
+    public String getResourceName() {
         return this.resourceName;
     }
 
@@ -124,11 +120,10 @@ public final class ResourceName implements Comparable<ResourceName>{
      * unaffected by this action.
      *
      * @param prefix The prefix to add
-     *
      * @return A new name with the prefix added
      */
-    public ResourceName addPrefix(String prefix){
-        return new ResourceName(this.domain, prefix+this.resourceName);
+    public ResourceName addPrefix(String prefix) {
+        return new ResourceName(this.domain, prefix + this.resourceName);
     }
 
     /**
@@ -139,40 +134,39 @@ public final class ResourceName implements Comparable<ResourceName>{
      * unaffected by this action.
      *
      * @param suffix The suffix to add
-     *
      * @return A new name with the suffix added
      */
-    public ResourceName addSuffix(String suffix){
-        return new ResourceName(this.domain, this.resourceName+suffix);
+    public ResourceName addSuffix(String suffix) {
+        return new ResourceName(this.domain, this.resourceName + suffix);
     }
 
     @Override
-    public boolean equals(Object o){
-        if(this == o){
+    public boolean equals(Object o) {
+        if (this == o) {
             return true;
         }
-        if(o == null || this.getClass() != o.getClass()){
+        if (o == null || this.getClass() != o.getClass()) {
             return false;
         }
 
-        ResourceName name = (ResourceName)o;
+        ResourceName name = (ResourceName) o;
         return this.domain.equals(name.domain) && this.resourceName.equals(name.resourceName);
     }
 
     @Override
-    public int hashCode(){
+    public int hashCode() {
         int result = this.domain.hashCode();
-        result = 31*result+this.resourceName.hashCode();
+        result = 31 * result + this.resourceName.hashCode();
         return result;
     }
 
     @Override
-    public int compareTo(ResourceName o){
+    public int compareTo(ResourceName o) {
         return this.toString().compareTo(o.toString());
     }
 
     @Override
-    public String toString(){
-        return this.getDomain()+Constants.RESOURCE_SEPARATOR+this.getResourceName();
+    public String toString() {
+        return this.getDomain() + Constants.RESOURCE_SEPARATOR + this.getResourceName();
     }
 }

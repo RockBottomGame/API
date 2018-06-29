@@ -56,7 +56,7 @@ import java.util.Map;
 import java.util.logging.Logger;
 
 @ApiInternal
-public interface IInternalHooks{
+public interface IInternalHooks {
 
     void doDefaultEntityUpdate(IGameInstance game, Entity entity, List<ActiveEffect> effects, List<AITask> aiTasks);
 

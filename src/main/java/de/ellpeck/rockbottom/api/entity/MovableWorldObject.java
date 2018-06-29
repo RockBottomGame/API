@@ -30,82 +30,79 @@ import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 
 import java.util.List;
 
-public abstract class MovableWorldObject{
-
-    public IWorld world;
-
-    public double motionX;
-    public double motionY;
+public abstract class MovableWorldObject {
 
     public final BoundBox currentBounds = new BoundBox();
-
+    public IWorld world;
+    public double motionX;
+    public double motionY;
     public boolean collidedHor;
     public boolean collidedVert;
     public boolean onGround;
 
-    public MovableWorldObject(IWorld world){
+    public MovableWorldObject(IWorld world) {
         this.world = world;
         this.resetBounds();
     }
 
-    public void setPos(double x, double y){
+    public void setPos(double x, double y) {
         this.setBounds(x, y);
     }
 
-    public void resetBounds(){
+    public void resetBounds() {
         this.setBounds(this.getX(), this.getY());
     }
 
-    public void setBounds(double x, double y){
-        this.currentBounds.set(x, y, x, y).expand(this.getWidth()/2D, this.getHeight()/2D);
+    public void setBounds(double x, double y) {
+        this.currentBounds.set(x, y, x, y).expand(this.getWidth() / 2D, this.getHeight() / 2D);
     }
 
-    public void setBoundsOrigin(double x, double y){
-        this.currentBounds.set(x, y, x+this.getWidth(), y+this.getHeight());
+    public void setBoundsOrigin(double x, double y) {
+        this.currentBounds.set(x, y, x + this.getWidth(), y + this.getHeight());
     }
 
-    public double getX(){
-        return (this.getOriginX()+this.currentBounds.getMaxX())/2D;
+    public double getX() {
+        return (this.getOriginX() + this.currentBounds.getMaxX()) / 2D;
     }
 
-    public double getY(){
-        return (this.getOriginY()+this.currentBounds.getMaxY())/2D;
+    public double getY() {
+        return (this.getOriginY() + this.currentBounds.getMaxY()) / 2D;
     }
 
-    public double getOriginX(){
+    public double getOriginX() {
         return this.currentBounds.getMinX();
     }
 
-    public double getOriginY(){
+    public double getOriginY() {
         return this.currentBounds.getMinY();
     }
 
     @ApiInternal
-    public void move(){
+    public void move() {
         RockBottomAPI.getInternalHooks().doWorldObjectMovement(this);
     }
 
     @ApiInternal
-    public void onTileCollision(int x, int y, TileLayer layer, TileState state, BoundBox objBox, BoundBox objBoxMotion, List<BoundBox> boxes){
+    public void onTileCollision(int x, int y, TileLayer layer, TileState state, BoundBox objBox, BoundBox objBoxMotion, List<BoundBox> boxes) {
 
     }
 
     @ApiInternal
-    public void onEntityCollision(Entity entity, BoundBox thisBox, BoundBox thisBoxMotion, BoundBox otherBox, BoundBox otherBoxMotion){
+    public void onEntityCollision(Entity entity, BoundBox thisBox, BoundBox thisBoxMotion, BoundBox otherBox, BoundBox otherBoxMotion) {
 
     }
 
     @ApiInternal
-    public void onTileIntersection(int x, int y, TileLayer layer, TileState state, BoundBox objBox, BoundBox objBoxMotion, List<BoundBox> boxes){
+    public void onTileIntersection(int x, int y, TileLayer layer, TileState state, BoundBox objBox, BoundBox objBoxMotion, List<BoundBox> boxes) {
 
     }
 
     @ApiInternal
-    public void onEntityIntersection(Entity entity, BoundBox thisBox, BoundBox thisBoxMotion, BoundBox otherBox, BoundBox otherBoxMotion){
+    public void onEntityIntersection(Entity entity, BoundBox thisBox, BoundBox thisBoxMotion, BoundBox otherBox, BoundBox otherBoxMotion) {
 
     }
 
-    public boolean canCollideWithTile(TileState state, int x, int y, TileLayer layer){
+    public boolean canCollideWithTile(TileState state, int x, int y, TileLayer layer) {
         return true;
     }
 

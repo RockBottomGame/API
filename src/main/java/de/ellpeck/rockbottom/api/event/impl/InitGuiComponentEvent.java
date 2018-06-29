@@ -30,12 +30,12 @@ import de.ellpeck.rockbottom.api.gui.component.GuiComponent;
  * called in its constructor, meaning it will not have been added to the {@link
  * Gui#components} list yet. It cannot be cancelled.
  */
-public final class InitGuiComponentEvent extends Event{
+public final class InitGuiComponentEvent extends Event {
 
     public final Gui gui;
     public final GuiComponent component;
 
-    public InitGuiComponentEvent(Gui gui, GuiComponent component){
+    public InitGuiComponentEvent(Gui gui, GuiComponent component) {
         this.gui = gui;
         this.component = component;
     }

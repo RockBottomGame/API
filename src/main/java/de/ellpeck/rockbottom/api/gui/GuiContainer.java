@@ -36,38 +36,38 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiFunction;
 
-public abstract class GuiContainer extends Gui{
+public abstract class GuiContainer extends Gui {
 
     public final List<ShiftClickBehavior> shiftClickBehaviors = new ArrayList<>();
     public final AbstractEntityPlayer player;
     private ItemContainer container;
 
-    public GuiContainer(AbstractEntityPlayer player, int sizeX, int sizeY){
+    public GuiContainer(AbstractEntityPlayer player, int sizeX, int sizeY) {
         super(sizeX, sizeY);
         this.player = player;
     }
 
     @Override
-    public void onClosed(IGameInstance game){
+    public void onClosed(IGameInstance game) {
         super.onClosed(game);
 
-        if(this.container.holdingInst != null){
+        if (this.container.holdingInst != null) {
             PacketDrop.dropHeldItem(this.player, this.container);
         }
 
-        if(this.shouldCloseContainer() && this.player.getContainer() == this.container){
+        if (this.shouldCloseContainer() && this.player.getContainer() == this.container) {
             this.player.closeContainer();
         }
     }
 
     @Override
-    public boolean onMouseAction(IGameInstance game, int button, float x, float y){
-        if(super.onMouseAction(game, button, x, y)){
+    public boolean onMouseAction(IGameInstance game, int button, float x, float y) {
+        if (super.onMouseAction(game, button, x, y)) {
             return true;
         }
 
-        if(this.container.holdingInst != null && Settings.KEY_GUI_ACTION_1.isKey(button)){
-            if(!this.isMouseOver(game)){
+        if (this.container.holdingInst != null && Settings.KEY_GUI_ACTION_1.isKey(button)) {
+            if (!this.isMouseOver(game)) {
                 PacketDrop.dropHeldItem(this.player, this.container);
                 return true;
             }
@@ -77,80 +77,80 @@ public abstract class GuiContainer extends Gui{
     }
 
     @Override
-    public boolean canCloseWithInvKey(){
+    public boolean canCloseWithInvKey() {
         return true;
     }
 
     @Override
-    public void init(IGameInstance game){
+    public void init(IGameInstance game) {
         super.init(game);
 
         this.container = this.player.getContainer();
-        for(int i = 0; i < this.container.getSlotAmount(); i++){
+        for (int i = 0; i < this.container.getSlotAmount(); i++) {
             ContainerSlot slot = this.container.getSlot(i);
             this.components.add(slot.getGraphicalSlot(this, i, this.getSlotOffsetX(), this.getSlotOffsetY()));
         }
     }
 
     @Override
-    public void render(IGameInstance game, IAssetManager manager, IRenderer g){
+    public void render(IGameInstance game, IAssetManager manager, IRenderer g) {
         super.render(game, manager, g);
 
-        if(this.container.holdingInst != null){
+        if (this.container.holdingInst != null) {
             float mouseX = g.getMouseInGuiX();
             float mouseY = g.getMouseInGuiY();
 
-            g.renderItemInGui(game, manager, this.container.holdingInst, mouseX-2F, mouseY-2F, 0.85F, Colors.WHITE, true, false);
+            g.renderItemInGui(game, manager, this.container.holdingInst, mouseX - 2F, mouseY - 2F, 0.85F, Colors.WHITE, true, false);
         }
     }
 
     @Override
-    public boolean doesPauseGame(){
+    public boolean doesPauseGame() {
         return false;
     }
 
-    public boolean shouldCloseContainer(){
+    public boolean shouldCloseContainer() {
         return true;
     }
 
-    public static class ShiftClickBehavior{
+    public int getSlotOffsetX() {
+        return 0;
+    }
+
+    public int getSlotOffsetY() {
+        return 0;
+    }
+
+    public ItemContainer getContainer() {
+        return this.container;
+    }
+
+    public static class ShiftClickBehavior {
 
         public final List<Integer> slots;
         public final List<Integer> slotsInto;
         public final BiFunction<ContainerSlot, ContainerSlot, Boolean> condition;
 
-        public ShiftClickBehavior(List<Integer> slots, List<Integer> slotsInto, BiFunction<ContainerSlot, ContainerSlot, Boolean> condition){
+        public ShiftClickBehavior(List<Integer> slots, List<Integer> slotsInto, BiFunction<ContainerSlot, ContainerSlot, Boolean> condition) {
             this.slots = slots;
             this.slotsInto = slotsInto;
             this.condition = condition;
         }
 
-        public ShiftClickBehavior(int startSlot, int endSlot, int slotsIntoStart, int slotsIntoEnd, BiFunction<ContainerSlot, ContainerSlot, Boolean> condition){
-            this(Util.makeIntList(startSlot, endSlot+1), Util.makeIntList(slotsIntoStart, slotsIntoEnd+1), condition);
+        public ShiftClickBehavior(int startSlot, int endSlot, int slotsIntoStart, int slotsIntoEnd, BiFunction<ContainerSlot, ContainerSlot, Boolean> condition) {
+            this(Util.makeIntList(startSlot, endSlot + 1), Util.makeIntList(slotsIntoStart, slotsIntoEnd + 1), condition);
         }
 
-        public ShiftClickBehavior(int startSlot, int endSlot, int slotsIntoStart, int slotsIntoEnd){
+        public ShiftClickBehavior(int startSlot, int endSlot, int slotsIntoStart, int slotsIntoEnd) {
             this(startSlot, endSlot, slotsIntoStart, slotsIntoEnd, null);
         }
 
-        public ShiftClickBehavior reversed(BiFunction<ContainerSlot, ContainerSlot, Boolean> condition){
+        public ShiftClickBehavior reversed(BiFunction<ContainerSlot, ContainerSlot, Boolean> condition) {
             return new ShiftClickBehavior(this.slotsInto, this.slots, condition);
         }
 
-        public ShiftClickBehavior reversed(){
+        public ShiftClickBehavior reversed() {
             return this.reversed(this.condition == null ? null : (slotFrom, slotTo) -> !this.condition.apply(slotFrom, slotTo));
         }
-    }
-
-    public int getSlotOffsetX(){
-        return 0;
-    }
-
-    public int getSlotOffsetY(){
-        return 0;
-    }
-
-    public ItemContainer getContainer(){
-        return this.container;
     }
 }

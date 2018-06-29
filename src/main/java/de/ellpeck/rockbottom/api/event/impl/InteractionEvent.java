@@ -35,7 +35,7 @@ import java.util.List;
  * point and information of interaction being changed. Cancelling the event will
  * result in no interaction taking place.
  */
-public final class InteractionEvent extends Event{
+public final class InteractionEvent extends Event {
 
     public final AbstractEntityPlayer player;
     public List<Entity> entities;
@@ -45,7 +45,7 @@ public final class InteractionEvent extends Event{
     public double mouseX;
     public double mouseY;
 
-    public InteractionEvent(AbstractEntityPlayer player, List<Entity> entities, TileLayer layer, int x, int y, double mouseX, double mouseY){
+    public InteractionEvent(AbstractEntityPlayer player, List<Entity> entities, TileLayer layer, int x, int y, double mouseX, double mouseY) {
         this.player = player;
         this.entities = entities;
         this.layer = layer;

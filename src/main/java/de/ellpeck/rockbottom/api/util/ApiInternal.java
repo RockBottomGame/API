@@ -33,6 +33,6 @@ import java.lang.annotation.RetentionPolicy;
  */
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ApiInternal{
+public @interface ApiInternal {
 
 }

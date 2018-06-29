@@ -27,7 +27,7 @@ import de.ellpeck.rockbottom.api.RockBottomAPI;
 import java.util.Map;
 import java.util.Set;
 
-public interface IRegistry<T, U>{
+public interface IRegistry<T, U> {
 
     void register(T id, U value);
 
@@ -47,8 +47,8 @@ public interface IRegistry<T, U>{
 
     Set<Map.Entry<T, U>> entrySet();
 
-    default <V extends IRegistry> V register(){
+    default <V extends IRegistry> V register() {
         RockBottomAPI.registerRegistry(this);
-        return (V)this;
+        return (V) this;
     }
 }

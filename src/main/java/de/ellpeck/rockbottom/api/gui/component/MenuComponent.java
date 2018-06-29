@@ -27,47 +27,47 @@ import de.ellpeck.rockbottom.api.util.Pos2;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MenuComponent{
+public class MenuComponent {
 
-    private final Map<Pos2, GuiComponent> components = new HashMap<>();
     public final int width;
     public final int height;
+    private final Map<Pos2, GuiComponent> components = new HashMap<>();
 
-    public MenuComponent(int width, int height){
+    public MenuComponent(int width, int height) {
         this.width = width;
         this.height = height;
     }
 
-    public MenuComponent add(int x, int y, GuiComponent component){
+    public MenuComponent add(int x, int y, GuiComponent component) {
         this.components.put(new Pos2(x, y), component);
         return this;
     }
 
-    public void init(Gui gui){
-        for(GuiComponent component : this.components.values()){
+    public void init(Gui gui) {
+        for (GuiComponent component : this.components.values()) {
             gui.getComponents().add(component);
         }
     }
 
-    public void onRemoved(Gui gui){
-        for(GuiComponent component : this.components.values()){
+    public void onRemoved(Gui gui) {
+        for (GuiComponent component : this.components.values()) {
             gui.getComponents().remove(component);
         }
     }
 
-    public void setActive(boolean active){
-        for(GuiComponent component : this.components.values()){
+    public void setActive(boolean active) {
+        for (GuiComponent component : this.components.values()) {
             component.setActive(active);
         }
     }
 
-    public void setPos(int x, int y){
-        for(Map.Entry<Pos2, GuiComponent> entry : this.components.entrySet()){
+    public void setPos(int x, int y) {
+        for (Map.Entry<Pos2, GuiComponent> entry : this.components.entrySet()) {
             GuiComponent component = entry.getValue();
             Pos2 pos = entry.getKey();
 
-            component.x = pos.getX()+x;
-            component.y = pos.getY()+y;
+            component.x = pos.getX() + x;
+            component.y = pos.getY() + y;
         }
     }
 }

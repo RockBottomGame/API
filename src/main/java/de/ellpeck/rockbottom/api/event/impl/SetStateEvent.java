@@ -35,7 +35,7 @@ import de.ellpeck.rockbottom.api.world.layer.TileLayer;
  * #x} and {@link #y} values are chunk-inner coordinates. Cancelling the event
  * will cause the tile not to be set into the world.
  */
-public final class SetStateEvent extends Event{
+public final class SetStateEvent extends Event {
 
     public final IChunk chunk;
     public TileState state;
@@ -43,7 +43,7 @@ public final class SetStateEvent extends Event{
     public int x;
     public int y;
 
-    public SetStateEvent(IChunk chunk, TileState state, TileLayer layer, int x, int y){
+    public SetStateEvent(IChunk chunk, TileState state, TileLayer layer, int x, int y) {
         this.chunk = chunk;
         this.state = state;
         this.layer = layer;

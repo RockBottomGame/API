@@ -43,7 +43,7 @@ import java.util.logging.Logger;
  * inside the API's code and are, as such, inside of the game. To access the API
  * handler, use {@link RockBottomAPI#getApiHandler()}.
  */
-public interface IApiHandler{
+public interface IApiHandler {
 
     /**
      * Writes a data set to the given file either as binary or as a json
@@ -70,7 +70,6 @@ public interface IApiHandler{
      *
      * @param stream The output to write to
      * @param set    The set to write to the output
-     *
      * @throws Exception if writing fails for some reason
      */
     void writeDataSet(DataOutput stream, AbstractDataSet set) throws Exception;
@@ -81,7 +80,6 @@ public interface IApiHandler{
      *
      * @param stream The input to read from
      * @param set    The set to save the input in
-     *
      * @throws Exception if reading fails for some reason
      */
     void readDataSet(DataInput stream, AbstractDataSet set) throws Exception;
@@ -92,7 +90,6 @@ public interface IApiHandler{
      *
      * @param main The json object to write to
      * @param set  The set to write
-     *
      * @throws Exception if writing fails for some reason
      */
     void writeDataSet(JsonObject main, AbstractDataSet set) throws Exception;
@@ -103,7 +100,6 @@ public interface IApiHandler{
      *
      * @param main The json object to read from
      * @param set  The set to save the input in
-     *
      * @throws Exception if reading fails for some reason
      */
     void readDataSet(JsonObject main, AbstractDataSet set) throws Exception;
@@ -116,7 +112,6 @@ public interface IApiHandler{
      * @param world The world
      * @param x     The x coordinate
      * @param y     The y coordinate
-     *
      * @return The interpolated light
      */
     int[] interpolateLight(IWorld world, int x, int y);
@@ -128,7 +123,6 @@ public interface IApiHandler{
      *
      * @param interpolatedLight The interpolated light
      * @param layer             The layer
-     *
      * @return The four colors
      */
     int[] interpolateWorldColor(int[] interpolatedLight, TileLayer layer);
@@ -160,7 +154,6 @@ public interface IApiHandler{
      *
      * @param light The light
      * @param layer The layer
-     *
      * @return The color
      */
     int getColorByLight(int light, TileLayer layer);
@@ -170,7 +163,6 @@ public interface IApiHandler{
      * specified seed.
      *
      * @param seed The seed
-     *
      * @return The noise generator
      */
     INoiseGen makeSimplexNoise(long seed);
@@ -180,7 +172,6 @@ public interface IApiHandler{
      * main logger and also written to the log file.
      *
      * @param name The name
-     *
      * @return The new logger
      */
     Logger createLogger(String name);

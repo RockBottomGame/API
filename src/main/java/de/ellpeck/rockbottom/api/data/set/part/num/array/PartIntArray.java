@@ -33,28 +33,27 @@ import java.io.DataOutput;
 import java.util.Arrays;
 import java.util.Locale;
 
-public final class PartIntArray extends BasicDataPart<int[]>{
+public final class PartIntArray extends BasicDataPart<int[]> {
 
-    public static final IPartFactory<PartIntArray> FACTORY = new IPartFactory<PartIntArray>(){
+    public static final IPartFactory<PartIntArray> FACTORY = new IPartFactory<PartIntArray>() {
         @Override
-        public PartIntArray parse(String name, JsonElement element){
-            if(element.isJsonArray()){
+        public PartIntArray parse(String name, JsonElement element) {
+            if (element.isJsonArray()) {
                 JsonArray array = element.getAsJsonArray();
-                if(array.size() > 0){
+                if (array.size() > 0) {
                     JsonElement first = array.get(0);
-                    if(first.isJsonPrimitive()){
+                    if (first.isJsonPrimitive()) {
                         JsonPrimitive prim = first.getAsJsonPrimitive();
-                        if(prim.isString()){
-                            if(prim.getAsString().toLowerCase(Locale.ROOT).endsWith("i")){
-                                try{
+                        if (prim.isString()) {
+                            if (prim.getAsString().toLowerCase(Locale.ROOT).endsWith("i")) {
+                                try {
                                     int[] data = new int[array.size()];
-                                    for(int i = 0; i < array.size(); i++){
+                                    for (int i = 0; i < array.size(); i++) {
                                         String string = array.get(i).getAsString();
-                                        data[i] = Integer.parseInt(string.substring(0, string.length()-1));
+                                        data[i] = Integer.parseInt(string.substring(0, string.length() - 1));
                                     }
                                     return new PartIntArray(name, data);
-                                }
-                                catch(Exception ignored){
+                                } catch (Exception ignored) {
                                 }
                             }
                         }
@@ -65,44 +64,44 @@ public final class PartIntArray extends BasicDataPart<int[]>{
         }
 
         @Override
-        public PartIntArray parse(String name, DataInput stream) throws Exception{
+        public PartIntArray parse(String name, DataInput stream) throws Exception {
             int amount = stream.readInt();
             int[] data = new int[amount];
-            for(int i = 0; i < amount; i++){
+            for (int i = 0; i < amount; i++) {
                 data[i] = stream.readInt();
             }
             return new PartIntArray(name, data);
         }
     };
 
-    public PartIntArray(String name, int[] data){
+    public PartIntArray(String name, int[] data) {
         super(name, data);
     }
 
     @Override
-    public void write(DataOutput stream) throws Exception{
+    public void write(DataOutput stream) throws Exception {
         stream.writeInt(this.data.length);
-        for(int i : this.data){
+        for (int i : this.data) {
             stream.writeInt(i);
         }
     }
 
     @Override
-    public JsonElement write(){
+    public JsonElement write() {
         JsonArray array = new JsonArray();
-        for(int i = 0; i < this.data.length; i++){
-            array.add(this.data[i]+"i");
+        for (int i = 0; i < this.data.length; i++) {
+            array.add(this.data[i] + "i");
         }
         return array;
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return Arrays.toString(this.data);
     }
 
     @Override
-    public IPartFactory<? extends DataPart<int[]>> getFactory(){
+    public IPartFactory<? extends DataPart<int[]>> getFactory() {
         return FACTORY;
     }
 }

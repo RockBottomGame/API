@@ -32,13 +32,13 @@ import org.lwjgl.glfw.GLFWCursorPosCallbackI;
  * GLFW#glfwSetCursorPosCallback(long, GLFWCursorPosCallbackI)}. Cancelling it
  * will cause the internal mouse position to not be updated.
  */
-public final class CursorPosEvent extends Event{
+public final class CursorPosEvent extends Event {
 
     public final long window;
     public double x;
     public double y;
 
-    public CursorPosEvent(long window, double x, double y){
+    public CursorPosEvent(long window, double x, double y) {
         this.window = window;
         this.x = x;
         this.y = y;

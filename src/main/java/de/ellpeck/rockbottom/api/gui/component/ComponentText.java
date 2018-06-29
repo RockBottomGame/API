@@ -30,13 +30,13 @@ import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 import java.util.List;
 
-public class ComponentText extends GuiComponent{
+public class ComponentText extends GuiComponent {
 
     private final float scale;
     private final boolean fromRight;
     private final String[] text;
 
-    public ComponentText(Gui gui, int x, int y, int width, int height, float scale, boolean fromRight, String... text){
+    public ComponentText(Gui gui, int x, int y, int width, int height, float scale, boolean fromRight, String... text) {
         super(gui, x, y, width, height);
         this.scale = scale;
         this.fromRight = fromRight;
@@ -44,19 +44,18 @@ public class ComponentText extends GuiComponent{
     }
 
     @Override
-    public void render(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y){
+    public void render(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y) {
         IFont font = manager.getFont();
-        List<String> text = font.splitTextToLength(this.width-2, this.scale, true, this.text);
+        List<String> text = font.splitTextToLength(this.width - 2, this.scale, true, this.text);
 
         float height = font.getHeight(this.scale);
-        int yOff = this.height/2-(text.size()*(int)height)/2;
+        int yOff = this.height / 2 - (text.size() * (int) height) / 2;
 
-        for(String s : text){
-            if(this.fromRight){
-                font.drawStringFromRight(x+this.width-1, y+yOff, s, this.scale);
-            }
-            else{
-                font.drawString(x+1, y+yOff, s, this.scale);
+        for (String s : text) {
+            if (this.fromRight) {
+                font.drawStringFromRight(x + this.width - 1, y + yOff, s, this.scale);
+            } else {
+                font.drawString(x + 1, y + yOff, s, this.scale);
             }
 
             yOff += height;
@@ -64,12 +63,12 @@ public class ComponentText extends GuiComponent{
     }
 
     @Override
-    public ResourceName getName(){
+    public ResourceName getName() {
         return ResourceName.intern("text");
     }
 
     @Override
-    public boolean shouldDoFingerCursor(IGameInstance game){
+    public boolean shouldDoFingerCursor(IGameInstance game) {
         return false;
     }
 }

@@ -38,19 +38,19 @@ import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 
 import java.util.List;
 
-public abstract class MultiTile extends TileBasic{
+public abstract class MultiTile extends TileBasic {
 
     public IntProp propSubX = new IntProp("subX", 0, this.getWidth());
     public IntProp propSubY = new IntProp("subY", 0, this.getHeight());
     private boolean[][] structure;
 
-    public MultiTile(ResourceName name){
+    public MultiTile(ResourceName name) {
         super(name);
         this.addProps(this.propSubX, this.propSubY);
     }
 
     @Override
-    protected ITileRenderer createRenderer(ResourceName name){
+    protected ITileRenderer createRenderer(ResourceName name) {
         return new MultiTileRenderer(name, this);
     }
 
@@ -64,27 +64,27 @@ public abstract class MultiTile extends TileBasic{
 
     public abstract int getMainY();
 
-    public boolean isStructurePart(int x, int y){
-        if(this.structure == null){
+    public boolean isStructurePart(int x, int y) {
+        if (this.structure == null) {
             this.structure = this.makeStructure();
-            Preconditions.checkState(this.areDimensionsValid(), "MultiTile with name "+this.name+" has invalid structure dimensions!");
+            Preconditions.checkState(this.areDimensionsValid(), "MultiTile with name " + this.name + " has invalid structure dimensions!");
         }
 
-        return this.structure[this.getHeight()-1-y][x];
+        return this.structure[this.getHeight() - 1 - y][x];
     }
 
     @Override
-    public boolean canPlace(IWorld world, int x, int y, TileLayer layer, AbstractEntityPlayer player){
-        int startX = x-this.getMainX();
-        int startY = y-this.getMainY();
+    public boolean canPlace(IWorld world, int x, int y, TileLayer layer, AbstractEntityPlayer player) {
+        int startX = x - this.getMainX();
+        int startY = y - this.getMainY();
 
-        for(int addX = 0; addX < this.getWidth(); addX++){
-            for(int addY = 0; addY < this.getHeight(); addY++){
-                if(this.isStructurePart(addX, addY)){
-                    int theX = startX+addX;
-                    int theY = startY+addY;
+        for (int addX = 0; addX < this.getWidth(); addX++) {
+            for (int addY = 0; addY < this.getHeight(); addY++) {
+                if (this.isStructurePart(addX, addY)) {
+                    int theX = startX + addX;
+                    int theY = startY + addY;
 
-                    if(!world.getState(layer, theX, theY).getTile().canReplace(world, theX, theY, layer)){
+                    if (!world.getState(layer, theX, theY).getTile().canReplace(world, theX, theY, layer)) {
                         return false;
                     }
                 }
@@ -94,16 +94,16 @@ public abstract class MultiTile extends TileBasic{
     }
 
     @Override
-    public void doPlace(IWorld world, int x, int y, TileLayer layer, ItemInstance instance, AbstractEntityPlayer placer){
-        if(!world.isClient()){
-            int startX = x-this.getMainX();
-            int startY = y-this.getMainY();
+    public void doPlace(IWorld world, int x, int y, TileLayer layer, ItemInstance instance, AbstractEntityPlayer placer) {
+        if (!world.isClient()) {
+            int startX = x - this.getMainX();
+            int startY = y - this.getMainY();
 
-            for(int addX = 0; addX < this.getWidth(); addX++){
-                for(int addY = 0; addY < this.getHeight(); addY++){
-                    if(this.isStructurePart(addX, addY)){
+            for (int addX = 0; addX < this.getWidth(); addX++) {
+                for (int addY = 0; addY < this.getHeight(); addY++) {
+                    if (this.isStructurePart(addX, addY)) {
                         TileState state = this.getPlacementState(world, x, y, layer, instance, placer);
-                        world.setState(layer, startX+addX, startY+addY, state.overrideProps(this.getState(addX, addY), this.propSubX, this.propSubY));
+                        world.setState(layer, startX + addX, startY + addY, state.overrideProps(this.getState(addX, addY), this.propSubX, this.propSubY));
                     }
                 }
             }
@@ -111,14 +111,14 @@ public abstract class MultiTile extends TileBasic{
     }
 
     @Override
-    public void doBreak(IWorld world, int x, int y, TileLayer layer, AbstractEntityPlayer breaker, boolean isRightTool, boolean allowDrop){
-        if(!world.isClient()){
+    public void doBreak(IWorld world, int x, int y, TileLayer layer, AbstractEntityPlayer breaker, boolean isRightTool, boolean allowDrop) {
+        if (!world.isClient()) {
             Pos2 start = this.getBottomLeft(x, y, world.getState(layer, x, y));
 
-            for(int addX = 0; addX < this.getWidth(); addX++){
-                for(int addY = 0; addY < this.getHeight(); addY++){
-                    if(this.isStructurePart(addX, addY)){
-                        world.destroyTile(start.getX()+addX, start.getY()+addY, layer, breaker, allowDrop && (this.forceDrop || isRightTool));
+            for (int addX = 0; addX < this.getWidth(); addX++) {
+                for (int addY = 0; addY < this.getHeight(); addY++) {
+                    if (this.isStructurePart(addX, addY)) {
+                        world.destroyTile(start.getX() + addX, start.getY() + addY, layer, breaker, allowDrop && (this.forceDrop || isRightTool));
                     }
                 }
             }
@@ -126,43 +126,42 @@ public abstract class MultiTile extends TileBasic{
     }
 
     @Override
-    public void onDestroyed(IWorld world, int x, int y, Entity destroyer, TileLayer layer, boolean shouldDrop){
+    public void onDestroyed(IWorld world, int x, int y, Entity destroyer, TileLayer layer, boolean shouldDrop) {
         super.onDestroyed(world, x, y, destroyer, layer, shouldDrop && this.isMainPos(x, y, world.getState(layer, x, y)));
     }
 
-    public boolean isMainPos(int x, int y, TileState state){
+    public boolean isMainPos(int x, int y, TileState state) {
         Pos2 main = this.getMainPos(x, y, state);
         return main.getX() == x && main.getY() == y;
     }
 
-    public Pos2 getInnerCoord(TileState state){
+    public Pos2 getInnerCoord(TileState state) {
         return new Pos2(state.get(this.propSubX), state.get(this.propSubY));
     }
 
-    public TileState getState(Pos2 coord){
+    public TileState getState(Pos2 coord) {
         return this.getState(coord.getX(), coord.getY());
     }
 
-    public TileState getState(int x, int y){
+    public TileState getState(int x, int y) {
         return this.getDefState().prop(this.propSubX, x).prop(this.propSubY, y);
     }
 
-    public Pos2 getMainPos(int x, int y, TileState state){
+    public Pos2 getMainPos(int x, int y, TileState state) {
         return this.getBottomLeft(x, y, state).add(this.getMainX(), this.getMainY());
     }
 
-    public Pos2 getBottomLeft(int x, int y, TileState state){
+    public Pos2 getBottomLeft(int x, int y, TileState state) {
         Pos2 inner = this.getInnerCoord(state);
-        return inner.set(x-inner.getX(), y-inner.getY());
+        return inner.set(x - inner.getX(), y - inner.getY());
     }
 
-    private boolean areDimensionsValid(){
-        if(this.structure.length != this.getHeight()){
+    private boolean areDimensionsValid() {
+        if (this.structure.length != this.getHeight()) {
             return false;
-        }
-        else{
-            for(boolean[] row : this.structure){
-                if(row.length != this.getWidth()){
+        } else {
+            for (boolean[] row : this.structure) {
+                if (row.length != this.getWidth()) {
                     return false;
                 }
             }
@@ -171,12 +170,12 @@ public abstract class MultiTile extends TileBasic{
     }
 
     @Override
-    public void describeItem(IAssetManager manager, ItemInstance instance, List<String> desc, boolean isAdvanced){
+    public void describeItem(IAssetManager manager, ItemInstance instance, List<String> desc, boolean isAdvanced) {
         super.describeItem(manager, instance, desc, isAdvanced);
 
-        if(isAdvanced){
+        if (isAdvanced) {
             desc.add("");
-            desc.add(FormattingCode.LIGHT_GRAY+manager.localize(ResourceName.intern("info.size"), this.getWidth(), this.getHeight()));
+            desc.add(FormattingCode.LIGHT_GRAY + manager.localize(ResourceName.intern("info.size"), this.getWidth(), this.getHeight()));
         }
     }
 }

@@ -29,54 +29,53 @@ import de.ellpeck.rockbottom.api.data.set.ModBasedDataSet;
 import java.io.DataInput;
 import java.io.DataOutput;
 
-public final class PartModBasedDataSet extends BasicDataPart<ModBasedDataSet>{
+public final class PartModBasedDataSet extends BasicDataPart<ModBasedDataSet> {
 
-    public static final IPartFactory<PartModBasedDataSet> FACTORY = new IPartFactory<PartModBasedDataSet>(){
+    public static final IPartFactory<PartModBasedDataSet> FACTORY = new IPartFactory<PartModBasedDataSet>() {
         @Override
-        public PartModBasedDataSet parse(String name, JsonElement element){
-            if(element.isJsonObject()){
-                try{
+        public PartModBasedDataSet parse(String name, JsonElement element) {
+            if (element.isJsonObject()) {
+                try {
                     ModBasedDataSet set = new ModBasedDataSet();
                     RockBottomAPI.getApiHandler().readDataSet(element.getAsJsonObject(), set);
                     return new PartModBasedDataSet(name, set);
-                }
-                catch(Exception ignored){
+                } catch (Exception ignored) {
                 }
             }
             return null;
         }
 
         @Override
-        public PartModBasedDataSet parse(String name, DataInput stream) throws Exception{
+        public PartModBasedDataSet parse(String name, DataInput stream) throws Exception {
             ModBasedDataSet data = new ModBasedDataSet();
             RockBottomAPI.getApiHandler().readDataSet(stream, data);
             return new PartModBasedDataSet(name, data);
         }
 
         @Override
-        public int getPriority(){
+        public int getPriority() {
             return 100;
         }
     };
 
-    public PartModBasedDataSet(String name, ModBasedDataSet data){
+    public PartModBasedDataSet(String name, ModBasedDataSet data) {
         super(name, data);
     }
 
     @Override
-    public void write(DataOutput stream) throws Exception{
+    public void write(DataOutput stream) throws Exception {
         RockBottomAPI.getApiHandler().writeDataSet(stream, this.data);
     }
 
     @Override
-    public JsonElement write() throws Exception{
+    public JsonElement write() throws Exception {
         JsonObject object = new JsonObject();
         RockBottomAPI.getApiHandler().writeDataSet(object, this.data);
         return object;
     }
 
     @Override
-    public IPartFactory<? extends DataPart<ModBasedDataSet>> getFactory(){
+    public IPartFactory<? extends DataPart<ModBasedDataSet>> getFactory() {
         return FACTORY;
     }
 }

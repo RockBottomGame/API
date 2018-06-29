@@ -23,7 +23,7 @@ package de.ellpeck.rockbottom.api.render.engine;
 
 import java.nio.FloatBuffer;
 
-public interface IVBO extends IDisposable{
+public interface IVBO extends IDisposable {
 
     void bind();
 

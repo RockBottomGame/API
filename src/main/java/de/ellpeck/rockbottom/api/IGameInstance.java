@@ -56,7 +56,7 @@ import java.util.function.Predicate;
  * and rendering methods) will throw an {@link UnsupportedOperationException}.
  * To access any methods from this class, use {@link RockBottomAPI#getGame()}.
  */
-public interface IGameInstance extends IMod{
+public interface IGameInstance extends IMod {
 
     @ApiInternal
     void startWorld(File worldFile, WorldInfo info, boolean isNewlyCreated);
@@ -92,7 +92,6 @@ public interface IGameInstance extends IMod{
      * @param object An object you can pass for later use in the action
      *               consumer
      * @param <T>    A user-chosen generic typ for the passed additional object
-     *
      * @see #enqueueAction(BiConsumer, Object)
      */
     <T> void enqueueAction(BiConsumer<IGameInstance, T> action, T object);
@@ -122,7 +121,6 @@ public interface IGameInstance extends IMod{
      * that this is not implemented on the dedicated server.
      *
      * @return The player
-     *
      * @throws UnsupportedOperationException on the dedicated server
      */
     AbstractEntityPlayer getPlayer();
@@ -133,7 +131,6 @@ public interface IGameInstance extends IMod{
      * implemented on the dedicated server.
      *
      * @return The gui manager
-     *
      * @throws UnsupportedOperationException on the dedicated server
      */
     IGuiManager getGuiManager();
@@ -145,7 +142,6 @@ public interface IGameInstance extends IMod{
      * server.
      *
      * @return The interaction manager
-     *
      * @throws UnsupportedOperationException on the dedicated server
      */
     IInteractionManager getInteractionManager();
@@ -172,7 +168,6 @@ public interface IGameInstance extends IMod{
      * not implemented on the dedicated server.
      *
      * @return The asset manager
-     *
      * @throws UnsupportedOperationException on the dedicated server
      */
     IAssetManager getAssetManager();
@@ -191,7 +186,6 @@ public interface IGameInstance extends IMod{
      * on the dedicated server.
      *
      * @return The particle manager
-     *
      * @throws UnsupportedOperationException on the dedicated server
      */
     IParticleManager getParticleManager();
@@ -204,7 +198,6 @@ public interface IGameInstance extends IMod{
      * returned.
      *
      * @return The game's unique id
-     *
      * @throws UnsupportedOperationException on the dedicated server
      */
     UUID getUniqueId();
@@ -249,7 +242,6 @@ public interface IGameInstance extends IMod{
      * Note that this is not implemented on the dedicated server.
      *
      * @return The player design
-     *
      * @throws UnsupportedOperationException on the dedicated server
      */
     IPlayerDesign getPlayerDesign();
@@ -273,7 +265,6 @@ public interface IGameInstance extends IMod{
      * server.
      *
      * @return The input manager
-     *
      * @throws UnsupportedOperationException on the dedicated server
      */
     IInputHandler getInput();
@@ -288,7 +279,6 @@ public interface IGameInstance extends IMod{
      * dedicated server.
      *
      * @return The toaster
-     *
      * @throws UnsupportedOperationException on the dedicated server
      */
     IToaster getToaster();
@@ -297,7 +287,6 @@ public interface IGameInstance extends IMod{
      * Gets the current width of the window in pixels
      *
      * @return The width
-     *
      * @throws UnsupportedOperationException on the dedicated server
      * @see IRenderer#getWidthInGui()
      * @see IRenderer#getWidthInWorld()
@@ -308,7 +297,6 @@ public interface IGameInstance extends IMod{
      * Gets the current height of the window in pixels
      *
      * @return The height
-     *
      * @throws UnsupportedOperationException on the dedicated server
      * @see IRenderer#getHeightInGui()
      * @see IRenderer#getHeightInWorld()
@@ -319,7 +307,6 @@ public interface IGameInstance extends IMod{
      * Gets the {@link GLFW} pointer to the window that is open.
      *
      * @return The window pointer
-     *
      * @throws UnsupportedOperationException on the dedicated server
      */
     long getWindow();

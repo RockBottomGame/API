@@ -28,56 +28,56 @@ import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 import java.util.Arrays;
 
-public class ChatComponentTranslation extends ChatComponent{
+public class ChatComponentTranslation extends ChatComponent {
 
     private ResourceName key;
     private String[] formatting;
 
-    public ChatComponentTranslation(){
+    public ChatComponentTranslation() {
     }
 
-    public ChatComponentTranslation(ResourceName key, String... formatting){
+    public ChatComponentTranslation(ResourceName key, String... formatting) {
         this.key = key;
         this.formatting = formatting;
     }
 
     @Override
-    public void save(DataSet set){
+    public void save(DataSet set) {
         super.save(set);
         set.addString("key", this.key.toString());
 
         set.addInt("format_amount", this.formatting.length);
-        for(int i = 0; i < this.formatting.length; i++){
-            set.addString("format_"+i, this.formatting[i]);
+        for (int i = 0; i < this.formatting.length; i++) {
+            set.addString("format_" + i, this.formatting[i]);
         }
     }
 
     @Override
-    public void load(DataSet set){
+    public void load(DataSet set) {
         super.load(set);
         this.key = new ResourceName(set.getString("key"));
 
         this.formatting = new String[set.getInt("format_amount")];
-        for(int i = 0; i < this.formatting.length; i++){
-            this.formatting[i] = set.getString("format_"+i);
+        for (int i = 0; i < this.formatting.length; i++) {
+            this.formatting[i] = set.getString("format_" + i);
         }
     }
 
     @Override
-    public String getDisplayString(IGameInstance game, IAssetManager manager){
-        return manager.localize(this.key, (Object[])this.formatting);
+    public String getDisplayString(IGameInstance game, IAssetManager manager) {
+        return manager.localize(this.key, (Object[]) this.formatting);
     }
 
     @Override
-    public String getUnformattedString(){
-        return "Locale("+this.key+", "+Arrays.toString(this.formatting)+')';
+    public String getUnformattedString() {
+        return "Locale(" + this.key + ", " + Arrays.toString(this.formatting) + ')';
     }
 
-    public ResourceName getKey(){
+    public ResourceName getKey() {
         return this.key;
     }
 
-    public String[] getFormatting(){
+    public String[] getFormatting() {
         return this.formatting;
     }
 }

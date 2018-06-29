@@ -30,25 +30,25 @@ import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.item.Item;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 
-public interface IItemRenderer<T extends Item>{
+public interface IItemRenderer<T extends Item> {
 
     void render(IGameInstance game, IAssetManager manager, IRenderer g, T item, ItemInstance instance, float x, float y, float scale, int filter);
 
-    default void renderOnMouseCursor(IGameInstance game, IAssetManager manager, IRenderer g, T item, ItemInstance instance, float x, float y, float scale, int filter, boolean isInPlayerRange){
+    default void renderOnMouseCursor(IGameInstance game, IAssetManager manager, IRenderer g, T item, ItemInstance instance, float x, float y, float scale, int filter, boolean isInPlayerRange) {
 
     }
 
-    default void renderHolding(IGameInstance game, IAssetManager manager, IRenderer g, T item, ItemInstance instance, AbstractEntityPlayer player, float x, float y, float rotation, float scale, int filter, boolean mirrored){
+    default void renderHolding(IGameInstance game, IAssetManager manager, IRenderer g, T item, ItemInstance instance, AbstractEntityPlayer player, float x, float y, float rotation, float scale, int filter, boolean mirrored) {
         g.translate(x, y);
         g.rotate(rotation);
 
-        if(mirrored){
+        if (mirrored) {
             g.mirror(true, false);
         }
 
-        this.render(game, manager, g, item, instance, 0F, 0F, scale*0.5F, filter);
+        this.render(game, manager, g, item, instance, 0F, 0F, scale * 0.5F, filter);
 
-        if(mirrored){
+        if (mirrored) {
             g.mirror(true, false);
         }
 
@@ -56,7 +56,7 @@ public interface IItemRenderer<T extends Item>{
         g.translate(-x, -y);
     }
 
-    default JsonElement getAdditionalTextureData(IGameInstance game, IAssetManager manager, IRenderer g, T item, ItemInstance instance, AbstractEntityPlayer player, String name){
+    default JsonElement getAdditionalTextureData(IGameInstance game, IAssetManager manager, IRenderer g, T item, ItemInstance instance, AbstractEntityPlayer player, String name) {
         return null;
     }
 

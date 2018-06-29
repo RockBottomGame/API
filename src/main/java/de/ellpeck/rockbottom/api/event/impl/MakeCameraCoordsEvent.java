@@ -31,13 +31,13 @@ import de.ellpeck.rockbottom.api.event.Event;
  * IGameInstance#getPlayer()}'s position, but you can change the values using
  * this event. It cannot be cancelled.
  */
-public class MakeCameraCoordsEvent extends Event{
+public class MakeCameraCoordsEvent extends Event {
 
     public final AbstractEntityPlayer player;
     public double cameraX;
     public double cameraY;
 
-    public MakeCameraCoordsEvent(AbstractEntityPlayer player, double cameraX, double cameraY){
+    public MakeCameraCoordsEvent(AbstractEntityPlayer player, double cameraX, double cameraY) {
         this.player = player;
         this.cameraX = cameraX;
         this.cameraY = cameraY;

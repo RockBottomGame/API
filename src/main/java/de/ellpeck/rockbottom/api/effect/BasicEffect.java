@@ -24,7 +24,7 @@ package de.ellpeck.rockbottom.api.effect;
 import de.ellpeck.rockbottom.api.entity.Entity;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
-public class BasicEffect implements IEffect{
+public class BasicEffect implements IEffect {
 
     private final ResourceName name;
     private final ResourceName iconName;
@@ -34,7 +34,7 @@ public class BasicEffect implements IEffect{
     private final boolean isInstant;
     private final int maxDuration;
 
-    public BasicEffect(ResourceName name, boolean isBad, boolean isInstant, int maxDuration){
+    public BasicEffect(ResourceName name, boolean isBad, boolean isInstant, int maxDuration) {
         this.name = name;
         this.unlocName = this.name.addPrefix("effect.");
         this.iconName = this.unlocName.addPrefix("gui.");
@@ -44,52 +44,52 @@ public class BasicEffect implements IEffect{
     }
 
     @Override
-    public boolean isBad(Entity entity){
+    public boolean isBad(Entity entity) {
         return this.isBad;
     }
 
     @Override
-    public boolean isInstant(Entity entity){
+    public boolean isInstant(Entity entity) {
         return this.isInstant;
     }
 
     @Override
-    public ResourceName getName(){
+    public ResourceName getName() {
         return this.name;
     }
 
     @Override
-    public ResourceName getUnlocalizedName(ActiveEffect effect, Entity entity){
+    public ResourceName getUnlocalizedName(ActiveEffect effect, Entity entity) {
         return this.unlocName;
     }
 
     @Override
-    public ResourceName getIcon(ActiveEffect effect, Entity entity){
+    public ResourceName getIcon(ActiveEffect effect, Entity entity) {
         return this.iconName;
     }
 
     @Override
-    public void updateLasting(ActiveEffect effect, Entity entity){
+    public void updateLasting(ActiveEffect effect, Entity entity) {
 
     }
 
     @Override
-    public void activateInstant(ActiveEffect effect, Entity entity){
+    public void activateInstant(ActiveEffect effect, Entity entity) {
 
     }
 
     @Override
-    public void onAddedOrLoaded(ActiveEffect effect, Entity entity, boolean loaded){
+    public void onAddedOrLoaded(ActiveEffect effect, Entity entity, boolean loaded) {
 
     }
 
     @Override
-    public void onRemovedOrEnded(ActiveEffect effect, Entity entity, boolean ended){
+    public void onRemovedOrEnded(ActiveEffect effect, Entity entity, boolean ended) {
 
     }
 
     @Override
-    public int getMaxDuration(Entity entity){
+    public int getMaxDuration(Entity entity) {
         return this.maxDuration;
     }
 }

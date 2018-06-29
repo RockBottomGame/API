@@ -32,14 +32,14 @@ import org.lwjgl.glfw.GLFWMouseButtonCallbackI;
  * GLFW#glfwSetMouseButtonCallback(long, GLFWMouseButtonCallbackI)}. Cancelling
  * it will make the moues input not be processed.
  */
-public final class MouseEvent extends Event{
+public final class MouseEvent extends Event {
 
     public final long window;
     public final int mods;
     public int action;
     public int button;
 
-    public MouseEvent(long window, int mods, int action, int button){
+    public MouseEvent(long window, int mods, int action, int button) {
         this.window = window;
         this.mods = mods;
         this.action = action;

@@ -35,110 +35,110 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-public class Item{
+public class Item {
 
     protected final ResourceName name;
     protected final ResourceName unlocName;
 
     protected int maxAmount = 999;
 
-    public Item(ResourceName name){
+    public Item(ResourceName name) {
         this.name = name;
         this.unlocName = this.name.addPrefix("item.");
     }
 
-    public IItemRenderer getRenderer(){
+    public IItemRenderer getRenderer() {
         return null;
     }
 
-    public Item register(){
+    public Item register() {
         RockBottomAPI.ITEM_REGISTRY.register(this.getName(), this);
         return this;
     }
 
-    public Item setMaxAmount(int amount){
+    public int getMaxAmount() {
+        return this.maxAmount;
+    }
+
+    public Item setMaxAmount(int amount) {
         this.maxAmount = amount;
         return this;
     }
 
-    public int getMaxAmount(){
-        return this.maxAmount;
-    }
-
-    public ResourceName getName(){
+    public ResourceName getName() {
         return this.name;
     }
 
-    public ResourceName getUnlocalizedName(ItemInstance instance){
+    public ResourceName getUnlocalizedName(ItemInstance instance) {
         return this.unlocName;
     }
 
-    public String getLocalizedName(ItemInstance instance){
+    public String getLocalizedName(ItemInstance instance) {
         return RockBottomAPI.getGame().getAssetManager().localize(this.getUnlocalizedName(instance));
     }
 
-    public void describeItem(IAssetManager manager, ItemInstance instance, List<String> desc, boolean isAdvanced){
+    public void describeItem(IAssetManager manager, ItemInstance instance, List<String> desc, boolean isAdvanced) {
         desc.add(instance.getDisplayName());
     }
 
-    public boolean onInteractWith(IWorld world, int x, int y, TileLayer layer, double mouseX, double mouseY, AbstractEntityPlayer player, ItemInstance instance){
+    public boolean onInteractWith(IWorld world, int x, int y, TileLayer layer, double mouseX, double mouseY, AbstractEntityPlayer player, ItemInstance instance) {
         return false;
     }
 
-    public int getInteractionPriority(IWorld world, int x, int y, TileLayer layer, double mouseX, double mouseY, AbstractEntityPlayer player, ItemInstance instance){
+    public int getInteractionPriority(IWorld world, int x, int y, TileLayer layer, double mouseX, double mouseY, AbstractEntityPlayer player, ItemInstance instance) {
         return 100;
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return this.getName().toString();
     }
 
-    public int getDespawnTime(ItemInstance instance){
+    public int getDespawnTime(ItemInstance instance) {
         return 24000;
     }
 
-    public boolean isDataSensitive(ItemInstance instance){
+    public boolean isDataSensitive(ItemInstance instance) {
         return false;
     }
 
-    public Map<ToolType, Integer> getToolTypes(ItemInstance instance){
+    public Map<ToolType, Integer> getToolTypes(ItemInstance instance) {
         return Collections.emptyMap();
     }
 
-    public float getMiningSpeed(IWorld world, int x, int y, TileLayer layer, Tile tile, boolean isRightTool){
+    public float getMiningSpeed(IWorld world, int x, int y, TileLayer layer, Tile tile, boolean isRightTool) {
         return 1F;
     }
 
-    public void onTileBroken(IWorld world, int x, int y, TileLayer layer, AbstractEntityPlayer player, Tile tile, ItemInstance instance){
+    public void onTileBroken(IWorld world, int x, int y, TileLayer layer, AbstractEntityPlayer player, Tile tile, ItemInstance instance) {
 
     }
 
-    public int getHighestPossibleMeta(){
+    public int getHighestPossibleMeta() {
         return 0;
     }
 
-    public double getMaxInteractionDistance(IWorld world, int x, int y, TileLayer layer, double mouseX, double mouseY, AbstractEntityPlayer player){
+    public double getMaxInteractionDistance(IWorld world, int x, int y, TileLayer layer, double mouseX, double mouseY, AbstractEntityPlayer player) {
         return AbstractEntityPlayer.RANGE;
     }
 
-    public boolean canHoldButtonToAttack(IWorld world, double mouseX, double mouseY, AbstractEntityPlayer player){
+    public boolean canHoldButtonToAttack(IWorld world, double mouseX, double mouseY, AbstractEntityPlayer player) {
         return true;
     }
 
-    public List<Entity> getCustomAttackableEntities(IWorld world, double mouseX, double mouseY, AbstractEntityPlayer player){
+    public List<Entity> getCustomAttackableEntities(IWorld world, double mouseX, double mouseY, AbstractEntityPlayer player) {
         return null;
     }
 
-    public int getAttackDamage(IWorld world, Entity entity, double mouseX, double mouseY, AbstractEntityPlayer player){
+    public int getAttackDamage(IWorld world, Entity entity, double mouseX, double mouseY, AbstractEntityPlayer player) {
         return 5;
     }
 
-    public int getAttackCooldown(IWorld world, double mouseX, double mouseY, AbstractEntityPlayer player){
+    public int getAttackCooldown(IWorld world, double mouseX, double mouseY, AbstractEntityPlayer player) {
         return 40;
     }
 
-    public boolean useMetaAsDurability(){
+    public boolean useMetaAsDurability() {
         return false;
     }
 }

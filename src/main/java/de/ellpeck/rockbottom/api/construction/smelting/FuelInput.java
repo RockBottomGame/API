@@ -26,45 +26,45 @@ import de.ellpeck.rockbottom.api.construction.resource.IUseInfo;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
-public class FuelInput{
+public class FuelInput {
 
     private final ResourceName name;
     private final IUseInfo fuel;
     private final int fuelTime;
 
-    public FuelInput(IUseInfo fuel, int fuelTime){
+    public FuelInput(IUseInfo fuel, int fuelTime) {
         this(fuel.getItems().get(0).getItem().getName(), fuel, fuelTime);
     }
 
-    public FuelInput(ResourceName name, IUseInfo fuel, int fuelTime){
+    public FuelInput(ResourceName name, IUseInfo fuel, int fuelTime) {
         this.name = name;
         this.fuel = fuel;
         this.fuelTime = fuelTime;
     }
 
-    public IUseInfo getFuel(){
-        return this.fuel;
-    }
-
-    public int getFuelTime(){
-        return this.fuelTime;
-    }
-
-    public ResourceName getName(){
-        return this.name;
-    }
-
-    public FuelInput register(){
-        RockBottomAPI.FUEL_REGISTRY.register(this.getName(), this);
-        return this;
-    }
-
-    public static int getFuelTime(ItemInstance instance){
-        for(FuelInput input : RockBottomAPI.FUEL_REGISTRY.values()){
-            if(input.getFuel().containsItem(instance)){
+    public static int getFuelTime(ItemInstance instance) {
+        for (FuelInput input : RockBottomAPI.FUEL_REGISTRY.values()) {
+            if (input.getFuel().containsItem(instance)) {
                 return input.fuelTime;
             }
         }
         return 0;
+    }
+
+    public IUseInfo getFuel() {
+        return this.fuel;
+    }
+
+    public int getFuelTime() {
+        return this.fuelTime;
+    }
+
+    public ResourceName getName() {
+        return this.name;
+    }
+
+    public FuelInput register() {
+        RockBottomAPI.FUEL_REGISTRY.register(this.getName(), this);
+        return this;
     }
 }

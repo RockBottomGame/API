@@ -25,7 +25,7 @@ import de.ellpeck.rockbottom.api.data.settings.IJsonSettings;
 
 import java.io.File;
 
-public interface IDataManager{
+public interface IDataManager {
 
     File getGameDir();
 

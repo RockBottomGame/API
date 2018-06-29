@@ -21,7 +21,7 @@
 
 package de.ellpeck.rockbottom.api.render.engine;
 
-public interface IDisposable{
+public interface IDisposable {
 
     void dispose();
 

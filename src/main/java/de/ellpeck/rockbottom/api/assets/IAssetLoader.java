@@ -27,9 +27,9 @@ import de.ellpeck.rockbottom.api.content.pack.ContentPack;
 import de.ellpeck.rockbottom.api.mod.IMod;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
-public interface IAssetLoader<T extends IAsset>{
+public interface IAssetLoader<T extends IAsset> {
 
-    default void register(){
+    default void register() {
         RockBottomAPI.ASSET_LOADER_REGISTRY.register(this.getAssetIdentifier(), this);
     }
 
@@ -39,11 +39,11 @@ public interface IAssetLoader<T extends IAsset>{
 
     void disableAsset(IAssetManager manager, ResourceName resourceName);
 
-    default boolean dealWithSpecialCases(IAssetManager manager, String resourceName, String path, JsonElement element, String elementName, IMod loadingMod, ContentPack pack) throws Exception{
+    default boolean dealWithSpecialCases(IAssetManager manager, String resourceName, String path, JsonElement element, String elementName, IMod loadingMod, ContentPack pack) throws Exception {
         return false;
     }
 
-    default void finalize(IAssetManager manager){
+    default void finalize(IAssetManager manager) {
 
     }
 }

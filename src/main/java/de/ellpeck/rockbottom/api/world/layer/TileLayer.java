@@ -38,7 +38,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class TileLayer{
+public class TileLayer {
 
     public static final TileLayer MAIN = new TileLayer(ResourceName.intern("main"), 0).register();
     public static final TileLayer LIQUIDS = new TileLayer(ResourceName.intern("liquids"), -5).register();
@@ -54,118 +54,116 @@ public class TileLayer{
 
     private int assignedIndex = -1;
 
-    public TileLayer(ResourceName name, int priority){
+    public TileLayer(ResourceName name, int priority) {
         this(name, priority, priority);
     }
 
-    public TileLayer(ResourceName name, int renderPriority, int interactionPriority){
+    public TileLayer(ResourceName name, int renderPriority, int interactionPriority) {
         this.name = name;
         this.renderPriority = renderPriority;
         this.interactionPriority = interactionPriority;
     }
 
-    public ResourceName getName(){
-        return this.name;
-    }
-
-    public int getRenderPriority(){
-        return this.renderPriority;
-    }
-
-    public int getInteractionPriority(){
-        return this.interactionPriority;
-    }
-
-    public boolean canEditLayer(IGameInstance game, AbstractEntityPlayer player){
-        return Settings.KEY_BACKGROUND.isDown() ? this == BACKGROUND : (this == MAIN || this == LIQUIDS);
-    }
-
-    public float getRenderLightModifier(){
-        return this == BACKGROUND ? 0.5F : 1F;
-    }
-
-    public boolean forceForegroundRender(){
-        return false;
-    }
-
-    public boolean isVisible(IGameInstance game, AbstractEntityPlayer player, IChunk chunk, int x, int y, boolean isRenderingForeground){
-        return true;
-    }
-
-    public boolean canTileBeInLayer(IWorld world, int x, int y, Tile tile){
-        return tile.isAir() || (this == LIQUIDS) == tile.isLiquid();
-    }
-
-    public boolean canHoldTileEntities(){
-        return this == MAIN || this == BACKGROUND;
-    }
-
-    public boolean canCollide(MovableWorldObject object){
-        return this == MAIN;
-    }
-
-    public TileLayer register(){
-        RockBottomAPI.TILE_LAYER_REGISTRY.register(this.getName(), this);
-        return this;
-    }
-
-    @Override
-    public boolean equals(Object o){
-        if(this == o){
-            return true;
-        }
-        else if(o instanceof TileLayer){
-            TileLayer tileLayer = (TileLayer)o;
-            return this.name.equals(tileLayer.name);
-        }
-        else{
-            return false;
-        }
-    }
-
-    @Override
-    public int hashCode(){
-        return this.name.hashCode();
-    }
-
-    @Override
-    public String toString(){
-        return this.getName().toString();
-    }
-
-    public int index(){
-        Preconditions.checkState(this.assignedIndex >= 0, "Cannot access layer index before layer list has been initialized!");
-        return this.assignedIndex;
-    }
-
     @ApiInternal
-    public static void init(){
-        allLayers = makeList(Comparator.comparing(TileLayer :: getName));
-        for(int i = 0; i < allLayers.size(); i++){
+    public static void init() {
+        allLayers = makeList(Comparator.comparing(TileLayer::getName));
+        for (int i = 0; i < allLayers.size(); i++) {
             allLayers.get(i).assignedIndex = i;
         }
 
-        layersByIntPrio = makeList(Comparator.comparingInt(TileLayer :: getInteractionPriority).reversed());
-        layersByRenderPrio = makeList(Comparator.comparingInt(TileLayer :: getRenderPriority).reversed());
+        layersByIntPrio = makeList(Comparator.comparingInt(TileLayer::getInteractionPriority).reversed());
+        layersByRenderPrio = makeList(Comparator.comparingInt(TileLayer::getRenderPriority).reversed());
 
-        RockBottomAPI.logger().info("Sorting a total of "+allLayers.size()+" tile layers");
+        RockBottomAPI.logger().info("Sorting a total of " + allLayers.size() + " tile layers");
     }
 
-    private static List<TileLayer> makeList(Comparator comparator){
+    private static List<TileLayer> makeList(Comparator comparator) {
         List<TileLayer> list = new ArrayList<>(RockBottomAPI.TILE_LAYER_REGISTRY.values());
         list.sort(comparator);
         return Collections.unmodifiableList(list);
     }
 
-    public static List<TileLayer> getAllLayers(){
+    public static List<TileLayer> getAllLayers() {
         return allLayers;
     }
 
-    public static List<TileLayer> getLayersByInteractionPrio(){
+    public static List<TileLayer> getLayersByInteractionPrio() {
         return layersByIntPrio;
     }
 
-    public static List<TileLayer> getLayersByRenderPrio(){
+    public static List<TileLayer> getLayersByRenderPrio() {
         return layersByRenderPrio;
+    }
+
+    public ResourceName getName() {
+        return this.name;
+    }
+
+    public int getRenderPriority() {
+        return this.renderPriority;
+    }
+
+    public int getInteractionPriority() {
+        return this.interactionPriority;
+    }
+
+    public boolean canEditLayer(IGameInstance game, AbstractEntityPlayer player) {
+        return Settings.KEY_BACKGROUND.isDown() ? this == BACKGROUND : (this == MAIN || this == LIQUIDS);
+    }
+
+    public float getRenderLightModifier() {
+        return this == BACKGROUND ? 0.5F : 1F;
+    }
+
+    public boolean forceForegroundRender() {
+        return false;
+    }
+
+    public boolean isVisible(IGameInstance game, AbstractEntityPlayer player, IChunk chunk, int x, int y, boolean isRenderingForeground) {
+        return true;
+    }
+
+    public boolean canTileBeInLayer(IWorld world, int x, int y, Tile tile) {
+        return tile.isAir() || (this == LIQUIDS) == tile.isLiquid();
+    }
+
+    public boolean canHoldTileEntities() {
+        return this == MAIN || this == BACKGROUND;
+    }
+
+    public boolean canCollide(MovableWorldObject object) {
+        return this == MAIN;
+    }
+
+    public TileLayer register() {
+        RockBottomAPI.TILE_LAYER_REGISTRY.register(this.getName(), this);
+        return this;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        } else if (o instanceof TileLayer) {
+            TileLayer tileLayer = (TileLayer) o;
+            return this.name.equals(tileLayer.name);
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public int hashCode() {
+        return this.name.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return this.getName().toString();
+    }
+
+    public int index() {
+        Preconditions.checkState(this.assignedIndex >= 0, "Cannot access layer index before layer list has been initialized!");
+        return this.assignedIndex;
     }
 }

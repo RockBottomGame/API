@@ -41,7 +41,7 @@ import java.util.List;
  * IRenderer} object given to you in render methods or access {@link
  * IGameInstance#getRenderer()}
  */
-public interface IRenderer extends IDisposable{
+public interface IRenderer extends IDisposable {
 
     /**
      * Sets the {@link IShaderProgram} that the game should fall back to when
@@ -52,24 +52,6 @@ public interface IRenderer extends IDisposable{
      */
     @ApiInternal
     void setDefaultProgram(IShaderProgram program);
-
-    /**
-     * Sets the {@link IShaderProgram} that the renderer should use to draw.
-     * Calling this method while the renderer is active will cause the current
-     * vertices to be flushed and rendered with the last set shader program.
-     *
-     * @param program The new shader program
-     */
-    void setProgram(IShaderProgram program);
-
-    /**
-     * Sets the {@link ITexture} that the renderer should render any vertices
-     * with. Calling this method while the renderer is active will cause the
-     * current vertices to be flushed and rendererd with the last set texture.
-     *
-     * @param texture The new texture
-     */
-    void setTexture(ITexture texture);
 
     /**
      * Adds a certain region of a texture to this renderer. This method gets
@@ -93,7 +75,6 @@ public interface IRenderer extends IDisposable{
      *                interpolate between, or null if there should be no light
      *                influence
      * @param filter  A filter color to modify this texture by
-     *
      * @see VertexProcessor#addTexturedRegion(IRenderer, ITexture, float, float,
      * float, float, float, float, float, float, float, float, float, float,
      * int, int, int, int)
@@ -121,7 +102,6 @@ public interface IRenderer extends IDisposable{
      * @param v2     The second texture y
      * @param u3     The third texture x
      * @param v3     The third texture y
-     *
      * @see VertexProcessor#addTriangle(IRenderer, float, float, float, float,
      * float, float, int, int, int, float, float, float, float, float, float)
      */
@@ -132,7 +112,6 @@ public interface IRenderer extends IDisposable{
      * convenience
      *
      * @param f The component to add
-     *
      * @return This renderer
      */
     IRenderer put(float f);
@@ -148,7 +127,6 @@ public interface IRenderer extends IDisposable{
      * @param color The color
      * @param u     The texture x
      * @param v     The texture y
-     *
      * @see VertexProcessor#addVertex(IRenderer, float, float, int, float,
      * float)
      */
@@ -185,15 +163,6 @@ public interface IRenderer extends IDisposable{
      * @param angle The angle
      */
     void rotate(float angle);
-
-    /**
-     * Rather than rotating by a given angle (see {@link #rotate(float)}), this
-     * method merely sets the rotation of this renderer to the given rotation.
-     * You can use this to reset the rotation back to 0 or its original state.
-     *
-     * @param angle The angle
-     */
-    void setRotation(float angle);
 
     /**
      * Sets the center of rotation for this renderer. This will only affect any
@@ -284,6 +253,15 @@ public interface IRenderer extends IDisposable{
     float getRotation();
 
     /**
+     * Rather than rotating by a given angle (see {@link #rotate(float)}), this
+     * method merely sets the rotation of this renderer to the given rotation.
+     * You can use this to reset the rotation back to 0 or its original state.
+     *
+     * @param angle The angle
+     */
+    void setRotation(float angle);
+
+    /**
      * @return This renderer's translation x
      */
     float getTranslationX();
@@ -320,10 +298,28 @@ public interface IRenderer extends IDisposable{
     IShaderProgram getProgram();
 
     /**
+     * Sets the {@link IShaderProgram} that the renderer should use to draw.
+     * Calling this method while the renderer is active will cause the current
+     * vertices to be flushed and rendered with the last set shader program.
+     *
+     * @param program The new shader program
+     */
+    void setProgram(IShaderProgram program);
+
+    /**
      * @return The renderer's current texture, set using {@link
      * #setTexture(ITexture)}
      */
     ITexture getTexture();
+
+    /**
+     * Sets the {@link ITexture} that the renderer should render any vertices
+     * with. Calling this method while the renderer is active will cause the
+     * current vertices to be flushed and rendererd with the last set texture.
+     *
+     * @param texture The new texture
+     */
+    void setTexture(ITexture texture);
 
     /**
      * Renders a slot. This displays the (by default) green box based on the gui
@@ -553,14 +549,12 @@ public interface IRenderer extends IDisposable{
 
     /**
      * @return The width of the currently visible area of the world, in pixels.
-     *
      * @see #getWidthInGui()
      */
     float getWidthInWorld();
 
     /**
      * @return The height of the currently visible area of the world, in pixels.
-     *
      * @see #getHeightInGui()
      */
     float getHeightInWorld();
@@ -569,7 +563,6 @@ public interface IRenderer extends IDisposable{
      * @return The width of the currently visible area of a gui, in pixels. This
      * is {@link IGameInstance#getWidth()} multiplied by {@link
      * #getGuiScale()}.
-     *
      * @see #getWidthInWorld()
      */
     float getWidthInGui();
@@ -578,21 +571,18 @@ public interface IRenderer extends IDisposable{
      * @return The height of the currently visible area of a gui, in pixels.
      * This is {@link IGameInstance#getHeight()} multiplied by {@link
      * #getGuiScale()}.
-     *
      * @see #getHeightInWorld()
      */
     float getHeightInGui();
 
     /**
      * @return The y position of the mouse on gui scale level
-     *
      * @see #getGuiScale()
      */
     float getMouseInGuiX();
 
     /**
      * @return The y position of the mouse on gui scale level
-     *
      * @see #getGuiScale()
      */
     float getMouseInGuiY();
@@ -672,7 +662,6 @@ public interface IRenderer extends IDisposable{
     /**
      * @return The amount of flushes that this renderer has done since the last
      * render frame.
-     *
      * @see #flush()
      */
     int getFlushes();

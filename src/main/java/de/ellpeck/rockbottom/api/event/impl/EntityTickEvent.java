@@ -28,11 +28,11 @@ import de.ellpeck.rockbottom.api.event.Event;
  * This event is fired every tick when an {@link Entity} is updating. Cancelling
  * the event will result in the entity not updating for one tick.
  */
-public final class EntityTickEvent extends Event{
+public final class EntityTickEvent extends Event {
 
     public final Entity entity;
 
-    public EntityTickEvent(Entity entity){
+    public EntityTickEvent(Entity entity) {
         this.entity = entity;
     }
 }

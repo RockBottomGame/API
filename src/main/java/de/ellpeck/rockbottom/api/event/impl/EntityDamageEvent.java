@@ -30,12 +30,12 @@ import de.ellpeck.rockbottom.api.event.Event;
  * in the damage changing. Cancelling the event will result in the entity taking
  * no damage.
  */
-public final class EntityDamageEvent extends Event{
+public final class EntityDamageEvent extends Event {
 
     public final EntityLiving entity;
     public int amount;
 
-    public EntityDamageEvent(EntityLiving entity, int amount){
+    public EntityDamageEvent(EntityLiving entity, int amount) {
         this.entity = entity;
         this.amount = amount;
     }

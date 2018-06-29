@@ -29,121 +29,121 @@ import de.ellpeck.rockbottom.api.data.set.part.num.array.PartShortArray;
 
 import java.util.UUID;
 
-public final class DataSet extends AbstractDataSet{
+public final class DataSet extends AbstractDataSet {
 
-    public int getInt(String key){
+    public int getInt(String key) {
         return this.getPartContent(key, PartInt.class, 0);
     }
 
-    public void addInt(String key, int i){
+    public void addInt(String key, int i) {
         this.addPart(new PartInt(key, i));
     }
 
-    public long getLong(String key){
+    public long getLong(String key) {
         return this.getPartContent(key, PartLong.class, 0L);
     }
 
-    public void addLong(String key, long l){
+    public void addLong(String key, long l) {
         this.addPart(new PartLong(key, l));
     }
 
-    public float getFloat(String key){
+    public float getFloat(String key) {
         return this.getPartContent(key, PartFloat.class, 0F);
     }
 
-    public void addFloat(String key, float f){
+    public void addFloat(String key, float f) {
         this.addPart(new PartFloat(key, f));
     }
 
-    public double getDouble(String key){
+    public double getDouble(String key) {
         return this.getPartContent(key, PartDouble.class, 0D);
     }
 
-    public void addDouble(String key, double d){
+    public void addDouble(String key, double d) {
         this.addPart(new PartDouble(key, d));
     }
 
-    public DataSet getDataSet(String key){
+    public DataSet getDataSet(String key) {
         return this.getPartContent(key, PartDataSet.class, new DataSet());
     }
 
-    public void addDataSet(String key, DataSet set){
+    public void addDataSet(String key, DataSet set) {
         this.addPart(new PartDataSet(key, set));
     }
 
-    public ModBasedDataSet getModBasedDataSet(String key){
+    public ModBasedDataSet getModBasedDataSet(String key) {
         return this.getPartContent(key, PartModBasedDataSet.class, new ModBasedDataSet());
     }
 
-    public void addModBasedDataSet(String key, ModBasedDataSet set){
+    public void addModBasedDataSet(String key, ModBasedDataSet set) {
         this.addPart(new PartModBasedDataSet(key, set));
     }
 
-    public byte[] getByteArray(String key, int defaultSize){
+    public byte[] getByteArray(String key, int defaultSize) {
         return this.getPartContent(key, PartByteArray.class, new byte[defaultSize]);
     }
 
-    public void addByteArray(String key, byte[] array){
+    public void addByteArray(String key, byte[] array) {
         this.addPart(new PartByteArray(key, array));
     }
 
-    public int[] getIntArray(String key, int defaultSize){
+    public int[] getIntArray(String key, int defaultSize) {
         return this.getPartContent(key, PartIntArray.class, new int[defaultSize]);
     }
 
-    public void addIntArray(String key, int[] array){
+    public void addIntArray(String key, int[] array) {
         this.addPart(new PartIntArray(key, array));
     }
 
-    public short[] getShortArray(String key, int defaultSize){
+    public short[] getShortArray(String key, int defaultSize) {
         return this.getPartContent(key, PartShortArray.class, new short[defaultSize]);
     }
 
-    public void addShortArray(String key, short[] array){
+    public void addShortArray(String key, short[] array) {
         this.addPart(new PartShortArray(key, array));
     }
 
-    public UUID getUniqueId(String key){
+    public UUID getUniqueId(String key) {
         return this.getPartContent(key, PartUniqueId.class, null);
     }
 
-    public void addUniqueId(String key, UUID id){
+    public void addUniqueId(String key, UUID id) {
         this.addPart(new PartUniqueId(key, id));
     }
 
-    public byte getByte(String key){
-        return this.getPartContent(key, PartByte.class, (byte)0);
+    public byte getByte(String key) {
+        return this.getPartContent(key, PartByte.class, (byte) 0);
     }
 
-    public void addByte(String key, byte b){
+    public void addByte(String key, byte b) {
         this.addPart(new PartByte(key, b));
     }
 
-    public short getShort(String key){
-        return this.getPartContent(key, PartShort.class, (short)0);
+    public short getShort(String key) {
+        return this.getPartContent(key, PartShort.class, (short) 0);
     }
 
-    public void addShort(String key, short s){
+    public void addShort(String key, short s) {
         this.addPart(new PartShort(key, s));
     }
 
-    public boolean getBoolean(String key){
+    public boolean getBoolean(String key) {
         return this.getPartContent(key, PartBoolean.class, false);
     }
 
-    public void addBoolean(String key, boolean s){
+    public void addBoolean(String key, boolean s) {
         this.addPart(new PartBoolean(key, s));
     }
 
-    public String getString(String key){
+    public String getString(String key) {
         return this.getPartContent(key, PartString.class, null);
     }
 
-    public void addString(String key, String s){
+    public void addString(String key, String s) {
         this.addPart(new PartString(key, s));
     }
 
-    public DataSet copy(){
+    public DataSet copy() {
         DataSet set = new DataSet();
         set.data.putAll(this.data);
         return set;

@@ -25,21 +25,21 @@ import de.ellpeck.rockbottom.api.render.item.DefaultItemRenderer;
 import de.ellpeck.rockbottom.api.render.item.IItemRenderer;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
-public class ItemBasic extends Item{
+public class ItemBasic extends Item {
 
     private final IItemRenderer renderer;
 
-    public ItemBasic(ResourceName name){
+    public ItemBasic(ResourceName name) {
         super(name);
         this.renderer = this.createRenderer(name);
     }
 
-    protected IItemRenderer createRenderer(ResourceName name){
+    protected IItemRenderer createRenderer(ResourceName name) {
         return new DefaultItemRenderer(name);
     }
 
     @Override
-    public IItemRenderer getRenderer(){
+    public IItemRenderer getRenderer() {
         return this.renderer;
     }
 }

@@ -27,30 +27,30 @@ import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 import java.util.function.Supplier;
 
-public class ComponentFancyToggleButton extends ComponentFancyButton{
+public class ComponentFancyToggleButton extends ComponentFancyButton {
 
     private final ResourceName texToggled;
     private boolean isToggled;
 
-    public ComponentFancyToggleButton(Gui gui, int x, int y, int sizeX, int sizeY, boolean defaultState, Supplier<Boolean> supplier, ResourceName texture, String... hover){
+    public ComponentFancyToggleButton(Gui gui, int x, int y, int sizeX, int sizeY, boolean defaultState, Supplier<Boolean> supplier, ResourceName texture, String... hover) {
         super(gui, x, y, sizeX, sizeY, supplier, texture, hover);
         this.isToggled = defaultState;
         this.texToggled = this.texture.addSuffix("_toggled");
     }
 
     @Override
-    protected ResourceName getTexture(){
+    protected ResourceName getTexture() {
         return this.isToggled ? this.texToggled : this.texture;
     }
 
     @Override
-    public boolean onPressed(IGameInstance game){
+    public boolean onPressed(IGameInstance game) {
         this.isToggled = !this.isToggled;
         return false;
     }
 
     @Override
-    public ResourceName getName(){
+    public ResourceName getName() {
         return ResourceName.intern("fancy_toggle_button");
     }
 }

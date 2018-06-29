@@ -32,22 +32,22 @@ import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 import de.ellpeck.rockbottom.api.world.IWorld;
 import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 
-public abstract class TileLiquid extends TileBasic{
+public abstract class TileLiquid extends TileBasic {
 
     public final IntProp level = new IntProp("level", 0, this.getLevels());
 
-    public TileLiquid(ResourceName name){
+    public TileLiquid(ResourceName name) {
         super(name);
         this.addProps(this.level);
     }
 
     @Override
-    protected ITileRenderer createRenderer(ResourceName name){
+    protected ITileRenderer createRenderer(ResourceName name) {
         return new TileLiquidRenderer(name, this);
     }
 
     @Override
-    public boolean isLiquid(){
+    public boolean isLiquid() {
         return true;
     }
 
@@ -58,52 +58,52 @@ public abstract class TileLiquid extends TileBasic{
     public abstract int getFlowSpeed();
 
     @Override
-    public void onChangeAround(IWorld world, int x, int y, TileLayer layer, int changedX, int changedY, TileLayer changedLayer){
-        if(!world.isClient()){
-            if(changedLayer == TileLayer.MAIN && changedX == x && changedY == y){
+    public void onChangeAround(IWorld world, int x, int y, TileLayer layer, int changedX, int changedY, TileLayer changedLayer) {
+        if (!world.isClient()) {
+            if (changedLayer == TileLayer.MAIN && changedX == x && changedY == y) {
                 TileState state = world.getState(x, y);
-                if(state.getTile().isFullTile()){
+                if (state.getTile().isFullTile()) {
                     world.setState(layer, x, y, GameContent.TILE_AIR.getDefState());
                 }
             }
 
-            if(this.doesFlow()){
+            if (this.doesFlow()) {
                 world.scheduleUpdate(x, y, layer, this.getFlowSpeed());
             }
         }
     }
 
     @Override
-    public void onAdded(IWorld world, int x, int y, TileLayer layer){
-        if(this.doesFlow() && !world.isClient()){
+    public void onAdded(IWorld world, int x, int y, TileLayer layer) {
+        if (this.doesFlow() && !world.isClient()) {
             world.scheduleUpdate(x, y, layer, this.getFlowSpeed());
         }
     }
 
     @Override
-    public boolean canBreak(IWorld world, int x, int y, TileLayer layer, AbstractEntityPlayer player, boolean isRightTool){
+    public boolean canBreak(IWorld world, int x, int y, TileLayer layer, AbstractEntityPlayer player, boolean isRightTool) {
         return false;
     }
 
     @Override
-    public boolean canPlaceInLayer(TileLayer layer){
+    public boolean canPlaceInLayer(TileLayer layer) {
         return layer == TileLayer.LIQUIDS;
     }
 
     @Override
-    public boolean isFullTile(){
+    public boolean isFullTile() {
         return false;
     }
 
     @Override
-    public void onScheduledUpdate(IWorld world, int x, int y, TileLayer layer, int scheduledMeta){
-        if(!world.isClient()){
+    public void onScheduledUpdate(IWorld world, int x, int y, TileLayer layer, int scheduledMeta) {
+        if (!world.isClient()) {
             RockBottomAPI.getInternalHooks().doDefaultLiquidBehavior(world, x, y, layer, this);
         }
     }
 
     @Override
-    protected boolean hasItem(){
+    protected boolean hasItem() {
         return false;
     }
 }

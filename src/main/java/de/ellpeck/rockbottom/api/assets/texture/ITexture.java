@@ -32,7 +32,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-public interface ITexture extends IAsset{
+public interface ITexture extends IAsset {
 
     ResourceName ID = ResourceName.intern("tex");
     int TOP_LEFT = 0;

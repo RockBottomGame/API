@@ -29,7 +29,7 @@ import de.ellpeck.rockbottom.api.world.gen.biome.Biome;
 import java.util.Collections;
 import java.util.List;
 
-public abstract class BiomeLevel{
+public abstract class BiomeLevel {
 
     public abstract int getMinY(IWorld world, int x, int y, int surfaceHeight);
 
@@ -41,12 +41,12 @@ public abstract class BiomeLevel{
 
     public abstract ResourceName getName();
 
-    public BiomeLevel register(){
+    public BiomeLevel register() {
         RockBottomAPI.BIOME_LEVEL_REGISTRY.register(this.getName(), this);
         return this;
     }
 
-    public List<Biome> getAdditionalGenBiomes(IWorld world){
+    public List<Biome> getAdditionalGenBiomes(IWorld world) {
         return Collections.emptyList();
     }
 }

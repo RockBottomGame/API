@@ -28,48 +28,47 @@ import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ItemMeta extends ItemBasic{
+public class ItemMeta extends ItemBasic {
 
     public final List<ResourceName> subResourceNames = new ArrayList<>();
     public final List<ResourceName> subUnlocNames = new ArrayList<>();
 
-    public ItemMeta(ResourceName name){
+    public ItemMeta(ResourceName name) {
         this(name, true);
     }
 
-    public ItemMeta(ResourceName name, boolean addDirectly){
+    public ItemMeta(ResourceName name, boolean addDirectly) {
         super(name);
 
-        if(addDirectly){
+        if (addDirectly) {
             this.addSubItem(name);
         }
     }
 
-    public ItemMeta addSubItem(ResourceName name){
+    public ItemMeta addSubItem(ResourceName name) {
         this.subResourceNames.add(name.addPrefix("items."));
         this.subUnlocNames.add(name.addPrefix("item."));
         return this;
     }
 
     @Override
-    protected IItemRenderer createRenderer(ResourceName name){
+    protected IItemRenderer createRenderer(ResourceName name) {
         return new ItemMetaRenderer(name);
     }
 
     @Override
-    public ResourceName getUnlocalizedName(ItemInstance instance){
+    public ResourceName getUnlocalizedName(ItemInstance instance) {
         int meta = instance.getMeta();
 
-        if(meta >= 0 && this.subUnlocNames.size() > meta){
+        if (meta >= 0 && this.subUnlocNames.size() > meta) {
             return this.subUnlocNames.get(meta);
-        }
-        else{
+        } else {
             return super.getUnlocalizedName(instance);
         }
     }
 
     @Override
-    public int getHighestPossibleMeta(){
-        return Math.max(this.subUnlocNames.size(), this.subResourceNames.size())-1;
+    public int getHighestPossibleMeta() {
+        return Math.max(this.subUnlocNames.size(), this.subResourceNames.size()) - 1;
     }
 }

@@ -28,22 +28,22 @@ import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 import java.util.List;
 
-public class KnowledgeBasedRecipe extends BasicRecipe{
+public class KnowledgeBasedRecipe extends BasicRecipe {
 
-    public KnowledgeBasedRecipe(ResourceName name, List<IUseInfo> inputs, List<ItemInstance> outputs){
+    public KnowledgeBasedRecipe(ResourceName name, List<IUseInfo> inputs, List<ItemInstance> outputs) {
         super(name, inputs, outputs);
     }
 
-    public KnowledgeBasedRecipe(ResourceName name, ItemInstance output, IUseInfo... inputs){
+    public KnowledgeBasedRecipe(ResourceName name, ItemInstance output, IUseInfo... inputs) {
         super(name, output, inputs);
     }
 
-    public KnowledgeBasedRecipe(ItemInstance output, IUseInfo... inputs){
+    public KnowledgeBasedRecipe(ItemInstance output, IUseInfo... inputs) {
         super(output, inputs);
     }
 
     @Override
-    public boolean isKnown(AbstractEntityPlayer player){
+    public boolean isKnown(AbstractEntityPlayer player) {
         return !player.world.isStoryMode() || player.getKnowledge().knowsRecipe(this);
     }
 }

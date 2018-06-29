@@ -23,11 +23,11 @@ package de.ellpeck.rockbottom.api.entity.player.statistics;
 
 import de.ellpeck.rockbottom.api.data.set.DataSet;
 
-public abstract class Statistic{
+public abstract class Statistic {
 
     private final StatisticInitializer initializer;
 
-    public Statistic(StatisticInitializer initializer){
+    public Statistic(StatisticInitializer initializer) {
         this.initializer = initializer;
     }
 
@@ -35,7 +35,7 @@ public abstract class Statistic{
 
     public abstract void load(DataSet set);
 
-    public StatisticInitializer getInitializer(){
+    public StatisticInitializer getInitializer() {
         return this.initializer;
     }
 }

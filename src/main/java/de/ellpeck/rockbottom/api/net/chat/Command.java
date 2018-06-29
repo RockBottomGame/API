@@ -29,48 +29,48 @@ import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 import java.util.Collections;
 import java.util.List;
 
-public abstract class Command{
+public abstract class Command {
 
     private final ResourceName name;
     private final String description;
     private final int level;
     private final String[] triggers;
 
-    public Command(ResourceName name, String description, int level){
+    public Command(ResourceName name, String description, int level) {
         this(name, description, level, name.getResourceName());
     }
 
-    public Command(ResourceName name, String description, int level, String... triggers){
+    public Command(ResourceName name, String description, int level, String... triggers) {
         this.name = name;
         this.description = description;
         this.level = level;
         this.triggers = triggers;
     }
 
-    public ResourceName getName(){
+    public ResourceName getName() {
         return this.name;
     }
 
-    public String getDescription(){
+    public String getDescription() {
         return this.description;
     }
 
-    public String[] getTriggers(){
+    public String[] getTriggers() {
         return this.triggers;
     }
 
-    public int getLevel(){
+    public int getLevel() {
         return this.level;
     }
 
-    public Command register(){
+    public Command register() {
         RockBottomAPI.COMMAND_REGISTRY.register(this.getName(), this);
         return this;
     }
 
     public abstract ChatComponent execute(String[] args, ICommandSender sender, String playerName, IGameInstance game, IChatLog chat);
 
-    public List<String> getAutocompleteSuggestions(String[] args, int argNumber, ICommandSender sender, IGameInstance game, IChatLog chat){
+    public List<String> getAutocompleteSuggestions(String[] args, int argNumber, ICommandSender sender, IGameInstance game, IChatLog chat) {
         return Collections.emptyList();
     }
 }

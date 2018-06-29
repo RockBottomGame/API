@@ -25,7 +25,7 @@ import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.tile.state.TileState;
 import de.ellpeck.rockbottom.api.world.IWorld;
 
-public interface IParticleManager{
+public interface IParticleManager {
 
     void addParticle(Particle particle);
 

@@ -25,13 +25,13 @@ import com.google.gson.JsonElement;
 
 import java.io.DataInput;
 
-public interface IPartFactory<T extends DataPart>{
+public interface IPartFactory<T extends DataPart> {
 
     T parse(String name, JsonElement element) throws Exception;
 
     T parse(String name, DataInput stream) throws Exception;
 
-    default int getPriority(){
+    default int getPriority() {
         return 0;
     }
 }

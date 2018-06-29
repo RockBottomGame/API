@@ -21,7 +21,7 @@
 
 package de.ellpeck.rockbottom.api.toast;
 
-public interface IToaster{
+public interface IToaster {
 
     void displayToast(Toast toast);
 

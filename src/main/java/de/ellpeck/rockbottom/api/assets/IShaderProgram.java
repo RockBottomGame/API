@@ -26,7 +26,7 @@ import de.ellpeck.rockbottom.api.render.engine.VertexProcessor;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 import org.joml.Matrix4f;
 
-public interface IShaderProgram extends IDisposable, IAsset{
+public interface IShaderProgram extends IDisposable, IAsset {
 
     ResourceName ID = ResourceName.intern("shader");
     ResourceName GUI_SHADER = ResourceName.intern("gui");

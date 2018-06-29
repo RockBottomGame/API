@@ -33,65 +33,65 @@ import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 import java.util.Collections;
 import java.util.List;
 
-public class NumberStatistic extends StatisticInitializer<NumberStatistic.Stat>{
+public class NumberStatistic extends StatisticInitializer<NumberStatistic.Stat> {
 
     protected final int defaultValue;
     protected final ResourceName textureLocation;
 
-    public NumberStatistic(ResourceName name, ResourceName textureLocation){
+    public NumberStatistic(ResourceName name, ResourceName textureLocation) {
         this(name, textureLocation, 0);
     }
 
-    public NumberStatistic(ResourceName name, ResourceName textureLocation, int defaultValue){
+    public NumberStatistic(ResourceName name, ResourceName textureLocation, int defaultValue) {
         super(name);
         this.defaultValue = defaultValue;
         this.textureLocation = textureLocation;
     }
 
     @Override
-    public Stat makeStatistic(IStatistics statistics){
+    public Stat makeStatistic(IStatistics statistics) {
         return new Stat(this, this.defaultValue);
     }
 
     @Override
-    public List<ComponentStatistic> getDisplayComponents(IGameInstance game, Stat stat, AbstractStatGui gui, ComponentMenu menu){
-        return Collections.singletonList(new ComponentStatistic(gui, () -> game.getAssetManager().localize(this.getName().addPrefix("stat.")), () -> String.valueOf(stat.getValue()), stat.getValue(), null){
+    public List<ComponentStatistic> getDisplayComponents(IGameInstance game, Stat stat, AbstractStatGui gui, ComponentMenu menu) {
+        return Collections.singletonList(new ComponentStatistic(gui, () -> game.getAssetManager().localize(this.getName().addPrefix("stat.")), () -> String.valueOf(stat.getValue()), stat.getValue(), null) {
             @Override
-            public void renderStatGraphic(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y){
-                manager.getTexture(NumberStatistic.this.textureLocation).draw(x+1, y+1, 12F, 12F);
+            public void renderStatGraphic(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y) {
+                manager.getTexture(NumberStatistic.this.textureLocation).draw(x + 1, y + 1, 12F, 12F);
             }
         });
     }
 
-    public static class Stat extends Statistic{
+    public static class Stat extends Statistic {
 
         private int value;
 
-        public Stat(StatisticInitializer initializer, int defaultValue){
+        public Stat(StatisticInitializer initializer, int defaultValue) {
             super(initializer);
             this.value = defaultValue;
         }
 
-        public void update(){
+        public void update() {
             this.value++;
         }
 
         @Override
-        public void save(DataSet set){
+        public void save(DataSet set) {
             set.addInt("value", this.value);
         }
 
         @Override
-        public void load(DataSet set){
+        public void load(DataSet set) {
             this.value = set.getInt("value");
         }
 
-        public int getValue(){
+        public int getValue() {
             return this.value;
         }
 
         @Override
-        public String toString(){
+        public String toString() {
             return String.valueOf(this.value);
         }
     }

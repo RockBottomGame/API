@@ -37,7 +37,7 @@ import java.util.UUID;
  * This class handles all of the multiplayer and {@link IPacket} managing. You
  * can receive an instance of this class using {@link RockBottomAPI#getNet()}.
  */
-public interface INetHandler{
+public interface INetHandler {
 
     /**
      * Returns true if the passed entity is the current local player. Note that
@@ -45,9 +45,7 @@ public interface INetHandler{
      * a local player.
      *
      * @param entity The entity to query
-     *
      * @return If the entity is the local player
-     *
      * @see IGameInstance#isDedicatedServer()
      * @see IWorld#isLocalPlayer(Entity)
      */
@@ -60,7 +58,6 @@ public interface INetHandler{
      * using the ingame menu, this will not be true.
      *
      * @return If the game is a client currently
-     *
      * @see IWorld#isClient()
      */
     boolean isClient();
@@ -72,7 +69,6 @@ public interface INetHandler{
      * ingame menu.
      *
      * @return If the game is a server currently
-     *
      * @see IGameInstance#isDedicatedServer()
      * @see IWorld#isServer()
      */
@@ -82,7 +78,6 @@ public interface INetHandler{
      * Returns true fi the game is currently either in server or client mode.
      *
      * @return If the net handler is active
-     *
      * @see #isClient()
      * @see #isServer()
      */
@@ -95,7 +90,6 @@ public interface INetHandler{
      * method does not return true.
      *
      * @return If the game is connected to a server
-     *
      * @see #isClient()
      */
     boolean isConnectedToServer();
@@ -194,9 +188,7 @@ public interface INetHandler{
      * permission to check how much access to commands any player has.
      *
      * @param player The player
-     *
      * @return The player's command level
-     *
      * @see Constants#ADMIN_PERMISSION
      */
     int getCommandLevel(AbstractEntityPlayer player);
@@ -206,7 +198,6 @@ public interface INetHandler{
      *
      * @param player The player
      * @param level  The command level
-     *
      * @see #getCommandLevel(AbstractEntityPlayer)
      * @see Constants#ADMIN_PERMISSION
      */
@@ -217,7 +208,6 @@ public interface INetHandler{
      *
      * @param id    The player's id
      * @param level The command level
-     *
      * @see #getCommandLevel(AbstractEntityPlayer)
      * @see Constants#ADMIN_PERMISSION
      */
@@ -241,7 +231,6 @@ public interface INetHandler{
      * Returns true if the given player unique id is on the whitelist.
      *
      * @param id The id to query
-     *
      * @return If it is whitelisted
      */
     boolean isWhitelisted(UUID id);
@@ -260,7 +249,6 @@ public interface INetHandler{
      * Sets the whitelist to be disabled or enabled
      *
      * @param enabled The value
-     *
      * @see #isWhitelistEnabled()
      */
     void enableWhitelist(boolean enabled);
@@ -282,7 +270,6 @@ public interface INetHandler{
      * will also return null if there is no reason.
      *
      * @param id The id
-     *
      * @return The reson for being on the blacklist
      */
     String getBlacklistReason(UUID id);
@@ -291,7 +278,6 @@ public interface INetHandler{
      * Removes a certain player's unique id from the blacklist
      *
      * @param id The id to remove
-     *
      * @see #blacklist(UUID, String)
      */
     void removeBlacklist(UUID id);
@@ -300,7 +286,6 @@ public interface INetHandler{
      * Returns true if a certain player's unique id is blacklisted currently
      *
      * @param id The id to query
-     *
      * @return If it is blacklisted
      */
     boolean isBlacklisted(UUID id);

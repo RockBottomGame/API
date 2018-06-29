@@ -35,52 +35,51 @@ import io.netty.channel.ChannelHandlerContext;
 import java.util.UUID;
 
 @ApiInternal
-public final class PacketDrop implements IPacket{
+public final class PacketDrop implements IPacket {
 
     private UUID playerId;
 
-    public PacketDrop(){
+    public PacketDrop() {
     }
 
-    public PacketDrop(UUID playerId){
+    public PacketDrop(UUID playerId) {
         this.playerId = playerId;
     }
 
+    @ApiInternal
+    public static void dropHeldItem(AbstractEntityPlayer player, ItemContainer container) {
+        if (container.holdingInst != null) {
+            if (RockBottomAPI.getNet().isClient()) {
+                RockBottomAPI.getNet().sendToServer(new PacketDrop(player.getUniqueId()));
+            } else {
+                AbstractEntityItem.spawn(player.world, container.holdingInst, player.getX(), player.getY() + 1, player.facing.x * 0.25, 0);
+            }
+            container.holdingInst = null;
+        }
+    }
+
     @Override
-    public void toBuffer(ByteBuf buf){
+    public void toBuffer(ByteBuf buf) {
         buf.writeLong(this.playerId.getMostSignificantBits());
         buf.writeLong(this.playerId.getLeastSignificantBits());
     }
 
     @Override
-    public void fromBuffer(ByteBuf buf){
+    public void fromBuffer(ByteBuf buf) {
         this.playerId = new UUID(buf.readLong(), buf.readLong());
     }
 
     @Override
-    public void handle(IGameInstance game, ChannelHandlerContext context){
+    public void handle(IGameInstance game, ChannelHandlerContext context) {
         IWorld world = game.getWorld();
-        if(world != null){
+        if (world != null) {
             AbstractEntityPlayer player = world.getPlayer(this.playerId);
-            if(player != null){
+            if (player != null) {
                 ItemContainer container = player.getContainer();
-                if(container != null){
+                if (container != null) {
                     dropHeldItem(player, container);
                 }
             }
-        }
-    }
-
-    @ApiInternal
-    public static void dropHeldItem(AbstractEntityPlayer player, ItemContainer container){
-        if(container.holdingInst != null){
-            if(RockBottomAPI.getNet().isClient()){
-                RockBottomAPI.getNet().sendToServer(new PacketDrop(player.getUniqueId()));
-            }
-            else{
-                AbstractEntityItem.spawn(player.world, container.holdingInst, player.getX(), player.getY()+1, player.facing.x*0.25, 0);
-            }
-            container.holdingInst = null;
         }
     }
 }

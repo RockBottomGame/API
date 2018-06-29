@@ -32,87 +32,81 @@ import java.util.Random;
 import java.util.Set;
 import java.util.function.BiConsumer;
 
-public abstract class AbstractInventory implements IInventory{
+public abstract class AbstractInventory implements IInventory {
 
     protected final Set<BiConsumer<IInventory, Integer>> callbacks = new HashSet<>();
 
     @Override
-    public ItemInstance add(int id, int amount){
+    public ItemInstance add(int id, int amount) {
         ItemInstance inst = this.get(id);
-        if(inst != null){
+        if (inst != null) {
             inst.addAmount(amount);
 
             this.notifyChange(id);
             return inst;
-        }
-        else{
+        } else {
             return null;
         }
     }
 
     @Override
-    public ItemInstance remove(int id, int amount){
+    public ItemInstance remove(int id, int amount) {
         ItemInstance inst = this.get(id);
-        if(inst != null){
+        if (inst != null) {
             this.set(id, inst.removeAmount(amount).nullIfEmpty());
             return inst;
-        }
-        else{
+        } else {
             return null;
         }
     }
 
     @Override
-    public void notifyChange(int slot){
+    public void notifyChange(int slot) {
         RockBottomAPI.getEventHandler().fireEvent(new InventoryChangeEvent(this, slot));
 
-        for(BiConsumer<IInventory, Integer> callback : this.callbacks){
+        for (BiConsumer<IInventory, Integer> callback : this.callbacks) {
             callback.accept(this, slot);
         }
     }
 
     @Override
-    public void addChangeCallback(BiConsumer<IInventory, Integer> callback){
-        if(!this.callbacks.contains(callback)){
+    public void addChangeCallback(BiConsumer<IInventory, Integer> callback) {
+        if (!this.callbacks.contains(callback)) {
             this.callbacks.add(callback);
-            RockBottomAPI.logger().config("Added change callback "+callback+" to inventory "+this);
-        }
-        else{
-            RockBottomAPI.logger().warning("Tried adding change callback "+callback+" to inventory "+this+" but it was already present!");
-        }
-    }
-
-    @Override
-    public void removeChangeCallback(BiConsumer<IInventory, Integer> callback){
-        if(this.callbacks.remove(callback)){
-            RockBottomAPI.logger().config("Removed change callback "+callback+" from inventory "+this);
-        }
-        else{
-            RockBottomAPI.logger().warning("Tried removing change callback "+callback+" to inventory "+this+" but it wasn't part of it!");
+            RockBottomAPI.logger().config("Added change callback " + callback + " to inventory " + this);
+        } else {
+            RockBottomAPI.logger().warning("Tried adding change callback " + callback + " to inventory " + this + " but it was already present!");
         }
     }
 
     @Override
-    public ItemInstance addToSlot(int slot, ItemInstance instance, boolean simulate){
+    public void removeChangeCallback(BiConsumer<IInventory, Integer> callback) {
+        if (this.callbacks.remove(callback)) {
+            RockBottomAPI.logger().config("Removed change callback " + callback + " from inventory " + this);
+        } else {
+            RockBottomAPI.logger().warning("Tried removing change callback " + callback + " to inventory " + this + " but it wasn't part of it!");
+        }
+    }
+
+    @Override
+    public ItemInstance addToSlot(int slot, ItemInstance instance, boolean simulate) {
         ItemInstance slotInst = this.get(slot);
 
-        if(slotInst == null){
-            if(!simulate){
+        if (slotInst == null) {
+            if (!simulate) {
                 this.set(slot, instance);
             }
             return null;
-        }
-        else if(slotInst.isEffectivelyEqual(instance)){
-            int space = slotInst.getMaxAmount()-slotInst.getAmount();
+        } else if (slotInst.isEffectivelyEqual(instance)) {
+            int space = slotInst.getMaxAmount() - slotInst.getAmount();
 
-            if(space >= instance.getAmount()){
-                if(!simulate){
+            if (space >= instance.getAmount()) {
+                if (!simulate) {
                     this.add(slot, instance.getAmount());
                 }
                 return null;
-            }
-            else{
-                if(!simulate){
+            } else {
+                if (!simulate) {
                     this.add(slot, space);
                 }
                 instance.removeAmount(space);
@@ -122,13 +116,13 @@ public abstract class AbstractInventory implements IInventory{
     }
 
     @Override
-    public ItemInstance add(ItemInstance instance, boolean simulate){
+    public ItemInstance add(ItemInstance instance, boolean simulate) {
         ItemInstance copy = instance.copy();
 
-        for(int i = 0; i < this.getSlotAmount(); i++){
+        for (int i = 0; i < this.getSlotAmount(); i++) {
             copy = this.addToSlot(i, copy, simulate);
 
-            if(copy == null){
+            if (copy == null) {
                 return null;
             }
         }
@@ -137,15 +131,15 @@ public abstract class AbstractInventory implements IInventory{
     }
 
     @Override
-    public ItemInstance addExistingFirst(ItemInstance instance, boolean simulate){
+    public ItemInstance addExistingFirst(ItemInstance instance, boolean simulate) {
         ItemInstance copy = instance.copy();
 
-        for(int i = 0; i < 2; i++){
-            for(int j = 0; j < this.getSlotAmount(); j++){
-                if(i == 1 || (this.get(j) != null && this.get(j).isEffectivelyEqual(instance))){
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < this.getSlotAmount(); j++) {
+                if (i == 1 || (this.get(j) != null && this.get(j).isEffectivelyEqual(instance))) {
                     copy = this.addToSlot(j, copy, simulate);
 
-                    if(copy == null){
+                    if (copy == null) {
                         return null;
                     }
                 }
@@ -156,28 +150,28 @@ public abstract class AbstractInventory implements IInventory{
     }
 
     @Override
-    public void fillRandomly(Random random, List<ItemInstance> items){
-        for(ItemInstance instance : items){
+    public void fillRandomly(Random random, List<ItemInstance> items) {
+        for (ItemInstance instance : items) {
             int slot;
-            do{
+            do {
                 slot = random.nextInt(this.getSlotAmount());
             }
-            while(this.get(slot) != null);
+            while (this.get(slot) != null);
 
             this.set(slot, instance);
         }
     }
 
     @Override
-    public boolean containsItem(ItemInstance inst){
+    public boolean containsItem(ItemInstance inst) {
         return this.getItemIndex(inst) >= 0;
     }
 
     @Override
-    public int getItemIndex(ItemInstance inst){
-        for(int i = 0; i < this.getSlotAmount(); i++){
+    public int getItemIndex(ItemInstance inst) {
+        for (int i = 0; i < this.getSlotAmount(); i++) {
             ItemInstance instance = this.get(i);
-            if(instance != null && instance.getAmount() >= inst.getAmount() && instance.isEffectivelyEqual(inst)){
+            if (instance != null && instance.getAmount() >= inst.getAmount() && instance.isEffectivelyEqual(inst)) {
                 return i;
             }
         }
@@ -185,9 +179,9 @@ public abstract class AbstractInventory implements IInventory{
     }
 
     @Override
-    public boolean containsResource(IUseInfo info){
-        for(ItemInstance inst : info.getItems()){
-            if(this.containsItem(inst)){
+    public boolean containsResource(IUseInfo info) {
+        for (ItemInstance inst : info.getItems()) {
+            if (this.containsItem(inst)) {
                 return true;
             }
         }

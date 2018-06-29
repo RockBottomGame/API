@@ -33,60 +33,59 @@ import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 import java.util.function.Supplier;
 
-public class ComponentClickableText extends GuiComponent{
+public class ComponentClickableText extends GuiComponent {
 
     private final float scale;
     private final String[] text;
     private final Supplier<Boolean> clickSupplier;
 
-    public ComponentClickableText(Gui gui, int x, int y, float scale, boolean fromRight, Supplier<Boolean> clickSupplier, String... text){
+    public ComponentClickableText(Gui gui, int x, int y, float scale, boolean fromRight, Supplier<Boolean> clickSupplier, String... text) {
         super(gui, x, y, 0, 0);
         this.scale = scale;
         this.text = text;
         this.clickSupplier = clickSupplier;
 
         IFont font = RockBottomAPI.getGame().getAssetManager().getFont();
-        for(String s : text){
-            int width = (int)font.getWidth(s, scale);
-            if(this.width < width){
+        for (String s : text) {
+            int width = (int) font.getWidth(s, scale);
+            if (this.width < width) {
                 this.width = width;
             }
         }
-        this.height = (int)font.getHeight(scale)*text.length;
+        this.height = (int) font.getHeight(scale) * text.length;
 
-        if(fromRight){
+        if (fromRight) {
             this.x -= this.width;
         }
     }
 
     @Override
-    public void render(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y){
+    public void render(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y) {
         IFont font = manager.getFont();
         boolean moused = this.isMouseOverPrioritized(game);
 
         int yOff = 0;
-        for(String s : this.getText()){
-            font.drawString(this.x, this.y+yOff, moused ? FormattingCode.UNDERLINED+s : s, this.scale);
+        for (String s : this.getText()) {
+            font.drawString(this.x, this.y + yOff, moused ? FormattingCode.UNDERLINED + s : s, this.scale);
             yOff += font.getHeight(this.scale);
         }
     }
 
-    public String[] getText(){
+    public String[] getText() {
         return this.text;
     }
 
     @Override
-    public boolean onMouseAction(IGameInstance game, int button, float x, float y){
-        if(Settings.KEY_GUI_ACTION_1.isKey(button) && this.isMouseOverPrioritized(game)){
+    public boolean onMouseAction(IGameInstance game, int button, float x, float y) {
+        if (Settings.KEY_GUI_ACTION_1.isKey(button) && this.isMouseOverPrioritized(game)) {
             return this.clickSupplier.get();
-        }
-        else{
+        } else {
             return false;
         }
     }
 
     @Override
-    public ResourceName getName(){
+    public ResourceName getName() {
         return ResourceName.intern("clickable_text");
     }
 }

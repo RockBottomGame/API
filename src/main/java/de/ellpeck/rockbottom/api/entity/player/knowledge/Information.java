@@ -25,35 +25,35 @@ import de.ellpeck.rockbottom.api.data.set.DataSet;
 import de.ellpeck.rockbottom.api.toast.Toast;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
-public class Information{
+public class Information {
 
     private final ResourceName name;
 
-    public Information(ResourceName name){
+    public Information(ResourceName name) {
         this.name = name;
     }
 
-    public void save(DataSet set, IKnowledgeManager manager){
+    public void save(DataSet set, IKnowledgeManager manager) {
 
     }
 
-    public void load(DataSet set, IKnowledgeManager manager){
+    public void load(DataSet set, IKnowledgeManager manager) {
 
     }
 
-    public Toast announceTeach(){
+    public Toast announceTeach() {
         return null;
     }
 
-    public Toast announceForget(){
+    public Toast announceForget() {
         return null;
     }
 
-    public ResourceName getName(){
+    public ResourceName getName() {
         return this.name;
     }
 
-    public ResourceName getRegistryName(){
+    public ResourceName getRegistryName() {
         return this.name;
     }
 }

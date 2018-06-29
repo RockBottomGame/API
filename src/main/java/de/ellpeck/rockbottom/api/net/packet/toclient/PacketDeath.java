@@ -32,34 +32,34 @@ import io.netty.channel.ChannelHandlerContext;
 import java.util.UUID;
 
 @ApiInternal
-public final class PacketDeath implements IPacket{
+public final class PacketDeath implements IPacket {
 
     private UUID entityId;
 
-    public PacketDeath(UUID entityId){
+    public PacketDeath(UUID entityId) {
         this.entityId = entityId;
     }
 
-    public PacketDeath(){
+    public PacketDeath() {
     }
 
     @Override
-    public void toBuffer(ByteBuf buf){
+    public void toBuffer(ByteBuf buf) {
         buf.writeLong(this.entityId.getMostSignificantBits());
         buf.writeLong(this.entityId.getLeastSignificantBits());
     }
 
     @Override
-    public void fromBuffer(ByteBuf buf){
+    public void fromBuffer(ByteBuf buf) {
         this.entityId = new UUID(buf.readLong(), buf.readLong());
     }
 
     @Override
-    public void handle(IGameInstance game, ChannelHandlerContext context){
+    public void handle(IGameInstance game, ChannelHandlerContext context) {
         IWorld world = game.getWorld();
-        if(world != null){
+        if (world != null) {
             Entity entity = world.getEntity(this.entityId);
-            if(entity != null){
+            if (entity != null) {
                 entity.setDead(true);
             }
         }

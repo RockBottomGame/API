@@ -28,7 +28,7 @@ import de.ellpeck.rockbottom.api.tile.Tile;
 import java.util.List;
 import java.util.Set;
 
-public interface IResourceRegistry{
+public interface IResourceRegistry {
 
     String addResources(String name, Item item);
 

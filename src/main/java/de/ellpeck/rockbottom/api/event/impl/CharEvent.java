@@ -32,12 +32,12 @@ import org.lwjgl.glfw.GLFWCharCallbackI;
  * GLFWCharCallbackI)}. Cancelling it will make the input character not be
  * processed internally.
  */
-public final class CharEvent extends Event{
+public final class CharEvent extends Event {
 
     public final long window;
     public int codepoint;
 
-    public CharEvent(long window, int codepoint){
+    public CharEvent(long window, int codepoint) {
         this.window = window;
         this.codepoint = codepoint;
     }

@@ -28,18 +28,17 @@ import java.io.DataInput;
 import java.io.DataOutput;
 import java.util.UUID;
 
-public final class PartUniqueId extends BasicDataPart<UUID>{
+public final class PartUniqueId extends BasicDataPart<UUID> {
 
-    public static final IPartFactory<PartUniqueId> FACTORY = new IPartFactory<PartUniqueId>(){
+    public static final IPartFactory<PartUniqueId> FACTORY = new IPartFactory<PartUniqueId>() {
         @Override
-        public PartUniqueId parse(String name, JsonElement element){
-            if(element.isJsonPrimitive()){
+        public PartUniqueId parse(String name, JsonElement element) {
+            if (element.isJsonPrimitive()) {
                 JsonPrimitive prim = element.getAsJsonPrimitive();
-                if(prim.isString()){
-                    try{
+                if (prim.isString()) {
+                    try {
                         return new PartUniqueId(name, UUID.fromString(prim.getAsString()));
-                    }
-                    catch(Exception ignored){
+                    } catch (Exception ignored) {
                     }
                 }
             }
@@ -47,33 +46,33 @@ public final class PartUniqueId extends BasicDataPart<UUID>{
         }
 
         @Override
-        public PartUniqueId parse(String name, DataInput stream) throws Exception{
+        public PartUniqueId parse(String name, DataInput stream) throws Exception {
             return new PartUniqueId(name, new UUID(stream.readLong(), stream.readLong()));
         }
 
         @Override
-        public int getPriority(){
+        public int getPriority() {
             return 50;
         }
     };
 
-    public PartUniqueId(String name, UUID data){
+    public PartUniqueId(String name, UUID data) {
         super(name, data);
     }
 
     @Override
-    public void write(DataOutput stream) throws Exception{
+    public void write(DataOutput stream) throws Exception {
         stream.writeLong(this.data.getMostSignificantBits());
         stream.writeLong(this.data.getLeastSignificantBits());
     }
 
     @Override
-    public JsonElement write(){
+    public JsonElement write() {
         return new JsonPrimitive(this.data.toString());
     }
 
     @Override
-    public IPartFactory<? extends DataPart<UUID>> getFactory(){
+    public IPartFactory<? extends DataPart<UUID>> getFactory() {
         return FACTORY;
     }
 }

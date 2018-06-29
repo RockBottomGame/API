@@ -30,7 +30,7 @@ import de.ellpeck.rockbottom.api.RockBottomAPI;
  * You can find a list of events that are fired in the normal game in the {@code
  * impl} sub-package.
  */
-public interface IEventHandler{
+public interface IEventHandler {
 
     /**
      * Registers an {@link IEventListener} that will listen to a certain kind of
@@ -42,7 +42,6 @@ public interface IEventHandler{
      * @param listener The listener
      * @param <T>      A generic type representing the event that is listened
      *                 to
-     *
      * @see IEventListener#listen(EventResult, Event)
      */
     <T extends Event> void registerListener(Class<T> type, IEventListener<T> listener);
@@ -73,9 +72,7 @@ public interface IEventHandler{
      * Event} class.
      *
      * @param event The event to fire
-     *
      * @return The result
-     *
      * @see #registerListener(Class, IEventListener)
      */
     EventResult fireEvent(Event event);

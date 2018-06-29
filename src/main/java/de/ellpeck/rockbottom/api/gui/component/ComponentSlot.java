@@ -31,13 +31,13 @@ import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 import org.lwjgl.glfw.GLFW;
 
-public class ComponentSlot extends GuiComponent{
+public class ComponentSlot extends GuiComponent {
 
     public final ContainerSlot slot;
     public final int componentId;
     public final GuiContainer container;
 
-    public ComponentSlot(GuiContainer container, ContainerSlot slot, int componentId, int x, int y){
+    public ComponentSlot(GuiContainer container, ContainerSlot slot, int componentId, int x, int y) {
         super(container, x, y, 16, 16);
         this.container = container;
         this.slot = slot;
@@ -45,36 +45,34 @@ public class ComponentSlot extends GuiComponent{
     }
 
     @Override
-    public boolean onMouseAction(IGameInstance game, int button, float x, float y){
-        if(this.isMouseOver(game)){
-            if(game.getInput().isKeyDown(GLFW.GLFW_KEY_LEFT_SHIFT)){
+    public boolean onMouseAction(IGameInstance game, int button, float x, float y) {
+        if (this.isMouseOver(game)) {
+            if (game.getInput().isKeyDown(GLFW.GLFW_KEY_LEFT_SHIFT)) {
                 return RockBottomAPI.getInternalHooks().doDefaultShiftClicking(game, button, this.container, this);
-            }
-            else{
+            } else {
                 return RockBottomAPI.getInternalHooks().doDefaultSlotMovement(game, button, x, y, this.container, this);
             }
-        }
-        else{
+        } else {
             return false;
         }
     }
 
     @Override
-    public ResourceName getName(){
+    public ResourceName getName() {
         return ResourceName.intern("slot");
     }
 
     @Override
-    public void render(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y){
+    public void render(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y) {
         ItemInstance holding = this.container.getContainer().holdingInst;
         g.renderSlotInGui(game, manager, this.slot.get(), x, y, 1F, this.isMouseOver(game), holding == null || this.slot.canPlace(holding));
     }
 
     @Override
-    public void renderOverlay(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y){
-        if(this.container.getContainer().holdingInst == null && this.isMouseOverPrioritized(game)){
+    public void renderOverlay(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y) {
+        if (this.container.getContainer().holdingInst == null && this.isMouseOverPrioritized(game)) {
             ItemInstance instance = this.slot.get();
-            if(instance != null){
+            if (instance != null) {
                 g.describeItem(game, manager, instance);
             }
         }

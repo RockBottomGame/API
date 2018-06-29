@@ -23,9 +23,9 @@ package de.ellpeck.rockbottom.api.entity;
 
 import de.ellpeck.rockbottom.api.world.IWorld;
 
-public abstract class AbstractEntitySlime extends EntityLiving{
+public abstract class AbstractEntitySlime extends EntityLiving {
 
-    public AbstractEntitySlime(IWorld world){
+    public AbstractEntitySlime(IWorld world) {
         super(world);
     }
 

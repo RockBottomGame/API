@@ -33,7 +33,7 @@ import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 import java.util.function.BiConsumer;
 
-public class ComponentColorPicker extends GuiComponent{
+public class ComponentColorPicker extends GuiComponent {
 
     private final ITexture texture = RockBottomAPI.getGame().getAssetManager().getTexture(ResourceName.intern("gui.colorpick"));
 
@@ -47,7 +47,7 @@ public class ComponentColorPicker extends GuiComponent{
     private boolean isEnlarged;
     private int color;
 
-    public ComponentColorPicker(Gui gui, int x, int y, int sizeX, int sizeY, int defaultColor, BiConsumer<Integer, Boolean> consumer, boolean isEnlargable){
+    public ComponentColorPicker(Gui gui, int x, int y, int sizeX, int sizeY, int defaultColor, BiConsumer<Integer, Boolean> consumer, boolean isEnlargable) {
         super(gui, x, y, sizeX, sizeY);
         this.consumer = consumer;
         this.color = defaultColor;
@@ -60,35 +60,33 @@ public class ComponentColorPicker extends GuiComponent{
     }
 
     @Override
-    public void render(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y){
+    public void render(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y) {
         this.texture.draw(x, y, this.width, this.height);
         g.addEmptyRect(x, y, this.width, this.height, getElementOutlineColor());
     }
 
     @Override
-    public boolean onMouseAction(IGameInstance game, int button, float x, float y){
-        if(this.isMouseOver(game)){
-            if(Settings.KEY_GUI_ACTION_1.isKey(button)){
-                if(this.isEnlargable && !this.isEnlarged){
+    public boolean onMouseAction(IGameInstance game, int button, float x, float y) {
+        if (this.isMouseOver(game)) {
+            if (Settings.KEY_GUI_ACTION_1.isKey(button)) {
+                if (this.isEnlargable && !this.isEnlarged) {
                     this.width *= 4;
                     this.height *= 4;
 
-                    this.x = Util.clamp(this.x-(this.width/2-(this.width/8)), 0, (int)game.getRenderer().getWidthInGui()-this.width);
-                    this.y = Util.clamp(this.y-(this.height/2-(this.height/8)), 0, (int)game.getRenderer().getHeightInGui()-this.height);
+                    this.x = Util.clamp(this.x - (this.width / 2 - (this.width / 8)), 0, (int) game.getRenderer().getWidthInGui() - this.width);
+                    this.y = Util.clamp(this.y - (this.height / 2 - (this.height / 8)), 0, (int) game.getRenderer().getHeightInGui() - this.height);
 
                     this.isEnlarged = true;
                     this.gui.sortComponents();
-                }
-                else if(!this.wasMouseDown){
+                } else if (!this.wasMouseDown) {
                     this.consumer.accept(this.color, false);
                     this.wasMouseDown = true;
                 }
 
                 return true;
             }
-        }
-        else{
-            if(this.isEnlarged){
+        } else {
+            if (this.isEnlarged) {
                 this.unenlarge();
                 return true;
             }
@@ -98,9 +96,9 @@ public class ComponentColorPicker extends GuiComponent{
     }
 
     @Override
-    public boolean onKeyPressed(IGameInstance game, int button){
-        if(this.isEnlarged){
-            if(Settings.KEY_MENU.isKey(button)){
+    public boolean onKeyPressed(IGameInstance game, int button) {
+        if (this.isEnlarged) {
+            if (Settings.KEY_MENU.isKey(button)) {
                 this.unenlarge();
                 return true;
             }
@@ -109,12 +107,12 @@ public class ComponentColorPicker extends GuiComponent{
     }
 
     @Override
-    public ResourceName getName(){
+    public ResourceName getName() {
         return ResourceName.intern("color_picker");
     }
 
-    private void unenlarge(){
-        if(this.isEnlarged){
+    private void unenlarge() {
+        if (this.isEnlarged) {
             this.x = this.defX;
             this.y = this.defY;
             this.width = this.defSizeX;
@@ -126,28 +124,27 @@ public class ComponentColorPicker extends GuiComponent{
     }
 
     @Override
-    public void update(IGameInstance game){
-        if(this.wasMouseDown){
+    public void update(IGameInstance game) {
+        if (this.wasMouseDown) {
             float mouseX = game.getRenderer().getMouseInGuiX();
             float mouseY = game.getRenderer().getMouseInGuiY();
 
-            if(Settings.KEY_GUI_ACTION_1.isDown()){
+            if (Settings.KEY_GUI_ACTION_1.isDown()) {
                 this.onClickOrMove(game, mouseX, mouseY);
-            }
-            else{
+            } else {
                 this.consumer.accept(this.color, true);
                 this.wasMouseDown = false;
             }
         }
     }
 
-    private void onClickOrMove(IGameInstance game, float mouseX, float mouseY){
-        if(this.isMouseOver(game)){
-            float x = (mouseX-this.getRenderX())/this.width*this.texture.getRenderWidth();
-            float y = (mouseY-this.getRenderY())/this.height*this.texture.getRenderHeight();
-            int color = this.texture.getTextureColor((int)x, (int)y);
+    private void onClickOrMove(IGameInstance game, float mouseX, float mouseY) {
+        if (this.isMouseOver(game)) {
+            float x = (mouseX - this.getRenderX()) / this.width * this.texture.getRenderWidth();
+            float y = (mouseY - this.getRenderY()) / this.height * this.texture.getRenderHeight();
+            int color = this.texture.getTextureColor((int) x, (int) y);
 
-            if(this.color != color){
+            if (this.color != color) {
                 this.color = color;
                 this.consumer.accept(this.color, false);
             }
@@ -155,7 +152,7 @@ public class ComponentColorPicker extends GuiComponent{
     }
 
     @Override
-    public int getPriority(){
+    public int getPriority() {
         return this.isEnlarged ? 1000 : super.getPriority();
     }
 }

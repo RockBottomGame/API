@@ -27,7 +27,7 @@ import de.ellpeck.rockbottom.api.util.ApiInternal;
 import java.io.File;
 import java.util.List;
 
-public interface IContentPackLoader{
+public interface IContentPackLoader {
 
     @ApiInternal
     void load(File dir);

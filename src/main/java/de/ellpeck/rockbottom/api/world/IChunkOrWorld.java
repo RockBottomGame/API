@@ -65,7 +65,7 @@ import java.util.function.Predicate;
  * @see IWorld
  * @see IChunk
  */
-public interface IChunkOrWorld extends IAdditionalDataProvider{
+public interface IChunkOrWorld extends IAdditionalDataProvider {
 
     /**
      * Gets the current {@link TileState} at any given position in the world on
@@ -73,7 +73,6 @@ public interface IChunkOrWorld extends IAdditionalDataProvider{
      *
      * @param x The x world coordinate
      * @param y The y world coordinate
-     *
      * @return The state
      */
     TileState getState(int x, int y);
@@ -85,7 +84,6 @@ public interface IChunkOrWorld extends IAdditionalDataProvider{
      * @param layer The layer
      * @param x     The x world coordinate
      * @param y     The y world coordinate
-     *
      * @return The state
      */
     TileState getState(TileLayer layer, int x, int y);
@@ -163,9 +161,7 @@ public interface IChunkOrWorld extends IAdditionalDataProvider{
      * @param layer The layer
      * @param x     The world x
      * @param y     The world y
-     *
      * @return The tile entity at that position, or null if there is none
-     *
      * @see #getTileEntity(TileLayer, int, int, Class)
      */
     TileEntity getTileEntity(TileLayer layer, int x, int y);
@@ -179,9 +175,7 @@ public interface IChunkOrWorld extends IAdditionalDataProvider{
      *
      * @param x The world x
      * @param y The world y
-     *
      * @return The tile entity at that position, or null if there is none
-     *
      * @see #getTileEntity(int, int, Class)
      */
     TileEntity getTileEntity(int x, int y);
@@ -199,7 +193,6 @@ public interface IChunkOrWorld extends IAdditionalDataProvider{
      *                  object of
      * @param <T>       The generic type representing the type of tile entity
      *                  that will be returned
-     *
      * @return The tile entity at that position, or null if there is none or it
      * is not of the provided type
      */
@@ -217,7 +210,6 @@ public interface IChunkOrWorld extends IAdditionalDataProvider{
      *                  object of
      * @param <T>       The generic type representing the type of tile entity
      *                  that will be returned
-     *
      * @return The tile entity at that position, or null if there is none or it
      * is not of the provided type
      */
@@ -233,7 +225,6 @@ public interface IChunkOrWorld extends IAdditionalDataProvider{
      * to have very specific ticking and performance behavior.
      *
      * @param tile The tile entitiy to reevaluate the ticking behavior for
-     *
      * @see TileEntity#doesTick()
      */
     void reevaluateTickBehavior(TileEntity tile);
@@ -244,7 +235,6 @@ public interface IChunkOrWorld extends IAdditionalDataProvider{
      * or from this list will throw an {@link UnsupportedOperationException}.
      *
      * @return All entities
-     *
      * @see #addEntity(Entity)
      * @see #removeEntity(Entity)
      */
@@ -256,7 +246,6 @@ public interface IChunkOrWorld extends IAdditionalDataProvider{
      * to or from this list will throw an {@link UnsupportedOperationException}.
      *
      * @return All tile entites
-     *
      * @see #addTileEntity(TileEntity)
      * @see #removeTileEntity(TileLayer, int, int)
      */
@@ -269,7 +258,6 @@ public interface IChunkOrWorld extends IAdditionalDataProvider{
      * will throw an {@link UnsupportedOperationException}.
      *
      * @return All ticking tile entities
-     *
      * @see #addTileEntity(TileEntity)
      * @see #removeTileEntity(TileLayer, int, int)
      */
@@ -280,9 +268,7 @@ public interface IChunkOrWorld extends IAdditionalDataProvider{
      * UUID}.
      *
      * @param id The unique id
-     *
      * @return The entity, or null if there is none
-     *
      * @see Entity#getUniqueId()
      */
     Entity getEntity(UUID id);
@@ -292,7 +278,6 @@ public interface IChunkOrWorld extends IAdditionalDataProvider{
      * the given {@link BoundBox}.
      *
      * @param area The area to check for entities
-     *
      * @return All of the entities
      */
     List<Entity> getEntities(BoundBox area);
@@ -305,7 +290,6 @@ public interface IChunkOrWorld extends IAdditionalDataProvider{
      * @param area The area to check for entities
      * @param test The predicate that needs to apply for them to be added to the
      *             list
-     *
      * @return All of the entities
      */
     List<Entity> getEntities(BoundBox area, Predicate<Entity> test);
@@ -319,7 +303,6 @@ public interface IChunkOrWorld extends IAdditionalDataProvider{
      * @param type The type that they need to be
      * @param <T>  A generic type representing the type of entities that are
      *             being looked for
-     *
      * @return All of the entities
      */
     <T extends Entity> List<T> getEntities(BoundBox area, Class<T> type);
@@ -336,7 +319,6 @@ public interface IChunkOrWorld extends IAdditionalDataProvider{
      *             list
      * @param <T>  A generic type representing the type of entities that are
      *             being looked for
-     *
      * @return All of the entities
      */
     <T extends Entity> List<T> getEntities(BoundBox area, Class<T> type, Predicate<T> test);
@@ -349,7 +331,6 @@ public interface IChunkOrWorld extends IAdditionalDataProvider{
      *
      * @param x The world x coordinate
      * @param y The world y coordinate
-     *
      * @return The light at the given position
      */
     byte getCombinedLight(int x, int y);
@@ -359,7 +340,6 @@ public interface IChunkOrWorld extends IAdditionalDataProvider{
      *
      * @param x The world x coordinate
      * @param y The world y coordinate
-     *
      * @return The sky light
      */
     byte getSkyLight(int x, int y);
@@ -370,7 +350,6 @@ public interface IChunkOrWorld extends IAdditionalDataProvider{
      *
      * @param x The world x coordinate
      * @param y The world y coordinate
-     *
      * @return The artificial light
      */
     byte getArtificialLight(int x, int y);
@@ -423,7 +402,6 @@ public interface IChunkOrWorld extends IAdditionalDataProvider{
      *                      distinguish between different kinds of updates
      * @param time          The time it should take in ticks for the update to
      *                      happen
-     *
      * @see Tile#onScheduledUpdate(IWorld, int, int, TileLayer, int)
      */
     void scheduleUpdate(int x, int y, TileLayer layer, int scheduledMeta, int time);
@@ -445,7 +423,6 @@ public interface IChunkOrWorld extends IAdditionalDataProvider{
      * @param y     The world y coordinate
      * @param layer The layer
      * @param time  The time it should take in ticks for the update to happen
-     *
      * @see Tile#onScheduledUpdate(IWorld, int, int, TileLayer, int)
      */
     void scheduleUpdate(int x, int y, TileLayer layer, int time);
@@ -470,7 +447,6 @@ public interface IChunkOrWorld extends IAdditionalDataProvider{
      * @param x       The world x coordinate
      * @param bottomY The world y coordiate whose chunk should be queried for
      *                the height
-     *
      * @return The height of the chunk at the given x coordinate
      */
     int getChunkHeight(TileLayer layer, int x, int bottomY);
@@ -486,7 +462,6 @@ public interface IChunkOrWorld extends IAdditionalDataProvider{
      * @param x       The world x coordinate
      * @param bottomY The world y coordiate whose chunk should be queried for
      *                the height
-     *
      * @return The height of the chunk at the given x coordinate
      */
     int getAverageChunkHeight(TileLayer layer, int x, int bottomY);
@@ -501,7 +476,6 @@ public interface IChunkOrWorld extends IAdditionalDataProvider{
      * @param layer The layer
      * @param x     The world x coordinate of the chunk to query
      * @param y     The world y coordinate of the chunk to query
-     *
      * @return The flatness of the chunk. This will be a number between 0 and 1,
      * where 1 means that all of the heights in the chunk are the same, and 0
      * means that none of the heights in the chunk are the same.
@@ -513,9 +487,7 @@ public interface IChunkOrWorld extends IAdditionalDataProvider{
      *
      * @param x The world x coordinate
      * @param y The world y coordinate
-     *
      * @return The biome
-     *
      * @see #getExpectedBiome(int, int)
      */
     Biome getBiome(int x, int y);
@@ -536,21 +508,18 @@ public interface IChunkOrWorld extends IAdditionalDataProvider{
 
     /**
      * @return If the game is currently in client mode
-     *
      * @see INetHandler#isClient()
      */
     boolean isClient();
 
     /**
      * @return If the game is currently in server mode
-     *
      * @see INetHandler#isServer()
      */
     boolean isServer();
 
     /**
      * @return If the game is acting as a dedicated server
-     *
      * @see IGameInstance#isDedicatedServer()
      */
     boolean isDedicatedServer();
@@ -559,9 +528,7 @@ public interface IChunkOrWorld extends IAdditionalDataProvider{
      * Returns true if the provided entity is the game's local player
      *
      * @param entity The entity
-     *
      * @return If the entity is the local player
-     *
      * @see INetHandler#isThePlayer(Entity)
      */
     boolean isLocalPlayer(Entity entity);
@@ -597,7 +564,6 @@ public interface IChunkOrWorld extends IAdditionalDataProvider{
      *
      * @param x The world x coordinate
      * @param y The world y coordinate
-     *
      * @return The expected biome for that position
      */
     Biome getExpectedBiome(int x, int y);
@@ -616,7 +582,6 @@ public interface IChunkOrWorld extends IAdditionalDataProvider{
      *
      * @param layer The layer
      * @param x     The world x coordinate
-     *
      * @return The expected height for that position
      */
     int getExpectedSurfaceHeight(TileLayer layer, int x);
@@ -634,7 +599,6 @@ public interface IChunkOrWorld extends IAdditionalDataProvider{
      * @param layer  The layer
      * @param startX The leftmost world x coordinate, inclusive
      * @param endX   The rightmost world x coordinate, exclusive
-     *
      * @return The expected average height for that interval
      */
     int getExpectedAverageHeight(TileLayer layer, int startX, int endX);
@@ -652,7 +616,6 @@ public interface IChunkOrWorld extends IAdditionalDataProvider{
      * @param layer  The layer
      * @param startX The leftmost world x coordinate, inclusive
      * @param endX   The rightmost world x coordinate, exclusive
-     *
      * @return The flatness in the interval. This will be a number between 0 and
      * 1, where 1 means that all of the heights in the interval are the same,
      * and 0 means that none of the heights in the interval are the same.
@@ -666,7 +629,6 @@ public interface IChunkOrWorld extends IAdditionalDataProvider{
      * Biome#getBiomeSeed(IWorld)}.
      *
      * @param biome The biome whose noise generator to get
-     *
      * @return The noise generator
      */
     INoiseGen getNoiseGenForBiome(Biome biome);

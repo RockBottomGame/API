@@ -30,82 +30,80 @@ import de.ellpeck.rockbottom.api.RockBottomAPI;
 import java.util.Map;
 import java.util.Set;
 
-public class NameRegistry<T> implements IRegistry<ResourceName, T>{
+public class NameRegistry<T> implements IRegistry<ResourceName, T> {
 
     protected final String name;
     protected final boolean canUnregister;
     protected final BiMap<ResourceName, T> map = HashBiMap.create();
     protected final BiMap<ResourceName, T> unmodifiableMap;
 
-    public NameRegistry(String name, boolean canUnregister){
+    public NameRegistry(String name, boolean canUnregister) {
         this.name = name;
         this.canUnregister = canUnregister;
         this.unmodifiableMap = Maps.unmodifiableBiMap(this.map);
     }
 
     @Override
-    public void register(ResourceName name, T value){
-        Preconditions.checkArgument(name != null, "Tried registering "+value+" with name "+name+" which is invalid into registry "+this);
-        Preconditions.checkArgument(!this.map.containsKey(name), "Cannot register "+value+" with name "+name+" twice into registry "+this);
+    public void register(ResourceName name, T value) {
+        Preconditions.checkArgument(name != null, "Tried registering " + value + " with name " + name + " which is invalid into registry " + this);
+        Preconditions.checkArgument(!this.map.containsKey(name), "Cannot register " + value + " with name " + name + " twice into registry " + this);
 
         this.map.put(name, value);
-        RockBottomAPI.logger().config("Registered "+value+" with name "+name+" into registry "+this);
+        RockBottomAPI.logger().config("Registered " + value + " with name " + name + " into registry " + this);
     }
 
     @Override
-    public T get(ResourceName name){
-        if(name == null){
-            RockBottomAPI.logger().warning("Tried getting value of "+name+" for registry "+this+" which is invalid");
+    public T get(ResourceName name) {
+        if (name == null) {
+            RockBottomAPI.logger().warning("Tried getting value of " + name + " for registry " + this + " which is invalid");
             return null;
-        }
-        else{
+        } else {
             return this.map.get(name);
         }
     }
 
     @Override
-    public ResourceName getId(T value){
+    public ResourceName getId(T value) {
         return this.map.inverse().get(value);
     }
 
     @Override
-    public int getSize(){
+    public int getSize() {
         return this.map.size();
     }
 
     @Override
-    public void unregister(ResourceName name){
-        if(this.canUnregister){
+    public void unregister(ResourceName name) {
+        if (this.canUnregister) {
             this.map.remove(name);
-            RockBottomAPI.logger().config("Unregistered "+name+" from registry "+this);
-        }
-        else{
-            throw new UnsupportedOperationException("Unregistering from registry "+this+" is disallowed");
+            RockBottomAPI.logger().config("Unregistered " + name + " from registry " + this);
+        } else {
+            throw new UnsupportedOperationException("Unregistering from registry " + this + " is disallowed");
         }
     }
 
     @Override
-    public BiMap<ResourceName, T> getUnmodifiable(){
+    public BiMap<ResourceName, T> getUnmodifiable() {
         return this.unmodifiableMap;
     }
 
     @Override
-    public Set<ResourceName> keySet(){
+    public Set<ResourceName> keySet() {
         return this.unmodifiableMap.keySet();
     }
 
     @Override
-    public Set<T> values(){
+    public Set<T> values() {
         return this.unmodifiableMap.values();
     }
 
     @Override
-    public Set<Map.Entry<ResourceName, T>> entrySet(){
+    public Set<Map.Entry<ResourceName, T>> entrySet() {
         return this.unmodifiableMap.entrySet();
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return this.name;
     }
 }

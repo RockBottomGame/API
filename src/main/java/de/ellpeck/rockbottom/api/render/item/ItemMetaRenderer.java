@@ -30,31 +30,29 @@ import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.item.ItemMeta;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
-public class ItemMetaRenderer extends DefaultItemRenderer<ItemMeta>{
+public class ItemMetaRenderer extends DefaultItemRenderer<ItemMeta> {
 
-    public ItemMetaRenderer(ResourceName texture){
+    public ItemMetaRenderer(ResourceName texture) {
         super(texture);
     }
 
     @Override
-    public void render(IGameInstance game, IAssetManager manager, IRenderer g, ItemMeta item, ItemInstance instance, float x, float y, float scale, int filter){
+    public void render(IGameInstance game, IAssetManager manager, IRenderer g, ItemMeta item, ItemInstance instance, float x, float y, float scale, int filter) {
         int meta = instance.getMeta();
 
-        if(meta >= 0 && item.subResourceNames.size() > meta){
-            manager.getTexture(item.subResourceNames.get(meta)).draw(x, y, 1F*scale, 1F*scale, filter);
-        }
-        else{
+        if (meta >= 0 && item.subResourceNames.size() > meta) {
+            manager.getTexture(item.subResourceNames.get(meta)).draw(x, y, 1F * scale, 1F * scale, filter);
+        } else {
             super.render(game, manager, g, item, instance, x, y, scale, filter);
         }
     }
 
     @Override
-    public JsonElement getAdditionalTextureData(IGameInstance game, IAssetManager manager, IRenderer g, ItemMeta item, ItemInstance instance, AbstractEntityPlayer player, String name){
+    public JsonElement getAdditionalTextureData(IGameInstance game, IAssetManager manager, IRenderer g, ItemMeta item, ItemInstance instance, AbstractEntityPlayer player, String name) {
         int meta = instance.getMeta();
-        if(meta >= 0 && item.subResourceNames.size() > meta){
+        if (meta >= 0 && item.subResourceNames.size() > meta) {
             return manager.getTexture(item.subResourceNames.get(meta)).getAdditionalData(name);
-        }
-        else{
+        } else {
             return super.getAdditionalTextureData(game, manager, g, item, instance, player, name);
         }
     }

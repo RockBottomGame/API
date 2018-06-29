@@ -43,6 +43,6 @@ import de.ellpeck.rockbottom.api.event.impl.BreakEvent;
  * that the outcome of the event actually influences the outcome of your
  * operation.
  */
-public class Event{
+public class Event {
 
 }

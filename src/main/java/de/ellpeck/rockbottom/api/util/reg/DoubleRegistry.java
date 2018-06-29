@@ -23,42 +23,42 @@ package de.ellpeck.rockbottom.api.util.reg;
 
 import com.google.common.base.Preconditions;
 
-public class DoubleRegistry<T> extends IndexRegistry<T>{
+public class DoubleRegistry<T> extends IndexRegistry<T> {
 
     private final NameRegistry<Integer> nameRegistry;
 
-    public DoubleRegistry(String name, int max, boolean canUnregister){
+    public DoubleRegistry(String name, int max, boolean canUnregister) {
         super(name, max, canUnregister);
-        this.nameRegistry = new NameRegistry(name+"_named", canUnregister);
+        this.nameRegistry = new NameRegistry(name + "_named", canUnregister);
     }
 
-    public void register(ResourceName name, Integer id, T value){
+    public void register(ResourceName name, Integer id, T value) {
         super.register(id, value);
         this.nameRegistry.register(name, id);
     }
 
-    public void unregister(ResourceName name, Integer id){
-        Preconditions.checkArgument(id.equals(this.nameRegistry.get(name)), "Can't unregister name "+name+" and id "+id+" that weren't registered as a matching pair from registry "+this);
+    public void unregister(ResourceName name, Integer id) {
+        Preconditions.checkArgument(id.equals(this.nameRegistry.get(name)), "Can't unregister name " + name + " and id " + id + " that weren't registered as a matching pair from registry " + this);
 
         super.unregister(id);
         this.nameRegistry.unregister(name);
     }
 
-    public T get(ResourceName name){
+    public T get(ResourceName name) {
         return this.get(this.nameRegistry.get(name));
     }
 
-    public ResourceName getName(T value){
+    public ResourceName getName(T value) {
         return this.nameRegistry.getId(this.getId(value));
     }
 
     @Override
-    public void register(Integer id, T value){
-        throw new UnsupportedOperationException("Can't register to double registry "+this+" using just the integer key");
+    public void register(Integer id, T value) {
+        throw new UnsupportedOperationException("Can't register to double registry " + this + " using just the integer key");
     }
 
     @Override
-    public void unregister(Integer id){
-        throw new UnsupportedOperationException("Can't unregister from double registry "+this+" using just the integer key");
+    public void unregister(Integer id) {
+        throw new UnsupportedOperationException("Can't unregister from double registry " + this + " using just the integer key");
     }
 }

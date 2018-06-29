@@ -32,127 +32,127 @@ import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 import java.util.UUID;
 
-public final class ModBasedDataSet extends AbstractDataSet{
+public final class ModBasedDataSet extends AbstractDataSet {
 
     @Override
-    public void addPart(DataPart part){
-        Preconditions.checkArgument(Util.isResourceName(part.getName()), "The name "+part.getName()+" of data part "+part+" which is being added to mod based data set "+this+" is not a valid resource name!");
+    public void addPart(DataPart part) {
+        Preconditions.checkArgument(Util.isResourceName(part.getName()), "The name " + part.getName() + " of data part " + part + " which is being added to mod based data set " + this + " is not a valid resource name!");
         super.addPart(part);
     }
 
-    public int getInt(ResourceName key){
+    public int getInt(ResourceName key) {
         return this.getPartContent(key.toString(), PartInt.class, 0);
     }
 
-    public void addInt(ResourceName key, int i){
+    public void addInt(ResourceName key, int i) {
         this.addPart(new PartInt(key.toString(), i));
     }
 
-    public long getLong(ResourceName key){
+    public long getLong(ResourceName key) {
         return this.getPartContent(key.toString(), PartLong.class, 0L);
     }
 
-    public void addLong(ResourceName key, long l){
+    public void addLong(ResourceName key, long l) {
         this.addPart(new PartLong(key.toString(), l));
     }
 
-    public float getFloat(ResourceName key){
+    public float getFloat(ResourceName key) {
         return this.getPartContent(key.toString(), PartFloat.class, 0F);
     }
 
-    public void addFloat(ResourceName key, float f){
+    public void addFloat(ResourceName key, float f) {
         this.addPart(new PartFloat(key.toString(), f));
     }
 
-    public double getDouble(ResourceName key){
+    public double getDouble(ResourceName key) {
         return this.getPartContent(key.toString(), PartDouble.class, 0D);
     }
 
-    public void addDouble(ResourceName key, double d){
+    public void addDouble(ResourceName key, double d) {
         this.addPart(new PartDouble(key.toString(), d));
     }
 
-    public DataSet getDataSet(ResourceName key){
+    public DataSet getDataSet(ResourceName key) {
         return this.getPartContent(key.toString(), PartDataSet.class, new DataSet());
     }
 
-    public void addDataSet(ResourceName key, DataSet set){
+    public void addDataSet(ResourceName key, DataSet set) {
         this.addPart(new PartDataSet(key.toString(), set));
     }
 
-    public ModBasedDataSet getModBasedDataSet(ResourceName key){
+    public ModBasedDataSet getModBasedDataSet(ResourceName key) {
         return this.getPartContent(key.toString(), PartModBasedDataSet.class, new ModBasedDataSet());
     }
 
-    public void addModBasedDataSet(ResourceName key, ModBasedDataSet set){
+    public void addModBasedDataSet(ResourceName key, ModBasedDataSet set) {
         this.addPart(new PartModBasedDataSet(key.toString(), set));
     }
 
-    public byte[] getByteArray(ResourceName key, int defaultSize){
+    public byte[] getByteArray(ResourceName key, int defaultSize) {
         return this.getPartContent(key.toString(), PartByteArray.class, new byte[defaultSize]);
     }
 
-    public void addByteArray(ResourceName key, byte[] array){
+    public void addByteArray(ResourceName key, byte[] array) {
         this.addPart(new PartByteArray(key.toString(), array));
     }
 
-    public int[] getIntArray(ResourceName key, int defaultSize){
+    public int[] getIntArray(ResourceName key, int defaultSize) {
         return this.getPartContent(key.toString(), PartIntArray.class, new int[defaultSize]);
     }
 
-    public void addIntArray(ResourceName key, int[] array){
+    public void addIntArray(ResourceName key, int[] array) {
         this.addPart(new PartIntArray(key.toString(), array));
     }
 
-    public short[] getShortArray(ResourceName key, int defaultSize){
+    public short[] getShortArray(ResourceName key, int defaultSize) {
         return this.getPartContent(key.toString(), PartShortArray.class, new short[defaultSize]);
     }
 
-    public void addShortArray(ResourceName key, short[] array){
+    public void addShortArray(ResourceName key, short[] array) {
         this.addPart(new PartShortArray(key.toString(), array));
     }
 
-    public UUID getUniqueId(ResourceName key){
+    public UUID getUniqueId(ResourceName key) {
         return this.getPartContent(key.toString(), PartUniqueId.class, null);
     }
 
-    public void addUniqueId(ResourceName key, UUID id){
+    public void addUniqueId(ResourceName key, UUID id) {
         this.addPart(new PartUniqueId(key.toString(), id));
     }
 
-    public byte getByte(ResourceName key){
-        return this.getPartContent(key.toString(), PartByte.class, (byte)0);
+    public byte getByte(ResourceName key) {
+        return this.getPartContent(key.toString(), PartByte.class, (byte) 0);
     }
 
-    public void addByte(ResourceName key, byte b){
+    public void addByte(ResourceName key, byte b) {
         this.addPart(new PartByte(key.toString(), b));
     }
 
-    public short getShort(ResourceName key){
-        return this.getPartContent(key.toString(), PartShort.class, (short)0);
+    public short getShort(ResourceName key) {
+        return this.getPartContent(key.toString(), PartShort.class, (short) 0);
     }
 
-    public void addShort(ResourceName key, short s){
+    public void addShort(ResourceName key, short s) {
         this.addPart(new PartShort(key.toString(), s));
     }
 
-    public boolean getBoolean(ResourceName key){
+    public boolean getBoolean(ResourceName key) {
         return this.getPartContent(key.toString(), PartBoolean.class, false);
     }
 
-    public void addBoolean(ResourceName key, boolean s){
+    public void addBoolean(ResourceName key, boolean s) {
         this.addPart(new PartBoolean(key.toString(), s));
     }
 
-    public String getString(ResourceName key){
+    public String getString(ResourceName key) {
         return this.getPartContent(key.toString(), PartString.class, null);
     }
 
-    public void addString(ResourceName key, String s){
+    public void addString(ResourceName key, String s) {
         this.addPart(new PartString(key.toString(), s));
     }
 
-    public ModBasedDataSet copy(){
+    public ModBasedDataSet copy() {
         ModBasedDataSet set = new ModBasedDataSet();
         set.data.putAll(this.data);
         return set;

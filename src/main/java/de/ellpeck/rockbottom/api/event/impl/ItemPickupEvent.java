@@ -32,13 +32,13 @@ import de.ellpeck.rockbottom.api.item.ItemInstance;
  * is done to see if there is enough space for the item. Cancelling the event
  * will make the item not be picked up.
  */
-public final class ItemPickupEvent extends Event{
+public final class ItemPickupEvent extends Event {
 
     public final AbstractEntityPlayer player;
     public final AbstractEntityItem item;
     public ItemInstance instance;
 
-    public ItemPickupEvent(AbstractEntityPlayer player, AbstractEntityItem item, ItemInstance instance){
+    public ItemPickupEvent(AbstractEntityPlayer player, AbstractEntityItem item, ItemInstance instance) {
         this.player = player;
         this.item = item;
         this.instance = instance;

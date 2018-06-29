@@ -33,30 +33,30 @@ import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 
 import java.util.List;
 
-public class ItemTile extends ItemBasic{
+public class ItemTile extends ItemBasic {
 
-    public ItemTile(ResourceName name){
+    public ItemTile(ResourceName name) {
         super(name);
     }
 
     @Override
-    protected IItemRenderer createRenderer(ResourceName name){
+    protected IItemRenderer createRenderer(ResourceName name) {
         return new ItemTileRenderer();
     }
 
-    public Tile getTile(){
+    public Tile getTile() {
         return RockBottomAPI.TILE_REGISTRY.get(this.getName());
     }
 
     @Override
-    public void describeItem(IAssetManager manager, ItemInstance instance, List<String> desc, boolean isAdvanced){
+    public void describeItem(IAssetManager manager, ItemInstance instance, List<String> desc, boolean isAdvanced) {
         super.describeItem(manager, instance, desc, isAdvanced);
 
         this.getTile().describeItem(manager, instance, desc, isAdvanced);
     }
 
     @Override
-    public boolean onInteractWith(IWorld world, int x, int y, TileLayer layer, double mouseX, double mouseY, AbstractEntityPlayer player, ItemInstance instance){
+    public boolean onInteractWith(IWorld world, int x, int y, TileLayer layer, double mouseX, double mouseY, AbstractEntityPlayer player, ItemInstance instance) {
         return RockBottomAPI.getInternalHooks().placeTile(x, y, layer, player, instance, this.getTile(), true, false);
     }
 }

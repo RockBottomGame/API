@@ -26,28 +26,28 @@ import de.ellpeck.rockbottom.api.util.reg.NameToIndexInfo;
 import io.netty.buffer.ByteBuf;
 
 @ApiInternal
-public class DynamicRegistryInfo{
+public class DynamicRegistryInfo {
 
     private NameToIndexInfo tileRegInfo;
     private NameToIndexInfo biomeRegInfo;
 
-    public DynamicRegistryInfo(){
+    public DynamicRegistryInfo() {
     }
 
-    public DynamicRegistryInfo(NameToIndexInfo tileRegInfo, NameToIndexInfo biomeRegInfo){
+    public DynamicRegistryInfo(NameToIndexInfo tileRegInfo, NameToIndexInfo biomeRegInfo) {
         this.tileRegInfo = tileRegInfo;
         this.biomeRegInfo = biomeRegInfo;
     }
 
-    public NameToIndexInfo getTiles(){
+    public NameToIndexInfo getTiles() {
         return this.tileRegInfo;
     }
 
-    public NameToIndexInfo getBiomes(){
+    public NameToIndexInfo getBiomes() {
         return this.biomeRegInfo;
     }
 
-    public void fromBuffer(ByteBuf buf){
+    public void fromBuffer(ByteBuf buf) {
         this.tileRegInfo = new NameToIndexInfo("tile_reg_client_world", null, null, Integer.MAX_VALUE);
         this.tileRegInfo.fromBuffer(buf);
 
@@ -55,7 +55,7 @@ public class DynamicRegistryInfo{
         this.biomeRegInfo.fromBuffer(buf);
     }
 
-    public void toBuffer(ByteBuf buf){
+    public void toBuffer(ByteBuf buf) {
         this.tileRegInfo.toBuffer(buf);
         this.biomeRegInfo.toBuffer(buf);
     }

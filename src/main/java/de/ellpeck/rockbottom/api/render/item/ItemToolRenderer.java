@@ -28,15 +28,15 @@ import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.item.ItemTool;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
-public class ItemToolRenderer extends DefaultItemRenderer<ItemTool>{
+public class ItemToolRenderer extends DefaultItemRenderer<ItemTool> {
 
-    public ItemToolRenderer(ResourceName texture){
+    public ItemToolRenderer(ResourceName texture) {
         super(texture);
     }
 
     @Override
-    public void renderOnMouseCursor(IGameInstance game, IAssetManager manager, IRenderer g, ItemTool item, ItemInstance instance, float x, float y, float scale, int filter, boolean isInPlayerRange){
-        if(isInPlayerRange){
+    public void renderOnMouseCursor(IGameInstance game, IAssetManager manager, IRenderer g, ItemTool item, ItemInstance instance, float x, float y, float scale, int filter, boolean isInPlayerRange) {
+        if (isInPlayerRange) {
             this.render(game, manager, g, item, instance, x, y, scale, filter);
         }
     }

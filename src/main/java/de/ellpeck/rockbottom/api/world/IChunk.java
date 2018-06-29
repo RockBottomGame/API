@@ -33,7 +33,7 @@ import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 import java.util.List;
 import java.util.Map;
 
-public interface IChunk extends IChunkOrWorld{
+public interface IChunk extends IChunkOrWorld {
 
     @ApiInternal
     List<AbstractEntityPlayer> getPlayersInRange();
@@ -77,9 +77,6 @@ public interface IChunk extends IChunkOrWorld{
     void setArtificialLightInner(int x, int y, byte light);
 
     @ApiInternal
-    void setGenerating(boolean generating);
-
-    @ApiInternal
     boolean needsSave();
 
     @ApiInternal
@@ -117,6 +114,9 @@ public interface IChunk extends IChunkOrWorld{
     boolean doesEntityForcePersistence();
 
     boolean isGenerating();
+
+    @ApiInternal
+    void setGenerating(boolean generating);
 
     @ApiInternal
     float getFadePercentage();

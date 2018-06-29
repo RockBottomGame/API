@@ -31,7 +31,7 @@ import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 import java.util.function.Consumer;
 
-public class ComponentInputField extends GuiComponent{
+public class ComponentInputField extends GuiComponent {
 
     public final boolean renderBox;
     public final boolean selectable;
@@ -42,11 +42,11 @@ public class ComponentInputField extends GuiComponent{
     private boolean isSelected;
     private boolean censored;
 
-    public ComponentInputField(Gui gui, int x, int y, int sizeX, int sizeY, boolean renderBox, boolean selectable, boolean defaultActive, int maxLength, boolean displayMaxLength){
+    public ComponentInputField(Gui gui, int x, int y, int sizeX, int sizeY, boolean renderBox, boolean selectable, boolean defaultActive, int maxLength, boolean displayMaxLength) {
         this(gui, x, y, sizeX, sizeY, renderBox, selectable, defaultActive, maxLength, displayMaxLength, null);
     }
 
-    public ComponentInputField(Gui gui, int x, int y, int sizeX, int sizeY, boolean renderBox, boolean selectable, boolean defaultActive, int maxLength, boolean displayMaxLength, Consumer<String> consumer){
+    public ComponentInputField(Gui gui, int x, int y, int sizeX, int sizeY, boolean renderBox, boolean selectable, boolean defaultActive, int maxLength, boolean displayMaxLength, Consumer<String> consumer) {
         super(gui, x, y, sizeX, sizeY);
         this.renderBox = renderBox;
         this.selectable = selectable;
@@ -56,84 +56,82 @@ public class ComponentInputField extends GuiComponent{
         this.consumer = consumer;
     }
 
-    public boolean isSelected(){
+    public boolean isSelected() {
         return this.isSelected;
     }
 
-    public void setSelected(boolean selected){
+    public void setSelected(boolean selected) {
         this.isSelected = selected;
     }
 
-    public boolean isCensored(){
+    public boolean isCensored() {
         return this.censored;
     }
 
-    public ComponentInputField setCensored(boolean censored){
+    public ComponentInputField setCensored(boolean censored) {
         this.censored = censored;
         return this;
     }
 
     @Override
-    public boolean onKeyPressed(IGameInstance game, int button){
+    public boolean onKeyPressed(IGameInstance game, int button) {
         return RockBottomAPI.getInternalHooks().doInputFieldKeyPress(game, button, this);
     }
 
     @Override
-    public boolean onCharInput(IGameInstance game, int codePoint, char[] characters){
+    public boolean onCharInput(IGameInstance game, int codePoint, char[] characters) {
         return RockBottomAPI.getInternalHooks().doInputFieldCharInput(game, characters, this);
 
     }
 
     @Override
-    public ResourceName getName(){
+    public ResourceName getName() {
         return ResourceName.intern("input_field");
     }
 
-    public String getText(){
+    public String getText() {
         return this.text;
     }
 
-    public String getDisplayText(){
-        return this.getText();
-    }
-
-    @Override
-    public void render(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y){
-        RockBottomAPI.getInternalHooks().doInputFieldRender(game, manager, g, x, y, this);
-    }
-
-    public void setText(String text){
+    public void setText(String text) {
         this.text = text;
-        if(this.consumer != null){
+        if (this.consumer != null) {
             this.consumer.accept(text);
         }
     }
 
-    public void append(String text){
-        if(this.text.length()+text.length() <= this.maxLength){
-            this.setText(this.text+text);
+    public String getDisplayText() {
+        return this.getText();
+    }
+
+    @Override
+    public void render(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y) {
+        RockBottomAPI.getInternalHooks().doInputFieldRender(game, manager, g, x, y, this);
+    }
+
+    public void append(String text) {
+        if (this.text.length() + text.length() <= this.maxLength) {
+            this.setText(this.text + text);
         }
     }
 
     @Override
-    public boolean onMouseAction(IGameInstance game, int button, float x, float y){
-        if(Settings.KEY_GUI_ACTION_1.isKey(button)){
-            if(this.selectable){
+    public boolean onMouseAction(IGameInstance game, int button, float x, float y) {
+        if (Settings.KEY_GUI_ACTION_1.isKey(button)) {
+            if (this.selectable) {
                 this.isSelected = this.isMouseOverPrioritized(game);
             }
-        }
-        else if(Settings.KEY_GUI_ACTION_2.isKey(button)){
-            if(this.isMouseOverPrioritized(game)){
+        } else if (Settings.KEY_GUI_ACTION_2.isKey(button)) {
+            if (this.isMouseOverPrioritized(game)) {
                 this.text = "";
-                if(this.consumer != null){
+                if (this.consumer != null) {
                     this.consumer.accept(this.text);
                 }
 
-                if(this.selectable){
+                if (this.selectable) {
                     this.isSelected = true;
                 }
-            }
-            else if(this.selectable){
+            } else if (this.selectable) {
                 this.isSelected = false;
             }
         }
@@ -141,7 +139,7 @@ public class ComponentInputField extends GuiComponent{
     }
 
     @Override
-    public boolean canCloseWithInvKey(){
+    public boolean canCloseWithInvKey() {
         return !this.isSelected || !this.isActive();
     }
 }

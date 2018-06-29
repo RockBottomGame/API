@@ -28,7 +28,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
 
-public interface IInventory{
+public interface IInventory {
 
     void set(int id, ItemInstance instance);
 

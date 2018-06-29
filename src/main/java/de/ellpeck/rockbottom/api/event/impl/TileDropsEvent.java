@@ -35,7 +35,7 @@ import java.util.List;
  * can be modified to change the drops of the tile. Cancelling the event will
  * stop the tile from dropping anything.
  */
-public final class TileDropsEvent extends Event{
+public final class TileDropsEvent extends Event {
 
     public final Tile tile;
     public final List<ItemInstance> drops;
@@ -45,7 +45,7 @@ public final class TileDropsEvent extends Event{
     public final TileLayer layer;
     public final Entity destroyer;
 
-    public TileDropsEvent(Tile tile, List<ItemInstance> drops, IWorld world, int x, int y, TileLayer layer, Entity destroyer){
+    public TileDropsEvent(Tile tile, List<ItemInstance> drops, IWorld world, int x, int y, TileLayer layer, Entity destroyer) {
         this.tile = tile;
         this.drops = drops;
         this.world = world;

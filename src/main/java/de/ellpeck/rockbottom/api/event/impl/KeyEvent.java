@@ -32,7 +32,7 @@ import org.lwjgl.glfw.GLFWKeyCallbackI;
  * GLFWKeyCallbackI)}. Cancelling it will cause the key not to be marked as
  * pressed or held down internally.
  */
-public final class KeyEvent extends Event{
+public final class KeyEvent extends Event {
 
     public final long window;
     public final int scancode;
@@ -40,7 +40,7 @@ public final class KeyEvent extends Event{
     public int action;
     public int key;
 
-    public KeyEvent(long window, int scancode, int mods, int action, int key){
+    public KeyEvent(long window, int scancode, int mods, int action, int key) {
         this.window = window;
         this.scancode = scancode;
         this.mods = mods;

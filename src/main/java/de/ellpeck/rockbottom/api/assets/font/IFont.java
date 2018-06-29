@@ -26,7 +26,7 @@ import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 import java.util.List;
 
-public interface IFont extends IAsset{
+public interface IFont extends IAsset {
 
     ResourceName ID = ResourceName.intern("font");
 

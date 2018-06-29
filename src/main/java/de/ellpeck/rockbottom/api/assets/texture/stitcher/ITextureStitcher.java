@@ -25,7 +25,7 @@ import de.ellpeck.rockbottom.api.assets.texture.ImageBuffer;
 
 import java.io.InputStream;
 
-public interface ITextureStitcher{
+public interface ITextureStitcher {
 
     void loadTexture(String refName, InputStream stream, IStitchCallback callback);
 

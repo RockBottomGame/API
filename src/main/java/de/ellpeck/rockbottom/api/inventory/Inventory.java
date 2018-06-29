@@ -24,49 +24,48 @@ package de.ellpeck.rockbottom.api.inventory;
 import de.ellpeck.rockbottom.api.data.set.DataSet;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 
-public class Inventory extends AbstractInventory{
+public class Inventory extends AbstractInventory {
 
     protected final ItemInstance[] slots;
 
-    public Inventory(int slotAmount){
+    public Inventory(int slotAmount) {
         this.slots = new ItemInstance[slotAmount];
     }
 
     @Override
-    public void set(int id, ItemInstance instance){
+    public void set(int id, ItemInstance instance) {
         this.slots[id] = instance;
         this.notifyChange(id);
     }
 
     @Override
-    public ItemInstance get(int id){
+    public ItemInstance get(int id) {
         return this.slots[id];
     }
 
     @Override
-    public int getSlotAmount(){
+    public int getSlotAmount() {
         return this.slots.length;
     }
 
-    public void save(DataSet set){
-        for(int i = 0; i < this.slots.length; i++){
+    public void save(DataSet set) {
+        for (int i = 0; i < this.slots.length; i++) {
             ItemInstance slot = this.slots[i];
 
-            if(slot != null){
+            if (slot != null) {
                 DataSet subset = new DataSet();
                 slot.save(subset);
-                set.addDataSet("item_"+i, subset);
+                set.addDataSet("item_" + i, subset);
             }
         }
     }
 
-    public void load(DataSet set){
-        for(int i = 0; i < this.slots.length; i++){
-            DataSet subset = set.getDataSet("item_"+i);
-            if(!subset.isEmpty()){
+    public void load(DataSet set) {
+        for (int i = 0; i < this.slots.length; i++) {
+            DataSet subset = set.getDataSet("item_" + i);
+            if (!subset.isEmpty()) {
                 this.slots[i] = ItemInstance.load(subset);
-            }
-            else{
+            } else {
                 this.slots[i] = null;
             }
         }

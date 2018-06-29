@@ -25,15 +25,15 @@ import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.data.set.DataSet;
 import de.ellpeck.rockbottom.api.entity.Entity;
 
-public abstract class AITask<T extends Entity>{
+public abstract class AITask<T extends Entity> {
 
     private final int priority;
 
-    public AITask(int priority){
+    public AITask(int priority) {
         this.priority = priority;
     }
 
-    public int getPriority(){
+    public int getPriority() {
         return this.priority;
     }
 
@@ -43,23 +43,23 @@ public abstract class AITask<T extends Entity>{
 
     public abstract void execute(IGameInstance game, T entity);
 
-    public void onExecutionStarted(AITask<T> previousTask, T entity){
+    public void onExecutionStarted(AITask<T> previousTask, T entity) {
 
     }
 
-    public void onExecutionEnded(AITask<T> nextTask, T entity){
+    public void onExecutionEnded(AITask<T> nextTask, T entity) {
 
     }
 
-    public AITask getNextTask(AITask<T> expectedNextTask, T entity){
+    public AITask getNextTask(AITask<T> expectedNextTask, T entity) {
         return expectedNextTask;
     }
 
-    public void save(DataSet set, boolean forSync){
+    public void save(DataSet set, boolean forSync) {
 
     }
 
-    public void load(DataSet set, boolean forSync){
+    public void load(DataSet set, boolean forSync) {
 
     }
 }

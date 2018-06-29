@@ -27,7 +27,7 @@ import de.ellpeck.rockbottom.api.util.Direction;
 
 import java.util.List;
 
-public interface IFilteredInventory extends IInventory{
+public interface IFilteredInventory extends IInventory {
 
     List<Integer> getInputSlots(ItemInstance instance, Direction dir);
 

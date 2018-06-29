@@ -34,27 +34,27 @@ import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ComponentFormatSelector extends ComponentButton{
+public class ComponentFormatSelector extends ComponentButton {
 
     private final ComponentInputField[] inputFields;
     private ComponentSelectorMenu menu;
 
-    public ComponentFormatSelector(Gui gui, int x, int y, ComponentInputField... inputFields){
+    public ComponentFormatSelector(Gui gui, int x, int y, ComponentInputField... inputFields) {
         super(gui, x, y, 16, 16, null, "Aa");
         this.inputFields = inputFields;
     }
 
-    public void openMenu(){
+    public void openMenu() {
         int width = 86;
         int height = 72;
 
-        this.menu = new ComponentSelectorMenu(this.gui, this.x+this.width/2-width/2, this.y-height-2, width, height, this.inputFields);
+        this.menu = new ComponentSelectorMenu(this.gui, this.x + this.width / 2 - width / 2, this.y - height - 2, width, height, this.inputFields);
         this.gui.getComponents().add(this.menu);
 
         this.gui.sortComponents();
     }
 
-    public void closeMenu(){
+    public void closeMenu() {
         this.gui.getComponents().remove(this.menu);
         this.menu.onRemoved();
         this.menu = null;
@@ -62,14 +62,14 @@ public class ComponentFormatSelector extends ComponentButton{
         this.gui.sortComponents();
     }
 
-    public boolean isMenuOpen(){
+    public boolean isMenuOpen() {
         return this.menu != null;
     }
 
     @Override
-    public boolean onKeyPressed(IGameInstance game, int button){
-        if(this.menu != null){
-            if(Settings.KEY_MENU.isKey(button)){
+    public boolean onKeyPressed(IGameInstance game, int button) {
+        if (this.menu != null) {
+            if (Settings.KEY_MENU.isKey(button)) {
                 this.closeMenu();
                 return true;
             }
@@ -78,78 +78,75 @@ public class ComponentFormatSelector extends ComponentButton{
     }
 
     @Override
-    public boolean onMouseAction(IGameInstance game, int button, float x, float y){
-        if(this.isMouseOver(game)){
-            if(Settings.KEY_GUI_ACTION_1.isKey(button)){
-                if(this.menu == null){
+    public boolean onMouseAction(IGameInstance game, int button, float x, float y) {
+        if (this.isMouseOver(game)) {
+            if (Settings.KEY_GUI_ACTION_1.isKey(button)) {
+                if (this.menu == null) {
                     this.openMenu();
                     return true;
                 }
             }
         }
 
-        if(this.menu != null && !this.menu.isMouseOver(game)){
+        if (this.menu != null && !this.menu.isMouseOver(game)) {
             this.closeMenu();
             return true;
-        }
-        else{
+        } else {
             return false;
         }
     }
 
     @Override
-    public ResourceName getName(){
+    public ResourceName getName() {
         return ResourceName.intern("format_selector_button");
     }
 
     @Override
-    public int getPriority(){
+    public int getPriority() {
         return this.menu != null ? 1000 : super.getPriority();
     }
 
-    private static class ComponentSelectorMenu extends GuiComponent{
+    private static class ComponentSelectorMenu extends GuiComponent {
 
         private final List<GuiComponent> subComponents = new ArrayList<>();
 
-        public ComponentSelectorMenu(Gui gui, int x, int y, int width, int height, ComponentInputField[] inputFields){
+        public ComponentSelectorMenu(Gui gui, int x, int y, int width, int height, ComponentInputField[] inputFields) {
             super(gui, x, y, width, height);
 
 
             int buttonX = 2;
             int buttonY = 2;
-            for(FormattingCode code : FormattingCode.getDefaultCodes().values()){
-                this.subComponents.add(new ComponentButton(gui, x+buttonX, y+buttonY, 12, 12, () -> {
+            for (FormattingCode code : FormattingCode.getDefaultCodes().values()) {
+                this.subComponents.add(new ComponentButton(gui, x + buttonX, y + buttonY, 12, 12, () -> {
                     String codeStrg = code.toString();
                     ComponentInputField field = null;
 
-                    if(inputFields.length <= 1){
+                    if (inputFields.length <= 1) {
                         field = inputFields[0];
-                    }
-                    else{
-                        for(ComponentInputField f : inputFields){
-                            if(f.isSelected()){
+                    } else {
+                        for (ComponentInputField f : inputFields) {
+                            if (f.isSelected()) {
                                 field = f;
                                 break;
                             }
                         }
                     }
 
-                    if(field != null && !field.getText().endsWith(codeStrg)){
+                    if (field != null && !field.getText().endsWith(codeStrg)) {
                         field.append(codeStrg);
                         return true;
-                    }
-                    else{
+                    } else {
                         return false;
                     }
-                }, code+"Aa", RockBottomAPI.getGame().getAssetManager().localize(ResourceName.intern("info.format."+code)), "Code: "+code.toString().replaceAll("&", "<&>")){
+                }, code + "Aa", RockBottomAPI.getGame().getAssetManager().localize(ResourceName.intern("info.format." + code)), "Code: " + code.toString().replaceAll("&", "<&>")) {
                     @Override
-                    public int getPriority(){
+                    public int getPriority() {
                         return 2000;
                     }
                 });
 
                 buttonX += 14;
-                if(buttonX >= width){
+                if (buttonX >= width) {
                     buttonX = 2;
                     buttonY += 14;
                 }
@@ -158,23 +155,23 @@ public class ComponentFormatSelector extends ComponentButton{
             this.gui.getComponents().addAll(this.subComponents);
         }
 
-        public void onRemoved(){
+        public void onRemoved() {
             this.gui.getComponents().removeAll(this.subComponents);
         }
 
         @Override
-        public ResourceName getName(){
+        public ResourceName getName() {
             return ResourceName.intern("format_selector_menu");
         }
 
         @Override
-        public void render(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y){
+        public void render(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y) {
             g.addFilledRect(x, y, this.width, this.height, Colors.setA(Colors.BLACK, 0.65F));
             g.addEmptyRect(x, y, this.width, this.height, Colors.BLACK);
         }
 
         @Override
-        public int getPriority(){
+        public int getPriority() {
             return 1500;
         }
     }

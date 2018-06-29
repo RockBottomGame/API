@@ -31,7 +31,7 @@ import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 import java.util.Map;
 
-public final class TileState{
+public final class TileState {
 
     private final Tile tile;
     private final ResourceName name;
@@ -39,7 +39,7 @@ public final class TileState{
     private final Table<String, Comparable, TileState> subStates = TreeBasedTable.create();
 
     @ApiInternal
-    public TileState(ResourceName name, Tile tile, Map<String, Comparable> properties){
+    public TileState(ResourceName name, Tile tile, Map<String, Comparable> properties) {
         this.tile = tile;
         this.properties = properties;
         this.name = name;
@@ -47,76 +47,73 @@ public final class TileState{
         RockBottomAPI.getInternalHooks().doTileStateInit(this, name, tile, properties, this.subStates);
     }
 
-    public ResourceName getName(){
+    public ResourceName getName() {
         return this.name;
     }
 
-    public <T extends Comparable> TileState prop(String prop, T value){
-        if(value.equals(this.get(prop))){
+    public <T extends Comparable> TileState prop(String prop, T value) {
+        if (value.equals(this.get(prop))) {
             return this;
-        }
-        else{
-            return Preconditions.checkNotNull(this.subStates.get(prop, value), "The tile "+this.tile.getName()+" does not have property "+prop+" with value "+value);
+        } else {
+            return Preconditions.checkNotNull(this.subStates.get(prop, value), "The tile " + this.tile.getName() + " does not have property " + prop + " with value " + value);
         }
     }
 
-    public <T extends Comparable> TileState prop(TileProp<T> prop, T value){
+    public <T extends Comparable> TileState prop(TileProp<T> prop, T value) {
         return this.prop(prop.getName(), value);
     }
 
-    public <T extends Comparable> TileState cycleProp(TileProp<T> prop){
-        int index = prop.getIndex(this.get(prop))+1;
-        if(index >= prop.getVariants()){
+    public <T extends Comparable> TileState cycleProp(TileProp<T> prop) {
+        int index = prop.getIndex(this.get(prop)) + 1;
+        if (index >= prop.getVariants()) {
             index = 0;
         }
         return this.prop(prop, prop.getValue(index));
     }
 
-    public <T extends Comparable> T get(String prop){
-        return Preconditions.checkNotNull((T)this.properties.get(prop), "The tile "+this.tile.getName()+" does not support property "+prop);
+    public <T extends Comparable> T get(String prop) {
+        return Preconditions.checkNotNull((T) this.properties.get(prop), "The tile " + this.tile.getName() + " does not support property " + prop);
     }
 
-    public <T extends Comparable> T get(TileProp<T> prop){
+    public <T extends Comparable> T get(TileProp<T> prop) {
         return this.get(prop.getName());
     }
 
-    public TileState overrideProps(TileState other, TileProp... props){
-        Preconditions.checkArgument(other.tile == this.tile, "Cannot override properties of state "+this+" with "+other+" because they are not the same tile");
+    public TileState overrideProps(TileState other, TileProp... props) {
+        Preconditions.checkArgument(other.tile == this.tile, "Cannot override properties of state " + this + " with " + other + " because they are not the same tile");
 
         TileState overriden = this;
-        for(TileProp prop : props){
+        for (TileProp prop : props) {
             overriden = overriden.prop(prop, other.get(prop));
         }
         return overriden;
     }
 
-    public Tile getTile(){
+    public Tile getTile() {
         return this.tile;
     }
 
     @Override
-    public boolean equals(Object o){
-        if(this == o){
+    public boolean equals(Object o) {
+        if (this == o) {
             return true;
-        }
-        else if(o instanceof TileState){
-            TileState tileState = (TileState)o;
+        } else if (o instanceof TileState) {
+            TileState tileState = (TileState) o;
             return this.tile.equals(tileState.tile) && this.properties.equals(tileState.properties);
-        }
-        else{
+        } else {
             return false;
         }
     }
 
     @Override
-    public int hashCode(){
+    public int hashCode() {
         int result = this.tile.hashCode();
-        result = 31*result+this.properties.hashCode();
+        result = 31 * result + this.properties.hashCode();
         return result;
     }
 
     @Override
-    public String toString(){
-        return this.tile.getName()+"@"+this.properties;
+    public String toString() {
+        return this.tile.getName() + "@" + this.properties;
     }
 }

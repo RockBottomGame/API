@@ -30,7 +30,7 @@ package de.ellpeck.rockbottom.api.event;
  * should use {@link #MODIFIED} as the result if not otherwise stated in the
  * description of the event's class.
  */
-public enum EventResult{
+public enum EventResult {
     DEFAULT,
     MODIFIED,
     CANCELLED

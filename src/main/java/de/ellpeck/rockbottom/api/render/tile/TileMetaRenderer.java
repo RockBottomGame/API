@@ -33,39 +33,38 @@ import de.ellpeck.rockbottom.api.tile.state.TileState;
 import de.ellpeck.rockbottom.api.world.IWorld;
 import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 
-public class TileMetaRenderer<T extends TileMeta> implements ITileRenderer<T>{
+public class TileMetaRenderer<T extends TileMeta> implements ITileRenderer<T> {
 
     @Override
-    public void render(IGameInstance game, IAssetManager manager, IRenderer g, IWorld world, T tile, TileState state, int x, int y, TileLayer layer, float renderX, float renderY, float scale, int[] light){
+    public void render(IGameInstance game, IAssetManager manager, IRenderer g, IWorld world, T tile, TileState state, int x, int y, TileLayer layer, float renderX, float renderY, float scale, int[] light) {
         this.getTexture(manager, tile, state.get(tile.metaProp)).getPositionalVariation(x, y).draw(renderX, renderY, scale, scale, light);
     }
 
     @Override
-    public void renderItem(IGameInstance game, IAssetManager manager, IRenderer g, T tile, ItemInstance instance, float x, float y, float scale, int filter){
+    public void renderItem(IGameInstance game, IAssetManager manager, IRenderer g, T tile, ItemInstance instance, float x, float y, float scale, int filter) {
         this.getTexture(manager, tile, instance.getMeta()).draw(x, y, scale, scale, filter);
     }
 
     @Override
-    public void renderInMainMenuBackground(IGameInstance game, IAssetManager manager, IRenderer g, T tile, TileState state, float x, float y, float scale){
-        this.getTexture(manager, tile, state.get(tile.metaProp)).getPositionalVariation((int)x, (int)y).draw(x, y, scale, scale);
+    public void renderInMainMenuBackground(IGameInstance game, IAssetManager manager, IRenderer g, T tile, TileState state, float x, float y, float scale) {
+        this.getTexture(manager, tile, state.get(tile.metaProp)).getPositionalVariation((int) x, (int) y).draw(x, y, scale, scale);
     }
 
     @Override
-    public ITexture getParticleTexture(IGameInstance game, IAssetManager manager, IRenderer g, T tile, TileState state){
+    public ITexture getParticleTexture(IGameInstance game, IAssetManager manager, IRenderer g, T tile, TileState state) {
         return this.getTexture(manager, tile, state.get(tile.metaProp));
     }
 
-    protected ITexture getTexture(IAssetManager manager, T tile, int meta){
-        if(meta >= 0 && meta < tile.subResourceNames.size()){
+    protected ITexture getTexture(IAssetManager manager, T tile, int meta) {
+        if (meta >= 0 && meta < tile.subResourceNames.size()) {
             return manager.getTexture(tile.subResourceNames.get(meta));
-        }
-        else{
+        } else {
             return manager.getMissingTexture();
         }
     }
 
     @Override
-    public JsonElement getAdditionalTextureData(IGameInstance game, IAssetManager manager, IRenderer g, T tile, ItemInstance instance, AbstractEntityPlayer player, String name){
+    public JsonElement getAdditionalTextureData(IGameInstance game, IAssetManager manager, IRenderer g, T tile, ItemInstance instance, AbstractEntityPlayer player, String name) {
         return this.getTexture(manager, tile, instance.getMeta()).getAdditionalData(name);
     }
 }

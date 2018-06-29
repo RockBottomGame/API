@@ -27,14 +27,14 @@ import com.google.gson.JsonPrimitive;
 import java.io.DataInput;
 import java.io.DataOutput;
 
-public final class PartString extends BasicDataPart<String>{
+public final class PartString extends BasicDataPart<String> {
 
-    public static final IPartFactory<PartString> FACTORY = new IPartFactory<PartString>(){
+    public static final IPartFactory<PartString> FACTORY = new IPartFactory<PartString>() {
         @Override
-        public PartString parse(String name, JsonElement element){
-            if(element.isJsonPrimitive()){
+        public PartString parse(String name, JsonElement element) {
+            if (element.isJsonPrimitive()) {
                 JsonPrimitive prim = element.getAsJsonPrimitive();
-                if(prim.isString()){
+                if (prim.isString()) {
                     return new PartString(name, prim.getAsString());
                 }
             }
@@ -42,40 +42,40 @@ public final class PartString extends BasicDataPart<String>{
         }
 
         @Override
-        public PartString parse(String name, DataInput stream) throws Exception{
+        public PartString parse(String name, DataInput stream) throws Exception {
             char[] chars = new char[stream.readInt()];
-            for(int i = 0; i < chars.length; i++){
+            for (int i = 0; i < chars.length; i++) {
                 chars[i] = stream.readChar();
             }
             return new PartString(name, new String(chars));
         }
 
         @Override
-        public int getPriority(){
+        public int getPriority() {
             return -50;
         }
     };
 
-    public PartString(String name, String data){
+    public PartString(String name, String data) {
         super(name, data);
     }
 
     @Override
-    public void write(DataOutput stream) throws Exception{
+    public void write(DataOutput stream) throws Exception {
         stream.writeInt(this.data.length());
 
-        for(char c : this.data.toCharArray()){
+        for (char c : this.data.toCharArray()) {
             stream.writeChar(c);
         }
     }
 
     @Override
-    public JsonElement write(){
+    public JsonElement write() {
         return new JsonPrimitive(this.data);
     }
 
     @Override
-    public IPartFactory<? extends DataPart<String>> getFactory(){
+    public IPartFactory<? extends DataPart<String>> getFactory() {
         return FACTORY;
     }
 }

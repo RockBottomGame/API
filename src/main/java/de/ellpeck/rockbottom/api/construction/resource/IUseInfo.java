@@ -25,7 +25,7 @@ import de.ellpeck.rockbottom.api.item.ItemInstance;
 
 import java.util.List;
 
-public interface IUseInfo{
+public interface IUseInfo {
 
     int getAmount();
 

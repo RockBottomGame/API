@@ -25,7 +25,7 @@ import com.google.gson.JsonElement;
 import de.ellpeck.rockbottom.api.assets.texture.ITexture;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
-public interface IAnimation extends IAsset{
+public interface IAnimation extends IAsset {
 
     ResourceName ID = ResourceName.intern("anim");
 

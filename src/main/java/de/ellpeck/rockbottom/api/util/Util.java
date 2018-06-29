@@ -45,7 +45,7 @@ import java.util.logging.Level;
  * This class provides a large variety of helpful utility methods and variables
  * that can be useful in a multitude of circumstances.
  */
-public final class Util{
+public final class Util {
 
     /**
      * A global random with a randomized seed that can be used for operations
@@ -81,12 +81,10 @@ public final class Util{
      * @param y1 The first point's y
      * @param x2 The second point's x
      * @param y2 The second point's y
-     *
      * @return The distance
-     *
      * @see #distanceSq(double, double, double, double)
      */
-    public static double distance(double x1, double y1, double x2, double y2){
+    public static double distance(double x1, double y1, double x2, double y2) {
         return Math.sqrt(distanceSq(x1, y1, x2, y2));
     }
 
@@ -98,15 +96,13 @@ public final class Util{
      * @param y1 The first point's y
      * @param x2 The second point's x
      * @param y2 The second point's y
-     *
      * @return The squared distance
-     *
      * @see #distance(double, double, double, double)
      */
-    public static double distanceSq(double x1, double y1, double x2, double y2){
-        double dx = x2-x1;
-        double dy = y2-y1;
-        return (dx*dx)+(dy*dy);
+    public static double distanceSq(double x1, double y1, double x2, double y2) {
+        double dx = x2 - x1;
+        double dy = y2 - y1;
+        return (dx * dx) + (dy * dy);
     }
 
     /**
@@ -118,12 +114,10 @@ public final class Util{
      * @param num The number to clamp
      * @param min The minimum
      * @param max The maximum
-     *
      * @return The clamped number
-     *
      * @see #clamp(int, int, int)
      */
-    public static double clamp(double num, double min, double max){
+    public static double clamp(double num, double min, double max) {
         return Math.max(min, Math.min(max, num));
     }
 
@@ -136,12 +130,10 @@ public final class Util{
      * @param num The number to clamp
      * @param min The minimum
      * @param max The maximum
-     *
      * @return The clamped number
-     *
      * @see #clamp(double, double, double)
      */
-    public static int clamp(int num, int min, int max){
+    public static int clamp(int num, int min, int max) {
         return Math.max(min, Math.min(max, num));
     }
 
@@ -152,12 +144,11 @@ public final class Util{
      * direction of 0) will be returned.
      *
      * @param value The value to floor
-     *
      * @return The floored value
      */
-    public static int floor(double value){
-        int i = (int)value;
-        return value < (double)i ? i-1 : i;
+    public static int floor(double value) {
+        int i = (int) value;
+        return value < (double) i ? i - 1 : i;
     }
 
     /**
@@ -168,12 +159,11 @@ public final class Util{
      * infinity otherwise) will be returned.
      *
      * @param value The value to ceiling
-     *
      * @return The ceilinged value
      */
-    public static int ceil(double value){
-        int i = (int)value;
-        return value > (double)i ? i+1 : i;
+    public static int ceil(double value) {
+        int i = (int) value;
+        return value > (double) i ? i + 1 : i;
     }
 
     /**
@@ -182,14 +172,12 @@ public final class Util{
      * position of the chunk that this position would be in.
      *
      * @param worldPos The world position
-     *
      * @return The chunk position
-     *
      * @see IChunk#getGridX()
      * @see IChunk#getGridY()
      */
-    public static int toGridPos(double worldPos){
-        return floor(worldPos/(double)Constants.CHUNK_SIZE);
+    public static int toGridPos(double worldPos) {
+        return floor(worldPos / (double) Constants.CHUNK_SIZE);
     }
 
     /**
@@ -198,11 +186,10 @@ public final class Util{
      * position of the chunk in the world.
      *
      * @param gridPos The chunk grid position
-     *
      * @return The world position
      */
-    public static int toWorldPos(int gridPos){
-        return gridPos*Constants.CHUNK_SIZE;
+    public static int toWorldPos(int gridPos) {
+        return gridPos * Constants.CHUNK_SIZE;
     }
 
     /**
@@ -213,9 +200,9 @@ public final class Util{
      *
      * @param file The folder to delete
      */
-    public static void deleteFolder(File file){
-        if(file.isDirectory()){
-            for(File child : file.listFiles()){
+    public static void deleteFolder(File file) {
+        if (file.isDirectory()) {
+            for (File child : file.listFiles()) {
                 deleteFolder(child);
             }
         }
@@ -228,19 +215,16 @@ public final class Util{
      *
      * @param name  The registry name of the entity
      * @param world The world that the entity should be in
-     *
      * @return The newly created entity
-     *
      * @see RockBottomAPI#ENTITY_REGISTRY
      */
-    public static Entity createEntity(ResourceName name, IWorld world){
+    public static Entity createEntity(ResourceName name, IWorld world) {
         Class<? extends Entity> entityClass = RockBottomAPI.ENTITY_REGISTRY.get(name);
 
-        try{
+        try {
             return entityClass.getConstructor(IWorld.class).newInstance(world);
-        }
-        catch(Exception e){
-            RockBottomAPI.logger().log(Level.SEVERE, "Couldn't initialize entity with name "+name, e);
+        } catch (Exception e) {
+            RockBottomAPI.logger().log(Level.SEVERE, "Couldn't initialize entity with name " + name, e);
             return null;
         }
     }
@@ -252,7 +236,7 @@ public final class Util{
      *
      * @return The system time in milliseconds
      */
-    public static long getTimeMillis(){
+    public static long getTimeMillis() {
         return System.currentTimeMillis();
     }
 
@@ -263,20 +247,18 @@ public final class Util{
      * if the folder does not exist
      *
      * @param file The file to open
-     *
      * @return True if it worked, false if some exception was thrown
      */
-    public static boolean createAndOpen(File file){
-        if(!file.exists()){
+    public static boolean createAndOpen(File file) {
+        if (!file.exists()) {
             file.mkdirs();
         }
 
-        try{
+        try {
             Desktop.getDesktop().open(file);
             return true;
-        }
-        catch(Exception e){
-            RockBottomAPI.logger().log(Level.WARNING, "Couldn't open file "+file, e);
+        } catch (Exception e) {
+            RockBottomAPI.logger().log(Level.WARNING, "Couldn't open file " + file, e);
             return false;
         }
     }
@@ -286,16 +268,14 @@ public final class Util{
      * utility method as {@link Desktop#browse(URI)} can throw an exception.
      *
      * @param domain The domain to open
-     *
      * @return True if it worked, false if some exception was thrown
      */
-    public static boolean openWebsite(String domain){
-        try{
+    public static boolean openWebsite(String domain) {
+        try {
             Desktop.getDesktop().browse(new URI(domain));
             return true;
-        }
-        catch(Exception e){
-            RockBottomAPI.logger().log(Level.WARNING, "Couldn't open website "+domain, e);
+        } catch (Exception e) {
+            RockBottomAPI.logger().log(Level.WARNING, "Couldn't open website " + domain, e);
             return false;
         }
     }
@@ -308,13 +288,11 @@ public final class Util{
      * a seed based on some other value, see {@link #scrambleSeed(int, long)}.
      *
      * @param l The long to scramble
-     *
      * @return The scrambled long
-     *
      * @see IWorld#getSeed()
      * @see #scrambleSeed(int, long)
      */
-    public static long shiftScramble(long l){
+    public static long shiftScramble(long l) {
         l ^= (l << 21);
         l ^= (l >> 35);
         l ^= (l << 4);
@@ -329,10 +307,9 @@ public final class Util{
      *
      * @param x The x value
      * @param y The y value
-     *
      * @return The seed
      */
-    public static long scrambleSeed(int x, int y){
+    public static long scrambleSeed(int x, int y) {
         return scrambleSeed(x, y, 0L);
     }
 
@@ -341,10 +318,9 @@ public final class Util{
      * that this is not influenced by another seed.
      *
      * @param i The value
-     *
      * @return The seed
      */
-    public static long scrambleSeed(int i){
+    public static long scrambleSeed(int i) {
         return scrambleSeed(i, 0L);
     }
 
@@ -356,11 +332,10 @@ public final class Util{
      * @param x    The x value
      * @param y    The y value
      * @param seed The original seed
-     *
      * @return The new seed
      */
-    public static long scrambleSeed(int x, int y, long seed){
-        return shiftScramble(shiftScramble(x)+Long.rotateLeft(shiftScramble(y), 32))+seed;
+    public static long scrambleSeed(int x, int y, long seed) {
+        return shiftScramble(shiftScramble(x) + Long.rotateLeft(shiftScramble(y), 32)) + seed;
     }
 
     /**
@@ -369,11 +344,10 @@ public final class Util{
      *
      * @param i    The value
      * @param seed The original seed
-     *
      * @return The new seed
      */
-    public static long scrambleSeed(int i, long seed){
-        return shiftScramble(i)+seed;
+    public static long scrambleSeed(int i, long seed) {
+        return shiftScramble(i) + seed;
     }
 
     /**
@@ -383,15 +357,13 @@ public final class Util{
      *
      * @param start The first number (inclusive)
      * @param end   The second number (exclusive)
-     *
      * @return A list of integers
-     *
      * @see IFilteredInventory#getInputSlots(ItemInstance, Direction)
      * @see IFilteredInventory#getOutputSlots(Direction)
      */
-    public static List<Integer> makeIntList(int start, int end){
+    public static List<Integer> makeIntList(int start, int end) {
         List<Integer> list = new ArrayList<>();
-        for(int i = start; i < end; i++){
+        for (int i = start; i < end; i++) {
             list.add(i);
         }
         return list;
@@ -403,12 +375,11 @@ public final class Util{
      * beginning or end of the string.
      *
      * @param s The string to check
-     *
      * @return If the string is a resource name
      */
-    public static boolean isResourceName(String s){
+    public static boolean isResourceName(String s) {
         int index = s.indexOf(Constants.RESOURCE_SEPARATOR);
-        return index > 0 && index < s.length()-1;
+        return index > 0 && index < s.length() - 1;
     }
 
     /**
@@ -419,11 +390,10 @@ public final class Util{
      *
      * @param time The time to sleep for
      */
-    public static void sleepSafe(long time){
-        try{
+    public static void sleepSafe(long time) {
+        try {
             Thread.sleep(time);
-        }
-        catch(InterruptedException ignored){
+        } catch (InterruptedException ignored) {
         }
     }
 }

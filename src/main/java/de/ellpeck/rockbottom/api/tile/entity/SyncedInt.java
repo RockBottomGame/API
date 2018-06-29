@@ -23,45 +23,45 @@ package de.ellpeck.rockbottom.api.tile.entity;
 
 import de.ellpeck.rockbottom.api.data.set.DataSet;
 
-public final class SyncedInt{
+public final class SyncedInt {
 
     private final String name;
     private int value;
     private int lastValue;
 
-    public SyncedInt(String name){
+    public SyncedInt(String name) {
         this.name = name;
     }
 
-    public boolean needsSync(){
+    public boolean needsSync() {
         return this.value != this.lastValue;
     }
 
-    public void onSync(){
+    public void onSync() {
         this.lastValue = this.value;
     }
 
-    public void set(int value){
+    public void set(int value) {
         this.value = value;
     }
 
-    public int get(){
+    public int get() {
         return this.value;
     }
 
-    public void add(int amount){
+    public void add(int amount) {
         this.value += amount;
     }
 
-    public void remove(int amount){
+    public void remove(int amount) {
         this.value -= amount;
     }
 
-    public void save(DataSet set){
+    public void save(DataSet set) {
         set.addInt(this.name, this.value);
     }
 
-    public void load(DataSet set){
+    public void load(DataSet set) {
         this.value = set.getInt(this.name);
     }
 }

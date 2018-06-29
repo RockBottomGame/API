@@ -32,7 +32,7 @@ import de.ellpeck.rockbottom.api.world.layer.TileLayer;
  * held by the player is effective in making the tile drop its result.
  * Cancelling the event will result in the tile not being broken.
  */
-public final class BreakEvent extends Event{
+public final class BreakEvent extends Event {
 
     public final AbstractEntityPlayer player;
     public TileLayer layer;
@@ -40,7 +40,7 @@ public final class BreakEvent extends Event{
     public int y;
     public boolean effective;
 
-    public BreakEvent(AbstractEntityPlayer player, TileLayer layer, int x, int y, boolean effective){
+    public BreakEvent(AbstractEntityPlayer player, TileLayer layer, int x, int y, boolean effective) {
         this.player = player;
         this.layer = layer;
         this.x = x;

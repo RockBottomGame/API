@@ -32,20 +32,19 @@ import java.io.DataOutput;
 import java.io.IOException;
 import java.util.Locale;
 
-public final class PartByte extends BasicDataPart<Byte>{
+public final class PartByte extends BasicDataPart<Byte> {
 
-    public static final IPartFactory<PartByte> FACTORY = new IPartFactory<PartByte>(){
+    public static final IPartFactory<PartByte> FACTORY = new IPartFactory<PartByte>() {
         @Override
-        public PartByte parse(String name, JsonElement element){
-            if(element.isJsonPrimitive()){
+        public PartByte parse(String name, JsonElement element) {
+            if (element.isJsonPrimitive()) {
                 JsonPrimitive prim = element.getAsJsonPrimitive();
-                if(prim.isString()){
+                if (prim.isString()) {
                     String string = prim.getAsString().toLowerCase(Locale.ROOT);
-                    if(string.endsWith("b")){
-                        try{
-                            return new PartByte(name, Byte.parseByte(string.substring(0, string.length()-1)));
-                        }
-                        catch(Exception ignored){
+                    if (string.endsWith("b")) {
+                        try {
+                            return new PartByte(name, Byte.parseByte(string.substring(0, string.length() - 1)));
+                        } catch (Exception ignored) {
                         }
                     }
                 }
@@ -54,27 +53,27 @@ public final class PartByte extends BasicDataPart<Byte>{
         }
 
         @Override
-        public PartByte parse(String name, DataInput stream) throws Exception{
+        public PartByte parse(String name, DataInput stream) throws Exception {
             return new PartByte(name, stream.readByte());
         }
     };
 
-    public PartByte(String name, Byte data){
+    public PartByte(String name, Byte data) {
         super(name, data);
     }
 
     @Override
-    public void write(DataOutput stream) throws IOException{
+    public void write(DataOutput stream) throws IOException {
         stream.writeByte(this.data);
     }
 
     @Override
-    public JsonElement write(){
-        return new JsonPrimitive(this.data+"b");
+    public JsonElement write() {
+        return new JsonPrimitive(this.data + "b");
     }
 
     @Override
-    public IPartFactory<? extends DataPart<Byte>> getFactory(){
+    public IPartFactory<? extends DataPart<Byte>> getFactory() {
         return FACTORY;
     }
 }

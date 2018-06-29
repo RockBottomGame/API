@@ -23,6 +23,6 @@ package de.ellpeck.rockbottom.api.assets;
 
 import de.ellpeck.rockbottom.api.render.engine.IDisposable;
 
-public interface IAsset extends IDisposable{
+public interface IAsset extends IDisposable {
 
 }

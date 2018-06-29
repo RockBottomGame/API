@@ -30,7 +30,7 @@ import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 import java.util.function.Supplier;
 
-public class ComponentProgressBar extends GuiComponent{
+public class ComponentProgressBar extends GuiComponent {
 
     private final int progressColor;
     private final int backgroundColor;
@@ -38,7 +38,7 @@ public class ComponentProgressBar extends GuiComponent{
     private final Supplier<Float> supplier;
     private final boolean isVertical;
 
-    public ComponentProgressBar(Gui gui, int x, int y, int sizeX, int sizeY, int progressColor, boolean isVertical, Supplier<Float> supplier){
+    public ComponentProgressBar(Gui gui, int x, int y, int sizeX, int sizeY, int progressColor, boolean isVertical, Supplier<Float> supplier) {
         super(gui, x, y, sizeX, sizeY);
         this.supplier = supplier;
         this.isVertical = isVertical;
@@ -47,19 +47,18 @@ public class ComponentProgressBar extends GuiComponent{
     }
 
     @Override
-    public void render(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y){
+    public void render(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y) {
         super.render(game, manager, g, x, y);
 
         float percent = this.supplier.get();
 
         g.addFilledRect(x, y, this.width, this.height, this.backgroundColor);
 
-        if(this.isVertical){
-            float height = percent*this.height;
-            g.addFilledRect(x, y+this.height-height, this.width, height, this.progressColor);
-        }
-        else{
-            float width = percent*this.width;
+        if (this.isVertical) {
+            float height = percent * this.height;
+            g.addFilledRect(x, y + this.height - height, this.width, height, this.progressColor);
+        } else {
+            float width = percent * this.width;
             g.addFilledRect(x, y, width, this.height, this.progressColor);
         }
 
@@ -67,7 +66,7 @@ public class ComponentProgressBar extends GuiComponent{
     }
 
     @Override
-    public ResourceName getName(){
+    public ResourceName getName() {
         return ResourceName.intern("progress_bar");
     }
 }

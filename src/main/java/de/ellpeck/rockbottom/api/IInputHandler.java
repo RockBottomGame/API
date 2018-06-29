@@ -31,7 +31,7 @@ import org.lwjgl.glfw.GLFW;
  * @see IGameInstance#getInput()
  * @see RockBottomAPI#getGame()
  */
-public interface IInputHandler{
+public interface IInputHandler {
 
     /**
      * Returns true if the mouse cursor is currently inside of the window. This
@@ -46,9 +46,7 @@ public interface IInputHandler{
      *
      * @param button The button to query. Use the {@link GLFW} class to easily
      *               get mouse buttons' ids
-     *
      * @return If the button is down
-     *
      * @see #wasMousePressed(int)
      */
     boolean isMouseDown(int button);
@@ -60,9 +58,7 @@ public interface IInputHandler{
      *
      * @param button The button toe query. Use the {@link GLFW} class to easily
      *               get mouse buttons' ids
-     *
      * @return If the button was pressed lately
-     *
      * @see #isMouseDown(int)
      */
     boolean wasMousePressed(int button);
@@ -72,9 +68,7 @@ public interface IInputHandler{
      *
      * @param key The key to query. Use the {@link GLFW} class to easily get
      *            keys' ids
-     *
      * @return If the key is down
-     *
      * @see #wasKeyPressed(int)
      */
     boolean isKeyDown(int key);
@@ -86,9 +80,7 @@ public interface IInputHandler{
      *
      * @param key The key to query. Use the {@link GLFW} class to easily get
      *            keys' ids
-     *
      * @return If the key was pressed lately
-     *
      * @see #isKeyDown(int)
      */
     boolean wasKeyPressed(int key);
@@ -99,7 +91,6 @@ public interface IInputHandler{
      * direction.
      *
      * @return The mouse wheel change
-     *
      * @see #getHorizontalMouseWheelChange()
      */
     int getMouseWheelChange();
@@ -110,7 +101,6 @@ public interface IInputHandler{
      * to the left. This is, obviously, not supported by all mouses.
      *
      * @return The horizontal mouse wheel change
-     *
      * @see #getMouseWheelChange()
      */
     int getHorizontalMouseWheelChange();
@@ -119,7 +109,6 @@ public interface IInputHandler{
      * Gets the mouse's current x coordinate on screen.
      *
      * @return The mouse's x coordinate
-     *
      * @see IRenderer#getMouseInGuiX()
      * @see IRenderer#getMousedTileX()
      */
@@ -129,7 +118,6 @@ public interface IInputHandler{
      * Gets the mouse's current y coordinate on screen
      *
      * @return The mouse's y coordinate
-     *
      * @see IRenderer#getMouseInGuiY()
      * @see IRenderer#getMousedTileY()
      */

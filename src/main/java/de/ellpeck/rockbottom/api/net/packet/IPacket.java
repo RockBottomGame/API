@@ -25,7 +25,7 @@ import de.ellpeck.rockbottom.api.IGameInstance;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 
-public interface IPacket{
+public interface IPacket {
 
     void toBuffer(ByteBuf buf);
 
@@ -33,7 +33,7 @@ public interface IPacket{
 
     void handle(IGameInstance game, ChannelHandlerContext context);
 
-    default void enqueueAsAction(IGameInstance game, ChannelHandlerContext context){
-        game.enqueueAction(IPacket.this :: handle, context);
+    default void enqueueAsAction(IGameInstance game, ChannelHandlerContext context) {
+        game.enqueueAction(IPacket.this::handle, context);
     }
 }

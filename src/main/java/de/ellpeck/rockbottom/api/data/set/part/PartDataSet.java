@@ -29,49 +29,48 @@ import de.ellpeck.rockbottom.api.data.set.DataSet;
 import java.io.DataInput;
 import java.io.DataOutput;
 
-public final class PartDataSet extends BasicDataPart<DataSet>{
+public final class PartDataSet extends BasicDataPart<DataSet> {
 
-    public static final IPartFactory<PartDataSet> FACTORY = new IPartFactory<PartDataSet>(){
+    public static final IPartFactory<PartDataSet> FACTORY = new IPartFactory<PartDataSet>() {
         @Override
-        public PartDataSet parse(String name, JsonElement element){
-            if(element.isJsonObject()){
-                try{
+        public PartDataSet parse(String name, JsonElement element) {
+            if (element.isJsonObject()) {
+                try {
                     DataSet set = new DataSet();
                     RockBottomAPI.getApiHandler().readDataSet(element.getAsJsonObject(), set);
                     return new PartDataSet(name, set);
-                }
-                catch(Exception ignored){
+                } catch (Exception ignored) {
                 }
             }
             return null;
         }
 
         @Override
-        public PartDataSet parse(String name, DataInput stream) throws Exception{
+        public PartDataSet parse(String name, DataInput stream) throws Exception {
             DataSet data = new DataSet();
             RockBottomAPI.getApiHandler().readDataSet(stream, data);
             return new PartDataSet(name, data);
         }
     };
 
-    public PartDataSet(String name, DataSet data){
+    public PartDataSet(String name, DataSet data) {
         super(name, data);
     }
 
     @Override
-    public void write(DataOutput stream) throws Exception{
+    public void write(DataOutput stream) throws Exception {
         RockBottomAPI.getApiHandler().writeDataSet(stream, this.data);
     }
 
     @Override
-    public JsonElement write() throws Exception{
+    public JsonElement write() throws Exception {
         JsonObject object = new JsonObject();
         RockBottomAPI.getApiHandler().writeDataSet(object, this.data);
         return object;
     }
 
     @Override
-    public IPartFactory getFactory(){
+    public IPartFactory getFactory() {
         return FACTORY;
     }
 }

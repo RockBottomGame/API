@@ -35,47 +35,47 @@ import java.util.Collections;
 import java.util.Random;
 import java.util.Set;
 
-public abstract class WorldGenOre implements IWorldGenerator{
+public abstract class WorldGenOre implements IWorldGenerator {
 
     protected final Random oreRandom = new Random();
     protected long oreSeed;
 
     @Override
-    public void initWorld(IWorld world){
+    public void initWorld(IWorld world) {
         this.oreSeed = Util.scrambleSeed(RockBottomAPI.WORLD_GENERATORS.getId(this.getClass()).hashCode(), world.getSeed());
     }
 
     @Override
-    public boolean shouldGenerate(IWorld world, IChunk chunk){
+    public boolean shouldGenerate(IWorld world, IChunk chunk) {
         return chunk.getGridY() <= this.getHighestGridPos() && chunk.getGridY() >= this.getLowestGridPos();
     }
 
     @Override
-    public void generate(IWorld world, IChunk chunk){
+    public void generate(IWorld world, IChunk chunk) {
         this.oreRandom.setSeed(Util.scrambleSeed(chunk.getX(), chunk.getY(), this.oreSeed));
         Collection<Biome> allowedBiomes = this.getAllowedBiomes();
         Collection<TileState> allowedTiles = this.getAllwedTiles();
 
-        int amount = this.oreRandom.nextInt(this.getMaxAmount()+1);
-        if(amount > 0){
+        int amount = this.oreRandom.nextInt(this.getMaxAmount() + 1);
+        if (amount > 0) {
             int radX = this.getClusterRadiusX();
             int radY = this.getClusterRadiusY();
-            int radXHalf = Util.ceil((double)radX/2);
-            int radYHalf = Util.ceil((double)radY/2);
+            int radXHalf = Util.ceil((double) radX / 2);
+            int radYHalf = Util.ceil((double) radY / 2);
 
-            for(int i = 0; i < amount; i++){
-                int startX = chunk.getX()+radX+this.oreRandom.nextInt(Constants.CHUNK_SIZE-radX*2);
-                int startY = chunk.getY()+radY+this.oreRandom.nextInt(Constants.CHUNK_SIZE-radY*2);
+            for (int i = 0; i < amount; i++) {
+                int startX = chunk.getX() + radX + this.oreRandom.nextInt(Constants.CHUNK_SIZE - radX * 2);
+                int startY = chunk.getY() + radY + this.oreRandom.nextInt(Constants.CHUNK_SIZE - radY * 2);
 
-                if(allowedBiomes.contains(world.getBiome(startX, startY))){
-                    int thisRadX = this.oreRandom.nextInt(radXHalf)+radXHalf;
-                    int thisRadY = this.oreRandom.nextInt(radYHalf)+radYHalf;
+                if (allowedBiomes.contains(world.getBiome(startX, startY))) {
+                    int thisRadX = this.oreRandom.nextInt(radXHalf) + radXHalf;
+                    int thisRadY = this.oreRandom.nextInt(radYHalf) + radYHalf;
 
-                    for(int x = -thisRadX; x <= thisRadX; x++){
-                        for(int y = -thisRadY; y <= thisRadY; y++){
-                            if(allowedTiles.contains(world.getState(startX+x, startY+y))){
-                                if(this.oreRandom.nextInt(thisRadX) == x || this.oreRandom.nextInt(thisRadY) == y){
-                                    world.setState(startX+x, startY+y, this.getOreState());
+                    for (int x = -thisRadX; x <= thisRadX; x++) {
+                        for (int y = -thisRadY; y <= thisRadY; y++) {
+                            if (allowedTiles.contains(world.getState(startX + x, startY + y))) {
+                                if (this.oreRandom.nextInt(thisRadX) == x || this.oreRandom.nextInt(thisRadY) == y) {
+                                    world.setState(startX + x, startY + y, this.getOreState());
                                 }
                             }
                         }
@@ -87,7 +87,7 @@ public abstract class WorldGenOre implements IWorldGenerator{
 
     protected abstract int getHighestGridPos();
 
-    protected int getLowestGridPos(){
+    protected int getLowestGridPos() {
         return Integer.MIN_VALUE;
     }
 
@@ -99,11 +99,11 @@ public abstract class WorldGenOre implements IWorldGenerator{
 
     protected abstract TileState getOreState();
 
-    protected Set<Biome> getAllowedBiomes(){
+    protected Set<Biome> getAllowedBiomes() {
         return RockBottomAPI.BIOME_REGISTRY.values();
     }
 
-    protected Set<TileState> getAllwedTiles(){
+    protected Set<TileState> getAllwedTiles() {
         return Collections.singleton(GameContent.TILE_STONE.getDefState());
     }
 }

@@ -25,7 +25,7 @@ import de.ellpeck.rockbottom.api.net.chat.component.ChatComponent;
 
 import java.util.UUID;
 
-public interface ICommandSender{
+public interface ICommandSender {
 
     int getCommandLevel();
 

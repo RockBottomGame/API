@@ -34,18 +34,17 @@ import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 import java.util.function.Consumer;
 
-public class ComponentScrollBar extends GuiComponent{
+public class ComponentScrollBar extends GuiComponent {
 
     protected final Consumer<Integer> scrollConsumer;
     protected final BoundBox hoverArea;
+    protected final ResourceName scrollTexture;
     protected int number;
     protected int max;
-
     protected boolean wasMouseDown;
     protected boolean drawReversed;
-    protected final ResourceName scrollTexture;
 
-    public ComponentScrollBar(Gui gui, int x, int y, int width, int height, BoundBox hoverArea, int max, Consumer<Integer> scrollConsumer, ResourceName scrollTexture){
+    public ComponentScrollBar(Gui gui, int x, int y, int width, int height, BoundBox hoverArea, int max, Consumer<Integer> scrollConsumer, ResourceName scrollTexture) {
         super(gui, x, y, width, height);
         this.scrollConsumer = scrollConsumer;
         this.hoverArea = hoverArea;
@@ -53,96 +52,93 @@ public class ComponentScrollBar extends GuiComponent{
         this.scrollTexture = scrollTexture;
     }
 
-    public ComponentScrollBar(Gui gui, int x, int y, int height, BoundBox hoverArea, int max, Consumer<Integer> scrollConsumer){
+    public ComponentScrollBar(Gui gui, int x, int y, int height, BoundBox hoverArea, int max, Consumer<Integer> scrollConsumer) {
         this(gui, x, y, 6, height, hoverArea, max, scrollConsumer, null);
     }
 
     @Override
-    public ResourceName getName(){
+    public ResourceName getName() {
         return ResourceName.intern("scroll_bar");
     }
 
-    public BoundBox getHoverArea(){
+    public BoundBox getHoverArea() {
         return this.hoverArea;
     }
 
-    public int getNumber(){
+    public int getNumber() {
         return this.number;
     }
 
-    public int getMax(){
-        return this.max;
-    }
-
-    public void setNumber(int number){
+    public void setNumber(int number) {
         this.number = number;
     }
 
-    public void setMax(int max){
+    public int getMax() {
+        return this.max;
+    }
+
+    public void setMax(int max) {
         this.max = max;
     }
 
-    public void setDrawReversed(boolean should){
+    public void setDrawReversed(boolean should) {
         this.drawReversed = should;
     }
 
     @Override
-    public void render(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y){
+    public void render(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y) {
         int max = this.getMax();
-        float percentage = max <= 0 ? 0 : (float)this.number/(float)max;
-        if(this.drawReversed){
-            percentage = 1F-percentage;
+        float percentage = max <= 0 ? 0 : (float) this.number / (float) max;
+        if (this.drawReversed) {
+            percentage = 1F - percentage;
         }
 
         boolean active = this.isMouseOverPrioritized(game) || this.hoverArea.contains(g.getMouseInGuiX(), g.getMouseInGuiY());
-        if(this.scrollTexture == null){
+        if (this.scrollTexture == null) {
             int color = active ? getElementColor() : getUnselectedElementColor();
 
             g.addFilledRect(x, y, 6F, this.height, color);
             g.addEmptyRect(x, y, 6F, this.height, getElementOutlineColor());
 
-            if(this.getMax() > 0){
-                float renderY = y+percentage*(this.height-10);
+            if (this.getMax() > 0) {
+                float renderY = y + percentage * (this.height - 10);
                 g.addFilledRect(x, renderY, 6F, 10F, color);
                 g.addEmptyRect(x, renderY, 6F, 10F, getElementOutlineColor());
             }
-        }
-        else if(this.getMax() > 0){
+        } else if (this.getMax() > 0) {
             ITexture texture = manager.getTexture(this.scrollTexture);
 
-            float renderY = y+percentage*(this.height-texture.getRenderHeight());
+            float renderY = y + percentage * (this.height - texture.getRenderHeight());
             texture.draw(x, renderY, this.width, texture.getRenderHeight(), active ? Colors.WHITE : Colors.LIGHT_GRAY);
         }
     }
 
     @Override
-    public void update(IGameInstance game){
-        if(this.wasMouseDown){
-            if(Settings.KEY_GUI_ACTION_1.isDown()){
+    public void update(IGameInstance game) {
+        if (this.wasMouseDown) {
+            if (Settings.KEY_GUI_ACTION_1.isDown()) {
                 int max = this.getMax();
-                float clickPercentage = (game.getRenderer().getMouseInGuiY()-this.getRenderY())/(float)this.height;
-                if(this.drawReversed){
-                    clickPercentage = 1F-clickPercentage;
+                float clickPercentage = (game.getRenderer().getMouseInGuiY() - this.getRenderY()) / (float) this.height;
+                if (this.drawReversed) {
+                    clickPercentage = 1F - clickPercentage;
                 }
 
-                int number = Util.clamp(Math.round(clickPercentage*max), 0, max);
-                if(number != this.number){
+                int number = Util.clamp(Math.round(clickPercentage * max), 0, max);
+                if (number != this.number) {
                     this.number = number;
                     this.onScroll();
                 }
-            }
-            else{
+            } else {
                 this.wasMouseDown = false;
             }
-        }
-        else{
+        } else {
             int scroll = game.getInput().getMouseWheelChange();
-            if(scroll != 0 && this.hoverArea.contains(game.getRenderer().getMouseInGuiX(), game.getRenderer().getMouseInGuiY())){
-                if(this.drawReversed){
+            if (scroll != 0 && this.hoverArea.contains(game.getRenderer().getMouseInGuiX(), game.getRenderer().getMouseInGuiY())) {
+                if (this.drawReversed) {
                     scroll = -scroll;
                 }
-                int number = Util.clamp(this.number+(scroll < 0 ? 1 : -1), 0, this.getMax());
-                if(number != this.number){
+                int number = Util.clamp(this.number + (scroll < 0 ? 1 : -1), 0, this.getMax());
+                if (number != this.number) {
                     this.number = number;
                     this.onScroll();
                 }
@@ -151,9 +147,9 @@ public class ComponentScrollBar extends GuiComponent{
     }
 
     @Override
-    public boolean onMouseAction(IGameInstance game, int button, float x, float y){
-        if(this.isMouseOver(game)){
-            if(!this.wasMouseDown){
+    public boolean onMouseAction(IGameInstance game, int button, float x, float y) {
+        if (this.isMouseOver(game)) {
+            if (!this.wasMouseDown) {
                 this.wasMouseDown = true;
                 return true;
             }
@@ -161,8 +157,8 @@ public class ComponentScrollBar extends GuiComponent{
         return false;
     }
 
-    protected void onScroll(){
-        if(this.scrollConsumer != null){
+    protected void onScroll() {
+        if (this.scrollConsumer != null) {
             this.scrollConsumer.accept(this.number);
         }
     }

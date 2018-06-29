@@ -33,13 +33,13 @@ import de.ellpeck.rockbottom.api.gui.component.GuiComponent;
  * {@link GuiComponent#renderOverlay(IGameInstance, IAssetManager, IRenderer,
  * int, int)}. Cancelling it will result in the overlay not rendering.
  */
-public final class ComponentRenderOverlayEvent extends Event{
+public final class ComponentRenderOverlayEvent extends Event {
 
     public final Gui gui;
     public final int id;
     public final GuiComponent component;
 
-    public ComponentRenderOverlayEvent(Gui gui, int id, GuiComponent component){
+    public ComponentRenderOverlayEvent(Gui gui, int id, GuiComponent component) {
         this.gui = gui;
         this.id = id;
         this.component = component;

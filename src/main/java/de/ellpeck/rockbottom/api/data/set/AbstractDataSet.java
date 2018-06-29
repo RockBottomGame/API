@@ -29,37 +29,37 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class AbstractDataSet{
+public abstract class AbstractDataSet {
 
     protected final Map<String, DataPart> data = new HashMap<>();
     protected final Map<String, DataPart> dataUnmodifiable = Collections.unmodifiableMap(this.data);
 
-    public void addPart(DataPart part){
+    public void addPart(DataPart part) {
         this.data.put(part.getName(), part);
     }
 
-    public boolean hasKey(String key){
+    public boolean hasKey(String key) {
         return this.data.containsKey(key);
     }
 
-    public DataPart remove(String key){
+    public DataPart remove(String key) {
         return this.data.remove(key);
     }
 
-    public void clear(){
+    public void clear() {
         this.data.clear();
     }
 
-    public int size(){
+    public int size() {
         return this.data.size();
     }
 
-    public <T> T getPartContent(String key, Class<? extends DataPart<T>> typeClass, T defaultValue){
+    public <T> T getPartContent(String key, Class<? extends DataPart<T>> typeClass, T defaultValue) {
         DataPart part = this.data.get(key);
 
-        if(part != null && part.getClass() == typeClass){
-            T result = (T)part.get();
-            if(result != null){
+        if (part != null && part.getClass() == typeClass) {
+            T result = (T) part.get();
+            if (result != null) {
                 return result;
             }
         }
@@ -68,49 +68,49 @@ public abstract class AbstractDataSet{
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return this.data.toString();
     }
 
-    public Map<String, DataPart> getData(){
+    public Map<String, DataPart> getData() {
         return this.dataUnmodifiable;
     }
 
-    public boolean isEmpty(){
+    public boolean isEmpty() {
         return this.data.isEmpty();
     }
 
     @Override
-    public boolean equals(Object o){
-        if(this == o){
+    public boolean equals(Object o) {
+        if (this == o) {
             return true;
         }
-        if(o == null || this.getClass() != o.getClass()){
+        if (o == null || this.getClass() != o.getClass()) {
             return false;
         }
 
-        DataSet dataSet = (DataSet)o;
+        DataSet dataSet = (DataSet) o;
         return this.data.equals(dataSet.data);
     }
 
     @Override
-    public int hashCode(){
+    public int hashCode() {
         return this.data.hashCode();
     }
 
-    public void write(File file){
+    public void write(File file) {
         RockBottomAPI.getApiHandler().writeDataSet(this, file, false);
     }
 
-    public void read(File file){
+    public void read(File file) {
         RockBottomAPI.getApiHandler().readDataSet(this, file, false);
     }
 
-    public void writeAsJson(File file){
+    public void writeAsJson(File file) {
         RockBottomAPI.getApiHandler().writeDataSet(this, file, true);
     }
 
-    public void readAsJson(File file){
+    public void readAsJson(File file) {
         RockBottomAPI.getApiHandler().readDataSet(this, file, true);
     }
 }

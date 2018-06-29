@@ -26,70 +26,68 @@ import de.ellpeck.rockbottom.api.item.Item;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.tile.Tile;
 
-public final class ResInfo{
+public final class ResInfo {
 
     private final Item item;
     private final int meta;
 
-    public ResInfo(ItemInstance instance){
+    public ResInfo(ItemInstance instance) {
         this(instance.getItem(), instance.getMeta());
     }
 
-    public ResInfo(Tile tile){
+    public ResInfo(Tile tile) {
         this(tile, 0);
     }
 
-    public ResInfo(Item item){
+    public ResInfo(Item item) {
         this(item, 0);
     }
 
-    public ResInfo(Tile tile, int meta){
+    public ResInfo(Tile tile, int meta) {
         this(tile.getItem(), meta);
     }
 
-    public ResInfo(Item item, int meta){
+    public ResInfo(Item item, int meta) {
         int max = Math.min(Short.MAX_VALUE, item.getHighestPossibleMeta());
-        Preconditions.checkArgument(meta >= 0 && meta <= max, "Tried assigning meta "+meta+" to resource info with item "+item+" which is less than 0 or greater than max "+max+'!');
+        Preconditions.checkArgument(meta >= 0 && meta <= max, "Tried assigning meta " + meta + " to resource info with item " + item + " which is less than 0 or greater than max " + max + '!');
 
         this.item = item;
         this.meta = meta;
     }
 
-    public Item getItem(){
+    public Item getItem() {
         return this.item;
     }
 
-    public int getMeta(){
+    public int getMeta() {
         return this.meta;
     }
 
-    public ItemInstance asInstance(int amount){
+    public ItemInstance asInstance(int amount) {
         return new ItemInstance(this.item, amount, this.meta);
     }
 
     @Override
-    public boolean equals(Object o){
-        if(this == o){
+    public boolean equals(Object o) {
+        if (this == o) {
             return true;
-        }
-        else if(o instanceof ResInfo){
-            ResInfo that = (ResInfo)o;
+        } else if (o instanceof ResInfo) {
+            ResInfo that = (ResInfo) o;
             return this.meta == that.meta && this.item.equals(that.item);
-        }
-        else{
+        } else {
             return false;
         }
     }
 
     @Override
-    public int hashCode(){
+    public int hashCode() {
         int result = this.item.hashCode();
-        result = 31*result+this.meta;
+        result = 31 * result + this.meta;
         return result;
     }
 
     @Override
-    public String toString(){
-        return this.item+"@"+this.meta;
+    public String toString() {
+        return this.item + "@" + this.meta;
     }
 }

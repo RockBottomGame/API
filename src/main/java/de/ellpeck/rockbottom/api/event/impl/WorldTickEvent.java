@@ -31,11 +31,11 @@ import de.ellpeck.rockbottom.api.world.IWorld;
  * it results in the world's {@link TileEntity} and {@link Entity} objects not
  * updating along with time not progressing for one tick.
  */
-public final class WorldTickEvent extends Event{
+public final class WorldTickEvent extends Event {
 
     public final IWorld world;
 
-    public WorldTickEvent(IWorld world){
+    public WorldTickEvent(IWorld world) {
         this.world = world;
     }
 }

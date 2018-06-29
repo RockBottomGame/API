@@ -29,38 +29,36 @@ import io.netty.buffer.ByteBufOutputStream;
 
 import java.util.logging.Level;
 
-public final class NetUtil{
+public final class NetUtil {
 
-    public static void writeSetToBuffer(AbstractDataSet set, ByteBuf buf){
-        try{
+    public static void writeSetToBuffer(AbstractDataSet set, ByteBuf buf) {
+        try {
             RockBottomAPI.getApiHandler().writeDataSet(new ByteBufOutputStream(buf), set);
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             RockBottomAPI.logger().log(Level.SEVERE, "Couldn't write data set to buffer", e);
         }
     }
 
-    public static void readSetFromBuffer(AbstractDataSet set, ByteBuf buf){
-        try{
+    public static void readSetFromBuffer(AbstractDataSet set, ByteBuf buf) {
+        try {
             RockBottomAPI.getApiHandler().readDataSet(new ByteBufInputStream(buf), set);
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             RockBottomAPI.logger().log(Level.SEVERE, "Couldn't read data set from buffer", e);
         }
     }
 
-    public static void writeStringToBuffer(String s, ByteBuf buf){
+    public static void writeStringToBuffer(String s, ByteBuf buf) {
         buf.writeInt(s.length());
 
-        for(char c : s.toCharArray()){
+        for (char c : s.toCharArray()) {
             buf.writeChar(c);
         }
     }
 
-    public static String readStringFromBuffer(ByteBuf buf){
+    public static String readStringFromBuffer(ByteBuf buf) {
         char[] chars = new char[buf.readInt()];
 
-        for(int i = 0; i < chars.length; i++){
+        for (int i = 0; i < chars.length; i++) {
             chars[i] = buf.readChar();
         }
 

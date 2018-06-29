@@ -29,30 +29,29 @@ import java.util.Random;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 
-public class CombinedInventory implements IInventory{
+public class CombinedInventory implements IInventory {
 
     private final IInventory[] inventories;
 
-    public CombinedInventory(IInventory... inventories){
+    public CombinedInventory(IInventory... inventories) {
         this.inventories = inventories;
     }
 
     @Override
-    public void set(int id, ItemInstance instance){
+    public void set(int id, ItemInstance instance) {
         this.executeOnInv(id, (inventory, integer) -> {
             inventory.set(integer, instance);
             return null;
         });
     }
 
-    public <T> T executeOnInv(int id, BiFunction<IInventory, Integer, T> function){
+    public <T> T executeOnInv(int id, BiFunction<IInventory, Integer, T> function) {
         int slotCounter = 0;
-        for(IInventory inventory : this.inventories){
+        for (IInventory inventory : this.inventories) {
             int amount = inventory.getSlotAmount();
-            if(slotCounter+amount > id){
-                return function.apply(inventory, id-slotCounter);
-            }
-            else{
+            if (slotCounter + amount > id) {
+                return function.apply(inventory, id - slotCounter);
+            } else {
                 slotCounter += amount;
             }
         }
@@ -60,24 +59,24 @@ public class CombinedInventory implements IInventory{
     }
 
     @Override
-    public ItemInstance add(int id, int amount){
+    public ItemInstance add(int id, int amount) {
         return this.executeOnInv(id, (inventory, integer) -> inventory.add(integer, amount));
     }
 
     @Override
-    public ItemInstance remove(int id, int amount){
+    public ItemInstance remove(int id, int amount) {
         return this.executeOnInv(id, (inventory, integer) -> inventory.remove(integer, amount));
     }
 
     @Override
-    public ItemInstance get(int id){
-        return this.executeOnInv(id, IInventory :: get);
+    public ItemInstance get(int id) {
+        return this.executeOnInv(id, IInventory::get);
     }
 
     @Override
-    public int getSlotAmount(){
+    public int getSlotAmount() {
         int sum = 0;
-        for(IInventory inventory : this.inventories){
+        for (IInventory inventory : this.inventories) {
             int slotAmount = inventory.getSlotAmount();
             sum += slotAmount;
         }
@@ -85,7 +84,7 @@ public class CombinedInventory implements IInventory{
     }
 
     @Override
-    public void notifyChange(int slot){
+    public void notifyChange(int slot) {
         this.executeOnInv(slot, (inv, i) -> {
             inv.notifyChange(i);
             return null;
@@ -93,28 +92,28 @@ public class CombinedInventory implements IInventory{
     }
 
     @Override
-    public void addChangeCallback(BiConsumer<IInventory, Integer> callback){
-        for(IInventory inventory : this.inventories){
+    public void addChangeCallback(BiConsumer<IInventory, Integer> callback) {
+        for (IInventory inventory : this.inventories) {
             inventory.addChangeCallback(callback);
         }
     }
 
     @Override
-    public void removeChangeCallback(BiConsumer<IInventory, Integer> callback){
-        for(IInventory inventory : this.inventories){
+    public void removeChangeCallback(BiConsumer<IInventory, Integer> callback) {
+        for (IInventory inventory : this.inventories) {
             inventory.removeChangeCallback(callback);
         }
     }
 
     @Override
-    public ItemInstance addToSlot(int slot, ItemInstance instance, boolean simulate){
+    public ItemInstance addToSlot(int slot, ItemInstance instance, boolean simulate) {
         return this.executeOnInv(slot, (inv, i) -> inv.addToSlot(i, instance, simulate));
     }
 
     @Override
-    public boolean containsResource(IUseInfo info){
-        for(IInventory inventory : this.inventories){
-            if(inventory.containsResource(info)){
+    public boolean containsResource(IUseInfo info) {
+        for (IInventory inventory : this.inventories) {
+            if (inventory.containsResource(info)) {
                 return true;
             }
         }
@@ -122,9 +121,9 @@ public class CombinedInventory implements IInventory{
     }
 
     @Override
-    public boolean containsItem(ItemInstance inst){
-        for(IInventory inventory : this.inventories){
-            if(inventory.containsItem(inst)){
+    public boolean containsItem(ItemInstance inst) {
+        for (IInventory inventory : this.inventories) {
+            if (inventory.containsItem(inst)) {
                 return true;
             }
         }
@@ -132,10 +131,10 @@ public class CombinedInventory implements IInventory{
     }
 
     @Override
-    public int getItemIndex(ItemInstance inst){
-        for(int i = 0; i < this.getSlotAmount(); i++){
+    public int getItemIndex(ItemInstance inst) {
+        for (int i = 0; i < this.getSlotAmount(); i++) {
             ItemInstance instance = this.get(i);
-            if(instance != null && instance.getAmount() >= inst.getAmount() && instance.isEffectivelyEqual(inst)){
+            if (instance != null && instance.getAmount() >= inst.getAmount() && instance.isEffectivelyEqual(inst)) {
                 return i;
             }
         }
@@ -143,11 +142,11 @@ public class CombinedInventory implements IInventory{
     }
 
     @Override
-    public ItemInstance add(ItemInstance instance, boolean simulate){
+    public ItemInstance add(ItemInstance instance, boolean simulate) {
         ItemInstance remaining = instance;
-        for(IInventory inventory : this.inventories){
+        for (IInventory inventory : this.inventories) {
             remaining = inventory.add(remaining, simulate);
-            if(remaining == null){
+            if (remaining == null) {
                 break;
             }
         }
@@ -155,11 +154,11 @@ public class CombinedInventory implements IInventory{
     }
 
     @Override
-    public ItemInstance addExistingFirst(ItemInstance instance, boolean simulate){
+    public ItemInstance addExistingFirst(ItemInstance instance, boolean simulate) {
         ItemInstance remaining = instance;
-        for(IInventory inventory : this.inventories){
+        for (IInventory inventory : this.inventories) {
             remaining = inventory.addExistingFirst(remaining, simulate);
-            if(remaining == null){
+            if (remaining == null) {
                 break;
             }
         }
@@ -167,13 +166,13 @@ public class CombinedInventory implements IInventory{
     }
 
     @Override
-    public void fillRandomly(Random random, List<ItemInstance> items){
-        for(ItemInstance instance : items){
+    public void fillRandomly(Random random, List<ItemInstance> items) {
+        for (ItemInstance instance : items) {
             int slot;
-            do{
+            do {
                 slot = random.nextInt(this.getSlotAmount());
             }
-            while(this.get(slot) != null);
+            while (this.get(slot) != null);
 
             this.set(slot, instance);
         }

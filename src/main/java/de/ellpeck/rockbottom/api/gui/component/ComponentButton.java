@@ -31,64 +31,64 @@ import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 import java.util.function.Supplier;
 
-public class ComponentButton extends GuiComponent{
+public class ComponentButton extends GuiComponent {
 
     private final String[] hover;
     private final Supplier<Boolean> supplier;
     public boolean hasBackground = true;
     protected String text;
 
-    public ComponentButton(Gui gui, int x, int y, int sizeX, int sizeY, Supplier<Boolean> supplier, String text, String... hover){
+    public ComponentButton(Gui gui, int x, int y, int sizeX, int sizeY, Supplier<Boolean> supplier, String text, String... hover) {
         super(gui, x, y, sizeX, sizeY);
         this.text = text;
         this.hover = hover;
         this.supplier = supplier;
     }
 
-    public void setText(String text){
-        this.text = text;
-    }
-
-    public ComponentButton setHasBackground(boolean has){
+    public ComponentButton setHasBackground(boolean has) {
         this.hasBackground = has;
         return this;
     }
 
     @Override
-    public void render(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y){
-        if(this.hasBackground){
+    public void render(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y) {
+        if (this.hasBackground) {
             g.addFilledRect(x, y, this.width, this.height, this.isMouseOverPrioritized(game) ? getElementColor() : getUnselectedElementColor());
             g.addEmptyRect(x, y, this.width, this.height, getElementOutlineColor());
         }
 
         String text = this.getText();
-        if(text != null){
-            manager.getFont().drawAutoScaledString(x+this.width/2F, y+this.height/2F+0.5F, text, 0.35F, this.width-2, Colors.WHITE, Colors.BLACK, true, true);
+        if (text != null) {
+            manager.getFont().drawAutoScaledString(x + this.width / 2F, y + this.height / 2F + 0.5F, text, 0.35F, this.width - 2, Colors.WHITE, Colors.BLACK, true, true);
         }
     }
 
-    protected String getText(){
+    protected String getText() {
         return this.text;
     }
 
-    protected String[] getHover(){
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    protected String[] getHover() {
         return this.hover;
     }
 
     @Override
-    public void renderOverlay(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y){
-        if(this.isMouseOverPrioritized(game)){
+    public void renderOverlay(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y) {
+        if (this.isMouseOverPrioritized(game)) {
             String[] hover = this.getHover();
-            if(hover != null && hover.length > 0){
+            if (hover != null && hover.length > 0) {
                 g.drawHoverInfoAtMouse(game, manager, false, 100, hover);
             }
         }
     }
 
     @Override
-    public boolean onMouseAction(IGameInstance game, int button, float x, float y){
-        if(Settings.KEY_GUI_ACTION_1.isKey(button) && this.isMouseOver(game)){
-            if(this.onPressed(game) || (this.supplier != null && this.supplier.get())){
+    public boolean onMouseAction(IGameInstance game, int button, float x, float y) {
+        if (Settings.KEY_GUI_ACTION_1.isKey(button) && this.isMouseOver(game)) {
+            if (this.onPressed(game) || (this.supplier != null && this.supplier.get())) {
                 game.getAssetManager().getSound(ResourceName.intern("menu.click")).play();
                 return true;
             }
@@ -97,11 +97,11 @@ public class ComponentButton extends GuiComponent{
     }
 
     @Override
-    public ResourceName getName(){
+    public ResourceName getName() {
         return ResourceName.intern("button");
     }
 
-    public boolean onPressed(IGameInstance game){
+    public boolean onPressed(IGameInstance game) {
         return false;
     }
 }

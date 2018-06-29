@@ -30,12 +30,12 @@ import de.ellpeck.rockbottom.api.world.IWorld;
  * IWorld#addEntity(Entity)}. Cancelling the event will make the entity not be
  * added.
  */
-public final class AddEntityToWorldEvent extends Event{
+public final class AddEntityToWorldEvent extends Event {
 
     public final IWorld world;
     public Entity entity;
 
-    public AddEntityToWorldEvent(IWorld world, Entity entity){
+    public AddEntityToWorldEvent(IWorld world, Entity entity) {
         this.world = world;
         this.entity = entity;
     }

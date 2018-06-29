@@ -21,7 +21,7 @@
 
 package de.ellpeck.rockbottom.api.data.set;
 
-public interface IAdditionalDataProvider{
+public interface IAdditionalDataProvider {
 
     boolean hasAdditionalData();
 

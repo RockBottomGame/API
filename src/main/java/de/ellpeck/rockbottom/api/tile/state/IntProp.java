@@ -23,12 +23,12 @@ package de.ellpeck.rockbottom.api.tile.state;
 
 import com.google.common.base.Preconditions;
 
-public final class IntProp extends TileProp<Integer>{
+public final class IntProp extends TileProp<Integer> {
 
     private final int def;
     private final int possibilities;
 
-    public IntProp(String name, int def, int possibilities){
+    public IntProp(String name, int def, int possibilities) {
         super(name);
         this.def = def;
         this.possibilities = possibilities;
@@ -36,22 +36,22 @@ public final class IntProp extends TileProp<Integer>{
     }
 
     @Override
-    public int getVariants(){
+    public int getVariants() {
         return this.possibilities;
     }
 
     @Override
-    public Integer getValue(int index){
+    public Integer getValue(int index) {
         return index;
     }
 
     @Override
-    public int getIndex(Integer value){
+    public int getIndex(Integer value) {
         return value;
     }
 
     @Override
-    public Integer getDefault(){
+    public Integer getDefault() {
         return this.def;
     }
 }

@@ -34,36 +34,36 @@ import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 import de.ellpeck.rockbottom.api.world.IWorld;
 import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 
-public class DefaultTileRenderer<T extends Tile> implements ITileRenderer<T>{
+public class DefaultTileRenderer<T extends Tile> implements ITileRenderer<T> {
 
     public final ResourceName texture;
 
-    public DefaultTileRenderer(ResourceName texture){
+    public DefaultTileRenderer(ResourceName texture) {
         this.texture = texture.addPrefix("tiles.");
     }
 
     @Override
-    public void render(IGameInstance game, IAssetManager manager, IRenderer g, IWorld world, T tile, TileState state, int x, int y, TileLayer layer, float renderX, float renderY, float scale, int[] light){
+    public void render(IGameInstance game, IAssetManager manager, IRenderer g, IWorld world, T tile, TileState state, int x, int y, TileLayer layer, float renderX, float renderY, float scale, int[] light) {
         manager.getTexture(this.texture).getPositionalVariation(x, y).draw(renderX, renderY, scale, scale, light);
     }
 
     @Override
-    public void renderItem(IGameInstance game, IAssetManager manager, IRenderer g, T tile, ItemInstance instance, float x, float y, float scale, int filter){
+    public void renderItem(IGameInstance game, IAssetManager manager, IRenderer g, T tile, ItemInstance instance, float x, float y, float scale, int filter) {
         manager.getTexture(this.texture).draw(x, y, scale, scale, filter);
     }
 
     @Override
-    public ITexture getParticleTexture(IGameInstance game, IAssetManager manager, IRenderer g, T tile, TileState state){
+    public ITexture getParticleTexture(IGameInstance game, IAssetManager manager, IRenderer g, T tile, TileState state) {
         return manager.getTexture(this.texture);
     }
 
     @Override
-    public void renderInMainMenuBackground(IGameInstance game, IAssetManager manager, IRenderer g, T tile, TileState state, float x, float y, float scale){
-        manager.getTexture(this.texture).getPositionalVariation((int)x, (int)y).draw(x, y, scale, scale);
+    public void renderInMainMenuBackground(IGameInstance game, IAssetManager manager, IRenderer g, T tile, TileState state, float x, float y, float scale) {
+        manager.getTexture(this.texture).getPositionalVariation((int) x, (int) y).draw(x, y, scale, scale);
     }
 
     @Override
-    public JsonElement getAdditionalTextureData(IGameInstance game, IAssetManager manager, IRenderer g, T tile, ItemInstance instance, AbstractEntityPlayer player, String name){
+    public JsonElement getAdditionalTextureData(IGameInstance game, IAssetManager manager, IRenderer g, T tile, ItemInstance instance, AbstractEntityPlayer player, String name) {
         return manager.getTexture(this.texture).getAdditionalData(name);
     }
 }

@@ -32,13 +32,13 @@ import de.ellpeck.rockbottom.api.event.Event;
  * assets. You can use this to configure {@link IShaderProgram}s or do other
  * asset-based things.
  */
-public final class LoadAssetsEvent extends Event{
+public final class LoadAssetsEvent extends Event {
 
     public final IGameInstance game;
     public final IAssetManager assetManager;
     public final IRenderer g;
 
-    public LoadAssetsEvent(IGameInstance game, IAssetManager assetManager, IRenderer g){
+    public LoadAssetsEvent(IGameInstance game, IAssetManager assetManager, IRenderer g) {
         this.game = game;
         this.assetManager = assetManager;
         this.g = g;

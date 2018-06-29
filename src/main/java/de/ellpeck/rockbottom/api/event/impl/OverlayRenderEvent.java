@@ -35,7 +35,7 @@ import de.ellpeck.rockbottom.api.gui.IGuiManager;
  * firing of this event, the {@link IRenderer#getGuiScale()} is applied to the
  * GL context. This event cannot be cancelled.
  */
-public final class OverlayRenderEvent extends Event{
+public final class OverlayRenderEvent extends Event {
 
     public final IGameInstance game;
     public final IAssetManager assetManager;
@@ -44,7 +44,7 @@ public final class OverlayRenderEvent extends Event{
     public final IGuiManager guiManager;
     public final Gui gui;
 
-    public OverlayRenderEvent(IGameInstance game, IAssetManager assetManager, IRenderer graphics, AbstractEntityPlayer player, IGuiManager guiManager, Gui gui){
+    public OverlayRenderEvent(IGameInstance game, IAssetManager assetManager, IRenderer graphics, AbstractEntityPlayer player, IGuiManager guiManager, Gui gui) {
         this.game = game;
         this.assetManager = assetManager;
         this.graphics = graphics;

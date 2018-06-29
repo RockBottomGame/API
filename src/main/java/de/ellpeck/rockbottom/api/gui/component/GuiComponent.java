@@ -30,16 +30,16 @@ import de.ellpeck.rockbottom.api.gui.Gui;
 import de.ellpeck.rockbottom.api.util.Colors;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
-public abstract class GuiComponent{
+public abstract class GuiComponent {
 
     public final Gui gui;
-    private boolean isActive = true;
     protected int width;
     protected int height;
     protected int x;
     protected int y;
+    private boolean isActive = true;
 
-    public GuiComponent(Gui gui, int x, int y, int width, int height){
+    public GuiComponent(Gui gui, int x, int y, int width, int height) {
         this.gui = gui;
         this.x = x;
         this.y = y;
@@ -49,132 +49,129 @@ public abstract class GuiComponent{
         RockBottomAPI.getEventHandler().fireEvent(new InitGuiComponentEvent(this.gui, this));
     }
 
-    public void setPos(int x, int y){
+    public static int getGuiColor() {
+        return RockBottomAPI.getGame().getSettings().guiColor;
+    }
+
+    public static int getElementColor() {
+        return Colors.multiplyA(getGuiColor(), 0.5F);
+    }
+
+    public static int getUnselectedElementColor() {
+        return Colors.multiplyA(getElementColor(), 0.6F);
+    }
+
+    public static int getElementOutlineColor() {
+        return Colors.multiply(getGuiColor(), 0.75F);
+    }
+
+    public void setPos(int x, int y) {
         this.x = x;
         this.y = y;
     }
 
-    public static int getGuiColor(){
-        return RockBottomAPI.getGame().getSettings().guiColor;
-    }
-
-    public static int getElementColor(){
-        return Colors.multiplyA(getGuiColor(), 0.5F);
-    }
-
-    public static int getUnselectedElementColor(){
-        return Colors.multiplyA(getElementColor(), 0.6F);
-    }
-
-    public static int getElementOutlineColor(){
-        return Colors.multiply(getGuiColor(), 0.75F);
-    }
-
-    public void update(IGameInstance game){
+    public void update(IGameInstance game) {
 
     }
 
-    public void updateInactive(IGameInstance game){
+    public void updateInactive(IGameInstance game) {
 
     }
 
-    public void render(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y){
+    public void render(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y) {
 
     }
 
-    public void renderOverlay(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y){
+    public void renderOverlay(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y) {
 
     }
 
-    public boolean isMouseOverPrioritized(IGameInstance game){
+    public boolean isMouseOverPrioritized(IGameInstance game) {
         return this.gui == null ? this.isMouseOver(game) : this.gui.isMouseOverPrioritized(game, this);
     }
 
-    public boolean isMouseOver(IGameInstance game){
-        if(this.isActive() && game.getInput().isMouseInWindow()){
-            int mouseX = (int)game.getRenderer().getMouseInGuiX();
-            int mouseY = (int)game.getRenderer().getMouseInGuiY();
+    public boolean isMouseOver(IGameInstance game) {
+        if (this.isActive() && game.getInput().isMouseInWindow()) {
+            int mouseX = (int) game.getRenderer().getMouseInGuiX();
+            int mouseY = (int) game.getRenderer().getMouseInGuiY();
 
             int renderX = this.getRenderX();
             int renderY = this.getRenderY();
 
-            return mouseX >= renderX && mouseX < renderX+this.width && mouseY >= renderY && mouseY < renderY+this.height;
-        }
-        else{
+            return mouseX >= renderX && mouseX < renderX + this.width && mouseY >= renderY && mouseY < renderY + this.height;
+        } else {
             return false;
         }
     }
 
-    public boolean isActive(){
+    public boolean isActive() {
         return this.isActive;
     }
 
-    public void setActive(boolean active){
+    public void setActive(boolean active) {
         this.isActive = active;
     }
 
-    public boolean onMouseAction(IGameInstance game, int button, float x, float y){
+    public boolean onMouseAction(IGameInstance game, int button, float x, float y) {
         return false;
     }
 
-    public boolean onKeyPressed(IGameInstance game, int button){
+    public boolean onKeyPressed(IGameInstance game, int button) {
         return false;
     }
 
-    public boolean onCharInput(IGameInstance game, int codePoint, char[] characters){
+    public boolean onCharInput(IGameInstance game, int codePoint, char[] characters) {
         return false;
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return this.getName().toString();
     }
 
     public abstract ResourceName getName();
 
-    public int getX(){
+    public int getX() {
         return this.x;
     }
 
-    public int getY(){
+    public int getY() {
         return this.y;
     }
 
-    public int getWidth(){
+    public int getWidth() {
         return this.width;
     }
 
-    public int getHeight(){
+    public int getHeight() {
         return this.height;
     }
 
-    public int getRenderX(){
-        if(this.gui != null){
-            return this.gui.getX()+this.getX();
-        }
-        else{
+    public int getRenderX() {
+        if (this.gui != null) {
+            return this.gui.getX() + this.getX();
+        } else {
             return this.getX();
         }
     }
 
-    public int getRenderY(){
-        if(this.gui != null){
-            return this.gui.getY()+this.getY();
-        }
-        else{
+    public int getRenderY() {
+        if (this.gui != null) {
+            return this.gui.getY() + this.getY();
+        } else {
             return this.getY();
         }
     }
 
-    public int getPriority(){
+    public int getPriority() {
         return 0;
     }
 
-    public boolean shouldDoFingerCursor(IGameInstance game){
+    public boolean shouldDoFingerCursor(IGameInstance game) {
         return this.isMouseOverPrioritized(game);
     }
 
-    public boolean canCloseWithInvKey(){
+    public boolean canCloseWithInvKey() {
         return true;
     }
 }

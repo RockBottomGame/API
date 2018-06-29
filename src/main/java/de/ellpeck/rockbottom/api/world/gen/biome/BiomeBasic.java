@@ -29,24 +29,24 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public abstract class BiomeBasic extends Biome{
+public abstract class BiomeBasic extends Biome {
 
     private final int weight;
     private final List<BiomeLevel> levels;
 
-    public BiomeBasic(ResourceName name, int weight, BiomeLevel... levels){
+    public BiomeBasic(ResourceName name, int weight, BiomeLevel... levels) {
         super(name);
         this.weight = weight;
         this.levels = Collections.unmodifiableList(Arrays.asList(levels));
     }
 
     @Override
-    public List<BiomeLevel> getGenerationLevels(IWorld world){
+    public List<BiomeLevel> getGenerationLevels(IWorld world) {
         return this.levels;
     }
 
     @Override
-    public int getWeight(IWorld world){
+    public int getWeight(IWorld world) {
         return this.weight;
     }
 }

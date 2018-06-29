@@ -27,80 +27,77 @@ import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 import java.util.Objects;
 
-public class ActiveEffect{
+public class ActiveEffect {
 
     private final IEffect effect;
     private int time;
 
-    public ActiveEffect(IEffect effect, int time){
+    public ActiveEffect(IEffect effect, int time) {
         this.effect = effect;
         this.time = time;
     }
 
-    public ActiveEffect(IEffect effect){
+    public ActiveEffect(IEffect effect) {
         this(effect, 0);
     }
 
-    public IEffect getEffect(){
+    public static ActiveEffect load(DataSet set) {
+        String name = set.getString("effect_name");
+        IEffect effect = RockBottomAPI.EFFECT_REGISTRY.get(new ResourceName(name));
+
+        if (effect != null) {
+            int time = set.getInt("time");
+            return new ActiveEffect(effect, time);
+        } else {
+            RockBottomAPI.logger().info("Could not load active effect from data set " + set + " because name " + name + " is missing!");
+            return null;
+        }
+    }
+
+    public IEffect getEffect() {
         return this.effect;
     }
 
-    public int getTime(){
+    public int getTime() {
         return this.time;
     }
 
-    public ActiveEffect setTime(int time){
+    public ActiveEffect setTime(int time) {
         this.time = time;
         return this;
     }
 
-    public ActiveEffect addTime(int time){
-        return this.setTime(this.time+time);
+    public ActiveEffect addTime(int time) {
+        return this.setTime(this.time + time);
     }
 
-    public ActiveEffect removeTime(int time){
-        return this.setTime(this.time-time);
+    public ActiveEffect removeTime(int time) {
+        return this.setTime(this.time - time);
     }
 
-    public ActiveEffect copy(){
+    public ActiveEffect copy() {
         return new ActiveEffect(this.getEffect(), this.getTime());
     }
 
     @Override
-    public boolean equals(Object o){
-        if(this == o){
+    public boolean equals(Object o) {
+        if (this == o) {
             return true;
-        }
-        else if(o instanceof ActiveEffect){
-            ActiveEffect effect = (ActiveEffect)o;
+        } else if (o instanceof ActiveEffect) {
+            ActiveEffect effect = (ActiveEffect) o;
             return this.time == effect.time && Objects.equals(this.effect, effect.effect);
-        }
-        else{
+        } else {
             return false;
         }
     }
 
     @Override
-    public int hashCode(){
+    public int hashCode() {
         return Objects.hash(this.effect, this.time);
     }
 
-    public void save(DataSet set){
+    public void save(DataSet set) {
         set.addString("effect_name", this.effect.getName().toString());
         set.addInt("time", this.time);
-    }
-
-    public static ActiveEffect load(DataSet set){
-        String name = set.getString("effect_name");
-        IEffect effect = RockBottomAPI.EFFECT_REGISTRY.get(new ResourceName(name));
-
-        if(effect != null){
-            int time = set.getInt("time");
-            return new ActiveEffect(effect, time);
-        }
-        else{
-            RockBottomAPI.logger().info("Could not load active effect from data set "+set+" because name "+name+" is missing!");
-            return null;
-        }
     }
 }

@@ -21,15 +21,15 @@
 
 package de.ellpeck.rockbottom.api.tile.state;
 
-public abstract class TileProp<T extends Comparable> implements Comparable<TileProp>{
+public abstract class TileProp<T extends Comparable> implements Comparable<TileProp> {
 
     protected final String name;
 
-    public TileProp(String name){
+    public TileProp(String name) {
         this.name = name;
     }
 
-    public String getName(){
+    public String getName() {
         return this.name;
     }
 
@@ -42,31 +42,29 @@ public abstract class TileProp<T extends Comparable> implements Comparable<TileP
     public abstract T getDefault();
 
     @Override
-    public int compareTo(TileProp o){
+    public int compareTo(TileProp o) {
         return this.name.compareTo(o.name);
     }
 
     @Override
-    public boolean equals(Object o){
-        if(this == o){
+    public boolean equals(Object o) {
+        if (this == o) {
             return true;
-        }
-        else if(o instanceof TileProp){
-            TileProp tileProp = (TileProp)o;
+        } else if (o instanceof TileProp) {
+            TileProp tileProp = (TileProp) o;
             return this.name.equals(tileProp.name);
-        }
-        else{
+        } else {
             return false;
         }
     }
 
     @Override
-    public int hashCode(){
+    public int hashCode() {
         return this.name.hashCode();
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return this.getName();
     }
 }

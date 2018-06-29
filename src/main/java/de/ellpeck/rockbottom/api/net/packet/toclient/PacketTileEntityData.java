@@ -32,26 +32,26 @@ import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 
 @ApiInternal
-public final class PacketTileEntityData implements IPacket{
+public final class PacketTileEntityData implements IPacket {
 
     private final DataSet set = new DataSet();
     private int x;
     private int y;
     private TileLayer layer;
 
-    public PacketTileEntityData(int x, int y, TileLayer layer, TileEntity tile){
+    public PacketTileEntityData(int x, int y, TileLayer layer, TileEntity tile) {
         this.x = x;
         this.y = y;
         this.layer = layer;
         tile.save(this.set, true);
     }
 
-    public PacketTileEntityData(){
+    public PacketTileEntityData() {
 
     }
 
     @Override
-    public void toBuffer(ByteBuf buf){
+    public void toBuffer(ByteBuf buf) {
         buf.writeInt(this.x);
         buf.writeInt(this.y);
         buf.writeInt(this.layer.index());
@@ -59,7 +59,7 @@ public final class PacketTileEntityData implements IPacket{
     }
 
     @Override
-    public void fromBuffer(ByteBuf buf){
+    public void fromBuffer(ByteBuf buf) {
         this.x = buf.readInt();
         this.y = buf.readInt();
         this.layer = TileLayer.getAllLayers().get(buf.readInt());
@@ -67,17 +67,17 @@ public final class PacketTileEntityData implements IPacket{
     }
 
     @Override
-    public void handle(IGameInstance game, ChannelHandlerContext context){
-        if(game.getWorld() != null){
+    public void handle(IGameInstance game, ChannelHandlerContext context) {
+        if (game.getWorld() != null) {
             TileEntity tile = game.getWorld().getTileEntity(this.layer, this.x, this.y);
-            if(tile != null){
+            if (tile != null) {
                 tile.load(this.set, true);
             }
         }
     }
 
     @Override
-    public void enqueueAsAction(IGameInstance game, ChannelHandlerContext context){
-        game.enqueueAction(this :: handle, context, inst -> inst.getWorld() != null);
+    public void enqueueAsAction(IGameInstance game, ChannelHandlerContext context) {
+        game.enqueueAction(this::handle, context, inst -> inst.getWorld() != null);
     }
 }

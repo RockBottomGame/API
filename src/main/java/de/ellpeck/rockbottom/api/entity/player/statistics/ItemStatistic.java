@@ -35,54 +35,54 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ItemStatistic extends StatisticInitializer<ItemStatistic.Stat>{
+public class ItemStatistic extends StatisticInitializer<ItemStatistic.Stat> {
 
     protected final ResourceName textureLocation;
 
-    public ItemStatistic(ResourceName name, ResourceName textureLocation){
+    public ItemStatistic(ResourceName name, ResourceName textureLocation) {
         super(name);
         this.textureLocation = textureLocation;
     }
 
     @Override
-    public Stat makeStatistic(IStatistics statistics){
+    public Stat makeStatistic(IStatistics statistics) {
         return new Stat(this);
     }
 
     @Override
-    public List<ComponentStatistic> getDisplayComponents(IGameInstance game, Stat stat, AbstractStatGui gui, ComponentMenu menu){
+    public List<ComponentStatistic> getDisplayComponents(IGameInstance game, Stat stat, AbstractStatGui gui, ComponentMenu menu) {
         return RockBottomAPI.getInternalHooks().makeItemStatComponents(game, stat, stat.map, gui, menu, this.textureLocation);
     }
 
-    public static class Stat extends Statistic{
+    public static class Stat extends Statistic {
 
         private final Map<Item, Counter> map = new HashMap<>();
         private int total;
 
-        public Stat(StatisticInitializer initializer){
+        public Stat(StatisticInitializer initializer) {
             super(initializer);
         }
 
-        public void update(Item item){
+        public void update(Item item) {
             this.map.computeIfAbsent(item, t -> new Counter(0)).add(1);
             this.total++;
         }
 
-        public int getTotal(){
+        public int getTotal() {
             return this.total;
         }
 
-        public int getValue(Item item){
+        public int getValue(Item item) {
             Counter value = this.map.get(item);
             return value != null ? value.get() : 0;
         }
 
         @Override
-        public void save(DataSet set){
+        public void save(DataSet set) {
             int counter = 0;
-            for(Map.Entry<Item, Counter> entry : this.map.entrySet()){
-                set.addString("item_"+counter, entry.getKey().getName().toString());
-                set.addInt("value_"+counter, entry.getValue().get());
+            for (Map.Entry<Item, Counter> entry : this.map.entrySet()) {
+                set.addString("item_" + counter, entry.getKey().getName().toString());
+                set.addInt("value_" + counter, entry.getValue().get());
                 counter++;
             }
             set.addInt("count", counter);
@@ -90,15 +90,15 @@ public class ItemStatistic extends StatisticInitializer<ItemStatistic.Stat>{
         }
 
         @Override
-        public void load(DataSet set){
+        public void load(DataSet set) {
             this.map.clear();
 
             int count = set.getInt("count");
-            for(int i = 0; i < count; i++){
-                ResourceName name = new ResourceName(set.getString("item_"+i));
+            for (int i = 0; i < count; i++) {
+                ResourceName name = new ResourceName(set.getString("item_" + i));
                 Item item = RockBottomAPI.ITEM_REGISTRY.get(name);
-                if(item != null){
-                    int counter = set.getInt("value_"+i);
+                if (item != null) {
+                    int counter = set.getInt("value_" + i);
                     this.map.put(item, new Counter(counter));
                 }
             }
@@ -106,7 +106,7 @@ public class ItemStatistic extends StatisticInitializer<ItemStatistic.Stat>{
         }
 
         @Override
-        public String toString(){
+        public String toString() {
             return this.map.toString();
         }
     }

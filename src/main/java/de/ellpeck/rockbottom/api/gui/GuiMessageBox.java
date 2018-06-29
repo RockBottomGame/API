@@ -31,22 +31,22 @@ import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 import java.util.List;
 
-public class GuiMessageBox extends Gui{
+public class GuiMessageBox extends Gui {
 
     private final float scale;
     private final int boxWidth;
     private final int heightOffset;
     private final ChatComponent message;
 
-    public GuiMessageBox(int boxWidth, ChatComponent message){
+    public GuiMessageBox(int boxWidth, ChatComponent message) {
         this(null, boxWidth, message);
     }
 
-    public GuiMessageBox(Gui parent, int boxWidth, ChatComponent message){
-        this(parent, 0.25F, boxWidth, 5,message);
+    public GuiMessageBox(Gui parent, int boxWidth, ChatComponent message) {
+        this(parent, 0.25F, boxWidth, 5, message);
     }
 
-    public GuiMessageBox(Gui parent, float scale, int boxWidth, int heightOffset, ChatComponent message){
+    public GuiMessageBox(Gui parent, float scale, int boxWidth, int heightOffset, ChatComponent message) {
         super(parent);
         this.scale = scale;
         this.boxWidth = boxWidth;
@@ -55,29 +55,29 @@ public class GuiMessageBox extends Gui{
     }
 
     @Override
-    public void init(IGameInstance game){
+    public void init(IGameInstance game) {
         super.init(game);
 
         IAssetManager asset = game.getAssetManager();
         IFont font = asset.getFont();
         String message = this.message.getDisplayWithChildren(game, asset);
 
-        List<String> split = font.splitTextToLength(this.boxWidth-4, this.scale, false, message);
-        int height = Util.ceil(split.size()*font.getHeight(this.scale))+4;
+        List<String> split = font.splitTextToLength(this.boxWidth - 4, this.scale, false, message);
+        int height = Util.ceil(split.size() * font.getHeight(this.scale)) + 4;
 
-        this.components.add(new ComponentMessageBox(this, this.width/2-this.boxWidth/2, this.height-height-this.heightOffset, this.boxWidth, height, message, this.scale, true, true, () -> {
+        this.components.add(new ComponentMessageBox(this, this.width / 2 - this.boxWidth / 2, this.height - height - this.heightOffset, this.boxWidth, height, message, this.scale, true, true, () -> {
             game.getGuiManager().closeGui();
             return true;
         }));
     }
 
     @Override
-    public ResourceName getName(){
+    public ResourceName getName() {
         return ResourceName.intern("message_box");
     }
 
     @Override
-    public boolean hasGradient(){
+    public boolean hasGradient() {
         return false;
     }
 }

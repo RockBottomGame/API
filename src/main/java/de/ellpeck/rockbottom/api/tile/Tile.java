@@ -49,10 +49,10 @@ import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 
 import java.util.*;
 
-public class Tile{
+public class Tile {
 
-    private static final ResourceName SOUND_GENERIC_TILE = ResourceName.intern("tiles.generic_tile");
     public static final BoundBox DEFAULT_BOUNDS = new BoundBox(0, 0, 1, 1);
+    private static final ResourceName SOUND_GENERIC_TILE = ResourceName.intern("tiles.generic_tile");
     private static final ResourceName LOC_ADVANCED = ResourceName.intern("info.advanced_info");
     private static final ResourceName LOC_LAYER = ResourceName.intern("info.layer_placement");
 
@@ -62,45 +62,44 @@ public class Tile{
     protected boolean forceDrop;
     protected float hardness = 1F;
 
-    public Tile(ResourceName name){
+    public Tile(ResourceName name) {
         this.name = name;
     }
 
-    public ITileRenderer getRenderer(){
+    public ITileRenderer getRenderer() {
         return null;
     }
 
-    public BoundBox getBoundBox(IWorld world, int x, int y, TileLayer layer){
+    public BoundBox getBoundBox(IWorld world, int x, int y, TileLayer layer) {
         return DEFAULT_BOUNDS;
     }
 
-    public List<BoundBox> getBoundBoxes(IWorld world, int x, int y, TileLayer layer, MovableWorldObject object, BoundBox objectBox, BoundBox objectBoxMotion){
+    public List<BoundBox> getBoundBoxes(IWorld world, int x, int y, TileLayer layer, MovableWorldObject object, BoundBox objectBox, BoundBox objectBoxMotion) {
         BoundBox box = this.getBoundBox(world, x, y, layer);
 
-        if(box != null && !box.isEmpty()){
+        if (box != null && !box.isEmpty()) {
             return Collections.singletonList(box.copy().add(x, y));
-        }
-        else{
+        } else {
             return Collections.emptyList();
         }
     }
 
-    public boolean canBreak(IWorld world, int x, int y, TileLayer layer, AbstractEntityPlayer player, boolean isRightTool){
+    public boolean canBreak(IWorld world, int x, int y, TileLayer layer, AbstractEntityPlayer player, boolean isRightTool) {
         return true;
     }
 
-    public boolean canPlace(IWorld world, int x, int y, TileLayer layer, AbstractEntityPlayer player){
+    public boolean canPlace(IWorld world, int x, int y, TileLayer layer, AbstractEntityPlayer player) {
         return true;
     }
 
-    public boolean canPlaceInLayer(TileLayer layer){
+    public boolean canPlaceInLayer(TileLayer layer) {
         return layer == TileLayer.MAIN || layer == TileLayer.BACKGROUND;
     }
 
-    public Tile register(){
+    public Tile register() {
         RockBottomAPI.TILE_REGISTRY.register(this.getName(), this);
 
-        if(this.hasItem()){
+        if (this.hasItem()) {
             this.createItemTile().register();
         }
 
@@ -109,276 +108,273 @@ public class Tile{
         return this;
     }
 
-    protected ItemTile createItemTile(){
+    protected ItemTile createItemTile() {
         return new ItemTile(this.getName());
     }
 
-    protected boolean hasItem(){
+    protected boolean hasItem() {
         return true;
     }
 
-    public Item getItem(){
-        if(this.hasItem()){
+    public Item getItem() {
+        if (this.hasItem()) {
             return RockBottomAPI.ITEM_REGISTRY.get(this.getName());
-        }
-        else{
+        } else {
             return null;
         }
     }
 
-    public void onRemoved(IWorld world, int x, int y, TileLayer layer){
-        if(!world.isClient() && this.canProvideTileEntity()){
+    public void onRemoved(IWorld world, int x, int y, TileLayer layer) {
+        if (!world.isClient() && this.canProvideTileEntity()) {
             TileEntity tile = world.getTileEntity(x, y);
-            if(tile != null){
+            if (tile != null) {
                 IFilteredInventory inv = tile.getTileInventory();
-                if(inv != null){
+                if (inv != null) {
                     tile.dropInventory(inv);
                 }
             }
         }
     }
 
-    public void onAdded(IWorld world, int x, int y, TileLayer layer){
+    public void onAdded(IWorld world, int x, int y, TileLayer layer) {
 
     }
 
-    public boolean onInteractWith(IWorld world, int x, int y, TileLayer layer, double mouseX, double mouseY, AbstractEntityPlayer player){
+    public boolean onInteractWith(IWorld world, int x, int y, TileLayer layer, double mouseX, double mouseY, AbstractEntityPlayer player) {
         return false;
     }
 
-    public int getInteractionPriority(IWorld world, int x, int y, TileLayer layer, double mouseX, double mouseY, AbstractEntityPlayer player){
+    public int getInteractionPriority(IWorld world, int x, int y, TileLayer layer, double mouseX, double mouseY, AbstractEntityPlayer player) {
         return 0;
     }
 
-    public boolean canReplace(IWorld world, int x, int y, TileLayer layer){
+    public boolean canReplace(IWorld world, int x, int y, TileLayer layer) {
         return false;
     }
 
-    public boolean doesSustainLeaves(IWorld world, int x, int y, TileLayer layer){
+    public boolean doesSustainLeaves(IWorld world, int x, int y, TileLayer layer) {
         return false;
     }
 
-    public void onDestroyed(IWorld world, int x, int y, Entity destroyer, TileLayer layer, boolean shouldDrop){
+    public void onDestroyed(IWorld world, int x, int y, Entity destroyer, TileLayer layer, boolean shouldDrop) {
         List<ItemInstance> drops = new ArrayList<>();
 
-        if(shouldDrop && !world.isClient()){
+        if (shouldDrop && !world.isClient()) {
             drops.addAll(this.getDrops(world, x, y, layer, destroyer));
         }
 
-        if(RockBottomAPI.getEventHandler().fireEvent(new TileDropsEvent(this, drops, world, x, y, layer, destroyer)) != EventResult.CANCELLED){
-            if(!drops.isEmpty()){
-                for(ItemInstance inst : drops){
-                    AbstractEntityItem.spawn(world, inst, x+0.5, y+0.5, Util.RANDOM.nextGaussian()*0.1, Util.RANDOM.nextGaussian()*0.1);
+        if (RockBottomAPI.getEventHandler().fireEvent(new TileDropsEvent(this, drops, world, x, y, layer, destroyer)) != EventResult.CANCELLED) {
+            if (!drops.isEmpty()) {
+                for (ItemInstance inst : drops) {
+                    AbstractEntityItem.spawn(world, inst, x + 0.5, y + 0.5, Util.RANDOM.nextGaussian() * 0.1, Util.RANDOM.nextGaussian() * 0.1);
                 }
             }
         }
     }
 
-    public List<ItemInstance> getDrops(IWorld world, int x, int y, TileLayer layer, Entity destroyer){
+    public List<ItemInstance> getDrops(IWorld world, int x, int y, TileLayer layer, Entity destroyer) {
         List<ItemInstance> drops = new ArrayList<>();
 
         Item item = this.getItem();
-        if(item != null){
+        if (item != null) {
             drops.add(new ItemInstance(item));
         }
 
         return drops;
     }
 
-    public TileEntity provideTileEntity(IWorld world, int x, int y, TileLayer layer){
+    public TileEntity provideTileEntity(IWorld world, int x, int y, TileLayer layer) {
         return null;
     }
 
-    public boolean canProvideTileEntity(){
+    public boolean canProvideTileEntity() {
         return false;
     }
 
-    public void onChangeAround(IWorld world, int x, int y, TileLayer layer, int changedX, int changedY, TileLayer changedLayer){
-        if(!world.isClient() && !this.canStay(world, x, y, layer, changedX, changedY, changedLayer)){
+    public void onChangeAround(IWorld world, int x, int y, TileLayer layer, int changedX, int changedY, TileLayer changedLayer) {
+        if (!world.isClient() && !this.canStay(world, x, y, layer, changedX, changedY, changedLayer)) {
             this.doBreak(world, x, y, layer, null, false, true);
         }
     }
 
-    public boolean canStay(IWorld world, int x, int y, TileLayer layer, int changedX, int changedY, TileLayer changedLayer){
+    public boolean canStay(IWorld world, int x, int y, TileLayer layer, int changedX, int changedY, TileLayer changedLayer) {
         return true;
     }
 
-    public boolean isFullTile(){
+    public boolean isFullTile() {
         return true;
     }
 
-    public boolean obscuresBackground(IWorld world, int x, int y, TileLayer layer){
+    public boolean obscuresBackground(IWorld world, int x, int y, TileLayer layer) {
         return this.isFullTile();
     }
 
-    public void updateRandomly(IWorld world, int x, int y, TileLayer layer){
+    public void updateRandomly(IWorld world, int x, int y, TileLayer layer) {
 
     }
 
-    public void doBreak(IWorld world, int x, int y, TileLayer layer, AbstractEntityPlayer breaker, boolean isRightTool, boolean allowDrop){
-        if(!world.isClient()){
+    public void doBreak(IWorld world, int x, int y, TileLayer layer, AbstractEntityPlayer breaker, boolean isRightTool, boolean allowDrop) {
+        if (!world.isClient()) {
             world.destroyTile(x, y, layer, breaker, allowDrop && (this.forceDrop || isRightTool));
         }
     }
 
-    public void doPlace(IWorld world, int x, int y, TileLayer layer, ItemInstance instance, AbstractEntityPlayer placer){
-        if(!world.isClient()){
+    public void doPlace(IWorld world, int x, int y, TileLayer layer, ItemInstance instance, AbstractEntityPlayer placer) {
+        if (!world.isClient()) {
             world.setState(layer, x, y, this.getPlacementState(world, x, y, layer, instance, placer));
         }
     }
 
-    public TileState getPlacementState(IWorld world, int x, int y, TileLayer layer, ItemInstance instance, AbstractEntityPlayer placer){
+    public TileState getPlacementState(IWorld world, int x, int y, TileLayer layer, ItemInstance instance, AbstractEntityPlayer placer) {
         return this.getDefState();
     }
 
-    public float getHardness(IWorld world, int x, int y, TileLayer layer){
+    public float getHardness(IWorld world, int x, int y, TileLayer layer) {
         return this.hardness;
     }
 
-    public Tile setHardness(float hardness){
+    public Tile setHardness(float hardness) {
         this.hardness = hardness;
         return this;
     }
 
-    public Tile setForceDrop(){
+    public Tile setForceDrop() {
         this.forceDrop = true;
         return this;
     }
 
-    public boolean isToolEffective(IWorld world, int x, int y, TileLayer layer, ToolType type, int level){
-        for(Map.Entry<ToolType, Integer> entry : this.effectiveTools.entrySet()){
-            if(entry.getKey() == type && level >= entry.getValue()){
+    public boolean isToolEffective(IWorld world, int x, int y, TileLayer layer, ToolType type, int level) {
+        for (Map.Entry<ToolType, Integer> entry : this.effectiveTools.entrySet()) {
+            if (entry.getKey() == type && level >= entry.getValue()) {
                 return true;
             }
         }
         return false;
     }
 
-    public Tile addEffectiveTool(ToolType type, int level){
+    public Tile addEffectiveTool(ToolType type, int level) {
         this.effectiveTools.put(type, level);
         return this;
     }
 
-    public int getLight(IWorld world, int x, int y, TileLayer layer){
+    public int getLight(IWorld world, int x, int y, TileLayer layer) {
         return 0;
     }
 
-    public float getTranslucentModifier(IWorld world, int x, int y, TileLayer layer, boolean skylight){
-        if(!this.isFullTile() && skylight){
+    public float getTranslucentModifier(IWorld world, int x, int y, TileLayer layer, boolean skylight) {
+        if (!this.isFullTile() && skylight) {
             return 1F;
-        }
-        else{
+        } else {
             return layer == TileLayer.BACKGROUND ? 0.9F : 0.8F;
         }
     }
 
-    public boolean isAir(){
+    public boolean isAir() {
         return false;
     }
 
-    public ResourceName getName(){
+    public ResourceName getName() {
         return this.name;
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return this.getName().toString();
     }
 
-    public void onScheduledUpdate(IWorld world, int x, int y, TileLayer layer, int scheduledMeta){
+    public void onScheduledUpdate(IWorld world, int x, int y, TileLayer layer, int scheduledMeta) {
 
     }
 
-    public boolean canClimb(IWorld world, int x, int y, TileLayer layer, TileState state, BoundBox entityBox, BoundBox entityBoxMotion, List<BoundBox> tileBoxes, Entity entity){
+    public boolean canClimb(IWorld world, int x, int y, TileLayer layer, TileState state, BoundBox entityBox, BoundBox entityBoxMotion, List<BoundBox> tileBoxes, Entity entity) {
         return false;
     }
 
-    public void onCollideWithEntity(IWorld world, int x, int y, TileLayer layer, TileState state, BoundBox entityBox, BoundBox entityBoxMotion, List<BoundBox> tileBoxes, Entity entity){
+    public void onCollideWithEntity(IWorld world, int x, int y, TileLayer layer, TileState state, BoundBox entityBox, BoundBox entityBoxMotion, List<BoundBox> tileBoxes, Entity entity) {
 
     }
 
-    public void onIntersectWithEntity(IWorld world, int x, int y, TileLayer layer, TileState state, BoundBox entityBox, BoundBox entityBoxMotion, List<BoundBox> tileBoxes, Entity entity){
+    public void onIntersectWithEntity(IWorld world, int x, int y, TileLayer layer, TileState state, BoundBox entityBox, BoundBox entityBoxMotion, List<BoundBox> tileBoxes, Entity entity) {
 
     }
 
-    public void describeItem(IAssetManager manager, ItemInstance instance, List<String> desc, boolean isAdvanced){
-        for(TileLayer layer : TileLayer.getLayersByInteractionPrio()){
-            if(this.canPlaceInLayer(layer)){
-                if(isAdvanced){
-                    desc.add(FormattingCode.LIGHT_GRAY+manager.localize(LOC_LAYER, manager.localize(layer.getName().addPrefix("layer."))));
-                }
-                else{
-                    desc.add(FormattingCode.GRAY+manager.localize(LOC_ADVANCED, Settings.KEY_ADVANCED_INFO.getDisplayName()));
+    public void describeItem(IAssetManager manager, ItemInstance instance, List<String> desc, boolean isAdvanced) {
+        for (TileLayer layer : TileLayer.getLayersByInteractionPrio()) {
+            if (this.canPlaceInLayer(layer)) {
+                if (isAdvanced) {
+                    desc.add(FormattingCode.LIGHT_GRAY + manager.localize(LOC_LAYER, manager.localize(layer.getName().addPrefix("layer."))));
+                } else {
+                    desc.add(FormattingCode.GRAY + manager.localize(LOC_ADVANCED, Settings.KEY_ADVANCED_INFO.getDisplayName()));
                     break;
                 }
             }
         }
     }
 
-    public boolean canGrassSpreadTo(IWorld world, int x, int y, TileLayer layer){
+    public boolean canGrassSpreadTo(IWorld world, int x, int y, TileLayer layer) {
         return false;
     }
 
-    public boolean canKeepPlants(IWorld world, int x, int y, TileLayer layer){
+    public boolean canKeepPlants(IWorld world, int x, int y, TileLayer layer) {
         return false;
     }
 
-    public TileState getDefState(){
+    public TileState getDefState() {
         return this.stateHandler.getDefault();
     }
 
-    public Tile addProps(TileProp... props){
-        for(TileProp prop : props){
+    public Tile addProps(TileProp... props) {
+        for (TileProp prop : props) {
             this.stateHandler.addProp(prop);
         }
         return this;
     }
 
-    public List<TileProp> getProps(){
+    public List<TileProp> getProps() {
         return this.stateHandler.getProps();
     }
 
-    public boolean hasState(ResourceName name, Map<String, Comparable> props){
+    public boolean hasState(ResourceName name, Map<String, Comparable> props) {
         return true;
     }
 
-    public ResourceName getBreakSound(IWorld world, int x, int y, TileLayer layer, Entity destroyer){
+    public ResourceName getBreakSound(IWorld world, int x, int y, TileLayer layer, Entity destroyer) {
         return SOUND_GENERIC_TILE;
     }
 
-    public ResourceName getPlaceSound(IWorld world, int x, int y, TileLayer layer, Entity placer, TileState state){
+    public ResourceName getPlaceSound(IWorld world, int x, int y, TileLayer layer, Entity placer, TileState state) {
         return SOUND_GENERIC_TILE;
     }
 
-    public double getMaxInteractionDistance(IWorld world, int x, int y, TileLayer layer, double mouseX, double mouseY, AbstractEntityPlayer player){
+    public double getMaxInteractionDistance(IWorld world, int x, int y, TileLayer layer, double mouseX, double mouseY, AbstractEntityPlayer player) {
         return AbstractEntityPlayer.RANGE;
     }
 
-    public boolean hasSolidSurface(IWorld world, int x, int y, TileLayer layer){
+    public boolean hasSolidSurface(IWorld world, int x, int y, TileLayer layer) {
         return this.isFullTile();
     }
 
-    public boolean canLiquidSpreadInto(IWorld world, int x, int y, TileLiquid liquid){
+    public boolean canLiquidSpreadInto(IWorld world, int x, int y, TileLiquid liquid) {
         return !this.isFullTile();
     }
 
-    public boolean isLiquid(){
+    public boolean isLiquid() {
         return false;
     }
 
-    public Tile setMaxAmount(int amount){
+    public Tile setMaxAmount(int amount) {
         Item item = this.getItem();
-        if(item != null){
+        if (item != null) {
             item.setMaxAmount(amount);
         }
         return this;
     }
 
-    public boolean factorsIntoHeightMap(IWorld world, int x, int y, TileLayer layer){
+    public boolean factorsIntoHeightMap(IWorld world, int x, int y, TileLayer layer) {
         return (this.isFullTile() || this.isLiquid()) && !this.isAir();
     }
 
-    public boolean makesGrassSnowy(IWorld world, int x, int y, TileLayer layer){
+    public boolean makesGrassSnowy(IWorld world, int x, int y, TileLayer layer) {
         return false;
     }
 }

@@ -27,14 +27,14 @@ import com.google.gson.JsonPrimitive;
 import java.io.DataInput;
 import java.io.DataOutput;
 
-public final class PartBoolean extends BasicDataPart<Boolean>{
+public final class PartBoolean extends BasicDataPart<Boolean> {
 
-    public static final IPartFactory<PartBoolean> FACTORY = new IPartFactory<PartBoolean>(){
+    public static final IPartFactory<PartBoolean> FACTORY = new IPartFactory<PartBoolean>() {
         @Override
-        public PartBoolean parse(String name, JsonElement element){
-            if(element.isJsonPrimitive()){
+        public PartBoolean parse(String name, JsonElement element) {
+            if (element.isJsonPrimitive()) {
                 JsonPrimitive prim = element.getAsJsonPrimitive();
-                if(prim.isBoolean()){
+                if (prim.isBoolean()) {
                     return new PartBoolean(name, prim.getAsBoolean());
                 }
             }
@@ -42,27 +42,27 @@ public final class PartBoolean extends BasicDataPart<Boolean>{
         }
 
         @Override
-        public PartBoolean parse(String name, DataInput stream) throws Exception{
+        public PartBoolean parse(String name, DataInput stream) throws Exception {
             return new PartBoolean(name, stream.readBoolean());
         }
     };
 
-    public PartBoolean(String name, Boolean data){
+    public PartBoolean(String name, Boolean data) {
         super(name, data);
     }
 
     @Override
-    public void write(DataOutput stream) throws Exception{
+    public void write(DataOutput stream) throws Exception {
         stream.writeBoolean(this.data);
     }
 
     @Override
-    public JsonElement write(){
+    public JsonElement write() {
         return new JsonPrimitive(this.data);
     }
 
     @Override
-    public IPartFactory getFactory(){
+    public IPartFactory getFactory() {
         return FACTORY;
     }
 }

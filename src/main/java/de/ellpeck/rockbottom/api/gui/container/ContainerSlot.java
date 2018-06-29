@@ -26,7 +26,7 @@ import de.ellpeck.rockbottom.api.gui.component.ComponentSlot;
 import de.ellpeck.rockbottom.api.inventory.IInventory;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 
-public class ContainerSlot{
+public class ContainerSlot {
 
     public final IInventory inventory;
     public final int slot;
@@ -34,30 +34,30 @@ public class ContainerSlot{
     public final int x;
     public final int y;
 
-    public ContainerSlot(IInventory inventory, int slot, int x, int y){
+    public ContainerSlot(IInventory inventory, int slot, int x, int y) {
         this.inventory = inventory;
         this.slot = slot;
         this.x = x;
         this.y = y;
     }
 
-    public boolean canPlace(ItemInstance instance){
+    public boolean canPlace(ItemInstance instance) {
         return true;
     }
 
-    public boolean canRemove(int amount){
+    public boolean canRemove(int amount) {
         return true;
     }
 
-    public void set(ItemInstance instance){
+    public void set(ItemInstance instance) {
         this.inventory.set(this.slot, instance);
     }
 
-    public ItemInstance get(){
+    public ItemInstance get() {
         return this.inventory.get(this.slot);
     }
 
-    public ComponentSlot getGraphicalSlot(GuiContainer gui, int index, int xOffset, int yOffset){
-        return new ComponentSlot(gui, this, index, xOffset+this.x, yOffset+this.y);
+    public ComponentSlot getGraphicalSlot(GuiContainer gui, int index, int xOffset, int yOffset) {
+        return new ComponentSlot(gui, this, index, xOffset + this.x, yOffset + this.y);
     }
 }

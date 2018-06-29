@@ -21,7 +21,7 @@
 
 package de.ellpeck.rockbottom.api.world.gen;
 
-public interface INoiseGen{
+public interface INoiseGen {
 
     double make2dNoise(double x, double y);
 

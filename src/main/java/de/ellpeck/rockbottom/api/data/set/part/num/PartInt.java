@@ -31,20 +31,19 @@ import java.io.DataOutput;
 import java.io.IOException;
 import java.util.Locale;
 
-public final class PartInt extends BasicDataPart<Integer>{
+public final class PartInt extends BasicDataPart<Integer> {
 
-    public static final IPartFactory<PartInt> FACTORY = new IPartFactory<PartInt>(){
+    public static final IPartFactory<PartInt> FACTORY = new IPartFactory<PartInt>() {
         @Override
-        public PartInt parse(String name, JsonElement element){
-            if(element.isJsonPrimitive()){
+        public PartInt parse(String name, JsonElement element) {
+            if (element.isJsonPrimitive()) {
                 JsonPrimitive prim = element.getAsJsonPrimitive();
-                if(prim.isString()){
+                if (prim.isString()) {
                     String string = prim.getAsString().toLowerCase(Locale.ROOT);
-                    if(string.endsWith("i")){
-                        try{
-                            return new PartInt(name, Integer.parseInt(string.substring(0, string.length()-1)));
-                        }
-                        catch(Exception ignored){
+                    if (string.endsWith("i")) {
+                        try {
+                            return new PartInt(name, Integer.parseInt(string.substring(0, string.length() - 1)));
+                        } catch (Exception ignored) {
                         }
                     }
                 }
@@ -53,27 +52,27 @@ public final class PartInt extends BasicDataPart<Integer>{
         }
 
         @Override
-        public PartInt parse(String name, DataInput stream) throws Exception{
+        public PartInt parse(String name, DataInput stream) throws Exception {
             return new PartInt(name, stream.readInt());
         }
     };
 
-    public PartInt(String name, Integer data){
+    public PartInt(String name, Integer data) {
         super(name, data);
     }
 
     @Override
-    public void write(DataOutput stream) throws IOException{
+    public void write(DataOutput stream) throws IOException {
         stream.writeInt(this.data);
     }
 
     @Override
-    public JsonElement write(){
-        return new JsonPrimitive(this.data+"i");
+    public JsonElement write() {
+        return new JsonPrimitive(this.data + "i");
     }
 
     @Override
-    public IPartFactory getFactory(){
+    public IPartFactory getFactory() {
         return FACTORY;
     }
 }

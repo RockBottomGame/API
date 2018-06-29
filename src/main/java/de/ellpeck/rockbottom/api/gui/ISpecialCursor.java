@@ -27,21 +27,21 @@ import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.entity.player.IInteractionManager;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
-public interface ISpecialCursor{
+public interface ISpecialCursor {
 
     ResourceName getTexture();
 
     boolean shouldUseCursor(IGameInstance game, IAssetManager manager, IRenderer graphics, IGuiManager guiManager, IInteractionManager interactionManager);
 
-    default int getHotspotX(){
+    default int getHotspotX() {
         return 0;
     }
 
-    default int getHotspotY(){
+    default int getHotspotY() {
         return 0;
     }
 
-    default int getPriority(){
+    default int getPriority() {
         return 0;
     }
 }

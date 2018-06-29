@@ -38,7 +38,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-public interface IWorld extends IChunkOrWorld{
+public interface IWorld extends IChunkOrWorld {
 
     IChunk getChunkFromGridCoords(int gridX, int gridY);
 
@@ -71,9 +71,9 @@ public interface IWorld extends IChunkOrWorld{
 
     int getCurrentTime();
 
-    int getTotalTime();
-
     void setCurrentTime(int time);
+
+    int getTotalTime();
 
     @ApiInternal
     void setTotalTime(int time);

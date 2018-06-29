@@ -32,25 +32,25 @@ import de.ellpeck.rockbottom.api.net.chat.component.ChatComponent;
 import de.ellpeck.rockbottom.api.util.Colors;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
-public class Toast{
+public class Toast {
 
     private final ResourceName icon;
     private final ChatComponent title;
     private final ChatComponent description;
     private final int displayTime;
 
-    public Toast(ChatComponent title, ChatComponent description, int displayTime){
+    public Toast(ChatComponent title, ChatComponent description, int displayTime) {
         this(null, title, description, displayTime);
     }
 
-    public Toast(ResourceName icon, ChatComponent title, ChatComponent description, int displayTime){
+    public Toast(ResourceName icon, ChatComponent title, ChatComponent description, int displayTime) {
         this.icon = icon;
         this.title = title;
         this.description = description;
         this.displayTime = displayTime;
     }
 
-    public void render(IGameInstance game, IAssetManager manager, IRenderer g, float x, float y){
+    public void render(IGameInstance game, IAssetManager manager, IRenderer g, float x, float y) {
         float width = this.getWidth();
         float height = this.getHeight();
 
@@ -60,42 +60,42 @@ public class Toast{
         float textX = x;
         float textWidth = width;
 
-        if(this.icon != null){
-            float size = height-2;
+        if (this.icon != null) {
+            float size = height - 2;
 
-            textX += size+1;
-            textWidth -= size+1;
+            textX += size + 1;
+            textWidth -= size + 1;
 
             ITexture tex = manager.getTexture(this.icon);
-            tex.draw(x+1, y+1, size, ((float)tex.getRenderWidth()/(float)tex.getRenderHeight())*size);
+            tex.draw(x + 1, y + 1, size, ((float) tex.getRenderWidth() / (float) tex.getRenderHeight()) * size);
         }
 
         IFont font = manager.getFont();
-        font.drawAutoScaledString(textX+1, y+1, this.getTitle().getDisplayWithChildren(game, manager), 0.3F, (int)textWidth-2, Colors.WHITE, Colors.BLACK, false, false);
-        font.drawSplitString(textX+1, y+8, FormattingCode.LIGHT_GRAY+this.getDescription().getDisplayWithChildren(game, manager), 0.25F, (int)textWidth-2);
+        font.drawAutoScaledString(textX + 1, y + 1, this.getTitle().getDisplayWithChildren(game, manager), 0.3F, (int) textWidth - 2, Colors.WHITE, Colors.BLACK, false, false);
+        font.drawSplitString(textX + 1, y + 8, FormattingCode.LIGHT_GRAY + this.getDescription().getDisplayWithChildren(game, manager), 0.25F, (int) textWidth - 2);
     }
 
-    public ChatComponent getTitle(){
+    public ChatComponent getTitle() {
         return this.title;
     }
 
-    public ChatComponent getDescription(){
+    public ChatComponent getDescription() {
         return this.description;
     }
 
-    public int getDisplayTime(){
+    public int getDisplayTime() {
         return this.displayTime;
     }
 
-    public float getHeight(){
+    public float getHeight() {
         return 20F;
     }
 
-    public float getWidth(){
+    public float getWidth() {
         return 90F;
     }
 
-    public float getMovementTime(){
+    public float getMovementTime() {
         return 15F;
     }
 }

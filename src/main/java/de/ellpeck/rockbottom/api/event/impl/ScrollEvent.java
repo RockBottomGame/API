@@ -32,13 +32,13 @@ import org.lwjgl.glfw.GLFWScrollCallbackI;
  * to {@link GLFW#glfwSetScrollCallback(long, GLFWScrollCallbackI)}. Cancelling
  * it will cause the internal scroll status not to be updated.
  */
-public final class ScrollEvent extends Event{
+public final class ScrollEvent extends Event {
 
     public final long window;
     public double xOffset;
     public double yOffset;
 
-    public ScrollEvent(long window, double xOffset, double yOffset){
+    public ScrollEvent(long window, double xOffset, double yOffset) {
         this.window = window;
         this.xOffset = xOffset;
         this.yOffset = yOffset;

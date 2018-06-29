@@ -33,7 +33,7 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Map;
 
-public interface IAssetManager{
+public interface IAssetManager {
 
     @ApiInternal
     void load();

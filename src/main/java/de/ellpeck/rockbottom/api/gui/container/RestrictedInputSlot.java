@@ -21,22 +21,21 @@
 
 package de.ellpeck.rockbottom.api.gui.container;
 
-import de.ellpeck.rockbottom.api.gui.container.ContainerSlot;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.tile.entity.IFilteredInventory;
 import de.ellpeck.rockbottom.api.util.Direction;
 
-public class RestrictedInputSlot extends ContainerSlot{
+public class RestrictedInputSlot extends ContainerSlot {
 
     private final IFilteredInventory inv;
 
-    public RestrictedInputSlot(IFilteredInventory inventory, int slot, int x, int y){
+    public RestrictedInputSlot(IFilteredInventory inventory, int slot, int x, int y) {
         super(inventory, slot, x, y);
         this.inv = inventory;
     }
 
     @Override
-    public boolean canPlace(ItemInstance instance){
+    public boolean canPlace(ItemInstance instance) {
         return this.inv.getInputSlots(instance, Direction.NONE).contains(this.slot);
     }
 }

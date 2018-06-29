@@ -28,14 +28,14 @@ import de.ellpeck.rockbottom.api.entity.MovableWorldObject;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 import de.ellpeck.rockbottom.api.world.IWorld;
 
-public class Particle extends MovableWorldObject{
+public class Particle extends MovableWorldObject {
 
     protected int maxLife;
     protected int life;
 
     protected boolean dead;
 
-    public Particle(IWorld world, double x, double y, double motionX, double motionY, int maxLife){
+    public Particle(IWorld world, double x, double y, double motionX, double motionY, int maxLife) {
         super(world);
         this.motionX = motionX;
         this.motionY = motionY;
@@ -44,51 +44,51 @@ public class Particle extends MovableWorldObject{
         this.setPos(x, y);
     }
 
-    public void update(IGameInstance game){
+    public void update(IGameInstance game) {
         this.life++;
 
-        if(this.life >= this.maxLife){
+        if (this.life >= this.maxLife) {
             this.setDead();
         }
 
         this.applyMotion();
         this.move();
 
-        if(this.onGround){
+        if (this.onGround) {
             this.motionY = 0;
         }
     }
 
-    protected void applyMotion(){
+    protected void applyMotion() {
         this.motionY -= 0.02;
 
         this.motionX *= this.onGround ? 0.8 : 0.98;
         this.motionY *= 0.99;
     }
 
-    public void render(IGameInstance game, IAssetManager manager, IRenderer g, float x, float y, int filter){
+    public void render(IGameInstance game, IAssetManager manager, IRenderer g, float x, float y, int filter) {
 
     }
 
-    public ResourceName getRenderShader(IGameInstance game, IAssetManager manager, IRenderer g){
+    public ResourceName getRenderShader(IGameInstance game, IAssetManager manager, IRenderer g) {
         return null;
     }
 
-    public boolean isDead(){
+    public boolean isDead() {
         return this.dead;
     }
 
-    public void setDead(){
+    public void setDead() {
         this.dead = true;
     }
 
     @Override
-    public float getWidth(){
+    public float getWidth() {
         return 0.25F;
     }
 
     @Override
-    public float getHeight(){
+    public float getHeight() {
         return 0.25F;
     }
 }

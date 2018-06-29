@@ -37,13 +37,13 @@ import de.ellpeck.rockbottom.api.world.IWorld;
 
 import java.util.List;
 
-public abstract class AbstractEntityPlayer extends EntityLiving implements ICommandSender{
+public abstract class AbstractEntityPlayer extends EntityLiving implements ICommandSender {
 
     public static final double MOVE_SPEED = 0.2;
     public static final double CLIMB_SPEED = 0.15;
     public static final double RANGE = 5;
 
-    public AbstractEntityPlayer(IWorld world){
+    public AbstractEntityPlayer(IWorld world) {
         super(world);
     }
 

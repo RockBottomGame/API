@@ -30,7 +30,7 @@ import de.ellpeck.rockbottom.api.RockBottomAPI;
 import java.util.Map;
 import java.util.Set;
 
-public class IndexRegistry<T> implements IRegistry<Integer, T>{
+public class IndexRegistry<T> implements IRegistry<Integer, T> {
 
     protected final int max;
     protected final String name;
@@ -38,7 +38,7 @@ public class IndexRegistry<T> implements IRegistry<Integer, T>{
     protected final BiMap<Integer, T> map = HashBiMap.create();
     protected final BiMap<Integer, T> unmodifiableMap;
 
-    public IndexRegistry(String name, int max, boolean canUnregister){
+    public IndexRegistry(String name, int max, boolean canUnregister) {
         this.name = name;
         this.max = max;
         this.canUnregister = canUnregister;
@@ -46,37 +46,36 @@ public class IndexRegistry<T> implements IRegistry<Integer, T>{
     }
 
     @Override
-    public void register(Integer id, T value){
-        Preconditions.checkArgument(id >= 0 && id <= this.max, "Tried registering "+value+" with id "+id+" which is less than 0 or greater than max "+this.max+" in registry "+this);
-        Preconditions.checkArgument(!this.map.containsKey(id), "Cannot register "+value+" with id "+id+" twice into registry "+this);
+    public void register(Integer id, T value) {
+        Preconditions.checkArgument(id >= 0 && id <= this.max, "Tried registering " + value + " with id " + id + " which is less than 0 or greater than max " + this.max + " in registry " + this);
+        Preconditions.checkArgument(!this.map.containsKey(id), "Cannot register " + value + " with id " + id + " twice into registry " + this);
 
         this.map.put(id, value);
-        RockBottomAPI.logger().config("Registered "+value+" with id "+id+" into registry "+this);
+        RockBottomAPI.logger().config("Registered " + value + " with id " + id + " into registry " + this);
     }
 
-    public void registerNextFree(T value){
+    public void registerNextFree(T value) {
         this.register(this.getNextFreeId(), value);
     }
 
     @Override
-    public T get(Integer id){
-        if(id > this.max){
-            RockBottomAPI.logger().warning("Tried getting value of "+id+" for registry "+this+" which is greater than max "+this.max);
+    public T get(Integer id) {
+        if (id > this.max) {
+            RockBottomAPI.logger().warning("Tried getting value of " + id + " for registry " + this + " which is greater than max " + this.max);
             return null;
-        }
-        else{
+        } else {
             return this.map.get(id);
         }
     }
 
     @Override
-    public Integer getId(T value){
+    public Integer getId(T value) {
         return this.map.inverse().getOrDefault(value, -1);
     }
 
-    public int getNextFreeId(){
-        for(int i = 0; i <= this.max; i++){
-            if(!this.map.containsKey(i)){
+    public int getNextFreeId() {
+        for (int i = 0; i <= this.max; i++) {
+            if (!this.map.containsKey(i)) {
                 return i;
             }
         }
@@ -84,43 +83,42 @@ public class IndexRegistry<T> implements IRegistry<Integer, T>{
     }
 
     @Override
-    public int getSize(){
+    public int getSize() {
         return this.map.size();
     }
 
     @Override
-    public void unregister(Integer id){
-        if(this.canUnregister){
+    public void unregister(Integer id) {
+        if (this.canUnregister) {
             this.map.remove(id);
-            RockBottomAPI.logger().config("Unregistered "+id+" from registry "+this);
-        }
-        else{
-            throw new UnsupportedOperationException("Unregistering from registry "+this+" is disallowed");
+            RockBottomAPI.logger().config("Unregistered " + id + " from registry " + this);
+        } else {
+            throw new UnsupportedOperationException("Unregistering from registry " + this + " is disallowed");
         }
     }
 
     @Override
-    public BiMap<Integer, T> getUnmodifiable(){
+    public BiMap<Integer, T> getUnmodifiable() {
         return this.unmodifiableMap;
     }
 
     @Override
-    public Set<Integer> keySet(){
+    public Set<Integer> keySet() {
         return this.unmodifiableMap.keySet();
     }
 
     @Override
-    public Set<T> values(){
+    public Set<T> values() {
         return this.unmodifiableMap.values();
     }
 
     @Override
-    public Set<Map.Entry<Integer, T>> entrySet(){
+    public Set<Map.Entry<Integer, T>> entrySet() {
         return this.unmodifiableMap.entrySet();
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return this.name;
     }
 }

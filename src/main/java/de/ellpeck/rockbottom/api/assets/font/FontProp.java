@@ -21,7 +21,7 @@
 
 package de.ellpeck.rockbottom.api.assets.font;
 
-public enum FontProp{
+public enum FontProp {
 
     NONE,
     RESET,

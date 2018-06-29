@@ -32,7 +32,7 @@ import org.lwjgl.glfw.GLFW;
 import java.io.File;
 
 @ApiInternal
-public final class Settings implements IJsonSettings{
+public final class Settings implements IJsonSettings {
 
     public static final Keybind KEY_PLACE = new Keybind(ResourceName.intern("place"), 1).register();
     public static final Keybind KEY_DESTROY = new Keybind(ResourceName.intern("destroy"), 0).register();
@@ -54,11 +54,11 @@ public final class Settings implements IJsonSettings{
     public static final Keybind[] KEYS_ITEM_SELECTION = new Keybind[8];
     public static final int DEFAULT_GUI_COLOR = 0xFF30704E;
 
-    static{
+    static {
         int[] defKeys = new int[]{GLFW.GLFW_KEY_1, GLFW.GLFW_KEY_2, GLFW.GLFW_KEY_3, GLFW.GLFW_KEY_4, GLFW.GLFW_KEY_5, GLFW.GLFW_KEY_6, GLFW.GLFW_KEY_7, GLFW.GLFW_KEY_8};
 
-        for(int i = 0; i < KEYS_ITEM_SELECTION.length; i++){
-            KEYS_ITEM_SELECTION[i] = new Keybind(ResourceName.intern("item_selection_"+i), defKeys[i]).register();
+        for (int i = 0; i < KEYS_ITEM_SELECTION.length; i++) {
+            KEYS_ITEM_SELECTION[i] = new Keybind(ResourceName.intern("item_selection_" + i), defKeys[i]).register();
         }
     }
 
@@ -83,20 +83,19 @@ public final class Settings implements IJsonSettings{
     public boolean betaTextDisplayed;
 
     @Override
-    public void load(JsonObject object){
-        if(object.has("keybinds")){
+    public void load(JsonObject object) {
+        if (object.has("keybinds")) {
             JsonObject keybinds = object.get("keybinds").getAsJsonObject();
-            for(Keybind keybind : RockBottomAPI.KEYBIND_REGISTRY.values()){
+            for (Keybind keybind : RockBottomAPI.KEYBIND_REGISTRY.values()) {
                 String name = keybind.getName().toString();
 
                 //TODO Remove legacy keybind check
                 JsonElement sub = keybinds.get(name);
-                if(sub != null){
-                    if(sub.isJsonObject()){
+                if (sub != null) {
+                    if (sub.isJsonObject()) {
                         int key = this.get(sub.getAsJsonObject(), "key", keybind.getKey());
                         keybind.setBind(key);
-                    }
-                    else{
+                    } else {
                         keybind.setBind(sub.getAsInt());
                     }
                 }
@@ -125,9 +124,9 @@ public final class Settings implements IJsonSettings{
     }
 
     @Override
-    public void save(JsonObject object){
+    public void save(JsonObject object) {
         JsonObject keybinds = new JsonObject();
-        for(Keybind keybind : RockBottomAPI.KEYBIND_REGISTRY.values()){
+        for (Keybind keybind : RockBottomAPI.KEYBIND_REGISTRY.values()) {
             String name = keybind.getName().toString();
             keybinds.addProperty(name, keybind.getKey());
         }
@@ -155,12 +154,12 @@ public final class Settings implements IJsonSettings{
     }
 
     @Override
-    public File getSettingsFile(IDataManager manager){
+    public File getSettingsFile(IDataManager manager) {
         return manager.getSettingsFile();
     }
 
     @Override
-    public String getName(){
+    public String getName() {
         return "Game settings";
     }
 

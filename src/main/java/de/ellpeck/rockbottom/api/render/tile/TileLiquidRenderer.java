@@ -33,20 +33,20 @@ import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TileLiquidRenderer<T extends TileLiquid> extends DefaultTileRenderer<T>{
+public class TileLiquidRenderer<T extends TileLiquid> extends DefaultTileRenderer<T> {
 
     private final List<ResourceName> levelTextures = new ArrayList<>();
 
-    public TileLiquidRenderer(ResourceName texture, T tile){
+    public TileLiquidRenderer(ResourceName texture, T tile) {
         super(texture);
 
-        for(int i = 0; i < tile.getLevels(); i++){
-            this.levelTextures.add(this.texture.addSuffix("."+i));
+        for (int i = 0; i < tile.getLevels(); i++) {
+            this.levelTextures.add(this.texture.addSuffix("." + i));
         }
     }
 
     @Override
-    public void render(IGameInstance game, IAssetManager manager, IRenderer g, IWorld world, T tile, TileState state, int x, int y, TileLayer layer, float renderX, float renderY, float scale, int[] light){
+    public void render(IGameInstance game, IAssetManager manager, IRenderer g, IWorld world, T tile, TileState state, int x, int y, TileLayer layer, float renderX, float renderY, float scale, int[] light) {
         int level = state.get(tile.level);
         manager.getTexture(this.levelTextures.get(level)).draw(renderX, renderY, scale, scale, light);
     }

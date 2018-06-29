@@ -21,7 +21,7 @@
 
 package de.ellpeck.rockbottom.api.util;
 
-public enum Direction{
+public enum Direction {
     NONE(0, 0),
 
     UP(0, 1),
@@ -44,13 +44,13 @@ public enum Direction{
     public final int x;
     public final int y;
 
-    Direction(int x, int y){
+    Direction(int x, int y) {
         this.x = x;
         this.y = y;
     }
 
-    public Direction getOpposite(){
-        switch(this){
+    public Direction getOpposite() {
+        switch (this) {
             case UP:
                 return DOWN;
             case DOWN:

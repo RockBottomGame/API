@@ -37,13 +37,13 @@ import java.util.List;
  * from the surrounding {@link Tile} objects in the world. This event cannot be
  * cancelled.
  */
-public final class WorldObjectCollisionEvent extends Event{
+public final class WorldObjectCollisionEvent extends Event {
 
     public final MovableWorldObject object;
     public final BoundBox entityBoundBox;
     public final List<BoundBox> boundBoxes;
 
-    public WorldObjectCollisionEvent(MovableWorldObject object, BoundBox entityBoundBox, List<BoundBox> boundBoxes){
+    public WorldObjectCollisionEvent(MovableWorldObject object, BoundBox entityBoundBox, List<BoundBox> boundBoxes) {
         this.object = object;
         this.entityBoundBox = entityBoundBox;
         this.boundBoxes = boundBoxes;

@@ -29,28 +29,28 @@ import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 import java.util.function.Supplier;
 
-public class ComponentFancyButton extends ComponentButton{
+public class ComponentFancyButton extends ComponentButton {
 
     protected final ResourceName texture;
 
-    public ComponentFancyButton(Gui gui, int x, int y, int sizeX, int sizeY, Supplier<Boolean> supplier, ResourceName texture, String... hover){
+    public ComponentFancyButton(Gui gui, int x, int y, int sizeX, int sizeY, Supplier<Boolean> supplier, ResourceName texture, String... hover) {
         super(gui, x, y, sizeX, sizeY, supplier, null, hover);
         this.texture = texture;
     }
 
-    protected ResourceName getTexture(){
+    protected ResourceName getTexture() {
         return this.texture;
     }
 
     @Override
-    public void render(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y){
+    public void render(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y) {
         super.render(game, manager, g, x, y);
 
         manager.getTexture(this.getTexture()).draw(x, y, this.width, this.height);
     }
 
     @Override
-    public ResourceName getName(){
+    public ResourceName getName() {
         return ResourceName.intern("fancy_button");
     }
 }

@@ -21,7 +21,7 @@
 
 package de.ellpeck.rockbottom.api.render.engine;
 
-public interface IVAO extends IDisposable{
+public interface IVAO extends IDisposable {
 
     void bind();
 

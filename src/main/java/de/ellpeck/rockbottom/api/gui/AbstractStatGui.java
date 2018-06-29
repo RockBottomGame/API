@@ -25,9 +25,9 @@ import de.ellpeck.rockbottom.api.gui.component.ComponentStatistic;
 
 import java.util.List;
 
-public abstract class AbstractStatGui extends Gui{
+public abstract class AbstractStatGui extends Gui {
 
-    public AbstractStatGui(Gui parent){
+    public AbstractStatGui(Gui parent) {
         super(158, 162, parent);
     }
 

@@ -26,25 +26,25 @@ import de.ellpeck.rockbottom.api.mod.IMod;
 
 import java.io.File;
 
-public abstract class ModConfig implements IJsonSettings{
+public abstract class ModConfig implements IJsonSettings {
 
     private final IMod mod;
 
-    public ModConfig(IMod mod){
+    public ModConfig(IMod mod) {
         this.mod = mod;
     }
 
-    public IMod getMod(){
+    public IMod getMod() {
         return this.mod;
     }
 
     @Override
-    public File getSettingsFile(IDataManager manager){
-        return new File(manager.getModConfigFolder(), this.mod.getId()+".json");
+    public File getSettingsFile(IDataManager manager) {
+        return new File(manager.getModConfigFolder(), this.mod.getId() + ".json");
     }
 
     @Override
-    public String getName(){
-        return this.mod.getDisplayName()+" settings";
+    public String getName() {
+        return this.mod.getDisplayName() + " settings";
     }
 }

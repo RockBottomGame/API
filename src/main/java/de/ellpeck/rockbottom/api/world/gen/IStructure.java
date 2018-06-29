@@ -32,18 +32,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public interface IStructure extends IContent{
+public interface IStructure extends IContent {
 
     ResourceName ID = ResourceName.intern("structure");
 
-    static IStructure forName(ResourceName name){
+    static IStructure forName(ResourceName name) {
         return RockBottomAPI.STRUCTURE_REGISTRY.get(name);
     }
 
-    static List<IStructure> forNamePart(String part){
+    static List<IStructure> forNamePart(String part) {
         List<IStructure> list = new ArrayList<>();
-        for(Map.Entry<ResourceName, IStructure> entry : RockBottomAPI.STRUCTURE_REGISTRY.entrySet()){
-            if(entry.getKey().toString().contains(part)){
+        for (Map.Entry<ResourceName, IStructure> entry : RockBottomAPI.STRUCTURE_REGISTRY.entrySet()) {
+            if (entry.getKey().toString().contains(part)) {
                 list.add(entry.getValue());
             }
         }

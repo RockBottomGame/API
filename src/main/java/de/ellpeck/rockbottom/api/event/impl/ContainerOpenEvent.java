@@ -30,12 +30,12 @@ import de.ellpeck.rockbottom.api.gui.container.ItemContainer;
  * container variable will result in a different container being opened.
  * Cancelling the event will result in no container being opened.
  */
-public final class ContainerOpenEvent extends Event{
+public final class ContainerOpenEvent extends Event {
 
     public final AbstractEntityPlayer player;
     public ItemContainer container;
 
-    public ContainerOpenEvent(AbstractEntityPlayer player, ItemContainer container){
+    public ContainerOpenEvent(AbstractEntityPlayer player, ItemContainer container) {
         this.player = player;
         this.container = container;
     }

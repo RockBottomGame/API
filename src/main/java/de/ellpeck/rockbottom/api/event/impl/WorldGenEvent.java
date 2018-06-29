@@ -34,13 +34,13 @@ import de.ellpeck.rockbottom.api.world.gen.IWorldGenerator;
  * EventResult#MODIFIED} will make the generator generate even if its own {@link
  * IWorldGenerator#shouldGenerate(IWorld, IChunk)} method returns false.
  */
-public final class WorldGenEvent extends Event{
+public final class WorldGenEvent extends Event {
 
     public final IWorld world;
     public final IChunk chunk;
     public final IWorldGenerator generator;
 
-    public WorldGenEvent(IWorld world, IChunk chunk, IWorldGenerator generator){
+    public WorldGenEvent(IWorld world, IChunk chunk, IWorldGenerator generator) {
         this.world = world;
         this.chunk = chunk;
         this.generator = generator;

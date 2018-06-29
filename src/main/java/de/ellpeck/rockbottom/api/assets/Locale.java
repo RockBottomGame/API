@@ -29,57 +29,55 @@ import java.util.Collections;
 import java.util.Map;
 
 @ApiInternal
-public final class Locale implements IAsset{
+public final class Locale implements IAsset {
 
     public static final ResourceName ID = ResourceName.intern("loc");
 
     private final String name;
     private final Map<ResourceName, String> localization;
 
-    public Locale(String name, Map<ResourceName, String> localization){
+    public Locale(String name, Map<ResourceName, String> localization) {
         this.name = name;
         this.localization = localization;
     }
 
-    public String localize(Locale fallback, ResourceName unloc, Object... format){
+    public String localize(Locale fallback, ResourceName unloc, Object... format) {
         String loc = this.localization.get(unloc);
 
-        if(loc == null){
-            if(fallback != null && fallback != this){
+        if (loc == null) {
+            if (fallback != null && fallback != this) {
                 loc = fallback.localize(null, unloc, format);
-            }
-            else{
+            } else {
                 loc = unloc.toString();
             }
 
             this.localization.put(unloc, loc);
 
-            RockBottomAPI.logger().warning("Localization with name "+unloc+" is missing from locale with name "+this.name+'!');
+            RockBottomAPI.logger().warning("Localization with name " + unloc + " is missing from locale with name " + this.name + '!');
         }
 
-        if(format == null || format.length <= 0){
+        if (format == null || format.length <= 0) {
             return loc;
-        }
-        else{
+        } else {
             return String.format(loc, format);
         }
     }
 
     @ApiInternal
-    public void override(Map<ResourceName, String> newLocalization){
+    public void override(Map<ResourceName, String> newLocalization) {
         this.localization.putAll(newLocalization);
     }
 
-    public String getName(){
+    public String getName() {
         return this.name;
     }
 
-    public Map<ResourceName, String> getLocalization(){
+    public Map<ResourceName, String> getLocalization() {
         return Collections.unmodifiableMap(this.localization);
     }
 
     @Override
-    public void dispose(){
+    public void dispose() {
 
     }
 }

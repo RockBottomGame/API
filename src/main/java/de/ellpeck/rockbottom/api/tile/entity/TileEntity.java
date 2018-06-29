@@ -33,77 +33,77 @@ import de.ellpeck.rockbottom.api.world.IChunk;
 import de.ellpeck.rockbottom.api.world.IWorld;
 import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 
-public abstract class TileEntity{
+public abstract class TileEntity {
 
     public final IWorld world;
     public final int x;
     public final int y;
     public final TileLayer layer;
 
-    public TileEntity(IWorld world, int x, int y, TileLayer layer){
+    public TileEntity(IWorld world, int x, int y, TileLayer layer) {
         this.world = world;
         this.x = x;
         this.y = y;
         this.layer = layer;
     }
 
-    public void update(IGameInstance game){
-        if(this.world.isServer()){
-            if(this.world.getTotalTime()%this.getSyncInterval() == 0 && this.needsSync()){
+    public void update(IGameInstance game) {
+        if (this.world.isServer()) {
+            if (this.world.getTotalTime() % this.getSyncInterval() == 0 && this.needsSync()) {
                 this.sendToClients();
                 this.onSync();
             }
         }
     }
 
-    public boolean shouldRemove(){
+    public boolean shouldRemove() {
         return false;
     }
 
-    public void save(DataSet set, boolean forSync){
+    public void save(DataSet set, boolean forSync) {
 
     }
 
-    public void load(DataSet set, boolean forSync){
+    public void load(DataSet set, boolean forSync) {
 
     }
 
-    protected boolean needsSync(){
+    protected boolean needsSync() {
         return false;
     }
 
-    protected void onSync(){
+    protected void onSync() {
 
     }
 
-    protected int getSyncInterval(){
+    protected int getSyncInterval() {
         return 10;
     }
 
-    public void sendToClients(){
-        if(this.world.isServer()){
+    public void sendToClients() {
+        if (this.world.isServer()) {
             RockBottomAPI.getNet().sendToAllPlayersWithLoadedPos(this.world, new PacketTileEntityData(this.x, this.y, this.layer, this), this.x, this.y);
         }
     }
 
-    public boolean doesSave(){
+    public boolean doesSave() {
         return true;
     }
 
-    public void dropInventory(IInventory inventory){
-        for(int i = 0; i < inventory.getSlotAmount(); i++){
+    public void dropInventory(IInventory inventory) {
+        for (int i = 0; i < inventory.getSlotAmount(); i++) {
             ItemInstance inst = inventory.get(i);
-            if(inst != null){
-                AbstractEntityItem.spawn(this.world, inst, this.x+0.5, this.y+0.5, Util.RANDOM.nextGaussian()*0.1, Util.RANDOM.nextGaussian()*0.1);
+            if (inst != null) {
+                AbstractEntityItem.spawn(this.world, inst, this.x + 0.5, this.y + 0.5, Util.RANDOM.nextGaussian() * 0.1, Util.RANDOM.nextGaussian() * 0.1);
             }
         }
     }
 
-    public IFilteredInventory getTileInventory(){
+    public IFilteredInventory getTileInventory() {
         return null;
     }
 
-    public boolean shouldMakeChunkPersist(IChunk chunk){
+    public boolean shouldMakeChunkPersist(IChunk chunk) {
         return false;
     }
 

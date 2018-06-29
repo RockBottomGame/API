@@ -21,7 +21,7 @@
 
 package de.ellpeck.rockbottom.api.util;
 
-public final class BoundBox{
+public final class BoundBox {
 
     private double minX;
     private double minY;
@@ -29,19 +29,19 @@ public final class BoundBox{
     private double maxX;
     private double maxY;
 
-    public BoundBox(){
+    public BoundBox() {
         this(0, 0, 0, 0);
     }
 
-    public BoundBox(double minX, double minY, double maxX, double maxY){
+    public BoundBox(double minX, double minY, double maxX, double maxY) {
         this.set(minX, minY, maxX, maxY);
     }
 
-    public BoundBox set(BoundBox box){
+    public BoundBox set(BoundBox box) {
         return this.set(box.minX, box.minY, box.maxX, box.maxY);
     }
 
-    public BoundBox set(double minX, double minY, double maxX, double maxY){
+    public BoundBox set(double minX, double minY, double maxX, double maxY) {
         this.minX = Math.min(minX, maxX);
         this.minY = Math.min(minY, maxY);
 
@@ -51,7 +51,7 @@ public final class BoundBox{
         return this;
     }
 
-    public BoundBox add(double x, double y){
+    public BoundBox add(double x, double y) {
         this.minX += x;
         this.minY += y;
 
@@ -61,7 +61,7 @@ public final class BoundBox{
         return this;
     }
 
-    public BoundBox expand(double x, double y){
+    public BoundBox expand(double x, double y) {
         this.minX -= x;
         this.maxX += x;
 
@@ -71,84 +71,84 @@ public final class BoundBox{
         return this;
     }
 
-    public BoundBox expand(double amount){
+    public BoundBox expand(double amount) {
         return this.expand(amount, amount);
     }
 
-    public boolean intersects(BoundBox other){
+    public boolean intersects(BoundBox other) {
         return this.intersects(other.minX, other.minY, other.maxX, other.maxY);
     }
 
-    public boolean intersects(double minX, double minY, double maxX, double maxY){
+    public boolean intersects(double minX, double minY, double maxX, double maxY) {
         return this.minX < maxX && this.maxX > minX && this.minY < maxY && this.maxY > minY;
     }
 
-    public boolean contains(double x, double y){
+    public boolean contains(double x, double y) {
         return this.minX <= x && this.minY <= y && this.maxX >= x && this.maxY >= y;
     }
 
-    public boolean isEmpty(){
+    public boolean isEmpty() {
         return this.getWidth() <= 0 || this.getHeight() <= 0;
     }
 
     @Override
-    public boolean equals(Object o){
-        if(this == o){
+    public boolean equals(Object o) {
+        if (this == o) {
             return true;
         }
-        if(o == null || this.getClass() != o.getClass()){
+        if (o == null || this.getClass() != o.getClass()) {
             return false;
         }
 
-        BoundBox boundBox = (BoundBox)o;
+        BoundBox boundBox = (BoundBox) o;
         return Double.compare(boundBox.minX, this.minX) == 0 && Double.compare(boundBox.minY, this.minY) == 0 && Double.compare(boundBox.maxX, this.maxX) == 0 && Double.compare(boundBox.maxY, this.maxY) == 0;
     }
 
     @Override
-    public int hashCode(){
+    public int hashCode() {
         int result;
         long temp;
         temp = Double.doubleToLongBits(this.minX);
-        result = (int)(temp ^ (temp >>> 32));
+        result = (int) (temp ^ (temp >>> 32));
         temp = Double.doubleToLongBits(this.minY);
-        result = 31*result+(int)(temp ^ (temp >>> 32));
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
         temp = Double.doubleToLongBits(this.maxX);
-        result = 31*result+(int)(temp ^ (temp >>> 32));
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
         temp = Double.doubleToLongBits(this.maxY);
-        result = 31*result+(int)(temp ^ (temp >>> 32));
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
         return result;
     }
 
     @Override
-    public String toString(){
-        return "{"+this.minX+", "+this.minY+" -> "+this.maxX+", "+this.maxY+'}';
+    public String toString() {
+        return "{" + this.minX + ", " + this.minY + " -> " + this.maxX + ", " + this.maxY + '}';
     }
 
-    public double getMinX(){
+    public double getMinX() {
         return this.minX;
     }
 
-    public double getMinY(){
+    public double getMinY() {
         return this.minY;
     }
 
-    public double getMaxX(){
+    public double getMaxX() {
         return this.maxX;
     }
 
-    public double getMaxY(){
+    public double getMaxY() {
         return this.maxY;
     }
 
-    public double getWidth(){
-        return this.maxX-this.minX;
+    public double getWidth() {
+        return this.maxX - this.minX;
     }
 
-    public double getHeight(){
-        return this.maxY-this.minY;
+    public double getHeight() {
+        return this.maxY - this.minY;
     }
 
-    public BoundBox copy(){
+    public BoundBox copy() {
         return new BoundBox(this.minX, this.minY, this.maxX, this.maxY);
     }
 }

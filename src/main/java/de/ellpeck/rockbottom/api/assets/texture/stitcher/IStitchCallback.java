@@ -23,7 +23,7 @@ package de.ellpeck.rockbottom.api.assets.texture.stitcher;
 
 import de.ellpeck.rockbottom.api.assets.texture.ITexture;
 
-public interface IStitchCallback{
+public interface IStitchCallback {
 
     void onStitched(int stitchX, int stitchY, ITexture stitchedTexture) throws Exception;
 }

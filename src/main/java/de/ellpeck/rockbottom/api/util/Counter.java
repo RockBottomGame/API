@@ -21,30 +21,30 @@
 
 package de.ellpeck.rockbottom.api.util;
 
-public final class Counter{
+public final class Counter {
 
     private int value;
 
-    public Counter(int value){
+    public Counter(int value) {
         this.value = value;
     }
 
-    public Counter set(int value){
+    public Counter set(int value) {
         this.value = value;
         return this;
     }
 
-    public Counter add(int value){
+    public Counter add(int value) {
         this.value += value;
         return this;
     }
 
-    public int get(){
+    public int get() {
         return this.value;
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return String.valueOf(this.value);
     }
 }

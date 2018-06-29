@@ -6,16 +6,16 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public final class SpecificIntProp extends TileProp<Integer>{
+public final class SpecificIntProp extends TileProp<Integer> {
 
     private final int def;
     private final List<Integer> allowedValues;
 
-    public SpecificIntProp(String name, Integer def, Integer... allowedValues){
+    public SpecificIntProp(String name, Integer def, Integer... allowedValues) {
         this(name, def, Arrays.asList(allowedValues));
     }
 
-    public SpecificIntProp(String name, Integer def, List<Integer> allowedValues){
+    public SpecificIntProp(String name, Integer def, List<Integer> allowedValues) {
         super(name);
         this.def = def;
         this.allowedValues = Collections.unmodifiableList(allowedValues);
@@ -24,22 +24,22 @@ public final class SpecificIntProp extends TileProp<Integer>{
     }
 
     @Override
-    public int getVariants(){
+    public int getVariants() {
         return this.allowedValues.size();
     }
 
     @Override
-    public Integer getValue(int index){
+    public Integer getValue(int index) {
         return this.allowedValues.get(index);
     }
 
     @Override
-    public int getIndex(Integer value){
+    public int getIndex(Integer value) {
         return this.allowedValues.indexOf(value);
     }
 
     @Override
-    public Integer getDefault(){
+    public Integer getDefault() {
         return this.def;
     }
 }

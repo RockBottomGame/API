@@ -33,65 +33,65 @@ import java.io.File;
 import java.util.Map;
 
 @ApiInternal
-public final class NameToIndexInfo implements IJsonSettings{
+public final class NameToIndexInfo implements IJsonSettings {
 
     private final IndexRegistry<ResourceName> reg;
     private final File legacyFile;
     private final File file;
     private boolean needsSave;
 
-    public NameToIndexInfo(String name, File legacyFile, File file, int max){
+    public NameToIndexInfo(String name, File legacyFile, File file, int max) {
         this.legacyFile = legacyFile;
         this.file = file;
         this.reg = new IndexRegistry<>(name, max, false);
     }
 
-    public <T> void populate(NameRegistry<T> registry){
-        for(Map.Entry<ResourceName, T> entry : registry.map.entrySet()){
+    public <T> void populate(NameRegistry<T> registry) {
+        for (Map.Entry<ResourceName, T> entry : registry.map.entrySet()) {
             ResourceName key = entry.getKey();
 
-            if(this.getId(key) < 0){
+            if (this.getId(key) < 0) {
                 this.reg.registerNextFree(key);
                 this.needsSave = true;
             }
         }
     }
 
-    public int getId(ResourceName name){
+    public int getId(ResourceName name) {
         return this.reg.getId(name);
     }
 
-    public ResourceName get(int id){
+    public ResourceName get(int id) {
         return this.reg.get(id);
     }
 
-    public boolean needsSave(){
+    public boolean needsSave() {
         return this.needsSave;
     }
 
-    public void fromBuffer(ByteBuf buf){
+    public void fromBuffer(ByteBuf buf) {
         this.reg.map.clear();
 
         int amount = buf.readInt();
-        for(int i = 0; i < amount; i++){
+        for (int i = 0; i < amount; i++) {
             this.reg.map.put(buf.readInt(), new ResourceName(NetUtil.readStringFromBuffer(buf)));
         }
     }
 
-    public void toBuffer(ByteBuf buf){
+    public void toBuffer(ByteBuf buf) {
         buf.writeInt(this.reg.getSize());
 
-        for(Map.Entry<Integer, ResourceName> entry : this.reg.map.entrySet()){
+        for (Map.Entry<Integer, ResourceName> entry : this.reg.map.entrySet()) {
             buf.writeInt(entry.getKey());
             NetUtil.writeStringToBuffer(entry.getValue().toString(), buf);
         }
     }
 
     @Override
-    public void load(JsonObject object){
+    public void load(JsonObject object) {
         this.reg.map.clear();
 
-        for(Map.Entry<String, JsonElement> entry : object.entrySet()){
+        for (Map.Entry<String, JsonElement> entry : object.entrySet()) {
             ResourceName name = new ResourceName(entry.getKey());
             int id = entry.getValue().getAsInt();
             this.reg.map.put(id, name);
@@ -99,20 +99,20 @@ public final class NameToIndexInfo implements IJsonSettings{
     }
 
     @Override
-    public void save(JsonObject object){
-        for(Map.Entry<Integer, ResourceName> entry : this.reg.map.entrySet()){
+    public void save(JsonObject object) {
+        for (Map.Entry<Integer, ResourceName> entry : this.reg.map.entrySet()) {
             object.addProperty(entry.getValue().toString(), entry.getKey());
         }
         this.needsSave = false;
     }
 
     @Override
-    public File getSettingsFile(IDataManager manager){
+    public File getSettingsFile(IDataManager manager) {
         return this.file;
     }
 
     @Override
-    public String getName(){
-        return "Name to index info "+this.reg;
+    public String getName() {
+        return "Name to index info " + this.reg;
     }
 }

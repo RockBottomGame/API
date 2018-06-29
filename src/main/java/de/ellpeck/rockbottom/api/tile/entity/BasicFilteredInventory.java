@@ -29,32 +29,32 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.Function;
 
-public class BasicFilteredInventory extends Inventory implements IFilteredInventory{
+public class BasicFilteredInventory extends Inventory implements IFilteredInventory {
 
     private final Function<ItemInstance, List<Integer>> inputSlotFunction;
     private final List<Integer> outputSlots;
 
-    public BasicFilteredInventory(int slotAmount, List<Integer> inputOutputSlots){
+    public BasicFilteredInventory(int slotAmount, List<Integer> inputOutputSlots) {
         this(slotAmount, inputOutputSlots, inputOutputSlots);
     }
 
-    public BasicFilteredInventory(int slotAmount, List<Integer> inputSlots, List<Integer> outputSlots){
+    public BasicFilteredInventory(int slotAmount, List<Integer> inputSlots, List<Integer> outputSlots) {
         this(slotAmount, inst -> inputSlots, outputSlots);
     }
 
-    public BasicFilteredInventory(int slotAmount, Function<ItemInstance, List<Integer>> inputSlotFunction, List<Integer> outputSlots){
+    public BasicFilteredInventory(int slotAmount, Function<ItemInstance, List<Integer>> inputSlotFunction, List<Integer> outputSlots) {
         super(slotAmount);
         this.inputSlotFunction = inputSlotFunction;
         this.outputSlots = Collections.unmodifiableList(outputSlots);
     }
 
     @Override
-    public List<Integer> getInputSlots(ItemInstance instance, Direction dir){
+    public List<Integer> getInputSlots(ItemInstance instance, Direction dir) {
         return this.inputSlotFunction.apply(instance);
     }
 
     @Override
-    public List<Integer> getOutputSlots(Direction dir){
+    public List<Integer> getOutputSlots(Direction dir) {
         return this.outputSlots;
     }
 }

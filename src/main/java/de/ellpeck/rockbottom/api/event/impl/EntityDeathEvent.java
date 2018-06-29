@@ -29,11 +29,11 @@ import de.ellpeck.rockbottom.api.event.Event;
  * Entity#setDead(boolean)}. Cancelling this event will result in the entity
  * being brought back to life.
  */
-public final class EntityDeathEvent extends Event{
+public final class EntityDeathEvent extends Event {
 
     public final Entity entity;
 
-    public EntityDeathEvent(Entity entity){
+    public EntityDeathEvent(Entity entity) {
         this.entity = entity;
     }
 }

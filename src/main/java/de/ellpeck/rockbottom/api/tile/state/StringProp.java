@@ -27,16 +27,16 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public final class StringProp extends TileProp<String>{
+public final class StringProp extends TileProp<String> {
 
     private final String def;
     private final List<String> allowedValues;
 
-    public StringProp(String name, String def, String... allowedValues){
+    public StringProp(String name, String def, String... allowedValues) {
         this(name, def, Arrays.asList(allowedValues));
     }
 
-    public StringProp(String name, String def, List<String> allowedValues){
+    public StringProp(String name, String def, List<String> allowedValues) {
         super(name);
         this.def = def;
         this.allowedValues = Collections.unmodifiableList(allowedValues);
@@ -45,22 +45,22 @@ public final class StringProp extends TileProp<String>{
     }
 
     @Override
-    public int getVariants(){
+    public int getVariants() {
         return this.allowedValues.size();
     }
 
     @Override
-    public String getValue(int index){
+    public String getValue(int index) {
         return this.allowedValues.get(index);
     }
 
     @Override
-    public int getIndex(String value){
+    public int getIndex(String value) {
         return this.allowedValues.indexOf(value);
     }
 
     @Override
-    public String getDefault(){
+    public String getDefault() {
         return this.def;
     }
 }

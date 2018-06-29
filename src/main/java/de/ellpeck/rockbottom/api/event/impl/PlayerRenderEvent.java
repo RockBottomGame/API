@@ -32,7 +32,7 @@ import de.ellpeck.rockbottom.api.event.Event;
  * that during the firing of this event, the {@link IRenderer#getWorldScale()}
  * is applied to the GL context. This event cannot be cancelled.
  */
-public final class PlayerRenderEvent extends Event{
+public final class PlayerRenderEvent extends Event {
 
     public final IGameInstance game;
     public final IAssetManager assetManager;
@@ -41,7 +41,7 @@ public final class PlayerRenderEvent extends Event{
     public final float x;
     public final float y;
 
-    public PlayerRenderEvent(IGameInstance game, IAssetManager assetManager, IRenderer graphics, AbstractEntityPlayer player, float x, float y){
+    public PlayerRenderEvent(IGameInstance game, IAssetManager assetManager, IRenderer graphics, AbstractEntityPlayer player, float x, float y) {
         this.game = game;
         this.assetManager = assetManager;
         this.graphics = graphics;

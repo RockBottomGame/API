@@ -32,59 +32,59 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class BasicRecipe implements IRecipe{
+public class BasicRecipe implements IRecipe {
 
     private final ResourceName name;
     private final ResourceName infoName;
     private final List<IUseInfo> inputs;
     private final List<ItemInstance> outputs;
 
-    public BasicRecipe(ResourceName name, List<IUseInfo> inputs, List<ItemInstance> outputs){
+    public BasicRecipe(ResourceName name, List<IUseInfo> inputs, List<ItemInstance> outputs) {
         this.name = name;
         this.infoName = name.addPrefix("recipe_");
         this.inputs = inputs;
         this.outputs = outputs;
     }
 
-    public BasicRecipe(ResourceName name, ItemInstance output, IUseInfo... inputs){
+    public BasicRecipe(ResourceName name, ItemInstance output, IUseInfo... inputs) {
         this(name, Arrays.asList(inputs), Collections.singletonList(output));
     }
 
-    public BasicRecipe(ItemInstance output, IUseInfo... inputs){
+    public BasicRecipe(ItemInstance output, IUseInfo... inputs) {
         this(output.getItem().getName(), output, inputs);
     }
 
     @Override
-    public List<IUseInfo> getInputs(){
+    public List<IUseInfo> getInputs() {
         return this.inputs;
     }
 
     @Override
-    public List<ItemInstance> getOutputs(){
+    public List<ItemInstance> getOutputs() {
         return this.outputs;
     }
 
     @Override
-    public boolean isKnown(AbstractEntityPlayer player){
+    public boolean isKnown(AbstractEntityPlayer player) {
         return true;
     }
 
     @Override
-    public ResourceName getName(){
+    public ResourceName getName() {
         return this.name;
     }
 
     @Override
-    public ResourceName getKnowledgeInformationName(){
+    public ResourceName getKnowledgeInformationName() {
         return this.infoName;
     }
 
-    public BasicRecipe register(NameRegistry<BasicRecipe> registry){
+    public BasicRecipe register(NameRegistry<BasicRecipe> registry) {
         registry.register(this.getName(), this);
         return this;
     }
 
-    public BasicRecipe registerManual(){
+    public BasicRecipe registerManual() {
         return this.register(RockBottomAPI.MANUAL_CONSTRUCTION_RECIPES);
     }
 }

@@ -30,15 +30,15 @@ import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 import java.util.List;
 
-public abstract class StatisticInitializer<T extends Statistic>{
+public abstract class StatisticInitializer<T extends Statistic> {
 
     private final ResourceName name;
 
-    public StatisticInitializer(ResourceName name){
+    public StatisticInitializer(ResourceName name) {
         this.name = name;
     }
 
-    public ResourceName getName(){
+    public ResourceName getName() {
         return this.name;
     }
 
@@ -46,7 +46,7 @@ public abstract class StatisticInitializer<T extends Statistic>{
 
     public abstract List<ComponentStatistic> getDisplayComponents(IGameInstance game, T stat, AbstractStatGui gui, ComponentMenu menu);
 
-    public StatisticInitializer<T> register(){
+    public StatisticInitializer<T> register() {
         RockBottomAPI.STATISTICS_REGISTRY.register(this.getName(), this);
         return this;
     }

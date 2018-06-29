@@ -36,7 +36,7 @@ import de.ellpeck.rockbottom.api.util.ApiInternal;
  * this class directly in any way is discouraged and rather useless.
  */
 @ApiInternal
-public final class Internals{
+public final class Internals {
 
     private IGameInstance game;
     private IApiHandler api;
@@ -47,67 +47,67 @@ public final class Internals{
     private IResourceRegistry resource;
     private IInternalHooks hooks;
 
-    public void setResource(IResourceRegistry resource){
-        this.resource = resource;
-    }
-
-    public void setHooks(IInternalHooks hooks){
-        this.hooks = hooks;
-    }
-
-    public void setGame(IGameInstance game){
-        this.game = game;
-    }
-
-    public void setApi(IApiHandler api){
-        this.api = api;
-    }
-
-    public void setEvent(IEventHandler event){
-        this.event = event;
-    }
-
-    public void setNet(INetHandler net){
-        this.net = net;
-    }
-
-    public void setMod(IModLoader mod){
-        this.mod = mod;
-    }
-
-    public void setContent(IContentPackLoader content){
-        this.content = content;
-    }
-
-    public IResourceRegistry getResource(){
+    public IResourceRegistry getResource() {
         return this.resource;
     }
 
-    public IGameInstance getGame(){
+    public void setResource(IResourceRegistry resource) {
+        this.resource = resource;
+    }
+
+    public IGameInstance getGame() {
         return this.game;
     }
 
-    public IApiHandler getApi(){
+    public void setGame(IGameInstance game) {
+        this.game = game;
+    }
+
+    public IApiHandler getApi() {
         return this.api;
     }
 
-    public IEventHandler getEvent(){
+    public void setApi(IApiHandler api) {
+        this.api = api;
+    }
+
+    public IEventHandler getEvent() {
         return this.event;
     }
 
-    public INetHandler getNet(){
+    public void setEvent(IEventHandler event) {
+        this.event = event;
+    }
+
+    public INetHandler getNet() {
         return this.net;
     }
 
-    public IModLoader getMod(){
+    public void setNet(INetHandler net) {
+        this.net = net;
+    }
+
+    public IModLoader getMod() {
         return this.mod;
     }
 
-    public IInternalHooks getHooks(){
+    public void setMod(IModLoader mod) {
+        this.mod = mod;
+    }
+
+    public IInternalHooks getHooks() {
         return this.hooks;
     }
 
-    public IContentPackLoader getContent(){
+    public void setHooks(IInternalHooks hooks) {
+        this.hooks = hooks;
+    }
+
+    public IContentPackLoader getContent() {
         return this.content;
+    }
+
+    public void setContent(IContentPackLoader content) {
+        this.content = content;
     }
 }

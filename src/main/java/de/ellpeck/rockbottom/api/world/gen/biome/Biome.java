@@ -34,11 +34,11 @@ import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 import java.util.List;
 import java.util.Random;
 
-public abstract class Biome{
+public abstract class Biome {
 
     protected final ResourceName name;
 
-    public Biome(ResourceName name){
+    public Biome(ResourceName name) {
         this.name = name;
     }
 
@@ -48,44 +48,44 @@ public abstract class Biome{
 
     public abstract int getWeight(IWorld world);
 
-    public long getBiomeSeed(IWorld world){
+    public long getBiomeSeed(IWorld world) {
         return world.getSeed();
     }
 
-    public ResourceName getName(){
+    public ResourceName getName() {
         return this.name;
     }
 
-    public Biome register(){
+    public Biome register() {
         RockBottomAPI.BIOME_REGISTRY.register(this.getName(), this);
         return this;
     }
 
-    public boolean hasGrasslandDecoration(){
+    public boolean hasGrasslandDecoration() {
         return false;
     }
 
-    public float getFlowerChance(){
+    public float getFlowerChance() {
         return 0F;
     }
 
-    public float getPebbleChance(){
+    public float getPebbleChance() {
         return 0F;
     }
 
-    public boolean canTreeGrow(IWorld world, IChunk chunk, int x, int y){
+    public boolean canTreeGrow(IWorld world, IChunk chunk, int x, int y) {
         return false;
     }
 
-    public TileState getFillerTile(IWorld world, IChunk chunk, int x, int y){
+    public TileState getFillerTile(IWorld world, IChunk chunk, int x, int y) {
         return GameContent.TILE_SOIL.getDefState();
     }
 
-    public Biome getVariationToGenerate(IWorld world, int x, int y, int surfaceHeight, Random random){
+    public Biome getVariationToGenerate(IWorld world, int x, int y, int surfaceHeight, Random random) {
         return this;
     }
 
-    public boolean hasUndergroundFeatures(IWorld world, IChunk chunk){
+    public boolean hasUndergroundFeatures(IWorld world, IChunk chunk) {
         return false;
     }
 }

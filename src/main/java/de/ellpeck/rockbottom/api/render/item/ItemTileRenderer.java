@@ -32,32 +32,32 @@ import de.ellpeck.rockbottom.api.item.ItemTile;
 import de.ellpeck.rockbottom.api.render.tile.ITileRenderer;
 import de.ellpeck.rockbottom.api.tile.Tile;
 
-public class ItemTileRenderer implements IItemRenderer<ItemTile>{
+public class ItemTileRenderer implements IItemRenderer<ItemTile> {
 
     @Override
-    public void render(IGameInstance game, IAssetManager manager, IRenderer g, ItemTile item, ItemInstance instance, float x, float y, float scale, int filter){
+    public void render(IGameInstance game, IAssetManager manager, IRenderer g, ItemTile item, ItemInstance instance, float x, float y, float scale, int filter) {
         Tile tile = item.getTile();
-        if(tile != null){
+        if (tile != null) {
             ITileRenderer renderer = tile.getRenderer();
-            if(renderer != null){
+            if (renderer != null) {
                 renderer.renderItem(game, manager, g, tile, instance, x, y, scale, filter);
             }
         }
     }
 
     @Override
-    public void renderOnMouseCursor(IGameInstance game, IAssetManager manager, IRenderer g, ItemTile item, ItemInstance instance, float x, float y, float scale, int filter, boolean isInPlayerRange){
-        if(isInPlayerRange){
-            this.render(game, manager, g, item, instance, x+0.1F*scale, y, scale*0.75F, filter);
+    public void renderOnMouseCursor(IGameInstance game, IAssetManager manager, IRenderer g, ItemTile item, ItemInstance instance, float x, float y, float scale, int filter, boolean isInPlayerRange) {
+        if (isInPlayerRange) {
+            this.render(game, manager, g, item, instance, x + 0.1F * scale, y, scale * 0.75F, filter);
         }
     }
 
     @Override
-    public JsonElement getAdditionalTextureData(IGameInstance game, IAssetManager manager, IRenderer g, ItemTile item, ItemInstance instance, AbstractEntityPlayer player, String name){
+    public JsonElement getAdditionalTextureData(IGameInstance game, IAssetManager manager, IRenderer g, ItemTile item, ItemInstance instance, AbstractEntityPlayer player, String name) {
         Tile tile = item.getTile();
-        if(tile != null){
+        if (tile != null) {
             ITileRenderer renderer = tile.getRenderer();
-            if(renderer != null){
+            if (renderer != null) {
                 return renderer.getAdditionalTextureData(game, manager, g, tile, instance, player, name);
             }
         }
@@ -65,11 +65,11 @@ public class ItemTileRenderer implements IItemRenderer<ItemTile>{
     }
 
     @Override
-    public ITexture getParticleTexture(IGameInstance game, IAssetManager manager, IRenderer g, ItemTile item, ItemInstance instance){
+    public ITexture getParticleTexture(IGameInstance game, IAssetManager manager, IRenderer g, ItemTile item, ItemInstance instance) {
         Tile tile = item.getTile();
-        if(tile != null){
+        if (tile != null) {
             ITileRenderer renderer = tile.getRenderer();
-            if(renderer != null){
+            if (renderer != null) {
                 return renderer.getParticleTexture(game, manager, g, tile, tile.getDefState());
             }
         }

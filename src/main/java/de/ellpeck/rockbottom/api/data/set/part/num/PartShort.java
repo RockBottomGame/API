@@ -32,20 +32,19 @@ import java.io.DataOutput;
 import java.io.IOException;
 import java.util.Locale;
 
-public final class PartShort extends BasicDataPart<Short>{
+public final class PartShort extends BasicDataPart<Short> {
 
-    public static final IPartFactory<PartShort> FACTORY = new IPartFactory<PartShort>(){
+    public static final IPartFactory<PartShort> FACTORY = new IPartFactory<PartShort>() {
         @Override
-        public PartShort parse(String name, JsonElement element){
-            if(element.isJsonPrimitive()){
+        public PartShort parse(String name, JsonElement element) {
+            if (element.isJsonPrimitive()) {
                 JsonPrimitive prim = element.getAsJsonPrimitive();
-                if(prim.isString()){
+                if (prim.isString()) {
                     String string = prim.getAsString().toLowerCase(Locale.ROOT);
-                    if(string.endsWith("s")){
-                        try{
-                            return new PartShort(name, Short.parseShort(string.substring(0, string.length()-1)));
-                        }
-                        catch(Exception ignored){
+                    if (string.endsWith("s")) {
+                        try {
+                            return new PartShort(name, Short.parseShort(string.substring(0, string.length() - 1)));
+                        } catch (Exception ignored) {
                         }
                     }
                 }
@@ -54,27 +53,27 @@ public final class PartShort extends BasicDataPart<Short>{
         }
 
         @Override
-        public PartShort parse(String name, DataInput stream) throws Exception{
+        public PartShort parse(String name, DataInput stream) throws Exception {
             return new PartShort(name, stream.readShort());
         }
     };
 
-    public PartShort(String name, Short data){
+    public PartShort(String name, Short data) {
         super(name, data);
     }
 
     @Override
-    public void write(DataOutput stream) throws IOException{
+    public void write(DataOutput stream) throws IOException {
         stream.writeShort(this.data);
     }
 
     @Override
-    public JsonElement write(){
-        return new JsonPrimitive(this.data+"s");
+    public JsonElement write() {
+        return new JsonPrimitive(this.data + "s");
     }
 
     @Override
-    public IPartFactory<? extends DataPart<Short>> getFactory(){
+    public IPartFactory<? extends DataPart<Short>> getFactory() {
         return FACTORY;
     }
 }

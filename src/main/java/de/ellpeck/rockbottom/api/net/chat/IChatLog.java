@@ -27,7 +27,7 @@ import de.ellpeck.rockbottom.api.util.ApiInternal;
 import java.util.List;
 import java.util.UUID;
 
-public interface IChatLog{
+public interface IChatLog {
 
     void displayMessage(ChatComponent message);
 

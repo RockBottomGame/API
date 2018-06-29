@@ -33,14 +33,14 @@ import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 import java.util.function.Supplier;
 
-public abstract class ComponentStatistic extends GuiComponent{
+public abstract class ComponentStatistic extends GuiComponent {
 
     private final Supplier<String> nameSupplier;
     private final Supplier<String> valueSupplier;
     private final Supplier<Boolean> clickSupplier;
     private final int priority;
 
-    public ComponentStatistic(Gui gui, Supplier<String> nameSupplier, Supplier<String> valueSupplier, int priority, Supplier<Boolean> clickSupplier){
+    public ComponentStatistic(Gui gui, Supplier<String> nameSupplier, Supplier<String> valueSupplier, int priority, Supplier<Boolean> clickSupplier) {
         super(gui, 0, 0, 150, 18);
         this.nameSupplier = nameSupplier;
         this.valueSupplier = valueSupplier;
@@ -49,30 +49,30 @@ public abstract class ComponentStatistic extends GuiComponent{
     }
 
     @Override
-    public int getPriority(){
+    public int getPriority() {
         return this.priority;
     }
 
     @Override
-    public void render(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y){
+    public void render(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y) {
         g.addFilledRect(x, y, this.width, this.height, this.clickSupplier != null && this.isMouseOver(game) ? getElementColor() : getUnselectedElementColor());
         g.addEmptyRect(x, y, this.width, this.height, getElementOutlineColor());
 
-        this.renderStatGraphic(game, manager, g, x+2, y+2);
+        this.renderStatGraphic(game, manager, g, x + 2, y + 2);
 
         IFont font = manager.getFont();
-        font.drawSplitString(x+20, y+2, this.nameSupplier.get(), 0.35F, this.width-50);
-        font.drawStringFromRight(x+this.width-1, y+this.height-17, this.valueSupplier.get(), 0.8F);
+        font.drawSplitString(x + 20, y + 2, this.nameSupplier.get(), 0.35F, this.width - 50);
+        font.drawStringFromRight(x + this.width - 1, y + this.height - 17, this.valueSupplier.get(), 0.8F);
 
-        if(this.clickSupplier != null){
-            font.drawString(x+20, y+11, FormattingCode.ITALICS+"Click for details", 0.25F, Colors.LIGHT_GRAY);
+        if (this.clickSupplier != null) {
+            font.drawString(x + 20, y + 11, FormattingCode.ITALICS + "Click for details", 0.25F, Colors.LIGHT_GRAY);
         }
     }
 
     @Override
-    public boolean onMouseAction(IGameInstance game, int button, float x, float y){
-        if(this.clickSupplier != null && Settings.KEY_GUI_ACTION_1.isKey(button) && this.isMouseOverPrioritized(game)){
-            if(this.clickSupplier.get()){
+    public boolean onMouseAction(IGameInstance game, int button, float x, float y) {
+        if (this.clickSupplier != null && Settings.KEY_GUI_ACTION_1.isKey(button) && this.isMouseOverPrioritized(game)) {
+            if (this.clickSupplier.get()) {
                 game.getAssetManager().getSound(ResourceName.intern("menu.click")).play();
                 return true;
             }
@@ -83,12 +83,12 @@ public abstract class ComponentStatistic extends GuiComponent{
     public abstract void renderStatGraphic(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y);
 
     @Override
-    public ResourceName getName(){
+    public ResourceName getName() {
         return ResourceName.intern("statistic");
     }
 
     @Override
-    public boolean shouldDoFingerCursor(IGameInstance game){
+    public boolean shouldDoFingerCursor(IGameInstance game) {
         return this.clickSupplier != null && super.shouldDoFingerCursor(game);
     }
 }

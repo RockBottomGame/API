@@ -29,44 +29,42 @@ import de.ellpeck.rockbottom.api.util.ApiInternal;
 
 import java.util.logging.Level;
 
-public abstract class ChatComponent{
+public abstract class ChatComponent {
 
     private ChatComponent child;
 
-    public ChatComponent(){
+    public ChatComponent() {
 
     }
 
     @ApiInternal
-    public static ChatComponent createFromSet(DataSet set){
+    public static ChatComponent createFromSet(DataSet set) {
         int id = set.getInt("id");
 
-        try{
+        try {
             Class<? extends ChatComponent> theClass = RockBottomAPI.CHAT_COMPONENT_REGISTRY.get(id);
 
             ChatComponent component = theClass.getConstructor().newInstance();
             component.load(set);
 
             return component;
-        }
-        catch(Exception e){
-            RockBottomAPI.logger().log(Level.SEVERE, "Couldn't read chat component with id "+id+" from data set "+set+"! Does it have a default constructor?", e);
+        } catch (Exception e) {
+            RockBottomAPI.logger().log(Level.SEVERE, "Couldn't read chat component with id " + id + " from data set " + set + "! Does it have a default constructor?", e);
             return null;
         }
     }
 
-    public ChatComponent append(ChatComponent component){
-        if(this.child != null){
+    public ChatComponent append(ChatComponent component) {
+        if (this.child != null) {
             this.child.append(component);
-        }
-        else{
+        } else {
             this.child = component;
         }
 
         return this;
     }
 
-    public ChatComponent getAppendage(){
+    public ChatComponent getAppendage() {
         return this.child;
     }
 
@@ -74,41 +72,41 @@ public abstract class ChatComponent{
 
     public abstract String getUnformattedString();
 
-    public String getDisplayWithChildren(IGameInstance game, IAssetManager manager){
+    public String getDisplayWithChildren(IGameInstance game, IAssetManager manager) {
         String s = this.getDisplayString(game, manager);
-        if(this.child != null){
+        if (this.child != null) {
             s += this.child.getDisplayWithChildren(game, manager);
         }
         return s;
     }
 
-    public String getUnformattedWithChildren(){
+    public String getUnformattedWithChildren() {
         String s = this.getUnformattedString();
-        if(this.child != null){
+        if (this.child != null) {
             s += this.child.getUnformattedWithChildren();
         }
         return s;
     }
 
-    public void save(DataSet set){
+    public void save(DataSet set) {
         set.addInt("id", RockBottomAPI.CHAT_COMPONENT_REGISTRY.getId(this.getClass()));
 
-        if(this.child != null){
+        if (this.child != null) {
             DataSet subSet = new DataSet();
             this.child.save(subSet);
             set.addDataSet("child", subSet);
         }
     }
 
-    public void load(DataSet set){
-        if(set.hasKey("child")){
+    public void load(DataSet set) {
+        if (set.hasKey("child")) {
             DataSet subSet = set.getDataSet("child");
             this.child = createFromSet(subSet);
         }
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return this.getUnformattedWithChildren();
     }
 }

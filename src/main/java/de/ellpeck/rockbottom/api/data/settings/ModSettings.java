@@ -32,50 +32,49 @@ import java.util.ArrayList;
 import java.util.List;
 
 @ApiInternal
-public final class ModSettings implements IJsonSettings{
+public final class ModSettings implements IJsonSettings {
 
     private final List<String> disabledMods = new ArrayList<>();
 
     @Override
-    public void load(JsonObject object){
+    public void load(JsonObject object) {
         this.disabledMods.clear();
 
-        if(object.has("disabled")){
+        if (object.has("disabled")) {
             JsonArray array = object.get("disabled").getAsJsonArray();
-            for(JsonElement s : array){
+            for (JsonElement s : array) {
                 this.disabledMods.add(s.getAsString());
             }
         }
     }
 
     @Override
-    public void save(JsonObject object){
+    public void save(JsonObject object) {
         JsonArray array = new JsonArray();
-        for(String s : this.disabledMods){
+        for (String s : this.disabledMods) {
             array.add(s);
         }
         object.add("disabled", array);
     }
 
     @Override
-    public File getSettingsFile(IDataManager manager){
+    public File getSettingsFile(IDataManager manager) {
         return manager.getModSettingsFile();
     }
 
     @Override
-    public String getName(){
+    public String getName() {
         return "Mod settings";
     }
 
-    public boolean isDisabled(String modid){
+    public boolean isDisabled(String modid) {
         return this.disabledMods.contains(modid);
     }
 
-    public void setDisabled(String modid, boolean disabled){
-        if(disabled){
+    public void setDisabled(String modid, boolean disabled) {
+        if (disabled) {
             this.disabledMods.add(modid);
-        }
-        else{
+        } else {
             this.disabledMods.remove(modid);
         }
     }

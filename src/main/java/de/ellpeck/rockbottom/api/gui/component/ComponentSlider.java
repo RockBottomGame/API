@@ -32,7 +32,7 @@ import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 import java.util.function.BiConsumer;
 
-public class ComponentSlider extends ComponentButton{
+public class ComponentSlider extends ComponentButton {
 
     protected final BiConsumer<Integer, Boolean> consumer;
     protected final int min;
@@ -41,7 +41,7 @@ public class ComponentSlider extends ComponentButton{
 
     private boolean wasMouseDown;
 
-    public ComponentSlider(Gui gui, int x, int y, int sizeX, int sizeY, int initialNumber, int min, int max, BiConsumer<Integer, Boolean> consumer, String text, String... hover){
+    public ComponentSlider(Gui gui, int x, int y, int sizeX, int sizeY, int initialNumber, int min, int max, BiConsumer<Integer, Boolean> consumer, String text, String... hover) {
         super(gui, x, y, sizeX, sizeY, null, text, hover);
         this.min = min;
         this.max = max;
@@ -50,25 +50,25 @@ public class ComponentSlider extends ComponentButton{
     }
 
     @Override
-    protected String getText(){
-        return super.getText()+": "+this.number;
+    protected String getText() {
+        return super.getText() + ": " + this.number;
     }
 
     @Override
-    public void render(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y){
+    public void render(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y) {
         super.render(game, manager, g, x, y);
 
-        float percentage = (float)(this.number-this.min)/(float)(this.max-this.min);
-        float renderX = x+percentage*(this.width-5);
+        float percentage = (float) (this.number - this.min) / (float) (this.max - this.min);
+        float renderX = x + percentage * (this.width - 5);
 
         g.addFilledRect(renderX, y, 5F, this.height, this.isMouseOverPrioritized(game) ? getElementColor() : getUnselectedElementColor());
         g.addEmptyRect(renderX, y, 5F, this.height, getElementOutlineColor());
     }
 
     @Override
-    public boolean onMouseAction(IGameInstance game, int button, float x, float y){
-        if(this.isMouseOver(game)){
-            if(!this.wasMouseDown){
+    public boolean onMouseAction(IGameInstance game, int button, float x, float y) {
+        if (this.isMouseOver(game)) {
+            if (!this.wasMouseDown) {
                 this.consumer.accept(this.number, false);
                 this.wasMouseDown = true;
 
@@ -79,14 +79,13 @@ public class ComponentSlider extends ComponentButton{
     }
 
     @Override
-    public void update(IGameInstance game){
-        if(this.wasMouseDown){
+    public void update(IGameInstance game) {
+        if (this.wasMouseDown) {
             float mouseX = game.getRenderer().getMouseInGuiX();
 
-            if(Settings.KEY_GUI_ACTION_1.isDown()){
+            if (Settings.KEY_GUI_ACTION_1.isDown()) {
                 this.onClickOrMove(mouseX);
-            }
-            else{
+            } else {
                 this.consumer.accept(this.number, true);
                 game.getAssetManager().getSound(ResourceName.intern("menu.click")).play();
                 this.wasMouseDown = false;
@@ -95,18 +94,18 @@ public class ComponentSlider extends ComponentButton{
     }
 
     @ApiInternal
-    private void onClickOrMove(float mouseX){
-        float clickPercentage = (mouseX-this.getRenderX())/(float)this.width;
-        int number = Util.clamp((int)(clickPercentage*(this.max-this.min+1)+this.min), this.min, this.max);
+    private void onClickOrMove(float mouseX) {
+        float clickPercentage = (mouseX - this.getRenderX()) / (float) this.width;
+        int number = Util.clamp((int) (clickPercentage * (this.max - this.min + 1) + this.min), this.min, this.max);
 
-        if(number != this.number){
+        if (number != this.number) {
             this.number = number;
             this.consumer.accept(this.number, false);
         }
     }
 
     @Override
-    public ResourceName getName(){
+    public ResourceName getName() {
         return ResourceName.intern("slider");
     }
 }

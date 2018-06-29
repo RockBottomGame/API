@@ -27,48 +27,47 @@ import java.nio.Buffer;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
-public final class ImageBuffer{
+public final class ImageBuffer {
 
     private final int width;
     private final int height;
 
     private final byte[] rawData;
 
-    public ImageBuffer(int width, int height){
+    public ImageBuffer(int width, int height) {
         this.width = width;
         this.height = height;
-        this.rawData = new byte[width*height*4];
+        this.rawData = new byte[width * height * 4];
     }
 
-    public ByteBuffer getRGBA(){
+    public ByteBuffer getRGBA() {
         ByteBuffer buffer = BufferUtils.createByteBuffer(this.rawData.length);
         buffer.put(this.rawData);
-        ((Buffer)buffer).flip();
+        ((Buffer) buffer).flip();
         return buffer;
     }
 
-    public int getWidth(){
+    public int getWidth() {
         return this.width;
     }
 
-    public int getHeight(){
+    public int getHeight() {
         return this.height;
     }
 
-    public void setRGBA(int x, int y, int r, int g, int b, int a){
-        int offset = ((x+(y*this.width))*4);
+    public void setRGBA(int x, int y, int r, int g, int b, int a) {
+        int offset = ((x + (y * this.width)) * 4);
 
-        if(ByteOrder.nativeOrder() == ByteOrder.BIG_ENDIAN){
-            this.rawData[offset] = (byte)b;
-            this.rawData[offset+1] = (byte)g;
-            this.rawData[offset+2] = (byte)r;
-            this.rawData[offset+3] = (byte)a;
-        }
-        else{
-            this.rawData[offset] = (byte)r;
-            this.rawData[offset+1] = (byte)g;
-            this.rawData[offset+2] = (byte)b;
-            this.rawData[offset+3] = (byte)a;
+        if (ByteOrder.nativeOrder() == ByteOrder.BIG_ENDIAN) {
+            this.rawData[offset] = (byte) b;
+            this.rawData[offset + 1] = (byte) g;
+            this.rawData[offset + 2] = (byte) r;
+            this.rawData[offset + 3] = (byte) a;
+        } else {
+            this.rawData[offset] = (byte) r;
+            this.rawData[offset + 1] = (byte) g;
+            this.rawData[offset + 2] = (byte) b;
+            this.rawData[offset + 3] = (byte) a;
         }
     }
 }

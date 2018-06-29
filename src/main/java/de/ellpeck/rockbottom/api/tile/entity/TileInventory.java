@@ -26,17 +26,17 @@ import de.ellpeck.rockbottom.api.item.ItemInstance;
 import java.util.List;
 import java.util.function.Function;
 
-public class TileInventory extends BasicFilteredInventory{
+public class TileInventory extends BasicFilteredInventory {
 
-    public TileInventory(TileEntity tile, int slotAmount, List<Integer> inputOutputSlots){
+    public TileInventory(TileEntity tile, int slotAmount, List<Integer> inputOutputSlots) {
         this(tile, slotAmount, inputOutputSlots, inputOutputSlots);
     }
 
-    public TileInventory(TileEntity tile, int slotAmount, List<Integer> inputSlots, List<Integer> outputSlots){
+    public TileInventory(TileEntity tile, int slotAmount, List<Integer> inputSlots, List<Integer> outputSlots) {
         this(tile, slotAmount, inst -> inputSlots, outputSlots);
     }
 
-    public TileInventory(TileEntity tile, int slotAmount, Function<ItemInstance, List<Integer>> inputSlotFunction, List<Integer> outputSlots){
+    public TileInventory(TileEntity tile, int slotAmount, Function<ItemInstance, List<Integer>> inputSlotFunction, List<Integer> outputSlots) {
         super(slotAmount, inputSlotFunction, outputSlots);
         this.addChangeCallback((inv, slot) -> tile.world.setDirty(tile.x, tile.y));
     }

@@ -21,33 +21,33 @@
 
 package de.ellpeck.rockbottom.api.util;
 
-public final class Pos3{
+public final class Pos3 {
 
     private int x;
     private int y;
     private int z;
 
-    public Pos3(){
+    public Pos3() {
         this(0, 0, 0);
     }
 
-    public Pos3(int x, int y, int z){
+    public Pos3(int x, int y, int z) {
         this.set(x, y, z);
     }
 
-    public int getX(){
+    public int getX() {
         return this.x;
     }
 
-    public int getY(){
+    public int getY() {
         return this.y;
     }
 
-    public int getZ(){
+    public int getZ() {
         return this.z;
     }
 
-    public Pos3 set(int x, int y, int z){
+    public Pos3 set(int x, int y, int z) {
         this.x = x;
         this.y = y;
         this.z = z;
@@ -56,28 +56,28 @@ public final class Pos3{
     }
 
     @Override
-    public boolean equals(Object o){
-        if(this == o){
+    public boolean equals(Object o) {
+        if (this == o) {
             return true;
         }
-        if(o == null || this.getClass() != o.getClass()){
+        if (o == null || this.getClass() != o.getClass()) {
             return false;
         }
 
-        Pos3 pos3 = (Pos3)o;
+        Pos3 pos3 = (Pos3) o;
         return this.x == pos3.x && this.y == pos3.y && this.z == pos3.z;
     }
 
     @Override
-    public int hashCode(){
+    public int hashCode() {
         int result = this.x;
-        result = 31*result+this.y;
-        result = 31*result+this.z;
+        result = 31 * result + this.y;
+        result = 31 * result + this.z;
         return result;
     }
 
     @Override
-    public String toString(){
-        return "{"+this.x+", "+this.y+", "+this.z+'}';
+    public String toString() {
+        return "{" + this.x + ", " + this.y + ", " + this.z + '}';
     }
 }

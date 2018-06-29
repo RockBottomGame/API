@@ -33,28 +33,27 @@ import java.io.DataOutput;
 import java.util.Arrays;
 import java.util.Locale;
 
-public final class PartShortArray extends BasicDataPart<short[]>{
+public final class PartShortArray extends BasicDataPart<short[]> {
 
-    public static final IPartFactory<PartShortArray> FACTORY = new IPartFactory<PartShortArray>(){
+    public static final IPartFactory<PartShortArray> FACTORY = new IPartFactory<PartShortArray>() {
         @Override
-        public PartShortArray parse(String name, JsonElement element){
-            if(element.isJsonArray()){
+        public PartShortArray parse(String name, JsonElement element) {
+            if (element.isJsonArray()) {
                 JsonArray array = element.getAsJsonArray();
-                if(array.size() > 0){
+                if (array.size() > 0) {
                     JsonElement first = array.get(0);
-                    if(first.isJsonPrimitive()){
+                    if (first.isJsonPrimitive()) {
                         JsonPrimitive prim = first.getAsJsonPrimitive();
-                        if(prim.isString()){
-                            if(prim.getAsString().toLowerCase(Locale.ROOT).endsWith("s")){
-                                try{
+                        if (prim.isString()) {
+                            if (prim.getAsString().toLowerCase(Locale.ROOT).endsWith("s")) {
+                                try {
                                     short[] data = new short[array.size()];
-                                    for(int i = 0; i < array.size(); i++){
+                                    for (int i = 0; i < array.size(); i++) {
                                         String string = array.get(i).getAsString();
-                                        data[i] = Short.parseShort(string.substring(0, string.length()-1));
+                                        data[i] = Short.parseShort(string.substring(0, string.length() - 1));
                                     }
                                     return new PartShortArray(name, data);
-                                }
-                                catch(Exception ignored){
+                                } catch (Exception ignored) {
                                 }
                             }
                         }
@@ -65,44 +64,44 @@ public final class PartShortArray extends BasicDataPart<short[]>{
         }
 
         @Override
-        public PartShortArray parse(String name, DataInput stream) throws Exception{
+        public PartShortArray parse(String name, DataInput stream) throws Exception {
             int amount = stream.readInt();
             short[] data = new short[amount];
-            for(int i = 0; i < amount; i++){
+            for (int i = 0; i < amount; i++) {
                 data[i] = stream.readShort();
             }
             return new PartShortArray(name, data);
         }
     };
 
-    public PartShortArray(String name, short[] data){
+    public PartShortArray(String name, short[] data) {
         super(name, data);
     }
 
     @Override
-    public void write(DataOutput stream) throws Exception{
+    public void write(DataOutput stream) throws Exception {
         stream.writeInt(this.data.length);
-        for(int i : this.data){
+        for (int i : this.data) {
             stream.writeShort(i);
         }
     }
 
     @Override
-    public JsonElement write(){
+    public JsonElement write() {
         JsonArray array = new JsonArray();
-        for(int i = 0; i < this.data.length; i++){
-            array.add(this.data[i]+"s");
+        for (int i = 0; i < this.data.length; i++) {
+            array.add(this.data[i] + "s");
         }
         return array;
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return Arrays.toString(this.data);
     }
 
     @Override
-    public IPartFactory<? extends DataPart<short[]>> getFactory(){
+    public IPartFactory<? extends DataPart<short[]>> getFactory() {
         return FACTORY;
     }
 }

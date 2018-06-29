@@ -37,72 +37,71 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class TileMeta extends TileBasic{
+public class TileMeta extends TileBasic {
 
     public final List<ResourceName> subResourceNames = new ArrayList<>();
     public final List<ResourceName> subUnlocNames = new ArrayList<>();
     public IntProp metaProp;
 
-    public TileMeta(ResourceName name){
+    public TileMeta(ResourceName name) {
         this(name, true);
     }
 
-    public TileMeta(ResourceName name, boolean addDirectly){
+    public TileMeta(ResourceName name, boolean addDirectly) {
         super(name);
 
-        if(addDirectly){
+        if (addDirectly) {
             this.addSubTile(name);
         }
     }
 
     @Override
-    protected ITileRenderer createRenderer(ResourceName name){
+    protected ITileRenderer createRenderer(ResourceName name) {
         return new TileMetaRenderer();
     }
 
     @Override
-    public Tile register(){
+    public Tile register() {
         this.metaProp = new IntProp("meta", 0, Math.max(this.subUnlocNames.size(), this.subResourceNames.size()));
         this.addProps(this.metaProp);
 
         return super.register();
     }
 
-    public TileMeta addSubTile(ResourceName name){
+    public TileMeta addSubTile(ResourceName name) {
         this.subResourceNames.add(name.addPrefix("tiles."));
         this.subUnlocNames.add(name.addPrefix("item."));
         return this;
     }
 
     @Override
-    protected ItemTile createItemTile(){
-        return new ItemTile(this.getName()){
+    protected ItemTile createItemTile() {
+        return new ItemTile(this.getName()) {
             @Override
-            public ResourceName getUnlocalizedName(ItemInstance instance){
+            public ResourceName getUnlocalizedName(ItemInstance instance) {
                 int meta = instance.getMeta();
 
-                if(meta >= 0 && TileMeta.this.subUnlocNames.size() > meta){
+                if (meta >= 0 && TileMeta.this.subUnlocNames.size() > meta) {
                     return TileMeta.this.subUnlocNames.get(meta);
-                }
-                else{
+                } else {
                     return super.getUnlocalizedName(instance);
                 }
             }
 
             @Override
-            public int getHighestPossibleMeta(){
-                return Math.max(TileMeta.this.subUnlocNames.size(), TileMeta.this.subResourceNames.size())-1;
+            public int getHighestPossibleMeta() {
+                return Math.max(TileMeta.this.subUnlocNames.size(), TileMeta.this.subResourceNames.size()) - 1;
             }
         };
     }
 
     @Override
-    public TileState getPlacementState(IWorld world, int x, int y, TileLayer layer, ItemInstance instance, AbstractEntityPlayer placer){
+    public TileState getPlacementState(IWorld world, int x, int y, TileLayer layer, ItemInstance instance, AbstractEntityPlayer placer) {
         return this.getDefState().prop(this.metaProp, instance.getMeta());
     }
 
     @Override
-    public List<ItemInstance> getDrops(IWorld world, int x, int y, TileLayer layer, Entity destroyer){
+    public List<ItemInstance> getDrops(IWorld world, int x, int y, TileLayer layer, Entity destroyer) {
         return Collections.singletonList(new ItemInstance(this, 1, world.getState(layer, x, y).get(this.metaProp)));
     }
 }

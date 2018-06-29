@@ -40,7 +40,7 @@ import de.ellpeck.rockbottom.api.world.gen.biome.level.BiomeLevel;
  * IResourceRegistry} entry objects as static variables that can be accessed
  * from anywhere.
  */
-public final class GameContent{
+public final class GameContent {
 
     /*
         ---TILES---
@@ -49,10 +49,10 @@ public final class GameContent{
     public static final Tile TILE_SOIL = getTile("soil").addEffectiveTool(ToolType.SHOVEL, 0).setForceDrop().setMaxAmount(100);
     public static final Tile TILE_GRASS = getTile("grass").addEffectiveTool(ToolType.SHOVEL, 0).setForceDrop().setMaxAmount(100);
     public static final Tile TILE_STONE = getTile("stone").setHardness(5F).addEffectiveTool(ToolType.PICKAXE, 0).setMaxAmount(50);
-    public static final TileMeta TILE_GRASS_TUFT = (TileMeta)getTile("grass_tuft").setHardness(0F).setForceDrop().setMaxAmount(150);
+    public static final TileMeta TILE_GRASS_TUFT = (TileMeta) getTile("grass_tuft").setHardness(0F).setForceDrop().setMaxAmount(150);
     public static final Tile TILE_LOG = getTile("log").setHardness(3F).addEffectiveTool(ToolType.AXE, 0).setMaxAmount(75);
     public static final Tile TILE_LEAVES = getTile("leaves").setHardness(0.5F).setForceDrop().setMaxAmount(150);
-    public static final TileMeta TILE_FLOWER = (TileMeta)getTile("flower").setHardness(0F).setForceDrop().setMaxAmount(150);
+    public static final TileMeta TILE_FLOWER = (TileMeta) getTile("flower").setHardness(0F).setForceDrop().setMaxAmount(150);
     public static final Tile TILE_PEBBLES = getTile("pebbles").setHardness(0F).setForceDrop().setMaxAmount(200);
     public static final Tile TILE_SAND = getTile("sand").setHardness(0.75F).addEffectiveTool(ToolType.SHOVEL, 0).setForceDrop().setMaxAmount(100);
     public static final Tile TILE_SANDSTONE = getTile("sandstone").setHardness(4F).addEffectiveTool(ToolType.PICKAXE, 0).setMaxAmount(75);
@@ -63,7 +63,7 @@ public final class GameContent{
     public static final Tile TILE_SIGN = getTile("sign").addEffectiveTool(ToolType.AXE, 0).setForceDrop().setMaxAmount(100);
     public static final Tile TILE_SAPLING = getTile("sapling").setHardness(0F).setForceDrop().setMaxAmount(150);
     public static final Tile TILE_WATER = getTile("water");
-    public static final TileMeta WOOD_BOARDS = (TileMeta)getTile("wood_boards").setHardness(2F).addEffectiveTool(ToolType.AXE, 0).setForceDrop().setMaxAmount(75);
+    public static final TileMeta WOOD_BOARDS = (TileMeta) getTile("wood_boards").setHardness(2F).addEffectiveTool(ToolType.AXE, 0).setForceDrop().setMaxAmount(75);
     public static final Tile TILE_WOOD_DOOR = getTile("wood_door").setHardness(4F).addEffectiveTool(ToolType.AXE, 0).setForceDrop().setMaxAmount(5);
     public static final Tile TILE_WOOD_DOOR_OLD = getTile("wood_door_old").setHardness(3.5F).addEffectiveTool(ToolType.AXE, 0).setForceDrop().setMaxAmount(5);
     public static final Tile TILE_REMAINS_GOO = getTile("remains_goo");
@@ -71,7 +71,7 @@ public final class GameContent{
     public static final Tile TILE_COPPER = getTile("copper").setHardness(10F).addEffectiveTool(ToolType.PICKAXE, 2).setMaxAmount(35);
     public static final Tile TILE_SIMPLE_FURNACE = getTile("simple_furnace").setHardness(15F).addEffectiveTool(ToolType.PICKAXE, 2).setMaxAmount(1);
     public static final Tile TILE_SNOW = getTile("snow").setHardness(0.75F).addEffectiveTool(ToolType.SHOVEL, 0).setMaxAmount(200);
-    public static final TileMeta TILE_CAVE_MUSHROOM = (TileMeta)getTile("cave_mushroom").setHardness(0.25F).setMaxAmount(50).setForceDrop();
+    public static final TileMeta TILE_CAVE_MUSHROOM = (TileMeta) getTile("cave_mushroom").setHardness(0.25F).setMaxAmount(50).setForceDrop();
     public static final Tile TILE_STARDROP = getTile("stardrop").setHardness(0.75F).setMaxAmount(10).setForceDrop();
 
     /*
@@ -105,7 +105,7 @@ public final class GameContent{
     public static final String RES_SAND = res().addResources("sand", TILE_SAND);
     public static final String RES_COAL = res().addResources("coal", TILE_COAL);
     public static final String RES_SAPLING = res().addResources("sapling", TILE_SAPLING);
-    public static final String RES_WOOD_PROCESSED = res().addResources("wood_processed", WOOD_BOARDS, 0, WOOD_BOARDS.metaProp.getVariants()-1);
+    public static final String RES_WOOD_PROCESSED = res().addResources("wood_processed", WOOD_BOARDS, 0, WOOD_BOARDS.metaProp.getVariants() - 1);
     public static final String RES_PLANT_FIBER = res().addResources("plant_fiber", ITEM_PLANT_FIBER);
     public static final String RES_STICK = res().addResources("stick", ITEM_TWIG);
     public static final String RES_COPPER_RAW = res().addResources("copper_raw", TILE_COPPER);
@@ -134,38 +134,38 @@ public final class GameContent{
     public static final IEffect EFFECT_JUMP_HEIGHT = getEffect("jump_height");
 
     @ApiInternal
-    private static Biome getBiome(String name){
+    private static Biome getBiome(String name) {
         return get(name, RockBottomAPI.BIOME_REGISTRY);
     }
 
     @ApiInternal
-    private static Item getItem(String name){
+    private static Item getItem(String name) {
         return get(name, RockBottomAPI.ITEM_REGISTRY);
     }
 
     @ApiInternal
-    private static Tile getTile(String name){
+    private static Tile getTile(String name) {
         return get(name, RockBottomAPI.TILE_REGISTRY);
     }
 
     @ApiInternal
-    private static IEffect getEffect(String name){
+    private static IEffect getEffect(String name) {
         return get(name, RockBottomAPI.EFFECT_REGISTRY);
     }
 
     @ApiInternal
-    private static BiomeLevel getBiomeLevel(String name){
+    private static BiomeLevel getBiomeLevel(String name) {
         return get(name, RockBottomAPI.BIOME_LEVEL_REGISTRY);
     }
 
     @ApiInternal
-    private static <T> T get(String name, NameRegistry<T> registry){
+    private static <T> T get(String name, NameRegistry<T> registry) {
         ResourceName res = ResourceName.intern(name);
-        return Preconditions.checkNotNull(registry.get(res), "Object with name "+res+" was not found in registry "+registry+"! This is probably due to GameContent being accessed before the game has initialized!");
+        return Preconditions.checkNotNull(registry.get(res), "Object with name " + res + " was not found in registry " + registry + "! This is probably due to GameContent being accessed before the game has initialized!");
     }
 
     @ApiInternal
-    private static IResourceRegistry res(){
+    private static IResourceRegistry res() {
         return RockBottomAPI.getResourceRegistry();
     }
 }

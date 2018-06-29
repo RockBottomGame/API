@@ -23,7 +23,7 @@ package de.ellpeck.rockbottom.api.tile.state;
 
 import java.util.List;
 
-public interface IStateHandler{
+public interface IStateHandler {
 
     void init();
 

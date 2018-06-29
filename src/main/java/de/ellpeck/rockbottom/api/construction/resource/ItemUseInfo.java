@@ -28,80 +28,78 @@ import de.ellpeck.rockbottom.api.tile.Tile;
 import java.util.Collections;
 import java.util.List;
 
-public final class ItemUseInfo implements IUseInfo{
+public final class ItemUseInfo implements IUseInfo {
 
     private final ItemInstance instance;
 
-    public ItemUseInfo(Tile tile, int amount, int meta){
+    public ItemUseInfo(Tile tile, int amount, int meta) {
         this(new ItemInstance(tile, amount, meta));
     }
 
-    public ItemUseInfo(Tile tile, int amount){
+    public ItemUseInfo(Tile tile, int amount) {
         this(new ItemInstance(tile, amount));
     }
 
-    public ItemUseInfo(Tile tile){
+    public ItemUseInfo(Tile tile) {
         this(new ItemInstance(tile));
     }
 
-    public ItemUseInfo(Item item, int amount, int meta){
+    public ItemUseInfo(Item item, int amount, int meta) {
         this(new ItemInstance(item, amount, meta));
     }
 
-    public ItemUseInfo(Item item, int amount){
+    public ItemUseInfo(Item item, int amount) {
         this(new ItemInstance(item, amount));
     }
 
-    public ItemUseInfo(Item item){
+    public ItemUseInfo(Item item) {
         this(new ItemInstance(item));
     }
 
-    public ItemUseInfo(ItemInstance instance){
+    public ItemUseInfo(ItemInstance instance) {
         this.instance = instance;
     }
 
     @Override
-    public int getAmount(){
+    public int getAmount() {
         return this.instance.getAmount();
     }
 
     @Override
-    public ItemUseInfo setAmount(int amount){
+    public ItemUseInfo setAmount(int amount) {
         this.instance.setAmount(amount);
         return this;
     }
 
     @Override
-    public List<ItemInstance> getItems(){
+    public List<ItemInstance> getItems() {
         return Collections.singletonList(this.instance);
     }
 
     @Override
-    public boolean containsItem(ItemInstance instance){
+    public boolean containsItem(ItemInstance instance) {
         return this.instance.isEffectivelyEqual(instance);
     }
 
     @Override
-    public boolean equals(Object o){
-        if(this == o){
+    public boolean equals(Object o) {
+        if (this == o) {
             return true;
-        }
-        else if(o instanceof ItemUseInfo){
-            ItemUseInfo that = (ItemUseInfo)o;
+        } else if (o instanceof ItemUseInfo) {
+            ItemUseInfo that = (ItemUseInfo) o;
             return this.instance.equals(that.instance);
-        }
-        else{
+        } else {
             return false;
         }
     }
 
     @Override
-    public int hashCode(){
+    public int hashCode() {
         return this.instance.hashCode();
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return this.instance.toString();
     }
 }

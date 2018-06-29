@@ -24,7 +24,7 @@ package de.ellpeck.rockbottom.api.world.gen.biome.level;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 import de.ellpeck.rockbottom.api.world.IWorld;
 
-public class BiomeLevelBasic extends BiomeLevel{
+public class BiomeLevelBasic extends BiomeLevel {
 
     private final ResourceName name;
     private final int minY;
@@ -32,7 +32,7 @@ public class BiomeLevelBasic extends BiomeLevel{
     private final boolean sideBySide;
     private final int priority;
 
-    public BiomeLevelBasic(ResourceName name, int minY, int maxY, boolean sideBySide, int priority){
+    public BiomeLevelBasic(ResourceName name, int minY, int maxY, boolean sideBySide, int priority) {
         this.name = name;
         this.minY = minY;
         this.maxY = maxY;
@@ -41,27 +41,27 @@ public class BiomeLevelBasic extends BiomeLevel{
     }
 
     @Override
-    public int getMinY(IWorld world, int x, int y, int surfaceHeight){
-        return this.minY == Integer.MIN_VALUE ? this.minY : surfaceHeight+this.minY;
+    public int getMinY(IWorld world, int x, int y, int surfaceHeight) {
+        return this.minY == Integer.MIN_VALUE ? this.minY : surfaceHeight + this.minY;
     }
 
     @Override
-    public int getMaxY(IWorld world, int x, int y, int surfaceHeight){
-        return this.maxY == Integer.MAX_VALUE ? this.maxY : surfaceHeight+this.maxY;
+    public int getMaxY(IWorld world, int x, int y, int surfaceHeight) {
+        return this.maxY == Integer.MAX_VALUE ? this.maxY : surfaceHeight + this.maxY;
     }
 
     @Override
-    public boolean isForcedSideBySide(){
+    public boolean isForcedSideBySide() {
         return this.sideBySide;
     }
 
     @Override
-    public int getPriority(){
+    public int getPriority() {
         return this.priority;
     }
 
     @Override
-    public ResourceName getName(){
+    public ResourceName getName() {
         return this.name;
     }
 }

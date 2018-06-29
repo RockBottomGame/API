@@ -26,7 +26,7 @@ import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 import java.util.Set;
 
-public interface ISound extends IAsset{
+public interface ISound extends IAsset {
 
     ResourceName ID = ResourceName.intern("sound");
 

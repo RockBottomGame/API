@@ -38,11 +38,11 @@ import de.ellpeck.rockbottom.api.world.IWorld;
 import java.util.ArrayList;
 import java.util.List;
 
-public interface IRecipe extends IContent{
+public interface IRecipe extends IContent {
 
     ResourceName ID = ResourceName.intern("recipe");
 
-    static IRecipe forName(ResourceName name){
+    static IRecipe forName(ResourceName name) {
         return RockBottomAPI.ALL_CONSTRUCTION_RECIPES.get(name);
     }
 
@@ -52,9 +52,9 @@ public interface IRecipe extends IContent{
 
     boolean isKnown(AbstractEntityPlayer player);
 
-    default boolean canConstruct(IInventory inventory){
-        for(IUseInfo info : this.getActualInputs(inventory)){
-            if(!inventory.containsResource(info)){
+    default boolean canConstruct(IInventory inventory) {
+        for (IUseInfo info : this.getActualInputs(inventory)) {
+            if (!inventory.containsResource(info)) {
                 return false;
             }
         }
@@ -63,33 +63,33 @@ public interface IRecipe extends IContent{
 
     List<IUseInfo> getInputs();
 
-    default List<IUseInfo> getActualInputs(IInventory inventory){
+    default List<IUseInfo> getActualInputs(IInventory inventory) {
         return this.getInputs();
     }
 
     List<ItemInstance> getOutputs();
 
-    default List<ItemInstance> getActualOutputs(IInventory inventory, List<ItemInstance> inputs){
+    default List<ItemInstance> getActualOutputs(IInventory inventory, List<ItemInstance> inputs) {
         return this.getOutputs();
     }
 
-    default void construct(IWorld world, double x, double y, Inventory inv, int amount){
+    default void construct(IWorld world, double x, double y, Inventory inv, int amount) {
         RockBottomAPI.getApiHandler().construct(world, x, y, inv, this, amount, this.getActualInputs(inv), used -> this.getActualOutputs(inv, used));
     }
 
-    default List<ComponentIngredient> getIngredientButtons(Gui gui, AbstractEntityPlayer player){
+    default List<ComponentIngredient> getIngredientButtons(Gui gui, AbstractEntityPlayer player) {
         List<ComponentIngredient> ingredients = new ArrayList<>();
-        for(IUseInfo info : this.getInputs()){
+        for (IUseInfo info : this.getInputs()) {
             ingredients.add(new ComponentIngredient(gui, player.getInv().containsResource(info), info.getItems()));
         }
         return ingredients;
     }
 
-    default ComponentConstruct getConstructButton(Gui gui, AbstractEntityPlayer player, boolean canConstruct){
+    default ComponentConstruct getConstructButton(Gui gui, AbstractEntityPlayer player, boolean canConstruct) {
         return new ComponentConstruct(gui, this, canConstruct);
     }
 
-    default ComponentPolaroid getPolaroidButton(Gui gui, AbstractEntityPlayer player, boolean canConstruct){
+    default ComponentPolaroid getPolaroidButton(Gui gui, AbstractEntityPlayer player, boolean canConstruct) {
         return new ComponentPolaroid(gui, this, canConstruct);
     }
 }

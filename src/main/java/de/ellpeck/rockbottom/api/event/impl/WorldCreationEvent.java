@@ -33,14 +33,14 @@ import java.io.File;
  * Note that determining this is a vague process as the event is called whenever
  * the {@link WorldInfo} does not exist. This event cannot be cancelled.
  */
-public final class WorldCreationEvent extends Event{
+public final class WorldCreationEvent extends Event {
 
     public final File worldFile;
     public final IWorld world;
     public final WorldInfo info;
     public final DynamicRegistryInfo regInfo;
 
-    public WorldCreationEvent(File worldFile, IWorld world, WorldInfo info, DynamicRegistryInfo regInfo){
+    public WorldCreationEvent(File worldFile, IWorld world, WorldInfo info, DynamicRegistryInfo regInfo) {
         this.worldFile = worldFile;
         this.world = world;
         this.info = info;

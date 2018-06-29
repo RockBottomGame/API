@@ -31,7 +31,7 @@ import de.ellpeck.rockbottom.api.world.layer.TileLayer;
  * Changing any of the non-final variables will result in the progress being
  * modified. This event cannot be cancelled.
  */
-public final class AddBreakProgressEvent extends Event{
+public final class AddBreakProgressEvent extends Event {
 
     public final AbstractEntityPlayer player;
     public final TileLayer layer;
@@ -40,7 +40,7 @@ public final class AddBreakProgressEvent extends Event{
     public float totalProgress;
     public float progressAdded;
 
-    public AddBreakProgressEvent(AbstractEntityPlayer player, TileLayer layer, int x, int y, float totalProgress, float progressAdded){
+    public AddBreakProgressEvent(AbstractEntityPlayer player, TileLayer layer, int x, int y, float totalProgress, float progressAdded) {
         this.player = player;
         this.layer = layer;
         this.x = x;

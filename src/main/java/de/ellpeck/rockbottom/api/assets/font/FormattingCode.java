@@ -29,11 +29,10 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class FormattingCode{
-
-    private static final Map<Character, FormattingCode> DEFAULT_CODES = new TreeMap<>(Character :: compare);
+public class FormattingCode {
 
     public static final FormattingCode NONE = new FormattingCode(' ', Colors.NO_COLOR, FontProp.NONE, 0, "");
+    private static final Map<Character, FormattingCode> DEFAULT_CODES = new TreeMap<>(Character::compare);
     public static final FormattingCode RESET_COLOR = new FormattingCode('y', Colors.RESET_COLOR).registerAsDefault();
     public static final FormattingCode RESET_PROPS = new FormattingCode('x', FontProp.RESET).registerAsDefault();
 
@@ -68,15 +67,15 @@ public class FormattingCode{
     private final String strg;
     private final FontProp prop;
 
-    public FormattingCode(char format, FontProp prop){
-        this(format, Colors.NO_COLOR, prop, 2, "&"+format);
+    public FormattingCode(char format, FontProp prop) {
+        this(format, Colors.NO_COLOR, prop, 2, "&" + format);
     }
 
-    public FormattingCode(char format, int color){
-        this(format, color, FontProp.NONE, 2, "&"+format);
+    public FormattingCode(char format, int color) {
+        this(format, color, FontProp.NONE, 2, "&" + format);
     }
 
-    public FormattingCode(char format, int color, FontProp prop, int length, String strg){
+    public FormattingCode(char format, int color, FontProp prop, int length, String strg) {
         this.format = format;
         this.color = color;
         this.length = length;
@@ -84,34 +83,34 @@ public class FormattingCode{
         this.prop = prop;
     }
 
-    public static FormattingCode getFormat(String s, int index){
+    public static FormattingCode getFormat(String s, int index) {
         return RockBottomAPI.getInternalHooks().getFormattingCode(s, index, DEFAULT_CODES);
     }
 
-    public FormattingCode registerAsDefault(){
-        Preconditions.checkArgument(this.format != ' ' && !DEFAULT_CODES.containsKey(this.format), "Tried to register two formatting codes as a default with key "+this.format+'!');
+    public static Map<Character, FormattingCode> getDefaultCodes() {
+        return Collections.unmodifiableMap(DEFAULT_CODES);
+    }
+
+    public FormattingCode registerAsDefault() {
+        Preconditions.checkArgument(this.format != ' ' && !DEFAULT_CODES.containsKey(this.format), "Tried to register two formatting codes as a default with key " + this.format + '!');
         DEFAULT_CODES.put(this.format, this);
         return this;
     }
 
-    public int getColor(){
+    public int getColor() {
         return this.color;
     }
 
-    public FontProp getProp(){
+    public FontProp getProp() {
         return this.prop;
     }
 
-    public int getLength(){
+    public int getLength() {
         return this.length;
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return this.strg;
-    }
-
-    public static Map<Character, FormattingCode> getDefaultCodes(){
-        return Collections.unmodifiableMap(DEFAULT_CODES);
     }
 }

@@ -29,7 +29,7 @@ package de.ellpeck.rockbottom.api.event;
  * @param <T> A generic type representing the kind of event that this listener
  *            accepts
  */
-public interface IEventListener<T extends Event>{
+public interface IEventListener<T extends Event> {
 
     /**
      * This method is called whenever the event that this listener listens to is
@@ -51,7 +51,6 @@ public interface IEventListener<T extends Event>{
      *               Generally speaking, if an event has parameters that are
      *               {@code non-final}, they can be changed by the event
      *               listener to change the outcome of the event.
-     *
      * @return The result passed into this method if unchanged, else the
      * corresponding event result
      */

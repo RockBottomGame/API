@@ -27,7 +27,7 @@ import de.ellpeck.rockbottom.api.content.IContent;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
-public class SmeltingRecipe implements IContent{
+public class SmeltingRecipe implements IContent {
 
     public static final ResourceName ID = ResourceName.intern("smelting");
 
@@ -36,44 +36,44 @@ public class SmeltingRecipe implements IContent{
     private final ItemInstance output;
     private final int time;
 
-    public SmeltingRecipe(IUseInfo input, ItemInstance output, int time){
+    public SmeltingRecipe(IUseInfo input, ItemInstance output, int time) {
         this(output.getItem().getName(), input, output, time);
     }
 
-    public SmeltingRecipe(ResourceName name, IUseInfo input, ItemInstance output, int time){
+    public SmeltingRecipe(ResourceName name, IUseInfo input, ItemInstance output, int time) {
         this.name = name;
         this.input = input;
         this.output = output;
         this.time = time;
     }
 
-    public IUseInfo getInput(){
-        return this.input;
-    }
-
-    public ItemInstance getOutput(){
-        return this.output;
-    }
-
-    public int getTime(){
-        return this.time;
-    }
-
-    public ResourceName getName(){
-        return this.name;
-    }
-
-    public SmeltingRecipe register(){
-        RockBottomAPI.SMELTING_REGISTRY.register(this.getName(), this);
-        return this;
-    }
-
-    public static SmeltingRecipe forInput(ItemInstance input){
-        for(SmeltingRecipe recipe : RockBottomAPI.SMELTING_REGISTRY.values()){
-            if(recipe.getInput().containsItem(input)){
+    public static SmeltingRecipe forInput(ItemInstance input) {
+        for (SmeltingRecipe recipe : RockBottomAPI.SMELTING_REGISTRY.values()) {
+            if (recipe.getInput().containsItem(input)) {
                 return recipe;
             }
         }
         return null;
+    }
+
+    public IUseInfo getInput() {
+        return this.input;
+    }
+
+    public ItemInstance getOutput() {
+        return this.output;
+    }
+
+    public int getTime() {
+        return this.time;
+    }
+
+    public ResourceName getName() {
+        return this.name;
+    }
+
+    public SmeltingRecipe register() {
+        RockBottomAPI.SMELTING_REGISTRY.register(this.getName(), this);
+        return this;
     }
 }

@@ -25,9 +25,9 @@ import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.world.IChunk;
 import de.ellpeck.rockbottom.api.world.IWorld;
 
-public interface IWorldGenerator{
+public interface IWorldGenerator {
 
-    default void initWorld(IWorld world){
+    default void initWorld(IWorld world) {
 
     }
 
@@ -37,19 +37,19 @@ public interface IWorldGenerator{
 
     int getPriority();
 
-    default boolean needsPlayerToAllowGeneration(IWorld world, IChunk chunk){
+    default boolean needsPlayerToAllowGeneration(IWorld world, IChunk chunk) {
         return false;
     }
 
-    default boolean doesPlayerAllowGeneration(IWorld world, IChunk chunk, AbstractEntityPlayer player){
+    default boolean doesPlayerAllowGeneration(IWorld world, IChunk chunk, AbstractEntityPlayer player) {
         return true;
     }
 
-    default boolean generatesRetroactively(){
+    default boolean generatesRetroactively() {
         return false;
     }
 
-    default boolean generatesPerChunk(){
+    default boolean generatesPerChunk() {
         return true;
     }
 }

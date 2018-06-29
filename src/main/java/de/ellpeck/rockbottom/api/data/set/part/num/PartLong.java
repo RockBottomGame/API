@@ -31,20 +31,19 @@ import java.io.DataInput;
 import java.io.DataOutput;
 import java.util.Locale;
 
-public final class PartLong extends BasicDataPart<Long>{
+public final class PartLong extends BasicDataPart<Long> {
 
-    public static final IPartFactory<PartLong> FACTORY = new IPartFactory<PartLong>(){
+    public static final IPartFactory<PartLong> FACTORY = new IPartFactory<PartLong>() {
         @Override
-        public PartLong parse(String name, JsonElement element){
-            if(element.isJsonPrimitive()){
+        public PartLong parse(String name, JsonElement element) {
+            if (element.isJsonPrimitive()) {
                 JsonPrimitive prim = element.getAsJsonPrimitive();
-                if(prim.isString()){
+                if (prim.isString()) {
                     String string = prim.getAsString().toLowerCase(Locale.ROOT);
-                    if(string.endsWith("l")){
-                        try{
-                            return new PartLong(name, Long.parseLong(string.substring(0, string.length()-1)));
-                        }
-                        catch(Exception ignored){
+                    if (string.endsWith("l")) {
+                        try {
+                            return new PartLong(name, Long.parseLong(string.substring(0, string.length() - 1)));
+                        } catch (Exception ignored) {
                         }
                     }
                 }
@@ -53,27 +52,27 @@ public final class PartLong extends BasicDataPart<Long>{
         }
 
         @Override
-        public PartLong parse(String name, DataInput stream) throws Exception{
+        public PartLong parse(String name, DataInput stream) throws Exception {
             return new PartLong(name, stream.readLong());
         }
     };
 
-    public PartLong(String name, Long data){
+    public PartLong(String name, Long data) {
         super(name, data);
     }
 
     @Override
-    public void write(DataOutput stream) throws Exception{
+    public void write(DataOutput stream) throws Exception {
         stream.writeLong(this.data);
     }
 
     @Override
-    public JsonElement write(){
-        return new JsonPrimitive(this.data+"l");
+    public JsonElement write() {
+        return new JsonPrimitive(this.data + "l");
     }
 
     @Override
-    public IPartFactory<? extends DataPart<Long>> getFactory(){
+    public IPartFactory<? extends DataPart<Long>> getFactory() {
         return FACTORY;
     }
 }

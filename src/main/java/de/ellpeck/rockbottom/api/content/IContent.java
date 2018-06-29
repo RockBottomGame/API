@@ -21,6 +21,6 @@
 
 package de.ellpeck.rockbottom.api.content;
 
-public interface IContent{
+public interface IContent {
 
 }

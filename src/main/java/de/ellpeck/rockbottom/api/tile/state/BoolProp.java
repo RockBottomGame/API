@@ -21,32 +21,32 @@
 
 package de.ellpeck.rockbottom.api.tile.state;
 
-public final class BoolProp extends TileProp<Boolean>{
+public final class BoolProp extends TileProp<Boolean> {
 
     private final boolean def;
 
-    public BoolProp(String name, boolean def){
+    public BoolProp(String name, boolean def) {
         super(name);
         this.def = def;
     }
 
     @Override
-    public int getVariants(){
+    public int getVariants() {
         return 2;
     }
 
     @Override
-    public Boolean getValue(int index){
+    public Boolean getValue(int index) {
         return index == 1;
     }
 
     @Override
-    public int getIndex(Boolean value){
+    public int getIndex(Boolean value) {
         return value ? 1 : 0;
     }
 
     @Override
-    public Boolean getDefault(){
+    public Boolean getDefault() {
         return this.def;
     }
 }

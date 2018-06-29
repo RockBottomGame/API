@@ -38,43 +38,43 @@ import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MultiTileRenderer<T extends MultiTile> extends DefaultTileRenderer<T>{
+public class MultiTileRenderer<T extends MultiTile> extends DefaultTileRenderer<T> {
 
     protected final ResourceName texItem;
     protected final Map<Pos2, ResourceName> textures = new HashMap<>();
 
-    public MultiTileRenderer(ResourceName texture, T tile){
+    public MultiTileRenderer(ResourceName texture, T tile) {
         super(texture);
         this.texItem = this.texture.addSuffix(".item");
 
-        for(int x = 0; x < tile.getWidth(); x++){
-            for(int y = 0; y < tile.getHeight(); y++){
-                if(tile.isStructurePart(x, y)){
-                    this.textures.put(new Pos2(x, y), this.texture.addSuffix("."+x+'.'+y));
+        for (int x = 0; x < tile.getWidth(); x++) {
+            for (int y = 0; y < tile.getHeight(); y++) {
+                if (tile.isStructurePart(x, y)) {
+                    this.textures.put(new Pos2(x, y), this.texture.addSuffix("." + x + '.' + y));
                 }
             }
         }
     }
 
     @Override
-    public void render(IGameInstance game, IAssetManager manager, IRenderer g, IWorld world, T tile, TileState state, int x, int y, TileLayer layer, float renderX, float renderY, float scale, int[] light){
+    public void render(IGameInstance game, IAssetManager manager, IRenderer g, IWorld world, T tile, TileState state, int x, int y, TileLayer layer, float renderX, float renderY, float scale, int[] light) {
         Pos2 innerCoord = tile.getInnerCoord(state);
         manager.getTexture(this.textures.get(innerCoord)).getPositionalVariation(x, y).draw(renderX, renderY, scale, scale, light);
     }
 
     @Override
-    public ITexture getParticleTexture(IGameInstance game, IAssetManager manager, IRenderer g, T tile, TileState state){
+    public ITexture getParticleTexture(IGameInstance game, IAssetManager manager, IRenderer g, T tile, TileState state) {
         Pos2 innerCoord = tile.getInnerCoord(state);
         return manager.getTexture(this.textures.get(innerCoord));
     }
 
     @Override
-    public void renderItem(IGameInstance game, IAssetManager manager, IRenderer g, T tile, ItemInstance instance, float x, float y, float scale, int filter){
+    public void renderItem(IGameInstance game, IAssetManager manager, IRenderer g, T tile, ItemInstance instance, float x, float y, float scale, int filter) {
         manager.getTexture(this.texItem).draw(x, y, scale, scale, filter);
     }
 
     @Override
-    public JsonElement getAdditionalTextureData(IGameInstance game, IAssetManager manager, IRenderer g, T tile, ItemInstance instance, AbstractEntityPlayer player, String name){
+    public JsonElement getAdditionalTextureData(IGameInstance game, IAssetManager manager, IRenderer g, T tile, ItemInstance instance, AbstractEntityPlayer player, String name) {
         return manager.getTexture(this.texItem).getAdditionalData(name);
     }
 }

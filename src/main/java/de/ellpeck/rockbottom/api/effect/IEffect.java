@@ -25,7 +25,7 @@ import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.entity.Entity;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
-public interface IEffect{
+public interface IEffect {
 
     boolean isBad(Entity entity);
 
@@ -47,7 +47,7 @@ public interface IEffect{
 
     ResourceName getIcon(ActiveEffect effect, Entity entity);
 
-    default void register(){
+    default void register() {
         RockBottomAPI.EFFECT_REGISTRY.register(this.getName(), this);
     }
 }

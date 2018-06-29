@@ -29,11 +29,11 @@ import de.ellpeck.rockbottom.api.gui.Gui;
  * result in a different gui being opened. Cancelling the event will result in
  * no gui being opened.
  */
-public final class GuiOpenEvent extends Event{
+public final class GuiOpenEvent extends Event {
 
     public Gui gui;
 
-    public GuiOpenEvent(Gui gui){
+    public GuiOpenEvent(Gui gui) {
         this.gui = gui;
     }
 }

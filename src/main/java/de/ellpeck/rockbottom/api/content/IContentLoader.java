@@ -28,9 +28,9 @@ import de.ellpeck.rockbottom.api.content.pack.ContentPack;
 import de.ellpeck.rockbottom.api.mod.IMod;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
-public interface IContentLoader<T extends IContent>{
+public interface IContentLoader<T extends IContent> {
 
-    default void register(){
+    default void register() {
         RockBottomAPI.CONTENT_LOADER_REGISTRY.register(this.getContentIdentifier(), this);
     }
 
@@ -40,11 +40,11 @@ public interface IContentLoader<T extends IContent>{
 
     void disableContent(IGameInstance game, ResourceName resourceName);
 
-    default boolean dealWithSpecialCases(IGameInstance game, String resourceName, String path, JsonElement element, String elementName, IMod loadingMod, ContentPack pack){
+    default boolean dealWithSpecialCases(IGameInstance game, String resourceName, String path, JsonElement element, String elementName, IMod loadingMod, ContentPack pack) {
         return false;
     }
 
-    default void finalize(IGameInstance game){
+    default void finalize(IGameInstance game) {
 
     }
 }

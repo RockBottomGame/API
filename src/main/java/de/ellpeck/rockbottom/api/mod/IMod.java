@@ -64,7 +64,7 @@ import de.ellpeck.rockbottom.api.world.layer.TileLayer;
  * href="https://github.com/RockBottomGame/Modding">modding example and tutorial
  * repository</a>.
  */
-public interface IMod{
+public interface IMod {
 
     /**
      * @return The mod's display name. This is the name that will be displayed
@@ -119,7 +119,7 @@ public interface IMod{
      *
      * @return The content location
      */
-    default String getContentLocation(){
+    default String getContentLocation() {
         return "";
     }
 
@@ -127,7 +127,7 @@ public interface IMod{
      * @return A short description of the mod to be displayed to the user in the
      * mods gui
      */
-    default String getDescription(){
+    default String getDescription() {
         return "";
     }
 
@@ -136,7 +136,7 @@ public interface IMod{
      * list will be displayed, each entry seperated by a comma, to the user in
      * the mods gui.
      */
-    default String[] getAuthors(){
+    default String[] getAuthors() {
         return new String[0];
     }
 
@@ -154,7 +154,7 @@ public interface IMod{
      *
      * @return The sorting priority
      */
-    default int getSortingPriority(){
+    default int getSortingPriority() {
         return 0;
     }
 
@@ -167,7 +167,7 @@ public interface IMod{
      *
      * @return A gui class
      */
-    default Class<? extends Gui> getModGuiClass(){
+    default Class<? extends Gui> getModGuiClass() {
         return null;
     }
 
@@ -186,7 +186,7 @@ public interface IMod{
      *
      * @return A config for the mod
      */
-    default ModConfig getModConfig(){
+    default ModConfig getModConfig() {
         return null;
     }
 
@@ -201,7 +201,7 @@ public interface IMod{
      *
      * @return If the mod should be disableable
      */
-    default boolean isDisableable(){
+    default boolean isDisableable() {
         return true;
     }
 
@@ -216,7 +216,7 @@ public interface IMod{
      *
      * @return If the mod should be required on the client
      */
-    default boolean isRequiredOnClient(){
+    default boolean isRequiredOnClient() {
         return true;
     }
 
@@ -229,7 +229,7 @@ public interface IMod{
      *
      * @return If the mod should be required on the server
      */
-    default boolean isRequiredOnServer(){
+    default boolean isRequiredOnServer() {
         return false;
     }
 
@@ -241,10 +241,9 @@ public interface IMod{
      * installed.
      *
      * @param version The version that the client has
-     *
      * @return If the client version and the current version are compatible
      */
-    default boolean isCompatibleWithModVersion(String version){
+    default boolean isCompatibleWithModVersion(String version) {
         return version.equals(this.getVersion());
     }
 
@@ -267,7 +266,7 @@ public interface IMod{
      * @param apiHandler   The api handler instance
      * @param eventHandler The event handler instance
      */
-    default void prePreInit(IGameInstance game, IApiHandler apiHandler, IEventHandler eventHandler){
+    default void prePreInit(IGameInstance game, IApiHandler apiHandler, IEventHandler eventHandler) {
 
     }
 
@@ -281,7 +280,7 @@ public interface IMod{
      * @param apiHandler   The api handler instance
      * @param eventHandler The event handler instance
      */
-    default void preInit(IGameInstance game, IApiHandler apiHandler, IEventHandler eventHandler){
+    default void preInit(IGameInstance game, IApiHandler apiHandler, IEventHandler eventHandler) {
 
     }
 
@@ -295,7 +294,7 @@ public interface IMod{
      * @param apiHandler   The api handler instance
      * @param eventHandler The event handler instance
      */
-    default void init(IGameInstance game, IApiHandler apiHandler, IEventHandler eventHandler){
+    default void init(IGameInstance game, IApiHandler apiHandler, IEventHandler eventHandler) {
 
     }
 
@@ -311,7 +310,7 @@ public interface IMod{
      * @param apiHandler   The api handler instance
      * @param eventHandler The event handler instance
      */
-    default void postInit(IGameInstance game, IApiHandler apiHandler, IEventHandler eventHandler){
+    default void postInit(IGameInstance game, IApiHandler apiHandler, IEventHandler eventHandler) {
 
     }
 
@@ -324,7 +323,7 @@ public interface IMod{
      * @param apiHandler   The api handler instance
      * @param eventHandler The event handler instance
      */
-    default void postPostInit(IGameInstance game, IApiHandler apiHandler, IEventHandler eventHandler){
+    default void postPostInit(IGameInstance game, IApiHandler apiHandler, IEventHandler eventHandler) {
 
     }
 
@@ -339,7 +338,7 @@ public interface IMod{
      * @param assetManager The asset manager instance
      * @param apiHandler   The api handler instance
      */
-    default void preInitAssets(IGameInstance game, IAssetManager assetManager, IApiHandler apiHandler){
+    default void preInitAssets(IGameInstance game, IAssetManager assetManager, IApiHandler apiHandler) {
 
     }
 
@@ -356,7 +355,7 @@ public interface IMod{
      * @param assetManager The asset manager instance
      * @param apiHandler   The api handler instance
      */
-    default void initAssets(IGameInstance game, IAssetManager assetManager, IApiHandler apiHandler){
+    default void initAssets(IGameInstance game, IAssetManager assetManager, IApiHandler apiHandler) {
 
     }
 
@@ -372,7 +371,7 @@ public interface IMod{
      * @param assetManager The asset manager instance
      * @param apiHandler   The api handler instance
      */
-    default void postInitAssets(IGameInstance game, IAssetManager assetManager, IApiHandler apiHandler){
+    default void postInitAssets(IGameInstance game, IAssetManager assetManager, IApiHandler apiHandler) {
 
     }
 }

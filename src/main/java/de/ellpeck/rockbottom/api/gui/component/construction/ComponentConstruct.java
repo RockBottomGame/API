@@ -34,41 +34,41 @@ import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 import java.util.List;
 
-public class ComponentConstruct extends GuiComponent{
+public class ComponentConstruct extends GuiComponent {
 
     private final IRecipe recipe;
     private final boolean canConstruct;
 
-    public ComponentConstruct(Gui gui, IRecipe recipe, boolean canConstruct){
+    public ComponentConstruct(Gui gui, IRecipe recipe, boolean canConstruct) {
         super(gui, 94, 17, 30, 30);
         this.recipe = recipe;
         this.canConstruct = canConstruct;
     }
 
     @Override
-    public void render(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y){
-        if(this.recipe != null){
-            g.renderItemInGui(game, manager, this.getOutput(game), x+5, y+5, 2.0F, Colors.WHITE);
+    public void render(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y) {
+        if (this.recipe != null) {
+            g.renderItemInGui(game, manager, this.getOutput(game), x + 5, y + 5, 2.0F, Colors.WHITE);
         }
     }
 
     @Override
-    public void renderOverlay(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y){
-        if(this.isMouseOver(game)){
+    public void renderOverlay(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y) {
+        if (this.isMouseOver(game)) {
             ItemInstance instance = this.getOutput(game);
 
-            String s = manager.localize(ResourceName.intern("info."+(this.canConstruct ? "click_to_construct" : "missing_items")));
-            g.drawHoverInfoAtMouse(game, manager, true, 200, instance.getDisplayName()+" x"+instance.getAmount(), s);
+            String s = manager.localize(ResourceName.intern("info." + (this.canConstruct ? "click_to_construct" : "missing_items")));
+            g.drawHoverInfoAtMouse(game, manager, true, 200, instance.getDisplayName() + " x" + instance.getAmount(), s);
         }
     }
 
-    protected ItemInstance getOutput(IGameInstance game){
+    protected ItemInstance getOutput(IGameInstance game) {
         List<ItemInstance> outputs = this.recipe.getOutputs();
-        return outputs.get((game.getTotalTicks()/Constants.TARGET_TPS)%outputs.size());
+        return outputs.get((game.getTotalTicks() / Constants.TARGET_TPS) % outputs.size());
     }
 
     @Override
-    public ResourceName getName(){
+    public ResourceName getName() {
         return ResourceName.intern("construct");
     }
 }

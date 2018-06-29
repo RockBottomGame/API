@@ -45,15 +45,13 @@ import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 import java.util.*;
 import java.util.function.ToIntFunction;
 
-public class Entity extends MovableWorldObject implements IAdditionalDataProvider{
-
-    public int chunkX;
-    public int chunkY;
-
-    public Direction facing = Direction.NONE;
+public class Entity extends MovableWorldObject implements IAdditionalDataProvider {
 
     private final List<ActiveEffect> effects = new ArrayList<>();
     private final List<AITask> aiTasks = new ArrayList<>();
+    public int chunkX;
+    public int chunkY;
+    public Direction facing = Direction.NONE;
     public AITask currentAiTask;
     public int ticksExisted;
     public double fallStartY;
@@ -66,36 +64,36 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
     private UUID uniqueId = UUID.randomUUID();
     private ModBasedDataSet additionalData;
 
-    public Entity(IWorld world){
+    public Entity(IWorld world) {
         super(world);
     }
 
-    public UUID getUniqueId(){
+    public UUID getUniqueId() {
         return this.uniqueId;
     }
 
-    public void setUniqueId(UUID uniqueId){
+    public void setUniqueId(UUID uniqueId) {
         this.uniqueId = uniqueId;
     }
 
-    public IEntityRenderer getRenderer(){
+    public IEntityRenderer getRenderer() {
         return null;
     }
 
-    public void update(IGameInstance game){
+    public void update(IGameInstance game) {
         RockBottomAPI.getInternalHooks().doDefaultEntityUpdate(game, this, this.effects, this.aiTasks);
     }
 
-    public boolean doesSync(){
+    public boolean doesSync() {
         return true;
     }
 
-    public int getSyncFrequency(){
+    public int getSyncFrequency() {
         return 40;
     }
 
-    public void applyMotion(){
-        if(!this.isClimbing){
+    public void applyMotion() {
+        if (!this.isClimbing) {
             this.motionY -= 0.025;
         }
 
@@ -103,75 +101,75 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
         this.motionY *= this.isClimbing ? 0.5 : 0.98;
     }
 
-    public boolean isDead(){
+    public boolean isDead() {
         return this.dead;
     }
 
-    public boolean shouldBeRemoved(){
-        return this.isDead();
-    }
-
-    public void onRemoveFromWorld(){
-
-    }
-
-    public boolean shouldRender(){
-        return !this.isDead();
-    }
-
-    public void setDead(boolean dead){
-        if(this.dead != dead){
-            if(RockBottomAPI.getEventHandler().fireEvent(new EntityDeathEvent(this)) != EventResult.CANCELLED){
+    public void setDead(boolean dead) {
+        if (this.dead != dead) {
+            if (RockBottomAPI.getEventHandler().fireEvent(new EntityDeathEvent(this)) != EventResult.CANCELLED) {
                 this.dead = dead;
 
-                if(this.world.isServer()){
+                if (this.world.isServer()) {
                     RockBottomAPI.getNet().sendToAllPlayersWithLoadedPos(this.world, new PacketDeath(this.getUniqueId()), this.getX(), this.getY());
                 }
             }
         }
     }
 
-    public void kill(){
+    public boolean shouldBeRemoved() {
+        return this.isDead();
+    }
+
+    public void onRemoveFromWorld() {
+
+    }
+
+    public boolean shouldRender() {
+        return !this.isDead();
+    }
+
+    public void kill() {
         this.setDead(true);
     }
 
-    public int getRenderPriority(){
+    public int getRenderPriority() {
         return 0;
     }
 
-    public void onGroundHit(double fallDistance){
+    public void onGroundHit(double fallDistance) {
 
     }
 
-    public void moveToChunk(IChunk chunk){
+    public void moveToChunk(IChunk chunk) {
         this.chunkX = chunk.getGridX();
         this.chunkY = chunk.getGridY();
     }
 
     @Override
-    public boolean hasAdditionalData(){
+    public boolean hasAdditionalData() {
         return this.additionalData != null;
     }
 
     @Override
-    public ModBasedDataSet getAdditionalData(){
+    public ModBasedDataSet getAdditionalData() {
         return this.additionalData;
     }
 
     @Override
-    public void setAdditionalData(ModBasedDataSet set){
+    public void setAdditionalData(ModBasedDataSet set) {
         this.additionalData = set;
     }
 
     @Override
-    public ModBasedDataSet getOrCreateAdditionalData(){
-        if(this.additionalData == null){
+    public ModBasedDataSet getOrCreateAdditionalData() {
+        if (this.additionalData == null) {
             this.additionalData = new ModBasedDataSet();
         }
         return this.additionalData;
     }
 
-    public void save(DataSet set){
+    public void save(DataSet set) {
         set.addDouble("x", this.getOriginX());
         set.addDouble("y", this.getOriginY());
         set.addDouble("motion_x", this.motionX);
@@ -182,19 +180,19 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
         set.addDouble("fall_start_y", this.fallStartY);
         set.addInt("facing", this.facing.ordinal());
 
-        if(this.additionalData != null){
+        if (this.additionalData != null) {
             set.addModBasedDataSet("data", this.additionalData);
         }
 
         int amount = this.effects.size();
-        for(int i = 0; i < amount; i++){
+        for (int i = 0; i < amount; i++) {
             DataSet sub = new DataSet();
             this.effects.get(i).save(sub);
-            set.addDataSet("effect_"+i, sub);
+            set.addDataSet("effect_" + i, sub);
         }
         set.addInt("effect_amount", amount);
 
-        if(this.currentAiTask != null){
+        if (this.currentAiTask != null) {
             DataSet sub = new DataSet();
             sub.addInt("id", this.getTaskId(this.currentAiTask));
             this.currentAiTask.save(sub, false);
@@ -202,7 +200,7 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
         }
     }
 
-    public void load(DataSet set){
+    public void load(DataSet set) {
         this.setBoundsOrigin(set.getDouble("x"), set.getDouble("y"));
         this.motionX = set.getDouble("motion_x");
         this.motionY = set.getDouble("motion_y");
@@ -212,96 +210,96 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
         this.fallStartY = set.getDouble("fall_start_y");
         this.facing = Direction.DIRECTIONS[set.getInt("facing")];
 
-        if(set.hasKey("data")){
+        if (set.hasKey("data")) {
             this.additionalData = set.getModBasedDataSet("data");
         }
 
         this.effects.clear();
         int amount = set.getInt("effect_amount");
-        for(int i = 0; i < amount; i++){
-            DataSet sub = set.getDataSet("effect_"+i);
+        for (int i = 0; i < amount; i++) {
+            DataSet sub = set.getDataSet("effect_" + i);
             ActiveEffect effect = ActiveEffect.load(sub);
-            if(effect != null){
+            if (effect != null) {
                 effect.getEffect().onAddedOrLoaded(effect, this, true);
                 this.effects.add(effect);
             }
         }
 
         DataSet sub = set.getDataSet("task");
-        if(!sub.isEmpty()){
+        if (!sub.isEmpty()) {
             this.currentAiTask = this.aiTasks.get(sub.getInt("id"));
-            if(this.currentAiTask != null){
+            if (this.currentAiTask != null) {
                 this.currentAiTask.load(sub, false);
             }
         }
     }
 
-    public boolean doesSave(){
+    public boolean doesSave() {
         return true;
     }
 
-    public void onCollideWithTile(int x, int y, TileLayer layer, TileState state, BoundBox entityBox, BoundBox entityBoxMotion, List<BoundBox> tileBoxes){
+    public void onCollideWithTile(int x, int y, TileLayer layer, TileState state, BoundBox entityBox, BoundBox entityBoxMotion, List<BoundBox> tileBoxes) {
 
     }
 
-    public void onCollideWithEntity(Entity otherEntity, BoundBox thisBox, BoundBox thisBoxMotion, BoundBox otherBox, BoundBox otherBoxMotion){
+    public void onCollideWithEntity(Entity otherEntity, BoundBox thisBox, BoundBox thisBoxMotion, BoundBox otherBox, BoundBox otherBoxMotion) {
 
     }
 
-    public void onIntersectWithTile(int x, int y, TileLayer layer, TileState state, BoundBox entityBox, BoundBox entityBoxMotion, List<BoundBox> tileBoxes){
+    public void onIntersectWithTile(int x, int y, TileLayer layer, TileState state, BoundBox entityBox, BoundBox entityBoxMotion, List<BoundBox> tileBoxes) {
 
     }
 
-    public void onIntersectWithEntity(Entity otherEntity, BoundBox thisBox, BoundBox thisBoxMotion, BoundBox otherBox, BoundBox otherBoxMotion){
+    public void onIntersectWithEntity(Entity otherEntity, BoundBox thisBox, BoundBox thisBoxMotion, BoundBox otherBox, BoundBox otherBoxMotion) {
 
     }
 
-    public boolean onInteractWith(AbstractEntityPlayer player, double mouseX, double mouseY){
+    public boolean onInteractWith(AbstractEntityPlayer player, double mouseX, double mouseY) {
         return false;
     }
 
-    public int getInteractionPriority(AbstractEntityPlayer player, double mouseX, double mouseY){
+    public int getInteractionPriority(AbstractEntityPlayer player, double mouseX, double mouseY) {
         return -100;
     }
 
-    public boolean onAttack(AbstractEntityPlayer player, double mouseX, double mouseY, int intendedDamage){
+    public boolean onAttack(AbstractEntityPlayer player, double mouseX, double mouseY, int intendedDamage) {
         return false;
     }
 
-    public boolean shouldStartClimbing(int x, int y, TileLayer layer, TileState state, BoundBox entityBox, BoundBox entityBoxMotion, List<BoundBox> tileBoxes){
+    public boolean shouldStartClimbing(int x, int y, TileLayer layer, TileState state, BoundBox entityBox, BoundBox entityBoxMotion, List<BoundBox> tileBoxes) {
         return false;
     }
 
-    public boolean canCollideWith(MovableWorldObject object, BoundBox entityBox, BoundBox entityBoxMotion){
+    public boolean canCollideWith(MovableWorldObject object, BoundBox entityBox, BoundBox entityBoxMotion) {
         return false;
     }
 
-    public double getMaxInteractionDistance(IWorld world, double mouseX, double mouseY, AbstractEntityPlayer player){
+    public double getMaxInteractionDistance(IWorld world, double mouseX, double mouseY, AbstractEntityPlayer player) {
         return AbstractEntityPlayer.RANGE;
     }
 
     @Override
-    public final void onTileCollision(int x, int y, TileLayer layer, TileState state, BoundBox objBox, BoundBox objBoxMotion, List<BoundBox> boxes){
+    public final void onTileCollision(int x, int y, TileLayer layer, TileState state, BoundBox objBox, BoundBox objBoxMotion, List<BoundBox> boxes) {
         Tile tile = state.getTile();
         tile.onCollideWithEntity(this.world, x, y, layer, state, objBox, objBoxMotion, boxes, this);
         this.onCollideWithTile(x, y, layer, state, objBox, objBoxMotion, boxes);
     }
 
     @Override
-    public final void onEntityCollision(Entity entity, BoundBox thisBox, BoundBox thisBoxMotion, BoundBox otherBox, BoundBox otherBoxMotion){
+    public final void onEntityCollision(Entity entity, BoundBox thisBox, BoundBox thisBoxMotion, BoundBox otherBox, BoundBox otherBoxMotion) {
         this.onCollideWithEntity(entity, thisBox, thisBoxMotion, otherBox, otherBoxMotion);
         entity.onCollideWithEntity(this, otherBox, otherBoxMotion, thisBox, thisBoxMotion);
     }
 
     @Override
-    public final void onTileIntersection(int x, int y, TileLayer layer, TileState state, BoundBox objBox, BoundBox objBoxMotion, List<BoundBox> boxes){
+    public final void onTileIntersection(int x, int y, TileLayer layer, TileState state, BoundBox objBox, BoundBox objBoxMotion, List<BoundBox> boxes) {
         Tile tile = state.getTile();
 
-        if(tile.canClimb(this.world, x, y, layer, state, objBox, objBoxMotion, boxes, this)){
+        if (tile.canClimb(this.world, x, y, layer, state, objBox, objBoxMotion, boxes, this)) {
             this.canClimb = true;
 
-            if(!this.onGround){
-                if(this.shouldStartClimbing(x, y, layer, state, objBox, objBoxMotion, boxes)){
+            if (!this.onGround) {
+                if (this.shouldStartClimbing(x, y, layer, state, objBox, objBoxMotion, boxes)) {
                     this.isClimbing = true;
                 }
             }
@@ -312,41 +310,40 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
     }
 
     @Override
-    public final void onEntityIntersection(Entity entity, BoundBox thisBox, BoundBox thisBoxMotion, BoundBox otherBox, BoundBox otherBoxMotion){
+    public final void onEntityIntersection(Entity entity, BoundBox thisBox, BoundBox thisBoxMotion, BoundBox otherBox, BoundBox otherBoxMotion) {
         this.onIntersectWithEntity(entity, thisBox, thisBoxMotion, otherBox, otherBoxMotion);
         entity.onIntersectWithEntity(this, otherBox, otherBoxMotion, thisBox, thisBoxMotion);
     }
 
-    public boolean shouldMakeChunkPersist(IChunk chunk){
+    public boolean shouldMakeChunkPersist(IChunk chunk) {
         return false;
     }
 
     @Override
-    public float getWidth(){
+    public float getWidth() {
         return 1F;
     }
 
     @Override
-    public float getHeight(){
+    public float getHeight() {
         return 1F;
     }
 
-    public List<ActiveEffect> getActiveEffects(){
+    public List<ActiveEffect> getActiveEffects() {
         return Collections.unmodifiableList(this.effects);
     }
 
-    public int addEffect(ActiveEffect effect){
+    public int addEffect(ActiveEffect effect) {
         IEffect underlying = effect.getEffect();
-        if(underlying.isInstant(this)){
+        if (underlying.isInstant(this)) {
             underlying.activateInstant(effect, this);
             return 0;
-        }
-        else{
-            for(ActiveEffect active : this.effects){
-                if(active.getEffect() == underlying){
-                    int maxAdd = Math.min(effect.getTime(), active.getEffect().getMaxDuration(this)-active.getTime());
+        } else {
+            for (ActiveEffect active : this.effects) {
+                if (active.getEffect() == underlying) {
+                    int maxAdd = Math.min(effect.getTime(), active.getEffect().getMaxDuration(this) - active.getTime());
                     active.addTime(maxAdd);
-                    return effect.getTime()-maxAdd;
+                    return effect.getTime() - maxAdd;
                 }
             }
 
@@ -356,10 +353,10 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
         }
     }
 
-    public boolean removeEffect(IEffect effect){
-        for(int i = this.effects.size()-1; i >= 0; i--){
+    public boolean removeEffect(IEffect effect) {
+        for (int i = this.effects.size() - 1; i >= 0; i--) {
             ActiveEffect active = this.effects.get(i);
-            if(active.getEffect() == effect){
+            if (active.getEffect() == effect) {
                 this.effects.remove(i);
                 effect.onRemovedOrEnded(active, this, false);
                 return true;
@@ -368,25 +365,25 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
         return false;
     }
 
-    public boolean hasEffect(IEffect effect){
-        for(ActiveEffect active : this.effects){
-            if(active.getEffect() == effect){
+    public boolean hasEffect(IEffect effect) {
+        for (ActiveEffect active : this.effects) {
+            if (active.getEffect() == effect) {
                 return true;
             }
         }
         return false;
     }
 
-    public void addAiTask(AITask task){
+    public void addAiTask(AITask task) {
         this.aiTasks.add(task);
-        this.aiTasks.sort(Comparator.comparingInt((ToIntFunction<AITask>)AITask :: getPriority).reversed());
+        this.aiTasks.sort(Comparator.comparingInt((ToIntFunction<AITask>) AITask::getPriority).reversed());
     }
 
-    public AITask getTask(int id){
+    public AITask getTask(int id) {
         return id >= 0 && id < this.aiTasks.size() ? this.aiTasks.get(id) : null;
     }
 
-    public int getTaskId(AITask task){
+    public int getTaskId(AITask task) {
         return this.aiTasks.indexOf(task);
     }
 }

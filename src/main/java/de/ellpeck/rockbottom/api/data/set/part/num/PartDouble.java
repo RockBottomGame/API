@@ -31,20 +31,19 @@ import java.io.DataInput;
 import java.io.DataOutput;
 import java.util.Locale;
 
-public final class PartDouble extends BasicDataPart<Double>{
+public final class PartDouble extends BasicDataPart<Double> {
 
-    public static final IPartFactory<PartDouble> FACTORY = new IPartFactory<PartDouble>(){
+    public static final IPartFactory<PartDouble> FACTORY = new IPartFactory<PartDouble>() {
         @Override
-        public PartDouble parse(String name, JsonElement element){
-            if(element.isJsonPrimitive()){
+        public PartDouble parse(String name, JsonElement element) {
+            if (element.isJsonPrimitive()) {
                 JsonPrimitive prim = element.getAsJsonPrimitive();
-                if(prim.isString()){
+                if (prim.isString()) {
                     String string = prim.getAsString().toLowerCase(Locale.ROOT);
-                    if(string.endsWith("d")){
-                        try{
+                    if (string.endsWith("d")) {
+                        try {
                             return new PartDouble(name, Double.parseDouble(string));
-                        }
-                        catch(Exception ignored){
+                        } catch (Exception ignored) {
                         }
                     }
                 }
@@ -53,27 +52,27 @@ public final class PartDouble extends BasicDataPart<Double>{
         }
 
         @Override
-        public PartDouble parse(String name, DataInput stream) throws Exception{
+        public PartDouble parse(String name, DataInput stream) throws Exception {
             return new PartDouble(name, stream.readDouble());
         }
     };
 
-    public PartDouble(String name, Double data){
+    public PartDouble(String name, Double data) {
         super(name, data);
     }
 
     @Override
-    public void write(DataOutput stream) throws Exception{
+    public void write(DataOutput stream) throws Exception {
         stream.writeDouble(this.data);
     }
 
     @Override
-    public JsonElement write(){
-        return new JsonPrimitive(this.data+"d");
+    public JsonElement write() {
+        return new JsonPrimitive(this.data + "d");
     }
 
     @Override
-    public IPartFactory<? extends DataPart<Double>> getFactory(){
+    public IPartFactory<? extends DataPart<Double>> getFactory() {
         return FACTORY;
     }
 }

@@ -25,19 +25,13 @@ import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.world.IWorld;
 
-public abstract class AbstractEntityItem extends Entity{
+public abstract class AbstractEntityItem extends Entity {
 
-    public AbstractEntityItem(IWorld world){
+    public AbstractEntityItem(IWorld world) {
         super(world);
     }
 
-    public abstract ItemInstance getItem();
-
-    public abstract void setItem(ItemInstance instance);
-
-    public abstract boolean canPickUp();
-
-    public static AbstractEntityItem spawn(IWorld world, ItemInstance inst, double x, double y, double motionX, double motionY){
+    public static AbstractEntityItem spawn(IWorld world, ItemInstance inst, double x, double y, double motionX, double motionY) {
         AbstractEntityItem item = RockBottomAPI.getInternalHooks().makeItem(world, inst, x, y, motionX, motionY);
         item.setPos(x, y);
         item.motionX = motionX;
@@ -45,4 +39,10 @@ public abstract class AbstractEntityItem extends Entity{
         world.addEntity(item);
         return item;
     }
+
+    public abstract ItemInstance getItem();
+
+    public abstract void setItem(ItemInstance instance);
+
+    public abstract boolean canPickUp();
 }

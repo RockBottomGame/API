@@ -29,17 +29,17 @@ import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 import java.util.function.Supplier;
 
-public class ComponentToggleButton extends ComponentButton{
+public class ComponentToggleButton extends ComponentButton {
 
     private final IMod locDomain;
     private final String locKey;
     private boolean isToggled;
 
-    public ComponentToggleButton(Gui gui, int x, int y, int sizeX, int sizeY, boolean defaultState, Supplier<Boolean> supplier, String locKey, String... hover){
+    public ComponentToggleButton(Gui gui, int x, int y, int sizeX, int sizeY, boolean defaultState, Supplier<Boolean> supplier, String locKey, String... hover) {
         this(gui, x, y, sizeX, sizeY, defaultState, supplier, RockBottomAPI.getGame(), locKey, hover);
     }
 
-    public ComponentToggleButton(Gui gui, int x, int y, int sizeX, int sizeY, boolean defaultState, Supplier<Boolean> supplier, IMod locDomain, String locKey, String... hover){
+    public ComponentToggleButton(Gui gui, int x, int y, int sizeX, int sizeY, boolean defaultState, Supplier<Boolean> supplier, IMod locDomain, String locKey, String... hover) {
         super(gui, x, y, sizeX, sizeY, supplier, null, hover);
         this.isToggled = defaultState;
         this.locDomain = locDomain;
@@ -47,19 +47,19 @@ public class ComponentToggleButton extends ComponentButton{
     }
 
     @Override
-    protected String getText(){
-        String resource = this.locKey+(this.isToggled ? "_toggled" : "");
+    protected String getText() {
+        String resource = this.locKey + (this.isToggled ? "_toggled" : "");
         return RockBottomAPI.getGame().getAssetManager().localize(new ResourceName(this.locDomain, resource));
     }
 
     @Override
-    public boolean onPressed(IGameInstance game){
+    public boolean onPressed(IGameInstance game) {
         this.isToggled = !this.isToggled;
         return false;
     }
 
     @Override
-    public ResourceName getName(){
+    public ResourceName getName() {
         return ResourceName.intern("toggle_button");
     }
 }

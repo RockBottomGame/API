@@ -28,33 +28,33 @@ import de.ellpeck.rockbottom.api.util.ApiInternal;
 import java.io.File;
 
 @ApiInternal
-public final class ServerSettings implements IJsonSettings{
+public final class ServerSettings implements IJsonSettings {
 
     public int autosaveIntervalSeconds;
     public int maxPlayerAmount;
     public String worldName;
 
     @Override
-    public void load(JsonObject object){
+    public void load(JsonObject object) {
         this.autosaveIntervalSeconds = this.get(object, "autosave_interval", 60);
         this.maxPlayerAmount = this.get(object, "max_players", 100);
         this.worldName = this.get(object, "world_name", "world_server");
     }
 
     @Override
-    public void save(JsonObject object){
+    public void save(JsonObject object) {
         this.set(object, "autosave_interval", this.autosaveIntervalSeconds);
         this.set(object, "max_players", this.maxPlayerAmount);
         this.set(object, "world_name", this.worldName);
     }
 
     @Override
-    public File getSettingsFile(IDataManager manager){
+    public File getSettingsFile(IDataManager manager) {
         return manager.getServerSettingsFile();
     }
 
     @Override
-    public String getName(){
+    public String getName() {
         return "Server settings";
     }
 }

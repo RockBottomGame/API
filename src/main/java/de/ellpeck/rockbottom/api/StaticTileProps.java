@@ -32,7 +32,7 @@ import de.ellpeck.rockbottom.api.tile.state.TileProp;
  * GameContent} to see their values. Every prop in here has a list of tiles that
  * it applies to.
  */
-public final class StaticTileProps{
+public final class StaticTileProps {
 
     /**
      * Determines if a tile is naturally generated or placed manually. Used by
@@ -89,7 +89,7 @@ public final class StaticTileProps{
      * An enum of log types that are used for the {@link #LOG_VARIANT}
      * property.
      */
-    public enum LogType{
+    public enum LogType {
         PLACED,
         BRANCH_LEFT,
         BRANCH_RIGHT,
@@ -103,7 +103,7 @@ public final class StaticTileProps{
          * @return If a certain log type is considered to be natural, meaning
          * not player-placed
          */
-        public boolean isNatural(){
+        public boolean isNatural() {
             return this != PLACED;
         }
     }

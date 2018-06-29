@@ -21,43 +21,41 @@
 
 package de.ellpeck.rockbottom.api.data.set.part;
 
-public abstract class BasicDataPart<T> extends DataPart<T>{
+public abstract class BasicDataPart<T> extends DataPart<T> {
 
     protected final T data;
 
-    public BasicDataPart(String name, T data){
+    public BasicDataPart(String name, T data) {
         super(name);
         this.data = data;
     }
 
     @Override
-    public T get(){
+    public T get() {
         return this.data;
     }
 
     @Override
-    public String toString(){
-        return this.getClass().getSimpleName()+"@"+this.data.toString();
+    public String toString() {
+        return this.getClass().getSimpleName() + "@" + this.data.toString();
     }
 
     @Override
-    public boolean equals(Object o){
-        if(this == o){
+    public boolean equals(Object o) {
+        if (this == o) {
             return true;
-        }
-        else if(o instanceof BasicDataPart){
-            BasicDataPart that = (BasicDataPart)o;
+        } else if (o instanceof BasicDataPart) {
+            BasicDataPart that = (BasicDataPart) o;
             return this.name.equals(that.name) && (this.data != null ? this.data.equals(that.data) : that.data == null);
-        }
-        else{
+        } else {
             return false;
         }
     }
 
     @Override
-    public int hashCode(){
+    public int hashCode() {
         int result = this.name.hashCode();
-        result = 31*result+(this.data != null ? this.data.hashCode() : 0);
+        result = 31 * result + (this.data != null ? this.data.hashCode() : 0);
         return result;
     }
 }

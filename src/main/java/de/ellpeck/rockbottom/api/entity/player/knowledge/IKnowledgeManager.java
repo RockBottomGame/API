@@ -24,7 +24,7 @@ package de.ellpeck.rockbottom.api.entity.player.knowledge;
 import de.ellpeck.rockbottom.api.construction.IRecipe;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
-public interface IKnowledgeManager{
+public interface IKnowledgeManager {
 
     boolean knowsRecipe(IRecipe recipe);
 

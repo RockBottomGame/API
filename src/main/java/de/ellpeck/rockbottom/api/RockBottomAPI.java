@@ -73,7 +73,7 @@ import java.util.logging.Logger;
  * The main API class. Use this to access all of the {@link IRegistry} objects
  * and other important data.
  */
-public final class RockBottomAPI{
+public final class RockBottomAPI {
 
     /**
      * The current API version equal to the version in the build.gradle file.
@@ -289,7 +289,7 @@ public final class RockBottomAPI{
      *
      * @return The API handler
      */
-    public static IApiHandler getApiHandler(){
+    public static IApiHandler getApiHandler() {
         return internals.getApi();
     }
 
@@ -300,7 +300,7 @@ public final class RockBottomAPI{
      *
      * @return The net handler
      */
-    public static INetHandler getNet(){
+    public static INetHandler getNet() {
         return internals.getNet();
     }
 
@@ -311,7 +311,7 @@ public final class RockBottomAPI{
      *
      * @return The event handler
      */
-    public static IEventHandler getEventHandler(){
+    public static IEventHandler getEventHandler() {
         return internals.getEvent();
     }
 
@@ -323,7 +323,7 @@ public final class RockBottomAPI{
      *
      * @return The game instance
      */
-    public static IGameInstance getGame(){
+    public static IGameInstance getGame() {
         return internals.getGame();
     }
 
@@ -334,7 +334,7 @@ public final class RockBottomAPI{
      *
      * @return The mod loader
      */
-    public static IModLoader getModLoader(){
+    public static IModLoader getModLoader() {
         return internals.getMod();
     }
 
@@ -346,7 +346,7 @@ public final class RockBottomAPI{
      *
      * @return The content pack loader
      */
-    public static IContentPackLoader getContentPackLoader(){
+    public static IContentPackLoader getContentPackLoader() {
         return internals.getContent();
     }
 
@@ -361,7 +361,7 @@ public final class RockBottomAPI{
      *
      * @return The resource registry
      */
-    public static IResourceRegistry getResourceRegistry(){
+    public static IResourceRegistry getResourceRegistry() {
         return internals.getResource();
     }
 
@@ -372,7 +372,7 @@ public final class RockBottomAPI{
      *
      * @return The internal hooks
      */
-    public static IInternalHooks getInternalHooks(){
+    public static IInternalHooks getInternalHooks() {
         return internals.getHooks();
     }
 
@@ -381,10 +381,9 @@ public final class RockBottomAPI{
      * a {@link Logger} with a specified name.
      *
      * @param name The logger's display name
-     *
      * @return The logger
      */
-    public static Logger createLogger(String name){
+    public static Logger createLogger(String name) {
         return getApiHandler().createLogger(name);
     }
 
@@ -395,7 +394,7 @@ public final class RockBottomAPI{
      * @return The game's logger
      */
     @ApiInternal
-    public static Logger logger(){
+    public static Logger logger() {
         return getInternalHooks().logger();
     }
 
@@ -408,8 +407,8 @@ public final class RockBottomAPI{
      * @param registry The registry to register
      */
     @ApiInternal
-    public static void registerRegistry(IRegistry registry){
-        Preconditions.checkArgument(!ALL_REGISTRIES.contains(registry), "Registry "+registry+" was already registered!");
+    public static void registerRegistry(IRegistry registry) {
+        Preconditions.checkArgument(!ALL_REGISTRIES.contains(registry), "Registry " + registry + " was already registered!");
         ALL_REGISTRIES.add(registry);
     }
 
@@ -418,7 +417,7 @@ public final class RockBottomAPI{
      *
      * @return The list of registries
      */
-    public static List<IRegistry> getAllRegistries(){
+    public static List<IRegistry> getAllRegistries() {
         return Collections.unmodifiableList(ALL_REGISTRIES);
     }
 
@@ -431,7 +430,7 @@ public final class RockBottomAPI{
      * @param intern The internals
      */
     @ApiInternal
-    public static void setInternals(Internals intern){
+    public static void setInternals(Internals intern) {
         Preconditions.checkState(internals == null, "Mod tried to modify internal handlers - This is not allowed!");
         internals = intern;
     }

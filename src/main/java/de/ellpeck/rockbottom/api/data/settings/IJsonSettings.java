@@ -27,7 +27,7 @@ import de.ellpeck.rockbottom.api.data.IDataManager;
 
 import java.io.File;
 
-public interface IJsonSettings{
+public interface IJsonSettings {
 
     void load(JsonObject object);
 
@@ -37,43 +37,43 @@ public interface IJsonSettings{
 
     String getName();
 
-    default void save(){
+    default void save() {
         RockBottomAPI.getGame().getDataManager().saveSettings(this);
     }
 
-    default void load(){
+    default void load() {
         RockBottomAPI.getGame().getDataManager().loadSettings(this);
     }
 
-    default void set(JsonObject object, String name, String val){
+    default void set(JsonObject object, String name, String val) {
         object.addProperty(name, val);
     }
 
-    default void set(JsonObject object, String name, Character val){
+    default void set(JsonObject object, String name, Character val) {
         object.addProperty(name, val);
     }
 
-    default void set(JsonObject object, String name, Boolean val){
+    default void set(JsonObject object, String name, Boolean val) {
         object.addProperty(name, val);
     }
 
-    default void set(JsonObject object, String name, Number val){
+    default void set(JsonObject object, String name, Number val) {
         object.addProperty(name, val);
     }
 
-    default int get(JsonObject object, String name, int def){
+    default int get(JsonObject object, String name, int def) {
         return object.has(name) ? object.get(name).getAsInt() : def;
     }
 
-    default boolean get(JsonObject object, String name, boolean def){
+    default boolean get(JsonObject object, String name, boolean def) {
         return object.has(name) ? object.get(name).getAsBoolean() : def;
     }
 
-    default float get(JsonObject object, String name, float def){
+    default float get(JsonObject object, String name, float def) {
         return object.has(name) ? object.get(name).getAsFloat() : def;
     }
 
-    default String get(JsonObject object, String name, String def){
+    default String get(JsonObject object, String name, String def) {
         return object.has(name) ? object.get(name).getAsString() : def;
     }
 }

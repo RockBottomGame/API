@@ -29,7 +29,7 @@ import org.lwjgl.opengl.GL13;
  * by graphics cards (as documented in {@link GL13#glActiveTexture(int)}, please
  * use these sparingly and try to stay within the first eight or so banks.
  */
-public enum TextureBank{
+public enum TextureBank {
     BANK_1,
     BANK_2,
     BANK_3,

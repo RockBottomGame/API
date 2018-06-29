@@ -28,7 +28,7 @@ import io.netty.buffer.ByteBuf;
 import java.io.File;
 import java.util.UUID;
 
-public class WorldInfo{
+public class WorldInfo {
 
     private static final String NAME = "world_info.dat";
     @ApiInternal
@@ -41,20 +41,20 @@ public class WorldInfo{
     public UUID lastPlayerId;
 
     @ApiInternal
-    public WorldInfo(File worldDirectory){
+    public WorldInfo(File worldDirectory) {
         this.dataFile = new File(worldDirectory, NAME);
     }
 
-    public static boolean exists(File directory){
+    public static boolean exists(File directory) {
         return new File(directory, NAME).exists();
     }
 
-    public static long lastModified(File directory){
+    public static long lastModified(File directory) {
         return new File(directory, NAME).lastModified();
     }
 
     @ApiInternal
-    public void load(){
+    public void load() {
         DataSet dataSet = new DataSet();
         dataSet.read(this.dataFile);
 
@@ -62,21 +62,21 @@ public class WorldInfo{
         this.totalTimeInWorld = dataSet.getInt("total_time");
         this.currentWorldTime = dataSet.getInt("curr_time");
         //TODO Remove this legacy compat check eventually
-        if(dataSet.hasKey("story_mode")){
+        if (dataSet.hasKey("story_mode")) {
             this.storyMode = dataSet.getBoolean("story_mode");
         }
         this.lastPlayerId = dataSet.getUniqueId("last_player");
     }
 
     @ApiInternal
-    public void save(){
+    public void save() {
         DataSet dataSet = new DataSet();
 
         dataSet.addLong("seed", this.seed);
         dataSet.addInt("total_time", this.totalTimeInWorld);
         dataSet.addInt("curr_time", this.currentWorldTime);
         dataSet.addBoolean("story_mode", this.storyMode);
-        if(this.lastPlayerId != null){
+        if (this.lastPlayerId != null) {
             dataSet.addUniqueId("last_player", this.lastPlayerId);
         }
 
@@ -84,7 +84,7 @@ public class WorldInfo{
     }
 
     @ApiInternal
-    public void toBuffer(ByteBuf buf){
+    public void toBuffer(ByteBuf buf) {
         buf.writeLong(this.seed);
         buf.writeInt(this.totalTimeInWorld);
         buf.writeInt(this.currentWorldTime);
@@ -92,7 +92,7 @@ public class WorldInfo{
     }
 
     @ApiInternal
-    public void fromBuffer(ByteBuf buf){
+    public void fromBuffer(ByteBuf buf) {
         this.seed = buf.readLong();
         this.totalTimeInWorld = buf.readInt();
         this.currentWorldTime = buf.readInt();

@@ -25,11 +25,11 @@ import com.google.gson.JsonElement;
 
 import java.io.DataOutput;
 
-public abstract class DataPart<T>{
+public abstract class DataPart<T> {
 
     protected final String name;
 
-    public DataPart(String name){
+    public DataPart(String name) {
         this.name = name;
     }
 
@@ -41,7 +41,7 @@ public abstract class DataPart<T>{
 
     public abstract IPartFactory<? extends DataPart<T>> getFactory();
 
-    public String getName(){
+    public String getName() {
         return this.name;
     }
 }
