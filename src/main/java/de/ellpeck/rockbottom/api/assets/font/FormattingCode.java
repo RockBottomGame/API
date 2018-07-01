@@ -26,13 +26,14 @@ import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.util.Colors;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.TreeMap;
 
 public class FormattingCode {
 
+    private static final Map<Character, FormattingCode> DEFAULT_CODES = new HashMap<>();
+
     public static final FormattingCode NONE = new FormattingCode(' ', Colors.NO_COLOR, FontProp.NONE, 0, "");
-    private static final Map<Character, FormattingCode> DEFAULT_CODES = new TreeMap<>(Character::compare);
     public static final FormattingCode RESET_COLOR = new FormattingCode('y', Colors.RESET_COLOR).registerAsDefault();
     public static final FormattingCode RESET_PROPS = new FormattingCode('x', FontProp.RESET).registerAsDefault();
 
