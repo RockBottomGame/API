@@ -41,6 +41,7 @@ import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.entity.player.knowledge.Information;
 import de.ellpeck.rockbottom.api.entity.player.statistics.IStatistics;
 import de.ellpeck.rockbottom.api.entity.player.statistics.StatisticInitializer;
+import de.ellpeck.rockbottom.api.entity.spawn.SpawnBehavior;
 import de.ellpeck.rockbottom.api.event.IEventHandler;
 import de.ellpeck.rockbottom.api.gui.IMainMenuTheme;
 import de.ellpeck.rockbottom.api.gui.ISpecialCursor;
@@ -274,6 +275,13 @@ public final class RockBottomAPI {
      */
     @ApiInternal
     public static final NameRegistry<SmeltingRecipe> SMELTING_REGISTRY = new NameRegistry<>("smelting_registry", true).register();
+    /**
+     * The registry for all {@link SpawnBehavior} objects that determine how and
+     * where entities can randomly appear in the world. To register something
+     * into this registry, please use {@link SpawnBehavior#register()}.
+     */
+    @ApiInternal
+    public static final NameRegistry<SpawnBehavior> SPAWN_BEHAVIOR_REGISTRY = new NameRegistry<>("spawn_behavior_registry", true).register();
 
     /**
      * A set of internal references to API classes that are initialized by the

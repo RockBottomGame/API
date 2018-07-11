@@ -30,6 +30,7 @@ import de.ellpeck.rockbottom.api.effect.ActiveEffect;
 import de.ellpeck.rockbottom.api.effect.IEffect;
 import de.ellpeck.rockbottom.api.entity.ai.AITask;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
+import de.ellpeck.rockbottom.api.entity.spawn.DespawnHandler;
 import de.ellpeck.rockbottom.api.event.EventResult;
 import de.ellpeck.rockbottom.api.event.impl.EntityDeathEvent;
 import de.ellpeck.rockbottom.api.net.packet.toclient.PacketDeath;
@@ -385,5 +386,9 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
 
     public int getTaskId(AITask task) {
         return this.aiTasks.indexOf(task);
+    }
+
+    public DespawnHandler getDespawnHandler() {
+        return null;
     }
 }

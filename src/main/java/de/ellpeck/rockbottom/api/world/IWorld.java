@@ -143,4 +143,6 @@ public interface IWorld extends IChunkOrWorld {
     byte getCombinedVisualLight(int x, int y);
 
     boolean isStoryMode();
+
+    AbstractEntityPlayer getClosestPlayer(double x, double y);
 }
