@@ -46,18 +46,24 @@ public abstract class SpawnBehavior<T extends Entity> {
 
     public abstract int getPackSize(IWorld world, double x, double y);
 
-    public double getEntityCapArea(IWorld world) {
-        return 50D;
+    public abstract boolean belongsToCap(Entity entity);
+
+    public boolean areGeneralConditionsMet(IWorld world){
+        return true;
+    }
+
+    public double getEntityCapArea(IWorld world, AbstractEntityPlayer player) {
+        return this.getMaxPlayerDistance(world, player);
     }
 
     public int getEntityCap(IWorld world) {
         return 20;
     }
 
-    public abstract boolean belongsToCap(Entity entity);
-
     public boolean canSpawnHere(IWorld world, double x, double y) {
-        return !world.getState(Util.floor(x), Util.floor(y)).getTile().isFullTile();
+        int theX = Util.floor(x);
+        int theY = Util.floor(y);
+        return !world.getState(theX, theY).getTile().isFullTile() && world.getState(theX, theY - 1).getTile().isFullTile();
     }
 
     public int getSpawnFrequency(IWorld world) {
