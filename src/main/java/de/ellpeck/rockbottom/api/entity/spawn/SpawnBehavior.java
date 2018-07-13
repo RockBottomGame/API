@@ -48,7 +48,7 @@ public abstract class SpawnBehavior<T extends Entity> {
 
     public abstract boolean belongsToCap(Entity entity);
 
-    public boolean areGeneralConditionsMet(IWorld world){
+    public boolean isReadyToSpawn(IWorld world){
         return true;
     }
 

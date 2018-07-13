@@ -22,30 +22,21 @@
 package de.ellpeck.rockbottom.api.entity.spawn;
 
 import de.ellpeck.rockbottom.api.entity.Entity;
+import de.ellpeck.rockbottom.api.world.IWorld;
 
 public abstract class DespawnHandler<T extends Entity> {
 
-    private int despawnTimer;
-
-    public abstract boolean isReadyToDespawn(T entity);
-
     public abstract double getMaxPlayerDistance(T entity);
 
-    public abstract int getDespawnTime(T entity);
+    public boolean isReadyToDespawn(T entity){
+        return true;
+    }
 
     public void despawn(T entity){
         entity.setDead(true);
     }
 
-    public void tickTimer() {
-        this.despawnTimer++;
-    }
-
-    public void resetTimer() {
-        this.despawnTimer = 0;
-    }
-
-    public int getTimer(){
-        return this.despawnTimer;
+    public int getDespawnFrequency(IWorld world) {
+        return 40;
     }
 }
