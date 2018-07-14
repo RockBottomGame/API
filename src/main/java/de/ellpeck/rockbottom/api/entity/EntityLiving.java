@@ -37,6 +37,7 @@ public abstract class EntityLiving extends Entity {
     public int jumpTimeout;
     protected int health;
     protected int maxHealth;
+    public int lastDamageTime;
 
     public EntityLiving(IWorld world) {
         super(world);
@@ -107,6 +108,7 @@ public abstract class EntityLiving extends Entity {
         EntityDamageEvent event = new EntityDamageEvent(this, amount);
         if (RockBottomAPI.getEventHandler().fireEvent(event) != EventResult.CANCELLED) {
             this.setHealth(this.getHealth() - event.amount);
+            this.lastDamageTime = this.world.getTotalTime();
         }
     }
 

@@ -125,6 +125,15 @@ public final class Colors {
         bind(getR(color), getG(color), getB(color), getA(color));
     }
 
+    public static int lerp(int c1, int c2, float factor) {
+        return lerp(getR(c1), getG(c1), getB(c1), getA(c1), getR(c2), getG(c2), getB(c2), getA(c2), factor);
+    }
+
+    public static int lerp(float r1, float g1, float b1, float a1, float r2, float g2, float b2, float a2, float factor) {
+        float fRev = 1F - factor;
+        return rgb(r1 * fRev + r2 * factor, g1 * fRev + g2 * factor, b1 * fRev + b2 * factor, a1 * fRev + a2 * factor);
+    }
+
     public static int multiply(int color, float factor) {
         return rgb(getR(color) * factor, getG(color) * factor, getB(color) * factor);
     }
