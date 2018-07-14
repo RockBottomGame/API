@@ -123,11 +123,15 @@ public class Item {
     }
 
     public boolean canHoldButtonToAttack(IWorld world, double mouseX, double mouseY, AbstractEntityPlayer player, ItemInstance instance) {
-        return true;
+        return false;
     }
 
     public List<Entity> getCustomAttackableEntities(IWorld world, double mouseX, double mouseY, AbstractEntityPlayer player, ItemInstance instance) {
         return null;
+    }
+
+    public boolean onEntityAttack(IWorld world, double mouseX, double mouseY, AbstractEntityPlayer player, Entity entity, ItemInstance instance){
+        return true;
     }
 
     public int getAttackDamage(IWorld world, Entity entity, double mouseX, double mouseY, AbstractEntityPlayer player, ItemInstance instance) {
@@ -136,6 +140,10 @@ public class Item {
 
     public int getAttackCooldown(IWorld world, double mouseX, double mouseY, AbstractEntityPlayer player, ItemInstance instance) {
         return 40;
+    }
+
+    public boolean attacksMultipleEntities(IWorld world, double mouseX, double mouseY, AbstractEntityPlayer player, ItemInstance instance){
+        return false;
     }
 
     public boolean useMetaAsDurability() {

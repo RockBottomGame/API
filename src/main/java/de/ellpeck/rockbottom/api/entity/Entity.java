@@ -118,6 +118,10 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
         }
     }
 
+    public void setReadyToRemove() {
+        this.setDead(true);
+    }
+
     public boolean shouldBeRemoved() {
         return this.isDead();
     }
@@ -128,10 +132,6 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
 
     public boolean shouldRender() {
         return true;
-    }
-
-    public void kill() {
-        this.setDead(true);
     }
 
     public int getRenderPriority() {

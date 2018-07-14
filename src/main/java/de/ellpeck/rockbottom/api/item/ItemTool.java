@@ -74,17 +74,21 @@ public class ItemTool extends ItemBasic {
     @Override
     public void onTileBroken(IWorld world, int x, int y, TileLayer layer, AbstractEntityPlayer player, Tile tile, ItemInstance instance) {
         if (!world.isClient()) {
-            IInventory inv = player.getInv();
-            int selected = player.getSelectedSlot();
+            this.takeDamage(instance, player, 1);
+        }
+    }
 
-            int meta = instance.getMeta();
-            if (meta < this.getHighestPossibleMeta()) {
-                instance.setMeta(meta + 1);
-                inv.notifyChange(selected);
-            } else {
-                inv.set(selected, null);
-                RockBottomAPI.getInternalHooks().onToolBroken(world, player, instance);
-            }
+    public void takeDamage(ItemInstance instance, AbstractEntityPlayer player, int amount) {
+        IInventory inv = player.getInv();
+        int selected = player.getSelectedSlot();
+
+        int meta = instance.getMeta();
+        if (meta + amount <= this.getHighestPossibleMeta()) {
+            instance.setMeta(meta + amount);
+            inv.notifyChange(selected);
+        } else {
+            inv.set(selected, null);
+            RockBottomAPI.getInternalHooks().onToolBroken(player.world, player, instance);
         }
     }
 

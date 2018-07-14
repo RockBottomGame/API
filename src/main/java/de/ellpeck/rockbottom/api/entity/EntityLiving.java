@@ -38,6 +38,7 @@ public abstract class EntityLiving extends Entity {
     protected int health;
     protected int maxHealth;
     public int lastDamageTime;
+    public int deathTimer;
 
     public EntityLiving(IWorld world) {
         super(world);
@@ -67,7 +68,9 @@ public abstract class EntityLiving extends Entity {
         if (!this.world.isClient()) {
             if (this.health <= 0) {
                 if (!this.dead) {
-                    this.kill();
+                    this.setDead(true);
+                } else if (this.deathTimer < this.getDeathLingerTime()) {
+                    this.deathTimer++;
                 }
             } else {
                 if (this.health < this.getMaxHealth()) {
@@ -80,6 +83,10 @@ public abstract class EntityLiving extends Entity {
                 }
             }
         }
+    }
+
+    public int getDeathLingerTime() {
+        return 40;
     }
 
     public boolean jump(double motion) {
@@ -102,6 +109,17 @@ public abstract class EntityLiving extends Entity {
 
     public void setHealth(int health) {
         this.health = health;
+    }
+
+    @Override
+    public boolean shouldBeRemoved() {
+        return this.isDead() && this.deathTimer >= this.getDeathLingerTime();
+    }
+
+    @Override
+    public void setReadyToRemove() {
+        this.deathTimer = this.getDeathLingerTime();
+        super.setReadyToRemove();
     }
 
     public void takeDamage(int amount) {

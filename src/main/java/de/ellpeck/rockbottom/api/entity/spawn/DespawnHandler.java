@@ -33,7 +33,7 @@ public abstract class DespawnHandler<T extends Entity> {
     }
 
     public void despawn(T entity){
-        entity.setDead(true);
+        entity.setReadyToRemove();
     }
 
     public int getDespawnFrequency(IWorld world) {

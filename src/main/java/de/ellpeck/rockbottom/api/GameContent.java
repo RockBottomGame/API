@@ -92,6 +92,7 @@ public final class GameContent {
     public static final Item ITEM_COPPER_PICKAXE = getItem("copper_pickaxe");
     public static final Item ITEM_COPPER_AXE = getItem("copper_axe");
     public static final Item ITEM_COPPER_SHOVEL = getItem("copper_shovel");
+    public static final Item ITEM_COPPER_SWORD = getItem("copper_sword");
 
     /*
         ---RESOURCE REGISTRY ENTRIES---
