@@ -106,7 +106,7 @@ public class Item {
         return Collections.emptyMap();
     }
 
-    public float getMiningSpeed(IWorld world, int x, int y, TileLayer layer, Tile tile, boolean isRightTool) {
+    public float getMiningSpeed(IWorld world, int x, int y, TileLayer layer, Tile tile, boolean isRightTool, ItemInstance instance) {
         return 1F;
     }
 
@@ -118,23 +118,23 @@ public class Item {
         return 0;
     }
 
-    public double getMaxInteractionDistance(IWorld world, int x, int y, TileLayer layer, double mouseX, double mouseY, AbstractEntityPlayer player) {
+    public double getMaxInteractionDistance(IWorld world, int x, int y, TileLayer layer, double mouseX, double mouseY, AbstractEntityPlayer player, ItemInstance instance) {
         return AbstractEntityPlayer.RANGE;
     }
 
-    public boolean canHoldButtonToAttack(IWorld world, double mouseX, double mouseY, AbstractEntityPlayer player) {
+    public boolean canHoldButtonToAttack(IWorld world, double mouseX, double mouseY, AbstractEntityPlayer player, ItemInstance instance) {
         return true;
     }
 
-    public List<Entity> getCustomAttackableEntities(IWorld world, double mouseX, double mouseY, AbstractEntityPlayer player) {
+    public List<Entity> getCustomAttackableEntities(IWorld world, double mouseX, double mouseY, AbstractEntityPlayer player, ItemInstance instance) {
         return null;
     }
 
-    public int getAttackDamage(IWorld world, Entity entity, double mouseX, double mouseY, AbstractEntityPlayer player) {
+    public int getAttackDamage(IWorld world, Entity entity, double mouseX, double mouseY, AbstractEntityPlayer player, ItemInstance instance) {
         return 5;
     }
 
-    public int getAttackCooldown(IWorld world, double mouseX, double mouseY, AbstractEntityPlayer player) {
+    public int getAttackCooldown(IWorld world, double mouseX, double mouseY, AbstractEntityPlayer player, ItemInstance instance) {
         return 40;
     }
 
