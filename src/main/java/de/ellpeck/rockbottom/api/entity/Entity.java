@@ -127,7 +127,7 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
     }
 
     public boolean shouldRender() {
-        return !this.isDead();
+        return true;
     }
 
     public void kill() {
