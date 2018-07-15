@@ -69,15 +69,8 @@ public class ItemSword extends ItemTool {
 
     @Override
     public boolean onEntityAttack(IWorld world, double mouseX, double mouseY, AbstractEntityPlayer player, Entity entity, ItemInstance instance) {
-        double moveX = entity.getX() - player.getX();
-        double moveY = entity.getY() - player.getY();
-        double length = Util.distance(0, 0, moveX, moveY);
-
-        entity.motionX += this.knockback * (moveX / length);
-        entity.motionY += this.knockback * (moveY / length);
-
         this.takeDamage(instance, player, 1);
-
+        entity.applyKnockback(player, this.knockback);
         return true;
     }
 

@@ -39,6 +39,7 @@ import de.ellpeck.rockbottom.api.tile.Tile;
 import de.ellpeck.rockbottom.api.tile.state.TileState;
 import de.ellpeck.rockbottom.api.util.BoundBox;
 import de.ellpeck.rockbottom.api.util.Direction;
+import de.ellpeck.rockbottom.api.util.Util;
 import de.ellpeck.rockbottom.api.world.IChunk;
 import de.ellpeck.rockbottom.api.world.IWorld;
 import de.ellpeck.rockbottom.api.world.layer.TileLayer;
@@ -107,7 +108,7 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
     }
 
     public void setDead(boolean dead) {
-        if (this.dead != dead) {
+        if (this.isDead() != dead) {
             if (RockBottomAPI.getEventHandler().fireEvent(new EntityDeathEvent(this)) != EventResult.CANCELLED) {
                 this.dead = dead;
 
@@ -390,5 +391,14 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
 
     public DespawnHandler getDespawnHandler() {
         return null;
+    }
+
+    public void applyKnockback(Entity source, double knockback){
+        double moveX = this.getX() - source.getX();
+        double moveY = this.getY() - source.getY();
+        double length = Util.distance(0, 0, moveX, moveY);
+
+        this.motionX += knockback * (moveX / length);
+        this.motionY += knockback * (moveY / length);
     }
 }

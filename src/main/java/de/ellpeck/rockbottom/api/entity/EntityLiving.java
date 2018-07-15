@@ -67,10 +67,8 @@ public abstract class EntityLiving extends Entity {
 
         if (!this.world.isClient()) {
             if (this.health <= 0) {
-                if (!this.dead) {
+                if (!this.isDead()) {
                     this.setDead(true);
-                } else if (this.deathTimer < this.getDeathLingerTime()) {
-                    this.deathTimer++;
                 }
             } else {
                 if (this.health < this.getMaxHealth()) {
@@ -82,6 +80,14 @@ public abstract class EntityLiving extends Entity {
                     }
                 }
             }
+        }
+
+        if (this.isDead()) {
+            if (this.deathTimer < this.getDeathLingerTime()) {
+                this.deathTimer++;
+            }
+        } else {
+            this.deathTimer = 0;
         }
     }
 
