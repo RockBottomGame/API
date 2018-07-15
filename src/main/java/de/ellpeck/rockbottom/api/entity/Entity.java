@@ -197,7 +197,7 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
         if (this.currentAiTask != null) {
             DataSet sub = new DataSet();
             sub.addInt("id", this.getTaskId(this.currentAiTask));
-            this.currentAiTask.save(sub, false);
+            this.currentAiTask.save(sub, false, this);
             set.addDataSet("task", sub);
         }
     }
@@ -231,7 +231,7 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
         if (!sub.isEmpty()) {
             this.currentAiTask = this.aiTasks.get(sub.getInt("id"));
             if (this.currentAiTask != null) {
-                this.currentAiTask.load(sub, false);
+                this.currentAiTask.load(sub, false, this);
             }
         }
     }
@@ -393,7 +393,7 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
         return null;
     }
 
-    public void applyKnockback(Entity source, double knockback){
+    public void applyKnockback(Entity source, double knockback) {
         double moveX = this.getX() - source.getX();
         double moveY = this.getY() - source.getY();
         double length = Util.distance(0, 0, moveX, moveY);

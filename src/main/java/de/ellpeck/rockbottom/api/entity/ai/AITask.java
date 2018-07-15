@@ -55,11 +55,11 @@ public abstract class AITask<T extends Entity> {
         return expectedNextTask;
     }
 
-    public void save(DataSet set, boolean forSync) {
+    public void save(DataSet set, boolean forSync, T entity) {
 
     }
 
-    public void load(DataSet set, boolean forSync) {
+    public void load(DataSet set, boolean forSync, T entity) {
 
     }
 }

@@ -28,6 +28,7 @@ import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.event.EventResult;
 import de.ellpeck.rockbottom.api.event.impl.EntityDamageEvent;
 import de.ellpeck.rockbottom.api.event.impl.RegenEvent;
+import de.ellpeck.rockbottom.api.net.packet.toclient.PacketDamage;
 import de.ellpeck.rockbottom.api.world.IWorld;
 
 public abstract class EntityLiving extends Entity {
@@ -131,8 +132,15 @@ public abstract class EntityLiving extends Entity {
     public void takeDamage(int amount) {
         EntityDamageEvent event = new EntityDamageEvent(this, amount);
         if (RockBottomAPI.getEventHandler().fireEvent(event) != EventResult.CANCELLED) {
-            this.setHealth(this.getHealth() - event.amount);
+            if (!this.world.isClient()) {
+                this.setHealth(this.getHealth() - event.amount);
+            }
+
             this.lastDamageTime = this.world.getTotalTime();
+
+            if (this.world.isServer()) {
+                RockBottomAPI.getNet().sendToAllPlayersWithLoadedPos(this.world, new PacketDamage(this.getUniqueId(), amount), this.getX(), this.getY());
+            }
         }
     }
 
@@ -174,7 +182,9 @@ public abstract class EntityLiving extends Entity {
 
     @Override
     public boolean onAttack(AbstractEntityPlayer player, double mouseX, double mouseY, int intendedDamage) {
-        this.takeDamage(intendedDamage);
+        if (!this.world.isClient()) {
+            this.takeDamage(intendedDamage);
+        }
         return true;
     }
 }

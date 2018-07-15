@@ -69,8 +69,10 @@ public class ItemSword extends ItemTool {
 
     @Override
     public boolean onEntityAttack(IWorld world, double mouseX, double mouseY, AbstractEntityPlayer player, Entity entity, ItemInstance instance) {
-        this.takeDamage(instance, player, 1);
-        entity.applyKnockback(player, this.knockback);
+        if (!entity.world.isClient()) {
+            this.takeDamage(instance, player, 1);
+            entity.applyKnockback(player, this.knockback);
+        }
         return true;
     }
 
