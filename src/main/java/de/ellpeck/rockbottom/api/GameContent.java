@@ -80,6 +80,7 @@ public final class GameContent {
     public static final Item ITEM_BRITTLE_PICKAXE = getItem("brittle_pickaxe");
     public static final Item ITEM_BRITTLE_AXE = getItem("brittle_axe");
     public static final Item ITEM_BRITTLE_SHOVEL = getItem("brittle_shovel");
+    public static final Item ITEM_BRITTLE_SWORD = getItem("brittle_sword");
     public static final Item ITEM_FIREWORK = getItem("firework").setMaxAmount(25);
     public static final Item ITEM_STAT_NOTE = getItem("start_note").setMaxAmount(1);
     public static final Item ITEM_PLANT_FIBER = getItem("plant_fiber").setMaxAmount(150);
@@ -87,6 +88,7 @@ public final class GameContent {
     public static final Item ITEM_STONE_PICKAXE = getItem("stone_pickaxe");
     public static final Item ITEM_STONE_AXE = getItem("stone_axe");
     public static final Item ITEM_STONE_SHOVEL = getItem("stone_shovel");
+    public static final Item ITEM_STONE_SWORD = getItem("stone_sword");
     public static final Item ITEM_COPPER_CANISTER = getItem("copper_canister").setMaxAmount(15);
     public static final Item ITEM_COPPER_INGOT = getItem("copper_ingot").setMaxAmount(50);
     public static final Item ITEM_COPPER_PICKAXE = getItem("copper_pickaxe");
