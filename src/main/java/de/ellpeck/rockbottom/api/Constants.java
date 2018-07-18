@@ -68,7 +68,7 @@ public final class Constants {
      * @see IWorld#getArtificialLight(int, int)
      * @see IWorld#getCombinedLight(int, int)
      */
-    public static final byte MAX_LIGHT = 30;
+    public static final byte MAX_LIGHT = Byte.MAX_VALUE;
 
     /**
      * The amount of ticks that a full day in the world should have
