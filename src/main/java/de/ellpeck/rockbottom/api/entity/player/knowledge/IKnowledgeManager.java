@@ -42,9 +42,9 @@ public interface IKnowledgeManager {
 
     void teachInformation(Information information);
 
-    void forgetRecipe(IRecipe recipe, boolean forgetAllParts, boolean announce);
+    void forgetRecipe(IRecipe recipe, boolean announce);
 
-    void forgetRecipe(IRecipe recipe, boolean forgetAllParts);
+    void forgetRecipe(IRecipe recipe);
 
     void forgetInformation(ResourceName name, boolean announce);
 

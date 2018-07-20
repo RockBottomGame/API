@@ -96,6 +96,7 @@ public final class GameContent {
     public static final Item ITEM_COPPER_AXE = getItem("copper_axe");
     public static final Item ITEM_COPPER_SHOVEL = getItem("copper_shovel");
     public static final Item ITEM_COPPER_SWORD = getItem("copper_sword");
+    public static final Item ITEM_RECIPE_NOTE = getItem("recipe_note").setMaxAmount(1);
 
     /*
         ---RESOURCE REGISTRY ENTRIES---
