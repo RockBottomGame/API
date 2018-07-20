@@ -27,6 +27,7 @@ import de.ellpeck.rockbottom.api.effect.IEffect;
 import de.ellpeck.rockbottom.api.item.Item;
 import de.ellpeck.rockbottom.api.item.ToolType;
 import de.ellpeck.rockbottom.api.tile.Tile;
+import de.ellpeck.rockbottom.api.tile.TileLiquid;
 import de.ellpeck.rockbottom.api.tile.TileMeta;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
 import de.ellpeck.rockbottom.api.util.reg.NameRegistry;
@@ -62,7 +63,7 @@ public final class GameContent {
     public static final Tile TILE_CHEST = getTile("chest").setHardness(4F).addEffectiveTool(ToolType.AXE, 0).setForceDrop().setMaxAmount(5);
     public static final Tile TILE_SIGN = getTile("sign").addEffectiveTool(ToolType.AXE, 0).setForceDrop().setMaxAmount(100);
     public static final Tile TILE_SAPLING = getTile("sapling").setHardness(0F).setForceDrop().setMaxAmount(150);
-    public static final Tile TILE_WATER = getTile("water");
+    public static final TileLiquid TILE_WATER = (TileLiquid)getTile("water");
     public static final TileMeta WOOD_BOARDS = (TileMeta) getTile("wood_boards").setHardness(2F).addEffectiveTool(ToolType.AXE, 0).setForceDrop().setMaxAmount(75);
     public static final Tile TILE_WOOD_DOOR = getTile("wood_door").setHardness(4F).addEffectiveTool(ToolType.AXE, 0).setForceDrop().setMaxAmount(5);
     public static final Tile TILE_WOOD_DOOR_OLD = getTile("wood_door_old").setHardness(3.5F).addEffectiveTool(ToolType.AXE, 0).setForceDrop().setMaxAmount(5);

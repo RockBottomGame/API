@@ -41,6 +41,10 @@ public abstract class TileLiquid extends TileBasic {
         this.addProps(this.level);
     }
 
+    public TileState getFullState() {
+        return this.getDefState().prop(this.level, this.getLevels() - 1);
+    }
+
     @Override
     protected ITileRenderer createRenderer(ResourceName name) {
         return new TileLiquidRenderer(name, this);

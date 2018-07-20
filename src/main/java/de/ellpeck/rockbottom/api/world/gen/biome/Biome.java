@@ -88,4 +88,8 @@ public abstract class Biome {
     public boolean hasUndergroundFeatures(IWorld world, IChunk chunk) {
         return false;
     }
+
+    public float getLakeChance(IWorld world, IChunk chunk){
+        return 0.5F;
+    }
 }
