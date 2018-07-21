@@ -36,6 +36,7 @@ import java.util.List;
 public class TileLiquidRenderer<T extends TileLiquid> extends DefaultTileRenderer<T> {
 
     private final List<ResourceName> levelTextures = new ArrayList<>();
+    private final ResourceName topTexture;
 
     public TileLiquidRenderer(ResourceName texture, T tile) {
         super(texture);
@@ -43,11 +44,24 @@ public class TileLiquidRenderer<T extends TileLiquid> extends DefaultTileRendere
         for (int i = 0; i < tile.getLevels(); i++) {
             this.levelTextures.add(this.texture.addSuffix("." + i));
         }
+        this.topTexture = this.texture.addSuffix(".top");
     }
 
     @Override
     public void render(IGameInstance game, IAssetManager manager, IRenderer g, IWorld world, T tile, TileState state, int x, int y, TileLayer layer, float renderX, float renderY, float scale, int[] light) {
+    }
+
+    @Override
+    public void renderInForeground(IGameInstance game, IAssetManager manager, IRenderer g, IWorld world, T tile, TileState state, int x, int y, TileLayer layer, float renderX, float renderY, float scale, int[] light) {
         int level = state.get(tile.level);
-        manager.getTexture(this.levelTextures.get(level)).draw(renderX, renderY, scale, scale, light);
+        ResourceName texture;
+
+        if (level == tile.getLevels() - 1 && !world.getState(layer, x, y + 1).getTile().isLiquid()) {
+            texture = this.topTexture;
+        } else {
+            texture = this.levelTextures.get(level);
+        }
+
+        manager.getTexture(texture).getPositionalVariation(x, y).draw(renderX, renderY, scale, scale, light);
     }
 }
