@@ -46,7 +46,6 @@ import java.io.File;
 import java.net.URLClassLoader;
 import java.util.UUID;
 import java.util.function.BiConsumer;
-import java.util.function.Predicate;
 
 /**
  * The game instance that can be used to interact with various game-related
@@ -75,19 +74,6 @@ public interface IGameInstance extends IMod {
      * meaning that you can call this function from a different thread without
      * causing concurrent modification issues.
      *
-     * @param action    The action to be executed
-     * @param object    An object you can pass for later use in the action
-     *                  consumer
-     * @param condition The condition for this action to be performed. If not
-     *                  met, the action will be kept in the queue until the
-     *                  condition is met, at which point it will be executed and
-     *                  removed from the queue
-     * @param <T>       A user-chosen generic type for the passed additional
-     *                  object
-     */
-    <T> void enqueueAction(BiConsumer<IGameInstance, T> action, T object, Predicate<IGameInstance> condition);
-
-    /**
      * @param action The action to be executed
      * @param object An object you can pass for later use in the action
      *               consumer
