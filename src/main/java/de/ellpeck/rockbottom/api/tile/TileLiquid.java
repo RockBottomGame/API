@@ -23,14 +23,18 @@ package de.ellpeck.rockbottom.api.tile;
 
 import de.ellpeck.rockbottom.api.GameContent;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
+import de.ellpeck.rockbottom.api.entity.Entity;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.render.tile.ITileRenderer;
 import de.ellpeck.rockbottom.api.render.tile.TileLiquidRenderer;
 import de.ellpeck.rockbottom.api.tile.state.IntProp;
 import de.ellpeck.rockbottom.api.tile.state.TileState;
+import de.ellpeck.rockbottom.api.util.BoundBox;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 import de.ellpeck.rockbottom.api.world.IWorld;
 import de.ellpeck.rockbottom.api.world.layer.TileLayer;
+
+import java.util.List;
 
 public abstract class TileLiquid extends TileBasic {
 
@@ -109,5 +113,20 @@ public abstract class TileLiquid extends TileBasic {
     @Override
     protected boolean hasItem() {
         return false;
+    }
+
+    @Override
+    public void onIntersectWithEntity(IWorld world, int x, int y, TileLayer layer, TileState state, BoundBox entityBox, BoundBox entityBoxMotion, List<BoundBox> tileBoxes, Entity entity) {
+        super.onIntersectWithEntity(world, x, y, layer, state, entityBox, entityBoxMotion, tileBoxes, entity);
+
+        for (BoundBox box : tileBoxes) {
+            if (box.intersects(entityBox)) {
+                entity.submergedLiquid = state;
+                if (box.contains(entity.getX(), entity.getOriginY() + entity.getEyeHeight())) {
+                    entity.canBreathe = false;
+                    break;
+                }
+            }
+        }
     }
 }

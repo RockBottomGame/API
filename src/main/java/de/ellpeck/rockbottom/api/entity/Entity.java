@@ -62,6 +62,8 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
     public double lastY;
     public boolean isClimbing;
     public boolean canClimb;
+    public TileState submergedLiquid;
+    public boolean canBreathe;
     protected boolean dead;
     private UUID uniqueId = UUID.randomUUID();
     private ModBasedDataSet additionalData;
@@ -400,5 +402,9 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
 
         this.motionX += knockback * (moveX / length);
         this.motionY += knockback * (moveY / length);
+    }
+
+    public double getEyeHeight() {
+        return this.getHeight()/2D;
     }
 }

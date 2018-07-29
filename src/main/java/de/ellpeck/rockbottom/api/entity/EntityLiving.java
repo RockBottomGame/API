@@ -38,6 +38,8 @@ public abstract class EntityLiving extends Entity {
     public int jumpTimeout;
     protected int health;
     protected int maxHealth;
+    protected int maxBreath = 10;
+    protected int breath;
     public int lastDamageTime;
     public int deathTimer;
 
@@ -45,6 +47,7 @@ public abstract class EntityLiving extends Entity {
         super(world);
         this.maxHealth = this.getInitialMaxHealth();
         this.health = this.getMaxHealth();
+        this.breath = this.maxBreath;
     }
 
     @Override
@@ -75,10 +78,23 @@ public abstract class EntityLiving extends Entity {
                 if (this.health < this.getMaxHealth()) {
                     RegenEvent event = new RegenEvent(this, this.getRegenRate(), 1);
                     if (RockBottomAPI.getEventHandler().fireEvent(event) != EventResult.CANCELLED) {
-                        if (this.world.getTotalTime() % event.regenRate == 0) {
+                        if (this.ticksExisted % event.regenRate == 0) {
                             this.health += event.addedHealth;
                         }
                     }
+                }
+
+                int breath = this.getBreath();
+                if (!this.canBreathe) {
+                    if (this.ticksExisted % 40 == 0) {
+                        if (breath > 0) {
+                            this.setBreath(breath - 1);
+                        } else {
+                            this.takeDamage(20);
+                        }
+                    }
+                } else if (this.ticksExisted % 20 == 0 && breath < this.getMaxBreath()) {
+                    this.setBreath(breath + 1);
                 }
             }
         }
@@ -110,14 +126,6 @@ public abstract class EntityLiving extends Entity {
         return 3;
     }
 
-    public int getHealth() {
-        return this.health;
-    }
-
-    public void setHealth(int health) {
-        this.health = health;
-    }
-
     @Override
     public boolean shouldBeRemoved() {
         return this.isDead() && this.deathTimer >= this.getDeathLingerTime();
@@ -144,12 +152,36 @@ public abstract class EntityLiving extends Entity {
         }
     }
 
+    public int getHealth() {
+        return this.health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
     public int getMaxHealth() {
         return this.maxHealth;
     }
 
     public void setMaxHealth(int maxHealth) {
         this.maxHealth = maxHealth;
+    }
+
+    public int getBreath() {
+        return this.breath;
+    }
+
+    public void setBreath(int breath) {
+        this.breath = breath;
+    }
+
+    public int getMaxBreath() {
+        return this.maxBreath;
+    }
+
+    public void setMaxBreath(int maxBreath) {
+        this.maxBreath = maxBreath;
     }
 
     public abstract int getInitialMaxHealth();
@@ -165,6 +197,8 @@ public abstract class EntityLiving extends Entity {
         set.addInt("jump_timeout", this.jumpTimeout);
         set.addInt("health", this.health);
         set.addInt("max_health", this.maxHealth);
+        set.addInt("breath", this.breath);
+        set.addInt("max_breath", this.maxBreath);
     }
 
     @Override
@@ -177,6 +211,10 @@ public abstract class EntityLiving extends Entity {
         this.health = set.getInt("health");
         if (set.hasKey("max_health")) { //TODO Remove this legacy compat check
             this.maxHealth = set.getInt("max_health");
+        }
+        this.breath = set.getInt("breath");
+        if (set.hasKey("max_breath")) { //TODO Remove this legacy compat check
+            this.maxBreath = set.getInt("max_breath");
         }
     }
 
