@@ -50,6 +50,8 @@ public abstract class MovableWorldObject {
 
     public void setPos(double x, double y) {
         this.setBounds(x, y);
+        this.lastTickX = x;
+        this.lastTickY = y;
     }
 
     public void resetBounds() {
