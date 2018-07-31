@@ -105,6 +105,10 @@ public final class Util {
         return (dx * dx) + (dy * dy);
     }
 
+    public static double lerp(double pos1, double pos2, double factor) {
+        return (1D - factor) * pos1 + factor * pos2;
+    }
+
     /**
      * Clamps a value between a minimum and a maximum value. If the given value
      * is higher than the maximum, the maximum will be returned. If it is lower

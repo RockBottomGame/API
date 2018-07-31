@@ -58,8 +58,8 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
     public int ticksExisted;
     public double fallStartY;
     public boolean isFalling;
-    public double lastX;
-    public double lastY;
+    public double lastSyncX;
+    public double lastSyncY;
     public boolean isClimbing;
     public boolean canClimb;
     public TileState submergedLiquid;

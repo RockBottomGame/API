@@ -25,6 +25,7 @@ import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.tile.state.TileState;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
 import de.ellpeck.rockbottom.api.util.BoundBox;
+import de.ellpeck.rockbottom.api.util.Util;
 import de.ellpeck.rockbottom.api.world.IWorld;
 import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 
@@ -39,6 +40,8 @@ public abstract class MovableWorldObject {
     public boolean collidedHor;
     public boolean collidedVert;
     public boolean onGround;
+    public double lastTickX;
+    public double lastTickY;
 
     public MovableWorldObject(IWorld world) {
         this.world = world;
@@ -77,8 +80,18 @@ public abstract class MovableWorldObject {
         return this.currentBounds.getMinY();
     }
 
+    public double getLerpedX(){
+        return Util.lerp(this.lastTickX, this.getX(), RockBottomAPI.getGame().getTickDelta());
+    }
+
+    public double getLerpedY(){
+        return Util.lerp(this.lastTickY, this.getY(), RockBottomAPI.getGame().getTickDelta());
+    }
+
     @ApiInternal
     public void move() {
+        this.lastTickX = this.getX();
+        this.lastTickY = this.getY();
         RockBottomAPI.getInternalHooks().doWorldObjectMovement(this);
     }
 
