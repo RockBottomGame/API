@@ -109,4 +109,12 @@ public abstract class AbstractEntityPlayer extends EntityLiving implements IComm
     public abstract double getJumpHeight();
 
     public abstract boolean isLocalPlayer();
+
+    public abstract void gainSkill(float percentage);
+
+    public abstract float getSkillPercentage();
+
+    public abstract int getSkillPoints();
+
+    public abstract int takeSkillPoints(int points);
 }

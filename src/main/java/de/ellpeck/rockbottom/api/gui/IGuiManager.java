@@ -21,7 +21,10 @@
 
 package de.ellpeck.rockbottom.api.gui;
 
+import de.ellpeck.rockbottom.api.gui.component.GuiComponent;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
+
+import java.util.List;
 
 public interface IGuiManager {
 
@@ -30,6 +33,8 @@ public interface IGuiManager {
 
     @ApiInternal
     void initOnScreenComponents();
+
+    List<GuiComponent> getOnScreenComponents();
 
     void openGui(Gui gui);
 
