@@ -63,7 +63,7 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
     public boolean isClimbing;
     public boolean canClimb;
     public TileState submergedLiquid;
-    public boolean canBreathe;
+    public boolean canBreathe = true;
     protected boolean dead;
     private UUID uniqueId = UUID.randomUUID();
     private ModBasedDataSet additionalData;
