@@ -21,7 +21,6 @@
 
 package de.ellpeck.rockbottom.api.data.settings;
 
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.data.IDataManager;
@@ -88,17 +87,7 @@ public final class Settings implements IJsonSettings {
             JsonObject keybinds = object.get("keybinds").getAsJsonObject();
             for (Keybind keybind : RockBottomAPI.KEYBIND_REGISTRY.values()) {
                 String name = keybind.getName().toString();
-
-                //TODO Remove legacy keybind check
-                JsonElement sub = keybinds.get(name);
-                if (sub != null) {
-                    if (sub.isJsonObject()) {
-                        int key = this.get(sub.getAsJsonObject(), "key", keybind.getKey());
-                        keybind.setBind(key);
-                    } else {
-                        keybind.setBind(sub.getAsInt());
-                    }
-                }
+                keybind.setBind(keybinds.get(name).getAsInt());
             }
         }
 

@@ -211,13 +211,9 @@ public abstract class EntityLiving extends Entity {
         this.jumpTicks = set.getInt("jump_ticks");
         this.jumpTimeout = set.getInt("jump_timeout");
         this.health = set.getInt("health");
-        if (set.hasKey("max_health")) { //TODO Remove this legacy compat check
-            this.maxHealth = set.getInt("max_health");
-        }
+        this.maxHealth = set.getInt("max_health");
         this.breath = set.getInt("breath");
-        if (set.hasKey("max_breath")) { //TODO Remove this legacy compat check
-            this.maxBreath = set.getInt("max_breath");
-        }
+        this.maxBreath = set.getInt("max_breath");
     }
 
     @Override

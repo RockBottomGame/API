@@ -61,10 +61,7 @@ public class WorldInfo {
         this.seed = dataSet.getLong("seed");
         this.totalTimeInWorld = dataSet.getInt("total_time");
         this.currentWorldTime = dataSet.getInt("curr_time");
-        //TODO Remove this legacy compat check eventually
-        if (dataSet.hasKey("story_mode")) {
-            this.storyMode = dataSet.getBoolean("story_mode");
-        }
+        this.storyMode = dataSet.getBoolean("story_mode");
         this.lastPlayerId = dataSet.getUniqueId("last_player");
     }
 
