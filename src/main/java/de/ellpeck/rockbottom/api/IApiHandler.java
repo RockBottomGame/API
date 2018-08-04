@@ -21,10 +21,12 @@
 
 package de.ellpeck.rockbottom.api;
 
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import de.ellpeck.rockbottom.api.construction.IRecipe;
 import de.ellpeck.rockbottom.api.construction.resource.IUseInfo;
 import de.ellpeck.rockbottom.api.data.set.AbstractDataSet;
+import de.ellpeck.rockbottom.api.data.set.part.DataPart;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.inventory.Inventory;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
@@ -104,6 +106,8 @@ public interface IApiHandler {
      * @throws Exception if reading fails for some reason
      */
     void readDataSet(JsonObject main, AbstractDataSet set) throws Exception;
+
+    DataPart readDataPart(JsonElement element) throws Exception;
 
     /**
      * Interpolates the light at a position in the world. The four integers in

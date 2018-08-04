@@ -24,12 +24,10 @@ package de.ellpeck.rockbottom.api.data.set;
 import com.google.common.base.Preconditions;
 import de.ellpeck.rockbottom.api.data.set.part.*;
 import de.ellpeck.rockbottom.api.data.set.part.num.*;
-import de.ellpeck.rockbottom.api.data.set.part.num.array.PartByteArray;
-import de.ellpeck.rockbottom.api.data.set.part.num.array.PartIntArray;
-import de.ellpeck.rockbottom.api.data.set.part.num.array.PartShortArray;
 import de.ellpeck.rockbottom.api.util.Util;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
+import java.util.List;
 import java.util.UUID;
 
 public final class ModBasedDataSet extends AbstractDataSet {
@@ -88,30 +86,6 @@ public final class ModBasedDataSet extends AbstractDataSet {
         this.addPart(key.toString(), new PartModBasedDataSet(set));
     }
 
-    public byte[] getByteArray(ResourceName key, int defaultSize) {
-        return this.getPartContent(key.toString(), PartByteArray.class, new byte[defaultSize]);
-    }
-
-    public void addByteArray(ResourceName key, byte[] array) {
-        this.addPart(key.toString(), new PartByteArray(array));
-    }
-
-    public int[] getIntArray(ResourceName key, int defaultSize) {
-        return this.getPartContent(key.toString(), PartIntArray.class, new int[defaultSize]);
-    }
-
-    public void addIntArray(ResourceName key, int[] array) {
-        this.addPart(key.toString(), new PartIntArray(array));
-    }
-
-    public short[] getShortArray(ResourceName key, int defaultSize) {
-        return this.getPartContent(key.toString(), PartShortArray.class, new short[defaultSize]);
-    }
-
-    public void addShortArray(ResourceName key, short[] array) {
-        this.addPart(key.toString(), new PartShortArray(array));
-    }
-
     public UUID getUniqueId(ResourceName key) {
         return this.getPartContent(key.toString(), PartUniqueId.class, null);
     }
@@ -150,6 +124,14 @@ public final class ModBasedDataSet extends AbstractDataSet {
 
     public void addString(ResourceName key, String s) {
         this.addPart(key.toString(), new PartString(s));
+    }
+
+    public <T extends DataPart> List<T> getList(String key) {
+        return (List<T>) this.getPartContent(key, PartList.class, null);
+    }
+
+    public void addList(String key, List<DataPart> list) {
+        this.addPart(key, new PartList(list));
     }
 
     public ModBasedDataSet copy() {

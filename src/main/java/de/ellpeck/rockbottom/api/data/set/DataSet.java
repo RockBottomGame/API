@@ -23,10 +23,8 @@ package de.ellpeck.rockbottom.api.data.set;
 
 import de.ellpeck.rockbottom.api.data.set.part.*;
 import de.ellpeck.rockbottom.api.data.set.part.num.*;
-import de.ellpeck.rockbottom.api.data.set.part.num.array.PartByteArray;
-import de.ellpeck.rockbottom.api.data.set.part.num.array.PartIntArray;
-import de.ellpeck.rockbottom.api.data.set.part.num.array.PartShortArray;
 
+import java.util.List;
 import java.util.UUID;
 
 public final class DataSet extends AbstractDataSet {
@@ -79,30 +77,6 @@ public final class DataSet extends AbstractDataSet {
         this.addPart(key, new PartModBasedDataSet(set));
     }
 
-    public byte[] getByteArray(String key, int defaultSize) {
-        return this.getPartContent(key, PartByteArray.class, new byte[defaultSize]);
-    }
-
-    public void addByteArray(String key, byte[] array) {
-        this.addPart(key, new PartByteArray(array));
-    }
-
-    public int[] getIntArray(String key, int defaultSize) {
-        return this.getPartContent(key, PartIntArray.class, new int[defaultSize]);
-    }
-
-    public void addIntArray(String key, int[] array) {
-        this.addPart(key, new PartIntArray(array));
-    }
-
-    public short[] getShortArray(String key, int defaultSize) {
-        return this.getPartContent(key, PartShortArray.class, new short[defaultSize]);
-    }
-
-    public void addShortArray(String key, short[] array) {
-        this.addPart(key, new PartShortArray(array));
-    }
-
     public UUID getUniqueId(String key) {
         return this.getPartContent(key, PartUniqueId.class, null);
     }
@@ -141,6 +115,14 @@ public final class DataSet extends AbstractDataSet {
 
     public void addString(String key, String s) {
         this.addPart(key, new PartString(s));
+    }
+
+    public <T extends DataPart> List<T> getList(String key) {
+        return (List<T>) this.getPartContent(key, PartList.class, null);
+    }
+
+    public void addList(String key, List<? extends DataPart> list) {
+        this.addPart(key, new PartList(list));
     }
 
     public DataSet copy() {

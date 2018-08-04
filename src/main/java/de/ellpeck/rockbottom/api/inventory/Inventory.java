@@ -22,7 +22,11 @@
 package de.ellpeck.rockbottom.api.inventory;
 
 import de.ellpeck.rockbottom.api.data.set.DataSet;
+import de.ellpeck.rockbottom.api.data.set.part.PartDataSet;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Inventory extends AbstractInventory {
 
@@ -49,20 +53,21 @@ public class Inventory extends AbstractInventory {
     }
 
     public void save(DataSet set) {
-        for (int i = 0; i < this.slots.length; i++) {
-            ItemInstance slot = this.slots[i];
-
+        List<PartDataSet> list = new ArrayList<>();
+        for (ItemInstance slot : this.slots) {
             if (slot != null) {
                 DataSet subset = new DataSet();
                 slot.save(subset);
-                set.addDataSet("item_" + i, subset);
+                list.add(new PartDataSet(subset));
             }
         }
+        set.addList("items", list);
     }
 
     public void load(DataSet set) {
-        for (int i = 0; i < this.slots.length; i++) {
-            DataSet subset = set.getDataSet("item_" + i);
+        List<PartDataSet> list = set.getList("items");
+        for (int i = 0; i < list.size(); i++) {
+            DataSet subset = list.get(i).get();
             if (!subset.isEmpty()) {
                 this.slots[i] = ItemInstance.load(subset);
             } else {
