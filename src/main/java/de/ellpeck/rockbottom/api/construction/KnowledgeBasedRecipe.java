@@ -30,16 +30,16 @@ import java.util.List;
 
 public class KnowledgeBasedRecipe extends BasicRecipe {
 
-    public KnowledgeBasedRecipe(ResourceName name, List<IUseInfo> inputs, List<ItemInstance> outputs) {
-        super(name, inputs, outputs);
+    public KnowledgeBasedRecipe(ResourceName name, List<IUseInfo> inputs, List<ItemInstance> outputs, float skillReward) {
+        super(name, inputs, outputs, skillReward);
     }
 
-    public KnowledgeBasedRecipe(ResourceName name, ItemInstance output, IUseInfo... inputs) {
-        super(name, output, inputs);
+    public KnowledgeBasedRecipe(ResourceName name, float skillReward, ItemInstance output, IUseInfo... inputs) {
+        super(name, skillReward, output, inputs);
     }
 
-    public KnowledgeBasedRecipe(ItemInstance output, IUseInfo... inputs) {
-        super(output, inputs);
+    public KnowledgeBasedRecipe(float skillReward, ItemInstance output, IUseInfo... inputs) {
+        super(skillReward, output, inputs);
     }
 
     @Override

@@ -38,20 +38,22 @@ public class BasicRecipe implements IRecipe {
     private final ResourceName infoName;
     private final List<IUseInfo> inputs;
     private final List<ItemInstance> outputs;
+    private final float skillReward;
 
-    public BasicRecipe(ResourceName name, List<IUseInfo> inputs, List<ItemInstance> outputs) {
+    public BasicRecipe(ResourceName name, List<IUseInfo> inputs, List<ItemInstance> outputs, float skillReward) {
         this.name = name;
         this.infoName = name.addPrefix("recipe_");
         this.inputs = inputs;
         this.outputs = outputs;
+        this.skillReward = skillReward;
     }
 
-    public BasicRecipe(ResourceName name, ItemInstance output, IUseInfo... inputs) {
-        this(name, Arrays.asList(inputs), Collections.singletonList(output));
+    public BasicRecipe(ResourceName name, float skillReward, ItemInstance output, IUseInfo... inputs) {
+        this(name, Arrays.asList(inputs), Collections.singletonList(output), skillReward);
     }
 
-    public BasicRecipe(ItemInstance output, IUseInfo... inputs) {
-        this(output.getItem().getName(), output, inputs);
+    public BasicRecipe(float skillReward, ItemInstance output, IUseInfo... inputs) {
+        this(output.getItem().getName(), skillReward, output, inputs);
     }
 
     @Override
@@ -77,6 +79,11 @@ public class BasicRecipe implements IRecipe {
     @Override
     public ResourceName getKnowledgeInformationName() {
         return this.infoName;
+    }
+
+    @Override
+    public float getSkillReward() {
+        return this.skillReward;
     }
 
     public BasicRecipe register(NameRegistry<BasicRecipe> registry) {

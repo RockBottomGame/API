@@ -117,4 +117,7 @@ public abstract class AbstractEntityPlayer extends EntityLiving implements IComm
     public abstract int getSkillPoints();
 
     public abstract int takeSkillPoints(int points);
+
+    @ApiInternal
+    public abstract void setSkill(float percentage, int points);
 }

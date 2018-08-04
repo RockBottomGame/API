@@ -24,6 +24,7 @@ package de.ellpeck.rockbottom.api.construction;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.construction.resource.IUseInfo;
 import de.ellpeck.rockbottom.api.content.IContent;
+import de.ellpeck.rockbottom.api.entity.AbstractEntityItem;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.gui.Gui;
 import de.ellpeck.rockbottom.api.gui.component.construction.ComponentConstruct;
@@ -33,7 +34,6 @@ import de.ellpeck.rockbottom.api.inventory.IInventory;
 import de.ellpeck.rockbottom.api.inventory.Inventory;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
-import de.ellpeck.rockbottom.api.world.IWorld;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,29 +52,35 @@ public interface IRecipe extends IContent {
 
     boolean isKnown(AbstractEntityPlayer player);
 
-    default boolean canConstruct(IInventory inventory) {
-        for (IUseInfo info : this.getActualInputs(inventory)) {
-            if (!inventory.containsResource(info)) {
+    List<IUseInfo> getInputs();
+
+    List<ItemInstance> getOutputs();
+
+    float getSkillReward();
+
+    default boolean canConstruct(IInventory inputInventory, IInventory outputInventory) {
+        for (IUseInfo info : this.getActualInputs(inputInventory)) {
+            if (!inputInventory.containsResource(info)) {
                 return false;
             }
         }
         return true;
     }
 
-    List<IUseInfo> getInputs();
-
     default List<IUseInfo> getActualInputs(IInventory inventory) {
         return this.getInputs();
     }
 
-    List<ItemInstance> getOutputs();
-
-    default List<ItemInstance> getActualOutputs(IInventory inventory, List<ItemInstance> inputs) {
+    default List<ItemInstance> getActualOutputs(IInventory inputInventory, IInventory outputInventory, List<ItemInstance> inputs) {
         return this.getOutputs();
     }
 
-    default void construct(IWorld world, double x, double y, Inventory inv, int amount) {
-        RockBottomAPI.getApiHandler().construct(world, x, y, inv, this, amount, this.getActualInputs(inv), used -> this.getActualOutputs(inv, used));
+    default void playerConstruct(AbstractEntityPlayer player, int amount) {
+        Inventory inv = player.getInv();
+        List<ItemInstance> remains = RockBottomAPI.getApiHandler().construct(player, inv, inv, this, amount, this.getActualInputs(inv), items -> this.getActualOutputs(inv, inv, items), this.getSkillReward());
+        for (ItemInstance instance : remains) {
+            AbstractEntityItem.spawn(player.world, instance, player.getX(), player.getY(), 0F, 0F);
+        }
     }
 
     default List<ComponentIngredient> getIngredientButtons(Gui gui, AbstractEntityPlayer player) {

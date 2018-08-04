@@ -25,6 +25,7 @@ import com.google.gson.JsonObject;
 import de.ellpeck.rockbottom.api.construction.IRecipe;
 import de.ellpeck.rockbottom.api.construction.resource.IUseInfo;
 import de.ellpeck.rockbottom.api.data.set.AbstractDataSet;
+import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.inventory.Inventory;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.world.IWorld;
@@ -130,23 +131,28 @@ public interface IApiHandler {
     /**
      * This is a utility method that you can call for custom construction of
      * items via the compendium, if you, for example, create a custom, more
-     * complex, {@link IRecipe} class.
+     * complex, {@link IRecipe} class, or if you create a machine that should
+     * automatically construct something.
      *
-     * @param world        The world
-     * @param x            The x coordinate of the construction, for dropping
-     *                     additional items
-     * @param y            The y coordinate of the construction, for dropping
-     *                     additional items
-     * @param inventory    The inventory that the construction takes place in
-     * @param recipe       The recipe to be constructed
-     * @param amount       The amount of times this recipe should be
-     *                     constructed
-     * @param inputs       The items that are input into the recipe
-     * @param outputGetter A function that is called to get the outputs of the
-     *                     recipe based on the inputs that were actually taken
-     *                     from the inventory
+     * @param player          The player doing this construction. Can be null if
+     *                        the construction is automated. Note that the skill
+     *                        reward is not used then.
+     * @param inputInventory  The inventory that the construction takes items
+     *                        from
+     * @param outputInventory The inventory that the output items go into
+     * @param recipe          The recipe to be constructed
+     * @param amount          The amount of times this recipe should be
+     *                        constructed
+     * @param inputs          The items that are input into the recipe
+     * @param outputGetter    A function that is called to get the outputs of
+     *                        the recipe based on the inputs that were actually
+     *                        taken from the inventory
+     * @param skillReward     The amount of skill points you get for
+     *                        constructing this recipe
+     * @return A list of items that couldn't fit into the output inventory
+     * specified
      */
-    void construct(IWorld world, double x, double y, Inventory inventory, IRecipe recipe, int amount, List<IUseInfo> inputs, Function<List<ItemInstance>, List<ItemInstance>> outputGetter);
+    List<ItemInstance> construct(AbstractEntityPlayer player, Inventory inputInventory, Inventory outputInventory, IRecipe recipe, int amount, List<IUseInfo> inputs, Function<List<ItemInstance>, List<ItemInstance>> outputGetter, float skillReward);
 
     /**
      * Gets a color in the world based on a light value between 0 and {@link

@@ -188,6 +188,8 @@ public abstract class EntityLiving extends Entity {
 
     public abstract int getRegenRate();
 
+    public abstract float getKillReward(AbstractEntityPlayer player);
+
     @Override
     public void save(DataSet set) {
         super.save(set);
@@ -222,6 +224,10 @@ public abstract class EntityLiving extends Entity {
     public boolean onAttack(AbstractEntityPlayer player, double mouseX, double mouseY, int intendedDamage) {
         if (!this.world.isClient()) {
             this.takeDamage(intendedDamage);
+
+            if (this.getHealth() <= 0) {
+                player.gainSkill(this.getKillReward(player));
+            }
         }
         return true;
     }
