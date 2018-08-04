@@ -35,14 +35,14 @@ public final class PartInt extends BasicDataPart<Integer> {
 
     public static final IPartFactory<PartInt> FACTORY = new IPartFactory<PartInt>() {
         @Override
-        public PartInt parse(String name, JsonElement element) {
+        public PartInt parse(JsonElement element) {
             if (element.isJsonPrimitive()) {
                 JsonPrimitive prim = element.getAsJsonPrimitive();
                 if (prim.isString()) {
                     String string = prim.getAsString().toLowerCase(Locale.ROOT);
                     if (string.endsWith("i")) {
                         try {
-                            return new PartInt(name, Integer.parseInt(string.substring(0, string.length() - 1)));
+                            return new PartInt(Integer.parseInt(string.substring(0, string.length() - 1)));
                         } catch (Exception ignored) {
                         }
                     }
@@ -52,13 +52,13 @@ public final class PartInt extends BasicDataPart<Integer> {
         }
 
         @Override
-        public PartInt parse(String name, DataInput stream) throws Exception {
-            return new PartInt(name, stream.readInt());
+        public PartInt parse(DataInput stream) throws Exception {
+            return new PartInt(stream.readInt());
         }
     };
 
-    public PartInt(String name, Integer data) {
-        super(name, data);
+    public PartInt(Integer data) {
+        super(data);
     }
 
     @Override

@@ -37,7 +37,7 @@ public final class PartByteArray extends BasicDataPart<byte[]> {
 
     public static final IPartFactory<PartByteArray> FACTORY = new IPartFactory<PartByteArray>() {
         @Override
-        public PartByteArray parse(String name, JsonElement element) {
+        public PartByteArray parse(JsonElement element) {
             if (element.isJsonArray()) {
                 JsonArray array = element.getAsJsonArray();
                 if (array.size() > 0) {
@@ -52,7 +52,7 @@ public final class PartByteArray extends BasicDataPart<byte[]> {
                                         String string = array.get(i).getAsString();
                                         data[i] = Byte.parseByte(string.substring(0, string.length() - 1));
                                     }
-                                    return new PartByteArray(name, data);
+                                    return new PartByteArray(data);
                                 } catch (Exception ignored) {
                                 }
                             }
@@ -64,18 +64,18 @@ public final class PartByteArray extends BasicDataPart<byte[]> {
         }
 
         @Override
-        public PartByteArray parse(String name, DataInput stream) throws Exception {
+        public PartByteArray parse(DataInput stream) throws Exception {
             int amount = stream.readInt();
             byte[] data = new byte[amount];
             for (int i = 0; i < amount; i++) {
                 data[i] = stream.readByte();
             }
-            return new PartByteArray(name, data);
+            return new PartByteArray(data);
         }
     };
 
-    public PartByteArray(String name, byte[] data) {
-        super(name, data);
+    public PartByteArray(byte[] data) {
+        super(data);
     }
 
     @Override

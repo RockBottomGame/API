@@ -35,14 +35,14 @@ public final class PartDouble extends BasicDataPart<Double> {
 
     public static final IPartFactory<PartDouble> FACTORY = new IPartFactory<PartDouble>() {
         @Override
-        public PartDouble parse(String name, JsonElement element) {
+        public PartDouble parse(JsonElement element) {
             if (element.isJsonPrimitive()) {
                 JsonPrimitive prim = element.getAsJsonPrimitive();
                 if (prim.isString()) {
                     String string = prim.getAsString().toLowerCase(Locale.ROOT);
                     if (string.endsWith("d")) {
                         try {
-                            return new PartDouble(name, Double.parseDouble(string));
+                            return new PartDouble(Double.parseDouble(string));
                         } catch (Exception ignored) {
                         }
                     }
@@ -52,13 +52,13 @@ public final class PartDouble extends BasicDataPart<Double> {
         }
 
         @Override
-        public PartDouble parse(String name, DataInput stream) throws Exception {
-            return new PartDouble(name, stream.readDouble());
+        public PartDouble parse(DataInput stream) throws Exception {
+            return new PartDouble(stream.readDouble());
         }
     };
 
-    public PartDouble(String name, Double data) {
-        super(name, data);
+    public PartDouble(Double data) {
+        super(data);
     }
 
     @Override

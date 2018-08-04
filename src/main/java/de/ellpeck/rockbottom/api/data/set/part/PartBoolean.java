@@ -31,24 +31,24 @@ public final class PartBoolean extends BasicDataPart<Boolean> {
 
     public static final IPartFactory<PartBoolean> FACTORY = new IPartFactory<PartBoolean>() {
         @Override
-        public PartBoolean parse(String name, JsonElement element) {
+        public PartBoolean parse(JsonElement element) {
             if (element.isJsonPrimitive()) {
                 JsonPrimitive prim = element.getAsJsonPrimitive();
                 if (prim.isBoolean()) {
-                    return new PartBoolean(name, prim.getAsBoolean());
+                    return new PartBoolean(prim.getAsBoolean());
                 }
             }
             return null;
         }
 
         @Override
-        public PartBoolean parse(String name, DataInput stream) throws Exception {
-            return new PartBoolean(name, stream.readBoolean());
+        public PartBoolean parse(DataInput stream) throws Exception {
+            return new PartBoolean(stream.readBoolean());
         }
     };
 
-    public PartBoolean(String name, Boolean data) {
-        super(name, data);
+    public PartBoolean(Boolean data) {
+        super(data);
     }
 
     @Override

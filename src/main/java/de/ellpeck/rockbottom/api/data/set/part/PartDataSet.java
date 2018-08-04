@@ -33,12 +33,12 @@ public final class PartDataSet extends BasicDataPart<DataSet> {
 
     public static final IPartFactory<PartDataSet> FACTORY = new IPartFactory<PartDataSet>() {
         @Override
-        public PartDataSet parse(String name, JsonElement element) {
+        public PartDataSet parse(JsonElement element) {
             if (element.isJsonObject()) {
                 try {
                     DataSet set = new DataSet();
                     RockBottomAPI.getApiHandler().readDataSet(element.getAsJsonObject(), set);
-                    return new PartDataSet(name, set);
+                    return new PartDataSet(set);
                 } catch (Exception ignored) {
                 }
             }
@@ -46,15 +46,15 @@ public final class PartDataSet extends BasicDataPart<DataSet> {
         }
 
         @Override
-        public PartDataSet parse(String name, DataInput stream) throws Exception {
+        public PartDataSet parse(DataInput stream) throws Exception {
             DataSet data = new DataSet();
             RockBottomAPI.getApiHandler().readDataSet(stream, data);
-            return new PartDataSet(name, data);
+            return new PartDataSet(data);
         }
     };
 
-    public PartDataSet(String name, DataSet data) {
-        super(name, data);
+    public PartDataSet(DataSet data) {
+        super(data);
     }
 
     @Override

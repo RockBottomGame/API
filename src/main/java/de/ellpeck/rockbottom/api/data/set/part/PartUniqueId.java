@@ -32,12 +32,12 @@ public final class PartUniqueId extends BasicDataPart<UUID> {
 
     public static final IPartFactory<PartUniqueId> FACTORY = new IPartFactory<PartUniqueId>() {
         @Override
-        public PartUniqueId parse(String name, JsonElement element) {
+        public PartUniqueId parse(JsonElement element) {
             if (element.isJsonPrimitive()) {
                 JsonPrimitive prim = element.getAsJsonPrimitive();
                 if (prim.isString()) {
                     try {
-                        return new PartUniqueId(name, UUID.fromString(prim.getAsString()));
+                        return new PartUniqueId(UUID.fromString(prim.getAsString()));
                     } catch (Exception ignored) {
                     }
                 }
@@ -46,8 +46,8 @@ public final class PartUniqueId extends BasicDataPart<UUID> {
         }
 
         @Override
-        public PartUniqueId parse(String name, DataInput stream) throws Exception {
-            return new PartUniqueId(name, new UUID(stream.readLong(), stream.readLong()));
+        public PartUniqueId parse(DataInput stream) throws Exception {
+            return new PartUniqueId(new UUID(stream.readLong(), stream.readLong()));
         }
 
         @Override
@@ -56,8 +56,8 @@ public final class PartUniqueId extends BasicDataPart<UUID> {
         }
     };
 
-    public PartUniqueId(String name, UUID data) {
-        super(name, data);
+    public PartUniqueId(UUID data) {
+        super(data);
     }
 
     @Override

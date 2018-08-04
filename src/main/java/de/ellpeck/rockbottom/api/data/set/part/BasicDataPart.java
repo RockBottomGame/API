@@ -21,12 +21,13 @@
 
 package de.ellpeck.rockbottom.api.data.set.part;
 
+import java.util.Objects;
+
 public abstract class BasicDataPart<T> extends DataPart<T> {
 
     protected final T data;
 
-    public BasicDataPart(String name, T data) {
-        super(name);
+    public BasicDataPart(T data) {
         this.data = data;
     }
 
@@ -42,20 +43,13 @@ public abstract class BasicDataPart<T> extends DataPart<T> {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        } else if (o instanceof BasicDataPart) {
-            BasicDataPart that = (BasicDataPart) o;
-            return this.name.equals(that.name) && (this.data != null ? this.data.equals(that.data) : that.data == null);
-        } else {
-            return false;
-        }
+        if (this == o) return true;
+        if (o == null || this.getClass() != o.getClass()) return false;
+        return Objects.equals(this.data, ((BasicDataPart) o).data);
     }
 
     @Override
     public int hashCode() {
-        int result = this.name.hashCode();
-        result = 31 * result + (this.data != null ? this.data.hashCode() : 0);
-        return result;
+        return Objects.hash(this.data);
     }
 }

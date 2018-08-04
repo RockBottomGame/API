@@ -36,14 +36,14 @@ public final class PartByte extends BasicDataPart<Byte> {
 
     public static final IPartFactory<PartByte> FACTORY = new IPartFactory<PartByte>() {
         @Override
-        public PartByte parse(String name, JsonElement element) {
+        public PartByte parse(JsonElement element) {
             if (element.isJsonPrimitive()) {
                 JsonPrimitive prim = element.getAsJsonPrimitive();
                 if (prim.isString()) {
                     String string = prim.getAsString().toLowerCase(Locale.ROOT);
                     if (string.endsWith("b")) {
                         try {
-                            return new PartByte(name, Byte.parseByte(string.substring(0, string.length() - 1)));
+                            return new PartByte(Byte.parseByte(string.substring(0, string.length() - 1)));
                         } catch (Exception ignored) {
                         }
                     }
@@ -53,13 +53,13 @@ public final class PartByte extends BasicDataPart<Byte> {
         }
 
         @Override
-        public PartByte parse(String name, DataInput stream) throws Exception {
-            return new PartByte(name, stream.readByte());
+        public PartByte parse(DataInput stream) throws Exception {
+            return new PartByte(stream.readByte());
         }
     };
 
-    public PartByte(String name, Byte data) {
-        super(name, data);
+    public PartByte(Byte data) {
+        super(data);
     }
 
     @Override

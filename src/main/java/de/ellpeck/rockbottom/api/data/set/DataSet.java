@@ -36,7 +36,7 @@ public final class DataSet extends AbstractDataSet {
     }
 
     public void addInt(String key, int i) {
-        this.addPart(new PartInt(key, i));
+        this.addPart(key, new PartInt(i));
     }
 
     public long getLong(String key) {
@@ -44,7 +44,7 @@ public final class DataSet extends AbstractDataSet {
     }
 
     public void addLong(String key, long l) {
-        this.addPart(new PartLong(key, l));
+        this.addPart(key, new PartLong(l));
     }
 
     public float getFloat(String key) {
@@ -52,7 +52,7 @@ public final class DataSet extends AbstractDataSet {
     }
 
     public void addFloat(String key, float f) {
-        this.addPart(new PartFloat(key, f));
+        this.addPart(key, new PartFloat(f));
     }
 
     public double getDouble(String key) {
@@ -60,7 +60,7 @@ public final class DataSet extends AbstractDataSet {
     }
 
     public void addDouble(String key, double d) {
-        this.addPart(new PartDouble(key, d));
+        this.addPart(key, new PartDouble(d));
     }
 
     public DataSet getDataSet(String key) {
@@ -68,7 +68,7 @@ public final class DataSet extends AbstractDataSet {
     }
 
     public void addDataSet(String key, DataSet set) {
-        this.addPart(new PartDataSet(key, set));
+        this.addPart(key, new PartDataSet(set));
     }
 
     public ModBasedDataSet getModBasedDataSet(String key) {
@@ -76,7 +76,7 @@ public final class DataSet extends AbstractDataSet {
     }
 
     public void addModBasedDataSet(String key, ModBasedDataSet set) {
-        this.addPart(new PartModBasedDataSet(key, set));
+        this.addPart(key, new PartModBasedDataSet(set));
     }
 
     public byte[] getByteArray(String key, int defaultSize) {
@@ -84,7 +84,7 @@ public final class DataSet extends AbstractDataSet {
     }
 
     public void addByteArray(String key, byte[] array) {
-        this.addPart(new PartByteArray(key, array));
+        this.addPart(key, new PartByteArray(array));
     }
 
     public int[] getIntArray(String key, int defaultSize) {
@@ -92,7 +92,7 @@ public final class DataSet extends AbstractDataSet {
     }
 
     public void addIntArray(String key, int[] array) {
-        this.addPart(new PartIntArray(key, array));
+        this.addPart(key, new PartIntArray(array));
     }
 
     public short[] getShortArray(String key, int defaultSize) {
@@ -100,7 +100,7 @@ public final class DataSet extends AbstractDataSet {
     }
 
     public void addShortArray(String key, short[] array) {
-        this.addPart(new PartShortArray(key, array));
+        this.addPart(key, new PartShortArray(array));
     }
 
     public UUID getUniqueId(String key) {
@@ -108,7 +108,7 @@ public final class DataSet extends AbstractDataSet {
     }
 
     public void addUniqueId(String key, UUID id) {
-        this.addPart(new PartUniqueId(key, id));
+        this.addPart(key, new PartUniqueId(id));
     }
 
     public byte getByte(String key) {
@@ -116,7 +116,7 @@ public final class DataSet extends AbstractDataSet {
     }
 
     public void addByte(String key, byte b) {
-        this.addPart(new PartByte(key, b));
+        this.addPart(key, new PartByte(b));
     }
 
     public short getShort(String key) {
@@ -124,7 +124,7 @@ public final class DataSet extends AbstractDataSet {
     }
 
     public void addShort(String key, short s) {
-        this.addPart(new PartShort(key, s));
+        this.addPart(key, new PartShort(s));
     }
 
     public boolean getBoolean(String key) {
@@ -132,7 +132,7 @@ public final class DataSet extends AbstractDataSet {
     }
 
     public void addBoolean(String key, boolean s) {
-        this.addPart(new PartBoolean(key, s));
+        this.addPart(key, new PartBoolean(s));
     }
 
     public String getString(String key) {
@@ -140,7 +140,7 @@ public final class DataSet extends AbstractDataSet {
     }
 
     public void addString(String key, String s) {
-        this.addPart(new PartString(key, s));
+        this.addPart(key, new PartString(s));
     }
 
     public DataSet copy() {

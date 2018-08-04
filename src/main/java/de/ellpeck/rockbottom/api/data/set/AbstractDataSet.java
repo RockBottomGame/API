@@ -34,8 +34,8 @@ public abstract class AbstractDataSet {
     protected final Map<String, DataPart> data = new HashMap<>();
     protected final Map<String, DataPart> dataUnmodifiable = Collections.unmodifiableMap(this.data);
 
-    public void addPart(DataPart part) {
-        this.data.put(part.getName(), part);
+    public void addPart(String name, DataPart part) {
+        this.data.put(name, part);
     }
 
     public boolean hasKey(String key) {

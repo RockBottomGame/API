@@ -27,12 +27,6 @@ import java.io.DataOutput;
 
 public abstract class DataPart<T> {
 
-    protected final String name;
-
-    public DataPart(String name) {
-        this.name = name;
-    }
-
     public abstract T get();
 
     public abstract void write(DataOutput stream) throws Exception;
@@ -41,7 +35,4 @@ public abstract class DataPart<T> {
 
     public abstract IPartFactory<? extends DataPart<T>> getFactory();
 
-    public String getName() {
-        return this.name;
-    }
 }

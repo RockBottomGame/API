@@ -37,7 +37,7 @@ public final class PartShortArray extends BasicDataPart<short[]> {
 
     public static final IPartFactory<PartShortArray> FACTORY = new IPartFactory<PartShortArray>() {
         @Override
-        public PartShortArray parse(String name, JsonElement element) {
+        public PartShortArray parse(JsonElement element) {
             if (element.isJsonArray()) {
                 JsonArray array = element.getAsJsonArray();
                 if (array.size() > 0) {
@@ -52,7 +52,7 @@ public final class PartShortArray extends BasicDataPart<short[]> {
                                         String string = array.get(i).getAsString();
                                         data[i] = Short.parseShort(string.substring(0, string.length() - 1));
                                     }
-                                    return new PartShortArray(name, data);
+                                    return new PartShortArray(data);
                                 } catch (Exception ignored) {
                                 }
                             }
@@ -64,18 +64,18 @@ public final class PartShortArray extends BasicDataPart<short[]> {
         }
 
         @Override
-        public PartShortArray parse(String name, DataInput stream) throws Exception {
+        public PartShortArray parse(DataInput stream) throws Exception {
             int amount = stream.readInt();
             short[] data = new short[amount];
             for (int i = 0; i < amount; i++) {
                 data[i] = stream.readShort();
             }
-            return new PartShortArray(name, data);
+            return new PartShortArray(data);
         }
     };
 
-    public PartShortArray(String name, short[] data) {
-        super(name, data);
+    public PartShortArray(short[] data) {
+        super(data);
     }
 
     @Override

@@ -31,23 +31,23 @@ public final class PartString extends BasicDataPart<String> {
 
     public static final IPartFactory<PartString> FACTORY = new IPartFactory<PartString>() {
         @Override
-        public PartString parse(String name, JsonElement element) {
+        public PartString parse(JsonElement element) {
             if (element.isJsonPrimitive()) {
                 JsonPrimitive prim = element.getAsJsonPrimitive();
                 if (prim.isString()) {
-                    return new PartString(name, prim.getAsString());
+                    return new PartString(prim.getAsString());
                 }
             }
             return null;
         }
 
         @Override
-        public PartString parse(String name, DataInput stream) throws Exception {
+        public PartString parse(DataInput stream) throws Exception {
             char[] chars = new char[stream.readInt()];
             for (int i = 0; i < chars.length; i++) {
                 chars[i] = stream.readChar();
             }
-            return new PartString(name, new String(chars));
+            return new PartString(new String(chars));
         }
 
         @Override
@@ -56,8 +56,8 @@ public final class PartString extends BasicDataPart<String> {
         }
     };
 
-    public PartString(String name, String data) {
-        super(name, data);
+    public PartString(String data) {
+        super(data);
     }
 
     @Override

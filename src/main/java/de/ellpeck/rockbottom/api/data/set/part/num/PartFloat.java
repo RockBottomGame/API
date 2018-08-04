@@ -35,14 +35,14 @@ public final class PartFloat extends BasicDataPart<Float> {
 
     public static final IPartFactory<PartFloat> FACTORY = new IPartFactory<PartFloat>() {
         @Override
-        public PartFloat parse(String name, JsonElement element) {
+        public PartFloat parse(JsonElement element) {
             if (element.isJsonPrimitive()) {
                 JsonPrimitive prim = element.getAsJsonPrimitive();
                 if (prim.isString()) {
                     String string = prim.getAsString().toLowerCase(Locale.ROOT);
                     if (string.endsWith("f")) {
                         try {
-                            return new PartFloat(name, Float.parseFloat(string));
+                            return new PartFloat(Float.parseFloat(string));
                         } catch (Exception ignored) {
                         }
                     }
@@ -52,13 +52,13 @@ public final class PartFloat extends BasicDataPart<Float> {
         }
 
         @Override
-        public PartFloat parse(String name, DataInput stream) throws Exception {
-            return new PartFloat(name, stream.readFloat());
+        public PartFloat parse(DataInput stream) throws Exception {
+            return new PartFloat(stream.readFloat());
         }
     };
 
-    public PartFloat(String name, Float data) {
-        super(name, data);
+    public PartFloat(Float data) {
+        super(data);
     }
 
     @Override

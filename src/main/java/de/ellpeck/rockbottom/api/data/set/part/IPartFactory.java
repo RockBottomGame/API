@@ -27,9 +27,9 @@ import java.io.DataInput;
 
 public interface IPartFactory<T extends DataPart> {
 
-    T parse(String name, JsonElement element) throws Exception;
+    T parse(JsonElement element) throws Exception;
 
-    T parse(String name, DataInput stream) throws Exception;
+    T parse(DataInput stream) throws Exception;
 
     default int getPriority() {
         return 0;

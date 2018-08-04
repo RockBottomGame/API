@@ -36,14 +36,14 @@ public final class PartShort extends BasicDataPart<Short> {
 
     public static final IPartFactory<PartShort> FACTORY = new IPartFactory<PartShort>() {
         @Override
-        public PartShort parse(String name, JsonElement element) {
+        public PartShort parse(JsonElement element) {
             if (element.isJsonPrimitive()) {
                 JsonPrimitive prim = element.getAsJsonPrimitive();
                 if (prim.isString()) {
                     String string = prim.getAsString().toLowerCase(Locale.ROOT);
                     if (string.endsWith("s")) {
                         try {
-                            return new PartShort(name, Short.parseShort(string.substring(0, string.length() - 1)));
+                            return new PartShort(Short.parseShort(string.substring(0, string.length() - 1)));
                         } catch (Exception ignored) {
                         }
                     }
@@ -53,13 +53,13 @@ public final class PartShort extends BasicDataPart<Short> {
         }
 
         @Override
-        public PartShort parse(String name, DataInput stream) throws Exception {
-            return new PartShort(name, stream.readShort());
+        public PartShort parse(DataInput stream) throws Exception {
+            return new PartShort(stream.readShort());
         }
     };
 
-    public PartShort(String name, Short data) {
-        super(name, data);
+    public PartShort(Short data) {
+        super(data);
     }
 
     @Override

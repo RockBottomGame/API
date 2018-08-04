@@ -33,12 +33,12 @@ public final class PartModBasedDataSet extends BasicDataPart<ModBasedDataSet> {
 
     public static final IPartFactory<PartModBasedDataSet> FACTORY = new IPartFactory<PartModBasedDataSet>() {
         @Override
-        public PartModBasedDataSet parse(String name, JsonElement element) {
+        public PartModBasedDataSet parse(JsonElement element) {
             if (element.isJsonObject()) {
                 try {
                     ModBasedDataSet set = new ModBasedDataSet();
                     RockBottomAPI.getApiHandler().readDataSet(element.getAsJsonObject(), set);
-                    return new PartModBasedDataSet(name, set);
+                    return new PartModBasedDataSet(set);
                 } catch (Exception ignored) {
                 }
             }
@@ -46,10 +46,10 @@ public final class PartModBasedDataSet extends BasicDataPart<ModBasedDataSet> {
         }
 
         @Override
-        public PartModBasedDataSet parse(String name, DataInput stream) throws Exception {
+        public PartModBasedDataSet parse(DataInput stream) throws Exception {
             ModBasedDataSet data = new ModBasedDataSet();
             RockBottomAPI.getApiHandler().readDataSet(stream, data);
-            return new PartModBasedDataSet(name, data);
+            return new PartModBasedDataSet(data);
         }
 
         @Override
@@ -58,8 +58,8 @@ public final class PartModBasedDataSet extends BasicDataPart<ModBasedDataSet> {
         }
     };
 
-    public PartModBasedDataSet(String name, ModBasedDataSet data) {
-        super(name, data);
+    public PartModBasedDataSet(ModBasedDataSet data) {
+        super(data);
     }
 
     @Override

@@ -35,9 +35,9 @@ import java.util.UUID;
 public final class ModBasedDataSet extends AbstractDataSet {
 
     @Override
-    public void addPart(DataPart part) {
-        Preconditions.checkArgument(Util.isResourceName(part.getName()), "The name " + part.getName() + " of data part " + part + " which is being added to mod based data set " + this + " is not a valid resource name!");
-        super.addPart(part);
+    public void addPart(String name, DataPart part) {
+        Preconditions.checkArgument(Util.isResourceName(name), "The name " + name + " of data part " + part + " which is being added to mod based data set " + this + " is not a valid resource name!");
+        super.addPart(name, part);
     }
 
     public int getInt(ResourceName key) {
@@ -45,7 +45,7 @@ public final class ModBasedDataSet extends AbstractDataSet {
     }
 
     public void addInt(ResourceName key, int i) {
-        this.addPart(new PartInt(key.toString(), i));
+        this.addPart(key.toString(), new PartInt(i));
     }
 
     public long getLong(ResourceName key) {
@@ -53,7 +53,7 @@ public final class ModBasedDataSet extends AbstractDataSet {
     }
 
     public void addLong(ResourceName key, long l) {
-        this.addPart(new PartLong(key.toString(), l));
+        this.addPart(key.toString(), new PartLong(l));
     }
 
     public float getFloat(ResourceName key) {
@@ -61,7 +61,7 @@ public final class ModBasedDataSet extends AbstractDataSet {
     }
 
     public void addFloat(ResourceName key, float f) {
-        this.addPart(new PartFloat(key.toString(), f));
+        this.addPart(key.toString(), new PartFloat(f));
     }
 
     public double getDouble(ResourceName key) {
@@ -69,7 +69,7 @@ public final class ModBasedDataSet extends AbstractDataSet {
     }
 
     public void addDouble(ResourceName key, double d) {
-        this.addPart(new PartDouble(key.toString(), d));
+        this.addPart(key.toString(), new PartDouble(d));
     }
 
     public DataSet getDataSet(ResourceName key) {
@@ -77,7 +77,7 @@ public final class ModBasedDataSet extends AbstractDataSet {
     }
 
     public void addDataSet(ResourceName key, DataSet set) {
-        this.addPart(new PartDataSet(key.toString(), set));
+        this.addPart(key.toString(), new PartDataSet(set));
     }
 
     public ModBasedDataSet getModBasedDataSet(ResourceName key) {
@@ -85,7 +85,7 @@ public final class ModBasedDataSet extends AbstractDataSet {
     }
 
     public void addModBasedDataSet(ResourceName key, ModBasedDataSet set) {
-        this.addPart(new PartModBasedDataSet(key.toString(), set));
+        this.addPart(key.toString(), new PartModBasedDataSet(set));
     }
 
     public byte[] getByteArray(ResourceName key, int defaultSize) {
@@ -93,7 +93,7 @@ public final class ModBasedDataSet extends AbstractDataSet {
     }
 
     public void addByteArray(ResourceName key, byte[] array) {
-        this.addPart(new PartByteArray(key.toString(), array));
+        this.addPart(key.toString(), new PartByteArray(array));
     }
 
     public int[] getIntArray(ResourceName key, int defaultSize) {
@@ -101,7 +101,7 @@ public final class ModBasedDataSet extends AbstractDataSet {
     }
 
     public void addIntArray(ResourceName key, int[] array) {
-        this.addPart(new PartIntArray(key.toString(), array));
+        this.addPart(key.toString(), new PartIntArray(array));
     }
 
     public short[] getShortArray(ResourceName key, int defaultSize) {
@@ -109,7 +109,7 @@ public final class ModBasedDataSet extends AbstractDataSet {
     }
 
     public void addShortArray(ResourceName key, short[] array) {
-        this.addPart(new PartShortArray(key.toString(), array));
+        this.addPart(key.toString(), new PartShortArray(array));
     }
 
     public UUID getUniqueId(ResourceName key) {
@@ -117,7 +117,7 @@ public final class ModBasedDataSet extends AbstractDataSet {
     }
 
     public void addUniqueId(ResourceName key, UUID id) {
-        this.addPart(new PartUniqueId(key.toString(), id));
+        this.addPart(key.toString(), new PartUniqueId(id));
     }
 
     public byte getByte(ResourceName key) {
@@ -125,7 +125,7 @@ public final class ModBasedDataSet extends AbstractDataSet {
     }
 
     public void addByte(ResourceName key, byte b) {
-        this.addPart(new PartByte(key.toString(), b));
+        this.addPart(key.toString(), new PartByte(b));
     }
 
     public short getShort(ResourceName key) {
@@ -133,7 +133,7 @@ public final class ModBasedDataSet extends AbstractDataSet {
     }
 
     public void addShort(ResourceName key, short s) {
-        this.addPart(new PartShort(key.toString(), s));
+        this.addPart(key.toString(), new PartShort(s));
     }
 
     public boolean getBoolean(ResourceName key) {
@@ -141,7 +141,7 @@ public final class ModBasedDataSet extends AbstractDataSet {
     }
 
     public void addBoolean(ResourceName key, boolean s) {
-        this.addPart(new PartBoolean(key.toString(), s));
+        this.addPart(key.toString(), new PartBoolean(s));
     }
 
     public String getString(ResourceName key) {
@@ -149,7 +149,7 @@ public final class ModBasedDataSet extends AbstractDataSet {
     }
 
     public void addString(ResourceName key, String s) {
-        this.addPart(new PartString(key.toString(), s));
+        this.addPart(key.toString(), new PartString(s));
     }
 
     public ModBasedDataSet copy() {
