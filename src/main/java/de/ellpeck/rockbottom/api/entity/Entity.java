@@ -26,6 +26,7 @@ import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.data.set.DataSet;
 import de.ellpeck.rockbottom.api.data.set.IAdditionalDataProvider;
 import de.ellpeck.rockbottom.api.data.set.ModBasedDataSet;
+import de.ellpeck.rockbottom.api.data.set.part.PartDataSet;
 import de.ellpeck.rockbottom.api.effect.ActiveEffect;
 import de.ellpeck.rockbottom.api.effect.IEffect;
 import de.ellpeck.rockbottom.api.entity.ai.AITask;
@@ -188,13 +189,13 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
             set.addModBasedDataSet("data", this.additionalData);
         }
 
-        int amount = this.effects.size();
-        for (int i = 0; i < amount; i++) {
+        List<PartDataSet> effects = new ArrayList<>();
+        for (int i = 0; i < this.effects.size(); i++) {
             DataSet sub = new DataSet();
             this.effects.get(i).save(sub);
-            set.addDataSet("effect_" + i, sub);
+            effects.add(new PartDataSet(sub));
         }
-        set.addInt("effect_amount", amount);
+        set.addList("effects", effects);
 
         if (this.currentAiTask != null) {
             DataSet sub = new DataSet();
@@ -219,10 +220,9 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
         }
 
         this.effects.clear();
-        int amount = set.getInt("effect_amount");
-        for (int i = 0; i < amount; i++) {
-            DataSet sub = set.getDataSet("effect_" + i);
-            ActiveEffect effect = ActiveEffect.load(sub);
+        List<PartDataSet> effects = set.getList("effects");
+        for (PartDataSet part : effects) {
+            ActiveEffect effect = ActiveEffect.load(part.get());
             if (effect != null) {
                 effect.getEffect().onAddedOrLoaded(effect, this, true);
                 this.effects.add(effect);
