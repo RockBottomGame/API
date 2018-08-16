@@ -25,6 +25,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonParser;
 import de.ellpeck.rockbottom.api.Constants;
+import de.ellpeck.rockbottom.api.Registries;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.entity.Entity;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
@@ -220,10 +221,10 @@ public final class Util {
      * @param name  The registry name of the entity
      * @param world The world that the entity should be in
      * @return The newly created entity
-     * @see RockBottomAPI#ENTITY_REGISTRY
+     * @see Registries#ENTITY_REGISTRY
      */
     public static Entity createEntity(ResourceName name, IWorld world) {
-        Class<? extends Entity> entityClass = RockBottomAPI.ENTITY_REGISTRY.get(name);
+        Class<? extends Entity> entityClass = Registries.ENTITY_REGISTRY.get(name);
 
         try {
             return entityClass.getConstructor(IWorld.class).newInstance(world);

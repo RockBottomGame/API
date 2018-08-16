@@ -21,6 +21,7 @@
 
 package de.ellpeck.rockbottom.api.tile;
 
+import de.ellpeck.rockbottom.api.Registries;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.assets.font.FormattingCode;
@@ -97,7 +98,7 @@ public class Tile {
     }
 
     public Tile register() {
-        RockBottomAPI.TILE_REGISTRY.register(this.getName(), this);
+        Registries.TILE_REGISTRY.register(this.getName(), this);
 
         if (this.hasItem()) {
             this.createItemTile().register();
@@ -118,7 +119,7 @@ public class Tile {
 
     public Item getItem() {
         if (this.hasItem()) {
-            return RockBottomAPI.ITEM_REGISTRY.get(this.getName());
+            return Registries.ITEM_REGISTRY.get(this.getName());
         } else {
             return null;
         }

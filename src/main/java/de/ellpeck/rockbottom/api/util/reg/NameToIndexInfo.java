@@ -36,12 +36,10 @@ import java.util.Map;
 public final class NameToIndexInfo implements IJsonSettings {
 
     private final IndexRegistry<ResourceName> reg;
-    private final File legacyFile;
     private final File file;
     private boolean needsSave;
 
-    public NameToIndexInfo(String name, File legacyFile, File file, int max) {
-        this.legacyFile = legacyFile;
+    public NameToIndexInfo(ResourceName name, File file, int max) {
         this.file = file;
         this.reg = new IndexRegistry<>(name, max, false);
     }

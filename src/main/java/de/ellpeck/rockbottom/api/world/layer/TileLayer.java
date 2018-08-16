@@ -23,6 +23,7 @@ package de.ellpeck.rockbottom.api.world.layer;
 
 import com.google.common.base.Preconditions;
 import de.ellpeck.rockbottom.api.IGameInstance;
+import de.ellpeck.rockbottom.api.Registries;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.data.settings.Settings;
 import de.ellpeck.rockbottom.api.entity.MovableWorldObject;
@@ -78,7 +79,7 @@ public class TileLayer {
     }
 
     private static List<TileLayer> makeList(Comparator comparator) {
-        List<TileLayer> list = new ArrayList<>(RockBottomAPI.TILE_LAYER_REGISTRY.values());
+        List<TileLayer> list = new ArrayList<>(Registries.TILE_LAYER_REGISTRY.values());
         list.sort(comparator);
         return Collections.unmodifiableList(list);
     }
@@ -136,7 +137,7 @@ public class TileLayer {
     }
 
     public TileLayer register() {
-        RockBottomAPI.TILE_LAYER_REGISTRY.register(this.getName(), this);
+        Registries.TILE_LAYER_REGISTRY.register(this.getName(), this);
         return this;
     }
 

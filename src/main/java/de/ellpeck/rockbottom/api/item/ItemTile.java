@@ -21,6 +21,7 @@
 
 package de.ellpeck.rockbottom.api.item;
 
+import de.ellpeck.rockbottom.api.Registries;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
@@ -45,7 +46,7 @@ public class ItemTile extends ItemBasic {
     }
 
     public Tile getTile() {
-        return RockBottomAPI.TILE_REGISTRY.get(this.getName());
+        return Registries.TILE_REGISTRY.get(this.getName());
     }
 
     @Override

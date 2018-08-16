@@ -32,12 +32,12 @@ import java.util.Set;
 
 public class NameRegistry<T> implements IRegistry<ResourceName, T> {
 
-    protected final String name;
+    protected final ResourceName name;
     protected final boolean canUnregister;
     protected final BiMap<ResourceName, T> map = HashBiMap.create();
     protected final BiMap<ResourceName, T> unmodifiableMap;
 
-    public NameRegistry(String name, boolean canUnregister) {
+    public NameRegistry(ResourceName name, boolean canUnregister) {
         this.name = name;
         this.canUnregister = canUnregister;
         this.unmodifiableMap = Maps.unmodifiableBiMap(this.map);
@@ -103,7 +103,12 @@ public class NameRegistry<T> implements IRegistry<ResourceName, T> {
     }
 
     @Override
-    public String toString() {
+    public ResourceName getName() {
         return this.name;
+    }
+
+    @Override
+    public String toString() {
+        return this.name.toString();
     }
 }

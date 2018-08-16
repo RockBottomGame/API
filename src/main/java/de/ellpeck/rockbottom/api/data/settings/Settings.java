@@ -22,7 +22,7 @@
 package de.ellpeck.rockbottom.api.data.settings;
 
 import com.google.gson.JsonObject;
-import de.ellpeck.rockbottom.api.RockBottomAPI;
+import de.ellpeck.rockbottom.api.Registries;
 import de.ellpeck.rockbottom.api.data.IDataManager;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
@@ -85,7 +85,7 @@ public final class Settings implements IJsonSettings {
     public void load(JsonObject object) {
         if (object.has("keybinds")) {
             JsonObject keybinds = object.get("keybinds").getAsJsonObject();
-            for (Keybind keybind : RockBottomAPI.KEYBIND_REGISTRY.values()) {
+            for (Keybind keybind : Registries.KEYBIND_REGISTRY.values()) {
                 String name = keybind.getName().toString();
                 keybind.setBind(keybinds.get(name).getAsInt());
             }
@@ -115,7 +115,7 @@ public final class Settings implements IJsonSettings {
     @Override
     public void save(JsonObject object) {
         JsonObject keybinds = new JsonObject();
-        for (Keybind keybind : RockBottomAPI.KEYBIND_REGISTRY.values()) {
+        for (Keybind keybind : Registries.KEYBIND_REGISTRY.values()) {
             String name = keybind.getName().toString();
             keybinds.addProperty(name, keybind.getKey());
         }

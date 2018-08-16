@@ -21,7 +21,7 @@
 
 package de.ellpeck.rockbottom.api.construction.smelting;
 
-import de.ellpeck.rockbottom.api.RockBottomAPI;
+import de.ellpeck.rockbottom.api.Registries;
 import de.ellpeck.rockbottom.api.construction.resource.IUseInfo;
 import de.ellpeck.rockbottom.api.content.IContent;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
@@ -48,7 +48,7 @@ public class SmeltingRecipe implements IContent {
     }
 
     public static SmeltingRecipe forInput(ItemInstance input) {
-        for (SmeltingRecipe recipe : RockBottomAPI.SMELTING_REGISTRY.values()) {
+        for (SmeltingRecipe recipe : Registries.SMELTING_REGISTRY.values()) {
             if (recipe.getInput().containsItem(input)) {
                 return recipe;
             }
@@ -73,7 +73,7 @@ public class SmeltingRecipe implements IContent {
     }
 
     public SmeltingRecipe register() {
-        RockBottomAPI.SMELTING_REGISTRY.register(this.getName(), this);
+        Registries.SMELTING_REGISTRY.register(this.getName(), this);
         return this;
     }
 }

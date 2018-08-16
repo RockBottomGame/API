@@ -23,6 +23,7 @@ package de.ellpeck.rockbottom.api.world;
 
 import de.ellpeck.rockbottom.api.util.ApiInternal;
 import de.ellpeck.rockbottom.api.util.reg.NameToIndexInfo;
+import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 import io.netty.buffer.ByteBuf;
 
 @ApiInternal
@@ -48,10 +49,10 @@ public class DynamicRegistryInfo {
     }
 
     public void fromBuffer(ByteBuf buf) {
-        this.tileRegInfo = new NameToIndexInfo("tile_reg_client_world", null, null, Integer.MAX_VALUE);
+        this.tileRegInfo = new NameToIndexInfo(ResourceName.intern("tile_reg_client_world"), null, Integer.MAX_VALUE);
         this.tileRegInfo.fromBuffer(buf);
 
-        this.biomeRegInfo = new NameToIndexInfo("biome_reg_client_world", null, null, Short.MAX_VALUE);
+        this.biomeRegInfo = new NameToIndexInfo(ResourceName.intern("biome_reg_client_world"), null, Short.MAX_VALUE);
         this.biomeRegInfo.fromBuffer(buf);
     }
 

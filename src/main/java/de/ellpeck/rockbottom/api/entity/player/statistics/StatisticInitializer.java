@@ -22,7 +22,7 @@
 package de.ellpeck.rockbottom.api.entity.player.statistics;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
-import de.ellpeck.rockbottom.api.RockBottomAPI;
+import de.ellpeck.rockbottom.api.Registries;
 import de.ellpeck.rockbottom.api.gui.AbstractStatGui;
 import de.ellpeck.rockbottom.api.gui.component.ComponentMenu;
 import de.ellpeck.rockbottom.api.gui.component.ComponentStatistic;
@@ -47,7 +47,7 @@ public abstract class StatisticInitializer<T extends Statistic> {
     public abstract List<ComponentStatistic> getDisplayComponents(IGameInstance game, T stat, AbstractStatGui gui, ComponentMenu menu);
 
     public StatisticInitializer<T> register() {
-        RockBottomAPI.STATISTICS_REGISTRY.register(this.getName(), this);
+        Registries.STATISTICS_REGISTRY.register(this.getName(), this);
         return this;
     }
 

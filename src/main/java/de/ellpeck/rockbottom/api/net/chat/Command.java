@@ -22,7 +22,7 @@
 package de.ellpeck.rockbottom.api.net.chat;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
-import de.ellpeck.rockbottom.api.RockBottomAPI;
+import de.ellpeck.rockbottom.api.Registries;
 import de.ellpeck.rockbottom.api.net.chat.component.ChatComponent;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
@@ -64,7 +64,7 @@ public abstract class Command {
     }
 
     public Command register() {
-        RockBottomAPI.COMMAND_REGISTRY.register(this.getName(), this);
+        Registries.COMMAND_REGISTRY.register(this.getName(), this);
         return this;
     }
 

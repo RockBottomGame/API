@@ -21,7 +21,7 @@
 
 package de.ellpeck.rockbottom.api.entity.spawn;
 
-import de.ellpeck.rockbottom.api.RockBottomAPI;
+import de.ellpeck.rockbottom.api.Registries;
 import de.ellpeck.rockbottom.api.entity.Entity;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.util.Util;
@@ -75,7 +75,7 @@ public abstract class SpawnBehavior<T extends Entity> {
     }
 
     public SpawnBehavior register() {
-        RockBottomAPI.SPAWN_BEHAVIOR_REGISTRY.register(this.getName(), this);
+        Registries.SPAWN_BEHAVIOR_REGISTRY.register(this.getName(), this);
         return this;
     }
 }

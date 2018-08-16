@@ -22,7 +22,7 @@
 package de.ellpeck.rockbottom.api.util.reg;
 
 import com.google.common.collect.BiMap;
-import de.ellpeck.rockbottom.api.RockBottomAPI;
+import de.ellpeck.rockbottom.api.Registries;
 
 import java.util.Map;
 import java.util.Set;
@@ -47,8 +47,10 @@ public interface IRegistry<T, U> {
 
     Set<Map.Entry<T, U>> entrySet();
 
+    ResourceName getName();
+
     default <V extends IRegistry> V register() {
-        RockBottomAPI.registerRegistry(this);
+        Registries.REGISTRIES.register(this.getName(), this);
         return (V) this;
     }
 }

@@ -22,7 +22,7 @@
 package de.ellpeck.rockbottom.api.assets;
 
 import com.google.gson.JsonElement;
-import de.ellpeck.rockbottom.api.RockBottomAPI;
+import de.ellpeck.rockbottom.api.Registries;
 import de.ellpeck.rockbottom.api.content.pack.ContentPack;
 import de.ellpeck.rockbottom.api.mod.IMod;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
@@ -30,7 +30,7 @@ import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 public interface IAssetLoader<T extends IAsset> {
 
     default void register() {
-        RockBottomAPI.ASSET_LOADER_REGISTRY.register(this.getAssetIdentifier(), this);
+        Registries.ASSET_LOADER_REGISTRY.register(this.getAssetIdentifier(), this);
     }
 
     ResourceName getAssetIdentifier();

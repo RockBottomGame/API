@@ -23,7 +23,7 @@ package de.ellpeck.rockbottom.api.world.gen;
 
 import de.ellpeck.rockbottom.api.Constants;
 import de.ellpeck.rockbottom.api.GameContent;
-import de.ellpeck.rockbottom.api.RockBottomAPI;
+import de.ellpeck.rockbottom.api.Registries;
 import de.ellpeck.rockbottom.api.tile.state.TileState;
 import de.ellpeck.rockbottom.api.util.Util;
 import de.ellpeck.rockbottom.api.world.IChunk;
@@ -42,7 +42,7 @@ public abstract class WorldGenOre implements IWorldGenerator {
 
     @Override
     public void initWorld(IWorld world) {
-        this.oreSeed = Util.scrambleSeed(RockBottomAPI.WORLD_GENERATORS.getId(this.getClass()).hashCode(), world.getSeed());
+        this.oreSeed = Util.scrambleSeed(Registries.WORLD_GENERATORS.getId(this.getClass()).hashCode(), world.getSeed());
     }
 
     @Override
@@ -100,7 +100,7 @@ public abstract class WorldGenOre implements IWorldGenerator {
     protected abstract TileState getOreState();
 
     protected Set<Biome> getAllowedBiomes() {
-        return RockBottomAPI.BIOME_REGISTRY.values();
+        return Registries.BIOME_REGISTRY.values();
     }
 
     protected Set<TileState> getAllwedTiles() {

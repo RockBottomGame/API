@@ -22,6 +22,7 @@
 package de.ellpeck.rockbottom.api.entity.player.statistics;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
+import de.ellpeck.rockbottom.api.Registries;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.data.set.DataSet;
 import de.ellpeck.rockbottom.api.gui.AbstractStatGui;
@@ -96,7 +97,7 @@ public class ItemStatistic extends StatisticInitializer<ItemStatistic.Stat> {
             int count = set.getInt("count");
             for (int i = 0; i < count; i++) {
                 ResourceName name = new ResourceName(set.getString("item_" + i));
-                Item item = RockBottomAPI.ITEM_REGISTRY.get(name);
+                Item item = Registries.ITEM_REGISTRY.get(name);
                 if (item != null) {
                     int counter = set.getInt("value_" + i);
                     this.map.put(item, new Counter(counter));

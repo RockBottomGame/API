@@ -27,9 +27,9 @@ public class DoubleRegistry<T> extends IndexRegistry<T> {
 
     private final NameRegistry<Integer> nameRegistry;
 
-    public DoubleRegistry(String name, int max, boolean canUnregister) {
+    public DoubleRegistry(ResourceName name, int max, boolean canUnregister) {
         super(name, max, canUnregister);
-        this.nameRegistry = new NameRegistry(name + "_named", canUnregister);
+        this.nameRegistry = new NameRegistry(name.addSuffix("_named"), canUnregister);
     }
 
     public void register(ResourceName name, Integer id, T value) {

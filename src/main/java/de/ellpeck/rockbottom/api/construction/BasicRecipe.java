@@ -21,7 +21,7 @@
 
 package de.ellpeck.rockbottom.api.construction;
 
-import de.ellpeck.rockbottom.api.RockBottomAPI;
+import de.ellpeck.rockbottom.api.Registries;
 import de.ellpeck.rockbottom.api.construction.resource.IUseInfo;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
@@ -92,6 +92,6 @@ public class BasicRecipe implements IRecipe {
     }
 
     public BasicRecipe registerManual() {
-        return this.register(RockBottomAPI.MANUAL_CONSTRUCTION_RECIPES);
+        return this.register(Registries.MANUAL_CONSTRUCTION_RECIPES);
     }
 }

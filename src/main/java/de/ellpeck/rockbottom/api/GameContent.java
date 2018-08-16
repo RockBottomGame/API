@@ -141,27 +141,27 @@ public final class GameContent {
 
     @ApiInternal
     private static Biome getBiome(String name) {
-        return get(name, RockBottomAPI.BIOME_REGISTRY);
+        return get(name, Registries.BIOME_REGISTRY);
     }
 
     @ApiInternal
     private static Item getItem(String name) {
-        return get(name, RockBottomAPI.ITEM_REGISTRY);
+        return get(name, Registries.ITEM_REGISTRY);
     }
 
     @ApiInternal
     private static Tile getTile(String name) {
-        return get(name, RockBottomAPI.TILE_REGISTRY);
+        return get(name, Registries.TILE_REGISTRY);
     }
 
     @ApiInternal
     private static IEffect getEffect(String name) {
-        return get(name, RockBottomAPI.EFFECT_REGISTRY);
+        return get(name, Registries.EFFECT_REGISTRY);
     }
 
     @ApiInternal
     private static BiomeLevel getBiomeLevel(String name) {
-        return get(name, RockBottomAPI.BIOME_LEVEL_REGISTRY);
+        return get(name, Registries.BIOME_LEVEL_REGISTRY);
     }
 
     @ApiInternal

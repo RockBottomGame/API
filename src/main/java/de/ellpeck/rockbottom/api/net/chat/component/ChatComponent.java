@@ -22,6 +22,7 @@
 package de.ellpeck.rockbottom.api.net.chat.component;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
+import de.ellpeck.rockbottom.api.Registries;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.data.set.DataSet;
@@ -42,7 +43,7 @@ public abstract class ChatComponent {
         int id = set.getInt("id");
 
         try {
-            Class<? extends ChatComponent> theClass = RockBottomAPI.CHAT_COMPONENT_REGISTRY.get(id);
+            Class<? extends ChatComponent> theClass = Registries.CHAT_COMPONENT_REGISTRY.get(id);
 
             ChatComponent component = theClass.getConstructor().newInstance();
             component.load(set);
@@ -89,7 +90,7 @@ public abstract class ChatComponent {
     }
 
     public void save(DataSet set) {
-        set.addInt("id", RockBottomAPI.CHAT_COMPONENT_REGISTRY.getId(this.getClass()));
+        set.addInt("id", Registries.CHAT_COMPONENT_REGISTRY.getId(this.getClass()));
 
         if (this.child != null) {
             DataSet subSet = new DataSet();

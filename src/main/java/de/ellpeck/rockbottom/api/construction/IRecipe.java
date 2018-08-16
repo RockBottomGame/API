@@ -21,6 +21,7 @@
 
 package de.ellpeck.rockbottom.api.construction;
 
+import de.ellpeck.rockbottom.api.Registries;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.construction.resource.IUseInfo;
 import de.ellpeck.rockbottom.api.content.IContent;
@@ -43,7 +44,7 @@ public interface IRecipe extends IContent {
     ResourceName ID = ResourceName.intern("recipe");
 
     static IRecipe forName(ResourceName name) {
-        return RockBottomAPI.ALL_CONSTRUCTION_RECIPES.get(name);
+        return Registries.ALL_CONSTRUCTION_RECIPES.get(name);
     }
 
     ResourceName getName();

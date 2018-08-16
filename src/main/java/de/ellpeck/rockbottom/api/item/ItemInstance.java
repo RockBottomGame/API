@@ -22,6 +22,7 @@
 package de.ellpeck.rockbottom.api.item;
 
 import com.google.common.base.Preconditions;
+import de.ellpeck.rockbottom.api.Registries;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.data.set.DataSet;
 import de.ellpeck.rockbottom.api.data.set.IAdditionalDataProvider;
@@ -67,7 +68,7 @@ public final class ItemInstance implements IAdditionalDataProvider {
 
     public static ItemInstance load(DataSet set) {
         String name = set.getString("item_name");
-        Item item = RockBottomAPI.ITEM_REGISTRY.get(new ResourceName(name));
+        Item item = Registries.ITEM_REGISTRY.get(new ResourceName(name));
 
         if (item != null) {
             int amount = set.getInt("amount");

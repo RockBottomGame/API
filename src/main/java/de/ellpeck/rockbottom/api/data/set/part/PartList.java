@@ -2,6 +2,7 @@ package de.ellpeck.rockbottom.api.data.set.part;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
+import de.ellpeck.rockbottom.api.Registries;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 
 import java.io.DataInput;
@@ -30,7 +31,7 @@ public class PartList extends BasicDataPart<List<? extends DataPart>> {
             List<DataPart> parts = new ArrayList<>();
             int size = stream.readInt();
             if (size > 0) {
-                IPartFactory factory = RockBottomAPI.PART_REGISTRY.get((int) stream.readByte());
+                IPartFactory factory = Registries.PART_REGISTRY.get((int) stream.readByte());
                 for (int i = 0; i < size; i++) {
                     parts.add(factory.parse(stream));
                 }
@@ -49,7 +50,7 @@ public class PartList extends BasicDataPart<List<? extends DataPart>> {
         for (int i = 0; i < this.data.size(); i++) {
             DataPart part = this.data.get(i);
             if (i == 0) {
-                stream.writeByte(RockBottomAPI.PART_REGISTRY.getId(part.getFactory()));
+                stream.writeByte(Registries.PART_REGISTRY.getId(part.getFactory()));
             }
             part.write(stream);
         }

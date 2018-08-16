@@ -22,6 +22,7 @@
 package de.ellpeck.rockbottom.api.data.settings;
 
 import de.ellpeck.rockbottom.api.IInputHandler;
+import de.ellpeck.rockbottom.api.Registries;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
@@ -87,7 +88,7 @@ public final class Keybind {
     }
 
     public Keybind register() {
-        RockBottomAPI.KEYBIND_REGISTRY.register(this.getName(), this);
+        Registries.KEYBIND_REGISTRY.register(this.getName(), this);
         return this;
     }
 }

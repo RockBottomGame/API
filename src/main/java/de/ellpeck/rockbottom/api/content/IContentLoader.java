@@ -23,7 +23,7 @@ package de.ellpeck.rockbottom.api.content;
 
 import com.google.gson.JsonElement;
 import de.ellpeck.rockbottom.api.IGameInstance;
-import de.ellpeck.rockbottom.api.RockBottomAPI;
+import de.ellpeck.rockbottom.api.Registries;
 import de.ellpeck.rockbottom.api.content.pack.ContentPack;
 import de.ellpeck.rockbottom.api.mod.IMod;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
@@ -31,7 +31,7 @@ import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 public interface IContentLoader<T extends IContent> {
 
     default void register() {
-        RockBottomAPI.CONTENT_LOADER_REGISTRY.register(this.getContentIdentifier(), this);
+        Registries.CONTENT_LOADER_REGISTRY.register(this.getContentIdentifier(), this);
     }
 
     ResourceName getContentIdentifier();

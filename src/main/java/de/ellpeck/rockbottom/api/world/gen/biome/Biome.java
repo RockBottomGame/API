@@ -22,7 +22,7 @@
 package de.ellpeck.rockbottom.api.world.gen.biome;
 
 import de.ellpeck.rockbottom.api.GameContent;
-import de.ellpeck.rockbottom.api.RockBottomAPI;
+import de.ellpeck.rockbottom.api.Registries;
 import de.ellpeck.rockbottom.api.tile.state.TileState;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 import de.ellpeck.rockbottom.api.world.IChunk;
@@ -57,7 +57,7 @@ public abstract class Biome {
     }
 
     public Biome register() {
-        RockBottomAPI.BIOME_REGISTRY.register(this.getName(), this);
+        Registries.BIOME_REGISTRY.register(this.getName(), this);
         return this;
     }
 

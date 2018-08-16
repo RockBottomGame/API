@@ -21,7 +21,7 @@
 
 package de.ellpeck.rockbottom.api.construction.smelting;
 
-import de.ellpeck.rockbottom.api.RockBottomAPI;
+import de.ellpeck.rockbottom.api.Registries;
 import de.ellpeck.rockbottom.api.construction.resource.IUseInfo;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
@@ -43,7 +43,7 @@ public class FuelInput {
     }
 
     public static int getFuelTime(ItemInstance instance) {
-        for (FuelInput input : RockBottomAPI.FUEL_REGISTRY.values()) {
+        for (FuelInput input : Registries.FUEL_REGISTRY.values()) {
             if (input.getFuel().containsItem(instance)) {
                 return input.fuelTime;
             }
@@ -64,7 +64,7 @@ public class FuelInput {
     }
 
     public FuelInput register() {
-        RockBottomAPI.FUEL_REGISTRY.register(this.getName(), this);
+        Registries.FUEL_REGISTRY.register(this.getName(), this);
         return this;
     }
 }

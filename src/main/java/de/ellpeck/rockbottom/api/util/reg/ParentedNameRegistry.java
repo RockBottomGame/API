@@ -25,7 +25,7 @@ public class ParentedNameRegistry<T> extends NameRegistry<T> {
 
     private final NameRegistry<T> parent;
 
-    public ParentedNameRegistry(String name, boolean canUnregister, NameRegistry<T> parent) {
+    public ParentedNameRegistry(ResourceName name, boolean canUnregister, NameRegistry<T> parent) {
         super(name, canUnregister);
         this.parent = parent;
     }

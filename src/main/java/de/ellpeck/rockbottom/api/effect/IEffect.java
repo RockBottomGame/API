@@ -21,7 +21,7 @@
 
 package de.ellpeck.rockbottom.api.effect;
 
-import de.ellpeck.rockbottom.api.RockBottomAPI;
+import de.ellpeck.rockbottom.api.Registries;
 import de.ellpeck.rockbottom.api.entity.Entity;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
@@ -48,6 +48,6 @@ public interface IEffect {
     ResourceName getIcon(ActiveEffect effect, Entity entity);
 
     default void register() {
-        RockBottomAPI.EFFECT_REGISTRY.register(this.getName(), this);
+        Registries.EFFECT_REGISTRY.register(this.getName(), this);
     }
 }

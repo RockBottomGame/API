@@ -21,6 +21,7 @@
 
 package de.ellpeck.rockbottom.api.item;
 
+import de.ellpeck.rockbottom.api.Registries;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.entity.Entity;
@@ -52,7 +53,7 @@ public class Item {
     }
 
     public Item register() {
-        RockBottomAPI.ITEM_REGISTRY.register(this.getName(), this);
+        Registries.ITEM_REGISTRY.register(this.getName(), this);
         return this;
     }
 

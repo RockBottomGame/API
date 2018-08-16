@@ -33,12 +33,12 @@ import java.util.Set;
 public class IndexRegistry<T> implements IRegistry<Integer, T> {
 
     protected final int max;
-    protected final String name;
+    protected final ResourceName name;
     protected final boolean canUnregister;
     protected final BiMap<Integer, T> map = HashBiMap.create();
     protected final BiMap<Integer, T> unmodifiableMap;
 
-    public IndexRegistry(String name, int max, boolean canUnregister) {
+    public IndexRegistry(ResourceName name, int max, boolean canUnregister) {
         this.name = name;
         this.max = max;
         this.canUnregister = canUnregister;
@@ -118,7 +118,12 @@ public class IndexRegistry<T> implements IRegistry<Integer, T> {
     }
 
     @Override
-    public String toString() {
+    public ResourceName getName() {
         return this.name;
+    }
+
+    @Override
+    public String toString() {
+        return this.name.toString();
     }
 }
