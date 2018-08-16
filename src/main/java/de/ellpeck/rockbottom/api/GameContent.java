@@ -63,7 +63,7 @@ public final class GameContent {
     public static final Tile TILE_CHEST = getTile("chest").setHardness(4F).addEffectiveTool(ToolType.AXE, 0).setForceDrop().setMaxAmount(5);
     public static final Tile TILE_SIGN = getTile("sign").addEffectiveTool(ToolType.AXE, 0).setForceDrop().setMaxAmount(100);
     public static final Tile TILE_SAPLING = getTile("sapling").setHardness(0F).setForceDrop().setMaxAmount(150);
-    public static final TileLiquid TILE_WATER = (TileLiquid)getTile("water");
+    public static final TileLiquid TILE_WATER = (TileLiquid) getTile("water");
     public static final TileMeta WOOD_BOARDS = (TileMeta) getTile("wood_boards").setHardness(2F).addEffectiveTool(ToolType.AXE, 0).setForceDrop().setMaxAmount(75);
     public static final Tile TILE_WOOD_DOOR = getTile("wood_door").setHardness(4F).addEffectiveTool(ToolType.AXE, 0).setForceDrop().setMaxAmount(5);
     public static final Tile TILE_WOOD_DOOR_OLD = getTile("wood_door_old").setHardness(3.5F).addEffectiveTool(ToolType.AXE, 0).setForceDrop().setMaxAmount(5);
@@ -98,6 +98,7 @@ public final class GameContent {
     public static final Item ITEM_COPPER_SHOVEL = getItem("copper_shovel");
     public static final Item ITEM_COPPER_SWORD = getItem("copper_sword");
     public static final Item ITEM_RECIPE_NOTE = getItem("recipe_note").setMaxAmount(1);
+    public static final Item ITEM_BOWL = getItem("bowl").setMaxAmount(1);
 
     /*
         ---RESOURCE REGISTRY ENTRIES---
