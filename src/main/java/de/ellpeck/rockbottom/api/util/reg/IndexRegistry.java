@@ -22,55 +22,30 @@
 package de.ellpeck.rockbottom.api.util.reg;
 
 import com.google.common.base.Preconditions;
-import com.google.common.collect.BiMap;
-import com.google.common.collect.HashBiMap;
-import com.google.common.collect.Maps;
-import de.ellpeck.rockbottom.api.RockBottomAPI;
 
-import java.util.Map;
-import java.util.Set;
-
-public class IndexRegistry<T> implements IRegistry<Integer, T> {
+public class IndexRegistry<U> extends AbstractRegistry<Integer, U> {
 
     protected final int max;
-    protected final ResourceName name;
-    protected final boolean canUnregister;
-    protected final BiMap<Integer, T> map = HashBiMap.create();
-    protected final BiMap<Integer, T> unmodifiableMap;
 
     public IndexRegistry(ResourceName name, int max, boolean canUnregister) {
-        this.name = name;
+        super(name, canUnregister);
         this.max = max;
-        this.canUnregister = canUnregister;
-        this.unmodifiableMap = Maps.unmodifiableBiMap(this.map);
     }
 
     @Override
-    public void register(Integer id, T value) {
-        Preconditions.checkArgument(id >= 0 && id <= this.max, "Tried registering " + value + " with id " + id + " which is less than 0 or greater than max " + this.max + " in registry " + this);
-        Preconditions.checkArgument(!this.map.containsKey(id), "Cannot register " + value + " with id " + id + " twice into registry " + this);
-
-        this.map.put(id, value);
-        RockBottomAPI.logger().config("Registered " + value + " with id " + id + " into registry " + this);
+    public void register(Integer key, U value) {
+        Preconditions.checkArgument(key >= 0 && key <= this.max, "Tried registering " + value + " with id " + key + " which is less than 0 or greater than max " + this.max + " in registry " + this);
+        super.register(key, value);
     }
 
-    public void registerNextFree(T value) {
+    public void registerNextFree(U value) {
         this.register(this.getNextFreeId(), value);
     }
 
     @Override
-    public T get(Integer id) {
-        if (id > this.max) {
-            RockBottomAPI.logger().warning("Tried getting value of " + id + " for registry " + this + " which is greater than max " + this.max);
-            return null;
-        } else {
-            return this.map.get(id);
-        }
-    }
-
-    @Override
-    public Integer getId(T value) {
-        return this.map.inverse().getOrDefault(value, -1);
+    public Integer getId(U value) {
+        Integer id = super.getId(value);
+        return id == null ? -1 : id;
     }
 
     public int getNextFreeId() {
@@ -80,50 +55,5 @@ public class IndexRegistry<T> implements IRegistry<Integer, T> {
             }
         }
         return -1;
-    }
-
-    @Override
-    public int getSize() {
-        return this.map.size();
-    }
-
-    @Override
-    public void unregister(Integer id) {
-        if (this.canUnregister) {
-            this.map.remove(id);
-            RockBottomAPI.logger().config("Unregistered " + id + " from registry " + this);
-        } else {
-            throw new UnsupportedOperationException("Unregistering from registry " + this + " is disallowed");
-        }
-    }
-
-    @Override
-    public BiMap<Integer, T> getUnmodifiable() {
-        return this.unmodifiableMap;
-    }
-
-    @Override
-    public Set<Integer> keySet() {
-        return this.unmodifiableMap.keySet();
-    }
-
-    @Override
-    public Set<T> values() {
-        return this.unmodifiableMap.values();
-    }
-
-    @Override
-    public Set<Map.Entry<Integer, T>> entrySet() {
-        return this.unmodifiableMap.entrySet();
-    }
-
-    @Override
-    public ResourceName getName() {
-        return this.name;
-    }
-
-    @Override
-    public String toString() {
-        return this.name.toString();
     }
 }
