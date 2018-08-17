@@ -24,6 +24,7 @@ package de.ellpeck.rockbottom.api;
 import de.ellpeck.rockbottom.api.assets.IAssetLoader;
 import de.ellpeck.rockbottom.api.construction.BasicRecipe;
 import de.ellpeck.rockbottom.api.construction.IRecipe;
+import de.ellpeck.rockbottom.api.construction.MortarRecipe;
 import de.ellpeck.rockbottom.api.construction.smelting.FuelInput;
 import de.ellpeck.rockbottom.api.construction.smelting.SmeltingRecipe;
 import de.ellpeck.rockbottom.api.content.IContentLoader;
@@ -262,6 +263,13 @@ public final class Registries {
      */
     @ApiInternal
     public static final NameRegistry<SmeltingRecipe> SMELTING_REGISTRY = new NameRegistry<>(ResourceName.intern("smelting_registry"), true).register();
+    /**
+     * The registry for all {@link MortarRecipe} objects that can be processed
+     * in a mortar. To register something into this registry, please use  {@link
+     * MortarRecipe#register()}.
+     */
+    @ApiInternal
+    public static final NameRegistry<MortarRecipe> MORTAR_REGISTRY = new NameRegistry<>(ResourceName.intern("mortar_registry"), true).register();
     /**
      * The registry for all {@link SpawnBehavior} objects that determine how and
      * where entities can randomly appear in the world. To register something

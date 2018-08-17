@@ -89,7 +89,7 @@ public abstract class AbstractDataSet {
             return false;
         }
 
-        DataSet dataSet = (DataSet) o;
+        AbstractDataSet dataSet = (AbstractDataSet) o;
         return this.data.equals(dataSet.data);
     }
 

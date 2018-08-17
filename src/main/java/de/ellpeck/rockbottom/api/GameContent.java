@@ -75,6 +75,7 @@ public final class GameContent {
     public static final TileMeta TILE_CAVE_MUSHROOM = (TileMeta) getTile("cave_mushroom").setHardness(0.25F).setMaxAmount(50).setForceDrop();
     public static final Tile TILE_STARDROP = getTile("stardrop").setHardness(0.75F).setMaxAmount(10).setForceDrop();
     public static final Tile TILE_IRON_LAMP = getTile("lamp_iron").setHardness(10F).addEffectiveTool(ToolType.PICKAXE, 8).setMaxAmount(20).setForceDrop();
+    public static final Tile TILE_MORTAR = getTile("mortar").setHardness(3F).addEffectiveTool(ToolType.PICKAXE, 0).setMaxAmount(5);
 
     /*
         ---ITEMS---
@@ -99,6 +100,8 @@ public final class GameContent {
     public static final Item ITEM_COPPER_SWORD = getItem("copper_sword");
     public static final Item ITEM_RECIPE_NOTE = getItem("recipe_note").setMaxAmount(1);
     public static final Item ITEM_BOWL = getItem("bowl").setMaxAmount(1);
+    public static final Item ITEM_PESTLE = getItem("pestle").setMaxAmount(1);
+    public static final Item ITEM_MUSH = getItem("mush").setMaxAmount(20);
 
     /*
         ---RESOURCE REGISTRY ENTRIES---

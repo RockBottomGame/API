@@ -21,9 +21,12 @@
 
 package de.ellpeck.rockbottom.api.effect;
 
+import de.ellpeck.rockbottom.api.Constants;
 import de.ellpeck.rockbottom.api.Registries;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
+import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.data.set.DataSet;
+import de.ellpeck.rockbottom.api.entity.Entity;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 import java.util.Objects;
@@ -57,6 +60,15 @@ public class ActiveEffect {
 
     public IEffect getEffect() {
         return this.effect;
+    }
+
+    public String getDisplayName(IAssetManager manager, Entity entity) {
+        return manager.localize(this.effect.getUnlocalizedName(this, entity));
+    }
+
+    public String getDisplayTime() {
+        int seconds = this.getTime() / Constants.TARGET_TPS;
+        return String.format("%02d:%02d", seconds / 60, seconds % 60);
     }
 
     public int getTime() {
