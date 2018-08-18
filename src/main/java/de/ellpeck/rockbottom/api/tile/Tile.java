@@ -36,6 +36,7 @@ import de.ellpeck.rockbottom.api.item.Item;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.item.ItemTile;
 import de.ellpeck.rockbottom.api.item.ToolType;
+import de.ellpeck.rockbottom.api.particle.IParticleManager;
 import de.ellpeck.rockbottom.api.render.tile.ITileRenderer;
 import de.ellpeck.rockbottom.api.tile.entity.IFilteredInventory;
 import de.ellpeck.rockbottom.api.tile.entity.TileEntity;
@@ -211,6 +212,10 @@ public class Tile {
     }
 
     public void updateRandomly(IWorld world, int x, int y, TileLayer layer) {
+
+    }
+
+    public void updateRandomlyInPlayerView(IWorld world, int x, int y, TileLayer layer, TileState state, IParticleManager manager) {
 
     }
 

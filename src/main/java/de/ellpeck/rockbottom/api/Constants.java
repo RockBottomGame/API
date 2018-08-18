@@ -23,7 +23,9 @@ package de.ellpeck.rockbottom.api;
 
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.net.INetHandler;
+import de.ellpeck.rockbottom.api.particle.IParticleManager;
 import de.ellpeck.rockbottom.api.tile.Tile;
+import de.ellpeck.rockbottom.api.tile.state.TileState;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 import de.ellpeck.rockbottom.api.world.IChunk;
 import de.ellpeck.rockbottom.api.world.IWorld;
@@ -55,6 +57,14 @@ public final class Constants {
      * @see Tile#updateRandomly(IWorld, int, int, TileLayer)
      */
     public static final int RANDOM_TILE_UPDATES = 5;
+    /**
+     * The percentage of random tile rendering updates that should take place
+     * per tick
+     *
+     * @see Tile#updateRandomlyInPlayerView(IWorld, int, int, TileLayer,
+     * TileState, IParticleManager)
+     */
+    public static final float RANDOM_TILE_RENDER_UPDATES = 0.1F;
 
     /**
      * The amount of tiles that there are, horizontally and vertically, in a
