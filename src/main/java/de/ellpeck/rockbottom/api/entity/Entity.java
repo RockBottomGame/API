@@ -95,8 +95,8 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
     public void onPositionReset() {
         super.onPositionReset();
         if (this.doesInterpolate()) {
-            this.interpolationX = this.getX();
-            this.interpolationY = this.getY();
+            this.interpolationX = this.getOriginX();
+            this.interpolationY = this.getOriginY();
         }
     }
 

@@ -50,6 +50,7 @@ public final class Settings implements IJsonSettings {
     public static final Keybind KEY_CHAT = new Keybind(ResourceName.intern("chat"), GLFW.GLFW_KEY_ENTER).register();
     public static final Keybind KEY_ADVANCED_INFO = new Keybind(ResourceName.intern("advanced_info"), GLFW.GLFW_KEY_LEFT_SHIFT).register();
     public static final Keybind KEY_SCREENSHOT = new Keybind(ResourceName.intern("screenshot"), GLFW.GLFW_KEY_F10).register();
+    public static final Keybind KEY_PLAYER_LIST = new Keybind(ResourceName.intern("players"), GLFW.GLFW_KEY_TAB).register();
     public static final Keybind[] KEYS_ITEM_SELECTION = new Keybind[8];
     public static final int DEFAULT_GUI_COLOR = 0xFF30704E;
 
@@ -87,7 +88,9 @@ public final class Settings implements IJsonSettings {
             JsonObject keybinds = object.get("keybinds").getAsJsonObject();
             for (Keybind keybind : Registries.KEYBIND_REGISTRY.values()) {
                 String name = keybind.getName().toString();
-                keybind.setBind(keybinds.get(name).getAsInt());
+                if (keybinds.has(name)) {
+                    keybind.setBind(keybinds.get(name).getAsInt());
+                }
             }
         }
 
