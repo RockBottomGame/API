@@ -50,12 +50,12 @@ public abstract class MovableWorldObject {
 
     public void setPos(double x, double y) {
         this.setBounds(x, y);
-        this.lastTickX = x;
-        this.lastTickY = y;
+        this.onPositionReset();
     }
 
     public void resetBounds() {
         this.setBounds(this.getX(), this.getY());
+        this.onPositionReset();
     }
 
     public void setBounds(double x, double y) {
@@ -80,6 +80,11 @@ public abstract class MovableWorldObject {
 
     public double getOriginY() {
         return this.currentBounds.getMinY();
+    }
+
+    public void onPositionReset(){
+        this.lastTickX = this.getX();
+        this.lastTickY = this.getY();
     }
 
     public double getLerpedX(){

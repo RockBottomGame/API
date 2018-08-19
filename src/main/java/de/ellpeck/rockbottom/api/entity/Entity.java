@@ -68,6 +68,8 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
     protected boolean dead;
     private UUID uniqueId = UUID.randomUUID();
     private ModBasedDataSet additionalData;
+    public double interpolationX;
+    public double interpolationY;
 
     public Entity(IWorld world) {
         super(world);
@@ -89,12 +91,25 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
         RockBottomAPI.getInternalHooks().doDefaultEntityUpdate(game, this, this.effects, this.aiTasks);
     }
 
+    @Override
+    public void onPositionReset() {
+        super.onPositionReset();
+        if (this.doesInterpolate()) {
+            this.interpolationX = this.getX();
+            this.interpolationY = this.getY();
+        }
+    }
+
     public boolean doesSync() {
         return true;
     }
 
     public int getSyncFrequency() {
         return 40;
+    }
+
+    public boolean doesInterpolate() {
+        return false;
     }
 
     public void applyMotion() {
@@ -207,6 +222,8 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
 
     public void load(DataSet set) {
         this.setBoundsOrigin(set.getDouble("x"), set.getDouble("y"));
+        this.onPositionReset();
+
         this.motionX = set.getDouble("motion_x");
         this.motionY = set.getDouble("motion_y");
         this.ticksExisted = set.getInt("ticks");
@@ -405,6 +422,6 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
     }
 
     public double getEyeHeight() {
-        return this.getHeight()/2D;
+        return this.getHeight() / 2D;
     }
 }
