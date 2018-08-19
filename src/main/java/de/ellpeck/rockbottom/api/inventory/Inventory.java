@@ -55,11 +55,11 @@ public class Inventory extends AbstractInventory {
     public void save(DataSet set) {
         List<PartDataSet> list = new ArrayList<>();
         for (ItemInstance slot : this.slots) {
+            DataSet subset = new DataSet();
             if (slot != null) {
-                DataSet subset = new DataSet();
                 slot.save(subset);
-                list.add(new PartDataSet(subset));
             }
+            list.add(new PartDataSet(subset));
         }
         set.addList("items", list);
     }
