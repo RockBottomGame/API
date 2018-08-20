@@ -46,6 +46,11 @@ public final class PartInt extends BasicDataPart<Integer> {
                         } catch (Exception ignored) {
                         }
                     }
+                } else if (prim.isNumber()) {
+                    int i = prim.getAsInt();
+                    if (prim.getAsDouble() == i) {
+                        return new PartInt(i);
+                    }
                 }
             }
             return null;

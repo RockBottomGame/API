@@ -126,12 +126,12 @@ public final class ModBasedDataSet extends AbstractDataSet {
         this.addPart(key.toString(), new PartString(s));
     }
 
-    public <T extends DataPart> List<T> getList(String key) {
-        return (List<T>) this.getPartContent(key, PartList.class, null);
+    public <T extends DataPart> List<T> getList(ResourceName key) {
+        return (List<T>) this.getPartContent(key.toString(), PartList.class, null);
     }
 
-    public void addList(String key, List<DataPart> list) {
-        this.addPart(key, new PartList(list));
+    public void addList(ResourceName key, List<DataPart> list) {
+        this.addPart(key.toString(), new PartList(list));
     }
 
     public ModBasedDataSet copy() {

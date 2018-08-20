@@ -46,6 +46,8 @@ public final class PartDouble extends BasicDataPart<Double> {
                         } catch (Exception ignored) {
                         }
                     }
+                } else if (prim.isNumber()) {
+                    return new PartDouble(prim.getAsDouble());
                 }
             }
             return null;
@@ -54,6 +56,11 @@ public final class PartDouble extends BasicDataPart<Double> {
         @Override
         public PartDouble parse(DataInput stream) throws Exception {
             return new PartDouble(stream.readDouble());
+        }
+
+        @Override
+        public int getPriority() {
+            return -50;
         }
     };
 
