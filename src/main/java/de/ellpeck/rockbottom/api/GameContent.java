@@ -51,7 +51,7 @@ public final class GameContent {
     public static final Tile TILE_GRASS = getTile("grass").addEffectiveTool(ToolType.SHOVEL, 0).setForceDrop().setMaxAmount(100);
     public static final Tile TILE_STONE = getTile("stone").setHardness(5F).addEffectiveTool(ToolType.PICKAXE, 0).setMaxAmount(50);
     public static final TileMeta TILE_GRASS_TUFT = (TileMeta) getTile("grass_tuft").setHardness(0F).setForceDrop().setMaxAmount(150);
-    public static final Tile TILE_LOG = getTile("log").setHardness(3F).addEffectiveTool(ToolType.AXE, 0).setMaxAmount(75);
+    public static final Tile TILE_LOG = getTile("log").setHardness(3F).addEffectiveTool(ToolType.AXE, 0).setMaxAmount(75).setForceDrop();
     public static final Tile TILE_LEAVES = getTile("leaves").setHardness(0.5F).setForceDrop().setMaxAmount(150);
     public static final TileMeta TILE_FLOWER = (TileMeta) getTile("flower").setHardness(0F).setForceDrop().setMaxAmount(150);
     public static final Tile TILE_PEBBLES = getTile("pebbles").setHardness(0F).setForceDrop().setMaxAmount(200);
