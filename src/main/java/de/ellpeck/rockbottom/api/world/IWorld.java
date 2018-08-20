@@ -144,6 +144,8 @@ public interface IWorld extends IChunkOrWorld {
 
     boolean isStoryMode();
 
+    AbstractEntityPlayer getClosestPlayer(double x, double y, AbstractEntityPlayer excluding);
+
     AbstractEntityPlayer getClosestPlayer(double x, double y);
 
     @ApiInternal

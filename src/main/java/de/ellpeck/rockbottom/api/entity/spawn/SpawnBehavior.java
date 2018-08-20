@@ -48,16 +48,12 @@ public abstract class SpawnBehavior<T extends Entity> {
 
     public abstract boolean belongsToCap(Entity entity);
 
-    public boolean isReadyToSpawn(IWorld world){
+    public abstract double getEntityCapArea(IWorld world, AbstractEntityPlayer player);
+
+    public abstract int getEntityCap(IWorld world);
+
+    public boolean isReadyToSpawn(IWorld world) {
         return true;
-    }
-
-    public double getEntityCapArea(IWorld world, AbstractEntityPlayer player) {
-        return this.getMaxPlayerDistance(world, player);
-    }
-
-    public int getEntityCap(IWorld world) {
-        return 20;
     }
 
     public boolean canSpawnHere(IWorld world, double x, double y) {
