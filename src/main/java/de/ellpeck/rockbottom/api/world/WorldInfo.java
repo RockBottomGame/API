@@ -39,6 +39,7 @@ public class WorldInfo {
     public int currentWorldTime = 3000;
     public boolean storyMode = true;
     public UUID lastPlayerId;
+    public boolean timeFrozen;
 
     @ApiInternal
     public WorldInfo(File worldDirectory) {
@@ -63,6 +64,7 @@ public class WorldInfo {
         this.currentWorldTime = dataSet.getInt("curr_time");
         this.storyMode = dataSet.getBoolean("story_mode");
         this.lastPlayerId = dataSet.getUniqueId("last_player");
+        this.timeFrozen = dataSet.getBoolean("time_frozen");
     }
 
     @ApiInternal
@@ -76,6 +78,7 @@ public class WorldInfo {
         if (this.lastPlayerId != null) {
             dataSet.addUniqueId("last_player", this.lastPlayerId);
         }
+        dataSet.addBoolean("time_frozen", this.timeFrozen);
 
         dataSet.write(this.dataFile);
     }
@@ -86,6 +89,7 @@ public class WorldInfo {
         buf.writeInt(this.totalTimeInWorld);
         buf.writeInt(this.currentWorldTime);
         buf.writeBoolean(this.storyMode);
+        buf.writeBoolean(this.timeFrozen);
     }
 
     @ApiInternal
@@ -94,5 +98,6 @@ public class WorldInfo {
         this.totalTimeInWorld = buf.readInt();
         this.currentWorldTime = buf.readInt();
         this.storyMode = buf.readBoolean();
+        this.timeFrozen = buf.readBoolean();
     }
 }
