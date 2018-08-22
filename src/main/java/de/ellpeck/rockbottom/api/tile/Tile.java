@@ -146,6 +146,10 @@ public class Tile {
         return false;
     }
 
+    public boolean onInteractWithBreakKey(IWorld world, int x, int y, TileLayer layer, double mouseX, double mouseY, AbstractEntityPlayer player) {
+        return false;
+    }
+
     public int getInteractionPriority(IWorld world, int x, int y, TileLayer layer, double mouseX, double mouseY, AbstractEntityPlayer player) {
         return 0;
     }

@@ -55,6 +55,7 @@ public final class LayerActionEvent extends Event {
 
     public enum Type {
         INTERACT,
+        INTERACT_WITH_BREAK_KEY,
         BREAK
     }
 }

@@ -279,6 +279,10 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
         return false;
     }
 
+    public boolean onInteractWithBreakKey(AbstractEntityPlayer player, double mouseX, double mouseY) {
+        return false;
+    }
+
     public int getInteractionPriority(AbstractEntityPlayer player, double mouseX, double mouseY) {
         return -100;
     }

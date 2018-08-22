@@ -86,6 +86,10 @@ public class Item {
         return false;
     }
 
+    public boolean onInteractWithDestKey(IWorld world, int x, int y, TileLayer layer, double mouseX, double mouseY, AbstractEntityPlayer player, ItemInstance instance) {
+        return false;
+    }
+
     public int getInteractionPriority(IWorld world, int x, int y, TileLayer layer, double mouseX, double mouseY, AbstractEntityPlayer player, ItemInstance instance) {
         return 100;
     }
@@ -131,7 +135,7 @@ public class Item {
         return null;
     }
 
-    public boolean onEntityAttack(IWorld world, double mouseX, double mouseY, AbstractEntityPlayer player, Entity entity, ItemInstance instance){
+    public boolean onEntityAttack(IWorld world, double mouseX, double mouseY, AbstractEntityPlayer player, Entity entity, ItemInstance instance) {
         return true;
     }
 
@@ -143,7 +147,7 @@ public class Item {
         return 40;
     }
 
-    public boolean attacksMultipleEntities(IWorld world, double mouseX, double mouseY, AbstractEntityPlayer player, ItemInstance instance){
+    public boolean attacksMultipleEntities(IWorld world, double mouseX, double mouseY, AbstractEntityPlayer player, ItemInstance instance) {
         return false;
     }
 
