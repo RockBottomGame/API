@@ -43,6 +43,8 @@ import de.ellpeck.rockbottom.api.world.WorldInfo;
 import org.lwjgl.glfw.GLFW;
 
 import java.io.File;
+import java.io.InputStream;
+import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.UUID;
 import java.util.function.BiConsumer;
@@ -210,6 +212,29 @@ public interface IGameInstance extends IMod {
      * @return The class loader
      */
     URLClassLoader getClassLoader();
+
+    /**
+     * Gets an input stream based on a resource available to the game using the
+     * {@link #getClassLoader()}. This is equivalent to {@link
+     * Class#getResourceAsStream(String)}, however it will include all resources
+     * loaded by the class loader, even content pack and mod resources.
+     *
+     * @param s The location
+     * @return An input stream or null if there is nothing at the specified
+     * location
+     */
+    InputStream getResourceStream(String s);
+
+    /**
+     * Gets a url based on a resource available to the game using the {@link
+     * #getClassLoader()}. This is equivalent to {@link Class#getResource(String)},
+     * however it will include all resources loaded by the class loader, even
+     * content pack and mod resources.
+     *
+     * @param s The location
+     * @return A url or null if there is nothing at the specified location
+     */
+    URL getResourceURL(String s);
 
     @ApiInternal
     void setFullscreen(boolean fullscreen);
