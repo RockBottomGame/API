@@ -42,7 +42,7 @@ public class ItemSword extends ItemTool {
     private final int cooldown;
 
     public ItemSword(ResourceName name, int durability, int attackDamage, int cooldown, double attackDistance, double knockback) {
-        super(name, 1F, durability, ToolType.SWORD, 1);
+        super(name, 1F, durability, ToolProperty.SWORD, 1);
         this.attackDamage = attackDamage;
         this.cooldown = cooldown;
         this.attackDistance = attackDistance;

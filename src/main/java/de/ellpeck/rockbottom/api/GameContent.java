@@ -25,7 +25,7 @@ import com.google.common.base.Preconditions;
 import de.ellpeck.rockbottom.api.construction.resource.IResourceRegistry;
 import de.ellpeck.rockbottom.api.effect.IEffect;
 import de.ellpeck.rockbottom.api.item.Item;
-import de.ellpeck.rockbottom.api.item.ToolType;
+import de.ellpeck.rockbottom.api.item.ToolProperty;
 import de.ellpeck.rockbottom.api.tile.Tile;
 import de.ellpeck.rockbottom.api.tile.TileLiquid;
 import de.ellpeck.rockbottom.api.tile.TileMeta;
@@ -47,35 +47,35 @@ public final class GameContent {
         ---TILES---
      */
     public static final Tile TILE_AIR = getTile("air");
-    public static final Tile TILE_SOIL = getTile("soil").addEffectiveTool(ToolType.SHOVEL, 0).setForceDrop().setMaxAmount(100);
-    public static final Tile TILE_GRASS = getTile("grass").addEffectiveTool(ToolType.SHOVEL, 0).setForceDrop().setMaxAmount(100);
-    public static final Tile TILE_STONE = getTile("stone").setHardness(5F).addEffectiveTool(ToolType.PICKAXE, 0).setMaxAmount(50);
+    public static final Tile TILE_SOIL = getTile("soil").addEffectiveTool(ToolProperty.SHOVEL, 0).setForceDrop().setMaxAmount(100);
+    public static final Tile TILE_GRASS = getTile("grass").addEffectiveTool(ToolProperty.SHOVEL, 0).setForceDrop().setMaxAmount(100);
+    public static final Tile TILE_STONE = getTile("stone").setHardness(5F).addEffectiveTool(ToolProperty.PICKAXE, 0).setMaxAmount(50);
     public static final TileMeta TILE_GRASS_TUFT = (TileMeta) getTile("grass_tuft").setHardness(0F).setForceDrop().setMaxAmount(150);
-    public static final Tile TILE_LOG = getTile("log").setHardness(3F).addEffectiveTool(ToolType.AXE, 0).setMaxAmount(75).setForceDrop();
+    public static final Tile TILE_LOG = getTile("log").setHardness(3F).addEffectiveTool(ToolProperty.AXE, 0).setMaxAmount(75).setForceDrop();
     public static final Tile TILE_LEAVES = getTile("leaves").setHardness(0.5F).setForceDrop().setMaxAmount(150);
     public static final TileMeta TILE_FLOWER = (TileMeta) getTile("flower").setHardness(0F).setForceDrop().setMaxAmount(150);
     public static final Tile TILE_PEBBLES = getTile("pebbles").setHardness(0F).setForceDrop().setMaxAmount(200);
-    public static final Tile TILE_SAND = getTile("sand").setHardness(0.75F).addEffectiveTool(ToolType.SHOVEL, 0).setForceDrop().setMaxAmount(100);
-    public static final Tile TILE_SANDSTONE = getTile("sandstone").setHardness(4F).addEffectiveTool(ToolType.PICKAXE, 0).setMaxAmount(75);
-    public static final Tile TILE_COAL = getTile("coal").setHardness(6F).addEffectiveTool(ToolType.PICKAXE, 1).setMaxAmount(45);
+    public static final Tile TILE_SAND = getTile("sand").setHardness(0.75F).addEffectiveTool(ToolProperty.SHOVEL, 0).setForceDrop().setMaxAmount(100);
+    public static final Tile TILE_SANDSTONE = getTile("sandstone").setHardness(4F).addEffectiveTool(ToolProperty.PICKAXE, 0).setMaxAmount(75);
+    public static final Tile TILE_COAL = getTile("coal").setHardness(6F).addEffectiveTool(ToolProperty.PICKAXE, 1).setMaxAmount(45);
     public static final Tile TILE_TORCH = getTile("torch").setHardness(0F).setForceDrop().setMaxAmount(50);
-    public static final Tile TILE_LADDER = getTile("ladder").setHardness(1.5F).addEffectiveTool(ToolType.AXE, 0).setForceDrop().setMaxAmount(100);
-    public static final Tile TILE_CHEST = getTile("chest").setHardness(4F).addEffectiveTool(ToolType.AXE, 0).setForceDrop().setMaxAmount(5);
-    public static final Tile TILE_SIGN = getTile("sign").addEffectiveTool(ToolType.AXE, 0).setForceDrop().setMaxAmount(100);
+    public static final Tile TILE_LADDER = getTile("ladder").setHardness(1.5F).addEffectiveTool(ToolProperty.AXE, 0).setForceDrop().setMaxAmount(100);
+    public static final Tile TILE_CHEST = getTile("chest").setHardness(4F).addEffectiveTool(ToolProperty.AXE, 0).setForceDrop().setMaxAmount(5);
+    public static final Tile TILE_SIGN = getTile("sign").addEffectiveTool(ToolProperty.AXE, 0).setForceDrop().setMaxAmount(100);
     public static final Tile TILE_SAPLING = getTile("sapling").setHardness(0F).setForceDrop().setMaxAmount(150);
     public static final TileLiquid TILE_WATER = (TileLiquid) getTile("water");
-    public static final TileMeta WOOD_BOARDS = (TileMeta) getTile("wood_boards").setHardness(2F).addEffectiveTool(ToolType.AXE, 0).setForceDrop().setMaxAmount(75);
-    public static final Tile TILE_WOOD_DOOR = getTile("wood_door").setHardness(4F).addEffectiveTool(ToolType.AXE, 0).setForceDrop().setMaxAmount(5);
-    public static final Tile TILE_WOOD_DOOR_OLD = getTile("wood_door_old").setHardness(3.5F).addEffectiveTool(ToolType.AXE, 0).setForceDrop().setMaxAmount(5);
+    public static final TileMeta WOOD_BOARDS = (TileMeta) getTile("wood_boards").setHardness(2F).addEffectiveTool(ToolProperty.AXE, 0).setForceDrop().setMaxAmount(75);
+    public static final Tile TILE_WOOD_DOOR = getTile("wood_door").setHardness(4F).addEffectiveTool(ToolProperty.AXE, 0).setForceDrop().setMaxAmount(5);
+    public static final Tile TILE_WOOD_DOOR_OLD = getTile("wood_door_old").setHardness(3.5F).addEffectiveTool(ToolProperty.AXE, 0).setForceDrop().setMaxAmount(5);
     public static final Tile TILE_REMAINS_GOO = getTile("remains_goo");
     public static final Tile TILE_GRASS_TORCH = getTile("torch_grass").setHardness(0F).setForceDrop().setMaxAmount(50);
-    public static final Tile TILE_COPPER = getTile("copper").setHardness(10F).addEffectiveTool(ToolType.PICKAXE, 2).setMaxAmount(35);
-    public static final Tile TILE_SIMPLE_FURNACE = getTile("simple_furnace").setHardness(15F).addEffectiveTool(ToolType.PICKAXE, 2).setMaxAmount(1);
-    public static final Tile TILE_SNOW = getTile("snow").setHardness(0.75F).addEffectiveTool(ToolType.SHOVEL, 0).setMaxAmount(200);
+    public static final Tile TILE_COPPER = getTile("copper").setHardness(10F).addEffectiveTool(ToolProperty.PICKAXE, 2).setMaxAmount(35);
+    public static final Tile TILE_SIMPLE_FURNACE = getTile("simple_furnace").setHardness(15F).addEffectiveTool(ToolProperty.PICKAXE, 2).setMaxAmount(1);
+    public static final Tile TILE_SNOW = getTile("snow").setHardness(0.75F).addEffectiveTool(ToolProperty.SHOVEL, 0).setMaxAmount(200);
     public static final TileMeta TILE_CAVE_MUSHROOM = (TileMeta) getTile("cave_mushroom").setHardness(0.25F).setMaxAmount(50).setForceDrop();
     public static final Tile TILE_STARDROP = getTile("stardrop").setHardness(0.75F).setMaxAmount(10).setForceDrop();
-    public static final Tile TILE_IRON_LAMP = getTile("lamp_iron").setHardness(10F).addEffectiveTool(ToolType.PICKAXE, 8).setMaxAmount(20).setForceDrop();
-    public static final Tile TILE_MORTAR = getTile("mortar").setHardness(3F).addEffectiveTool(ToolType.PICKAXE, 0).setMaxAmount(5);
+    public static final Tile TILE_IRON_LAMP = getTile("lamp_iron").setHardness(10F).addEffectiveTool(ToolProperty.PICKAXE, 8).setMaxAmount(20).setForceDrop();
+    public static final Tile TILE_MORTAR = getTile("mortar").setHardness(3F).addEffectiveTool(ToolProperty.PICKAXE, 0).setMaxAmount(5);
 
     /*
         ---ITEMS---

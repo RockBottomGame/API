@@ -26,6 +26,7 @@ import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.entity.Entity;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
+import de.ellpeck.rockbottom.api.inventory.IInventory;
 import de.ellpeck.rockbottom.api.render.item.IItemRenderer;
 import de.ellpeck.rockbottom.api.tile.Tile;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
@@ -107,7 +108,16 @@ public class Item {
         return false;
     }
 
+    /**
+     * The tool type system is deprecated. Please use {@link
+     * #getToolProperties(ItemInstance)} instead.
+     */
+    @Deprecated
     public Map<ToolType, Integer> getToolTypes(ItemInstance instance) {
+        return Collections.emptyMap();
+    }
+
+    public Map<ToolProperty, Integer> getToolProperties(ItemInstance instance) {
         return Collections.emptyMap();
     }
 
@@ -153,5 +163,21 @@ public class Item {
 
     public boolean useMetaAsDurability() {
         return false;
+    }
+
+    public void takeDamage(ItemInstance instance, AbstractEntityPlayer player, int amount) {
+        if (this.useMetaAsDurability()) {
+            IInventory inv = player.getInv();
+            int selected = player.getSelectedSlot();
+
+            int meta = instance.getMeta();
+            if (meta + amount <= this.getHighestPossibleMeta()) {
+                instance.setMeta(meta + amount);
+                inv.notifyChange(selected);
+            } else {
+                inv.set(selected, null);
+                RockBottomAPI.getInternalHooks().onToolBroken(player.world, player, instance);
+            }
+        }
     }
 }

@@ -21,9 +21,26 @@
 
 package de.ellpeck.rockbottom.api.item;
 
+/**
+ * The tool type system is deprecated. Please use {@link ToolProperty} instead.
+ */
+@Deprecated
 public enum ToolType {
     PICKAXE,
     SHOVEL,
     AXE,
-    SWORD
+    SWORD;
+
+    public ToolProperty property() {
+        switch (this) {
+            case PICKAXE:
+                return ToolProperty.PICKAXE;
+            case SHOVEL:
+                return ToolProperty.SHOVEL;
+            case AXE:
+                return ToolProperty.AXE;
+            default:
+                return ToolProperty.SWORD;
+        }
+    }
 }

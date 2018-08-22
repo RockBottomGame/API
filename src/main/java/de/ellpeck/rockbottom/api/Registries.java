@@ -44,6 +44,7 @@ import de.ellpeck.rockbottom.api.event.IEventHandler;
 import de.ellpeck.rockbottom.api.gui.IMainMenuTheme;
 import de.ellpeck.rockbottom.api.gui.ISpecialCursor;
 import de.ellpeck.rockbottom.api.item.Item;
+import de.ellpeck.rockbottom.api.item.ToolProperty;
 import de.ellpeck.rockbottom.api.mod.IMod;
 import de.ellpeck.rockbottom.api.net.chat.Command;
 import de.ellpeck.rockbottom.api.net.chat.component.ChatComponent;
@@ -277,6 +278,13 @@ public final class Registries {
      */
     @ApiInternal
     public static final NameRegistry<SpawnBehavior> SPAWN_BEHAVIOR_REGISTRY = new NameRegistry<>(ResourceName.intern("spawn_behavior_registry"), true).register();
+    /**
+     * The registry for all {@link ToolProperty} objects that determine what
+     * kind of tool an item is and what level it is. Use {@link
+     * ToolProperty#register()} to register a property.
+     */
+    @ApiInternal
+    public static final NameRegistry<ToolProperty> TOOL_PROPERTY_REGISTRY = new NameRegistry<>(ResourceName.intern("tool_property_registry"), false).register();
 
     public static <T extends IRegistry> T get(ResourceName name, Class<T> type) {
         IRegistry reg = get(name);
