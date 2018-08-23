@@ -38,12 +38,10 @@ public class ItemSword extends ItemTool {
 
     private final double knockback;
     private final double attackDistance;
-    private final int attackDamage;
     private final int cooldown;
 
     public ItemSword(ResourceName name, int durability, int attackDamage, int cooldown, double attackDistance, double knockback) {
-        super(name, 1F, durability, ToolProperty.SWORD, 1);
-        this.attackDamage = attackDamage;
+        super(name, 1F, durability, ToolProperty.SWORD, attackDamage);
         this.cooldown = cooldown;
         this.attackDistance = attackDistance;
         this.knockback = knockback;
@@ -83,7 +81,7 @@ public class ItemSword extends ItemTool {
 
     @Override
     public int getAttackDamage(IWorld world, Entity entity, double mouseX, double mouseY, AbstractEntityPlayer player, ItemInstance instance) {
-        return this.attackDamage;
+        return this.getToolProperties(instance).get(ToolProperty.SWORD);
     }
 
     @Override
