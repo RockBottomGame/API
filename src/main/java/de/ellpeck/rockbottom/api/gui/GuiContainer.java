@@ -23,12 +23,12 @@ package de.ellpeck.rockbottom.api.gui;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.IRenderer;
+import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.data.settings.Settings;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.gui.container.ContainerSlot;
 import de.ellpeck.rockbottom.api.gui.container.ItemContainer;
-import de.ellpeck.rockbottom.api.net.packet.toserver.PacketDrop;
 import de.ellpeck.rockbottom.api.util.Colors;
 import de.ellpeck.rockbottom.api.util.Util;
 
@@ -52,7 +52,7 @@ public abstract class GuiContainer extends Gui {
         super.onClosed(game);
 
         if (this.container.holdingInst != null) {
-            PacketDrop.dropHeldItem(this.player, this.container);
+            RockBottomAPI.getInternalHooks().dropHeldItem(this.player, this.container);
         }
 
         if (this.shouldCloseContainer() && this.player.getContainer() == this.container) {
@@ -68,7 +68,7 @@ public abstract class GuiContainer extends Gui {
 
         if (this.container.holdingInst != null && Settings.KEY_GUI_ACTION_1.isKey(button)) {
             if (!this.isMouseOver(game)) {
-                PacketDrop.dropHeldItem(this.player, this.container);
+                RockBottomAPI.getInternalHooks().dropHeldItem(this.player, this.container);
                 return true;
             }
         }

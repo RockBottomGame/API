@@ -23,13 +23,11 @@ package de.ellpeck.rockbottom.api.item;
 
 import de.ellpeck.rockbottom.api.entity.Entity;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
-import de.ellpeck.rockbottom.api.tile.Tile;
 import de.ellpeck.rockbottom.api.util.BoundBox;
 import de.ellpeck.rockbottom.api.util.Direction;
 import de.ellpeck.rockbottom.api.util.Util;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 import de.ellpeck.rockbottom.api.world.IWorld;
-import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +39,7 @@ public class ItemSword extends ItemTool {
     private final int cooldown;
 
     public ItemSword(ResourceName name, int durability, int attackDamage, int cooldown, double attackDistance, double knockback) {
-        super(name, 1F, durability, ToolProperty.SWORD, attackDamage);
+        super(name, 0F, durability, ToolProperty.SWORD, attackDamage);
         this.cooldown = cooldown;
         this.attackDistance = attackDistance;
         this.knockback = knockback;
@@ -92,10 +90,5 @@ public class ItemSword extends ItemTool {
     @Override
     public boolean canHoldButtonToAttack(IWorld world, double mouseX, double mouseY, AbstractEntityPlayer player, ItemInstance instance) {
         return true;
-    }
-
-    @Override
-    public float getMiningSpeed(IWorld world, int x, int y, TileLayer layer, Tile tile, boolean isRightTool, ItemInstance instance) {
-        return 0F;
     }
 }

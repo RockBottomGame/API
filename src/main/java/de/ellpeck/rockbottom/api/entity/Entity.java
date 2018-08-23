@@ -34,7 +34,6 @@ import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.entity.spawn.DespawnHandler;
 import de.ellpeck.rockbottom.api.event.EventResult;
 import de.ellpeck.rockbottom.api.event.impl.EntityDeathEvent;
-import de.ellpeck.rockbottom.api.net.packet.toclient.PacketDeath;
 import de.ellpeck.rockbottom.api.render.entity.IEntityRenderer;
 import de.ellpeck.rockbottom.api.tile.Tile;
 import de.ellpeck.rockbottom.api.tile.state.TileState;
@@ -131,9 +130,15 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
                 this.dead = dead;
 
                 if (this.world.isServer()) {
-                    RockBottomAPI.getNet().sendToAllPlayersWithLoadedPos(this.world, new PacketDeath(this.getUniqueId()), this.getX(), this.getY());
+                    RockBottomAPI.getInternalHooks().packetDeath(this.world, this.getX(), this.getY(), this.getUniqueId());
                 }
             }
+        }
+    }
+
+    public void sendToClients() {
+        if (this.world.isServer()) {
+            RockBottomAPI.getInternalHooks().packetEntityData(this);
         }
     }
 
@@ -189,12 +194,11 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
         return this.additionalData;
     }
 
-    public void save(DataSet set) {
+    public void save(DataSet set, boolean forFullSync) {
         set.addDouble("x", this.getOriginX());
         set.addDouble("y", this.getOriginY());
         set.addDouble("motion_x", this.motionX);
         set.addDouble("motion_y", this.motionY);
-        set.addInt("ticks", this.ticksExisted);
         set.addBoolean("dead", this.isDead());
         set.addBoolean("falling", this.isFalling);
         set.addDouble("fall_start_y", this.fallStartY);
@@ -212,21 +216,25 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
         }
         set.addList("effects", effects);
 
-        if (this.currentAiTask != null) {
-            DataSet sub = new DataSet();
-            sub.addInt("id", this.getTaskId(this.currentAiTask));
-            this.currentAiTask.save(sub, false, this);
-            set.addDataSet("task", sub);
+        if (!forFullSync) {
+            if (this.currentAiTask != null) {
+                DataSet sub = new DataSet();
+                sub.addInt("id", this.getTaskId(this.currentAiTask));
+                this.currentAiTask.save(sub, false, this);
+                set.addDataSet("task", sub);
+            }
+            set.addInt("ticks", this.ticksExisted);
         }
+
+        this.save(set);
     }
 
-    public void load(DataSet set) {
+    public void load(DataSet set, boolean forFullSync) {
         this.setBoundsOrigin(set.getDouble("x"), set.getDouble("y"));
         this.onPositionReset();
 
         this.motionX = set.getDouble("motion_x");
         this.motionY = set.getDouble("motion_y");
-        this.ticksExisted = set.getInt("ticks");
         this.setDead(set.getBoolean("dead"));
         this.isFalling = set.getBoolean("falling");
         this.fallStartY = set.getDouble("fall_start_y");
@@ -246,13 +254,36 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
             }
         }
 
-        DataSet sub = set.getDataSet("task");
-        if (!sub.isEmpty()) {
-            this.currentAiTask = this.aiTasks.get(sub.getInt("id"));
-            if (this.currentAiTask != null) {
-                this.currentAiTask.load(sub, false, this);
+        if (!forFullSync) {
+            DataSet sub = set.getDataSet("task");
+            if (!sub.isEmpty()) {
+                this.currentAiTask = this.aiTasks.get(sub.getInt("id"));
+                if (this.currentAiTask != null) {
+                    this.currentAiTask.load(sub, false, this);
+                }
             }
+            this.ticksExisted = set.getInt("ticks");
         }
+
+        this.load(set);
+    }
+
+    /**
+     * This method is deprecated. Please use {@link #save(DataSet, boolean)}
+     * instead.
+     */
+    @Deprecated
+    public void save(DataSet set) {
+
+    }
+
+    /**
+     * This method is deprecated. Please use {@link #load(DataSet, boolean)}
+     * instead.
+     */
+    @Deprecated
+    public void load(DataSet set) {
+
     }
 
     public boolean doesSave() {

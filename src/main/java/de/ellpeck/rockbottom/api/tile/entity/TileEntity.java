@@ -27,7 +27,6 @@ import de.ellpeck.rockbottom.api.data.set.DataSet;
 import de.ellpeck.rockbottom.api.entity.AbstractEntityItem;
 import de.ellpeck.rockbottom.api.inventory.IInventory;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
-import de.ellpeck.rockbottom.api.net.packet.toclient.PacketTileEntityData;
 import de.ellpeck.rockbottom.api.util.Util;
 import de.ellpeck.rockbottom.api.world.IChunk;
 import de.ellpeck.rockbottom.api.world.IWorld;
@@ -82,7 +81,7 @@ public abstract class TileEntity {
 
     public void sendToClients() {
         if (this.world.isServer()) {
-            RockBottomAPI.getNet().sendToAllPlayersWithLoadedPos(this.world, new PacketTileEntityData(this.x, this.y, this.layer, this), this.x, this.y);
+            RockBottomAPI.getInternalHooks().packetTileEntityData(this);
         }
     }
 

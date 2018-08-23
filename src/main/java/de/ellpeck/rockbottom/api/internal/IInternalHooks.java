@@ -39,10 +39,12 @@ import de.ellpeck.rockbottom.api.gui.component.ComponentInputField;
 import de.ellpeck.rockbottom.api.gui.component.ComponentMenu;
 import de.ellpeck.rockbottom.api.gui.component.ComponentSlot;
 import de.ellpeck.rockbottom.api.gui.component.ComponentStatistic;
+import de.ellpeck.rockbottom.api.gui.container.ItemContainer;
 import de.ellpeck.rockbottom.api.item.Item;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.tile.Tile;
 import de.ellpeck.rockbottom.api.tile.TileLiquid;
+import de.ellpeck.rockbottom.api.tile.entity.TileEntity;
 import de.ellpeck.rockbottom.api.tile.state.IStateHandler;
 import de.ellpeck.rockbottom.api.tile.state.TileState;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
@@ -53,6 +55,7 @@ import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.util.logging.Logger;
 
 @ApiInternal
@@ -92,4 +95,14 @@ public interface IInternalHooks {
     Logger logger();
 
     void onToolBroken(IWorld world, AbstractEntityPlayer player, ItemInstance instance);
+
+    void dropHeldItem(AbstractEntityPlayer player, ItemContainer container);
+
+    void packetDamage(IWorld world, double x, double y, UUID entityId, int damage);
+
+    void packetDeath(IWorld world, double x, double y, UUID entityId);
+
+    void packetTileEntityData(TileEntity tile);
+
+    void packetEntityData(Entity entity);
 }

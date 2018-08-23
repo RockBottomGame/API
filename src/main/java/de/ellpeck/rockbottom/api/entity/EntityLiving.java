@@ -28,7 +28,6 @@ import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.event.EventResult;
 import de.ellpeck.rockbottom.api.event.impl.EntityDamageEvent;
 import de.ellpeck.rockbottom.api.event.impl.RegenEvent;
-import de.ellpeck.rockbottom.api.net.packet.toclient.PacketDamage;
 import de.ellpeck.rockbottom.api.world.IWorld;
 
 public abstract class EntityLiving extends Entity {
@@ -147,7 +146,7 @@ public abstract class EntityLiving extends Entity {
             this.lastDamageTime = this.world.getTotalTime();
 
             if (this.world.isServer()) {
-                RockBottomAPI.getNet().sendToAllPlayersWithLoadedPos(this.world, new PacketDamage(this.getUniqueId(), amount), this.getX(), this.getY());
+                RockBottomAPI.getInternalHooks().packetDamage(this.world, this.getX(), this.getY(), this.getUniqueId(), amount);
             }
         }
     }
@@ -191,8 +190,8 @@ public abstract class EntityLiving extends Entity {
     public abstract float getKillReward(AbstractEntityPlayer player);
 
     @Override
-    public void save(DataSet set) {
-        super.save(set);
+    public void save(DataSet set, boolean forFullSync) {
+        super.save(set, forFullSync);
 
         set.addBoolean("jumping", this.jumping);
         set.addInt("jump_ticks", this.jumpTicks);
@@ -204,8 +203,8 @@ public abstract class EntityLiving extends Entity {
     }
 
     @Override
-    public void load(DataSet set) {
-        super.load(set);
+    public void load(DataSet set, boolean forFullSync) {
+        super.load(set, forFullSync);
 
         this.jumping = set.getBoolean("jumping");
         this.jumpTicks = set.getInt("jump_ticks");
