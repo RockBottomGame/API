@@ -24,7 +24,6 @@ package de.ellpeck.rockbottom.api.world;
 import de.ellpeck.rockbottom.api.Registries;
 import de.ellpeck.rockbottom.api.util.Pos2;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
-import de.ellpeck.rockbottom.api.world.gen.IWorldGenerator;
 import de.ellpeck.rockbottom.api.world.gen.biome.Biome;
 import de.ellpeck.rockbottom.api.world.gen.biome.level.BiomeLevel;
 import de.ellpeck.rockbottom.api.world.layer.TileLayer;
@@ -50,10 +49,6 @@ public abstract class SubWorldInitializer {
     public abstract int getSpawnX(IWorld subWorld);
 
     public abstract List<Pos2> getDefaultPersistentChunks(IWorld subWorld);
-
-    public boolean shouldGenerateHere(IWorld subWorld, IWorldGenerator generator, ResourceName name) {
-        return generator.shouldExistInWorld(subWorld);
-    }
 
     public void onGeneratorsInitialized(IWorld subWorld) {
 
