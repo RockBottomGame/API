@@ -78,11 +78,6 @@ public interface IWorld extends IChunkOrWorld {
     @ApiInternal
     void setTotalTime(int time);
 
-    @ApiInternal
-    void setTimeFrozen(boolean frozen);
-
-    boolean isTimeFrozen();
-
     void notifyNeighborsOfChange(int x, int y, TileLayer layer);
 
     AbstractEntityPlayer createPlayer(UUID id, IPlayerDesign design, Channel channel, boolean loadOrSwapLast);

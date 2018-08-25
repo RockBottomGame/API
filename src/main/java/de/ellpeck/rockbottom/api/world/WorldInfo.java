@@ -35,8 +35,11 @@ public class WorldInfo {
     private final File dataFile;
 
     public long seed;
+    public int totalTimeInWorld;
+    public int currentWorldTime = 3000;
     public boolean storyMode = true;
     public UUID lastPlayerId;
+    public boolean timeFrozen;
 
     @ApiInternal
     public WorldInfo(File worldDirectory) {
@@ -57,8 +60,11 @@ public class WorldInfo {
         dataSet.read(this.dataFile);
 
         this.seed = dataSet.getLong("seed");
+        this.totalTimeInWorld = dataSet.getInt("total_time");
+        this.currentWorldTime = dataSet.getInt("curr_time");
         this.storyMode = dataSet.getBoolean("story_mode");
         this.lastPlayerId = dataSet.getUniqueId("last_player");
+        this.timeFrozen = dataSet.getBoolean("time_frozen");
     }
 
     @ApiInternal
@@ -66,10 +72,13 @@ public class WorldInfo {
         DataSet dataSet = new DataSet();
 
         dataSet.addLong("seed", this.seed);
+        dataSet.addInt("total_time", this.totalTimeInWorld);
+        dataSet.addInt("curr_time", this.currentWorldTime);
         dataSet.addBoolean("story_mode", this.storyMode);
         if (this.lastPlayerId != null) {
             dataSet.addUniqueId("last_player", this.lastPlayerId);
         }
+        dataSet.addBoolean("time_frozen", this.timeFrozen);
 
         dataSet.write(this.dataFile);
     }
@@ -77,12 +86,18 @@ public class WorldInfo {
     @ApiInternal
     public void toBuffer(ByteBuf buf) {
         buf.writeLong(this.seed);
+        buf.writeInt(this.totalTimeInWorld);
+        buf.writeInt(this.currentWorldTime);
         buf.writeBoolean(this.storyMode);
+        buf.writeBoolean(this.timeFrozen);
     }
 
     @ApiInternal
     public void fromBuffer(ByteBuf buf) {
         this.seed = buf.readLong();
+        this.totalTimeInWorld = buf.readInt();
+        this.currentWorldTime = buf.readInt();
         this.storyMode = buf.readBoolean();
+        this.timeFrozen = buf.readBoolean();
     }
 }
