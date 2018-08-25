@@ -158,4 +158,8 @@ public interface IWorld extends IChunkOrWorld {
 
     @ApiInternal
     void removePlayer(AbstractEntityPlayer player);
+
+    List<IWorld> getSubWorlds();
+
+    IWorld getSubWorld(ResourceName name);
 }

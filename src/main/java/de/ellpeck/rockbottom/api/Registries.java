@@ -54,6 +54,7 @@ import de.ellpeck.rockbottom.api.tile.state.TileState;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
 import de.ellpeck.rockbottom.api.util.reg.*;
 import de.ellpeck.rockbottom.api.world.IWorld;
+import de.ellpeck.rockbottom.api.world.SubWorldInitializer;
 import de.ellpeck.rockbottom.api.world.gen.IStructure;
 import de.ellpeck.rockbottom.api.world.gen.IWorldGenerator;
 import de.ellpeck.rockbottom.api.world.gen.biome.Biome;
@@ -285,6 +286,13 @@ public final class Registries {
      */
     @ApiInternal
     public static final NameRegistry<ToolProperty> TOOL_PROPERTY_REGISTRY = new NameRegistry<>(ResourceName.intern("tool_property_registry"), false).register();
+    /**
+     * The registry for all {@link SubWorldInitializer} objects which can be
+     * used to initialize additional worlds that are unrelated to the main
+     * world. Use {@link SubWorldInitializer#register()} to register one.
+     */
+    @ApiInternal
+    public static final NameRegistry<SubWorldInitializer> SUB_WORLD_INITIALIZER_REGISTRY = new NameRegistry<>(ResourceName.intern("sub_world_intializer"), true).register();
 
     public static <T extends IRegistry> T get(ResourceName name, Class<T> type) {
         IRegistry reg = get(name);
