@@ -621,4 +621,15 @@ public interface IChunkOrWorld extends IAdditionalDataProvider {
      * and 0 means that none of the heights in the interval are the same.
      */
     float getExpectedSurfaceFlatness(TileLayer layer, int startX, int endX);
+
+    /**
+     * Returns the {@link INoiseGen} from the biome generator. This noise
+     * generator is the one given to {@link Biome#getState(IWorld, IChunk, int,
+     * int, TileLayer, INoiseGen, int)} and it is influenced by {@link
+     * Biome#getBiomeSeed(IWorld)}.
+     *
+     * @param biome The biome whose noise generator to get
+     * @return The noise generator
+     */
+    INoiseGen getNoiseGenForBiome(Biome biome);
 }

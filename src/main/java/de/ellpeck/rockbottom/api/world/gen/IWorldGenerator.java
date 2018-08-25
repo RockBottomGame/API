@@ -52,8 +52,4 @@ public interface IWorldGenerator {
     default boolean generatesPerChunk() {
         return true;
     }
-
-    default boolean shouldExistInWorld(IWorld world){
-        return true;
-    }
 }
