@@ -78,6 +78,10 @@ public interface IWorld extends IChunkOrWorld {
     @ApiInternal
     void setTotalTime(int time);
 
+    boolean isTimeFrozen();
+
+    void setTimeFrozen(boolean frozen);
+
     void notifyNeighborsOfChange(int x, int y, TileLayer layer);
 
     AbstractEntityPlayer createPlayer(UUID id, IPlayerDesign design, Channel channel, boolean loadOrSwapLast);
@@ -99,6 +103,8 @@ public interface IWorld extends IChunkOrWorld {
 
     @ApiInternal
     void savePlayer(AbstractEntityPlayer player);
+
+    float getSkylightModifier(boolean doMinMax);
 
     @ApiInternal
     Map<ResourceName, IWorldGenerator> getAllGenerators();
@@ -153,4 +159,20 @@ public interface IWorld extends IChunkOrWorld {
 
     @ApiInternal
     void removePlayer(AbstractEntityPlayer player);
+
+    void travelToSubWorld(Entity entity, ResourceName subWorld, double x, double y);
+
+    IWorld getSubWorld(ResourceName name);
+
+    List<? extends IWorld> getSubWorlds();
+
+    IWorld getMainWorld();
+
+    ResourceName getSubName();
+
+    @ApiInternal
+    void unloadEverything();
+
+    @ApiInternal
+    void setSubName(ResourceName subName);
 }

@@ -171,6 +171,10 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
         this.chunkY = chunk.getGridY();
     }
 
+    public void moveToWorld(IWorld world){
+        this.world = world;
+    }
+
     @Override
     public boolean hasAdditionalData() {
         return this.additionalData != null;

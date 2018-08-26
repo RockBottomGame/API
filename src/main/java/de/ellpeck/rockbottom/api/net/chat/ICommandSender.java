@@ -22,10 +22,13 @@
 package de.ellpeck.rockbottom.api.net.chat;
 
 import de.ellpeck.rockbottom.api.net.chat.component.ChatComponent;
+import de.ellpeck.rockbottom.api.world.IWorld;
 
 import java.util.UUID;
 
 public interface ICommandSender {
+
+    IWorld getWorld();
 
     int getCommandLevel();
 

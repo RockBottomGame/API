@@ -37,6 +37,7 @@ import de.ellpeck.rockbottom.api.render.IPlayerDesign;
 import de.ellpeck.rockbottom.api.toast.IToaster;
 import de.ellpeck.rockbottom.api.toast.Toast;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
+import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 import de.ellpeck.rockbottom.api.world.DynamicRegistryInfo;
 import de.ellpeck.rockbottom.api.world.IWorld;
 import de.ellpeck.rockbottom.api.world.WorldInfo;
@@ -63,7 +64,10 @@ public interface IGameInstance extends IMod {
     void startWorld(File worldFile, WorldInfo info, boolean isNewlyCreated);
 
     @ApiInternal
-    void joinWorld(DataSet playerSet, WorldInfo info, DynamicRegistryInfo regInfo);
+    void joinWorld(DataSet playerSet, WorldInfo info, ResourceName subName, DataSet worldData, DynamicRegistryInfo regInfo);
+
+    @ApiInternal
+    void changeWorld(ResourceName subName, DataSet worldData);
 
     @ApiInternal
     void quitWorld();
@@ -149,6 +153,17 @@ public interface IGameInstance extends IMod {
      * @return The world
      */
     IWorld getWorld();
+
+    /**
+     * Gets the {@link IWorld} that the player is currently in. If the player is
+     * in the normal world, then this call will be equal to {@link #getWorld()}.
+     * If the player is in a sub world, then this call will return the sub
+     * world. Notice that, on the client side, this call will always return the
+     * same as {@link #getWorld()}.
+     *
+     * @return The player's world
+     */
+    IWorld getPlayerWorld();
 
     /**
      * Gets the {@link IAssetManager} of the current game instance. This can be

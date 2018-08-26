@@ -106,6 +106,27 @@ public interface INetHandler {
     void sendToServer(IPacket packet);
 
     /**
+     * Sends an {@link IPacket} to all the players on the server, meaning that
+     * this packet will be send to a list of clients and then handled there.
+     *
+     * @param world  The world
+     * @param packet The packet to send
+     */
+    void sendToAllPlayers(IWorld world, IPacket packet);
+
+    /**
+     * Sends an {@link IPacket} to all of the players on the server except one.
+     * This can be useful for if a packet is being sent from a player that
+     * already has a certain bit of information, possibly from having sent it to
+     * the server prior.
+     *
+     * @param world  The world
+     * @param packet The packet to send
+     * @param except The player that the packet should not be sent to
+     */
+    void sendToAllPlayersExcept(IWorld world, IPacket packet, Entity except);
+
+    /**
      * Sends an {@link IPacket} to all the players in the current world, meaning
      * that this packet will be send to a list of clients and then handled
      * there.
@@ -113,7 +134,7 @@ public interface INetHandler {
      * @param world  The world
      * @param packet The packet to send
      */
-    void sendToAllPlayers(IWorld world, IPacket packet);
+    void sendToAllPlayersInWorld(IWorld world, IPacket packet);
 
     /**
      * Sends an {@link IPacket} to all of the players in the current world
@@ -125,7 +146,7 @@ public interface INetHandler {
      * @param packet The packet to send
      * @param except The player that the packet should not be sent to
      */
-    void sendToAllPlayersExcept(IWorld world, IPacket packet, Entity except);
+    void sendToAllPlayersInWorldExcept(IWorld world, IPacket packet, Entity except);
 
     /**
      * Sends an {@link IPacket} to all of the players in the current world
