@@ -68,6 +68,10 @@ public abstract class Command {
         return this;
     }
 
+    public int getMaxArgumentAmount(){
+        return -1;
+    }
+
     public abstract ChatComponent execute(String[] args, ICommandSender sender, String playerName, IGameInstance game, IChatLog chat);
 
     public List<String> getAutocompleteSuggestions(String[] args, int argNumber, ICommandSender sender, IGameInstance game, IChatLog chat) {
