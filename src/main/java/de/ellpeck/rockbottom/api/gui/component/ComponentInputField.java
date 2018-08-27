@@ -123,10 +123,7 @@ public class ComponentInputField extends GuiComponent {
             }
         } else if (Settings.KEY_GUI_ACTION_2.isKey(button)) {
             if (this.isMouseOverPrioritized(game)) {
-                this.text = "";
-                if (this.consumer != null) {
-                    this.consumer.accept(this.text);
-                }
+                this.setText("");
 
                 if (this.selectable) {
                     this.isSelected = true;
