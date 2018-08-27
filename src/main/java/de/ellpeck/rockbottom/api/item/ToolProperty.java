@@ -31,6 +31,7 @@ public class ToolProperty {
     public static final ToolProperty AXE = new ToolProperty(ResourceName.intern("axe")).register();
     public static final ToolProperty SWORD = new ToolProperty(ResourceName.intern("sword")).register();
     public static final ToolProperty PESTLE = new ToolProperty(ResourceName.intern("pestle")).register();
+    public static final ToolProperty BOOMERANG = new ToolProperty(ResourceName.intern("boomerang")).register();
 
     private final ResourceName name;
 

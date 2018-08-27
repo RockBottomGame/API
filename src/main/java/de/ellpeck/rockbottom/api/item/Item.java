@@ -26,7 +26,6 @@ import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.entity.Entity;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
-import de.ellpeck.rockbottom.api.inventory.IInventory;
 import de.ellpeck.rockbottom.api.render.item.IItemRenderer;
 import de.ellpeck.rockbottom.api.tile.Tile;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
@@ -167,17 +166,25 @@ public class Item {
 
     public void takeDamage(ItemInstance instance, AbstractEntityPlayer player, int amount) {
         if (this.useMetaAsDurability()) {
-            IInventory inv = player.getInv();
-            int selected = player.getSelectedSlot();
+            ItemInstance left = this.takeDamage(instance, amount);
+            player.getInv().set(player.getSelectedSlot(), left);
+            if (left != null) {
+                RockBottomAPI.getInternalHooks().onToolBroken(player.world, player, instance);
+            }
+        }
+    }
 
+    public ItemInstance takeDamage(ItemInstance instance, int amount) {
+        if (this.useMetaAsDurability()) {
             int meta = instance.getMeta();
             if (meta + amount <= this.getHighestPossibleMeta()) {
                 instance.setMeta(meta + amount);
-                inv.notifyChange(selected);
+                return instance;
             } else {
-                inv.set(selected, null);
-                RockBottomAPI.getInternalHooks().onToolBroken(player.world, player, instance);
+                return null;
             }
+        } else {
+            return instance;
         }
     }
 }

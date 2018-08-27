@@ -39,6 +39,7 @@ public abstract class EntityLiving extends Entity {
     protected int maxHealth;
     protected int maxBreath = 10;
     protected int breath;
+    protected int damageCooldown;
     public int lastDamageTime;
     public int deathTimer;
 
@@ -62,6 +63,10 @@ public abstract class EntityLiving extends Entity {
             } else {
                 this.jumpTicks++;
             }
+        }
+
+        if (this.damageCooldown > 0) {
+            this.damageCooldown--;
         }
 
         if (this.jumpTimeout > 0) {
@@ -125,6 +130,10 @@ public abstract class EntityLiving extends Entity {
         return 3;
     }
 
+    protected int getDamageCooldown() {
+        return 5;
+    }
+
     @Override
     public boolean shouldBeRemoved() {
         return this.isDead() && this.deathTimer >= this.getDeathLingerTime();
@@ -136,18 +145,24 @@ public abstract class EntityLiving extends Entity {
         super.setReadyToRemove();
     }
 
-    public void takeDamage(int amount) {
-        EntityDamageEvent event = new EntityDamageEvent(this, amount);
-        if (RockBottomAPI.getEventHandler().fireEvent(event) != EventResult.CANCELLED) {
-            if (!this.world.isClient()) {
-                this.setHealth(this.getHealth() - event.amount);
-            }
+    public boolean takeDamage(int amount) {
+        if (this.damageCooldown <= 0) {
+            EntityDamageEvent event = new EntityDamageEvent(this, amount);
+            if (RockBottomAPI.getEventHandler().fireEvent(event) != EventResult.CANCELLED) {
+                if (!this.world.isClient()) {
+                    this.setHealth(this.getHealth() - event.amount);
+                }
 
-            this.lastDamageTime = this.world.getTotalTime();
+                this.lastDamageTime = this.world.getTotalTime();
+                this.damageCooldown = this.getDamageCooldown();
 
-            if (this.world.isServer()) {
-                RockBottomAPI.getInternalHooks().packetDamage(this.world, this.getX(), this.getY(), this.getUniqueId(), amount);
+                if (this.world.isServer()) {
+                    RockBottomAPI.getInternalHooks().packetDamage(this.world, this.getX(), this.getY(), this.getUniqueId(), amount);
+                }
             }
+            return true;
+        } else {
+            return false;
         }
     }
 
@@ -218,10 +233,10 @@ public abstract class EntityLiving extends Entity {
     @Override
     public boolean onAttack(AbstractEntityPlayer player, double mouseX, double mouseY, int intendedDamage) {
         if (!this.world.isClient()) {
-            this.takeDamage(intendedDamage);
-
-            if (this.getHealth() <= 0) {
-                player.gainSkill(this.getKillReward(player));
+            if (this.takeDamage(intendedDamage)) {
+                if (player != null && this.getHealth() <= 0) {
+                    player.gainSkill(this.getKillReward(player));
+                }
             }
         }
         return true;

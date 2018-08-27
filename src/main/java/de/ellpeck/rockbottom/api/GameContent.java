@@ -102,6 +102,7 @@ public final class GameContent {
     public static final Item ITEM_BOWL = getItem("bowl").setMaxAmount(1);
     public static final Item ITEM_PESTLE = getItem("pestle").setMaxAmount(1);
     public static final Item ITEM_MUSH = getItem("mush").setMaxAmount(20);
+    public static final Item ITEM_WOOD_BOOMERANG = getItem("wood_boomerang");
 
     /*
         ---RESOURCE REGISTRY ENTRIES---
