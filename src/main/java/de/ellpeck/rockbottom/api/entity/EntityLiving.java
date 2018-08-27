@@ -131,7 +131,7 @@ public abstract class EntityLiving extends Entity {
     }
 
     protected int getDamageCooldown() {
-        return 5;
+        return 10;
     }
 
     @Override
