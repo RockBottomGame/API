@@ -159,11 +159,10 @@ public abstract class EntityLiving extends Entity {
                 if (this.world.isServer()) {
                     RockBottomAPI.getInternalHooks().packetDamage(this.world, this.getX(), this.getY(), this.getUniqueId(), amount);
                 }
+                return true;
             }
-            return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     public int getHealth() {
