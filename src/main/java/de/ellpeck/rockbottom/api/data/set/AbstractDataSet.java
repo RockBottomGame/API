@@ -27,9 +27,10 @@ import de.ellpeck.rockbottom.api.data.set.part.DataPart;
 import java.io.File;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
-public abstract class AbstractDataSet {
+public abstract class AbstractDataSet implements Iterable<Map.Entry<String, DataPart>> {
 
     protected final Map<String, DataPart> data = new HashMap<>();
     protected final Map<String, DataPart> dataUnmodifiable = Collections.unmodifiableMap(this.data);
@@ -78,6 +79,11 @@ public abstract class AbstractDataSet {
 
     public boolean isEmpty() {
         return this.data.isEmpty();
+    }
+
+    @Override
+    public Iterator<Map.Entry<String, DataPart>> iterator() {
+        return this.dataUnmodifiable.entrySet().iterator();
     }
 
     @Override

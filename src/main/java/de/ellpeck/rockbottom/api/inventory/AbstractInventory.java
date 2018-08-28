@@ -26,10 +26,7 @@ import de.ellpeck.rockbottom.api.construction.resource.IUseInfo;
 import de.ellpeck.rockbottom.api.event.impl.InventoryChangeEvent;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 import java.util.function.BiConsumer;
 
 public abstract class AbstractInventory implements IInventory {
@@ -186,5 +183,28 @@ public abstract class AbstractInventory implements IInventory {
             }
         }
         return false;
+    }
+
+    @Override
+    public Iterator<ItemInstance> iterator() {
+        return new Iterator<ItemInstance>() {
+            private int index;
+
+            @Override
+            public boolean hasNext() {
+                return this.index < AbstractInventory.this.getSlotAmount();
+            }
+
+            @Override
+            public ItemInstance next() {
+                if (this.index >= AbstractInventory.this.getSlotAmount()) {
+                    throw new NoSuchElementException();
+                } else {
+                    ItemInstance inst = AbstractInventory.this.get(this.index);
+                    this.index++;
+                    return inst;
+                }
+            }
+        };
     }
 }

@@ -21,9 +21,11 @@
 
 package de.ellpeck.rockbottom.api.inventory;
 
+import com.google.common.collect.Iterators;
 import de.ellpeck.rockbottom.api.construction.resource.IUseInfo;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
@@ -176,5 +178,14 @@ public class CombinedInventory implements IInventory {
 
             this.set(slot, instance);
         }
+    }
+
+    @Override
+    public Iterator<ItemInstance> iterator() {
+        Iterator<ItemInstance>[] its = new Iterator[this.inventories.length];
+        for (int i = 0; i < its.length; i++) {
+            its[i] = this.inventories[i].iterator();
+        }
+        return Iterators.concat(its);
     }
 }

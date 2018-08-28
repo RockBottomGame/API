@@ -90,8 +90,7 @@ public abstract class TileEntity {
     }
 
     public void dropInventory(IInventory inventory) {
-        for (int i = 0; i < inventory.getSlotAmount(); i++) {
-            ItemInstance inst = inventory.get(i);
+        for (ItemInstance inst : inventory) {
             if (inst != null) {
                 AbstractEntityItem.spawn(this.world, inst, this.x + 0.5, this.y + 0.5, Util.RANDOM.nextGaussian() * 0.1, Util.RANDOM.nextGaussian() * 0.1);
             }

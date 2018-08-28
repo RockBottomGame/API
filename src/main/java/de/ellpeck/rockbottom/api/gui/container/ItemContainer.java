@@ -21,6 +21,7 @@
 
 package de.ellpeck.rockbottom.api.gui.container;
 
+import com.google.common.collect.Iterators;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.inventory.IInventory;
@@ -29,7 +30,7 @@ import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 import java.util.*;
 
-public abstract class ItemContainer {
+public abstract class ItemContainer implements Iterable<ContainerSlot> {
 
     public final AbstractEntityPlayer player;
     private final List<ContainerSlot> slots = new ArrayList<>();
@@ -64,6 +65,10 @@ public abstract class ItemContainer {
         }
 
         this.slots.add(slot);
+    }
+
+    public boolean removeSlot(ContainerSlot slot) {
+        return this.slots.remove(slot);
     }
 
     public int getIndexForInvSlot(IInventory inv, int id) {
@@ -101,6 +106,11 @@ public abstract class ItemContainer {
 
     public void onClosed() {
 
+    }
+
+    @Override
+    public Iterator<ContainerSlot> iterator() {
+        return Iterators.unmodifiableIterator(this.slots.iterator());
     }
 
     public abstract ResourceName getName();
