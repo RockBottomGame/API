@@ -168,7 +168,7 @@ public class Item {
         if (this.useMetaAsDurability()) {
             ItemInstance left = this.takeDamage(instance, amount);
             player.getInv().set(player.getSelectedSlot(), left);
-            if (left != null) {
+            if (left == null) {
                 RockBottomAPI.getInternalHooks().onToolBroken(player.world, player, instance);
             }
         }
