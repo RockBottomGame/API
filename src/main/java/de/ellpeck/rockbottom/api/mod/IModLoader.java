@@ -21,6 +21,7 @@
 
 package de.ellpeck.rockbottom.api.mod;
 
+import de.ellpeck.rockbottom.api.data.set.DataSet;
 import de.ellpeck.rockbottom.api.data.settings.ModSettings;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
 
@@ -61,6 +62,16 @@ public interface IModLoader {
 
     @ApiInternal
     void postPostInit();
+
+    /**
+     * @see IMod#receiveMessage(IMod, String, DataSet)
+     */
+    DataSet sendMessage(IMod sender, String recipientId, String messageIdentifier, DataSet message);
+
+    /**
+     * @see IMod#receiveMessage(IMod, String, DataSet)
+     */
+    DataSet sendMessage(IMod sender, IMod recipient, String messageIdentifier, DataSet message);
 
     IMod getMod(String id);
 

@@ -29,6 +29,7 @@ import de.ellpeck.rockbottom.api.assets.IAsset;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.assets.texture.stitcher.ITextureStitcher;
 import de.ellpeck.rockbottom.api.content.IContent;
+import de.ellpeck.rockbottom.api.data.set.DataSet;
 import de.ellpeck.rockbottom.api.data.settings.ModConfig;
 import de.ellpeck.rockbottom.api.data.settings.ServerSettings;
 import de.ellpeck.rockbottom.api.data.settings.Settings;
@@ -245,6 +246,27 @@ public interface IMod {
      */
     default boolean isCompatibleWithModVersion(String version) {
         return version.equals(this.getVersion());
+    }
+
+    /**
+     * This method is called when another loaded mod sends a message to this mod
+     * using {@link IModLoader#sendMessage(IMod, String, String, DataSet)}. You
+     * can process any type of message in this method, and return any type of
+     * response back to the mod that originally sent the message. This way of
+     * communication can be used for several things, like registering custom
+     * content to different mods, notifying mods of certain requirements or
+     * items, and so on. Messages like this can be sent at any time. Note that
+     * sending a message to a mod that isn't installed will always yield an
+     * empty response with the message simply being discarded.
+     *
+     * @param sender            The mod that sent the message
+     * @param messageIdentifier A name for the message or type of message, can
+     *                          be null
+     * @param message           The message data that the mod sent
+     * @return Some reply data, or null if there should be none
+     */
+    default DataSet receiveMessage(IMod sender, String messageIdentifier, DataSet message) {
+        return null;
     }
 
     /*
