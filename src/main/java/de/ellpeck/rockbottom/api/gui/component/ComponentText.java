@@ -43,6 +43,10 @@ public class ComponentText extends GuiComponent {
         this.text = text;
     }
 
+    public String[] getText() {
+        return this.text;
+    }
+
     @Override
     public void render(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y) {
         IFont font = manager.getFont();
