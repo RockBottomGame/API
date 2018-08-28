@@ -111,6 +111,10 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
         return false;
     }
 
+    public boolean shouldBeFalling(){
+        return !this.onGround && !this.isClimbing;
+    }
+
     public void applyMotion() {
         if (!this.isClimbing) {
             this.motionY -= 0.025;
