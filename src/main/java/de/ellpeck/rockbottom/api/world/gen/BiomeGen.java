@@ -10,9 +10,9 @@ import de.ellpeck.rockbottom.api.world.gen.biome.Biome;
 import de.ellpeck.rockbottom.api.world.gen.biome.level.BiomeLevel;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 
 public abstract class BiomeGen implements IWorldGenerator {
 
@@ -33,7 +33,9 @@ public abstract class BiomeGen implements IWorldGenerator {
 
     public abstract int getNoiseSeedScramble(IWorld world);
 
-    public abstract List<BiomeLevel> getGenerationLevels(Biome biome, IWorld world);
+    public abstract Set<Biome> getBiomesToGen(IWorld world);
+
+    public abstract Set<BiomeLevel> getLevelsToGen(IWorld world);
 
     @Override
     public void initWorld(IWorld world) {

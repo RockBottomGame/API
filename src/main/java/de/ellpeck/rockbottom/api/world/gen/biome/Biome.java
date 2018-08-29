@@ -92,4 +92,8 @@ public abstract class Biome {
     public float getLakeChance(IWorld world, IChunk chunk){
         return 0.5F;
     }
+
+    public boolean shouldGenerateInWorld(IWorld world){
+        return true;
+    }
 }

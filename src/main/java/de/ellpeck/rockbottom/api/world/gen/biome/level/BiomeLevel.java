@@ -49,4 +49,8 @@ public abstract class BiomeLevel {
     public List<Biome> getAdditionalGenBiomes(IWorld world) {
         return Collections.emptyList();
     }
+
+    public boolean shouldGenerateInWorld(IWorld world){
+        return true;
+    }
 }
