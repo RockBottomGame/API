@@ -21,6 +21,7 @@
 
 package de.ellpeck.rockbottom.api;
 
+import com.google.common.collect.ListMultimap;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import de.ellpeck.rockbottom.api.construction.IRecipe;
@@ -30,14 +31,20 @@ import de.ellpeck.rockbottom.api.data.set.part.DataPart;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.inventory.Inventory;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
+import de.ellpeck.rockbottom.api.world.IChunk;
 import de.ellpeck.rockbottom.api.world.IWorld;
+import de.ellpeck.rockbottom.api.world.gen.BiomeGen;
 import de.ellpeck.rockbottom.api.world.gen.INoiseGen;
+import de.ellpeck.rockbottom.api.world.gen.biome.Biome;
+import de.ellpeck.rockbottom.api.world.gen.biome.level.BiomeLevel;
 import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 
 import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.File;
 import java.util.List;
+import java.util.Map;
+import java.util.Random;
 import java.util.function.Function;
 import java.util.logging.Logger;
 
@@ -185,4 +192,14 @@ public interface IApiHandler {
      * @return The new logger
      */
     Logger createLogger(String name);
+
+    int generateBasicHeight(IWorld world, TileLayer layer, int x, INoiseGen noiseGen, int minHeight, int maxHeight, int maxMountainHeight);
+
+    void initBiomeGen(IWorld world, int seedScramble, int blobSize, long[] layerSeeds, ListMultimap<BiomeLevel, Biome> biomesPerLevel, Map<BiomeLevel, Integer> totalWeights, BiomeGen gen);
+
+    void generateBiomeGen(IWorld world, IChunk chunk, BiomeGen gen, Map<Biome, INoiseGen> biomeNoiseGens);
+
+    Biome getBiome(IWorld world, int x, int y, int height, Map<BiomeLevel, Integer> totalWeights, ListMultimap<BiomeLevel, Biome> biomesPerLevel, Random biomeRandom, int blobSize, long[] layerSeeds, INoiseGen levelHeightNoise, int levelTransition, int biomeTransition);
+
+    BiomeLevel getSmoothedLevelForPos(IWorld world, int x, int y, int height, int levelTransition, ListMultimap<BiomeLevel, Biome> biomesPerLevel, INoiseGen levelHeightNoise);
 }

@@ -25,10 +25,9 @@ import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.Registries;
 import de.ellpeck.rockbottom.api.util.Pos2;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
+import de.ellpeck.rockbottom.api.world.gen.BiomeGen;
+import de.ellpeck.rockbottom.api.world.gen.HeightGen;
 import de.ellpeck.rockbottom.api.world.gen.IWorldGenerator;
-import de.ellpeck.rockbottom.api.world.gen.biome.Biome;
-import de.ellpeck.rockbottom.api.world.gen.biome.level.BiomeLevel;
-import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 
 import java.util.List;
 
@@ -46,11 +45,9 @@ public abstract class SubWorldInitializer {
 
     public abstract void onSave(IWorld subWorld);
 
-    public abstract Biome getExpectedBiome(IWorld subWorld, int x, int y);
+    public abstract HeightGen initHeightGen(IWorld subWorld);
 
-    public abstract BiomeLevel getExpectedBiomeLevel(IWorld subWorld, int x, int y);
-
-    public abstract int getExpectedSurfaceHeight(IWorld subWorld, TileLayer layer, int x);
+    public abstract BiomeGen initBiomeGen(IWorld subWorld);
 
     public abstract void onGeneratorsInitialized(IWorld subWorld);
 
