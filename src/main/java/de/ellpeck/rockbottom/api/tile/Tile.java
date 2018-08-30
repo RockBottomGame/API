@@ -395,6 +395,10 @@ public class Tile {
         return false;
     }
 
+    public boolean canSwim(IWorld world, int x, int y, TileLayer layer, Entity entity){
+        return false;
+    }
+
     public Tile setMaxAmount(int amount) {
         Item item = this.getItem();
         if (item != null) {

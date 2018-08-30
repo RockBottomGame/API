@@ -64,6 +64,7 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
     public boolean canClimb;
     public TileState submergedLiquid;
     public boolean canBreathe = true;
+    public boolean canSwim;
     protected boolean dead;
     private UUID uniqueId = UUID.randomUUID();
     private ModBasedDataSet additionalData;
@@ -111,7 +112,7 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
         return false;
     }
 
-    public boolean shouldBeFalling(){
+    public boolean shouldBeFalling() {
         return !this.onGround && !this.isClimbing;
     }
 
@@ -175,7 +176,7 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
         this.chunkY = chunk.getGridY();
     }
 
-    public void moveToWorld(IWorld world){
+    public void moveToWorld(IWorld world) {
         this.world = world;
     }
 
@@ -359,12 +360,25 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
     public final void onTileIntersection(int x, int y, TileLayer layer, TileState state, BoundBox objBox, BoundBox objBoxMotion, List<BoundBox> boxes) {
         Tile tile = state.getTile();
 
-        if (tile.canClimb(this.world, x, y, layer, state, objBox, objBoxMotion, boxes, this)) {
-            this.canClimb = true;
+        if (!this.canClimb || !this.isClimbing) {
+            if (tile.canClimb(this.world, x, y, layer, state, objBox, objBoxMotion, boxes, this)) {
+                this.canClimb = true;
 
-            if (!this.onGround) {
-                if (this.shouldStartClimbing(x, y, layer, state, objBox, objBoxMotion, boxes)) {
-                    this.isClimbing = true;
+                if (!this.onGround) {
+                    if (this.shouldStartClimbing(x, y, layer, state, objBox, objBoxMotion, boxes)) {
+                        this.isClimbing = true;
+                    }
+                }
+            }
+        }
+
+        if (!this.canSwim) {
+            if (tile.canSwim(this.world, x, y, layer, this)) {
+                for (BoundBox box : boxes) {
+                    if (this.collidedHor ? box.intersects(objBox) : box.contains(this.getX(), this.getY())) {
+                        this.canSwim = true;
+                        break;
+                    }
                 }
             }
         }

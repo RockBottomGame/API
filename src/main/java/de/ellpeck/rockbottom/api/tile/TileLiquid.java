@@ -59,6 +59,11 @@ public abstract class TileLiquid extends TileBasic {
         return true;
     }
 
+    @Override
+    public boolean canSwim(IWorld world, int x, int y, TileLayer layer, Entity entity) {
+        return true;
+    }
+
     public abstract int getLevels();
 
     public abstract boolean doesFlow();
