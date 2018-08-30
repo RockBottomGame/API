@@ -22,7 +22,10 @@
 package de.ellpeck.rockbottom.api.world;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
+import de.ellpeck.rockbottom.api.IRenderer;
 import de.ellpeck.rockbottom.api.Registries;
+import de.ellpeck.rockbottom.api.assets.IAssetManager;
+import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.util.Pos2;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 import de.ellpeck.rockbottom.api.world.gen.BiomeGen;
@@ -53,11 +56,15 @@ public abstract class SubWorldInitializer {
 
     public abstract void update(IWorld subWorld, IGameInstance game);
 
-    public boolean shouldGenerateHere(IWorld subWorld, ResourceName name, IWorldGenerator generator){
+    public boolean shouldGenerateHere(IWorld subWorld, ResourceName name, IWorldGenerator generator) {
         return generator.shouldExistInWorld(subWorld);
     }
 
-    public ResourceName getWorldName(){
+    public boolean renderSky(IWorld subWorld, IGameInstance game, IAssetManager manager, IRenderer g, IWorld world, AbstractEntityPlayer player, double width, double height) {
+        return true;
+    }
+
+    public ResourceName getWorldName() {
         return this.getName();
     }
 
