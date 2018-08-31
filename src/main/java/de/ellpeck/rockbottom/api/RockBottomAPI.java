@@ -45,7 +45,7 @@ public final class RockBottomAPI {
     /**
      * The current API version equal to the version in the build.gradle file.
      */
-    public static final String VERSION = "0.4.3";
+    public static final String VERSION = "0.4.4";
 
     /**
      * A set of internal references to API classes that are initialized by the

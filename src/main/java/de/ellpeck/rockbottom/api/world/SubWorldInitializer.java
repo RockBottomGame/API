@@ -21,6 +21,7 @@
 
 package de.ellpeck.rockbottom.api.world;
 
+import de.ellpeck.rockbottom.api.Constants;
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.IRenderer;
 import de.ellpeck.rockbottom.api.Registries;
@@ -55,6 +56,16 @@ public abstract class SubWorldInitializer {
     public abstract void onGeneratorsInitialized(IWorld subWorld);
 
     public abstract void update(IWorld subWorld, IGameInstance game);
+
+    public float getSkylightModifierModifier(IWorld subWorld) {
+        return 1F;
+    }
+
+    public void updateLocalTime(IWorld subWorld) {
+        if (!subWorld.isTimeFrozen()) {
+            subWorld.setCurrentTime((subWorld.getCurrentTime() + 1) % Constants.TIME_PER_DAY);
+        }
+    }
 
     public boolean shouldGenerateHere(IWorld subWorld, ResourceName name, IWorldGenerator generator) {
         return generator.shouldExistInWorld(subWorld);
