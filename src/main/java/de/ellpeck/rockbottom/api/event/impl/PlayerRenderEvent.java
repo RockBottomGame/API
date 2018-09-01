@@ -30,9 +30,11 @@ import de.ellpeck.rockbottom.api.event.Event;
 /**
  * This event is fired after an {@link AbstractEntityPlayer} is rendered. Note
  * that during the firing of this event, the {@link IRenderer#getWorldScale()}
- * is applied to the GL context. This event cannot be cancelled.
+ * is applied to the GL context. This event cannot be cancelled. Use {@link Pre}
+ * if you want to render something before the player is rendered, or if you want
+ * to cancel the rendering of the player.
  */
-public final class PlayerRenderEvent extends Event {
+public class PlayerRenderEvent extends Event {
 
     public final IGameInstance game;
     public final IAssetManager assetManager;
@@ -48,5 +50,16 @@ public final class PlayerRenderEvent extends Event {
         this.player = player;
         this.x = x;
         this.y = y;
+    }
+
+    /**
+     * This event is fired before na {@link AbstractEntityPlayer} is rendered.
+     * Cancelling the event will cause the player not to be rendered.
+     */
+    public static final class Pre extends PlayerRenderEvent {
+
+        public Pre(IGameInstance game, IAssetManager assetManager, IRenderer graphics, AbstractEntityPlayer player, float x, float y) {
+            super(game, assetManager, graphics, player, x, y);
+        }
     }
 }

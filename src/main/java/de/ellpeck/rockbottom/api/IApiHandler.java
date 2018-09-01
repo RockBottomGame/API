@@ -24,6 +24,7 @@ package de.ellpeck.rockbottom.api;
 import com.google.common.collect.ListMultimap;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.construction.IRecipe;
 import de.ellpeck.rockbottom.api.construction.resource.IUseInfo;
 import de.ellpeck.rockbottom.api.data.set.AbstractDataSet;
@@ -31,6 +32,7 @@ import de.ellpeck.rockbottom.api.data.set.part.DataPart;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.inventory.Inventory;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
+import de.ellpeck.rockbottom.api.render.IPlayerDesign;
 import de.ellpeck.rockbottom.api.world.IChunk;
 import de.ellpeck.rockbottom.api.world.IWorld;
 import de.ellpeck.rockbottom.api.world.gen.BiomeGen;
@@ -192,6 +194,8 @@ public interface IApiHandler {
      * @return The new logger
      */
     Logger createLogger(String name);
+
+    void renderPlayer(AbstractEntityPlayer player, IGameInstance game, IAssetManager manager, IRenderer g, IPlayerDesign design, float x, float y, float scale, int row, int light);
 
     int generateBasicHeight(IWorld world, TileLayer layer, int x, INoiseGen noiseGen, int minHeight, int maxHeight, int maxMountainHeight);
 
