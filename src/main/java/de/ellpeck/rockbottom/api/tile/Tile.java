@@ -352,6 +352,10 @@ public class Tile {
         return false;
     }
 
+    public boolean canKeepFarmablePlants(IWorld world, int x, int y, TileLayer layer) {
+        return false;
+    }
+
     public TileState getDefState() {
         return this.stateHandler.getDefault();
     }
@@ -395,7 +399,7 @@ public class Tile {
         return false;
     }
 
-    public boolean canSwim(IWorld world, int x, int y, TileLayer layer, Entity entity){
+    public boolean canSwim(IWorld world, int x, int y, TileLayer layer, Entity entity) {
         return false;
     }
 

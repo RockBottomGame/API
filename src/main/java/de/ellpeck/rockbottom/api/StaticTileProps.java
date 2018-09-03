@@ -60,8 +60,14 @@ public final class StaticTileProps {
      */
     public static final IntProp SAPLING_GROWTH = new IntProp("growth", 0, 5);
     /**
+     * Determines how far grown a corn plant is. Used by {@link
+     * GameContent#TILE_CORN}
+     */
+    public static final IntProp CORN_GROWTH = new IntProp("growth", 0, 10);
+    /**
      * Determines if a tile is the top or bottom half of a door. Used by {@link
-     * GameContent#TILE_WOOD_DOOR} and {@link GameContent#TILE_WOOD_DOOR_OLD}
+     * GameContent#TILE_WOOD_DOOR}, {@link GameContent#TILE_WOOD_DOOR_OLD} and
+     * {@link GameContent#TILE_CORN}
      */
     public static final BoolProp TOP_HALF = new BoolProp("top_half", false);
     /**

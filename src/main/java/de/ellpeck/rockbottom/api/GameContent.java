@@ -76,6 +76,8 @@ public final class GameContent {
     public static final Tile TILE_STARDROP = getTile("stardrop").setHardness(0.75F).setMaxAmount(10).setForceDrop();
     public static final Tile TILE_IRON_LAMP = getTile("lamp_iron").setHardness(10F).addEffectiveTool(ToolProperty.PICKAXE, 8).setMaxAmount(20).setForceDrop();
     public static final Tile TILE_MORTAR = getTile("mortar").setHardness(3F).addEffectiveTool(ToolProperty.PICKAXE, 0).setMaxAmount(5);
+    public static final Tile TILE_SOIL_TILLED = getTile("soil_tilled").setHardness(0.8F).addEffectiveTool(ToolProperty.SHOVEL, 0).setForceDrop();
+    public static final Tile TILE_CORN = getTile("corn").setHardness(2F).setForceDrop().setMaxAmount(25);
 
     /*
         ---ITEMS---
@@ -103,6 +105,7 @@ public final class GameContent {
     public static final Item ITEM_PESTLE = getItem("pestle").setMaxAmount(1);
     public static final Item ITEM_MUSH = getItem("mush").setMaxAmount(20);
     public static final Item ITEM_WOOD_BOOMERANG = getItem("wood_boomerang");
+    public static final Item ITEM_SIMPLE_HOE = getItem("simple_hoe");
 
     /*
         ---RESOURCE REGISTRY ENTRIES---
