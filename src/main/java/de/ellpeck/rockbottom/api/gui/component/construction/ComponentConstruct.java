@@ -26,12 +26,14 @@ import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.IRenderer;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.construction.compendium.ICompendiumRecipe;
+import de.ellpeck.rockbottom.api.data.settings.Settings;
 import de.ellpeck.rockbottom.api.gui.Gui;
 import de.ellpeck.rockbottom.api.gui.component.GuiComponent;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.util.Colors;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 
@@ -60,14 +62,19 @@ public class ComponentConstruct extends GuiComponent {
         if (this.isMouseOver(game)) {
             ItemInstance instance = this.getOutput(game);
 
-            String s = manager.localize(ResourceName.intern("info." + (this.canConstruct ? "click_to_construct" : "missing_items")));
-            g.drawHoverInfoAtMouse(game, manager, true, 200, instance.getDisplayName() + " x" + instance.getAmount(), s);
+            List<String> info = new ArrayList<>();
+            instance.getItem().describeItem(manager, instance, info, Settings.KEY_ADVANCED_INFO.isDown());
+            if (this.consumer != null) {
+                info.add("");
+                info.add(manager.localize(ResourceName.intern("info." + (this.canConstruct ? "click_to_construct" : "missing_items"))));
+            }
+            g.drawHoverInfoAtMouse(game, manager, true, 200, info);
         }
     }
 
     @Override
     public boolean onMouseAction(IGameInstance game, int button, float x, float y) {
-        if (this.consumer != null) {
+        if (this.consumer != null && Settings.KEY_GUI_ACTION_1.isKey(button) && this.isMouseOver(game)) {
             return this.consumer.get();
         } else {
             return false;
@@ -77,6 +84,11 @@ public class ComponentConstruct extends GuiComponent {
     protected ItemInstance getOutput(IGameInstance game) {
         List<ItemInstance> outputs = this.recipe.getOutputs();
         return outputs.get((game.getTotalTicks() / Constants.TARGET_TPS) % outputs.size());
+    }
+
+    @Override
+    public boolean shouldDoFingerCursor(IGameInstance game) {
+        return this.consumer != null;
     }
 
     @Override

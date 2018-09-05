@@ -26,12 +26,14 @@ import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.IRenderer;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.construction.compendium.ICompendiumRecipe;
+import de.ellpeck.rockbottom.api.data.settings.Settings;
 import de.ellpeck.rockbottom.api.gui.Gui;
 import de.ellpeck.rockbottom.api.gui.component.GuiComponent;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.util.Colors;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ComponentPolaroid extends GuiComponent {
@@ -71,7 +73,9 @@ public class ComponentPolaroid extends GuiComponent {
         if (this.isMouseOver(game)) {
             if (this.recipe != null) {
                 ItemInstance instance = this.getOutput(game);
-                g.drawHoverInfoAtMouse(game, manager, true, 200, instance.getDisplayName() + " x" + instance.getAmount());
+                List<String> info = new ArrayList<>();
+                instance.getItem().describeItem(manager, instance, info, Settings.KEY_ADVANCED_INFO.isDown());
+                g.drawHoverInfoAtMouse(game, manager, true, 200, info);
             } else {
                 g.drawHoverInfoAtMouse(game, manager, false, 200, manager.localize(ResourceName.intern("info.unknown_recipe")));
             }

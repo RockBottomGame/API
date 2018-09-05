@@ -62,7 +62,7 @@ public class ComponentIngredient extends GuiComponent {
     public void renderOverlay(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y) {
         if (!this.inputs.isEmpty() && this.isMouseOver(game)) {
             ItemInstance instance = this.getInput(game);
-            g.drawHoverInfoAtMouse(game, manager, false, 200, instance.getDisplayName() + " x" + instance.getAmount());
+            g.drawHoverInfoAtMouse(game, manager, false, 200, instance.getDisplayName());
         }
     }
 

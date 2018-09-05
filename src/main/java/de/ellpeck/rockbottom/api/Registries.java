@@ -22,6 +22,7 @@
 package de.ellpeck.rockbottom.api;
 
 import de.ellpeck.rockbottom.api.assets.IAssetLoader;
+import de.ellpeck.rockbottom.api.construction.compendium.CompendiumCategory;
 import de.ellpeck.rockbottom.api.construction.compendium.construction.ConstructionRecipe;
 import de.ellpeck.rockbottom.api.construction.compendium.mortar.MortarRecipe;
 import de.ellpeck.rockbottom.api.construction.smelting.FuelInput;
@@ -285,6 +286,14 @@ public final class Registries {
      */
     @ApiInternal
     public static final NameRegistry<SubWorldInitializer> SUB_WORLD_INITIALIZER_REGISTRY = new NameRegistry<>(ResourceName.intern("sub_world_initializer_registry"), true).register();
+    /**
+     * The registry for all {@link CompendiumCategory} objects that allow
+     * modders to add a custom tab to the compendium in the inventory, and an
+     * easy way to list recipes and their descriptions with it. Use {@link
+     * CompendiumCategory#register()} to register a category.
+     */
+    @ApiInternal
+    public static final NameRegistry<CompendiumCategory> COMPENDIUM_CATEGORY_REGISTRY = new NameRegistry<>(ResourceName.intern("compendium_category_registry"), true).register();
 
     public static <T extends IRegistry> T get(ResourceName name, Class<T> type) {
         IRegistry reg = get(name);
