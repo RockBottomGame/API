@@ -32,7 +32,10 @@ import de.ellpeck.rockbottom.api.entity.MovableWorldObject;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.event.EventResult;
 import de.ellpeck.rockbottom.api.event.impl.TileDropsEvent;
-import de.ellpeck.rockbottom.api.item.*;
+import de.ellpeck.rockbottom.api.item.Item;
+import de.ellpeck.rockbottom.api.item.ItemInstance;
+import de.ellpeck.rockbottom.api.item.ItemTile;
+import de.ellpeck.rockbottom.api.item.ToolProperty;
 import de.ellpeck.rockbottom.api.particle.IParticleManager;
 import de.ellpeck.rockbottom.api.render.tile.ITileRenderer;
 import de.ellpeck.rockbottom.api.tile.entity.IFilteredInventory;
@@ -57,7 +60,6 @@ public class Tile {
 
     protected final ResourceName name;
     private final IStateHandler stateHandler = RockBottomAPI.getInternalHooks().makeStateHandler(this);
-    protected Map<ToolType, Integer> effectiveTools = new HashMap<>();
     protected Map<ToolProperty, Integer> effectiveToolProps = new HashMap<>();
     protected boolean forceDrop;
     protected float hardness = 1F;
@@ -251,21 +253,6 @@ public class Tile {
         return this;
     }
 
-    /**
-     * The tool type system is deprecated. Please use {@link
-     * #isToolEffective(IWorld, int, int, TileLayer, ToolProperty, int)}
-     * instead.
-     */
-    @Deprecated
-    public boolean isToolEffective(IWorld world, int x, int y, TileLayer layer, ToolType type, int level) {
-        for (Map.Entry<ToolType, Integer> entry : this.effectiveTools.entrySet()) {
-            if (entry.getKey() == type && level >= entry.getValue()) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     public boolean isToolEffective(IWorld world, int x, int y, TileLayer layer, ToolProperty property, int level) {
         for (Map.Entry<ToolProperty, Integer> entry : this.effectiveToolProps.entrySet()) {
             if (entry.getKey() == property && level >= entry.getValue()) {
@@ -273,16 +260,6 @@ public class Tile {
             }
         }
         return false;
-    }
-
-    /**
-     * The tool type system is deprecated. Please use {@link
-     * #addEffectiveTool(ToolProperty, int)} instead.
-     */
-    @Deprecated
-    public Tile addEffectiveTool(ToolType type, int level) {
-        this.effectiveTools.put(type, level);
-        return this;
     }
 
     public Tile addEffectiveTool(ToolProperty property, int level) {

@@ -234,8 +234,6 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
             }
             set.addInt("ticks", this.ticksExisted);
         }
-
-        this.save(set);
     }
 
     public void load(DataSet set, boolean forFullSync) {
@@ -273,26 +271,6 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
             }
             this.ticksExisted = set.getInt("ticks");
         }
-
-        this.load(set);
-    }
-
-    /**
-     * This method is deprecated. Please use {@link #save(DataSet, boolean)}
-     * instead.
-     */
-    @Deprecated
-    public void save(DataSet set) {
-
-    }
-
-    /**
-     * This method is deprecated. Please use {@link #load(DataSet, boolean)}
-     * instead.
-     */
-    @Deprecated
-    public void load(DataSet set) {
-
     }
 
     public boolean doesSave() {

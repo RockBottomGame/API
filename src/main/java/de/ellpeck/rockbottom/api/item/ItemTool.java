@@ -38,22 +38,7 @@ public class ItemTool extends ItemBasic {
 
     private final int durability;
     private final float miningSpeed;
-    private final Map<ToolType, Integer> toolTypes = new HashMap<>();
     private final Map<ToolProperty, Integer> toolProperties = new HashMap<>();
-
-    /**
-     * The tool type system is deprecated. Please use the other constructor
-     * instead.
-     */
-    @Deprecated
-    public ItemTool(ResourceName name, float miningSpeed, int durability, ToolType type, int level) {
-        super(name);
-        this.miningSpeed = miningSpeed;
-        this.durability = durability;
-
-        this.addToolType(type, level);
-        this.maxAmount = 1;
-    }
 
     public ItemTool(ResourceName name, float miningSpeed, int durability, ToolProperty property, int level) {
         super(name);
@@ -69,24 +54,9 @@ public class ItemTool extends ItemBasic {
         return new ItemToolRenderer(name);
     }
 
-    /**
-     * The tool type system is deprecated. Please use {@link
-     * #addToolProperty(ToolProperty, int)} instead.
-     */
-    @Deprecated
-    public ItemTool addToolType(ToolType type, int level) {
-        this.toolTypes.put(type, level);
-        return this;
-    }
-
     public ItemTool addToolProperty(ToolProperty property, int level) {
         this.toolProperties.put(property, level);
         return this;
-    }
-
-    @Override
-    public Map<ToolType, Integer> getToolTypes(ItemInstance instance) {
-        return this.toolTypes;
     }
 
     @Override

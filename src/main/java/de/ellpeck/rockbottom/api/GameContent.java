@@ -64,7 +64,7 @@ public final class GameContent {
     public static final Tile TILE_SIGN = getTile("sign").addEffectiveTool(ToolProperty.AXE, 0).setForceDrop().setMaxAmount(100);
     public static final Tile TILE_SAPLING = getTile("sapling").setHardness(0F).setForceDrop().setMaxAmount(150);
     public static final TileLiquid TILE_WATER = (TileLiquid) getTile("water");
-    public static final TileMeta WOOD_BOARDS = (TileMeta) getTile("wood_boards").setHardness(2F).addEffectiveTool(ToolProperty.AXE, 0).setForceDrop().setMaxAmount(75);
+    public static final TileMeta TILE_WOOD_BOARDS = (TileMeta) getTile("wood_boards").setHardness(2F).addEffectiveTool(ToolProperty.AXE, 0).setForceDrop().setMaxAmount(75);
     public static final Tile TILE_WOOD_DOOR = getTile("wood_door").setHardness(4F).addEffectiveTool(ToolProperty.AXE, 0).setForceDrop().setMaxAmount(5);
     public static final Tile TILE_WOOD_DOOR_OLD = getTile("wood_door_old").setHardness(3.5F).addEffectiveTool(ToolProperty.AXE, 0).setForceDrop().setMaxAmount(5);
     public static final Tile TILE_REMAINS_GOO = getTile("remains_goo");
@@ -119,7 +119,7 @@ public final class GameContent {
     public static final String RES_SAND = res().addResources("sand", TILE_SAND);
     public static final String RES_COAL = res().addResources("coal", TILE_COAL);
     public static final String RES_SAPLING = res().addResources("sapling", TILE_SAPLING);
-    public static final String RES_WOOD_PROCESSED = res().addResources("wood_processed", WOOD_BOARDS, 0, WOOD_BOARDS.metaProp.getVariants() - 1);
+    public static final String RES_WOOD_PROCESSED = res().addResources("wood_processed", TILE_WOOD_BOARDS, 0, TILE_WOOD_BOARDS.metaProp.getVariants() - 1);
     public static final String RES_PLANT_FIBER = res().addResources("plant_fiber", ITEM_PLANT_FIBER);
     public static final String RES_STICK = res().addResources("stick", ITEM_TWIG);
     public static final String RES_COPPER_RAW = res().addResources("copper_raw", TILE_COPPER);

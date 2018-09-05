@@ -19,41 +19,49 @@
  * © 2017 Ellpeck
  */
 
-package de.ellpeck.rockbottom.api.construction;
+package de.ellpeck.rockbottom.api.construction.compendium.construction;
 
 import de.ellpeck.rockbottom.api.Registries;
+import de.ellpeck.rockbottom.api.RockBottomAPI;
+import de.ellpeck.rockbottom.api.construction.compendium.BasicCompendiumRecipe;
 import de.ellpeck.rockbottom.api.construction.resource.IUseInfo;
+import de.ellpeck.rockbottom.api.entity.AbstractEntityItem;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
+import de.ellpeck.rockbottom.api.gui.Gui;
+import de.ellpeck.rockbottom.api.gui.component.construction.ComponentConstruct;
+import de.ellpeck.rockbottom.api.inventory.Inventory;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
-import de.ellpeck.rockbottom.api.util.reg.NameRegistry;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class BasicRecipe implements IRecipe {
+public class ConstructionRecipe extends BasicCompendiumRecipe {
 
-    private final ResourceName name;
-    private final ResourceName infoName;
     private final List<IUseInfo> inputs;
     private final List<ItemInstance> outputs;
     private final float skillReward;
+    private final ResourceName infoName;
 
-    public BasicRecipe(ResourceName name, List<IUseInfo> inputs, List<ItemInstance> outputs, float skillReward) {
-        this.name = name;
+    public ConstructionRecipe(ResourceName name, List<IUseInfo> inputs, List<ItemInstance> outputs, float skillReward) {
+        super(name);
         this.infoName = name.addPrefix("recipe_");
         this.inputs = inputs;
         this.outputs = outputs;
         this.skillReward = skillReward;
     }
 
-    public BasicRecipe(ResourceName name, float skillReward, ItemInstance output, IUseInfo... inputs) {
+    public ConstructionRecipe(ResourceName name, float skillReward, ItemInstance output, IUseInfo... inputs) {
         this(name, Arrays.asList(inputs), Collections.singletonList(output), skillReward);
     }
 
-    public BasicRecipe(float skillReward, ItemInstance output, IUseInfo... inputs) {
+    public ConstructionRecipe(float skillReward, ItemInstance output, IUseInfo... inputs) {
         this(output.getItem().getName(), skillReward, output, inputs);
+    }
+
+    public static ConstructionRecipe forName(ResourceName name) {
+        return Registries.MANUAL_CONSTRUCTION_RECIPES.get(name);
     }
 
     @Override
@@ -72,26 +80,32 @@ public class BasicRecipe implements IRecipe {
     }
 
     @Override
-    public ResourceName getName() {
-        return this.name;
-    }
-
-    @Override
-    public ResourceName getKnowledgeInformationName() {
-        return this.infoName;
-    }
-
-    @Override
     public float getSkillReward() {
         return this.skillReward;
     }
 
-    public BasicRecipe register(NameRegistry<BasicRecipe> registry) {
-        registry.register(this.getName(), this);
+    public void playerConstruct(AbstractEntityPlayer player, int amount) {
+        Inventory inv = player.getInv();
+        List<ItemInstance> remains = RockBottomAPI.getApiHandler().construct(player, inv, inv, this, amount, this.getActualInputs(inv), items -> this.getActualOutputs(inv, inv, items), this.getSkillReward());
+        for (ItemInstance instance : remains) {
+            AbstractEntityItem.spawn(player.world, instance, player.getX(), player.getY(), 0F, 0F);
+        }
+    }
+
+    @Override
+    public ComponentConstruct getConstructButton(Gui gui, AbstractEntityPlayer player, boolean canConstruct) {
+        return new ComponentConstruct(gui, this, canConstruct, () -> {
+            RockBottomAPI.getInternalHooks().defaultConstruct(player, this);
+            return true;
+        });
+    }
+
+    public ConstructionRecipe registerManual() {
+        Registries.MANUAL_CONSTRUCTION_RECIPES.register(this.getName(), this);
         return this;
     }
 
-    public BasicRecipe registerManual() {
-        return this.register(Registries.MANUAL_CONSTRUCTION_RECIPES);
+    public ResourceName getKnowledgeInformationName() {
+        return this.infoName;
     }
 }

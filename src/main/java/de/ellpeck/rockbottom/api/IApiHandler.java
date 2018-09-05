@@ -25,7 +25,7 @@ import com.google.common.collect.ListMultimap;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
-import de.ellpeck.rockbottom.api.construction.IRecipe;
+import de.ellpeck.rockbottom.api.construction.compendium.ICompendiumRecipe;
 import de.ellpeck.rockbottom.api.construction.resource.IUseInfo;
 import de.ellpeck.rockbottom.api.data.set.AbstractDataSet;
 import de.ellpeck.rockbottom.api.data.set.part.DataPart;
@@ -144,7 +144,7 @@ public interface IApiHandler {
     /**
      * This is a utility method that you can call for custom construction of
      * items via the compendium, if you, for example, create a custom, more
-     * complex, {@link IRecipe} class, or if you create a machine that should
+     * complex, {@link ICompendiumRecipe} class, or if you create a machine that should
      * automatically construct something.
      *
      * @param player          The player doing this construction. Can be null if
@@ -165,7 +165,7 @@ public interface IApiHandler {
      * @return A list of items that couldn't fit into the output inventory
      * specified
      */
-    List<ItemInstance> construct(AbstractEntityPlayer player, Inventory inputInventory, Inventory outputInventory, IRecipe recipe, int amount, List<IUseInfo> inputs, Function<List<ItemInstance>, List<ItemInstance>> outputGetter, float skillReward);
+    List<ItemInstance> construct(AbstractEntityPlayer player, Inventory inputInventory, Inventory outputInventory, ICompendiumRecipe recipe, int amount, List<IUseInfo> inputs, Function<List<ItemInstance>, List<ItemInstance>> outputGetter, float skillReward);
 
     /**
      * Gets a color in the world based on a light value between 0 and {@link

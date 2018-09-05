@@ -26,6 +26,7 @@ import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.IRenderer;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.assets.font.FormattingCode;
+import de.ellpeck.rockbottom.api.construction.compendium.construction.ConstructionRecipe;
 import de.ellpeck.rockbottom.api.effect.ActiveEffect;
 import de.ellpeck.rockbottom.api.entity.AbstractEntityItem;
 import de.ellpeck.rockbottom.api.entity.Entity;
@@ -105,4 +106,6 @@ public interface IInternalHooks {
     void packetTileEntityData(TileEntity tile);
 
     void packetEntityData(Entity entity);
+
+    void defaultConstruct(AbstractEntityPlayer player, ConstructionRecipe recipe);
 }

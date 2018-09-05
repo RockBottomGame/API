@@ -25,7 +25,7 @@ import de.ellpeck.rockbottom.api.Constants;
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.IRenderer;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
-import de.ellpeck.rockbottom.api.construction.IRecipe;
+import de.ellpeck.rockbottom.api.construction.compendium.ICompendiumRecipe;
 import de.ellpeck.rockbottom.api.gui.Gui;
 import de.ellpeck.rockbottom.api.gui.component.GuiComponent;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
@@ -39,11 +39,11 @@ public class ComponentPolaroid extends GuiComponent {
     private static final ResourceName RES = ResourceName.intern("gui.construction.item_background");
     private static final ResourceName RES_HIGHLIGHTED = ResourceName.intern("gui.construction.item_background_highlighted");
     private static final ResourceName RES_SELECTED = ResourceName.intern("gui.construction.item_background_selected");
-    public final IRecipe recipe;
+    public final ICompendiumRecipe recipe;
     public final boolean canConstruct;
     public boolean isSelected;
 
-    public ComponentPolaroid(Gui gui, IRecipe recipe, boolean canConstruct) {
+    public ComponentPolaroid(Gui gui, ICompendiumRecipe recipe, boolean canConstruct) {
         super(gui, 0, 0, 18, 20);
         this.recipe = recipe;
         this.canConstruct = canConstruct;

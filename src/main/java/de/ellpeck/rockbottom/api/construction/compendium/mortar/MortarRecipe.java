@@ -19,68 +19,72 @@
  * © 2018 Ellpeck
  */
 
-package de.ellpeck.rockbottom.api.construction;
+package de.ellpeck.rockbottom.api.construction.compendium.mortar;
 
 import de.ellpeck.rockbottom.api.Registries;
+import de.ellpeck.rockbottom.api.construction.compendium.BasicCompendiumRecipe;
 import de.ellpeck.rockbottom.api.construction.resource.IUseInfo;
-import de.ellpeck.rockbottom.api.content.IContent;
+import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
+import de.ellpeck.rockbottom.api.inventory.IInventory;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
-public class MortarRecipe implements IContent {
+import java.util.List;
+
+public class MortarRecipe extends BasicCompendiumRecipe {
 
     public static final ResourceName ID = ResourceName.intern("mortar");
 
-    private final ResourceName name;
-    private final IUseInfo[] input;
-    private final ItemInstance[] output;
+    private final List<IUseInfo> input;
+    private final List<ItemInstance> output;
     private final int time;
 
-    public MortarRecipe(ResourceName name, IUseInfo[] input, ItemInstance[] output, int time) {
-        this.name = name;
+    public MortarRecipe(ResourceName name, List<IUseInfo> input, List<ItemInstance> output, int time) {
+        super(name);
         this.input = input;
         this.output = output;
         this.time = time;
     }
 
-    public static MortarRecipe forInput(ItemInstance[] inputs) {
+    public static MortarRecipe forName(ResourceName name){
+        return Registries.MORTAR_REGISTRY.get(name);
+    }
+
+    public static MortarRecipe getRecipe(IInventory inv) {
         for (MortarRecipe recipe : Registries.MORTAR_REGISTRY.values()) {
-            int found = 0;
-            for (IUseInfo input : recipe.getInput()) {
-                if (input != null) {
-                    for (ItemInstance instance : inputs) {
-                        if (instance != null && input.containsItem(instance)) {
-                            found++;
-                            break;
-                        }
-                    }
-                }
-            }
-            if (found >= recipe.getInput().length) {
+            if (recipe.canConstruct(inv, inv)) {
                 return recipe;
             }
         }
         return null;
     }
 
-    public IUseInfo[] getInput() {
-        return this.input;
-    }
-
-    public ItemInstance[] getOutput() {
-        return this.output;
-    }
-
     public int getTime() {
         return this.time;
-    }
-
-    public ResourceName getName() {
-        return this.name;
     }
 
     public MortarRecipe register() {
         Registries.MORTAR_REGISTRY.register(this.getName(), this);
         return this;
+    }
+
+    @Override
+    public boolean isKnown(AbstractEntityPlayer player) {
+        return true;
+    }
+
+    @Override
+    public List<IUseInfo> getInputs() {
+        return this.input;
+    }
+
+    @Override
+    public List<ItemInstance> getOutputs() {
+        return this.output;
+    }
+
+    @Override
+    public float getSkillReward() {
+        return 0F;
     }
 }

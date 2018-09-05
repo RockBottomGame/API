@@ -25,7 +25,7 @@ import de.ellpeck.rockbottom.api.Constants;
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.IRenderer;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
-import de.ellpeck.rockbottom.api.construction.IRecipe;
+import de.ellpeck.rockbottom.api.construction.compendium.ICompendiumRecipe;
 import de.ellpeck.rockbottom.api.gui.Gui;
 import de.ellpeck.rockbottom.api.gui.component.GuiComponent;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
@@ -33,16 +33,19 @@ import de.ellpeck.rockbottom.api.util.Colors;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 public class ComponentConstruct extends GuiComponent {
 
-    private final IRecipe recipe;
+    private final ICompendiumRecipe recipe;
     private final boolean canConstruct;
+    private final Supplier<Boolean> consumer;
 
-    public ComponentConstruct(Gui gui, IRecipe recipe, boolean canConstruct) {
+    public ComponentConstruct(Gui gui, ICompendiumRecipe recipe, boolean canConstruct, Supplier<Boolean> consumer) {
         super(gui, 94, 17, 30, 30);
         this.recipe = recipe;
         this.canConstruct = canConstruct;
+        this.consumer = consumer;
     }
 
     @Override
@@ -59,6 +62,15 @@ public class ComponentConstruct extends GuiComponent {
 
             String s = manager.localize(ResourceName.intern("info." + (this.canConstruct ? "click_to_construct" : "missing_items")));
             g.drawHoverInfoAtMouse(game, manager, true, 200, instance.getDisplayName() + " x" + instance.getAmount(), s);
+        }
+    }
+
+    @Override
+    public boolean onMouseAction(IGameInstance game, int button, float x, float y) {
+        if (this.consumer != null) {
+            return this.consumer.get();
+        } else {
+            return false;
         }
     }
 

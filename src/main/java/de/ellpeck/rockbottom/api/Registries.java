@@ -22,9 +22,8 @@
 package de.ellpeck.rockbottom.api;
 
 import de.ellpeck.rockbottom.api.assets.IAssetLoader;
-import de.ellpeck.rockbottom.api.construction.BasicRecipe;
-import de.ellpeck.rockbottom.api.construction.IRecipe;
-import de.ellpeck.rockbottom.api.construction.MortarRecipe;
+import de.ellpeck.rockbottom.api.construction.compendium.construction.ConstructionRecipe;
+import de.ellpeck.rockbottom.api.construction.compendium.mortar.MortarRecipe;
 import de.ellpeck.rockbottom.api.construction.smelting.FuelInput;
 import de.ellpeck.rockbottom.api.construction.smelting.SmeltingRecipe;
 import de.ellpeck.rockbottom.api.content.IContentLoader;
@@ -52,7 +51,10 @@ import de.ellpeck.rockbottom.api.net.packet.IPacket;
 import de.ellpeck.rockbottom.api.tile.Tile;
 import de.ellpeck.rockbottom.api.tile.state.TileState;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
-import de.ellpeck.rockbottom.api.util.reg.*;
+import de.ellpeck.rockbottom.api.util.reg.IRegistry;
+import de.ellpeck.rockbottom.api.util.reg.IndexRegistry;
+import de.ellpeck.rockbottom.api.util.reg.NameRegistry;
+import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 import de.ellpeck.rockbottom.api.world.IWorld;
 import de.ellpeck.rockbottom.api.world.SubWorldInitializer;
 import de.ellpeck.rockbottom.api.world.gen.IStructure;
@@ -122,25 +124,22 @@ public final class Registries {
      */
     public static final NameRegistry<Command> COMMAND_REGISTRY = new NameRegistry<>(ResourceName.intern("command_registry"), true).register();
     /**
-     * The registry for all {@link IRecipe} objects that are used to construct
-     * items through the input-output system of the construction in the player's
-     * inventory. Do not manually register recipes into this registry as this is
-     * automatically done using {@link BasicRecipe#register(NameRegistry)}. This
-     * is a convenience registry to help with packets and networking. If you
-     * want to get a recipe instance by its name, use {@link
-     * IRecipe#forName(ResourceName)}.
+     * The registry for all {@link ConstructionRecipe} objects that are
+     * displayed on the left side of the player's inventory. Use {@link
+     * ConstructionRecipe#registerManual()} to register recipes into this
+     * registry. If you want to get a recipe instance by its name, use {@link
+     * ConstructionRecipe#forName(ResourceName)}.
      */
     @ApiInternal
-    public static final NameRegistry<IRecipe> ALL_CONSTRUCTION_RECIPES = new NameRegistry<>(ResourceName.intern("all_recipe_registry"), true).register();
+    public static final NameRegistry<ConstructionRecipe> MANUAL_CONSTRUCTION_RECIPES = new NameRegistry<>(ResourceName.intern("manual_recipe_registry"), true).register();
     /**
-     * The registry for all {@link BasicRecipe} objects that are displayed on
-     * the left side of the player's inventory. Use {@link
-     * BasicRecipe#registerManual()} to register recipes into this registry. If
-     * you want to get a recipe instance by its name, use {@link
-     * IRecipe#forName(ResourceName)}.
+     * The registry for all {@link MortarRecipe} objects that can be processed
+     * in a mortar. To register something into this registry, please use  {@link
+     * MortarRecipe#register()}. If you want to get a recipe instance by its
+     * name, use {@link MortarRecipe#forName(ResourceName)}.
      */
     @ApiInternal
-    public static final ParentedNameRegistry<BasicRecipe> MANUAL_CONSTRUCTION_RECIPES = new ParentedNameRegistry<>(ResourceName.intern("manual_recipe_registry"), true, ALL_CONSTRUCTION_RECIPES).register();
+    public static final NameRegistry<MortarRecipe> MORTAR_REGISTRY = new NameRegistry<>(ResourceName.intern("mortar_registry"), true).register();
     /**
      * The registry for all {@link IWorldGenerator} types. The {@link
      * ResourceName} is used to save a generator to disk if it is a retroactive
@@ -265,13 +264,6 @@ public final class Registries {
      */
     @ApiInternal
     public static final NameRegistry<SmeltingRecipe> SMELTING_REGISTRY = new NameRegistry<>(ResourceName.intern("smelting_registry"), true).register();
-    /**
-     * The registry for all {@link MortarRecipe} objects that can be processed
-     * in a mortar. To register something into this registry, please use  {@link
-     * MortarRecipe#register()}.
-     */
-    @ApiInternal
-    public static final NameRegistry<MortarRecipe> MORTAR_REGISTRY = new NameRegistry<>(ResourceName.intern("mortar_registry"), true).register();
     /**
      * The registry for all {@link SpawnBehavior} objects that determine how and
      * where entities can randomly appear in the world. To register something

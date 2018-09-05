@@ -107,15 +107,6 @@ public class Item {
         return false;
     }
 
-    /**
-     * The tool type system is deprecated. Please use {@link
-     * #getToolProperties(ItemInstance)} instead.
-     */
-    @Deprecated
-    public Map<ToolType, Integer> getToolTypes(ItemInstance instance) {
-        return Collections.emptyMap();
-    }
-
     public Map<ToolProperty, Integer> getToolProperties(ItemInstance instance) {
         return Collections.emptyMap();
     }

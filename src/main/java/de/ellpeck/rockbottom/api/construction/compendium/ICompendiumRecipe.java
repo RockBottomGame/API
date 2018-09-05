@@ -19,37 +19,27 @@
  * © 2017 Ellpeck
  */
 
-package de.ellpeck.rockbottom.api.construction;
+package de.ellpeck.rockbottom.api.construction.compendium;
 
-import de.ellpeck.rockbottom.api.Registries;
-import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.construction.resource.IUseInfo;
 import de.ellpeck.rockbottom.api.content.IContent;
-import de.ellpeck.rockbottom.api.entity.AbstractEntityItem;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.gui.Gui;
 import de.ellpeck.rockbottom.api.gui.component.construction.ComponentConstruct;
 import de.ellpeck.rockbottom.api.gui.component.construction.ComponentIngredient;
 import de.ellpeck.rockbottom.api.gui.component.construction.ComponentPolaroid;
 import de.ellpeck.rockbottom.api.inventory.IInventory;
-import de.ellpeck.rockbottom.api.inventory.Inventory;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public interface IRecipe extends IContent {
+public interface ICompendiumRecipe extends IContent {
 
     ResourceName ID = ResourceName.intern("recipe");
 
-    static IRecipe forName(ResourceName name) {
-        return Registries.ALL_CONSTRUCTION_RECIPES.get(name);
-    }
-
     ResourceName getName();
-
-    ResourceName getKnowledgeInformationName();
 
     boolean isKnown(AbstractEntityPlayer player);
 
@@ -76,14 +66,6 @@ public interface IRecipe extends IContent {
         return this.getOutputs();
     }
 
-    default void playerConstruct(AbstractEntityPlayer player, int amount) {
-        Inventory inv = player.getInv();
-        List<ItemInstance> remains = RockBottomAPI.getApiHandler().construct(player, inv, inv, this, amount, this.getActualInputs(inv), items -> this.getActualOutputs(inv, inv, items), this.getSkillReward());
-        for (ItemInstance instance : remains) {
-            AbstractEntityItem.spawn(player.world, instance, player.getX(), player.getY(), 0F, 0F);
-        }
-    }
-
     default List<ComponentIngredient> getIngredientButtons(Gui gui, AbstractEntityPlayer player) {
         List<ComponentIngredient> ingredients = new ArrayList<>();
         for (IUseInfo info : this.getInputs()) {
@@ -93,7 +75,7 @@ public interface IRecipe extends IContent {
     }
 
     default ComponentConstruct getConstructButton(Gui gui, AbstractEntityPlayer player, boolean canConstruct) {
-        return new ComponentConstruct(gui, this, canConstruct);
+        return new ComponentConstruct(gui, this, canConstruct, null);
     }
 
     default ComponentPolaroid getPolaroidButton(Gui gui, AbstractEntityPlayer player, boolean canConstruct) {
