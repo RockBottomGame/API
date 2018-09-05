@@ -39,10 +39,12 @@ import java.util.List;
 
 public class ConstructionRecipe extends BasicCompendiumRecipe {
 
-    private final List<IUseInfo> inputs;
-    private final List<ItemInstance> outputs;
-    private final float skillReward;
-    private final ResourceName infoName;
+    public static final ResourceName ID = ResourceName.intern("recipe");
+
+    protected final List<IUseInfo> inputs;
+    protected final List<ItemInstance> outputs;
+    protected final float skillReward;
+    protected final ResourceName infoName;
 
     public ConstructionRecipe(ResourceName name, List<IUseInfo> inputs, List<ItemInstance> outputs, float skillReward) {
         super(name);
@@ -79,7 +81,6 @@ public class ConstructionRecipe extends BasicCompendiumRecipe {
         return true;
     }
 
-    @Override
     public float getSkillReward() {
         return this.skillReward;
     }

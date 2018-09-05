@@ -37,8 +37,6 @@ import java.util.List;
 
 public interface ICompendiumRecipe extends IContent {
 
-    ResourceName ID = ResourceName.intern("recipe");
-
     ResourceName getName();
 
     boolean isKnown(AbstractEntityPlayer player);
@@ -46,8 +44,6 @@ public interface ICompendiumRecipe extends IContent {
     List<IUseInfo> getInputs();
 
     List<ItemInstance> getOutputs();
-
-    float getSkillReward();
 
     default boolean canConstruct(IInventory inputInventory, IInventory outputInventory) {
         for (IUseInfo info : this.getActualInputs(inputInventory)) {

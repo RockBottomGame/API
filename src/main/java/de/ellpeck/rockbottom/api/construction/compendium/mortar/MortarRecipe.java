@@ -22,10 +22,12 @@
 package de.ellpeck.rockbottom.api.construction.compendium.mortar;
 
 import de.ellpeck.rockbottom.api.Registries;
+import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.construction.compendium.BasicCompendiumRecipe;
 import de.ellpeck.rockbottom.api.construction.resource.IUseInfo;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.inventory.IInventory;
+import de.ellpeck.rockbottom.api.inventory.Inventory;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
@@ -35,9 +37,9 @@ public class MortarRecipe extends BasicCompendiumRecipe {
 
     public static final ResourceName ID = ResourceName.intern("mortar");
 
-    private final List<IUseInfo> input;
-    private final List<ItemInstance> output;
-    private final int time;
+    protected final List<IUseInfo> input;
+    protected final List<ItemInstance> output;
+    protected final int time;
 
     public MortarRecipe(ResourceName name, List<IUseInfo> input, List<ItemInstance> output, int time) {
         super(name);
@@ -46,7 +48,7 @@ public class MortarRecipe extends BasicCompendiumRecipe {
         this.time = time;
     }
 
-    public static MortarRecipe forName(ResourceName name){
+    public static MortarRecipe forName(ResourceName name) {
         return Registries.MORTAR_REGISTRY.get(name);
     }
 
@@ -68,6 +70,10 @@ public class MortarRecipe extends BasicCompendiumRecipe {
         return this;
     }
 
+    public void construct(Inventory inventory, int amount) {
+        RockBottomAPI.getApiHandler().construct(null, inventory, inventory, this, amount, this.getActualInputs(inventory), items -> this.getActualOutputs(inventory, inventory, items), 0F);
+    }
+
     @Override
     public boolean isKnown(AbstractEntityPlayer player) {
         return true;
@@ -81,10 +87,5 @@ public class MortarRecipe extends BasicCompendiumRecipe {
     @Override
     public List<ItemInstance> getOutputs() {
         return this.output;
-    }
-
-    @Override
-    public float getSkillReward() {
-        return 0F;
     }
 }
