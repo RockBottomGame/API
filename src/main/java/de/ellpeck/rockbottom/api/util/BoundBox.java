@@ -87,6 +87,14 @@ public final class BoundBox {
         return this.minX <= x && this.minY <= y && this.maxX >= x && this.maxY >= y;
     }
 
+    public BoundBox getIntersection(BoundBox other){
+        return new BoundBox(
+                Math.max(this.getMinX(), other.getMinX()),
+                Math.max(this.getMinY(), other.getMinY()),
+                Math.min(this.getMaxX(), other.getMaxX()),
+                Math.min(this.getMaxY(), other.getMaxY()));
+    }
+
     public boolean isEmpty() {
         return this.getWidth() <= 0 || this.getHeight() <= 0;
     }
