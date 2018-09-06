@@ -41,11 +41,13 @@ public final class WorldObjectCollisionEvent extends Event {
 
     public final MovableWorldObject object;
     public final BoundBox entityBoundBox;
+    public final BoundBox entityBoundBoxWithMotion;
     public final List<BoundBox> boundBoxes;
 
-    public WorldObjectCollisionEvent(MovableWorldObject object, BoundBox entityBoundBox, List<BoundBox> boundBoxes) {
+    public WorldObjectCollisionEvent(MovableWorldObject object, BoundBox entityBoundBox, BoundBox entityBoundBoxWithMotion, List<BoundBox> boundBoxes) {
         this.object = object;
         this.entityBoundBox = entityBoundBox;
+        this.entityBoundBoxWithMotion = entityBoundBoxWithMotion;
         this.boundBoxes = boundBoxes;
     }
 }
