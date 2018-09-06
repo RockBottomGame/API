@@ -33,14 +33,20 @@ public class BasicEffect implements IEffect {
     private final boolean isBad;
     private final boolean isInstant;
     private final int maxDuration;
+    private final int maxLevel;
 
-    public BasicEffect(ResourceName name, boolean isBad, boolean isInstant, int maxDuration) {
+    public BasicEffect(ResourceName name, boolean isBad, boolean isInstant, int maxDuration, int maxLevel) {
         this.name = name;
         this.unlocName = this.name.addPrefix("effect.");
         this.iconName = this.unlocName.addPrefix("gui.");
         this.isBad = isBad;
         this.isInstant = isInstant;
         this.maxDuration = maxDuration;
+        this.maxLevel = maxLevel;
+    }
+
+    public BasicEffect(ResourceName name, boolean isBad, boolean isInstant, int maxDuration) {
+        this(name, isBad, isInstant, maxDuration, 1);
     }
 
     @Override
@@ -91,5 +97,10 @@ public class BasicEffect implements IEffect {
     @Override
     public int getMaxDuration(Entity entity) {
         return this.maxDuration;
+    }
+
+    @Override
+    public int getMaxLevel(Entity entity) {
+        return this.maxLevel;
     }
 }

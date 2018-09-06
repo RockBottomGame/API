@@ -41,6 +41,8 @@ public interface IEffect {
 
     int getMaxDuration(Entity entity);
 
+    int getMaxLevel(Entity entity);
+
     ResourceName getName();
 
     ResourceName getUnlocalizedName(ActiveEffect effect, Entity entity);

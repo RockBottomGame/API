@@ -399,6 +399,12 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
                 if (active.getEffect() == underlying) {
                     int maxAdd = Math.min(effect.getTime(), active.getEffect().getMaxDuration(this) - active.getTime());
                     active.addTime(maxAdd);
+
+                    int level = effect.getLevel();
+                    if (active.getLevel() < level) {
+                        active.setLevel(level);
+                    }
+
                     return effect.getTime() - maxAdd;
                 }
             }
@@ -421,13 +427,17 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
         return false;
     }
 
-    public boolean hasEffect(IEffect effect) {
+    public int getEffectModifier(IEffect effect) {
         for (ActiveEffect active : this.effects) {
             if (active.getEffect() == effect) {
-                return true;
+                return active.getLevel();
             }
         }
-        return false;
+        return 0;
+    }
+
+    public boolean hasEffect(IEffect effect) {
+        return this.getEffectModifier(effect) > 0;
     }
 
     public void addAiTask(AITask task) {

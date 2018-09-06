@@ -35,10 +35,16 @@ public class ActiveEffect {
 
     private final IEffect effect;
     private int time;
+    private int level;
 
-    public ActiveEffect(IEffect effect, int time) {
+    public ActiveEffect(IEffect effect, int time, int level) {
         this.effect = effect;
         this.time = time;
+        this.level = level;
+    }
+
+    public ActiveEffect(IEffect effect, int time) {
+        this(effect, time, 1);
     }
 
     public ActiveEffect(IEffect effect) {
@@ -51,7 +57,8 @@ public class ActiveEffect {
 
         if (effect != null) {
             int time = set.getInt("time");
-            return new ActiveEffect(effect, time);
+            int level = set.getInt("level");
+            return new ActiveEffect(effect, time, level);
         } else {
             RockBottomAPI.logger().info("Could not load active effect from data set " + set + " because name " + name + " is missing!");
             return null;
@@ -63,7 +70,7 @@ public class ActiveEffect {
     }
 
     public String getDisplayName(IAssetManager manager, Entity entity) {
-        return manager.localize(this.effect.getUnlocalizedName(this, entity));
+        return manager.localize(this.effect.getUnlocalizedName(this, entity)) + " (" + this.level + ')';
     }
 
     public String getDisplayTime() {
@@ -80,6 +87,14 @@ public class ActiveEffect {
         return this;
     }
 
+    public int getLevel() {
+        return this.level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
     public ActiveEffect addTime(int time) {
         return this.setTime(this.time + time);
     }
@@ -89,7 +104,7 @@ public class ActiveEffect {
     }
 
     public ActiveEffect copy() {
-        return new ActiveEffect(this.getEffect(), this.getTime());
+        return new ActiveEffect(this.getEffect(), this.getTime(), this.getLevel());
     }
 
     @Override
@@ -98,7 +113,7 @@ public class ActiveEffect {
             return true;
         } else if (o instanceof ActiveEffect) {
             ActiveEffect effect = (ActiveEffect) o;
-            return this.time == effect.time && Objects.equals(this.effect, effect.effect);
+            return this.time == effect.time && this.level == effect.level && Objects.equals(this.effect, effect.effect);
         } else {
             return false;
         }
@@ -106,11 +121,12 @@ public class ActiveEffect {
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.effect, this.time);
+        return Objects.hash(this.effect, this.time, this.level);
     }
 
     public void save(DataSet set) {
         set.addString("effect_name", this.effect.getName().toString());
         set.addInt("time", this.time);
+        set.addInt("level", this.level);
     }
 }
