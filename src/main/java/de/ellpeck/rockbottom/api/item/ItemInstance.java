@@ -112,8 +112,11 @@ public final class ItemInstance implements IAdditionalDataProvider {
             }
 
             if (data) {
-                if (one.item.isDataSensitive(one) || other.item.isDataSensitive(other)) {
-                    return one.additionalData == null ? other.additionalData == null : one.additionalData.equals(other.additionalData);
+                //Note that emptiness and nullity are treated as the same
+                if (one.additionalData == null || one.additionalData.isEmpty()) {
+                    return other.additionalData == null || other.additionalData.isEmpty();
+                } else {
+                    return one.additionalData.equals(other.additionalData);
                 }
             }
 

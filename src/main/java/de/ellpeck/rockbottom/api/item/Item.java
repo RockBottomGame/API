@@ -103,6 +103,11 @@ public class Item {
         return 24000;
     }
 
+    /**
+     * @deprecated This method is now unused - items will always be data
+     * sensitive
+     */
+    @Deprecated
     public boolean isDataSensitive(ItemInstance instance) {
         return false;
     }
