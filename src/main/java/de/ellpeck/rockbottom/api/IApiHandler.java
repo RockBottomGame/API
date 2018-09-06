@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with the RockBottomAPI. If not, see <http://www.gnu.org/licenses/>.
  *
- * © 2017 Ellpeck
+ * © 2018 Ellpeck
  */
 
 package de.ellpeck.rockbottom.api;
@@ -144,8 +144,8 @@ public interface IApiHandler {
     /**
      * This is a utility method that you can call for custom construction of
      * items via the compendium, if you, for example, create a custom, more
-     * complex, {@link ICompendiumRecipe} class, or if you create a machine that should
-     * automatically construct something.
+     * complex, {@link ICompendiumRecipe} class, or if you create a machine that
+     * should automatically construct something.
      *
      * @param player          The player doing this construction. Can be null if
      *                        the construction is automated. Note that the skill

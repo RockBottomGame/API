@@ -1,5 +1,5 @@
 /*
- * This file ("ConstructEevnt.java") is part of the RockBottomAPI by Ellpeck.
+ * This file ("ConstructEvent.java") is part of the RockBottomAPI by Ellpeck.
  * View the source code at <https://github.com/RockBottomGame/>.
  * View information on the project at <https://rockbottom.ellpeck.de/>.
  *
@@ -34,9 +34,9 @@ import java.util.function.Function;
 
 /**
  * This event is fired when construction takes place in {@link
- * IApiHandler#construct(AbstractEntityPlayer, Inventory, Inventory, ICompendiumRecipe,
- * int, List, Function, float)}. Cancelling the event will cause the
- * construction not to take place.
+ * IApiHandler#construct(AbstractEntityPlayer, Inventory, Inventory,
+ * ICompendiumRecipe, int, List, Function, float)}. Cancelling the event will
+ * cause the construction not to take place.
  */
 public final class ConstructEvent extends Event {
     public final AbstractEntityPlayer player;

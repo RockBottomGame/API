@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with the RockBottomAPI. If not, see <http://www.gnu.org/licenses/>.
  *
- * © 2017 Ellpeck
+ * © 2018 Ellpeck
  */
 
 package de.ellpeck.rockbottom.api.net.chat;
@@ -68,7 +68,7 @@ public abstract class Command {
         return this;
     }
 
-    public int getMaxArgumentAmount(){
+    public int getMaxArgumentAmount() {
         return -1;
     }
 

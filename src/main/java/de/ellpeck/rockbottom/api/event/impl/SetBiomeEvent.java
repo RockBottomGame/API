@@ -27,7 +27,11 @@ import de.ellpeck.rockbottom.api.world.IChunkOrWorld;
 import de.ellpeck.rockbottom.api.world.gen.biome.Biome;
 
 /**
- * This event is fired when a {@link Biome} is set into the world using {@link IChunk#setBiomeInner(int, int, Biome)} or any of the helper methods like {@link IChunkOrWorld#setBiome(int, int, Biome)}. Note that the {@link #x} and {@link #y} variables are chunk-inner coordinates. Cancelling the event will cause the biome not to be set.
+ * This event is fired when a {@link Biome} is set into the world using {@link
+ * IChunk#setBiomeInner(int, int, Biome)} or any of the helper methods like
+ * {@link IChunkOrWorld#setBiome(int, int, Biome)}. Note that the {@link #x} and
+ * {@link #y} variables are chunk-inner coordinates. Cancelling the event will
+ * cause the biome not to be set.
  */
 public final class SetBiomeEvent extends Event {
 

@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with the RockBottomAPI. If not, see <http://www.gnu.org/licenses/>.
  *
- * © 2017 Ellpeck
+ * © 2018 Ellpeck
  */
 
 package de.ellpeck.rockbottom.api.assets.font;
@@ -31,9 +31,8 @@ import java.util.Map;
 
 public class FormattingCode {
 
-    private static final Map<Character, FormattingCode> DEFAULT_CODES = new HashMap<>();
-
     public static final FormattingCode NONE = new FormattingCode(' ', Colors.NO_COLOR, FontProp.NONE, 0, "");
+    private static final Map<Character, FormattingCode> DEFAULT_CODES = new HashMap<>();
     public static final FormattingCode RESET_COLOR = new FormattingCode('y', Colors.RESET_COLOR).registerAsDefault();
     public static final FormattingCode RESET_PROPS = new FormattingCode('x', FontProp.RESET).registerAsDefault();
 

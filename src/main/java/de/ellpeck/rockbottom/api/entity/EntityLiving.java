@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with the RockBottomAPI. If not, see <http://www.gnu.org/licenses/>.
  *
- * © 2017 Ellpeck
+ * © 2018 Ellpeck
  */
 
 package de.ellpeck.rockbottom.api.entity;
@@ -35,13 +35,13 @@ public abstract class EntityLiving extends Entity {
     public boolean jumping;
     public int jumpTicks;
     public int jumpTimeout;
+    public int lastDamageTime;
+    public int deathTimer;
     protected int health;
     protected int maxHealth;
     protected int maxBreath = 10;
     protected int breath;
     protected int damageCooldown;
-    public int lastDamageTime;
-    public int deathTimer;
 
     public EntityLiving(IWorld world) {
         super(world);

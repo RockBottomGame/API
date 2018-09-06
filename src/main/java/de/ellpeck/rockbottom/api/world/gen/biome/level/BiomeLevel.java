@@ -50,7 +50,7 @@ public abstract class BiomeLevel {
         return Collections.emptyList();
     }
 
-    public boolean shouldGenerateInWorld(IWorld world){
+    public boolean shouldGenerateInWorld(IWorld world) {
         return true;
     }
 }

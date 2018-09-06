@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with the RockBottomAPI. If not, see <http://www.gnu.org/licenses/>.
  *
- * © 2017 Ellpeck
+ * © 2018 Ellpeck
  */
 
 package de.ellpeck.rockbottom.api.world;
@@ -171,8 +171,8 @@ public interface IWorld extends IChunkOrWorld {
     ResourceName getSubName();
 
     @ApiInternal
-    void unloadEverything();
+    void setSubName(ResourceName subName);
 
     @ApiInternal
-    void setSubName(ResourceName subName);
+    void unloadEverything();
 }

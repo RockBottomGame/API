@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with the RockBottomAPI. If not, see <http://www.gnu.org/licenses/>.
  *
- * © 2017 Ellpeck
+ * © 2018 Ellpeck
  */
 
 package de.ellpeck.rockbottom.api.world.gen.biome;
@@ -89,11 +89,11 @@ public abstract class Biome {
         return false;
     }
 
-    public float getLakeChance(IWorld world, IChunk chunk){
+    public float getLakeChance(IWorld world, IChunk chunk) {
         return 0.5F;
     }
 
-    public boolean shouldGenerateInWorld(IWorld world){
+    public boolean shouldGenerateInWorld(IWorld world) {
         return true;
     }
 }

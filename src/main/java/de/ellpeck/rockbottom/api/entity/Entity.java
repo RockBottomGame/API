@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with the RockBottomAPI. If not, see <http://www.gnu.org/licenses/>.
  *
- * © 2017 Ellpeck
+ * © 2018 Ellpeck
  */
 
 package de.ellpeck.rockbottom.api.entity;
@@ -65,11 +65,11 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
     public TileState submergedLiquid;
     public boolean canBreathe = true;
     public boolean canSwim;
+    public double interpolationX;
+    public double interpolationY;
     protected boolean dead;
     private UUID uniqueId = UUID.randomUUID();
     private ModBasedDataSet additionalData;
-    public double interpolationX;
-    public double interpolationY;
 
     public Entity(IWorld world) {
         super(world);

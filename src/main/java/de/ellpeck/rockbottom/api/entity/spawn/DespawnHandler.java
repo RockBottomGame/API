@@ -28,11 +28,11 @@ public abstract class DespawnHandler<T extends Entity> {
 
     public abstract double getMaxPlayerDistance(T entity);
 
-    public boolean isReadyToDespawn(T entity){
+    public boolean isReadyToDespawn(T entity) {
         return true;
     }
 
-    public void despawn(T entity){
+    public void despawn(T entity) {
         entity.setReadyToRemove();
     }
 

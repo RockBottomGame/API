@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with the RockBottomAPI. If not, see <http://www.gnu.org/licenses/>.
  *
- * © 2017 Ellpeck
+ * © 2018 Ellpeck
  */
 
 package de.ellpeck.rockbottom.api.entity;
@@ -54,7 +54,7 @@ public abstract class MovableWorldObject {
     }
 
     public void resetBounds() {
-        this.setBounds(this.getX(), this.getY());
+        this.setBoundsOrigin(this.getOriginX(), this.getOriginY());
         this.onPositionReset();
     }
 
@@ -67,11 +67,11 @@ public abstract class MovableWorldObject {
     }
 
     public double getX() {
-        return (this.getOriginX() + this.currentBounds.getMaxX()) / 2D;
+        return this.currentBounds.getCenterX();
     }
 
     public double getY() {
-        return (this.getOriginY() + this.currentBounds.getMaxY()) / 2D;
+        return this.currentBounds.getCenterY();
     }
 
     public double getOriginX() {
@@ -82,16 +82,16 @@ public abstract class MovableWorldObject {
         return this.currentBounds.getMinY();
     }
 
-    public void onPositionReset(){
+    public void onPositionReset() {
         this.lastTickX = this.getX();
         this.lastTickY = this.getY();
     }
 
-    public double getLerpedX(){
+    public double getLerpedX() {
         return Util.lerp(this.lastTickX, this.getX(), RockBottomAPI.getGame().getTickDelta());
     }
 
-    public double getLerpedY(){
+    public double getLerpedY() {
         return Util.lerp(this.lastTickY, this.getY(), RockBottomAPI.getGame().getTickDelta());
     }
 

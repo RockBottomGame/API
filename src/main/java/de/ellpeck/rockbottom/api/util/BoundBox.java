@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with the RockBottomAPI. If not, see <http://www.gnu.org/licenses/>.
  *
- * © 2017 Ellpeck
+ * © 2018 Ellpeck
  */
 
 package de.ellpeck.rockbottom.api.util;
@@ -87,7 +87,7 @@ public final class BoundBox {
         return this.minX <= x && this.minY <= y && this.maxX >= x && this.maxY >= y;
     }
 
-    public BoundBox getIntersection(BoundBox other){
+    public BoundBox getIntersection(BoundBox other) {
         return new BoundBox(
                 Math.max(this.getMinX(), other.getMinX()),
                 Math.max(this.getMinY(), other.getMinY()),
@@ -154,6 +154,14 @@ public final class BoundBox {
 
     public double getHeight() {
         return this.maxY - this.minY;
+    }
+
+    public double getCenterX() {
+        return this.minX + this.getWidth() / 2D;
+    }
+
+    public double getCenterY() {
+        return this.minY + this.getHeight() / 2D;
     }
 
     public BoundBox copy() {
