@@ -208,7 +208,7 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
         set.addDouble("y", this.getOriginY());
         set.addDouble("motion_x", this.motionX);
         set.addDouble("motion_y", this.motionY);
-        set.addBoolean("dead", this.isDead());
+        set.addBoolean("dead", this.dead);
         set.addBoolean("falling", this.isFalling);
         set.addDouble("fall_start_y", this.fallStartY);
         set.addInt("facing", this.facing.ordinal());
@@ -242,7 +242,7 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
 
         this.motionX = set.getDouble("motion_x");
         this.motionY = set.getDouble("motion_y");
-        this.setDead(set.getBoolean("dead"));
+        this.dead = set.getBoolean("dead");
         this.isFalling = set.getBoolean("falling");
         this.fallStartY = set.getDouble("fall_start_y");
         this.facing = Direction.DIRECTIONS[set.getInt("facing")];
