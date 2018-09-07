@@ -38,18 +38,20 @@ public final class ResetMovedPlayerEvent extends Event {
     public final AbstractEntityPlayer player;
     public final double lastCalcX;
     public final double lastCalcY;
-    public final int fallingTicks;
-    public final int climbingTicks;
+    //The calculation of movement has changed - these values are now unused
+    @Deprecated
+    public final int fallingTicks = 0;
+    //The calculation of movement has changed - these values are now unused
+    @Deprecated
+    public final int climbingTicks = 0;
 
     public double distanceSqMoved;
     public double allowedDefaultDistance;
 
-    public ResetMovedPlayerEvent(AbstractEntityPlayer player, double lastCalcX, double lastCalcY, int fallingTicks, int climbingTicks, double distanceSqMoved, double allowedDefaultDistance) {
+    public ResetMovedPlayerEvent(AbstractEntityPlayer player, double lastCalcX, double lastCalcY, double distanceSqMoved, double allowedDefaultDistance) {
         this.player = player;
         this.lastCalcX = lastCalcX;
         this.lastCalcY = lastCalcY;
-        this.fallingTicks = fallingTicks;
-        this.climbingTicks = climbingTicks;
         this.distanceSqMoved = distanceSqMoved;
         this.allowedDefaultDistance = allowedDefaultDistance;
     }
