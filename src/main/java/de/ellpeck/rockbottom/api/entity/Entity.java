@@ -318,7 +318,7 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
     }
 
     public double getMaxInteractionDistance(IWorld world, double mouseX, double mouseY, AbstractEntityPlayer player) {
-        return AbstractEntityPlayer.RANGE;
+        return player.getRange();
     }
 
     @Override

@@ -129,7 +129,7 @@ public class Item {
     }
 
     public double getMaxInteractionDistance(IWorld world, int x, int y, TileLayer layer, double mouseX, double mouseY, AbstractEntityPlayer player, ItemInstance instance) {
-        return AbstractEntityPlayer.RANGE;
+        return player.getRange();
     }
 
     public boolean canHoldButtonToAttack(IWorld world, double mouseX, double mouseY, AbstractEntityPlayer player, ItemInstance instance) {

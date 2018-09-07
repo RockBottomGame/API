@@ -361,7 +361,7 @@ public class Tile {
     }
 
     public double getMaxInteractionDistance(IWorld world, int x, int y, TileLayer layer, double mouseX, double mouseY, AbstractEntityPlayer player) {
-        return AbstractEntityPlayer.RANGE;
+        return player.getRange();
     }
 
     public boolean hasSolidSurface(IWorld world, int x, int y, TileLayer layer) {
