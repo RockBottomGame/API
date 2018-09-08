@@ -27,8 +27,14 @@ import de.ellpeck.rockbottom.api.Registries;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.gui.Gui;
+import de.ellpeck.rockbottom.api.gui.component.ComponentMenu;
+import de.ellpeck.rockbottom.api.gui.component.construction.ComponentConstruct;
+import de.ellpeck.rockbottom.api.gui.component.construction.ComponentIngredient;
+import de.ellpeck.rockbottom.api.gui.component.construction.ComponentPolaroid;
+import de.ellpeck.rockbottom.api.util.Pos2;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
+import java.util.List;
 import java.util.Set;
 
 public abstract class CompendiumCategory {
@@ -41,6 +47,22 @@ public abstract class CompendiumCategory {
 
     public Gui getGuiOverride(Gui parent) {
         return null;
+    }
+
+    public void onGuiOrganized(Gui gui, ComponentMenu menu, List<ComponentPolaroid> polaroids, List<ComponentIngredient> ingredients, ComponentConstruct construct) {
+
+    }
+
+    public int getMaxIngredientAmount(Gui gui, List<ComponentIngredient> ingredients) {
+        return 8;
+    }
+
+    public Pos2 getIngredientPosition(Gui gui, ComponentIngredient ingredient, int index) {
+        return new Pos2(78 + (index % 4) * 16, 51 + (index / 4) * 19);
+    }
+
+    public ResourceName getBackgroundPicture(Gui gui, IAssetManager manager) {
+        return ResourceName.intern("gui.construction.page_recipes");
     }
 
     public boolean shouldDisplay(AbstractEntityPlayer player) {

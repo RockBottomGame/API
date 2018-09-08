@@ -78,6 +78,7 @@ public final class GameContent {
     public static final Tile TILE_MORTAR = getTile("mortar").setHardness(3F).addEffectiveTool(ToolProperty.PICKAXE, 0).setMaxAmount(5);
     public static final Tile TILE_SOIL_TILLED = getTile("soil_tilled").setHardness(0.8F).addEffectiveTool(ToolProperty.SHOVEL, 0).setForceDrop();
     public static final Tile TILE_CORN = getTile("corn").setHardness(2F).setForceDrop().setMaxAmount(25);
+    public static final Tile TILE_GLASS = getTile("glass").setHardness(3F).setMaxAmount(75);
 
     /*
         ---ITEMS---

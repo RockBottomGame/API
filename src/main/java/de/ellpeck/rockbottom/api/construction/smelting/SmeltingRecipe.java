@@ -22,16 +22,19 @@
 package de.ellpeck.rockbottom.api.construction.smelting;
 
 import de.ellpeck.rockbottom.api.Registries;
+import de.ellpeck.rockbottom.api.construction.compendium.BasicCompendiumRecipe;
 import de.ellpeck.rockbottom.api.construction.resource.IUseInfo;
-import de.ellpeck.rockbottom.api.content.IContent;
+import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
-public class SmeltingRecipe implements IContent {
+import java.util.Collections;
+import java.util.List;
+
+public class SmeltingRecipe extends BasicCompendiumRecipe {
 
     public static final ResourceName ID = ResourceName.intern("smelting");
 
-    private final ResourceName name;
     private final IUseInfo input;
     private final ItemInstance output;
     private final int time;
@@ -41,7 +44,7 @@ public class SmeltingRecipe implements IContent {
     }
 
     public SmeltingRecipe(ResourceName name, IUseInfo input, ItemInstance output, int time) {
-        this.name = name;
+        super(name);
         this.input = input;
         this.output = output;
         this.time = time;
@@ -68,8 +71,19 @@ public class SmeltingRecipe implements IContent {
         return this.time;
     }
 
-    public ResourceName getName() {
-        return this.name;
+    @Override
+    public boolean isKnown(AbstractEntityPlayer player) {
+        return true;
+    }
+
+    @Override
+    public List<IUseInfo> getInputs() {
+        return Collections.singletonList(this.getInput());
+    }
+
+    @Override
+    public List<ItemInstance> getOutputs() {
+        return Collections.singletonList(this.getOutput());
     }
 
     public SmeltingRecipe register() {
