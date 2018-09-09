@@ -45,10 +45,6 @@ public abstract class CompendiumCategory {
         this.name = name;
     }
 
-    public Gui getGuiOverride(Gui parent) {
-        return null;
-    }
-
     public void onGuiOrganized(Gui gui, ComponentMenu menu, List<ComponentPolaroid> polaroids, List<ComponentIngredient> ingredients, ComponentConstruct construct) {
 
     }
