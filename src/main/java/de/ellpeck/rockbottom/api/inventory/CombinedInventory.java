@@ -23,15 +23,21 @@ package de.ellpeck.rockbottom.api.inventory;
 
 import com.google.common.collect.Iterators;
 import de.ellpeck.rockbottom.api.construction.resource.IUseInfo;
+import de.ellpeck.rockbottom.api.data.set.DataSet;
+import de.ellpeck.rockbottom.api.data.set.part.PartDataSet;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
+import de.ellpeck.rockbottom.api.tile.entity.IFilteredInventory;
+import de.ellpeck.rockbottom.api.util.Direction;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
+import java.util.function.Function;
 
-public class CombinedInventory implements IInventory {
+public class CombinedInventory implements IFilteredInventory {
 
     private final IInventory[] inventories;
 
@@ -187,5 +193,58 @@ public class CombinedInventory implements IInventory {
             its[i] = this.inventories[i].iterator();
         }
         return Iterators.concat(its);
+    }
+
+    @Override
+    public List<Integer> getInputSlots(ItemInstance instance, Direction dir) {
+        return this.getSlots(inv -> inv.getInputSlots(instance, dir));
+    }
+
+    @Override
+    public List<Integer> getOutputSlots(Direction dir) {
+        return this.getSlots(inv -> inv.getOutputSlots(dir));
+    }
+
+    protected List<Integer> getSlots(Function<IFilteredInventory, List<Integer>> consumer) {
+        List<Integer> slots = new ArrayList<>();
+        int slotCounter = 0;
+        for (IInventory inventory : this.inventories) {
+            if (inventory instanceof IFilteredInventory) {
+                for (int slot : consumer.apply((IFilteredInventory) inventory)) {
+                    slots.add(slotCounter + slot);
+                }
+            } else {
+                for (int i = 0; i < inventory.getSlotAmount(); i++) {
+                    slots.add(slotCounter + i);
+                }
+            }
+            slotCounter += inventory.getSlotAmount();
+        }
+        return slots;
+    }
+
+    public void save(DataSet set) {
+        List<PartDataSet> list = new ArrayList<>();
+        for (int i = 0; i < this.getSlotAmount(); i++) {
+            DataSet subset = new DataSet();
+            ItemInstance slot = this.get(i);
+            if (slot != null) {
+                slot.save(subset);
+            }
+            list.add(new PartDataSet(subset));
+        }
+        set.addList("items", list);
+    }
+
+    public void load(DataSet set) {
+        List<PartDataSet> list = set.getList("items");
+        for (int i = 0; i < list.size(); i++) {
+            DataSet subset = list.get(i).get();
+            if (!subset.isEmpty()) {
+                this.set(i, ItemInstance.load(subset));
+            } else {
+                this.set(i, null);
+            }
+        }
     }
 }

@@ -23,10 +23,27 @@ package de.ellpeck.rockbottom.api.tile.entity;
 
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.function.Function;
 
 public class TileInventory extends BasicFilteredInventory {
+
+    /**
+     * Creates a tile inventory that has a single slot that is an output slot
+     */
+    public TileInventory(TileEntity tile) {
+        this(tile, 1, Collections.emptyList(), Collections.singletonList(0));
+    }
+
+    /**
+     * Creates a tile inventory that has a single slot that is an input slot.
+     * The function determines if the given item can be put into the slot or
+     * not
+     */
+    public TileInventory(TileEntity tile, Function<ItemInstance, Boolean> canInput) {
+        this(tile, 1, inst -> canInput.apply(inst) ? Collections.singletonList(0) : Collections.emptyList(), Collections.emptyList());
+    }
 
     public TileInventory(TileEntity tile, int slotAmount, List<Integer> inputOutputSlots) {
         this(tile, slotAmount, inputOutputSlots, inputOutputSlots);
