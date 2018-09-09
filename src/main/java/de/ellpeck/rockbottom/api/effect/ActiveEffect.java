@@ -31,7 +31,7 @@ import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 import java.util.Objects;
 
-public class ActiveEffect {
+public final class ActiveEffect {
 
     private final IEffect effect;
     private int time;
@@ -70,7 +70,7 @@ public class ActiveEffect {
     }
 
     public String getDisplayName(IAssetManager manager, Entity entity) {
-        return manager.localize(this.effect.getUnlocalizedName(this, entity)) + " (" + this.level + ')';
+        return manager.localize(this.effect.getUnlocalizedName(this, entity)) + ' ' + this.level;
     }
 
     public String getDisplayTime() {

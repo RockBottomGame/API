@@ -148,6 +148,7 @@ public final class GameContent {
     public static final IEffect EFFECT_SPEED = getEffect("speed");
     public static final IEffect EFFECT_JUMP_HEIGHT = getEffect("jump_height");
     public static final IEffect EFFECT_RANGE = getEffect("range");
+    public static final IEffect EFFECT_PICKUP_RANGE = getEffect("pickup_range");
 
     @ApiInternal
     private static Biome getBiome(String name) {

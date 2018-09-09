@@ -106,6 +106,8 @@ public abstract class AbstractEntityPlayer extends EntityLiving implements IComm
 
     public abstract double getRange();
 
+    public abstract double getPickupRange();
+
     public abstract boolean isLocalPlayer();
 
     public abstract void gainSkill(float percentage);

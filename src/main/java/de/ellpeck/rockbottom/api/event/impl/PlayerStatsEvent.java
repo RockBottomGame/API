@@ -48,6 +48,7 @@ public final class PlayerStatsEvent extends Event {
         MOVE_SPEED,
         CLIMB_SPEED,
         JUMP_HEIGHT,
-        RANGE
+        RANGE,
+        PICKUP_RANGE
     }
 }
