@@ -77,7 +77,10 @@ public interface ICompendiumRecipe extends IContent {
         return new ComponentConstruct(gui, this, canConstruct, null);
     }
 
-    default ComponentPolaroid getPolaroidButton(Gui gui, AbstractEntityPlayer player, boolean canConstruct) {
-        return new ComponentPolaroid(gui, this, canConstruct);
+    default ComponentPolaroid getPolaroidButton(Gui gui, AbstractEntityPlayer player, boolean canConstruct, boolean constructionTable) {
+        return new ComponentPolaroid(gui, this, canConstruct,
+                constructionTable ? ComponentPolaroid.CONSTRUCTION_TEX : ComponentPolaroid.DEFAULT_TEX,
+                constructionTable ? ComponentPolaroid.CONSTRUCTION_TEX_HIGHLIGHTED : ComponentPolaroid.DEFAULT_TEX_HIGHLIGHTED,
+                constructionTable ? ComponentPolaroid.CONSTRUCTION_TEX_SELECTED : ComponentPolaroid.DEFAULT_TEX_SELECTED);
     }
 }

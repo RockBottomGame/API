@@ -37,6 +37,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ComponentPolaroid extends GuiComponent {
+    public static final ResourceName DEFAULT_TEX = ResourceName.intern("gui.compendium.item_background");
+    public static final ResourceName DEFAULT_TEX_HIGHLIGHTED = ResourceName.intern("gui.compendium.item_background_highlighted");
+    public static final ResourceName DEFAULT_TEX_SELECTED = ResourceName.intern("gui.compendium.item_background_selected");
+    public static final ResourceName CONSTRUCTION_TEX = ResourceName.intern("gui.construction_table.item_background");
+    public static final ResourceName CONSTRUCTION_TEX_HIGHLIGHTED = ResourceName.intern("gui.construction_table.item_background_highlighted");
+    public static final ResourceName CONSTRUCTION_TEX_SELECTED = ResourceName.intern("gui.construction_table.item_background_selected");
 
     private final ResourceName tex;
     private final ResourceName texHighlighted;
@@ -55,7 +61,7 @@ public class ComponentPolaroid extends GuiComponent {
     }
 
     public ComponentPolaroid(Gui gui, ICompendiumRecipe recipe, boolean canConstruct) {
-        this(gui, recipe, canConstruct, ResourceName.intern("gui.compendium.item_background"), ResourceName.intern("gui.compendium.item_background_highlighted"), ResourceName.intern("gui.compendium.item_background_selected"));
+        this(gui, recipe, canConstruct, DEFAULT_TEX, DEFAULT_TEX_HIGHLIGHTED, DEFAULT_TEX_SELECTED);
     }
 
     @Override
