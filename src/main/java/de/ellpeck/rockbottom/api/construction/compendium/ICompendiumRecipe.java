@@ -62,10 +62,13 @@ public interface ICompendiumRecipe extends IContent {
         return this.getOutputs();
     }
 
-    default List<ComponentIngredient> getIngredientButtons(Gui gui, AbstractEntityPlayer player) {
+
+    default List<ComponentIngredient> getIngredientButtons(Gui gui, AbstractEntityPlayer player, boolean constructionTable) {
         List<ComponentIngredient> ingredients = new ArrayList<>();
         for (IUseInfo info : this.getInputs()) {
-            ingredients.add(new ComponentIngredient(gui, player.getInv().containsResource(info), info.getItems()));
+            ingredients.add(new ComponentIngredient(gui, player.getInv().containsResource(info), info.getItems(),
+                    constructionTable ? ComponentIngredient.CONSTRUCTION_TEX : ComponentIngredient.DEFAULT_TEX,
+                    constructionTable ? ComponentIngredient.CONSTRUCTION_TEX_NONE : ComponentIngredient.DEFAULT_TEX_NONE));
         }
         return ingredients;
     }
