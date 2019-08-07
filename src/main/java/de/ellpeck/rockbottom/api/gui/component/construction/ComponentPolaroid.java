@@ -38,17 +38,24 @@ import java.util.List;
 
 public class ComponentPolaroid extends GuiComponent {
 
-    private static final ResourceName RES = ResourceName.intern("gui.construction.item_background");
-    private static final ResourceName RES_HIGHLIGHTED = ResourceName.intern("gui.construction.item_background_highlighted");
-    private static final ResourceName RES_SELECTED = ResourceName.intern("gui.construction.item_background_selected");
+    private final ResourceName tex;
+    private final ResourceName texHighlighted;
+    private final ResourceName texSelected;
     public final ICompendiumRecipe recipe;
     public final boolean canConstruct;
     public boolean isSelected;
 
-    public ComponentPolaroid(Gui gui, ICompendiumRecipe recipe, boolean canConstruct) {
+    public ComponentPolaroid(Gui gui, ICompendiumRecipe recipe, boolean canConstruct, ResourceName tex, ResourceName texHighlighted, ResourceName texSelected) {
         super(gui, 0, 0, 18, 20);
         this.recipe = recipe;
         this.canConstruct = canConstruct;
+        this.tex = tex;
+        this.texHighlighted = texHighlighted;
+        this.texSelected = texSelected;
+    }
+
+    public ComponentPolaroid(Gui gui, ICompendiumRecipe recipe, boolean canConstruct) {
+        this(gui, recipe, canConstruct, ResourceName.intern("gui.compendium.item_background"), ResourceName.intern("gui.compendium.item_background_highlighted"), ResourceName.intern("gui.compendium.item_background_selected"));
     }
 
     @Override
@@ -58,7 +65,7 @@ public class ComponentPolaroid extends GuiComponent {
 
     @Override
     public void render(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y) {
-        ResourceName res = this.recipe != null && this.isSelected ? RES_SELECTED : (this.isMouseOverPrioritized(game) ? RES_HIGHLIGHTED : RES);
+        ResourceName res = this.recipe != null && this.isSelected ? this.texSelected : (this.isMouseOverPrioritized(game) ? this.texHighlighted : this.tex);
         manager.getTexture(res).draw(x, y, this.width, this.height);
 
         if (this.recipe != null) {

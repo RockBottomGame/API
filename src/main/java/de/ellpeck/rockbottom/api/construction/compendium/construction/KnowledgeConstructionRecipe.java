@@ -23,6 +23,7 @@ package de.ellpeck.rockbottom.api.construction.compendium.construction;
 
 import de.ellpeck.rockbottom.api.construction.resource.IUseInfo;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
+import de.ellpeck.rockbottom.api.item.Item;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
@@ -30,16 +31,16 @@ import java.util.List;
 
 public class KnowledgeConstructionRecipe extends ConstructionRecipe {
 
-    public KnowledgeConstructionRecipe(ResourceName name, List<IUseInfo> inputs, List<ItemInstance> outputs, float skillReward) {
-        super(name, inputs, outputs, skillReward);
+    public KnowledgeConstructionRecipe(ResourceName name, Item tool, List<IUseInfo> inputs, List<ItemInstance> outputs, float skillReward) {
+        super(name, tool, inputs, outputs, skillReward);
     }
 
-    public KnowledgeConstructionRecipe(ResourceName name, float skillReward, ItemInstance output, IUseInfo... inputs) {
-        super(name, skillReward, output, inputs);
+    public KnowledgeConstructionRecipe(ResourceName name, Item tool, float skillReward, ItemInstance output, IUseInfo... inputs) {
+        super(name, tool, skillReward, output, inputs);
     }
 
-    public KnowledgeConstructionRecipe(float skillReward, ItemInstance output, IUseInfo... inputs) {
-        super(skillReward, output, inputs);
+    public KnowledgeConstructionRecipe(float skillReward, Item tool, ItemInstance output, IUseInfo... inputs) {
+        super(tool, skillReward, output, inputs);
     }
 
     @Override

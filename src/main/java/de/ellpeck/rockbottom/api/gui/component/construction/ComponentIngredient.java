@@ -35,8 +35,8 @@ import java.util.List;
 
 public class ComponentIngredient extends GuiComponent {
 
-    private static final ResourceName RES = ResourceName.intern("gui.construction.ingredient_background");
-    private static final ResourceName RES_NONE = ResourceName.intern("gui.construction.ingredient_background_none");
+    private static final ResourceName RES = ResourceName.intern("gui.compendium.ingredient_background");
+    private static final ResourceName RES_NONE = ResourceName.intern("gui.compendium.ingredient_background_none");
 
     private final boolean hasItem;
     private final List<ItemInstance> inputs;

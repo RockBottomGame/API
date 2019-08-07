@@ -71,6 +71,7 @@ public final class GameContent {
     public static final Tile TILE_GRASS_TORCH = getTile("torch_grass").setHardness(0F).setForceDrop().setMaxAmount(50);
     public static final Tile TILE_COPPER = getTile("copper").setHardness(10F).addEffectiveTool(ToolProperty.PICKAXE, 2).setMaxAmount(35);
     public static final Tile TILE_SIMPLE_FURNACE = getTile("simple_furnace").setHardness(15F).addEffectiveTool(ToolProperty.PICKAXE, 2).setMaxAmount(1);
+    public static final Tile TILE_CONSTRUCTION_TABLE = getTile("construction_table").setHardness(15F).addEffectiveTool(ToolProperty.PICKAXE, 2).setMaxAmount(1);
     public static final Tile TILE_SNOW = getTile("snow").setHardness(0.75F).addEffectiveTool(ToolProperty.SHOVEL, 0).setMaxAmount(200);
     public static final TileMeta TILE_CAVE_MUSHROOM = (TileMeta) getTile("cave_mushroom").setHardness(0.25F).setMaxAmount(50).setForceDrop();
     public static final Tile TILE_STARDROP = getTile("stardrop").setHardness(0.75F).setMaxAmount(10).setForceDrop();
@@ -87,6 +88,11 @@ public final class GameContent {
     public static final Item ITEM_BRITTLE_AXE = getItem("brittle_axe");
     public static final Item ITEM_BRITTLE_SHOVEL = getItem("brittle_shovel");
     public static final Item ITEM_BRITTLE_SWORD = getItem("brittle_sword");
+    public static final Item ITEM_WRENCH = getItem("wrench");
+    public static final Item ITEM_SAW = getItem("saw");
+    public static final Item ITEM_HAMMER = getItem("hammer");
+    public static final Item ITEM_MALLET = getItem("mallet");
+    public static final Item ITEM_CHISEL = getItem("chisel");
     public static final Item ITEM_FIREWORK = getItem("firework").setMaxAmount(25);
     public static final Item ITEM_STAT_NOTE = getItem("start_note").setMaxAmount(1);
     public static final Item ITEM_PLANT_FIBER = getItem("plant_fiber").setMaxAmount(150);

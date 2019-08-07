@@ -30,6 +30,7 @@ import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.gui.Gui;
 import de.ellpeck.rockbottom.api.gui.component.construction.ComponentConstruct;
 import de.ellpeck.rockbottom.api.inventory.Inventory;
+import de.ellpeck.rockbottom.api.item.Item;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
@@ -41,25 +42,27 @@ public class ConstructionRecipe extends BasicCompendiumRecipe {
 
     public static final ResourceName ID = ResourceName.intern("recipe");
 
+    protected final ResourceName infoName;
     protected final List<IUseInfo> inputs;
     protected final List<ItemInstance> outputs;
+    protected final Item tool;
     protected final float skillReward;
-    protected final ResourceName infoName;
 
-    public ConstructionRecipe(ResourceName name, List<IUseInfo> inputs, List<ItemInstance> outputs, float skillReward) {
+    public ConstructionRecipe(ResourceName name, Item tool, List<IUseInfo> inputs, List<ItemInstance> outputs, float skillReward) {
         super(name);
         this.infoName = name.addPrefix("recipe_");
         this.inputs = inputs;
         this.outputs = outputs;
+        this.tool = tool;
         this.skillReward = skillReward;
     }
 
-    public ConstructionRecipe(ResourceName name, float skillReward, ItemInstance output, IUseInfo... inputs) {
-        this(name, Arrays.asList(inputs), Collections.singletonList(output), skillReward);
+    public ConstructionRecipe(ResourceName name, Item tool, float skillReward, ItemInstance output, IUseInfo... inputs) {
+        this(name, tool, Arrays.asList(inputs), Collections.singletonList(output), skillReward);
     }
 
-    public ConstructionRecipe(float skillReward, ItemInstance output, IUseInfo... inputs) {
-        this(output.getItem().getName(), skillReward, output, inputs);
+    public ConstructionRecipe(Item tool, float skillReward, ItemInstance output, IUseInfo... inputs) {
+        this(output.getItem().getName(), tool, skillReward, output, inputs);
     }
 
     public static ConstructionRecipe forName(ResourceName name) {
@@ -79,6 +82,14 @@ public class ConstructionRecipe extends BasicCompendiumRecipe {
     @Override
     public boolean isKnown(AbstractEntityPlayer player) {
         return true;
+    }
+
+    public Item getTool() {
+        return tool;
+    }
+
+    public boolean usesTool() {
+        return tool == null;
     }
 
     public float getSkillReward() {
@@ -102,7 +113,18 @@ public class ConstructionRecipe extends BasicCompendiumRecipe {
     }
 
     public ConstructionRecipe registerManual() {
+        if (tool != null) {
+            RockBottomAPI.logger().warning("Registered manual recipe " + getName() + " with tool " + getTool() + "! This should be marked as a construction table recipe.");
+        }
         Registries.MANUAL_CONSTRUCTION_RECIPES.register(this.getName(), this);
+        return this;
+    }
+
+    public ConstructionRecipe registerConstructionTable() {
+        if (tool == null) {
+            RockBottomAPI.logger().warning("Registered construction table recipe " + getName() + " with no tool! This should be marked as a manual recipe.");
+        }
+        Registries.CONSTRUCTION_TABLE_RECIPES.register(this.getName(), this);
         return this;
     }
 
