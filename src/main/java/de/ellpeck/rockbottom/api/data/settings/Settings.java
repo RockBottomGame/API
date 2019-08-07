@@ -48,6 +48,7 @@ public final class Settings implements IJsonSettings {
     public static final Keybind KEY_JUMP = new Keybind(ResourceName.intern("jump"), GLFW.GLFW_KEY_SPACE).register();
     public static final Keybind KEY_BACKGROUND = new Keybind(ResourceName.intern("background"), GLFW.GLFW_KEY_LEFT_SHIFT).register();
     public static final Keybind KEY_CHAT = new Keybind(ResourceName.intern("chat"), GLFW.GLFW_KEY_ENTER).register();
+    public static final Keybind KEY_COMMAND = new Keybind(ResourceName.intern("command"), GLFW.GLFW_KEY_SLASH).register();
     public static final Keybind KEY_ADVANCED_INFO = new Keybind(ResourceName.intern("advanced_info"), GLFW.GLFW_KEY_LEFT_SHIFT).register();
     public static final Keybind KEY_SCREENSHOT = new Keybind(ResourceName.intern("screenshot"), GLFW.GLFW_KEY_F10).register();
     public static final Keybind KEY_PLAYER_LIST = new Keybind(ResourceName.intern("players"), GLFW.GLFW_KEY_TAB).register();
