@@ -33,6 +33,7 @@ import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.inventory.Inventory;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.render.IPlayerDesign;
+import de.ellpeck.rockbottom.api.tile.entity.TileEntity;
 import de.ellpeck.rockbottom.api.world.IChunk;
 import de.ellpeck.rockbottom.api.world.IWorld;
 import de.ellpeck.rockbottom.api.world.gen.BiomeGen;
@@ -165,7 +166,7 @@ public interface IApiHandler {
      * @return A list of items that couldn't fit into the output inventory
      * specified
      */
-    List<ItemInstance> construct(AbstractEntityPlayer player, Inventory inputInventory, Inventory outputInventory, ICompendiumRecipe recipe, int amount, List<IUseInfo> inputs, Function<List<ItemInstance>, List<ItemInstance>> outputGetter, float skillReward);
+    List<ItemInstance> construct(AbstractEntityPlayer player, Inventory inputInventory, Inventory outputInventory, ICompendiumRecipe recipe, TileEntity machine, int amount, List<IUseInfo> inputs, Function<List<ItemInstance>, List<ItemInstance>> outputGetter, float skillReward);
 
     /**
      * Gets a color in the world based on a light value between 0 and {@link

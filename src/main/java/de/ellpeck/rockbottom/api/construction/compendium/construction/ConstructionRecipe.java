@@ -23,6 +23,7 @@ package de.ellpeck.rockbottom.api.construction.compendium.construction;
 
 import de.ellpeck.rockbottom.api.Registries;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
+import de.ellpeck.rockbottom.api.construction.ConstructionTool;
 import de.ellpeck.rockbottom.api.construction.compendium.BasicCompendiumRecipe;
 import de.ellpeck.rockbottom.api.construction.resource.IUseInfo;
 import de.ellpeck.rockbottom.api.entity.AbstractEntityItem;
@@ -32,11 +33,13 @@ import de.ellpeck.rockbottom.api.gui.component.construction.ComponentConstruct;
 import de.ellpeck.rockbottom.api.inventory.Inventory;
 import de.ellpeck.rockbottom.api.item.Item;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
+import de.ellpeck.rockbottom.api.tile.entity.TileEntity;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Function;
 
 public class ConstructionRecipe extends BasicCompendiumRecipe {
 
@@ -45,24 +48,24 @@ public class ConstructionRecipe extends BasicCompendiumRecipe {
     protected final ResourceName infoName;
     protected final List<IUseInfo> inputs;
     protected final List<ItemInstance> outputs;
-    protected final Item tool;
+    protected final List<ConstructionTool> tools;
     protected final float skillReward;
 
-    public ConstructionRecipe(ResourceName name, Item tool, List<IUseInfo> inputs, List<ItemInstance> outputs, float skillReward) {
+    public ConstructionRecipe(ResourceName name, List<ConstructionTool> tools, List<IUseInfo> inputs, List<ItemInstance> outputs, float skillReward) {
         super(name);
         this.infoName = name.addPrefix("recipe_");
         this.inputs = inputs;
         this.outputs = outputs;
-        this.tool = tool;
+        this.tools = tools;
         this.skillReward = skillReward;
     }
 
-    public ConstructionRecipe(ResourceName name, Item tool, float skillReward, ItemInstance output, IUseInfo... inputs) {
-        this(name, tool, Arrays.asList(inputs), Collections.singletonList(output), skillReward);
+    public ConstructionRecipe(ResourceName name, List<ConstructionTool> tools, float skillReward, ItemInstance output, IUseInfo... inputs) {
+        this(name, tools, Arrays.asList(inputs), Collections.singletonList(output), skillReward);
     }
 
-    public ConstructionRecipe(Item tool, float skillReward, ItemInstance output, IUseInfo... inputs) {
-        this(output.getItem().getName(), tool, skillReward, output, inputs);
+    public ConstructionRecipe(List<ConstructionTool> tools, float skillReward, ItemInstance output, IUseInfo... inputs) {
+        this(output.getItem().getName(), tools, skillReward, output, inputs);
     }
 
     public static ConstructionRecipe forName(ResourceName name) {
@@ -84,45 +87,70 @@ public class ConstructionRecipe extends BasicCompendiumRecipe {
         return true;
     }
 
-    public Item getTool() {
-        return tool;
+    public List<ConstructionTool> getTools() {
+        return tools;
     }
 
-    public boolean usesTool() {
-        return tool == null;
+    public boolean usesTools() {
+        return tools != null && tools.size() > 0;
     }
 
     public float getSkillReward() {
         return this.skillReward;
     }
 
-    public void playerConstruct(AbstractEntityPlayer player, int amount) {
+    public void playerConstruct(AbstractEntityPlayer player, TileEntity machine, int amount) {
         Inventory inv = player.getInv();
-        List<ItemInstance> remains = RockBottomAPI.getApiHandler().construct(player, inv, inv, this, amount, this.getActualInputs(inv), items -> this.getActualOutputs(inv, inv, items), this.getSkillReward());
+        List<ItemInstance> remains = RockBottomAPI.getApiHandler().construct(player, inv, inv, this, machine, amount, this.getActualInputs(inv), items -> this.getActualOutputs(inv, inv, items), this.getSkillReward());
         for (ItemInstance instance : remains) {
             AbstractEntityItem.spawn(player.world, instance, player.getX(), player.getY(), 0F, 0F);
         }
     }
 
+    public boolean canUseTools(TileEntity machine) {
+        if (usesTools()) {
+            for (ConstructionTool tool : tools) {
+                if (!RockBottomAPI.getInternalHooks().useConstructionTableTool(machine, tool, true)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     @Override
-    public ComponentConstruct getConstructButton(Gui gui, AbstractEntityPlayer player, boolean canConstruct) {
-        return new ComponentConstruct(gui, this, canConstruct, () -> {
-            RockBottomAPI.getInternalHooks().defaultConstruct(player, this);
+    public ComponentConstruct getConstructButton(Gui gui, AbstractEntityPlayer player, TileEntity machine, boolean canConstruct) {
+
+        return new ComponentConstruct(gui, this, canUseTools(machine), canConstruct, () -> {
+            RockBottomAPI.getInternalHooks().defaultConstruct(player, this, machine);
             return true;
         });
     }
 
+    @Override
+    public boolean handleMachine(AbstractEntityPlayer player, Inventory inputInventory, Inventory outputInventory, TileEntity machine, int amount, List<IUseInfo> inputs, Function<List<ItemInstance>, List<ItemInstance>> outputGetter, float skillReward) {
+        if (usesTools()) {
+            if (!canUseTools(machine)) {
+                return false;
+            }
+            for (ConstructionTool tool : tools) {
+                RockBottomAPI.getInternalHooks().useConstructionTableTool(machine, tool, false);
+            }
+        }
+        return true;
+    }
+
     public ConstructionRecipe registerManual() {
-        if (tool != null) {
-            RockBottomAPI.logger().warning("Registered manual recipe " + getName() + " with tool " + getTool() + "! This should be marked as a construction table recipe.");
+        if (tools != null && tools.size() > 0) {
+            RockBottomAPI.logger().warning("Registered manual recipe " + getName() + " with " + getTools().size() + "tools! This should be marked as a construction table recipe.");
         }
         Registries.MANUAL_CONSTRUCTION_RECIPES.register(this.getName(), this);
         return this;
     }
 
     public ConstructionRecipe registerConstructionTable() {
-        if (tool == null) {
-            RockBottomAPI.logger().warning("Registered construction table recipe " + getName() + " with no tool! This should be marked as a manual recipe.");
+        if (tools == null || tools.isEmpty()) {
+            RockBottomAPI.logger().warning("Registered construction table recipe " + getName() + " with no tools! This should be marked as a manual recipe.");
         }
         Registries.CONSTRUCTION_TABLE_RECIPES.register(this.getName(), this);
         return this;

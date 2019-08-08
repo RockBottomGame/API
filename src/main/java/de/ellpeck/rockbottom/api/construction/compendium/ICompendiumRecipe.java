@@ -29,11 +29,14 @@ import de.ellpeck.rockbottom.api.gui.component.construction.ComponentConstruct;
 import de.ellpeck.rockbottom.api.gui.component.construction.ComponentIngredient;
 import de.ellpeck.rockbottom.api.gui.component.construction.ComponentPolaroid;
 import de.ellpeck.rockbottom.api.inventory.IInventory;
+import de.ellpeck.rockbottom.api.inventory.Inventory;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
+import de.ellpeck.rockbottom.api.tile.entity.TileEntity;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 
 public interface ICompendiumRecipe extends IContent {
 
@@ -51,6 +54,15 @@ public interface ICompendiumRecipe extends IContent {
                 return false;
             }
         }
+        return true;
+    }
+
+    /**
+     * Called during construction with the machine used to construct the recipe.
+     * Provides the same parameters as the ConstructEvent directly to the recipe.
+     * @return True if the construction should continue
+     */
+    default boolean handleMachine(AbstractEntityPlayer player, Inventory inputInventory, Inventory outputInventory, TileEntity machine, int amount, List<IUseInfo> inputs, Function<List<ItemInstance>, List<ItemInstance>> outputGetter, float skillReward) {
         return true;
     }
 
@@ -73,8 +85,8 @@ public interface ICompendiumRecipe extends IContent {
         return ingredients;
     }
 
-    default ComponentConstruct getConstructButton(Gui gui, AbstractEntityPlayer player, boolean canConstruct) {
-        return new ComponentConstruct(gui, this, canConstruct, null);
+    default ComponentConstruct getConstructButton(Gui gui, AbstractEntityPlayer player, TileEntity machine, boolean canConstruct) {
+        return new ComponentConstruct(gui, this, true, canConstruct, null);
     }
 
     default ComponentPolaroid getPolaroidButton(Gui gui, AbstractEntityPlayer player, boolean canConstruct, boolean constructionTable) {

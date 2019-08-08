@@ -71,7 +71,7 @@ public class MortarRecipe extends BasicCompendiumRecipe {
     }
 
     public void construct(Inventory inventory, int amount) {
-        RockBottomAPI.getApiHandler().construct(null, inventory, inventory, this, amount, this.getActualInputs(inventory), items -> this.getActualOutputs(inventory, inventory, items), 0F);
+        RockBottomAPI.getApiHandler().construct(null, inventory, inventory, this, null, amount, this.getActualInputs(inventory), items -> this.getActualOutputs(inventory, inventory, items), 0F);
     }
 
     @Override

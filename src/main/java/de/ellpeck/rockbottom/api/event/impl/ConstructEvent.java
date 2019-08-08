@@ -28,6 +28,7 @@ import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.event.Event;
 import de.ellpeck.rockbottom.api.inventory.Inventory;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
+import de.ellpeck.rockbottom.api.tile.entity.TileEntity;
 
 import java.util.List;
 import java.util.function.Function;
@@ -35,7 +36,7 @@ import java.util.function.Function;
 /**
  * This event is fired when construction takes place in {@link
  * IApiHandler#construct(AbstractEntityPlayer, Inventory, Inventory,
- * ICompendiumRecipe, int, List, Function, float)}. Cancelling the event will
+ * ICompendiumRecipe, TileEntity, int, List, Function, float)}. Cancelling the event will
  * cause the construction not to take place.
  */
 public final class ConstructEvent extends Event {
@@ -43,16 +44,18 @@ public final class ConstructEvent extends Event {
     public Inventory inputInventory;
     public Inventory outputInventory;
     public ICompendiumRecipe recipe;
+    public TileEntity machine;
     public int amount;
     public List<IUseInfo> inputs;
     public Function<List<ItemInstance>, List<ItemInstance>> outputGetter;
     public float skillReward;
 
-    public ConstructEvent(AbstractEntityPlayer player, Inventory inputInventory, Inventory outputInventory, ICompendiumRecipe recipe, int amount, List<IUseInfo> inputs, Function<List<ItemInstance>, List<ItemInstance>> outputGetter, float skillReward) {
+    public ConstructEvent(AbstractEntityPlayer player, Inventory inputInventory, Inventory outputInventory, ICompendiumRecipe recipe, TileEntity machine, int amount, List<IUseInfo> inputs, Function<List<ItemInstance>, List<ItemInstance>> outputGetter, float skillReward) {
         this.player = player;
         this.inputInventory = inputInventory;
         this.outputInventory = outputInventory;
         this.recipe = recipe;
+        this.machine = machine;
         this.amount = amount;
         this.inputs = inputs;
         this.outputGetter = outputGetter;

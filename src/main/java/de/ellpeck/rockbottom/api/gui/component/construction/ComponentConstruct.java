@@ -30,7 +30,6 @@ import de.ellpeck.rockbottom.api.data.settings.Settings;
 import de.ellpeck.rockbottom.api.gui.Gui;
 import de.ellpeck.rockbottom.api.gui.component.GuiComponent;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
-import de.ellpeck.rockbottom.api.tile.entity.TileEntity;
 import de.ellpeck.rockbottom.api.util.Colors;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
@@ -41,13 +40,15 @@ import java.util.function.Supplier;
 public class ComponentConstruct extends GuiComponent {
 
     private final ICompendiumRecipe recipe;
-    private final boolean canConstruct;
+    private final boolean hasTool;
+    private final boolean hasIngredients;
     private final Supplier<Boolean> consumer;
 
-    public ComponentConstruct(Gui gui, ICompendiumRecipe recipe, boolean canConstruct, Supplier<Boolean> consumer) {
+    public ComponentConstruct(Gui gui, ICompendiumRecipe recipe, boolean hasTool, boolean hasIngredients, Supplier<Boolean> consumer) {
         super(gui, 94, 17, 30, 30);
         this.recipe = recipe;
-        this.canConstruct = canConstruct;
+        this.hasTool = hasTool;
+        this.hasIngredients = hasIngredients;
         this.consumer = consumer;
     }
 
@@ -67,7 +68,7 @@ public class ComponentConstruct extends GuiComponent {
             instance.getItem().describeItem(manager, instance, info, Settings.KEY_ADVANCED_INFO.isDown());
             if (this.consumer != null) {
                 info.add("");
-                info.add(manager.localize(ResourceName.intern("info." + (this.canConstruct ? "click_to_construct" : "missing_items"))));
+                info.add(manager.localize(ResourceName.intern("info." + (this.hasIngredients ? (this.hasTool ? "click_to_construct" : "missing_tool") : "missing_items"))));
             }
             g.drawHoverInfoAtMouse(game, manager, true, 200, info);
         }
