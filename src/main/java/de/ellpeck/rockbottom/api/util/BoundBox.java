@@ -99,6 +99,25 @@ public final class BoundBox {
         return this.getWidth() <= 0 || this.getHeight() <= 0;
     }
 
+	/**
+	 * Gets the position of an edge based on the direction.
+	 * For example:
+	 * box = BoundBox(-2.8, 0.2, 10.2, 11.5)
+	 * box.getBoundEdge(Direction.UP) is 11.5.
+	 * box.getBoundEdge(Direction.LEFT) is -2.8.
+	 * @param direction The (CARDINAL) direction towards the edge
+	 * @return The position value at that edge if direction is cardinal, 0 otherwise.
+	 */
+	public double getBoundEdge(Direction direction) {
+    	switch (direction) {
+			case LEFT: return minX;
+			case RIGHT: return maxX;
+			case DOWN: return minY;
+			case UP: return maxY;
+			default: return 0;
+		}
+	}
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

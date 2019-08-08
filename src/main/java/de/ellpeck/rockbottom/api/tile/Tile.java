@@ -72,10 +72,34 @@ public class Tile {
         return null;
     }
 
+    public BoundBox getActualBoundBox(IWorld world, TileState state, int x, int y, TileLayer layer) {
+    	BoundBox box = getBoundBox(world, state, x, y, layer);
+    	if (box == null) {
+    		box = new BoundBox();
+		}
+		return box;
+	}
+
+    public BoundBox getBoundBox(IWorld world, TileState state, int x, int y, TileLayer layer) {
+		return DEFAULT_BOUNDS;
+	}
+
+    @Deprecated
     public BoundBox getBoundBox(IWorld world, int x, int y, TileLayer layer) {
-        return DEFAULT_BOUNDS;
+        return this.getBoundBox(world, world.getState(x, y), x, y, layer);
     }
 
+	public List<BoundBox> getBoundBoxes(IWorld world, TileState state, int x, int y, TileLayer layer, MovableWorldObject object, BoundBox objectBox, BoundBox objectBoxMotion) {
+		BoundBox box = this.getBoundBox(world, state, x, y, layer);
+
+		if (box != null && !box.isEmpty()) {
+			return Collections.singletonList(box.copy().add(x, y));
+		} else {
+			return Collections.emptyList();
+		}
+	}
+
+	@Deprecated
     public List<BoundBox> getBoundBoxes(IWorld world, int x, int y, TileLayer layer, MovableWorldObject object, BoundBox objectBox, BoundBox objectBoxMotion) {
         BoundBox box = this.getBoundBox(world, x, y, layer);
 
