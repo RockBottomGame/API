@@ -91,7 +91,7 @@ public class ComponentSlot extends GuiComponent {
     @Override
     public void render(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y) {
         ItemInstance holding = this.container.getContainer().holdingInst;
-        g.renderSlotInGui(game, manager, this.slot.get(), x, y, 1F, this.isMouseOver(game), holding == null || this.slot.canPlace(holding), renderBackground, useColorOverride ? colorOverride : game.getSettings().guiColor);
+        g.renderSlotInGui(game, manager, this.slot.get(), x, y, 1F, this.isMouseOver(game), holding == null || this.slot.canPlace(holding), renderBackground, useColorOverride ? colorOverride : getGuiColor());
     }
 
     @Override
