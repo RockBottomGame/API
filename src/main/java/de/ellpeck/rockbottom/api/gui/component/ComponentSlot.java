@@ -39,6 +39,7 @@ public class ComponentSlot extends GuiComponent {
     public final GuiContainer container;
 
     private boolean renderBackground = true;
+    private boolean useColorOverride = false;
     private int colorOverride = -1;
 
     public ComponentSlot(GuiContainer container, ContainerSlot slot, int componentId, int x, int y) {
@@ -53,8 +54,8 @@ public class ComponentSlot extends GuiComponent {
      * invisible with this enabled if there are no items in it. You should
      * probably only use this if your GUI texture includes its own slot markers.
      */
-    public ComponentSlot setBackgroundRender(boolean backgroundRender) {
-        renderBackground = backgroundRender;
+    public ComponentSlot disableBackgroundRender() {
+        renderBackground = false;
         return this;
     }
 
@@ -63,7 +64,8 @@ public class ComponentSlot extends GuiComponent {
      * will use the user-defined color preference {@link Settings#guiColor}
      * @param color The color that you want your slot to use
      */
-    public ComponentSlot setColorOverride(int color) {
+    public ComponentSlot addColorOverride(int color) {
+        this.useColorOverride = true;
         this.colorOverride = color;
         return this;
     }
@@ -89,7 +91,7 @@ public class ComponentSlot extends GuiComponent {
     @Override
     public void render(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y) {
         ItemInstance holding = this.container.getContainer().holdingInst;
-        g.renderSlotInGui(game, manager, this.slot.get(), x, y, 1F, this.isMouseOver(game), holding == null || this.slot.canPlace(holding), renderBackground, colorOverride);
+        g.renderSlotInGui(game, manager, this.slot.get(), x, y, 1F, this.isMouseOver(game), holding == null || this.slot.canPlace(holding), renderBackground, useColorOverride ? colorOverride : game.getSettings().guiColor);
     }
 
     @Override
