@@ -58,7 +58,7 @@ public abstract class CompendiumCategory {
     }
 
     public ResourceName getBackgroundPicture(Gui gui, IAssetManager manager) {
-        return ResourceName.intern("gui.construction.page_recipes");
+        return ResourceName.intern("gui.compendium.page_recipes");
     }
 
     public boolean shouldDisplay(AbstractEntityPlayer player) {

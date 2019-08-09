@@ -34,27 +34,37 @@ import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 import java.util.List;
 
 public class ComponentIngredient extends GuiComponent {
+    public static final ResourceName DEFAULT_TEX = ResourceName.intern("gui.compendium.ingredient_background");
+    public static final ResourceName DEFAULT_TEX_NONE = ResourceName.intern("gui.compendium.ingredient_background_none");
 
-    private static final ResourceName RES = ResourceName.intern("gui.construction.ingredient_background");
-    private static final ResourceName RES_NONE = ResourceName.intern("gui.construction.ingredient_background_none");
+    public static final ResourceName CONSTRUCTION_TEX = ResourceName.intern("gui.construction_table.ingredient_background");
+    public static final ResourceName CONSTRUCTION_TEX_NONE = ResourceName.intern("gui.construction_table.ingredient_background_none");
 
+    private final ResourceName tex;
+    private final ResourceName texNone;
     private final boolean hasItem;
     private final List<ItemInstance> inputs;
 
-    public ComponentIngredient(Gui gui, boolean hasItem, List<ItemInstance> inputs) {
+    public ComponentIngredient(Gui gui, boolean hasItem, List<ItemInstance> inputs, ResourceName tex, ResourceName texNone) {
         super(gui, 0, 0, 14, 14);
         this.hasItem = hasItem;
         this.inputs = inputs;
+        this.tex = tex;
+        this.texNone = texNone;
+    }
+
+    public ComponentIngredient(Gui gui, boolean hasItem, List<ItemInstance> inputs) {
+        this(gui, hasItem, inputs, DEFAULT_TEX, DEFAULT_TEX_NONE);
     }
 
     @Override
     public void render(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y) {
         if (!this.inputs.isEmpty()) {
             ItemInstance input = this.getInput(game);
-            manager.getTexture(RES).draw(x, y, this.width, this.height);
+            manager.getTexture(tex).draw(x, y, this.width, this.height);
             g.renderItemInGui(game, manager, input, x + 2, y + 2, 1.0F, this.hasItem ? Colors.WHITE : Colors.multiplyA(Colors.WHITE, 0.35F));
         } else {
-            manager.getTexture(RES_NONE).draw(x, y, this.width, this.height);
+            manager.getTexture(texNone).draw(x, y, this.width, this.height);
         }
     }
 

@@ -26,6 +26,7 @@ import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.IRenderer;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.assets.font.FormattingCode;
+import de.ellpeck.rockbottom.api.construction.ConstructionTool;
 import de.ellpeck.rockbottom.api.construction.compendium.construction.ConstructionRecipe;
 import de.ellpeck.rockbottom.api.effect.ActiveEffect;
 import de.ellpeck.rockbottom.api.entity.AbstractEntityItem;
@@ -72,6 +73,15 @@ public interface IInternalHooks {
 
     boolean placeTile(int x, int y, TileLayer layer, AbstractEntityPlayer player, ItemInstance selected, Tile tile, boolean removeItem, boolean simulate);
 
+    /**
+     * Checks if the tile entity is a construction table, and if it has a tool
+     * @param constructionTable
+     * @param tool
+     * @param simulate
+     * @return
+     */
+    boolean useConstructionTableTool(TileEntity constructionTable, ConstructionTool tool, boolean simulate);
+
     //Liquid behavior kindly provided by superaxander
     void doDefaultLiquidBehavior(IWorld world, int x, int y, TileLayer layer, TileLiquid tile);
 
@@ -107,5 +117,5 @@ public interface IInternalHooks {
 
     void packetEntityData(Entity entity);
 
-    void defaultConstruct(AbstractEntityPlayer player, ConstructionRecipe recipe);
+    void defaultConstruct(AbstractEntityPlayer player, ConstructionRecipe recipe, TileEntity machine);
 }

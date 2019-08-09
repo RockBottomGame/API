@@ -105,5 +105,7 @@ public abstract class TileEntity {
         return false;
     }
 
-    public abstract boolean doesTick();
+    public boolean doesTick() {
+        return false;
+    }
 }
