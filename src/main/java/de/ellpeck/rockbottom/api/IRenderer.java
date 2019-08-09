@@ -30,6 +30,7 @@ import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.render.engine.*;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
 import de.ellpeck.rockbottom.api.util.Util;
+import de.ellpeck.rockbottom.api.data.settings.Settings;
 import org.lwjgl.opengl.GL15;
 
 import java.nio.FloatBuffer;
@@ -340,6 +341,13 @@ public interface IRenderer extends IDisposable {
      *                     be rendered in grayscale
      */
     void renderSlotInGui(IGameInstance game, IAssetManager manager, ItemInstance slot, float x, float y, float scale, boolean hovered, boolean canPlaceInto);
+
+    /**
+     * Renders a slot with additional arguments
+     * @param renderBackground Should the slot overlay be rendered? Usually true.
+     * @param colorOverride What color should the slot be? Usually {@link Settings#guiColor}
+     */
+    void renderSlotInGui(IGameInstance game, IAssetManager manager, ItemInstance slot, float x, float y, float scale, boolean hovered, boolean canPlaceInto, boolean renderBackground, int colorOverride);
 
     /**
      * Renders an item and its amount. This is similar to {@link

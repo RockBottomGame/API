@@ -23,6 +23,7 @@ package de.ellpeck.rockbottom.api.gui.component;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.IRenderer;
+import de.ellpeck.rockbottom.api.data.settings.Settings;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.gui.GuiContainer;
@@ -37,11 +38,34 @@ public class ComponentSlot extends GuiComponent {
     public final int componentId;
     public final GuiContainer container;
 
+    private boolean renderBackground = true;
+    private int colorOverride = -1;
+
     public ComponentSlot(GuiContainer container, ContainerSlot slot, int componentId, int x, int y) {
         super(container, x, y, 16, 16);
         this.container = container;
         this.slot = slot;
         this.componentId = componentId;
+    }
+
+    /**
+     * This disables the background rendering of the slot. Your slot will be
+     * invisible with this enabled if there are no items in it. You should
+     * probably only use this if your GUI texture includes its own slot markers.
+     */
+    public ComponentSlot setBackgroundRender(boolean backgroundRender) {
+        renderBackground = backgroundRender;
+        return this;
+    }
+
+    /**
+     * This forces your slot to render as a specific color. By default, slots
+     * will use the user-defined color preference {@link Settings#guiColor}
+     * @param color The color that you want your slot to use
+     */
+    public ComponentSlot setColorOverride(int color) {
+        this.colorOverride = color;
+        return this;
     }
 
     @Override
@@ -65,7 +89,7 @@ public class ComponentSlot extends GuiComponent {
     @Override
     public void render(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y) {
         ItemInstance holding = this.container.getContainer().holdingInst;
-        g.renderSlotInGui(game, manager, this.slot.get(), x, y, 1F, this.isMouseOver(game), holding == null || this.slot.canPlace(holding));
+        g.renderSlotInGui(game, manager, this.slot.get(), x, y, 1F, this.isMouseOver(game), holding == null || this.slot.canPlace(holding), renderBackground, colorOverride);
     }
 
     @Override
