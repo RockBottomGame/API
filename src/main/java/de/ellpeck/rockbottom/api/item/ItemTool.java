@@ -22,6 +22,7 @@
 package de.ellpeck.rockbottom.api.item;
 
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
+import de.ellpeck.rockbottom.api.assets.font.FormattingCode;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.render.item.IItemRenderer;
 import de.ellpeck.rockbottom.api.render.item.ItemToolRenderer;
@@ -34,19 +35,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ItemTool extends ItemBasic {
-
-    private final int durability;
+public class ItemTool extends ItemBasicTool {
     private final float miningSpeed;
     private final Map<ToolProperty, Integer> toolProperties = new HashMap<>();
 
     public ItemTool(ResourceName name, float miningSpeed, int durability, ToolProperty property, int level) {
-        super(name);
+        super(name, durability);
         this.miningSpeed = miningSpeed;
-        this.durability = durability;
 
         this.addToolProperty(property, level);
-        this.maxAmount = 1;
     }
 
     @Override
@@ -75,24 +72,4 @@ public class ItemTool extends ItemBasic {
             this.takeDamage(instance, player, 1);
         }
     }
-
-    @Override
-    public void describeItem(IAssetManager manager, ItemInstance instance, List<String> desc, boolean isAdvanced) {
-        super.describeItem(manager, instance, desc, isAdvanced);
-
-        int highest = this.getHighestPossibleMeta() + 1;
-        desc.add(manager.localize(ResourceName.intern("info.durability"), highest - instance.getMeta(), highest));
-    }
-
-    @Override
-    public boolean useMetaAsDurability() {
-        return true;
-    }
-
-    @Override
-    public int getHighestPossibleMeta() {
-        return this.durability - 1;
-    }
-
-
 }
