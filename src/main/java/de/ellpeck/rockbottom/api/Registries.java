@@ -27,6 +27,7 @@ import de.ellpeck.rockbottom.api.construction.compendium.ICompendiumRecipe;
 import de.ellpeck.rockbottom.api.construction.compendium.construction.ConstructionRecipe;
 import de.ellpeck.rockbottom.api.construction.compendium.ICriteria;
 import de.ellpeck.rockbottom.api.construction.compendium.mortar.MortarRecipe;
+import de.ellpeck.rockbottom.api.construction.compendium.smithing.SmithingRecipe;
 import de.ellpeck.rockbottom.api.construction.smelting.FuelInput;
 import de.ellpeck.rockbottom.api.construction.smelting.SmeltingRecipe;
 import de.ellpeck.rockbottom.api.content.IContentLoader;
@@ -168,7 +169,16 @@ public final class Registries {
      */
     @ApiInternal
     public static final ParentedNameRegistry<MortarRecipe> MORTAR_RECIPES = new ParentedNameRegistry<>(ResourceName.intern("mortar_recipe_registry"), true, ALL_RECIPES).register();
-    /**
+	/**
+	 * The registry for all {@link SmithingRecipe} objects that can be processed
+	 * in a mortar. To register something into this registry, please use  {@link
+	 * SmithingRecipe#register()}. If you want to get a recipe instance by its
+	 * name, use {@link MortarRecipe#forName(ResourceName)}.
+	 */
+	@ApiInternal
+	public static final ParentedNameRegistry<SmithingRecipe> SMITHING_RECIPES = new ParentedNameRegistry<>(ResourceName.intern("smithing_recipe_registry"), true, ALL_RECIPES).register();
+
+	/**
      * The registry for all {@link IWorldGenerator} types. The {@link
      * ResourceName} is used to save a generator to disk if it is a retroactive
      * generator ({@link IWorldGenerator#generatesRetroactively()}) to mark that
