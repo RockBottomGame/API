@@ -42,6 +42,8 @@ public interface ICompendiumRecipe extends IContent {
 
     ResourceName getName();
 
+    ResourceName getKnowledgeInformationName();
+
     boolean isKnown(AbstractEntityPlayer player);
 
     List<IUseInfo> getInputs();

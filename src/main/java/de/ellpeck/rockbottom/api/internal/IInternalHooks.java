@@ -21,12 +21,14 @@
 
 package de.ellpeck.rockbottom.api.internal;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Table;
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.IRenderer;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.assets.font.FormattingCode;
 import de.ellpeck.rockbottom.api.construction.ConstructionTool;
+import de.ellpeck.rockbottom.api.construction.compendium.ICompendiumRecipe;
 import de.ellpeck.rockbottom.api.construction.compendium.construction.ConstructionRecipe;
 import de.ellpeck.rockbottom.api.effect.ActiveEffect;
 import de.ellpeck.rockbottom.api.entity.AbstractEntityItem;
@@ -75,12 +77,19 @@ public interface IInternalHooks {
 
     /**
      * Checks if the tile entity is a construction table, and if it has a tool
-     * @param constructionTable
-     * @param tool
-     * @param simulate
+     * @param constructionTable The construction table tile entity
+     * @param tool What tool and how much durability is needed
+     * @param simulate Should we actually damage the tool, or just check if it is there
      * @return
      */
     boolean useConstructionTableTool(TileEntity constructionTable, ConstructionTool tool, boolean simulate);
+
+    /**
+     * Returns a list of compendium recipes that can be unlocked by breaking the specified tile
+     * @param tile The tile which needs to be broken to unlock the recipes
+     * @return The recipe list
+     */
+    List<ICompendiumRecipe> getRecipesToLearnFrom(Tile tile);
 
     //Liquid behavior kindly provided by superaxander
     void doDefaultLiquidBehavior(IWorld world, int x, int y, TileLayer layer, TileLiquid tile);
