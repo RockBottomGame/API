@@ -34,6 +34,10 @@ public class ContainerSlot {
     public final int x;
     public final int y;
 
+    private boolean renderSlotBackground = true;
+    private boolean useSlotColorOverride = false;
+    private int slotColorOverride;
+
     public ContainerSlot(IInventory inventory, int slot, int x, int y) {
         this.inventory = inventory;
         this.slot = slot;
@@ -57,7 +61,21 @@ public class ContainerSlot {
         return this.inventory.get(this.slot);
     }
 
+    public ContainerSlot disableSlotBackgroundRender() {
+        renderSlotBackground = false;
+        return this;
+    }
+
+    public ContainerSlot setSlotColorOverride(int slotColorOverride) {
+        this.useSlotColorOverride = true;
+        this.slotColorOverride = slotColorOverride;
+        return this;
+    }
+
     public ComponentSlot getGraphicalSlot(GuiContainer gui, int index, int xOffset, int yOffset) {
-        return new ComponentSlot(gui, this, index, xOffset + this.x, yOffset + this.y);
+        ComponentSlot slot = new ComponentSlot(gui, this, index, xOffset + this.x, yOffset + this.y);
+        if (!renderSlotBackground) slot.disableBackgroundRender();
+        else if (useSlotColorOverride) slot.addColorOverride(slotColorOverride);
+        return slot;
     }
 }
