@@ -35,7 +35,7 @@ import de.ellpeck.rockbottom.api.net.chat.IChatLog;
 import de.ellpeck.rockbottom.api.particle.IParticleManager;
 import de.ellpeck.rockbottom.api.render.IPlayerDesign;
 import de.ellpeck.rockbottom.api.toast.IToaster;
-import de.ellpeck.rockbottom.api.toast.Toast;
+import de.ellpeck.rockbottom.api.toast.ToastBasic;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 import de.ellpeck.rockbottom.api.world.DynamicRegistryInfo;
@@ -300,7 +300,7 @@ public interface IGameInstance extends IMod {
 
     /**
      * Gets the {@link IToaster} of the current game instance. This is the
-     * system that displays {@link Toast} objects, which are the little pop-up
+     * system that displays {@link ToastBasic} objects, which are the little pop-up
      * messages in the top left. Note that this is not implemented on the
      * dedicated server.
      *

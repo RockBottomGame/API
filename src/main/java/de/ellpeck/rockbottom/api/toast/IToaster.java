@@ -23,9 +23,9 @@ package de.ellpeck.rockbottom.api.toast;
 
 public interface IToaster {
 
-    void displayToast(Toast toast);
+    void displayToast(IToast toast);
 
-    void cancelToast(Toast toast);
+    void cancelToast(IToast toast);
 
     void cancelAllToasts();
 }
