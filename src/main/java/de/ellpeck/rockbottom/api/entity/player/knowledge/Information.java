@@ -22,7 +22,7 @@
 package de.ellpeck.rockbottom.api.entity.player.knowledge;
 
 import de.ellpeck.rockbottom.api.data.set.DataSet;
-import de.ellpeck.rockbottom.api.toast.Toast;
+import de.ellpeck.rockbottom.api.toast.IToast;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 public class Information {
@@ -41,11 +41,11 @@ public class Information {
 
     }
 
-    public Toast announceTeach() {
+    public IToast announceTeach() {
         return null;
     }
 
-    public Toast announceForget() {
+    public IToast announceForget() {
         return null;
     }
 

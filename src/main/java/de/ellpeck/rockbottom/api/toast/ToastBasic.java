@@ -1,5 +1,5 @@
 /*
- * This file ("Toast.java") is part of the RockBottomAPI by Ellpeck.
+ * This file ("ToastBasic.java") is part of the RockBottomAPI by Ellpeck.
  * View the source code at <https://github.com/RockBottomGame/>.
  * View information on the project at <https://rockbottom.ellpeck.de/>.
  *
@@ -32,24 +32,25 @@ import de.ellpeck.rockbottom.api.net.chat.component.ChatComponent;
 import de.ellpeck.rockbottom.api.util.Colors;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
-public class Toast {
+public class ToastBasic implements IToast {
 
-    private final ResourceName icon;
-    private final ChatComponent title;
-    private final ChatComponent description;
-    private final int displayTime;
+    protected final ResourceName icon;
+    protected final ChatComponent title;
+    protected final ChatComponent description;
+    protected final int displayTime;
 
-    public Toast(ChatComponent title, ChatComponent description, int displayTime) {
+    public ToastBasic(ChatComponent title, ChatComponent description, int displayTime) {
         this(null, title, description, displayTime);
     }
 
-    public Toast(ResourceName icon, ChatComponent title, ChatComponent description, int displayTime) {
+    public ToastBasic(ResourceName icon, ChatComponent title, ChatComponent description, int displayTime) {
         this.icon = icon;
         this.title = title;
         this.description = description;
         this.displayTime = displayTime;
     }
 
+    @Override
     public void render(IGameInstance game, IAssetManager manager, IRenderer g, float x, float y) {
         float width = this.getWidth();
         float height = this.getHeight();
@@ -75,26 +76,30 @@ public class Toast {
         font.drawSplitString(textX + 1, y + 8, FormattingCode.LIGHT_GRAY + this.getDescription().getDisplayWithChildren(game, manager), 0.25F, (int) textWidth - 2);
     }
 
-    public ChatComponent getTitle() {
+    protected ChatComponent getTitle() {
         return this.title;
     }
 
-    public ChatComponent getDescription() {
+    protected ChatComponent getDescription() {
         return this.description;
     }
 
-    public int getDisplayTime() {
-        return this.displayTime;
-    }
-
+    @Override
     public float getHeight() {
         return 20F;
     }
 
+    @Override
     public float getWidth() {
         return 90F;
     }
 
+    @Override
+    public int getDisplayTime() {
+        return this.displayTime;
+    }
+
+    @Override
     public float getMovementTime() {
         return 15F;
     }
