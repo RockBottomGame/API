@@ -54,10 +54,7 @@ import de.ellpeck.rockbottom.api.net.packet.IPacket;
 import de.ellpeck.rockbottom.api.tile.Tile;
 import de.ellpeck.rockbottom.api.tile.state.TileState;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
-import de.ellpeck.rockbottom.api.util.reg.IRegistry;
-import de.ellpeck.rockbottom.api.util.reg.IndexRegistry;
-import de.ellpeck.rockbottom.api.util.reg.NameRegistry;
-import de.ellpeck.rockbottom.api.util.reg.ResourceName;
+import de.ellpeck.rockbottom.api.util.reg.*;
 import de.ellpeck.rockbottom.api.world.IWorld;
 import de.ellpeck.rockbottom.api.world.SubWorldInitializer;
 import de.ellpeck.rockbottom.api.world.gen.IStructure;
@@ -65,8 +62,6 @@ import de.ellpeck.rockbottom.api.world.gen.IWorldGenerator;
 import de.ellpeck.rockbottom.api.world.gen.biome.Biome;
 import de.ellpeck.rockbottom.api.world.gen.biome.level.BiomeLevel;
 import de.ellpeck.rockbottom.api.world.layer.TileLayer;
-
-import java.util.List;
 
 /**
  * This class houses all of the game's default {@link IRegistry} objects. If you
@@ -134,7 +129,29 @@ public final class Registries {
      * These can be used in recipe json files.
      */
     public static final NameRegistry<ICriteria> CRITERIA_REGISTRY = new NameRegistry<>(ResourceName.intern("criteria_registry"), false).register();
-    /**
+	/**
+	 * The registry for all {@link ICompendiumRecipe} objects that are
+	 * in the game. If your mod includes its own registry for recipes,
+	 * consider making it a {@link ParentedNameRegistry} and using this
+	 * as the parent.
+	 */
+    public static final NameRegistry<ICompendiumRecipe> ALL_RECIPES = new NameRegistry<>(ResourceName.intern("all_recipes_registry"), true).register();
+	/**
+	 * // TODO 0.4
+	 * A parent for Manual and Construction Table recipes.
+	 */
+	@ApiInternal
+	public static final ParentedNameRegistry<ConstructionRecipe> CONSTRUCTION_RECIPES = new ParentedNameRegistry<>(ResourceName.intern("construction_recipe_registry"), true, ALL_RECIPES).register();
+	/**
+	 * The recipe for all {@link ConstructionRecipe} objects which require
+	 * a tool to be crafted. These show up in a separate tab to manual recipes
+	 * in the Compendium and can be crafted with the use of a tool in the
+	 * ConstructionTable. Use {@link ConstructionRecipe#registerConstructionTable()}
+	 * to register.
+	 */
+	@ApiInternal
+	public static final ParentedNameRegistry<ConstructionRecipe> CONSTRUCTION_TABLE_RECIPES = new ParentedNameRegistry<>(ResourceName.intern("construction_table_recipe_registry"), true, CONSTRUCTION_RECIPES).register();
+	/**
      * The registry for all {@link ConstructionRecipe} objects that are
      * displayed on the left side of the player's inventory. Use {@link
      * ConstructionRecipe#registerManual()} to register recipes into this
@@ -142,16 +159,7 @@ public final class Registries {
      * ConstructionRecipe#forName(ResourceName)}.
      */
     @ApiInternal
-    public static final NameRegistry<ConstructionRecipe> MANUAL_CONSTRUCTION_RECIPES = new NameRegistry<>(ResourceName.intern("manual_recipe_registry"), true).register();
-    /**
-     * The recipe for all {@link ConstructionRecipe} objects which require
-     * a tool to be crafted. These show up in a separate tab to manual recipes
-     * in the Compendium and can be crafted with the use of a tool in the
-     * ConstructionTable. Use {@link ConstructionRecipe#registerConstructionTable()}
-     * to register.
-     */
-    @ApiInternal
-    public static final NameRegistry<ConstructionRecipe> CONSTRUCTION_TABLE_RECIPES = new NameRegistry<>(ResourceName.intern("construction_table_recipe_registry"), true).register();
+    public static final ParentedNameRegistry<ConstructionRecipe> MANUAL_CONSTRUCTION_RECIPES = new ParentedNameRegistry<>(ResourceName.intern("manual_construction_recipe_registry"), true, CONSTRUCTION_RECIPES).register();
     /**
      * The registry for all {@link MortarRecipe} objects that can be processed
      * in a mortar. To register something into this registry, please use  {@link
@@ -159,7 +167,7 @@ public final class Registries {
      * name, use {@link MortarRecipe#forName(ResourceName)}.
      */
     @ApiInternal
-    public static final NameRegistry<MortarRecipe> MORTAR_REGISTRY = new NameRegistry<>(ResourceName.intern("mortar_registry"), true).register();
+    public static final ParentedNameRegistry<MortarRecipe> MORTAR_RECIPES = new ParentedNameRegistry<>(ResourceName.intern("mortar_recipe_registry"), true, ALL_RECIPES).register();
     /**
      * The registry for all {@link IWorldGenerator} types. The {@link
      * ResourceName} is used to save a generator to disk if it is a retroactive
