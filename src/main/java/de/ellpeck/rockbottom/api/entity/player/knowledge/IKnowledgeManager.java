@@ -25,6 +25,8 @@ import de.ellpeck.rockbottom.api.construction.compendium.ICompendiumRecipe;
 import de.ellpeck.rockbottom.api.construction.compendium.construction.ConstructionRecipe;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
+import java.util.List;
+
 public interface IKnowledgeManager {
 
     boolean knowsRecipe(ConstructionRecipe recipe);
@@ -35,9 +37,21 @@ public interface IKnowledgeManager {
 
     <T extends Information> T getInformation(ResourceName name, Class<T> infoClass);
 
-    void teachRecipe(ICompendiumRecipe recipe, boolean announce);
+    /**
+     * Tries to teach the recipe to the player
+     * @param recipe the recipe to teach
+     * @param announce Should the player recieve a toast to inform them of their discovery?
+     * @return True if the player did not already know the recipe
+     */
+    boolean teachRecipe(ICompendiumRecipe recipe, boolean announce);
 
-    void teachRecipe(ICompendiumRecipe recipe);
+    boolean teachRecipe(ICompendiumRecipe recipe);
+
+    /**
+     * Teaches many recipes with a single toast notification
+     * @param recipes A list of recipes to be taught
+     */
+    void teachRecipes(List<ICompendiumRecipe> recipes);
 
     void teachInformation(Information information, boolean announce);
 

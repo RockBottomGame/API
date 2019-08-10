@@ -204,12 +204,7 @@ public class Tile {
 
         if (!world.isClient() && shouldDrop && destroyer instanceof AbstractEntityPlayer) {
             List<ICompendiumRecipe> recipes = RockBottomAPI.getInternalHooks().getRecipesToLearnFrom(this);
-            if (recipes != null) {
-                for (ICompendiumRecipe recipe : recipes) {
-                    ((AbstractEntityPlayer)destroyer).getKnowledge().teachRecipe(recipe);
-                }
-            }
-
+            ((AbstractEntityPlayer)destroyer).getKnowledge().teachRecipes(recipes);
         }
     }
 
