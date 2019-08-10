@@ -380,7 +380,7 @@ public interface IRenderer extends IDisposable {
      * @param color             The color to filter the item's renderer with
      * @param displayAmount     If the amount of items in this instance should
      *                          be displayed as a little number below the item
-     * @param displayDurability If the durability of the item should be
+     * @param displayDurability If the usage of the item should be
      *                          displayed
      */
     void renderItemInGui(IGameInstance game, IAssetManager manager, ItemInstance slot, float x, float y, float scale, int color, boolean displayAmount, boolean displayDurability);

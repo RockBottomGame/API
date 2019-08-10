@@ -49,11 +49,11 @@ public class MortarRecipe extends BasicCompendiumRecipe {
     }
 
     public static MortarRecipe forName(ResourceName name) {
-        return Registries.MORTAR_REGISTRY.get(name);
+        return Registries.MORTAR_RECIPES.get(name);
     }
 
     public static MortarRecipe getRecipe(IInventory inv) {
-        for (MortarRecipe recipe : Registries.MORTAR_REGISTRY.values()) {
+        for (MortarRecipe recipe : Registries.MORTAR_RECIPES.values()) {
             if (recipe.canConstruct(inv, inv)) {
                 return recipe;
             }
@@ -66,7 +66,7 @@ public class MortarRecipe extends BasicCompendiumRecipe {
     }
 
     public MortarRecipe register() {
-        Registries.MORTAR_REGISTRY.register(this.getName(), this);
+        Registries.MORTAR_RECIPES.register(this.getName(), this);
         return this;
     }
 

@@ -26,13 +26,12 @@ import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.construction.ConstructionTool;
 import de.ellpeck.rockbottom.api.construction.compendium.BasicCompendiumRecipe;
 import de.ellpeck.rockbottom.api.construction.resource.IUseInfo;
-import de.ellpeck.rockbottom.api.entity.AbstractEntityItem;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.gui.Gui;
 import de.ellpeck.rockbottom.api.gui.component.construction.ComponentConstruct;
 import de.ellpeck.rockbottom.api.inventory.Inventory;
-import de.ellpeck.rockbottom.api.item.Item;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
+import de.ellpeck.rockbottom.api.tile.entity.ICraftingStation;
 import de.ellpeck.rockbottom.api.tile.entity.TileEntity;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
@@ -67,7 +66,7 @@ public class ConstructionRecipe extends BasicCompendiumRecipe {
     }
 
     public static ConstructionRecipe forName(ResourceName name) {
-        return Registries.MANUAL_CONSTRUCTION_RECIPES.get(name);
+        return Registries.CONSTRUCTION_TABLE_RECIPES.get(name);
     }
 
     @Override
@@ -93,22 +92,16 @@ public class ConstructionRecipe extends BasicCompendiumRecipe {
         return tools != null && tools.size() > 0;
     }
 
+    @Override
     public float getSkillReward() {
         return this.skillReward;
     }
 
-    public void playerConstruct(AbstractEntityPlayer player, TileEntity machine, int amount) {
-        Inventory inv = player.getInv();
-        List<ItemInstance> remains = RockBottomAPI.getApiHandler().construct(player, inv, inv, this, machine, amount, this.getActualInputs(inv), items -> this.getActualOutputs(inv, inv, items), this.getSkillReward());
-        for (ItemInstance instance : remains) {
-            AbstractEntityItem.spawn(player.world, instance, player.getX(), player.getY(), 0F, 0F);
-        }
-    }
-
-    public boolean canUseTools(TileEntity machine) {
+    public boolean canUseTools(ICraftingStation machine) {
         if (usesTools()) {
+        	if (machine == null) return false;
             for (ConstructionTool tool : tools) {
-                if (!RockBottomAPI.getInternalHooks().useConstructionTableTool(machine, tool, true)) {
+                if (!RockBottomAPI.getInternalHooks().useCraftingTool(machine, tool, true)) {
                     return false;
                 }
             }
@@ -118,8 +111,7 @@ public class ConstructionRecipe extends BasicCompendiumRecipe {
 
     @Override
     public ComponentConstruct getConstructButton(Gui gui, AbstractEntityPlayer player, TileEntity machine, boolean canConstruct) {
-
-        return new ComponentConstruct(gui, this, canUseTools(machine), canConstruct, () -> {
+        return new ComponentConstruct(gui, this, canUseTools((ICraftingStation)machine), canConstruct, () -> {
             RockBottomAPI.getInternalHooks().defaultConstruct(player, this, machine);
             return true;
         });
@@ -128,11 +120,11 @@ public class ConstructionRecipe extends BasicCompendiumRecipe {
     @Override
     public boolean handleMachine(AbstractEntityPlayer player, Inventory inputInventory, Inventory outputInventory, TileEntity machine, int amount, List<IUseInfo> inputs, Function<List<ItemInstance>, List<ItemInstance>> outputGetter, float skillReward) {
         if (usesTools()) {
-            if (!canUseTools(machine)) {
+            if (!canUseTools((ICraftingStation)machine)) {
                 return false;
             }
             for (ConstructionTool tool : tools) {
-                RockBottomAPI.getInternalHooks().useConstructionTableTool(machine, tool, false);
+                RockBottomAPI.getInternalHooks().useCraftingTool((ICraftingStation)machine, tool, false);
             }
         }
         return true;

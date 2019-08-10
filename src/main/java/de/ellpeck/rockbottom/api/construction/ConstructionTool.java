@@ -4,10 +4,10 @@ import de.ellpeck.rockbottom.api.item.Item;
 
 public class ConstructionTool {
     public final Item tool;
-    public final int durability;
+    public final int usage;
 
-    public ConstructionTool(Item tool, int durability) {
+    public ConstructionTool(Item tool, int usage) {
         this.tool = tool;
-        this.durability = durability;
+        this.usage = usage;
     }
 }

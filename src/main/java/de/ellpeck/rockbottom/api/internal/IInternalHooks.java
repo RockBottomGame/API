@@ -48,6 +48,7 @@ import de.ellpeck.rockbottom.api.item.Item;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.tile.Tile;
 import de.ellpeck.rockbottom.api.tile.TileLiquid;
+import de.ellpeck.rockbottom.api.tile.entity.ICraftingStation;
 import de.ellpeck.rockbottom.api.tile.entity.TileEntity;
 import de.ellpeck.rockbottom.api.tile.state.IStateHandler;
 import de.ellpeck.rockbottom.api.tile.state.TileState;
@@ -77,12 +78,12 @@ public interface IInternalHooks {
 
     /**
      * Checks if the tile entity is a construction table, and if it has a tool
-     * @param constructionTable The construction table tile entity
-     * @param tool What tool and how much durability is needed
+     * @param craftingStation The construction table tile entity
+     * @param tool What tool and how much usage is needed
      * @param simulate Should we actually damage the tool, or just check if it is there
      * @return
      */
-    boolean useConstructionTableTool(TileEntity constructionTable, ConstructionTool tool, boolean simulate);
+    boolean useCraftingTool(ICraftingStation craftingStation, ConstructionTool tool, boolean simulate);
 
     /**
      * Returns a list of compendium recipes that can be unlocked by breaking the specified tile
@@ -126,5 +127,5 @@ public interface IInternalHooks {
 
     void packetEntityData(Entity entity);
 
-    void defaultConstruct(AbstractEntityPlayer player, ConstructionRecipe recipe, TileEntity machine);
+    void defaultConstruct(AbstractEntityPlayer player, ICompendiumRecipe recipe, TileEntity machine);
 }
