@@ -29,7 +29,7 @@ import java.util.List;
 
 public interface IKnowledgeManager {
 
-    boolean knowsRecipe(ConstructionRecipe recipe);
+    boolean knowsRecipe(ICompendiumRecipe recipe);
 
     boolean knowsInformation(ResourceName name);
 
