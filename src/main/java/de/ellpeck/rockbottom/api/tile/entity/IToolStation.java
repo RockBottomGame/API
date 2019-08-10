@@ -4,7 +4,8 @@ import de.ellpeck.rockbottom.api.construction.ConstructionTool;
 import de.ellpeck.rockbottom.api.item.Item;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 
-public interface ICraftingStation {
+// TODO 0.4 Write description for modders on how to use this.
+public interface IToolStation {
 
 	/**
 	 * Damages the specified tool in the table if it is found

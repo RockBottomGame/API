@@ -46,15 +46,6 @@ public class ComponentPolaroid extends GuiComponent {
     public final boolean canConstruct;
     public boolean isSelected;
 
-    public ComponentPolaroid(Gui gui, ICompendiumRecipe recipe, boolean canConstruct, ResourceName tex, ResourceName texHighlighted, ResourceName texSelected) {
-        super(gui, 0, 0, 18, 20);
-        this.recipe = recipe;
-        this.canConstruct = canConstruct;
-        this.tex = tex;
-        this.texHighlighted = texHighlighted;
-        this.texSelected = texSelected;
-    }
-
 	public ComponentPolaroid(Gui gui, ICompendiumRecipe recipe, boolean canConstruct, ResourceName tex) {
 		super(gui, 0, 0, 18, 20);
 		this.recipe = recipe;

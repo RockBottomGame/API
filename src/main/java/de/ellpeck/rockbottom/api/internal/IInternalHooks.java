@@ -21,7 +21,6 @@
 
 package de.ellpeck.rockbottom.api.internal;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Table;
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.IRenderer;
@@ -29,7 +28,7 @@ import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.assets.font.FormattingCode;
 import de.ellpeck.rockbottom.api.construction.ConstructionTool;
 import de.ellpeck.rockbottom.api.construction.compendium.ICompendiumRecipe;
-import de.ellpeck.rockbottom.api.construction.compendium.construction.ConstructionRecipe;
+import de.ellpeck.rockbottom.api.construction.compendium.PlayerCompendiumRecipe;
 import de.ellpeck.rockbottom.api.effect.ActiveEffect;
 import de.ellpeck.rockbottom.api.entity.AbstractEntityItem;
 import de.ellpeck.rockbottom.api.entity.Entity;
@@ -48,7 +47,7 @@ import de.ellpeck.rockbottom.api.item.Item;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.tile.Tile;
 import de.ellpeck.rockbottom.api.tile.TileLiquid;
-import de.ellpeck.rockbottom.api.tile.entity.ICraftingStation;
+import de.ellpeck.rockbottom.api.tile.entity.IToolStation;
 import de.ellpeck.rockbottom.api.tile.entity.TileEntity;
 import de.ellpeck.rockbottom.api.tile.state.IStateHandler;
 import de.ellpeck.rockbottom.api.tile.state.TileState;
@@ -83,7 +82,7 @@ public interface IInternalHooks {
      * @param simulate Should we actually damage the tool, or just check if it is there
      * @return
      */
-    boolean useCraftingTool(ICraftingStation craftingStation, ConstructionTool tool, boolean simulate);
+    boolean useCraftingTool(IToolStation craftingStation, ConstructionTool tool, boolean simulate);
 
     /**
      * Returns a list of compendium recipes that can be unlocked by breaking the specified tile
@@ -127,5 +126,5 @@ public interface IInternalHooks {
 
     void packetEntityData(Entity entity);
 
-    void defaultConstruct(AbstractEntityPlayer player, ICompendiumRecipe recipe, TileEntity machine);
+    void defaultConstruct(AbstractEntityPlayer player, PlayerCompendiumRecipe recipe, TileEntity machine);
 }

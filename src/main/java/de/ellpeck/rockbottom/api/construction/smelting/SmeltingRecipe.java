@@ -50,6 +50,10 @@ public class SmeltingRecipe extends BasicCompendiumRecipe {
         this.time = time;
     }
 
+    public static SmeltingRecipe forName(ResourceName name) {
+    	return Registries.SMELTING_REGISTRY.get(name);
+	}
+
     public static SmeltingRecipe forInput(ItemInstance input) {
         for (SmeltingRecipe recipe : Registries.SMELTING_REGISTRY.values()) {
             if (recipe.getInput().containsItem(input)) {

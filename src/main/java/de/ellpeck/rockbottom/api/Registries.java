@@ -141,7 +141,7 @@ public final class Registries {
 	 * A parent for Manual and Construction Table recipes.
 	 */
 	@ApiInternal
-	public static final ParentedNameRegistry<ConstructionRecipe> CONSTRUCTION_RECIPES = new ParentedNameRegistry<>(ResourceName.intern("construction_recipes_registry"), true, ALL_RECIPES).register();
+	public static final ParentedNameRegistry<ConstructionRecipe> CONSTRUCTION_RECIPES = new ParentedNameRegistry<>(ResourceName.intern("construction_recipe_registry"), true, ALL_RECIPES).register();
 	/**
 	 * The recipe for all {@link ConstructionRecipe} objects which require
 	 * a tool to be crafted. These show up in a separate tab to manual recipes

@@ -24,16 +24,18 @@ package de.ellpeck.rockbottom.api.construction.compendium.mortar;
 import de.ellpeck.rockbottom.api.Registries;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.construction.compendium.BasicCompendiumRecipe;
+import de.ellpeck.rockbottom.api.construction.compendium.PlayerCompendiumRecipe;
 import de.ellpeck.rockbottom.api.construction.resource.IUseInfo;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.inventory.IInventory;
 import de.ellpeck.rockbottom.api.inventory.Inventory;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
+import de.ellpeck.rockbottom.api.tile.entity.TileEntity;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 import java.util.List;
 
-public class MortarRecipe extends BasicCompendiumRecipe {
+public class MortarRecipe extends PlayerCompendiumRecipe {
 
     public static final ResourceName ID = ResourceName.intern("mortar");
 
@@ -41,8 +43,8 @@ public class MortarRecipe extends BasicCompendiumRecipe {
     protected final List<ItemInstance> output;
     protected final int time;
 
-    public MortarRecipe(ResourceName name, List<IUseInfo> input, List<ItemInstance> output, int time) {
-        super(name);
+    public MortarRecipe(ResourceName name, List<IUseInfo> input, List<ItemInstance> output, int time, float skillReward) {
+        super(name, skillReward);
         this.input = input;
         this.output = output;
         this.time = time;
@@ -70,8 +72,8 @@ public class MortarRecipe extends BasicCompendiumRecipe {
         return this;
     }
 
-    public void construct(Inventory inventory, int amount) {
-        RockBottomAPI.getApiHandler().construct(null, inventory, inventory, this, null, amount, this.getActualInputs(inventory), items -> this.getActualOutputs(inventory, inventory, items), 0F);
+    public void construct(Inventory inventory, TileEntity machine, int amount) {
+        RockBottomAPI.getApiHandler().construct(null, inventory, inventory, this, machine, amount, this.getActualInputs(inventory), items -> this.getActualOutputs(inventory, inventory, items), 0F);
     }
 
     @Override
