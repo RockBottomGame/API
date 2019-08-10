@@ -45,7 +45,6 @@ public class ConstructionRecipe extends BasicCompendiumRecipe {
 
     public static final ResourceName ID = ResourceName.intern("recipe");
 
-    protected final ResourceName infoName;
     protected final List<IUseInfo> inputs;
     protected final List<ItemInstance> outputs;
     protected final List<ConstructionTool> tools;
@@ -53,7 +52,6 @@ public class ConstructionRecipe extends BasicCompendiumRecipe {
 
     public ConstructionRecipe(ResourceName name, List<ConstructionTool> tools, List<IUseInfo> inputs, List<ItemInstance> outputs, float skillReward) {
         super(name);
-        this.infoName = name.addPrefix("recipe_");
         this.inputs = inputs;
         this.outputs = outputs;
         this.tools = tools;
@@ -154,9 +152,5 @@ public class ConstructionRecipe extends BasicCompendiumRecipe {
         }
         Registries.CONSTRUCTION_TABLE_RECIPES.register(this.getName(), this);
         return this;
-    }
-
-    public ResourceName getKnowledgeInformationName() {
-        return this.infoName;
     }
 }

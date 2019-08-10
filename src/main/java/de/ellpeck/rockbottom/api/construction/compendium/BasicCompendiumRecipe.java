@@ -26,13 +26,19 @@ import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 public abstract class BasicCompendiumRecipe implements ICompendiumRecipe {
 
     private final ResourceName name;
+    protected final ResourceName infoName;
 
     public BasicCompendiumRecipe(ResourceName name) {
         this.name = name;
+        this.infoName = name.addPrefix("recipe_");
     }
 
     @Override
     public ResourceName getName() {
         return this.name;
+    }
+
+    public ResourceName getKnowledgeInformationName() {
+        return this.infoName;
     }
 }

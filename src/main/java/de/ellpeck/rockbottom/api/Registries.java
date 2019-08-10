@@ -23,7 +23,9 @@ package de.ellpeck.rockbottom.api;
 
 import de.ellpeck.rockbottom.api.assets.IAssetLoader;
 import de.ellpeck.rockbottom.api.construction.compendium.CompendiumCategory;
+import de.ellpeck.rockbottom.api.construction.compendium.ICompendiumRecipe;
 import de.ellpeck.rockbottom.api.construction.compendium.construction.ConstructionRecipe;
+import de.ellpeck.rockbottom.api.construction.compendium.ICriteria;
 import de.ellpeck.rockbottom.api.construction.compendium.mortar.MortarRecipe;
 import de.ellpeck.rockbottom.api.construction.smelting.FuelInput;
 import de.ellpeck.rockbottom.api.construction.smelting.SmeltingRecipe;
@@ -63,6 +65,8 @@ import de.ellpeck.rockbottom.api.world.gen.IWorldGenerator;
 import de.ellpeck.rockbottom.api.world.gen.biome.Biome;
 import de.ellpeck.rockbottom.api.world.gen.biome.level.BiomeLevel;
 import de.ellpeck.rockbottom.api.world.layer.TileLayer;
+
+import java.util.List;
 
 /**
  * This class houses all of the game's default {@link IRegistry} objects. If you
@@ -125,9 +129,15 @@ public final class Registries {
      */
     public static final NameRegistry<Command> COMMAND_REGISTRY = new NameRegistry<>(ResourceName.intern("command_registry"), true).register();
     /**
+     * The registry for all {@link ICriteria} objects. Use
+     * {link ICriteria#register()} to register your criteria.
+     * These can be used in recipe json files.
+     */
+    public static final NameRegistry<ICriteria> CRITERIA_REGISTRY = new NameRegistry<>(ResourceName.intern("criteria_registry"), false).register();
+    /**
      * The registry for all {@link ConstructionRecipe} objects that are
      * displayed on the left side of the player's inventory. Use {@link
-     * ConstructionRecipe#register()} to register recipes into this
+     * ConstructionRecipe#registerManual()} to register recipes into this
      * registry. If you want to get a recipe instance by its name, use {@link
      * ConstructionRecipe#forName(ResourceName)}.
      */
@@ -137,7 +147,8 @@ public final class Registries {
      * The recipe for all {@link ConstructionRecipe} objects which require
      * a tool to be crafted. These show up in a separate tab to manual recipes
      * in the Compendium and can be crafted with the use of a tool in the
-     * ConstructionTable.
+     * ConstructionTable. Use {@link ConstructionRecipe#registerConstructionTable()}
+     * to register.
      */
     @ApiInternal
     public static final NameRegistry<ConstructionRecipe> CONSTRUCTION_TABLE_RECIPES = new NameRegistry<>(ResourceName.intern("construction_table_recipe_registry"), true).register();
