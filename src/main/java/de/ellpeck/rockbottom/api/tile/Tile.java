@@ -26,6 +26,7 @@ import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.assets.font.FormattingCode;
 import de.ellpeck.rockbottom.api.construction.compendium.ICompendiumRecipe;
+import de.ellpeck.rockbottom.api.construction.compendium.PlayerCompendiumRecipe;
 import de.ellpeck.rockbottom.api.data.settings.Settings;
 import de.ellpeck.rockbottom.api.entity.AbstractEntityItem;
 import de.ellpeck.rockbottom.api.entity.Entity;
@@ -203,7 +204,7 @@ public class Tile {
         }
 
         if (!world.isClient() && shouldDrop && destroyer instanceof AbstractEntityPlayer) {
-            List<ICompendiumRecipe> recipes = RockBottomAPI.getInternalHooks().getRecipesToLearnFrom(this);
+            List<PlayerCompendiumRecipe> recipes = RockBottomAPI.getInternalHooks().getRecipesToLearnFrom(this);
             ((AbstractEntityPlayer)destroyer).getKnowledge().teachRecipes(recipes);
         }
     }

@@ -54,6 +54,14 @@ public interface IInventory extends Iterable<ItemInstance> {
 
     int getItemIndex(ItemInstance inst);
 
+    default int getActualSlot(IInventory inv, int slot) {
+        return slot;
+    }
+
+    default boolean containsInv(IInventory inv) {
+        return inv == this;
+    }
+
     ItemInstance add(ItemInstance instance, boolean simulate);
 
     ItemInstance addExistingFirst(ItemInstance instance, boolean simulate);

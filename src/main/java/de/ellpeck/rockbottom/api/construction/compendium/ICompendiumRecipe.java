@@ -42,13 +42,17 @@ public interface ICompendiumRecipe extends IContent {
 
     ResourceName getName();
 
-    ResourceName getKnowledgeInformationName();
-
-    boolean isKnown(AbstractEntityPlayer player);
-
     List<IUseInfo> getInputs();
 
     List<ItemInstance> getOutputs();
+
+    default boolean isKnown(AbstractEntityPlayer player) {
+        return true;
+    }
+
+    default boolean isKnowledge() {
+        return false;
+    }
 
     default boolean canConstruct(IInventory inputInventory, IInventory outputInventory) {
         for (IUseInfo info : this.getActualInputs(inputInventory)) {

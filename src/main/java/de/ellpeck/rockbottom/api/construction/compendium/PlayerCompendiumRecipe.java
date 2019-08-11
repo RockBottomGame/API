@@ -14,10 +14,12 @@ import java.util.function.Function;
 
 public abstract class PlayerCompendiumRecipe extends BasicCompendiumRecipe {
 
+	protected final boolean isKnowledge;
 	protected final float skillReward;
 
-	public PlayerCompendiumRecipe(ResourceName name, float skillReward) {
+	public PlayerCompendiumRecipe(ResourceName name, boolean isKnowledge, float skillReward) {
 		super(name);
+		this.isKnowledge = isKnowledge;
 		this.skillReward = skillReward;
 	}
 
@@ -36,6 +38,20 @@ public abstract class PlayerCompendiumRecipe extends BasicCompendiumRecipe {
 		for (ItemInstance instance : remains) {
 			AbstractEntityItem.spawn(player.world, instance, player.getX(), player.getY(), 0F, 0F);
 		}
+	}
+
+
+	public ResourceName getKnowledgeInformationName() {
+		return this.infoName;
+	}
+
+	public boolean isKnowledge() {
+		return this.isKnowledge;
+	}
+
+	@Override
+	public boolean isKnown(AbstractEntityPlayer player) {
+		return !isKnowledge || !player.world.isStoryMode() || player.getKnowledge().knowsRecipe(this);
 	}
 
 	public float getSkillReward() {

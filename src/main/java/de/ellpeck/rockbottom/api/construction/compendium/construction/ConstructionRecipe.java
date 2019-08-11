@@ -48,19 +48,19 @@ public class ConstructionRecipe extends PlayerCompendiumRecipe {
     protected final List<ItemInstance> outputs;
     protected final List<ConstructionTool> tools;
 
-    public ConstructionRecipe(ResourceName name, List<ConstructionTool> tools, List<IUseInfo> inputs, List<ItemInstance> outputs, float skillReward) {
-        super(name, skillReward);
+    public ConstructionRecipe(ResourceName name, List<ConstructionTool> tools, List<IUseInfo> inputs, List<ItemInstance> outputs, boolean isKnowledge, float skillReward) {
+        super(name, isKnowledge, skillReward);
         this.inputs = inputs;
         this.outputs = outputs;
         this.tools = tools;
     }
 
-    public ConstructionRecipe(ResourceName name, List<ConstructionTool> tools, float skillReward, ItemInstance output, IUseInfo... inputs) {
-        this(name, tools, Arrays.asList(inputs), Collections.singletonList(output), skillReward);
+    public ConstructionRecipe(ResourceName name, List<ConstructionTool> tools, boolean isKnowledge, float skillReward, ItemInstance output, IUseInfo... inputs) {
+        this(name, tools, Arrays.asList(inputs), Collections.singletonList(output), isKnowledge, skillReward);
     }
 
-    public ConstructionRecipe(List<ConstructionTool> tools, float skillReward, ItemInstance output, IUseInfo... inputs) {
-        this(output.getItem().getName(), tools, skillReward, output, inputs);
+    public ConstructionRecipe(List<ConstructionTool> tools, boolean isKnowledge, float skillReward, ItemInstance output, IUseInfo... inputs) {
+        this(output.getItem().getName(), tools, isKnowledge, skillReward, output, inputs);
     }
 
     public static ConstructionRecipe forName(ResourceName name) {
@@ -75,11 +75,6 @@ public class ConstructionRecipe extends PlayerCompendiumRecipe {
     @Override
     public List<ItemInstance> getOutputs() {
         return this.outputs;
-    }
-
-    @Override
-    public boolean isKnown(AbstractEntityPlayer player) {
-        return true;
     }
 
     public List<ConstructionTool> getTools() {
@@ -104,7 +99,7 @@ public class ConstructionRecipe extends PlayerCompendiumRecipe {
 
     @Override
     public ComponentConstruct getConstructButton(Gui gui, AbstractEntityPlayer player, TileEntity machine, boolean canConstruct) {
-        return new ComponentConstruct(gui, this, canUseTools((IToolStation)machine), canConstruct, () -> {
+        return new ComponentConstruct(gui, this, canUseTools((IToolStation)machine), canConstruct, usesTools() && machine == null ? null : () -> {
             RockBottomAPI.getInternalHooks().defaultConstruct(player, this, machine);
             return true;
         });

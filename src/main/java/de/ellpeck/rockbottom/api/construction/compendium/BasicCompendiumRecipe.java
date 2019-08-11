@@ -37,8 +37,4 @@ public abstract class BasicCompendiumRecipe implements ICompendiumRecipe {
     public ResourceName getName() {
         return this.name;
     }
-
-    public ResourceName getKnowledgeInformationName() {
-        return this.infoName;
-    }
 }

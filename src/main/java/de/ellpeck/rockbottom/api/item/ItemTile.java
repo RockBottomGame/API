@@ -50,8 +50,8 @@ public class ItemTile extends ItemBasic {
     }
 
     @Override
-    public void describeItem(IAssetManager manager, ItemInstance instance, List<String> desc, boolean isAdvanced) {
-        super.describeItem(manager, instance, desc, isAdvanced);
+    public void describeItem(IAssetManager manager, ItemInstance instance, List<String> desc, boolean isAdvanced, boolean isRealItem) {
+        super.describeItem(manager, instance, desc, isAdvanced, isRealItem);
 
         this.getTile().describeItem(manager, instance, desc, isAdvanced);
     }

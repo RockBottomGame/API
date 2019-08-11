@@ -58,7 +58,7 @@ public class ComponentIngredient extends GuiComponent {
         if (!this.inputs.isEmpty()) {
             ItemInstance input = this.getInput(game);
             manager.getTexture(tex).draw(x, y, this.width, this.height);
-            g.renderItemInGui(game, manager, input, x + 2, y + 2, 1.0F, this.hasItem ? Colors.WHITE : Colors.multiplyA(Colors.WHITE, 0.35F));
+            g.renderItemInGui(game, manager, input, x + 2, y + 2, 1.0F, this.hasItem ? Colors.WHITE : Colors.multiplyA(Colors.WHITE, 0.35F), true, false);
         } else {
             manager.getTexture(texNone).draw(x, y, this.width, this.height);
         }

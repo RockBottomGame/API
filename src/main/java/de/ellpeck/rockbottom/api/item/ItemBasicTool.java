@@ -19,15 +19,17 @@ public class ItemBasicTool extends ItemBasic {
     }
 
     @Override
-    public void describeItem(IAssetManager manager, ItemInstance instance, List<String> desc, boolean isAdvanced) {
-        String condition = "info.durability.low";
-        int highest = this.getHighestPossibleMeta() + 1;
-        float percent = (float) (highest - instance.getMeta()) / highest;
-        if (percent > 0.9) condition = "info.durability.high";
-        else if (percent > 0.7) condition = "info.durability.medium_high";
-        else if (percent > 0.4) condition = "info.durability.medium";
-        else if (percent > 0.2) condition = "info.durability.medium_low";
-        desc.add(RockBottomAPI.getGame().getAssetManager().localize(ResourceName.intern(condition)) + " " + FormattingCode.RESET_COLOR + instance.getDisplayName());
+    public void describeItem(IAssetManager manager, ItemInstance instance, List<String> desc, boolean isAdvanced, boolean isRealItem) {
+        if (isRealItem) {
+            String condition = "info.durability.low";
+            int highest = this.getHighestPossibleMeta() + 1;
+            float percent = (float) (highest - instance.getMeta()) / highest;
+            if (percent > 0.9) condition = "info.durability.high";
+            else if (percent > 0.7) condition = "info.durability.medium_high";
+            else if (percent > 0.4) condition = "info.durability.medium";
+            else if (percent > 0.2) condition = "info.durability.medium_low";
+            desc.add(RockBottomAPI.getGame().getAssetManager().localize(ResourceName.intern(condition)) + " " + FormattingCode.RESET_COLOR + instance.getDisplayName());
+        } else super.describeItem(manager, instance, desc, isAdvanced, false);
     }
 
     @Override
