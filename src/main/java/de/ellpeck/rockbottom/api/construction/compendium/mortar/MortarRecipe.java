@@ -72,8 +72,8 @@ public class MortarRecipe extends PlayerCompendiumRecipe {
         return this;
     }
 
-    public void construct(Inventory inventory, TileEntity machine, int amount) {
-        RockBottomAPI.getApiHandler().construct(null, inventory, inventory, this, machine, amount, this.getActualInputs(inventory), items -> this.getActualOutputs(inventory, inventory, items), 0F);
+    public void construct(AbstractEntityPlayer player, Inventory inventory, TileEntity machine, int amount) {
+        RockBottomAPI.getApiHandler().construct(player, inventory, inventory, this, machine, amount, this.getActualInputs(inventory), items -> this.getActualOutputs(inventory, inventory, items), skillReward);
     }
 
     @Override

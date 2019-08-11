@@ -1,5 +1,6 @@
 package de.ellpeck.rockbottom.api.tile.entity;
 
+import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.construction.ConstructionTool;
 import de.ellpeck.rockbottom.api.item.Item;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
@@ -14,15 +15,21 @@ public interface IToolStation {
 	 * @return True if the tool exists
 	 */
 	default boolean damageTool(ConstructionTool tool, boolean simulate) {
+		if (tool == null || tool.tool == null) return true;
+		int toolSlot = getToolSlot(tool.tool);
 		ItemInstance toolItem;
-		if (tool != null && (toolItem = getTool(tool.tool)) != null) {
-			if (!simulate) {
+		if (toolSlot != -1 && (toolItem = getTileInventory().get(toolSlot)) != null) {
+			if (!simulate && !RockBottomAPI.getNet().isClient()) {
 				toolItem.getItem().takeDamage(toolItem, tool.usage);
+				getTileInventory().notifyChange(toolSlot);
+
 			}
 			return true;
 		}
-		return tool == null || tool.tool == null;
+		return false;
 	}
 
-	ItemInstance getTool(Item tool);
+	int getToolSlot(Item tool);
+
+	IFilteredInventory getTileInventory();
 }
