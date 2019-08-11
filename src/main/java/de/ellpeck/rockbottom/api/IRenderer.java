@@ -390,11 +390,12 @@ public interface IRenderer extends IDisposable {
      * Additionally, it draws the {@link IRenderer#isItemInfoDebug()} text and
      * also fires the {@link TooltipEvent}.
      *
-     * @param game     The game instance
-     * @param manager  The asset manager
-     * @param instance The item whose information to draw
+     * @param game          The game instance
+     * @param manager       The asset manager
+     * @param instance      The item whose information to draw
+     * @param isRealItem    Does the player own the item or is it just a preview in a GUI?
      */
-    void describeItem(IGameInstance game, IAssetManager manager, ItemInstance instance);
+    void describeItem(IGameInstance game, IAssetManager manager, ItemInstance instance, boolean isRealItem);
 
     /**
      * Draws a hovering information at the mouse's position using the specified

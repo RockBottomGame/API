@@ -86,7 +86,7 @@ public class ComponentPolaroid extends GuiComponent {
             if (this.recipe != null) {
                 ItemInstance instance = this.getOutput(game);
                 List<String> info = new ArrayList<>();
-                instance.getItem().describeItem(manager, instance, info, Settings.KEY_ADVANCED_INFO.isDown());
+                instance.getItem().describeItem(manager, instance, info, Settings.KEY_ADVANCED_INFO.isDown(), false);
                 g.drawHoverInfoAtMouse(game, manager, true, 200, info);
             } else {
                 g.drawHoverInfoAtMouse(game, manager, false, 200, manager.localize(ResourceName.intern("info.unknown_recipe")));

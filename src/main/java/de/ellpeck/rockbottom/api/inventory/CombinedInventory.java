@@ -150,6 +150,23 @@ public class CombinedInventory implements IFilteredInventory {
     }
 
     @Override
+    public int getActualSlot(IInventory targetInv, int internalSlot) {
+        int slotCounter = 0;
+        for (IInventory inv : inventories) {
+            if (inv == targetInv) return slotCounter + internalSlot;
+            slotCounter += inv.getSlotAmount();
+        }
+        return -1;
+    }
+
+    @Override
+    public boolean containsInv(IInventory inv) {
+        if (inv == this) return true;
+        for (IInventory containedInv : inventories) if (containedInv == inv) return true;
+        return false;
+    }
+
+    @Override
     public ItemInstance add(ItemInstance instance, boolean simulate) {
         ItemInstance remaining = instance;
         for (IInventory inventory : this.inventories) {

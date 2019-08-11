@@ -43,8 +43,8 @@ public class MortarRecipe extends PlayerCompendiumRecipe {
     protected final List<ItemInstance> output;
     protected final int time;
 
-    public MortarRecipe(ResourceName name, List<IUseInfo> input, List<ItemInstance> output, int time, float skillReward) {
-        super(name, skillReward);
+    public MortarRecipe(ResourceName name, List<IUseInfo> input, List<ItemInstance> output, int time, boolean isKnowledge, float skillReward) {
+        super(name, isKnowledge, skillReward);
         this.input = input;
         this.output = output;
         this.time = time;
@@ -72,13 +72,8 @@ public class MortarRecipe extends PlayerCompendiumRecipe {
         return this;
     }
 
-    public void construct(Inventory inventory, TileEntity machine, int amount) {
-        RockBottomAPI.getApiHandler().construct(null, inventory, inventory, this, machine, amount, this.getActualInputs(inventory), items -> this.getActualOutputs(inventory, inventory, items), 0F);
-    }
-
-    @Override
-    public boolean isKnown(AbstractEntityPlayer player) {
-        return true;
+    public void construct(AbstractEntityPlayer player, Inventory inventory, TileEntity machine, int amount) {
+        RockBottomAPI.getApiHandler().construct(player, inventory, inventory, this, machine, amount, this.getActualInputs(inventory), items -> this.getActualOutputs(inventory, inventory, items), skillReward);
     }
 
     @Override

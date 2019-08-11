@@ -56,7 +56,7 @@ public class ComponentConstruct extends GuiComponent {
     @Override
     public void render(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y) {
         if (this.recipe != null) {
-            g.renderItemInGui(game, manager, this.getOutput(game), x + 5, y + 5, 2.0F, Colors.WHITE);
+            g.renderItemInGui(game, manager, this.getOutput(game), x + 5, y + 5, 2.0F, Colors.WHITE, true, false);
         }
     }
 
@@ -66,9 +66,9 @@ public class ComponentConstruct extends GuiComponent {
             ItemInstance instance = this.getOutput(game);
 
             List<String> info = new ArrayList<>();
-            instance.getItem().describeItem(manager, instance, info, Settings.KEY_ADVANCED_INFO.isDown());
+            instance.getItem().describeItem(manager, instance, info, Settings.KEY_ADVANCED_INFO.isDown(), false);
             if (this.consumer != null) {
-                info.add("");
+                if (info.size() > 1) info.add("");
                 info.add(manager.localize(ResourceName.intern("info." + (this.hasIngredients ? (this.hasTool ? "click_to_construct" : "missing_tool") : "missing_items"))));
             }
             g.drawHoverInfoAtMouse(game, manager, true, 200, info);
@@ -77,8 +77,8 @@ public class ComponentConstruct extends GuiComponent {
 
     @Override
     public boolean onMouseAction(IGameInstance game, int button, float x, float y) {
-        if (this.consumer != null && Settings.KEY_GUI_ACTION_1.isKey(button) && this.isMouseOver(game)) {
-            return this.consumer.get();
+        if (Settings.KEY_GUI_ACTION_1.isKey(button) && this.isMouseOver(game)) {
+            return this.consumer == null || this.consumer.get();
         } else {
             return false;
         }

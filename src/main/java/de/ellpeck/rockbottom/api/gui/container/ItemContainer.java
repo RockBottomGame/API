@@ -63,7 +63,6 @@ public abstract class ItemContainer implements Iterable<ContainerSlot> {
 
             RockBottomAPI.logger().config("Added inventory " + slot.inventory + " as contained inventory of " + this);
         }
-
         this.slots.add(slot);
     }
 
@@ -74,7 +73,7 @@ public abstract class ItemContainer implements Iterable<ContainerSlot> {
     public int getIndexForInvSlot(IInventory inv, int id) {
         for (int i = 0; i < this.slots.size(); i++) {
             ContainerSlot slot = this.slots.get(i);
-            if (slot.inventory == inv && slot.slot == id) {
+            if (slot.inventory.containsInv(inv) && slot.slot == slot.inventory.getActualSlot(inv, id)) {
                 return i;
             }
         }
