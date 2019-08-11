@@ -306,7 +306,8 @@ public class Tile {
         if (!this.isFullTile() && skylight) {
             return 1F;
         } else {
-            return layer == TileLayer.BACKGROUND ? 0.9F : 0.8F;
+            if (!isFullTile()) return layer == TileLayer.BACKGROUND ? 0.9F : 0.8F;
+            else return layer == TileLayer.BACKGROUND ? 0.9F : 0.3F;
         }
     }
 

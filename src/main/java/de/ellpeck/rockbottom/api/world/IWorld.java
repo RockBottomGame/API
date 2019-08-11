@@ -92,6 +92,8 @@ public interface IWorld extends IChunkOrWorld {
 
     void destroyTile(int x, int y, TileLayer layer, Entity destroyer, boolean shouldDrop);
 
+    boolean hasHighestTile(int x);
+
     int getHighestTile(int x, int fallback, boolean setFallback);
 
     void setHighestTile(int x, int y);
