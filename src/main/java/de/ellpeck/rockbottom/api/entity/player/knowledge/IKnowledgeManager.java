@@ -21,15 +21,14 @@
 
 package de.ellpeck.rockbottom.api.entity.player.knowledge;
 
-import de.ellpeck.rockbottom.api.construction.compendium.ICompendiumRecipe;
-import de.ellpeck.rockbottom.api.construction.compendium.construction.ConstructionRecipe;
+import de.ellpeck.rockbottom.api.construction.compendium.PlayerCompendiumRecipe;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 import java.util.List;
 
 public interface IKnowledgeManager {
 
-    boolean knowsRecipe(ConstructionRecipe recipe);
+    boolean knowsRecipe(PlayerCompendiumRecipe recipe);
 
     boolean knowsInformation(ResourceName name);
 
@@ -43,23 +42,23 @@ public interface IKnowledgeManager {
      * @param announce Should the player recieve a toast to inform them of their discovery?
      * @return True if the player did not already know the recipe
      */
-    boolean teachRecipe(ICompendiumRecipe recipe, boolean announce);
+    boolean teachRecipe(PlayerCompendiumRecipe recipe, boolean announce);
 
-    boolean teachRecipe(ICompendiumRecipe recipe);
+    boolean teachRecipe(PlayerCompendiumRecipe recipe);
 
     /**
      * Teaches many recipes with a single toast notification
      * @param recipes A list of recipes to be taught
      */
-    void teachRecipes(List<ICompendiumRecipe> recipes);
+    void teachRecipes(List<PlayerCompendiumRecipe> recipes);
 
     void teachInformation(Information information, boolean announce);
 
     void teachInformation(Information information);
 
-    void forgetRecipe(ICompendiumRecipe recipe, boolean announce);
+    void forgetRecipe(PlayerCompendiumRecipe recipe, boolean announce);
 
-    void forgetRecipe(ICompendiumRecipe recipe);
+    void forgetRecipe(PlayerCompendiumRecipe recipe);
 
     void forgetInformation(ResourceName name, boolean announce);
 

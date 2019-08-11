@@ -89,7 +89,7 @@ public interface IInternalHooks {
      * @param tile The tile which needs to be broken to unlock the recipes
      * @return The recipe list
      */
-    List<ICompendiumRecipe> getRecipesToLearnFrom(Tile tile);
+    List<PlayerCompendiumRecipe> getRecipesToLearnFrom(Tile tile);
 
     //Liquid behavior kindly provided by superaxander
     void doDefaultLiquidBehavior(IWorld world, int x, int y, TileLayer layer, TileLiquid tile);
