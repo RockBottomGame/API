@@ -78,7 +78,15 @@ public class Item {
         return RockBottomAPI.getGame().getAssetManager().localize(this.getUnlocalizedName(instance));
     }
 
-    public void describeItem(IAssetManager manager, ItemInstance instance, List<String> desc, boolean isAdvanced) {
+    /**
+     * Allows items to add to the tooltip
+     * @param instance The item that is being described
+     * @param desc The item description. You can add to this list or replace it.
+     * @param isAdvanced If the player is holding SHIFT to view advanced info
+     * @param isRealItem Does the player actually own this item or is it a preview in a GUI?
+     *                   Used by tools to display durability descriptors only on real items.
+     */
+    public void describeItem(IAssetManager manager, ItemInstance instance, List<String> desc, boolean isAdvanced, boolean isRealItem) {
         desc.add(instance.getDisplayName());
     }
 

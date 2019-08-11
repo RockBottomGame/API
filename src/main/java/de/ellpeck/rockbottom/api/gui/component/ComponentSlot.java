@@ -99,7 +99,7 @@ public class ComponentSlot extends GuiComponent {
         if (this.container.getContainer().holdingInst == null && this.isMouseOverPrioritized(game)) {
             ItemInstance instance = this.slot.get();
             if (instance != null) {
-                g.describeItem(game, manager, instance);
+                g.describeItem(game, manager, instance, true);
             }
         }
     }

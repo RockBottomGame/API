@@ -99,7 +99,7 @@ public class ConstructionRecipe extends PlayerCompendiumRecipe {
 
     @Override
     public ComponentConstruct getConstructButton(Gui gui, AbstractEntityPlayer player, TileEntity machine, boolean canConstruct) {
-        return new ComponentConstruct(gui, this, canUseTools((IToolStation)machine), canConstruct, () -> {
+        return new ComponentConstruct(gui, this, canUseTools((IToolStation)machine), canConstruct, usesTools() && machine == null ? null : () -> {
             RockBottomAPI.getInternalHooks().defaultConstruct(player, this, machine);
             return true;
         });
