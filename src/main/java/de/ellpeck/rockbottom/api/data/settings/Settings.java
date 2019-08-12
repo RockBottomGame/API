@@ -35,6 +35,7 @@ public final class Settings implements IJsonSettings {
 
     public static final Keybind KEY_PLACE = new Keybind(ResourceName.intern("place"), 1).register();
     public static final Keybind KEY_DESTROY = new Keybind(ResourceName.intern("destroy"), 0).register();
+    public static final Keybind KEY_PICKUP = new Keybind(ResourceName.intern("pickup"), 2).register();
     public static final Keybind KEY_GUI_ACTION_1 = new Keybind(ResourceName.intern("gui_action_1"), 0).register();
     public static final Keybind KEY_GUI_ACTION_2 = new Keybind(ResourceName.intern("gui_action_2"), 1).register();
 

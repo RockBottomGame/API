@@ -65,6 +65,7 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
     public TileState submergedLiquid;
     public boolean canBreathe = true;
     public boolean canSwim;
+    public boolean isFlying;
     public double interpolationX;
     public double interpolationY;
     protected boolean dead;
@@ -117,7 +118,7 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
     }
 
     public void applyMotion() {
-        if (!this.isClimbing) {
+        if (!this.isClimbing && !this.isFlying) {
             this.motionY -= 0.025;
         }
 
@@ -211,6 +212,7 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
         set.addBoolean("dead", this.dead);
         set.addBoolean("falling", this.isFalling);
         set.addDouble("fall_start_y", this.fallStartY);
+        set.addBoolean("flying", this.isFlying);
         set.addInt("facing", this.facing.ordinal());
 
         if (this.additionalData != null) {
@@ -245,6 +247,7 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
         this.dead = set.getBoolean("dead");
         this.isFalling = set.getBoolean("falling");
         this.fallStartY = set.getDouble("fall_start_y");
+        this.isFlying = set.getBoolean("flying");
         this.facing = Direction.DIRECTIONS[set.getInt("facing")];
 
         if (set.hasKey("data")) {
