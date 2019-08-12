@@ -65,6 +65,7 @@ public class Tile {
     protected Map<ToolProperty, Integer> effectiveToolProps = new HashMap<>();
     protected boolean forceDrop;
     protected float hardness = 1F;
+    protected float solidLightPropagation = 0.3f;
 
     public Tile(ResourceName name) {
         this.name = name;
@@ -306,8 +307,8 @@ public class Tile {
         if (!this.isFullTile() && skylight) {
             return 1F;
         } else {
-            if (!isFullTile()) return layer == TileLayer.BACKGROUND ? 0.9F : 0.8F;
-            else return layer == TileLayer.BACKGROUND ? 0.9F : 0.3F;
+            if (!obscuresBackground(world, x, y, layer)) return layer == TileLayer.BACKGROUND ? 0.9F : 0.8F;
+            else return layer == TileLayer.BACKGROUND ? 0.9F : solidLightPropagation;
         }
     }
 
@@ -417,6 +418,11 @@ public class Tile {
         if (item != null) {
             item.setMaxAmount(amount);
         }
+        return this;
+    }
+
+    public Tile setSolidLightPropagation(float propagation) {
+        this.solidLightPropagation = propagation;
         return this;
     }
 
