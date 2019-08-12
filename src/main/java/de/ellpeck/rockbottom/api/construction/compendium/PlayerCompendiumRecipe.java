@@ -28,7 +28,7 @@ public abstract class PlayerCompendiumRecipe extends BasicCompendiumRecipe {
 	 * Provides the same parameters as the ConstructEvent directly to the recipe.
 	 * @return True if the construction should continue
 	 */
-	public boolean handleMachine(AbstractEntityPlayer player, Inventory inputInventory, Inventory outputInventory, TileEntity machine, int amount, List<IUseInfo> inputs, Function<List<ItemInstance>, List<ItemInstance>> outputGetter, float skillReward) {
+	public boolean handleRecipe(AbstractEntityPlayer player, Inventory inputInventory, Inventory outputInventory, TileEntity machine, List<IUseInfo> inputs, Function<List<ItemInstance>, List<ItemInstance>> outputGetter, float skillReward) {
 		return true;
 	}
 

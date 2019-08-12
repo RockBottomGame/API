@@ -67,14 +67,15 @@ public class MortarRecipe extends PlayerCompendiumRecipe {
         return this.time;
     }
 
-    public MortarRecipe register() {
-        Registries.MORTAR_RECIPES.register(this.getName(), this);
-        return this;
-    }
-
+	// TODO: implement handleRecipe insstead of this to make it consistent with other recipes
     public void construct(AbstractEntityPlayer player, Inventory inventory, TileEntity machine, int amount) {
-        RockBottomAPI.getApiHandler().construct(player, inventory, inventory, this, machine, amount, this.getActualInputs(inventory), items -> this.getActualOutputs(inventory, inventory, items), skillReward);
-    }
+		RockBottomAPI.getApiHandler().construct(player, inventory, inventory, this, machine, amount, this.getActualInputs(inventory), items -> this.getActualOutputs(inventory, inventory, items), skillReward);
+	}
+
+	public MortarRecipe register() {
+		Registries.MORTAR_RECIPES.register(this.getName(), this);
+		return this;
+	}
 
     @Override
     public List<IUseInfo> getInputs() {

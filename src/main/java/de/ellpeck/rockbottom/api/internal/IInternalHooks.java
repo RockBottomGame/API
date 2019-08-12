@@ -29,6 +29,7 @@ import de.ellpeck.rockbottom.api.assets.font.FormattingCode;
 import de.ellpeck.rockbottom.api.construction.ConstructionTool;
 import de.ellpeck.rockbottom.api.construction.compendium.ICompendiumRecipe;
 import de.ellpeck.rockbottom.api.construction.compendium.PlayerCompendiumRecipe;
+import de.ellpeck.rockbottom.api.construction.compendium.smithing.SmithingRecipe;
 import de.ellpeck.rockbottom.api.effect.ActiveEffect;
 import de.ellpeck.rockbottom.api.entity.AbstractEntityItem;
 import de.ellpeck.rockbottom.api.entity.Entity;
@@ -37,6 +38,7 @@ import de.ellpeck.rockbottom.api.entity.ai.AITask;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.entity.player.statistics.ItemStatistic;
 import de.ellpeck.rockbottom.api.gui.AbstractStatGui;
+import de.ellpeck.rockbottom.api.gui.Gui;
 import de.ellpeck.rockbottom.api.gui.GuiContainer;
 import de.ellpeck.rockbottom.api.gui.component.ComponentInputField;
 import de.ellpeck.rockbottom.api.gui.component.ComponentMenu;
@@ -74,15 +76,6 @@ public interface IInternalHooks {
     boolean doDefaultShiftClicking(IGameInstance game, int button, GuiContainer gui, ComponentSlot slot);
 
     boolean placeTile(int x, int y, TileLayer layer, AbstractEntityPlayer player, ItemInstance selected, Tile tile, boolean removeItem, boolean simulate);
-
-    /**
-     * Checks if the tile entity is a construction table, and if it has a tool
-     * @param craftingStation The construction table tile entity
-     * @param tool What tool and how much usage is needed
-     * @param simulate Should we actually damage the tool, or just check if it is there
-     * @return
-     */
-    boolean useCraftingTool(IToolStation craftingStation, ConstructionTool tool, boolean simulate);
 
     /**
      * Returns a list of compendium recipes that can be unlocked by breaking the specified tile
@@ -126,5 +119,5 @@ public interface IInternalHooks {
 
     void packetEntityData(Entity entity);
 
-    void defaultConstruct(AbstractEntityPlayer player, PlayerCompendiumRecipe recipe, TileEntity machine);
+    void smithingConstruct(Gui parent, AbstractEntityPlayer player, TileEntity tile, SmithingRecipe recipe, List<ItemInstance> actualInputs);
 }
