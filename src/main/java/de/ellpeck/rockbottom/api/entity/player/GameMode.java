@@ -1,6 +1,6 @@
 package de.ellpeck.rockbottom.api.entity.player;
 
-public enum Gamemode {
+public enum GameMode {
 
     SURVIVAL,
     CREATIVE;

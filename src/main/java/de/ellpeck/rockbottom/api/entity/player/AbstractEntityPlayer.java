@@ -121,8 +121,8 @@ public abstract class AbstractEntityPlayer extends EntityLiving implements IComm
     @ApiInternal
     public abstract void setSkill(float percentage, int points);
 
-    public abstract Gamemode getGamemode();
+    public abstract GameMode getGameMode();
 
-    public abstract void setGamemode(Gamemode gamemode);
+    public abstract void setGameMode(GameMode gamemode);
 
 }
