@@ -41,7 +41,7 @@ public interface IShaderProgram extends IDisposable, IAsset {
 
     void link();
 
-    void bind();
+    IShaderProgram bind();
 
     int getAttributeLocation(String name);
 
@@ -49,17 +49,17 @@ public interface IShaderProgram extends IDisposable, IAsset {
 
     void pointVertexAttribute(String name, int size);
 
-    void setUniform(String name, Matrix4f matrix);
+    IShaderProgram setUniform(String name, Matrix4f matrix);
 
-    void setUniform(String name, int value);
+    IShaderProgram setUniform(String name, int value);
 
-    void setUniform(String name, float f);
+    IShaderProgram setUniform(String name, float f);
 
-    void setUniform(String name, float x, float y);
+    IShaderProgram setUniform(String name, float x, float y);
 
-    void setUniform(String name, float x, float y, float z);
+    IShaderProgram setUniform(String name, float x, float y, float z);
 
-    void unbind();
+    IShaderProgram unbind();
 
     int getId();
 
