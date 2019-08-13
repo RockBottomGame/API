@@ -11,6 +11,8 @@ public interface ICriteria {
 
     /**
      * This provides the raw JSON parameters for deserialization
+     *
+     * @param recipe The recipe for the criteria
      * @param params The parameters for this criteria
      * @return True if the criteria was successfully deserialized
      */

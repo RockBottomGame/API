@@ -341,9 +341,17 @@ public interface IRenderer extends IDisposable {
      *                     be rendered in grayscale
      */
     void renderSlotInGui(IGameInstance game, IAssetManager manager, ItemInstance slot, float x, float y, float scale, boolean hovered, boolean canPlaceInto);
-
+    
     /**
      * Renders a slot with additional arguments
+     * @param game the game instance
+     * @param manager the asset manager
+     * @param slot the item instance to put into the slot
+     * @param x the x coordinate
+     * @param y the y coordinate
+     * @param scale scale
+     * @param hovered can it be hovered
+     * @param canPlaceInto can it placed into it
      * @param renderBackground Should the slot overlay be rendered? Usually true.
      * @param colorOverride What color should the slot be? Usually {@link Settings#guiColor}
      */
@@ -524,6 +532,7 @@ public interface IRenderer extends IDisposable {
      *
      * @param isStatic Wether or not this vbo should use {@link
      *                 GL15#GL_STATIC_DRAW} or {@link GL15#GL_DYNAMIC_DRAW}
+     * @return A new vbo
      */
     IVBO createVBO(boolean isStatic);
 

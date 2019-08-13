@@ -104,6 +104,9 @@ public class Item {
     }
 
     /**
+     * @param instance the item instance
+     * @return if the instance data is sensitive
+     *
      * @deprecated This method is now unused - items will always be data
      * sensitive
      */

@@ -62,13 +62,25 @@ public interface IModLoader {
 
     @ApiInternal
     void postPostInit();
-
+    
     /**
+     * @param sender The sending mod
+     * @param recipientId the recipient id
+     * @param messageIdentifier the message identifier
+     * @param message the message itself
+     * @return The response
+     *
      * @see IMod#receiveMessage(IMod, String, DataSet)
      */
     DataSet sendMessage(IMod sender, String recipientId, String messageIdentifier, DataSet message);
-
+    
     /**
+     * @param sender The sending mod
+     * @param recipient the recipient mod
+     * @param messageIdentifier the message identifier
+     * @param message the message
+     * @return the response
+     *
      * @see IMod#receiveMessage(IMod, String, DataSet)
      */
     DataSet sendMessage(IMod sender, IMod recipient, String messageIdentifier, DataSet message);

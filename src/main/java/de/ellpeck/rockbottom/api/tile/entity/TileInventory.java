@@ -31,6 +31,8 @@ public class TileInventory extends BasicFilteredInventory {
 
     /**
      * Creates a tile inventory that has a single slot that is an output slot
+     *
+     * @param tile the tile entity itself
      */
     public TileInventory(TileEntity tile) {
         this(tile, 1, Collections.emptyList(), Collections.singletonList(0));
@@ -40,6 +42,9 @@ public class TileInventory extends BasicFilteredInventory {
      * Creates a tile inventory that has a single slot that is an input slot.
      * The function determines if the given item can be put into the slot or
      * not
+     *
+     * @param tile the tile entity itself
+     * @param canInput if it can be inputted into the tile entity
      */
     public TileInventory(TileEntity tile, Function<ItemInstance, Boolean> canInput) {
         this(tile, 1, inst -> canInput.apply(inst) ? Collections.singletonList(0) : Collections.emptyList(), Collections.emptyList());
