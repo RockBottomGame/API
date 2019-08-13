@@ -42,16 +42,12 @@ public final class WorldRenderEvent extends Event {
     public final IRenderer graphics;
     public final IWorld world;
     public final AbstractEntityPlayer player;
-    public final float translationX;
-    public final float translationY;
 
-    public WorldRenderEvent(IGameInstance game, IAssetManager assetManager, IRenderer graphics, IWorld world, AbstractEntityPlayer player, float translationX, float translationY) {
+    public WorldRenderEvent(IGameInstance game, IAssetManager assetManager, IRenderer graphics, IWorld world, AbstractEntityPlayer player) {
         this.game = game;
         this.assetManager = assetManager;
         this.graphics = graphics;
         this.world = world;
         this.player = player;
-        this.translationX = translationX;
-        this.translationY = translationY;
     }
 }
