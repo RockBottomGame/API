@@ -121,7 +121,7 @@ public class ConstructionRecipe extends PlayerCompendiumRecipe {
     }
 
     public boolean showInConstructionTable() {
-        return !manualOnly;
+        return !this.manualOnly;
     }
 
     public ConstructionRecipe registerManual() {
