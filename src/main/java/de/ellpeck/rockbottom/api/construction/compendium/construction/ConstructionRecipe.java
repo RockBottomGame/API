@@ -47,16 +47,18 @@ public class ConstructionRecipe extends PlayerCompendiumRecipe {
     protected final List<IUseInfo> inputs;
     protected final List<ItemInstance> outputs;
     protected final List<ConstructionTool> tools;
+    protected final boolean constructionTable;
 
-    public ConstructionRecipe(ResourceName name, List<ConstructionTool> tools, List<IUseInfo> inputs, List<ItemInstance> outputs, boolean isKnowledge, float skillReward) {
+    public ConstructionRecipe(ResourceName name, List<ConstructionTool> tools, List<IUseInfo> inputs, List<ItemInstance> outputs, boolean constructionTable, boolean isKnowledge, float skillReward) {
         super(name, isKnowledge, skillReward);
         this.inputs = inputs;
         this.outputs = outputs;
         this.tools = tools;
+        this.constructionTable = constructionTable;
     }
 
     public ConstructionRecipe(ResourceName name, List<ConstructionTool> tools, boolean isKnowledge, float skillReward, ItemInstance output, IUseInfo... inputs) {
-        this(name, tools, Arrays.asList(inputs), Collections.singletonList(output), isKnowledge, skillReward);
+        this(name, tools, Arrays.asList(inputs), Collections.singletonList(output), true, isKnowledge, skillReward);
     }
 
     public ConstructionRecipe(List<ConstructionTool> tools, boolean isKnowledge, float skillReward, ItemInstance output, IUseInfo... inputs) {
@@ -116,6 +118,10 @@ public class ConstructionRecipe extends PlayerCompendiumRecipe {
             }
         }
         return true;
+    }
+
+    public boolean showInConstructionTable() {
+        return constructionTable;
     }
 
     public ConstructionRecipe registerManual() {
