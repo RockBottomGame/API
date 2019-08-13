@@ -26,6 +26,14 @@ public abstract class PlayerCompendiumRecipe extends BasicCompendiumRecipe {
 	/**
 	 * Called during construction with the machine used to construct the recipe.
 	 * Provides the same parameters as the ConstructEvent directly to the recipe.
+	 * @param player The player
+	 * @param inputInventory the input inventory
+	 * @param outputInventory the output inventory
+	 * @param machine the machine
+	 * @param amount the amount
+	 * @param inputs the inputs
+	 * @param outputGetter the output
+	 * @param skillReward the skill reward
 	 * @return True if the construction should continue
 	 */
 	public boolean handleMachine(AbstractEntityPlayer player, Inventory inputInventory, Inventory outputInventory, TileEntity machine, int amount, List<IUseInfo> inputs, Function<List<ItemInstance>, List<ItemInstance>> outputGetter, float skillReward) {

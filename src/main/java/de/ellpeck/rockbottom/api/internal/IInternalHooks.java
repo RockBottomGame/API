@@ -80,7 +80,7 @@ public interface IInternalHooks {
      * @param craftingStation The construction table tile entity
      * @param tool What tool and how much usage is needed
      * @param simulate Should we actually damage the tool, or just check if it is there
-     * @return
+     * @return True if the tile entity is a construction table and it has a tool
      */
     boolean useCraftingTool(IToolStation craftingStation, ConstructionTool tool, boolean simulate);
 
