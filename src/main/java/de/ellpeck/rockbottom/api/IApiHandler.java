@@ -144,26 +144,28 @@ public interface IApiHandler {
      */
     int[] interpolateWorldColor(int[] interpolatedLight, TileLayer layer);
 
-	/**
-	 * Searches the inventory for items as IUseInfo specified in the given parameters.
-	 * @param inventory The inventory to search
-	 * @param inputs The list of item infos to find
-	 * @param simulate Whether to simulate the process. False will remove the items found from inventory IF it has found all inputs.
-	 * @param out The list to be provided which will store the ItemInstances found.
-	 * @return True enough items are in the inventory and it can be collected. False otherwise.
-	 */
-	boolean collectItems(IInventory inventory, List<IUseInfo> inputs, boolean simulate, List<ItemInstance> out);
+    /**
+     * Searches the inventory for items as IUseInfo specified in the given parameters.
+     *
+     * @param inventory The inventory to search
+     * @param inputs    The list of item infos to find
+     * @param simulate  Whether to simulate the process. False will remove the items found from inventory IF it has found all inputs.
+     * @param out       The list to be provided which will store the ItemInstances found.
+     * @return True enough items are in the inventory and it can be collected. False otherwise.
+     */
+    boolean collectItems(IInventory inventory, List<IUseInfo> inputs, boolean simulate, List<ItemInstance> out);
 
-	/**
-	 * Similar to {@link IApiHandler#construct(AbstractEntityPlayer, Inventory, Inventory, PlayerCompendiumRecipe, TileEntity, int, List, List, Function, float)}
-	 * but safe to use on both client and server side (client side sends packet to server).
-	 * @param player          The player doing this construction. Can be null if
-	 *                        the construction is automated. Note that the skill
-	 *                        reward is not used then.
-	 * @param recipe The recipe to construct
-	 * @param machine The tile entity doing the crafting
-	 */
-	void defaultConstruct(AbstractEntityPlayer player, PlayerCompendiumRecipe recipe, TileEntity machine);
+    /**
+     * Similar to {@link IApiHandler#construct(AbstractEntityPlayer, Inventory, Inventory, PlayerCompendiumRecipe, TileEntity, int, List, List, Function, float)}
+     * but safe to use on both client and server side (client side sends packet to server).
+     *
+     * @param player  The player doing this construction. Can be null if
+     *                the construction is automated. Note that the skill
+     *                reward is not used then.
+     * @param recipe  The recipe to construct
+     * @param machine The tile entity doing the crafting
+     */
+    void defaultConstruct(AbstractEntityPlayer player, PlayerCompendiumRecipe recipe, TileEntity machine);
 
     /**
      * This is a utility method that you can call for custom construction of
@@ -182,7 +184,7 @@ public interface IApiHandler {
      * @param amount          The amount of times this recipe should be
      *                        constructed
      * @param recipeInputs    The items that are input into the recipe
-	 * @param actualInputs    The actual {@link ItemInstance}s used in the construction of the recipe.
+     * @param actualInputs    The actual {@link ItemInstance}s used in the construction of the recipe.
      *                        Can be {@code null} if the inputs should be calculated by the method.
      * @param outputGetter    A function that is called to get the outputs of
      *                        the recipe based on the recipeInputs that were actually
@@ -191,7 +193,7 @@ public interface IApiHandler {
      *                        constructing this recipe
      * @return A list of items that couldn't fit into the output inventory
      * specified
-	 * @see IApiHandler#defaultConstruct(AbstractEntityPlayer, PlayerCompendiumRecipe, TileEntity)
+     * @see IApiHandler#defaultConstruct(AbstractEntityPlayer, PlayerCompendiumRecipe, TileEntity)
      */
     List<ItemInstance> construct(AbstractEntityPlayer player, Inventory inputInventory, Inventory outputInventory, PlayerCompendiumRecipe recipe, TileEntity machine, int amount, List<IUseInfo> recipeInputs, List<ItemInstance> actualInputs, Function<List<ItemInstance>, List<ItemInstance>> outputGetter, float skillReward);
 

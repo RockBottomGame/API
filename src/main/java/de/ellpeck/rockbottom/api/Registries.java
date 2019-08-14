@@ -130,29 +130,29 @@ public final class Registries {
      * These can be used in recipe json files.
      */
     public static final NameRegistry<ICriteria> CRITERIA_REGISTRY = new NameRegistry<>(ResourceName.intern("criteria_registry"), false).register();
-	/**
-	 * The registry for all {@link ICompendiumRecipe} objects that are
-	 * in the game. If your mod includes its own registry for recipes,
-	 * consider making it a {@link ParentedNameRegistry} and using this
-	 * as the parent.
-	 */
+    /**
+     * The registry for all {@link ICompendiumRecipe} objects that are
+     * in the game. If your mod includes its own registry for recipes,
+     * consider making it a {@link ParentedNameRegistry} and using this
+     * as the parent.
+     */
     public static final NameRegistry<ICompendiumRecipe> ALL_RECIPES = new NameRegistry<>(ResourceName.intern("all_recipes_registry"), true).register();
-	/**
-	 * // TODO 0.4
-	 * A parent for Manual and Construction Table recipes.
-	 */
-	@ApiInternal
-	public static final ParentedNameRegistry<ConstructionRecipe> CONSTRUCTION_RECIPES = new ParentedNameRegistry<>(ResourceName.intern("construction_recipe_registry"), true, ALL_RECIPES).register();
-	/**
-	 * The recipe for all {@link ConstructionRecipe} objects which require
-	 * a tool to be crafted. These show up in a separate tab to manual recipes
-	 * in the Compendium and can be crafted with the use of a tool in the
-	 * ConstructionTable. Use {@link ConstructionRecipe#registerConstructionTable()}
-	 * to register.
-	 */
-	@ApiInternal
-	public static final ParentedNameRegistry<ConstructionRecipe> CONSTRUCTION_TABLE_RECIPES = new ParentedNameRegistry<>(ResourceName.intern("construction_table_recipe_registry"), true, CONSTRUCTION_RECIPES).register();
-	/**
+    /**
+     * // TODO 0.4
+     * A parent for Manual and Construction Table recipes.
+     */
+    @ApiInternal
+    public static final ParentedNameRegistry<ConstructionRecipe> CONSTRUCTION_RECIPES = new ParentedNameRegistry<>(ResourceName.intern("construction_recipe_registry"), true, ALL_RECIPES).register();
+    /**
+     * The recipe for all {@link ConstructionRecipe} objects which require
+     * a tool to be crafted. These show up in a separate tab to manual recipes
+     * in the Compendium and can be crafted with the use of a tool in the
+     * ConstructionTable. Use {@link ConstructionRecipe#registerConstructionTable()}
+     * to register.
+     */
+    @ApiInternal
+    public static final ParentedNameRegistry<ConstructionRecipe> CONSTRUCTION_TABLE_RECIPES = new ParentedNameRegistry<>(ResourceName.intern("construction_table_recipe_registry"), true, CONSTRUCTION_RECIPES).register();
+    /**
      * The registry for all {@link ConstructionRecipe} objects that are
      * displayed on the left side of the player's inventory. Use {@link
      * ConstructionRecipe#registerManual()} to register recipes into this
@@ -169,16 +169,16 @@ public final class Registries {
      */
     @ApiInternal
     public static final ParentedNameRegistry<MortarRecipe> MORTAR_RECIPES = new ParentedNameRegistry<>(ResourceName.intern("mortar_recipe_registry"), true, ALL_RECIPES).register();
-	/**
-	 * The registry for all {@link SmithingRecipe} objects that can be processed
-	 * in a mortar. To register something into this registry, please use  {@link
-	 * SmithingRecipe#register()}. If you want to get a recipe instance by its
-	 * name, use {@link MortarRecipe#forName(ResourceName)}.
-	 */
-	@ApiInternal
-	public static final ParentedNameRegistry<SmithingRecipe> SMITHING_RECIPES = new ParentedNameRegistry<>(ResourceName.intern("smithing_recipe_registry"), true, ALL_RECIPES).register();
+    /**
+     * The registry for all {@link SmithingRecipe} objects that can be processed
+     * in a mortar. To register something into this registry, please use  {@link
+     * SmithingRecipe#register()}. If you want to get a recipe instance by its
+     * name, use {@link MortarRecipe#forName(ResourceName)}.
+     */
+    @ApiInternal
+    public static final ParentedNameRegistry<SmithingRecipe> SMITHING_RECIPES = new ParentedNameRegistry<>(ResourceName.intern("smithing_recipe_registry"), true, ALL_RECIPES).register();
 
-	/**
+    /**
      * The registry for all {@link IWorldGenerator} types. The {@link
      * ResourceName} is used to save a generator to disk if it is a retroactive
      * generator ({@link IWorldGenerator#generatesRetroactively()}) to mark that
