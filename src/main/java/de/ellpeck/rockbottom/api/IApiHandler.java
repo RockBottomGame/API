@@ -178,6 +178,7 @@ public interface IApiHandler {
      *                        from
      * @param outputInventory The inventory that the output items go into
      * @param recipe          The recipe to be constructed
+     * @param machine         The machine
      * @param amount          The amount of times this recipe should be
      *                        constructed
      * @param recipeInputs    The items that are input into the recipe

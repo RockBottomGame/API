@@ -24,6 +24,7 @@ package de.ellpeck.rockbottom.api.data.set;
 import de.ellpeck.rockbottom.api.data.set.part.*;
 import de.ellpeck.rockbottom.api.data.set.part.num.*;
 
+import java.util.EnumSet;
 import java.util.List;
 import java.util.UUID;
 
@@ -123,6 +124,21 @@ public final class DataSet extends AbstractDataSet {
 
     public void addList(String key, List<? extends DataPart> list) {
         this.addPart(key, new PartList(list));
+    }
+
+    public void addEnum(String key, Enum<?> value){
+        this.addInt(key, value.ordinal());
+    }
+
+    public <T extends Enum<T>> T getEnum(String key, Class<T> type){
+        if(this.hasKey(key)){
+            int ordinal = this.getInt(key);
+            EnumSet set = EnumSet.allOf(type);
+            if(set.size() > ordinal){
+                return (T) set.toArray()[ordinal];
+            }
+        }
+        return null;
     }
 
     public DataSet copy() {
