@@ -75,6 +75,7 @@ public interface IInternalHooks {
 
     boolean doDefaultShiftClicking(IGameInstance game, int button, GuiContainer gui, ComponentSlot slot);
 
+    // TODO: Move to IApiHandler
     boolean placeTile(int x, int y, TileLayer layer, AbstractEntityPlayer player, ItemInstance selected, Tile tile, boolean removeItem, boolean simulate);
 
     /**
@@ -119,5 +120,5 @@ public interface IInternalHooks {
 
     void packetEntityData(Entity entity);
 
-    void smithingConstruct(Gui parent, AbstractEntityPlayer player, TileEntity tile, SmithingRecipe recipe, List<ItemInstance> actualInputs);
+    void smithingConstruct(AbstractEntityPlayer player, TileEntity tile, SmithingRecipe recipe, List<ItemInstance> actualInputs);
 }

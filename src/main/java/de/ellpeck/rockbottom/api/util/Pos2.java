@@ -53,6 +53,10 @@ public final class Pos2 {
         return this.set(this.x + x, this.y + y);
     }
 
+    public Pos2 copy() {
+        return new Pos2(this.x, this.y);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

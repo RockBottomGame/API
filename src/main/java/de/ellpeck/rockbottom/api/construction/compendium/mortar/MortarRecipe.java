@@ -67,9 +67,9 @@ public class MortarRecipe extends PlayerCompendiumRecipe {
         return this.time;
     }
 
-	// TODO: implement handleRecipe insstead of this to make it consistent with other recipes
+	// TODO: implement handleRecipe instead of this to make it consistent with other recipes
     public void construct(AbstractEntityPlayer player, Inventory inventory, TileEntity machine, int amount) {
-		RockBottomAPI.getApiHandler().construct(player, inventory, inventory, this, machine, amount, this.getActualInputs(inventory), items -> this.getActualOutputs(inventory, inventory, items), skillReward);
+		RockBottomAPI.getApiHandler().construct(player, inventory, inventory, this, machine, amount, this.getActualInputs(inventory), null, items -> this.getActualOutputs(inventory, inventory, items), skillReward);
 	}
 
 	public MortarRecipe register() {

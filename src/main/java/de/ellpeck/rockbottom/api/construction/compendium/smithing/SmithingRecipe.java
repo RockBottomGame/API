@@ -15,6 +15,7 @@ import de.ellpeck.rockbottom.api.tile.entity.IToolStation;
 import de.ellpeck.rockbottom.api.tile.entity.TileEntity;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -32,6 +33,10 @@ public class SmithingRecipe extends PlayerCompendiumRecipe {
 
 	private ConstructionTool tool;
 
+	public SmithingRecipe(ResourceName name, List<IUseInfo> inputs, List<ItemInstance> outputs, boolean isKnowledge, float skillReward) {
+	    this(name, inputs, outputs, isKnowledge, skillReward, 0, 0, 0);
+    }
+
 	public SmithingRecipe(ResourceName name, List<IUseInfo> inputs, List<ItemInstance> outputs, boolean isKnowledge, float skillReward, float difficulty, int hits, int usage) {
 		super(name, isKnowledge, skillReward);
 		this.inputs = inputs;
@@ -43,17 +48,29 @@ public class SmithingRecipe extends PlayerCompendiumRecipe {
 		this.tool = new ConstructionTool(GameContent.ITEM_HAMMER, usage);
 	}
 
+	private boolean hasTools(TileEntity machine) {
+        IToolStation station = (IToolStation) machine;
+        return station.damageTool(this.tool, true);
+    }
+
 	@Override
 	public ComponentConstruct getConstructButton(Gui gui, AbstractEntityPlayer player, TileEntity machine, boolean canConstruct) {
-		return new ComponentConstruct(gui, this, machine.getTileInventory().get(((IToolStation)machine).getToolSlot(GameContent.ITEM_HAMMER)) != null, canConstruct, () -> {
-			RockBottomAPI.getInternalHooks().smithingConstruct(gui, player, machine, this, Collections.emptyList());
-			return true;
+		return new ComponentConstruct(gui, this, hasTools(machine), canConstruct, () -> {
+		    if (hasTools(machine) && canConstruct) {
+                this.playerConstruct(player, machine, 1);
+                return true;
+            }
+            return false;
 		});
 	}
 
 	@Override
-	public boolean handleRecipe(AbstractEntityPlayer player, Inventory inputInventory, Inventory outputInventory, TileEntity machine, List<IUseInfo> inputs, Function<List<ItemInstance>, List<ItemInstance>> outputGetter, float skillReward) {
-		return ((IToolStation) machine).damageTool(this.tool, true) && ((IToolStation) machine).damageTool(this.tool, false);
+	public boolean handleRecipe(AbstractEntityPlayer player, Inventory inputInventory, Inventory outputInventory, TileEntity machine, List<IUseInfo> recipeInputs, List<ItemInstance> actualInputs, Function<List<ItemInstance>, List<ItemInstance>> outputGetter, float skillReward) {
+        IToolStation station = (IToolStation) machine;
+        if (machine.getTileInventory().get(station.getToolSlot(tool.tool)) != null) {
+            return ((IToolStation) machine).damageTool(this.tool, true) && ((IToolStation) machine).damageTool(this.tool, false);
+        }
+        return false;
 	}
 
 	public SmithingRecipe register() {
@@ -88,7 +105,7 @@ public class SmithingRecipe extends PlayerCompendiumRecipe {
 		return "SmithingRecipe{" +
 				"infoName=" + infoName +
 				", isKnowledge=" + isKnowledge +
-				", inputs=" + inputs +
+				", recipeInputs=" + inputs +
 				", outputs=" + outputs +
 				", difficulty=" + difficulty +
 				", hits=" + hits +

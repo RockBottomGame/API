@@ -106,7 +106,7 @@ public class ConstructionRecipe extends PlayerCompendiumRecipe {
     }
 
     @Override
-    public boolean handleRecipe(AbstractEntityPlayer player, Inventory inputInventory, Inventory outputInventory, TileEntity machine, List<IUseInfo> inputs, Function<List<ItemInstance>, List<ItemInstance>> outputGetter, float skillReward) {
+    public boolean handleRecipe(AbstractEntityPlayer player, Inventory inputInventory, Inventory outputInventory, TileEntity machine, List<IUseInfo> recipeInputs, List<ItemInstance> actualInputs, Function<List<ItemInstance>, List<ItemInstance>> outputGetter, float skillReward) {
         if (usesTools()) {
             if (!canUseTools((IToolStation)machine)) {
                 return false;
@@ -132,5 +132,17 @@ public class ConstructionRecipe extends PlayerCompendiumRecipe {
         }
         Registries.CONSTRUCTION_TABLE_RECIPES.register(this.getName(), this);
         return this;
+    }
+
+    @Override
+    public String toString() {
+        return "ConstructionRecipe{" +
+                "infoName=" + infoName +
+                ", isKnowledge=" + isKnowledge +
+                ", tools=" + tools +
+                ", inputs=" + inputs +
+                ", outputs=" + outputs +
+                ", skillReward=" + skillReward +
+                '}';
     }
 }

@@ -28,18 +28,17 @@ public abstract class PlayerCompendiumRecipe extends BasicCompendiumRecipe {
 	 * Provides the same parameters as the ConstructEvent directly to the recipe.
 	 * @return True if the construction should continue
 	 */
-	public boolean handleRecipe(AbstractEntityPlayer player, Inventory inputInventory, Inventory outputInventory, TileEntity machine, List<IUseInfo> inputs, Function<List<ItemInstance>, List<ItemInstance>> outputGetter, float skillReward) {
+	public boolean handleRecipe(AbstractEntityPlayer player, Inventory inputInventory, Inventory outputInventory, TileEntity machine, List<IUseInfo> recipeInputs, List<ItemInstance> actualInputs, Function<List<ItemInstance>, List<ItemInstance>> outputGetter, float skillReward) {
 		return true;
 	}
 
 	public void playerConstruct(AbstractEntityPlayer player, TileEntity machine, int amount) {
 		Inventory inv = player.getInv();
-		List<ItemInstance> remains = RockBottomAPI.getApiHandler().construct(player, inv, inv, this, machine, amount, this.getActualInputs(inv), items -> this.getActualOutputs(inv, inv, items), this.getSkillReward());
+		List<ItemInstance> remains = RockBottomAPI.getApiHandler().construct(player, inv, inv, this, machine, amount, this.getActualInputs(inv), null, items -> this.getActualOutputs(inv, inv, items), this.getSkillReward());
 		for (ItemInstance instance : remains) {
 			AbstractEntityItem.spawn(player.world, instance, player.getX(), player.getY(), 0F, 0F);
 		}
 	}
-
 
 	public ResourceName getKnowledgeInformationName() {
 		return this.infoName;
