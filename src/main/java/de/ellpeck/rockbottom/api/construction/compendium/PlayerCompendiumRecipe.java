@@ -30,8 +30,8 @@ public abstract class PlayerCompendiumRecipe extends BasicCompendiumRecipe {
 	 * @param inputInventory the input inventory
 	 * @param outputInventory the output inventory
 	 * @param machine the machine
-	 * @param amount the amount
-	 * @param inputs the inputs
+	 * @param recipeInputs the inputs as dictated from the recipe
+     * @param actualInputs the actual item instance inputs provided from the inventory
 	 * @param outputGetter the output
 	 * @param skillReward the skill reward
 	 * @return True if the construction should continue
