@@ -78,7 +78,6 @@ public interface IInternalHooks {
     // TODO: Move to IApiHandler
     boolean placeTile(int x, int y, TileLayer layer, AbstractEntityPlayer player, ItemInstance selected, Tile tile, boolean removeItem, boolean simulate);
 
-    /**
      * Returns a list of compendium recipes that can be unlocked by breaking the specified tile
      * @param tile The tile which needs to be broken to unlock the recipes
      * @return The recipe list

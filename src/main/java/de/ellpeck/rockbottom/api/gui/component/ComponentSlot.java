@@ -53,6 +53,8 @@ public class ComponentSlot extends GuiComponent {
      * This disables the background rendering of the slot. Your slot will be
      * invisible with this enabled if there are no items in it. You should
      * probably only use this if your GUI texture includes its own slot markers.
+     *
+     * @return This component slot
      */
     public ComponentSlot disableBackgroundRender() {
         renderBackground = false;
@@ -62,7 +64,9 @@ public class ComponentSlot extends GuiComponent {
     /**
      * This forces your slot to render as a specific color. By default, slots
      * will use the user-defined color preference {@link Settings#guiColor}
+     *
      * @param color The color that you want your slot to use
+     * @return The colored component slot. The same as this one
      */
     public ComponentSlot addColorOverride(int color) {
         this.useColorOverride = true;

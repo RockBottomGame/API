@@ -23,6 +23,7 @@ package de.ellpeck.rockbottom.api;
 
 import com.google.common.base.Preconditions;
 import de.ellpeck.rockbottom.api.construction.resource.IResourceRegistry;
+import de.ellpeck.rockbottom.api.construction.resource.ResInfo;
 import de.ellpeck.rockbottom.api.effect.IEffect;
 import de.ellpeck.rockbottom.api.item.Item;
 import de.ellpeck.rockbottom.api.item.ToolProperty;
@@ -98,6 +99,7 @@ public final class GameContent {
     public static final Item ITEM_STAT_NOTE = getItem("start_note").setMaxAmount(1);
     public static final Item ITEM_PLANT_FIBER = getItem("plant_fiber").setMaxAmount(150);
     public static final Item ITEM_TWIG = getItem("twig").setMaxAmount(150);
+    public static final Item ITEM_STICK = getItem("stick").setMaxAmount(150);
     public static final Item ITEM_STONE_PICKAXE = getItem("stone_pickaxe");
     public static final Item ITEM_STONE_AXE = getItem("stone_axe");
     public static final Item ITEM_STONE_SHOVEL = getItem("stone_shovel");
@@ -129,7 +131,7 @@ public final class GameContent {
     public static final String RES_SAPLING = res().addResources("sapling", TILE_SAPLING);
     public static final String RES_WOOD_PROCESSED = res().addResources("wood_processed", TILE_WOOD_BOARDS, 0, TILE_WOOD_BOARDS.metaProp.getVariants() - 1);
     public static final String RES_PLANT_FIBER = res().addResources("plant_fiber", ITEM_PLANT_FIBER);
-    public static final String RES_STICK = res().addResources("stick", ITEM_TWIG);
+    public static final String RES_STICK = res().addResources("stick", new ResInfo(ITEM_TWIG), new ResInfo(ITEM_STICK));
     public static final String RES_COPPER_RAW = res().addResources("copper_raw", TILE_COPPER);
     public static final String RES_COPPER_PROCESSED = res().addResources("copper_processed", ITEM_COPPER_INGOT);
 
