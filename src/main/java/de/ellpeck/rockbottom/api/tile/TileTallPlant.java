@@ -17,8 +17,8 @@ import java.util.List;
 /**
  * Used for two-high plants such as Corn and Cotton
  */
-public class TilePlant extends TileBasic {
-    public TilePlant(ResourceName name) {
+public class TileTallPlant extends TileBasic {
+    public TileTallPlant(ResourceName name) {
         super(name);
         this.addProps(StaticTileProps.TOP_HALF, StaticTileProps.PLANT_GROWTH);
     }
@@ -88,7 +88,7 @@ public class TilePlant extends TileBasic {
     }
 
     @Override
-    public List<ItemInstance> getDrops(IWorld world, int x, int y, TileLayer layer, Entity destroyer) {
+    public List<ItemInstance> (IWorld world, int x, int y, TileLayer layer, Entity destroyer) {
         TileState state = world.getState(layer, x, y);
         if (state.get(StaticTileProps.TOP_HALF) && state.get(StaticTileProps.PLANT_GROWTH) >= 9) {
             return Collections.singletonList(new ItemInstance(this, Util.RANDOM.nextInt(3) + 1));

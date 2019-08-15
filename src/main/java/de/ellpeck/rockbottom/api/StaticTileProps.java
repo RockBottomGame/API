@@ -25,6 +25,7 @@ import de.ellpeck.rockbottom.api.tile.state.BoolProp;
 import de.ellpeck.rockbottom.api.tile.state.EnumProp;
 import de.ellpeck.rockbottom.api.tile.state.IntProp;
 import de.ellpeck.rockbottom.api.tile.state.TileProp;
+import de.ellpeck.rockbottom.api.tile.TileTallPlant;
 
 /**
  * A list of static {@link TileProp} objects that are used for certain tiles
@@ -60,12 +61,11 @@ public final class StaticTileProps {
      */
     public static final IntProp SAPLING_GROWTH = new IntProp("growth", 0, 5);
     /**
-     * Determines how far grown a plant is. Used by {@link
-     * GameContent#TILE_CORN} and {@link GameContent#TILE_COTTON}
+     * Determines how far grown a plant is. Used by {@link TileTallPlant )
      */
     public static final IntProp PLANT_GROWTH = new IntProp("growth", 0, 10);
     /**
-     * Determines is a plant is considered alive.
+     * Determines if a plant is considered alive.
      * Used by {@link GameContent#TILE_COTTON}
      */
     public static final BoolProp ALIVE = new BoolProp("alive", false);
