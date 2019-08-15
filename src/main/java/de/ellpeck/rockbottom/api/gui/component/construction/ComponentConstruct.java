@@ -78,10 +78,10 @@ public class ComponentConstruct extends GuiComponent {
     @Override
     public boolean onMouseAction(IGameInstance game, int button, float x, float y) {
         if (Settings.KEY_GUI_ACTION_1.isKey(button) && this.isMouseOver(game)) {
-            return this.consumer == null || this.consumer.get();
-        } else {
-            return false;
+            if (this.consumer != null) this.consumer.get();
+            return true;
         }
+        return false;
     }
 
     protected ItemInstance getOutput(IGameInstance game) {

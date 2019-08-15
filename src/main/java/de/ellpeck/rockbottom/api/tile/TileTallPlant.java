@@ -88,7 +88,7 @@ public class TileTallPlant extends TileBasic {
     }
 
     @Override
-    public List<ItemInstance> (IWorld world, int x, int y, TileLayer layer, Entity destroyer) {
+    public List<ItemInstance> getDrops(IWorld world, int x, int y, TileLayer layer, Entity destroyer) {
         TileState state = world.getState(layer, x, y);
         if (state.get(StaticTileProps.TOP_HALF) && state.get(StaticTileProps.PLANT_GROWTH) >= 9) {
             return Collections.singletonList(new ItemInstance(this, Util.RANDOM.nextInt(3) + 1));
