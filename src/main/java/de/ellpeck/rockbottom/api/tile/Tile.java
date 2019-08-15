@@ -25,7 +25,6 @@ import de.ellpeck.rockbottom.api.Registries;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.assets.font.FormattingCode;
-import de.ellpeck.rockbottom.api.construction.compendium.ICompendiumRecipe;
 import de.ellpeck.rockbottom.api.construction.compendium.PlayerCompendiumRecipe;
 import de.ellpeck.rockbottom.api.data.settings.Settings;
 import de.ellpeck.rockbottom.api.entity.AbstractEntityItem;
@@ -77,8 +76,7 @@ public class Tile {
     public BoundBox getActualBoundBox(IWorld world, TileState state, int x, int y, TileLayer layer) {
     	BoundBox box = getBoundBox(world, state, x, y, layer);
     	if (box == null) {
-    		// TODO Change to a static cached empty bound.
-    		box = new BoundBox();
+    		box = BoundBox.NULL_BOUNDS;
 		}
 		return box;
 	}
