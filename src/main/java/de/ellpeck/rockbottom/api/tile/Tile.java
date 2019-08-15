@@ -77,6 +77,7 @@ public class Tile {
     public BoundBox getActualBoundBox(IWorld world, TileState state, int x, int y, TileLayer layer) {
     	BoundBox box = getBoundBox(world, state, x, y, layer);
     	if (box == null) {
+    		// TODO Change to a static cached empty bound.
     		box = new BoundBox();
 		}
 		return box;

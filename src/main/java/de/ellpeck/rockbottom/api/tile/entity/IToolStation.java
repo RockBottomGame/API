@@ -22,7 +22,6 @@ public interface IToolStation {
 			if (!simulate && !RockBottomAPI.getNet().isClient()) {
 				toolItem.getItem().takeDamage(toolItem, tool.usage);
 				getTileInventory().notifyChange(toolSlot);
-
 			}
 			return true;
 		}

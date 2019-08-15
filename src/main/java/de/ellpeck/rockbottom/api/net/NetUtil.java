@@ -27,6 +27,7 @@ import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufInputStream;
 import io.netty.buffer.ByteBufOutputStream;
 
+import java.util.UUID;
 import java.util.logging.Level;
 
 public final class NetUtil {
@@ -64,4 +65,13 @@ public final class NetUtil {
 
         return new String(chars);
     }
+
+    public static void writeUUIDToBuffer(ByteBuf buf, UUID uuid) {
+    	buf.writeLong(uuid.getMostSignificantBits());
+    	buf.writeLong(uuid.getLeastSignificantBits());
+	}
+
+	public static UUID readUUIDFromBuffer(ByteBuf buf) {
+    	return new UUID(buf.readLong(), buf.readLong());
+	}
 }

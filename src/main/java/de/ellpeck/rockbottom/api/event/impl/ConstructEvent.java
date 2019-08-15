@@ -22,7 +22,7 @@
 package de.ellpeck.rockbottom.api.event.impl;
 
 import de.ellpeck.rockbottom.api.IApiHandler;
-import de.ellpeck.rockbottom.api.construction.compendium.ICompendiumRecipe;
+import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.construction.compendium.PlayerCompendiumRecipe;
 import de.ellpeck.rockbottom.api.construction.resource.IUseInfo;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
@@ -37,7 +37,7 @@ import java.util.function.Function;
 /**
  * This event is fired when construction takes place in {@link
  * IApiHandler#construct(AbstractEntityPlayer, Inventory, Inventory,
- * PlayerCompendiumRecipe, TileEntity, int, List, Function, float)}. Cancelling the event will
+ * PlayerCompendiumRecipe, TileEntity, int, List, List, Function, float)}. Cancelling the event will
  * cause the construction not to take place.
  */
 public final class ConstructEvent extends Event {
@@ -47,18 +47,20 @@ public final class ConstructEvent extends Event {
     public PlayerCompendiumRecipe recipe;
     public TileEntity machine;
     public int amount;
-    public List<IUseInfo> inputs;
-    public Function<List<ItemInstance>, List<ItemInstance>> outputGetter;
-    public float skillReward;
+    public List<IUseInfo> recipeInputs;
+	public List<ItemInstance> actualInputs;
+	public Function<List<ItemInstance>, List<ItemInstance>> outputGetter;
+	public float skillReward;
 
-    public ConstructEvent(AbstractEntityPlayer player, Inventory inputInventory, Inventory outputInventory, PlayerCompendiumRecipe recipe, TileEntity machine, int amount, List<IUseInfo> inputs, Function<List<ItemInstance>, List<ItemInstance>> outputGetter, float skillReward) {
+    public ConstructEvent(AbstractEntityPlayer player, Inventory inputInventory, Inventory outputInventory, PlayerCompendiumRecipe recipe, TileEntity machine, int amount, List<IUseInfo> recipeInputs, List<ItemInstance> actualInputs, Function<List<ItemInstance>, List<ItemInstance>> outputGetter, float skillReward) {
         this.player = player;
         this.inputInventory = inputInventory;
         this.outputInventory = outputInventory;
         this.recipe = recipe;
         this.machine = machine;
         this.amount = amount;
-        this.inputs = inputs;
+        this.recipeInputs = recipeInputs;
+        this.actualInputs = actualInputs;
         this.outputGetter = outputGetter;
         this.skillReward = skillReward;
     }
