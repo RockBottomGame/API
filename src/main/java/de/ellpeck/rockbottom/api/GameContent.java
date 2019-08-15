@@ -71,6 +71,7 @@ public final class GameContent {
     public static final Tile TILE_REMAINS_GOO = getTile("remains_goo");
     public static final Tile TILE_GRASS_TORCH = getTile("torch_grass").setHardness(0F).setForceDrop().setMaxAmount(50);
     public static final Tile TILE_COPPER = getTile("copper").setHardness(10F).addEffectiveTool(ToolProperty.PICKAXE, 2).setMaxAmount(35);
+    public static final Tile TILE_SPINNING_WHEEL = getTile("spinning_wheel").setHardness(7F).addEffectiveTool(ToolProperty.PICKAXE, 1).setMaxAmount(1);
     public static final Tile TILE_SIMPLE_FURNACE = getTile("simple_furnace").setHardness(15F).addEffectiveTool(ToolProperty.PICKAXE, 2).setMaxAmount(1);
     public static final Tile TILE_CONSTRUCTION_TABLE = getTile("construction_table").setHardness(15F).addEffectiveTool(ToolProperty.PICKAXE, 2).setMaxAmount(1);
     public static final Tile TILE_SNOW = getTile("snow").setHardness(0.75F).addEffectiveTool(ToolProperty.SHOVEL, 0).setMaxAmount(200);
@@ -80,6 +81,7 @@ public final class GameContent {
     public static final Tile TILE_MORTAR = getTile("mortar").setHardness(3F).addEffectiveTool(ToolProperty.PICKAXE, 0).setMaxAmount(5);
     public static final Tile TILE_SOIL_TILLED = getTile("soil_tilled").setHardness(0.8F).addEffectiveTool(ToolProperty.SHOVEL, 0).setForceDrop();
     public static final Tile TILE_CORN = getTile("corn").setHardness(2F).setForceDrop().setMaxAmount(25);
+    public static final Tile TILE_COTTON = getTile("cotton").setHardness(2F).setForceDrop().setMaxAmount(25);
     public static final Tile TILE_GLASS = getTile("glass").setHardness(3F).setMaxAmount(75);
 
     /*
@@ -97,6 +99,7 @@ public final class GameContent {
     public static final Item ITEM_FIREWORK = getItem("firework").setMaxAmount(25);
     public static final Item ITEM_STAT_NOTE = getItem("start_note").setMaxAmount(1);
     public static final Item ITEM_PLANT_FIBER = getItem("plant_fiber").setMaxAmount(150);
+    public static final Item ITEM_YARN = getItem("yarn").setMaxAmount(30);
     public static final Item ITEM_TWIG = getItem("twig").setMaxAmount(150);
     public static final Item ITEM_STICK = getItem("stick").setMaxAmount(150);
     public static final Item ITEM_STONE_PICKAXE = getItem("stone_pickaxe");

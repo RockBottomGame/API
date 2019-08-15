@@ -58,7 +58,7 @@ public class ConstructionRecipe extends PlayerCompendiumRecipe {
     }
 
     public ConstructionRecipe(ResourceName name, List<ConstructionTool> tools, boolean isKnowledge, float skillReward, ItemInstance output, IUseInfo... inputs) {
-        this(name, tools, Arrays.asList(inputs), Collections.singletonList(output), true, isKnowledge, skillReward);
+        this(name, tools, Arrays.asList(inputs), Collections.singletonList(output), false, isKnowledge, skillReward);
     }
 
     public ConstructionRecipe(List<ConstructionTool> tools, boolean isKnowledge, float skillReward, ItemInstance output, IUseInfo... inputs) {
