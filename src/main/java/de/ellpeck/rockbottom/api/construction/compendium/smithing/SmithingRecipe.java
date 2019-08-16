@@ -49,13 +49,14 @@ public class SmithingRecipe extends PlayerCompendiumRecipe {
 	}
 
 	private boolean hasTools(TileEntity machine) {
+		if (machine == null) return false;
         IToolStation station = (IToolStation) machine;
         return station.damageTool(this.tool, true);
     }
 
 	@Override
 	public ComponentConstruct getConstructButton(Gui gui, AbstractEntityPlayer player, TileEntity machine, boolean canConstruct) {
-		return new ComponentConstruct(gui, this, hasTools(machine), canConstruct, () -> {
+		return new ComponentConstruct(gui, this, hasTools(machine), canConstruct, machine == null ? null : () -> {
 		    if (hasTools(machine) && canConstruct) {
                 this.playerConstruct(player, machine, 1);
                 return true;
