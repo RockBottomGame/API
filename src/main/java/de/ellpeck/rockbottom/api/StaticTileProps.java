@@ -61,7 +61,7 @@ public final class StaticTileProps {
      */
     public static final IntProp SAPLING_GROWTH = new IntProp("growth", 0, 5);
     /**
-     * Determines how far grown a plant is. Used by {@link TileTallPlant )
+     * Determines how far grown a plant is. Used by {@link TileTallPlant}
      */
     public static final IntProp PLANT_GROWTH = new IntProp("growth", 0, 10);
     /**
