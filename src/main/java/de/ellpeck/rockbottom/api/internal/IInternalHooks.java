@@ -26,9 +26,8 @@ import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.IRenderer;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.assets.font.FormattingCode;
-import de.ellpeck.rockbottom.api.construction.ConstructionTool;
-import de.ellpeck.rockbottom.api.construction.compendium.ICompendiumRecipe;
 import de.ellpeck.rockbottom.api.construction.compendium.PlayerCompendiumRecipe;
+import de.ellpeck.rockbottom.api.construction.compendium.smithing.SmithingRecipe;
 import de.ellpeck.rockbottom.api.effect.ActiveEffect;
 import de.ellpeck.rockbottom.api.entity.AbstractEntityItem;
 import de.ellpeck.rockbottom.api.entity.Entity;
@@ -47,7 +46,6 @@ import de.ellpeck.rockbottom.api.item.Item;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.tile.Tile;
 import de.ellpeck.rockbottom.api.tile.TileLiquid;
-import de.ellpeck.rockbottom.api.tile.entity.IToolStation;
 import de.ellpeck.rockbottom.api.tile.entity.TileEntity;
 import de.ellpeck.rockbottom.api.tile.state.IStateHandler;
 import de.ellpeck.rockbottom.api.tile.state.TileState;
@@ -73,16 +71,8 @@ public interface IInternalHooks {
 
     boolean doDefaultShiftClicking(IGameInstance game, int button, GuiContainer gui, ComponentSlot slot);
 
+    // TODO: Move to IApiHandler
     boolean placeTile(int x, int y, TileLayer layer, AbstractEntityPlayer player, ItemInstance selected, Tile tile, boolean removeItem, boolean simulate);
-
-    /**
-     * Checks if the tile entity is a construction table, and if it has a tool
-     * @param craftingStation The construction table tile entity
-     * @param tool What tool and how much usage is needed
-     * @param simulate Should we actually damage the tool, or just check if it is there
-     * @return
-     */
-    boolean useCraftingTool(IToolStation craftingStation, ConstructionTool tool, boolean simulate);
 
     /**
      * Returns a list of compendium recipes that can be unlocked by breaking the specified tile
@@ -126,5 +116,5 @@ public interface IInternalHooks {
 
     void packetEntityData(Entity entity);
 
-    void defaultConstruct(AbstractEntityPlayer player, PlayerCompendiumRecipe recipe, TileEntity machine);
+    void smithingConstruct(AbstractEntityPlayer player, TileEntity tile, SmithingRecipe recipe, List<ItemInstance> actualInputs);
 }

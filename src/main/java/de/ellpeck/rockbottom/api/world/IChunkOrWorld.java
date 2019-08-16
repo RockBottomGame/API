@@ -323,6 +323,57 @@ public interface IChunkOrWorld extends IAdditionalDataProvider {
      */
     <T extends Entity> List<T> getEntities(BoundBox area, Class<T> type, Predicate<T> test);
 
+
+    /**
+     * Gets a list of all of the {@link Entity} objects that are currently in
+     * the given List of {@link BoundBox}.
+     *
+     * @param area The area to check for entities
+     * @return All of the entities
+     */
+    List<Entity> getEntities(List<BoundBox> area);
+
+    /**
+     * Gets a list of all of the {@link Entity} objects that are currently in
+     * the given List of {@link BoundBox} and for which the given {@link Predicate}
+     * applies.
+     *
+     * @param area The area to check for entities
+     * @param test The predicate that needs to apply for them to be added to the
+     *             list
+     * @return All of the entities
+     */
+    List<Entity> getEntities(List<BoundBox> area, Predicate<Entity> test);
+
+    /**
+     * Gets a list of all of the {@link Entity} objects that are currently in
+     * the given List of {@link BoundBox} that also are objects of or whose classes
+     * extend the given {@link Class}.
+     *
+     * @param area The area to check for entities
+     * @param type The type that they need to be
+     * @param <T>  A generic type representing the type of entities that are
+     *             being looked for
+     * @return All of the entities
+     */
+    <T extends Entity> List<T> getEntities(List<BoundBox> area, Class<T> type);
+
+    /**
+     * Gets a list of all of the {@link Entity} objects that are currently in
+     * the given List of {@link BoundBox} that also are objects of or whose classes
+     * extend the given {@link Class} and for which the given {@link Predicate}
+     * applies.
+     *
+     * @param area The area to check for entities
+     * @param type The type that they need to be
+     * @param test The predicate that needs to apply for them to be added to the
+     *             list
+     * @param <T>  A generic type representing the type of entities that are
+     *             being looked for
+     * @return All of the entities
+     */
+    <T extends Entity> List<T> getEntities(List<BoundBox> area, Class<T> type, Predicate<T> test);
+
     /**
      * Gets the combined light at the given position in the world. The combined
      * light is a combination of {@link #getSkyLight(int, int)}, {@link

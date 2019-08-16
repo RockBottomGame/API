@@ -21,7 +21,11 @@
 
 package de.ellpeck.rockbottom.api.util;
 
+import java.util.List;
+
 public final class BoundBox {
+
+    public static final BoundBox NULL_BOUNDS = new BoundBox();
 
     private double minX;
     private double minY;
@@ -35,6 +39,28 @@ public final class BoundBox {
 
     public BoundBox(double minX, double minY, double maxX, double maxY) {
         this.set(minX, minY, maxX, maxY);
+    }
+
+    public static BoundBox getCombinedBoundBox(List<BoundBox> boxes) {
+        if (boxes.isEmpty())
+            return BoundBox.NULL_BOUNDS;
+        double minAreaX = Double.MAX_VALUE;
+        double minAreaY = Double.MAX_VALUE;
+        double maxAreaX = Double.MIN_VALUE;
+        double maxAreaY = Double.MIN_VALUE;
+
+        for (BoundBox box : boxes) {
+            if (box.minX < minAreaX)
+                minAreaX = box.minX;
+            if (box.minY < minAreaY)
+                minAreaY = box.minY;
+            if (box.maxX > maxAreaX)
+                maxAreaX = box.maxX;
+            if (box.maxY > maxAreaY)
+                maxAreaY = box.maxY;
+        }
+
+        return new BoundBox(minAreaX, minAreaY, maxAreaX, maxAreaY);
     }
 
     public BoundBox set(BoundBox box) {

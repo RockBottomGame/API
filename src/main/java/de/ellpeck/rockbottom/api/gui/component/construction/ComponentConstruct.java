@@ -42,6 +42,7 @@ public class ComponentConstruct extends GuiComponent {
     private final ICompendiumRecipe recipe;
     private final boolean hasTool;
     private final boolean hasIngredients;
+    // TODO 0.4 Rename 'consumer' to something more resembling 'onClick' or 'onConstruct'
     private final Supplier<Boolean> consumer;
 
     public ComponentConstruct(Gui gui, ICompendiumRecipe recipe, boolean hasTool, boolean hasIngredients, Supplier<Boolean> consumer) {
@@ -77,10 +78,10 @@ public class ComponentConstruct extends GuiComponent {
     @Override
     public boolean onMouseAction(IGameInstance game, int button, float x, float y) {
         if (Settings.KEY_GUI_ACTION_1.isKey(button) && this.isMouseOver(game)) {
-            return this.consumer == null || this.consumer.get();
-        } else {
-            return false;
+            if (this.consumer != null) this.consumer.get();
+            return true;
         }
+        return false;
     }
 
     protected ItemInstance getOutput(IGameInstance game) {

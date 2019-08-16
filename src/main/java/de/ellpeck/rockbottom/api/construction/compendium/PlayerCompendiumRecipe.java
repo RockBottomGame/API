@@ -26,20 +26,27 @@ public abstract class PlayerCompendiumRecipe extends BasicCompendiumRecipe {
 	/**
 	 * Called during construction with the machine used to construct the recipe.
 	 * Provides the same parameters as the ConstructEvent directly to the recipe.
+	 * @param player The player
+	 * @param inputInventory the input inventory
+	 * @param outputInventory the output inventory
+	 * @param machine the machine
+	 * @param recipeInputs the inputs as dictated from the recipe
+     * @param actualInputs the actual item instance inputs provided from the inventory
+	 * @param outputGetter the output
+	 * @param skillReward the skill reward
 	 * @return True if the construction should continue
 	 */
-	public boolean handleMachine(AbstractEntityPlayer player, Inventory inputInventory, Inventory outputInventory, TileEntity machine, int amount, List<IUseInfo> inputs, Function<List<ItemInstance>, List<ItemInstance>> outputGetter, float skillReward) {
+	public boolean handleRecipe(AbstractEntityPlayer player, Inventory inputInventory, Inventory outputInventory, TileEntity machine, List<IUseInfo> recipeInputs, List<ItemInstance> actualInputs, Function<List<ItemInstance>, List<ItemInstance>> outputGetter, float skillReward) {
 		return true;
 	}
 
 	public void playerConstruct(AbstractEntityPlayer player, TileEntity machine, int amount) {
 		Inventory inv = player.getInv();
-		List<ItemInstance> remains = RockBottomAPI.getApiHandler().construct(player, inv, inv, this, machine, amount, this.getActualInputs(inv), items -> this.getActualOutputs(inv, inv, items), this.getSkillReward());
+		List<ItemInstance> remains = RockBottomAPI.getApiHandler().construct(player, inv, inv, this, machine, amount, this.getActualInputs(inv), null, items -> this.getActualOutputs(inv, inv, items), this.getSkillReward());
 		for (ItemInstance instance : remains) {
 			AbstractEntityItem.spawn(player.world, instance, player.getX(), player.getY(), 0F, 0F);
 		}
 	}
-
 
 	public ResourceName getKnowledgeInformationName() {
 		return this.infoName;
