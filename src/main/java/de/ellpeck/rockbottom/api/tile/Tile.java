@@ -106,7 +106,7 @@ public class Tile {
 
 	public List<BoundBox> getBoundBoxes(IWorld world, TileState state, int x, int y, TileLayer layer, MovableWorldObject object, BoundBox objectBox, BoundBox objectBoxMotion) {
         if (layer == TileLayer.MAIN && this.isChiseled(world, x, y, layer, state))
-            return getChiselBoundBoxes(world, x, y, layer, object, objectBox, objectBoxMotion);
+            return getChiselBoundBoxes(world, x, y);
 
 		BoundBox box = this.getBoundBox(world, state, x, y, layer);
 
@@ -128,7 +128,7 @@ public class Tile {
         }
     }
 
-    protected List<BoundBox> getChiselBoundBoxes(IWorld world, int x, int y, TileLayer layer, MovableWorldObject object, BoundBox objectBox, BoundBox objectBoxMotion) {
+    protected List<BoundBox> getChiselBoundBoxes(IWorld world, int x, int y) {
         List<BoundBox> boxes = new ArrayList<>();
         boolean[] chiseledCorners = Util.decodeBitVector(world.getState(x, y).get(StaticTileProps.CHISEL_STATE), 4);
         for (int i = 0; i < CHISEL_BOUNDS.length; i++) {
@@ -371,8 +371,9 @@ public class Tile {
     }
 
     public boolean isChiseled(IWorld world, int x, int y, TileLayer layer, TileState state) {
-        if (layer == TileLayer.MAIN && this.isChiselable())
+        if (layer == TileLayer.MAIN && state.getTile().isChiselable()) {
             return state.get(StaticTileProps.CHISEL_STATE) > 0;
+        }
         return false;
     }
 
@@ -496,7 +497,21 @@ public class Tile {
     }
 
     public boolean canLiquidSpread(IWorld world, int x, int y, TileLiquid liquid, Direction dir) {
-        return !this.isFullTile();
+        if (!this.isChiseled(world, x, y, TileLayer.MAIN, world.getState(x, y)))
+            return !this.isFullTile();
+
+        TileState state = world.getState(x, y);
+        int prop = state.get(StaticTileProps.CHISEL_STATE);
+        boolean[] chiseledCorners = Util.decodeBitVector(prop, 4);
+
+        switch (dir) {
+            case UP: return chiseledCorners[0] || chiseledCorners[1];
+            case DOWN: return chiseledCorners[2] || chiseledCorners[3];
+            case LEFT: return chiseledCorners[0] || chiseledCorners[1];
+            case RIGHT: return chiseledCorners[1] || chiseledCorners[3];
+            case NONE: return true;
+            default: return false;
+        }
     }
 
     public boolean isLiquid() {
