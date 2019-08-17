@@ -57,7 +57,7 @@ public class TileMeta extends TileBasic {
 
     @Override
     protected ITileRenderer createRenderer(ResourceName name) {
-        return new TileMetaRenderer();
+        return new TileMetaRenderer(name);
     }
 
     @Override

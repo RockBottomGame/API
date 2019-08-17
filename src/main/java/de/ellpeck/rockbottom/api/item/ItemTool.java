@@ -21,18 +21,16 @@
 
 package de.ellpeck.rockbottom.api.item;
 
-import de.ellpeck.rockbottom.api.assets.IAssetManager;
-import de.ellpeck.rockbottom.api.assets.font.FormattingCode;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.render.item.IItemRenderer;
 import de.ellpeck.rockbottom.api.render.item.ItemToolRenderer;
 import de.ellpeck.rockbottom.api.tile.Tile;
+import de.ellpeck.rockbottom.api.tile.state.TileState;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 import de.ellpeck.rockbottom.api.world.IWorld;
 import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class ItemTool extends ItemBasicTool {
@@ -71,5 +69,20 @@ public class ItemTool extends ItemBasicTool {
         if (!world.isClient()) {
             this.takeDamage(instance, player, 1);
         }
+    }
+
+    @Override
+    public boolean onInteractWith(IWorld world, int x, int y, TileLayer layer, double mouseX, double mouseY, AbstractEntityPlayer player, ItemInstance instance) {
+        if (!this.hasToolProperty(instance, ToolProperty.CHISEL) || layer != TileLayer.MAIN)
+            return false;
+
+        TileState state = world.getState(x, y);
+        if (state.getTile().chisel(world, x, y, state, mouseX, mouseY)) {
+            if (!world.isClient()) {
+                this.takeDamage(instance, 1);
+            }
+            return true;
+        }
+        return false;
     }
 }

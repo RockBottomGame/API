@@ -389,10 +389,13 @@ public final class Util {
 
     /**
      * Creates an integer representation of a bit vector from an array of booleans
+     * Reverse of {@link Util#decodeBitVector(int, int)}
      * @param inputs The bits as booleans
      * @return The int equivalent of ORing the boolean inputs.
+     *
+     * @see Util#decodeBitVector(int, int)
      */
-    public static int createBitVector(boolean... inputs) {
+    public static int encodeBitVector(boolean... inputs) {
         if (inputs.length == 0) return 0;
         int out = 0;
         int max = Math.min(inputs.length, 32);
@@ -405,15 +408,18 @@ public final class Util {
 
     /**
      * Separates a bit vector into an array of booleans whose are true if the bit is 1.
+     * Reverse of {@link Util#encodeBitVector(boolean...)}
      * @param input The input to decode
      * @param size The size of the out array (how many bits to check).
      * @return An array of booleans representing the bits of the input
+     *
+     * @see Util#encodeBitVector(boolean...)
      */
     public static boolean[] decodeBitVector(int input, int size) {
         int max = Math.min(size, 32);
         boolean[] out = new boolean[max];
         for (int i = 0; i < max; i++) {
-            out[i] = (input >> (max - i) & 1) == 1;
+            out[i] = ((input >> i) & 1) == 1;
         }
         return out;
     }

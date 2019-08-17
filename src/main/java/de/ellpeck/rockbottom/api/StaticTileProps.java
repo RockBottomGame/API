@@ -107,7 +107,7 @@ public final class StaticTileProps {
      * Bit 2 - Bottom Left
      * Bit 3 - Bottom Right
      */
-    public static final IntProp CHISEL_STATE = new IntProp("chisel_state", 0, 16);
+    public static final IntProp CHISEL_STATE = new IntProp("chisel_state", 0, 15);
 
     /**
      * An enum of log types that are used for the {@link #LOG_VARIANT}
