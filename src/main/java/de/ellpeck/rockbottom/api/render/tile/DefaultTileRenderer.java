@@ -140,7 +140,7 @@ public class DefaultTileRenderer<T extends Tile> implements ITileRenderer<T> {
         return manager.getTexture(this.texture).getAdditionalData(name);
     }
 
-    private int[] getChiseledLight(int[] light, int corner) {
+    protected int[] getChiseledLight(int[] light, int corner) {
         if (corner > 3)
             return light;
         int[] newLight = new int[4];
