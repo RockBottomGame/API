@@ -64,7 +64,7 @@ public class TileMetaRenderer<T extends TileMeta> extends DefaultTileRenderer<T>
         return super.getParticleTexture(game, manager, g, tile, state);
     }
 
-    protected ResourceName getTexture(T tile, int meta) {
+    protected ResourceName getTextureResource(T tile, int meta) {
         if (meta >= 0 && meta < tile.subResourceNames.size()) {
             return tile.subResourceNames.get(meta);
         } else {
@@ -74,10 +74,10 @@ public class TileMetaRenderer<T extends TileMeta> extends DefaultTileRenderer<T>
 
     @Override
     public JsonElement getAdditionalTextureData(IGameInstance game, IAssetManager manager, IRenderer g, T tile, ItemInstance instance, AbstractEntityPlayer player, String name) {
-        return manager.getTexture(this.getTexture(tile, instance.getMeta())).getAdditionalData(name);
+        return manager.getTexture(this.getTextureResource(tile, instance.getMeta())).getAdditionalData(name);
     }
 
     private void setTextureResource(T tile, int meta) {
-        this.texture = getTexture(tile, meta);
+        this.texture = getTextureResource(tile, meta);
     }
 }
