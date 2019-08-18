@@ -51,13 +51,18 @@ public class DefaultTileRenderer<T extends Tile> implements ITileRenderer<T> {
 
     @Override
     public void render(IGameInstance game, IAssetManager manager, IRenderer g, IWorld world, T tile, TileState state, int x, int y, TileLayer layer, float renderX, float renderY, float scale, int[] light) {
-        if (!tile.isChiseled(world, x, y, layer, state)) {
+        if (!tile.isChiseled(world, x, y, layer, state))
             manager.getTexture(this.texture).getPositionalVariation(x, y).draw(renderX, renderY, scale, scale, light);
-            if (tile.isChiselable()) {
-                this.renderChiselHighlight(game, g, null, x, y, renderX, renderY, scale);
-            }
-        } else
+
+    }
+
+    @Override
+    public void renderInForeground(IGameInstance game, IAssetManager manager, IRenderer g, IWorld world, T tile, TileState state, int x, int y, TileLayer layer, float renderX, float renderY, float scale, int[] light) {
+        if (tile.isChiseled(world, x, y, layer, state))
             this.renderChiseled(game, manager, g, world, tile, state, x, y, layer, renderX, renderY, scale, light);
+        else if (tile.isChiselable())
+            this.renderChiselHighlight(game, g, null, x, y, renderX, renderY, scale);
+
     }
 
     @Override

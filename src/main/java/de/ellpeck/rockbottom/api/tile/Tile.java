@@ -507,7 +507,7 @@ public class Tile {
         switch (dir) {
             case UP: return chiseledCorners[0] || chiseledCorners[1];
             case DOWN: return chiseledCorners[2] || chiseledCorners[3];
-            case LEFT: return chiseledCorners[0] || chiseledCorners[1];
+            case LEFT: return chiseledCorners[0] || chiseledCorners[2];
             case RIGHT: return chiseledCorners[1] || chiseledCorners[3];
             case NONE: return true;
             default: return false;

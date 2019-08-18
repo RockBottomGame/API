@@ -213,6 +213,10 @@ public final class BoundBox {
         return this.maxY - this.minY;
     }
 
+    public double getArea() {
+	    return this.getWidth() * this.getHeight();
+    }
+
     public double getCenterX() {
         return this.minX + this.getWidth() / 2D;
     }
