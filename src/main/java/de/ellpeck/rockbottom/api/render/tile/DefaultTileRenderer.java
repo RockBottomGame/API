@@ -141,7 +141,6 @@ public class DefaultTileRenderer<T extends Tile> implements ITileRenderer<T> {
     }
 
     private int[] getChiseledLight(int[] light, int corner) {
-        // TODO: Try and turn this method into a single statement based on the bound box of the chisel.
         if (corner > 3)
             return light;
         int[] newLight = new int[4];
