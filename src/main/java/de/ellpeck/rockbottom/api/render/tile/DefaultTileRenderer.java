@@ -60,7 +60,7 @@ public class DefaultTileRenderer<T extends Tile> implements ITileRenderer<T> {
     public void renderInForeground(IGameInstance game, IAssetManager manager, IRenderer g, IWorld world, T tile, TileState state, int x, int y, TileLayer layer, float renderX, float renderY, float scale, int[] light) {
         if (tile.isChiseled(world, x, y, layer, state))
             this.renderChiseled(game, manager, g, world, tile, state, x, y, layer, renderX, renderY, scale, light);
-        else if (tile.isChiselable())
+        else if (tile.isChiselable() && layer == TileLayer.MAIN)
             this.renderChiselHighlight(game, g, null, x, y, renderX, renderY, scale);
 
     }
