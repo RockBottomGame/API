@@ -83,12 +83,12 @@ public abstract class ItemLiquidContainer extends ItemBasic {
         TileState state = world.getState(TileLayer.LIQUIDS, x, y);
         Tile tile = state.getTile();
 
-        if (stored <= 0) {
+        if (stored <= 0) { // grab liquid from world
             if (tile instanceof TileLiquid) {
                 IntProp amountProp = ((TileLiquid) tile).level;
-                int tileAmount = state.get(amountProp);
-                int toStore = Math.min(tileAmount, this.getCapacity(instance));
-                if (toStore > 0) {
+                int tileAmount = state.get(amountProp) + 1;
+                if (this.getCapacity(instance) > 0) { // container capacity > 0
+                    int toStore = Math.min(tileAmount, this.getCapacity(instance));
                     if (this.allowsLiquid(instance, tile.getName())) {
                         if (!world.isClient()) {
                             storeLiquid(instance, tile.getName(), toStore);
@@ -97,15 +97,14 @@ public abstract class ItemLiquidContainer extends ItemBasic {
                             if (toStore >= tileAmount) {
                                 world.setState(TileLayer.LIQUIDS, x, y, GameContent.TILE_AIR.getDefState());
                             } else {
-                                world.setState(TileLayer.LIQUIDS, x, y, state.prop(amountProp, tileAmount - toStore));
+                                world.setState(TileLayer.LIQUIDS, x, y, state.prop(amountProp, tileAmount - 1 - toStore));
                             }
                         }
-
                         return true;
                     }
                 }
             }
-        } else {
+        } else { // put liquid in world
             if (tile.isAir()) {
                 if (!world.isClient()) {
                     ResourceName liquid = getLiquid(instance);
@@ -114,7 +113,7 @@ public abstract class ItemLiquidContainer extends ItemBasic {
                         IntProp amountProp = ((TileLiquid) toPlace).level;
                         int toPutDown = Math.min(stored, amountProp.getVariants());
 
-                        TileState placeState = toPlace.getDefState().prop(amountProp, toPutDown);
+                        TileState placeState = toPlace.getDefState().prop(amountProp, toPutDown - 1);
                         world.setState(TileLayer.LIQUIDS, x, y, placeState);
 
                         if (toPutDown >= stored) {

@@ -80,11 +80,12 @@ public class Item {
 
     /**
      * Allows items to add to the tooltip
-     * @param instance The item that is being described
-     * @param desc The item description. You can add to this list or replace it.
-     * @param isAdvanced If the player is holding SHIFT to view advanced info
-     * @param isRealItem Does the player actually own this item or is it a preview in a GUI?
-     *                   Used by tools to display durability descriptors only on real items.
+     * @param manager       The asset manager
+     * @param instance      The item that is being described
+     * @param desc          The item description. You can add to this list or replace it.
+     * @param isAdvanced    If the player is holding SHIFT to view advanced info
+     * @param isRealItem    Does the player actually own this item or is it a preview in a GUI?
+     *                      Used by tools to display durability descriptors only on real items.
      */
     public void describeItem(IAssetManager manager, ItemInstance instance, List<String> desc, boolean isAdvanced, boolean isRealItem) {
         desc.add(instance.getDisplayName());
@@ -125,6 +126,10 @@ public class Item {
 
     public Map<ToolProperty, Integer> getToolProperties(ItemInstance instance) {
         return Collections.emptyMap();
+    }
+
+    public boolean hasToolProperty(ItemInstance instance, ToolProperty property) {
+        return this.getToolProperties(instance).containsKey(property);
     }
 
     public float getMiningSpeed(IWorld world, int x, int y, TileLayer layer, Tile tile, boolean isRightTool, ItemInstance instance) {

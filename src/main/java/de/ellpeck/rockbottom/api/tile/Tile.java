@@ -21,8 +21,10 @@
 
 package de.ellpeck.rockbottom.api.tile;
 
+import de.ellpeck.rockbottom.api.GameContent;
 import de.ellpeck.rockbottom.api.Registries;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
+import de.ellpeck.rockbottom.api.StaticTileProps;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.assets.font.FormattingCode;
 import de.ellpeck.rockbottom.api.construction.compendium.PlayerCompendiumRecipe;
@@ -57,12 +59,13 @@ public class Tile {
 
     public static final BoundBox DEFAULT_BOUNDS = new BoundBox(0, 0, 1, 1);
 
-    public static final BoundBox PLATFORM_TOP = new BoundBox(0, 11/12d, 1, 1);
-    public static final BoundBox PLATFORM_RIGHT = new BoundBox(11/12d, 0, 1, 1);
-    public static final BoundBox PLATFORM_DOWN = new BoundBox(0, 0, 1, 1/12d);
-    public static final BoundBox PLATFORM_LEFT = new BoundBox(0, 0, 1/12d, 1);
-    public static final BoundBox[] PLATFORM_BOUNDS = new BoundBox[] {
-            PLATFORM_TOP, PLATFORM_RIGHT, PLATFORM_DOWN, PLATFORM_LEFT
+    public static final BoundBox TOP_LEFT = new BoundBox(0, 0.5d, 0.5d, 1);
+    public static final BoundBox TOP_RIGHT = new BoundBox(0.5d, 0.5d, 1, 1);
+    public static final BoundBox BOTTOM_LEFT = new BoundBox(0, 0, 0.5d, 0.5d);
+    public static final BoundBox BOTTOM_RIGHT = new BoundBox(0.5d, 0, 1, 0.5d);
+
+    public static final BoundBox[] CHISEL_BOUNDS = new BoundBox[]{
+            TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT
     };
 
     private static final ResourceName SOUND_GENERIC_TILE = ResourceName.intern("tiles.generic_tile");
@@ -74,6 +77,7 @@ public class Tile {
     protected Map<ToolProperty, Integer> effectiveToolProps = new HashMap<>();
     protected boolean forceDrop;
     protected float hardness = 1F;
+    protected boolean isChiselable;
 
     public Tile(ResourceName name) {
         this.name = name;
@@ -103,8 +107,11 @@ public class Tile {
 	public List<BoundBox> getBoundBoxes(IWorld world, TileState state, int x, int y, TileLayer layer, MovableWorldObject object, BoundBox objectBox, BoundBox objectBoxMotion) {
         if (this.isPlatform())
             return this.getPlatformBounds(world, x, y, layer, state, object, objectBox, objectBoxMotion);
+    
+        if (layer == TileLayer.MAIN && this.isChiseled(world, x, y, layer, state))
+            return getChiselBoundBoxes(world, x, y);
 
-        BoundBox box = this.getBoundBox(world, state, x, y, layer);
+		BoundBox box = this.getBoundBox(world, state, x, y, layer);
 
 		if (box != null && !box.isEmpty()) {
 			return Collections.singletonList(box.copy().add(x, y));
@@ -132,6 +139,17 @@ public class Tile {
         if (!(this instanceof MultiTile) || (state.get(((MultiTile) this).propSubY) == ((MultiTile) this).getHeight() - 1))
             return RockBottomAPI.getApiHandler().getDefaultPlatformBounds(world, x, y, layer, 1, 1, state, object, objectBox);
         return Collections.emptyList();
+    }
+  
+    protected List<BoundBox> getChiselBoundBoxes(IWorld world, int x, int y) {
+        List<BoundBox> boxes = new ArrayList<>();
+        boolean[] chiseledCorners = Util.decodeBitVector(world.getState(x, y).get(StaticTileProps.CHISEL_STATE), 4);
+        for (int i = 0; i < CHISEL_BOUNDS.length; i++) {
+            if (!chiseledCorners[i]) {
+                boxes.add(CHISEL_BOUNDS[i].copy().add(x, y));
+            }
+        }
+        return boxes;
     }
 
     public boolean canBreak(IWorld world, int x, int y, TileLayer layer, AbstractEntityPlayer player, boolean isRightTool) {
@@ -210,6 +228,48 @@ public class Tile {
         return false;
     }
 
+    /**
+     * Attempts to chisel a corner of the tile based on the cursor position.
+     * Only works if the tile is {@link Tile#isChiselable()}
+     * @param world The {@link IWorld} the tile is in.
+     * @param x The x position of the tile
+     * @param y The y position of the tile
+     * @param state The {@link TileState} of the tile
+     * @param mouseX The x position of the cursor
+     * @param mouseY The y position of the cursor
+     * @return True if the tile has been chiseled, false otherwise.
+     */
+    public boolean chisel(IWorld world, int x, int y, TileState state, double mouseX, double mouseY) {
+        if (!isChiselable())
+            return false;
+
+        mouseX -= x;
+        mouseY -= y;
+
+        int corner = (Util.floor((1-mouseY) * 2f) << 1) + Util.floor(mouseX * 2f);
+        return chiselCorner(world, x, y, state, corner);
+    }
+
+    // Chisels a specific corner.
+    // The corner param is representing the bit of the corner from StaticTileProps.CHISEL_STATE
+    private boolean chiselCorner(IWorld world, int x, int y, TileState state, int corner) {
+        int prop = state.get(StaticTileProps.CHISEL_STATE);
+        boolean[] chiseledCorners = Util.decodeBitVector(prop, 4);
+
+        if (chiseledCorners[corner])
+            return false;
+
+        prop += 1 << corner;
+        if (!world.isClient()) {
+            if (prop == 0b1111) {
+                world.setState(x, y, GameContent.TILE_AIR.getDefState());
+            } else {
+                world.setState(x, y, state.prop(StaticTileProps.CHISEL_STATE, prop));
+            }
+        }
+        return true;
+    }
+
     public void onDestroyed(IWorld world, int x, int y, Entity destroyer, TileLayer layer, boolean shouldDrop) {
         List<ItemInstance> drops = new ArrayList<>();
 
@@ -232,6 +292,9 @@ public class Tile {
     }
 
     public List<ItemInstance> getDrops(IWorld world, int x, int y, TileLayer layer, Entity destroyer) {
+        if (this.isChiseled(world, x, y, layer, world.getState(layer, x, y)))
+            return Collections.emptyList();
+
         List<ItemInstance> drops = new ArrayList<>();
 
         Item item = this.getItem();
@@ -265,7 +328,7 @@ public class Tile {
     }
 
     public boolean obscuresBackground(IWorld world, int x, int y, TileLayer layer) {
-        return this.isFullTile();
+        return this.isFullTile() && !this.isChiseled(world, x, y, layer, world.getState(layer, x, y));
     }
 
     public void updateRandomly(IWorld world, int x, int y, TileLayer layer) {
@@ -304,6 +367,27 @@ public class Tile {
     public Tile setForceDrop() {
         this.forceDrop = true;
         return this;
+    }
+
+    public boolean isChiselable() {
+        return this.isChiselable;
+    }
+
+    /**
+     * Call this to make your tile chiselable. Make sure you do this before you call the {@link Tile#register()} method.
+     * @return The tile
+     */
+    public Tile setChiselable() {
+        this.isChiselable = true;
+        this.addProps(StaticTileProps.CHISEL_STATE);
+        return this;
+    }
+
+    public boolean isChiseled(IWorld world, int x, int y, TileLayer layer, TileState state) {
+        if (layer == TileLayer.MAIN && state.getTile().isChiselable()) {
+            return state.get(StaticTileProps.CHISEL_STATE) > 0;
+        }
+        return false;
     }
 
     public boolean isToolEffective(IWorld world, int x, int y, TileLayer layer, ToolProperty property, int level) {
@@ -401,6 +485,10 @@ public class Tile {
         return this.stateHandler.getProps();
     }
 
+    public boolean hasProp(TileProp prop) {
+        return this.getProps().contains(prop);
+    }
+
     public boolean hasState(ResourceName name, Map<String, Comparable> props) {
         return true;
     }
@@ -421,8 +509,22 @@ public class Tile {
         return this.isFullTile();
     }
 
-    public boolean canLiquidSpreadInto(IWorld world, int x, int y, TileLiquid liquid) {
-        return !this.isFullTile();
+    public boolean canLiquidSpread(IWorld world, int x, int y, TileLiquid liquid, Direction dir) {
+        if (!this.isChiseled(world, x, y, TileLayer.MAIN, world.getState(x, y)))
+            return !this.isFullTile();
+
+        TileState state = world.getState(x, y);
+        int prop = state.get(StaticTileProps.CHISEL_STATE);
+        boolean[] chiseledCorners = Util.decodeBitVector(prop, 4);
+
+        switch (dir) {
+            case UP: return chiseledCorners[0] || chiseledCorners[1];
+            case DOWN: return chiseledCorners[2] || chiseledCorners[3];
+            case LEFT: return chiseledCorners[0] || chiseledCorners[2];
+            case RIGHT: return chiseledCorners[1] || chiseledCorners[3];
+            case NONE: return true;
+            default: return false;
+        }
     }
 
     public boolean isLiquid() {

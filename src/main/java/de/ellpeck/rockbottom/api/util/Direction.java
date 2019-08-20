@@ -77,5 +77,11 @@ public enum Direction {
         if (side > 0) return RIGHT;
         return NONE;
     }
+  
+    public static Direction getVertical(int side) {
+        if (side < 0) return DOWN;
+        if (side > 0) return UP;
+        return NONE;
+    }
 }
 

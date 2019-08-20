@@ -59,6 +59,14 @@ public final class TileState {
         }
     }
 
+    public boolean hasProp(String prop) {
+        return this.properties.containsKey(prop);
+    }
+
+    public boolean hasProp(TileProp prop) {
+        return this.hasProp(prop.getName());
+    }
+
     public <T extends Comparable> TileState prop(TileProp<T> prop, T value) {
         return this.prop(prop.getName(), value);
     }
