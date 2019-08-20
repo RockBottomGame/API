@@ -114,11 +114,23 @@ public final class BoundBox {
     }
 
     public BoundBox getIntersection(BoundBox other) {
+        if (other == null)
+            return NULL_BOUNDS;
         return new BoundBox(
                 Math.max(this.getMinX(), other.getMinX()),
                 Math.max(this.getMinY(), other.getMinY()),
                 Math.min(this.getMaxX(), other.getMaxX()),
                 Math.min(this.getMaxY(), other.getMaxY()));
+    }
+
+    public BoundBox getUnion(BoundBox other) {
+        if (other == null)
+            return this.copy();
+        return new BoundBox(
+                Math.min(this.getMinX(), other.getMinX()),
+                Math.min(this.getMinX(), other.getMinY()),
+                Math.max(this.getMaxX(), other.getMaxX()),
+                Math.max(this.getMaxY(), other.getMaxY()));
     }
 
     public boolean isEmpty() {
@@ -199,6 +211,10 @@ public final class BoundBox {
 
     public double getHeight() {
         return this.maxY - this.minY;
+    }
+
+    public double getArea() {
+	    return this.getWidth() * this.getHeight();
     }
 
     public double getCenterX() {

@@ -33,6 +33,7 @@ public class ToolProperty {
     public static final ToolProperty PESTLE = new ToolProperty(ResourceName.intern("pestle")).register();
     public static final ToolProperty BOOMERANG = new ToolProperty(ResourceName.intern("boomerang")).register();
     public static final ToolProperty HOE = new ToolProperty(ResourceName.intern("hoe")).register();
+    public static final ToolProperty CHISEL = new ToolProperty(ResourceName.intern("chisel")).register();
 
     private final ResourceName name;
 

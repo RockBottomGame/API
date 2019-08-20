@@ -99,6 +99,15 @@ public final class StaticTileProps {
      * GameContent#TILE_STARDROP}
      */
     public static final IntProp STARDROP_GROWTH = new IntProp("growth", 0, 3);
+    /**
+     * Determines which corners of a tile have been chiseled.
+     * The chiseled corner is represented by the bit of the 16 different values.
+     * Bit 0 - Top Left
+     * Bit 1 - Top Right
+     * Bit 2 - Bottom Left
+     * Bit 3 - Bottom Right
+     */
+    public static final IntProp CHISEL_STATE = new IntProp("chisel_state", 0, 15);
 
     /**
      * An enum of log types that are used for the {@link #LOG_VARIANT}

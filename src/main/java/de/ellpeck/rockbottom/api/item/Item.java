@@ -128,6 +128,10 @@ public class Item {
         return Collections.emptyMap();
     }
 
+    public boolean hasToolProperty(ItemInstance instance, ToolProperty property) {
+        return this.getToolProperties(instance).containsKey(property);
+    }
+
     public float getMiningSpeed(IWorld world, int x, int y, TileLayer layer, Tile tile, boolean isRightTool, ItemInstance instance) {
         return 1F;
     }
