@@ -102,6 +102,8 @@ public class TileMeta extends TileBasic {
 
     @Override
     public List<ItemInstance> getDrops(IWorld world, int x, int y, TileLayer layer, Entity destroyer) {
+        if (this.isChiseled(world, x, y, layer, world.getState(layer, x, y)))
+            return Collections.emptyList();
         return Collections.singletonList(new ItemInstance(this, 1, world.getState(layer, x, y).get(this.metaProp)));
     }
 }
