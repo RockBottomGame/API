@@ -45,6 +45,7 @@ import de.ellpeck.rockbottom.api.tile.state.IStateHandler;
 import de.ellpeck.rockbottom.api.tile.state.TileProp;
 import de.ellpeck.rockbottom.api.tile.state.TileState;
 import de.ellpeck.rockbottom.api.util.BoundBox;
+import de.ellpeck.rockbottom.api.util.Direction;
 import de.ellpeck.rockbottom.api.util.Util;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 import de.ellpeck.rockbottom.api.world.IWorld;
@@ -55,6 +56,15 @@ import java.util.*;
 public class Tile {
 
     public static final BoundBox DEFAULT_BOUNDS = new BoundBox(0, 0, 1, 1);
+
+    public static final BoundBox PLATFORM_TOP = new BoundBox(0, 11/12d, 1, 1);
+    public static final BoundBox PLATFORM_RIGHT = new BoundBox(11/12d, 0, 1, 1);
+    public static final BoundBox PLATFORM_DOWN = new BoundBox(0, 0, 1, 1/12d);
+    public static final BoundBox PLATFORM_LEFT = new BoundBox(0, 0, 1/12d, 1);
+    public static final BoundBox[] PLATFORM_BOUNDS = new BoundBox[] {
+            PLATFORM_TOP, PLATFORM_RIGHT, PLATFORM_DOWN, PLATFORM_LEFT
+    };
+
     private static final ResourceName SOUND_GENERIC_TILE = ResourceName.intern("tiles.generic_tile");
     private static final ResourceName LOC_ADVANCED = ResourceName.intern("info.advanced_info");
     private static final ResourceName LOC_LAYER = ResourceName.intern("info.layer_placement");
@@ -91,7 +101,10 @@ public class Tile {
     }
 
 	public List<BoundBox> getBoundBoxes(IWorld world, TileState state, int x, int y, TileLayer layer, MovableWorldObject object, BoundBox objectBox, BoundBox objectBoxMotion) {
-		BoundBox box = this.getBoundBox(world, state, x, y, layer);
+        if (this.isPlatform())
+            return this.getPlatformBounds(world, x, y, layer, state, object, objectBox, objectBoxMotion);
+
+        BoundBox box = this.getBoundBox(world, state, x, y, layer);
 
 		if (box != null && !box.isEmpty()) {
 			return Collections.singletonList(box.copy().add(x, y));
@@ -109,6 +122,16 @@ public class Tile {
         } else {
             return Collections.emptyList();
         }
+    }
+
+    public boolean isPlatform() {
+        return false;
+    }
+
+    public List<BoundBox> getPlatformBounds(IWorld world, int x, int y, TileLayer layer, TileState state, MovableWorldObject object, BoundBox objectBox, BoundBox objectBoxMotion) {
+        if (!(this instanceof MultiTile) || (state.get(((MultiTile) this).propSubY) == ((MultiTile) this).getHeight() - 1))
+            return RockBottomAPI.getApiHandler().getDefaultPlatformBounds(world, x, y, layer, 1, 1, state, object, objectBox);
+        return Collections.emptyList();
     }
 
     public boolean canBreak(IWorld world, int x, int y, TileLayer layer, AbstractEntityPlayer player, boolean isRightTool) {

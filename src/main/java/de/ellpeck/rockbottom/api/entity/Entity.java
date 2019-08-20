@@ -66,6 +66,7 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
     public boolean canBreathe = true;
     public boolean canSwim;
     public boolean isFlying;
+    public boolean isDropping;
     public double interpolationX;
     public double interpolationY;
     protected boolean dead;

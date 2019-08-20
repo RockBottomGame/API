@@ -99,6 +99,11 @@ public final class StaticTileProps {
      * GameContent#TILE_STARDROP}
      */
     public static final IntProp STARDROP_GROWTH = new IntProp("growth", 0, 3);
+    /**
+     * Determines if a tile has ladder inside of it. Used by {@link
+     * GameContent#TILE_PLATFORM}
+     */
+    public static final BoolProp HAS_LADDER = new BoolProp("has_ladder", false);
 
     /**
      * An enum of log types that are used for the {@link #LOG_VARIANT}
