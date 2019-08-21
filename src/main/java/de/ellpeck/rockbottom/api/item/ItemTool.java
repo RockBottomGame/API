@@ -21,8 +21,6 @@
 
 package de.ellpeck.rockbottom.api.item;
 
-import de.ellpeck.rockbottom.api.assets.IAssetManager;
-import de.ellpeck.rockbottom.api.assets.font.FormattingCode;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.render.item.IItemRenderer;
 import de.ellpeck.rockbottom.api.render.item.ItemToolRenderer;
@@ -32,7 +30,6 @@ import de.ellpeck.rockbottom.api.world.IWorld;
 import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class ItemTool extends ItemBasicTool {
