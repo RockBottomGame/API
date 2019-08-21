@@ -150,6 +150,16 @@ public class CombinedInventory implements IFilteredInventory {
     }
 
     @Override
+    public int getNextFreeIndex() {
+        for (IInventory inv : this.inventories) {
+            int index = inv.getNextFreeIndex();
+            if (index >= 0)
+                return index;
+        }
+        return -1;
+    }
+
+    @Override
     public int getActualSlot(IInventory targetInv, int internalSlot) {
         int slotCounter = 0;
         for (IInventory inv : inventories) {

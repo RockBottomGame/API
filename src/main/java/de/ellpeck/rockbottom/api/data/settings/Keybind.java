@@ -57,16 +57,6 @@ public final class Keybind {
         }
     }
 
-    public boolean wasPressedWithinTime(int amount, long time){
-        IInputHandler input = RockBottomAPI.getGame().getInput();
-
-        if(!this.isMouse()){
-            return input.wasKeyPressedWithinTime(this.key, amount, time);
-        }
-
-        return false;
-    }
-
     public boolean isPressed() {
         IInputHandler input = RockBottomAPI.getGame().getInput();
 
