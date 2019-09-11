@@ -176,6 +176,15 @@ public abstract class AbstractInventory implements IInventory {
     }
 
     @Override
+    public int getNextFreeIndex() {
+        for (int i = 0; i < this.getSlotAmount(); i++) {
+            if (this.get(i) == null)
+                return i;
+        }
+        return -1;
+    }
+
+    @Override
     public boolean containsResource(IUseInfo info) {
         for (ItemInstance inst : info.getItems()) {
             if (this.containsItem(inst)) {

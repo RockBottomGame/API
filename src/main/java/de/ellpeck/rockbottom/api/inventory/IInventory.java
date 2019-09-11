@@ -54,6 +54,8 @@ public interface IInventory extends Iterable<ItemInstance> {
 
     int getItemIndex(ItemInstance inst);
 
+    int getNextFreeIndex();
+
     default int getActualSlot(IInventory inv, int slot) {
         return slot;
     }

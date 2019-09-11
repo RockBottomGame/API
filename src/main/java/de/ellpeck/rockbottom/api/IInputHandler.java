@@ -84,17 +84,6 @@ public interface IInputHandler {
      * @see #isKeyDown(int)
      */
     boolean wasKeyPressed(int key);
-    
-    /**
-     * Returns true if a keyboard key was pressed the amount of times within the specified time.
-     * It is used for double space detection in creative mode.
-     *
-     * @param key The key to query. Use the {@link GLFW} class to easily get keys' ids
-     * @param amount The amount of times the key needs to be pressed
-     * @param time In which time the presses need to occur in milliseconds
-     * @return If it was pressed the amount in time
-     */
-    boolean wasKeyPressedWithinTime(int key, int amount, long time);
 
     /**
      * Returns the amount of delta that the mouse wheel has been turned since

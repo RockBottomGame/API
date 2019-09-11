@@ -274,7 +274,8 @@ public class Tile {
         List<ItemInstance> drops = new ArrayList<>();
 
         if (shouldDrop && !world.isClient()) {
-            drops.addAll(this.getDrops(world, x, y, layer, destroyer));
+            if (!(destroyer instanceof AbstractEntityPlayer && ((AbstractEntityPlayer) destroyer).getGameMode().isCreative()))
+                drops.addAll(this.getDrops(world, x, y, layer, destroyer));
         }
 
         if (RockBottomAPI.getEventHandler().fireEvent(new TileDropsEvent(this, drops, world, x, y, layer, destroyer)) != EventResult.CANCELLED) {
