@@ -28,6 +28,7 @@ import de.ellpeck.rockbottom.api.entity.player.statistics.IStatistics;
 import de.ellpeck.rockbottom.api.gui.Gui;
 import de.ellpeck.rockbottom.api.gui.container.ItemContainer;
 import de.ellpeck.rockbottom.api.inventory.Inventory;
+import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.net.chat.ICommandSender;
 import de.ellpeck.rockbottom.api.net.packet.IPacket;
 import de.ellpeck.rockbottom.api.render.IPlayerDesign;
@@ -81,6 +82,8 @@ public abstract class AbstractEntityPlayer extends EntityLiving implements IComm
 
     @ApiInternal
     public abstract void setSelectedSlot(int slot);
+
+    public abstract ItemInstance getSelectedItem();
 
     @Override
     public abstract String getChatColorFormat();

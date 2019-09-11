@@ -84,6 +84,7 @@ public final class GameContent {
     public static final Tile TILE_CORN = getTile("corn").setHardness(2F).setForceDrop().setMaxAmount(25);
     public static final Tile TILE_COTTON = getTile("cotton").setHardness(2F).setForceDrop().setMaxAmount(25);
     public static final Tile TILE_GLASS = getTile("glass").setHardness(3F).setMaxAmount(75);
+    public static final Tile TILE_PLATFORM = getTile("platform").setHardness(0.5F).addEffectiveTool(ToolProperty.AXE, 0).setForceDrop().setMaxAmount(150);
 
     /*
         ---ITEMS---

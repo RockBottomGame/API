@@ -53,7 +53,7 @@ public abstract class EntityLiving extends Entity {
     @Override
     public void update(IGameInstance game) {
         super.update(game);
-
+        this.isDropping = false;
         if (this.jumping) {
             if (this.jumpTicks > 0 && this.collidedVert) {
                 this.motionY = 0;

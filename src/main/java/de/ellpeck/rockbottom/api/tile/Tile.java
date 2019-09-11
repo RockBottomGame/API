@@ -105,6 +105,9 @@ public class Tile {
     }
 
 	public List<BoundBox> getBoundBoxes(IWorld world, TileState state, int x, int y, TileLayer layer, MovableWorldObject object, BoundBox objectBox, BoundBox objectBoxMotion) {
+        if (this.isPlatform())
+            return this.getPlatformBounds(world, x, y, layer, state, object, objectBox, objectBoxMotion);
+    
         if (layer == TileLayer.MAIN && this.isChiseled(world, x, y, layer, state))
             return getChiselBoundBoxes(world, x, y);
 
@@ -128,6 +131,16 @@ public class Tile {
         }
     }
 
+    public boolean isPlatform() {
+        return false;
+    }
+
+    public List<BoundBox> getPlatformBounds(IWorld world, int x, int y, TileLayer layer, TileState state, MovableWorldObject object, BoundBox objectBox, BoundBox objectBoxMotion) {
+        if (!(this instanceof MultiTile) || (state.get(((MultiTile) this).propSubY) == ((MultiTile) this).getHeight() - 1))
+            return RockBottomAPI.getApiHandler().getDefaultPlatformBounds(world, x, y, layer, 1, 1, state, object, objectBox);
+        return Collections.emptyList();
+    }
+  
     protected List<BoundBox> getChiselBoundBoxes(IWorld world, int x, int y) {
         List<BoundBox> boxes = new ArrayList<>();
         boolean[] chiseledCorners = Util.decodeBitVector(world.getState(x, y).get(StaticTileProps.CHISEL_STATE), 4);

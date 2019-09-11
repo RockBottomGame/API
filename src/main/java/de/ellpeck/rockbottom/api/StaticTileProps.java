@@ -100,6 +100,10 @@ public final class StaticTileProps {
      */
     public static final IntProp STARDROP_GROWTH = new IntProp("growth", 0, 3);
     /**
+     * Determines if a tile has ladder inside of it. Used by {@link
+     * GameContent#TILE_PLATFORM}
+     */
+    public static final BoolProp HAS_LADDER = new BoolProp("has_ladder", false);
      * Determines which corners of a tile have been chiseled.
      * The chiseled corner is represented by the bit of the 16 different values.
      * Bit 0 - Top Left
