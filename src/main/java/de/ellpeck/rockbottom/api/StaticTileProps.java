@@ -21,11 +21,11 @@
 
 package de.ellpeck.rockbottom.api;
 
+import de.ellpeck.rockbottom.api.tile.TileTallPlant;
 import de.ellpeck.rockbottom.api.tile.state.BoolProp;
 import de.ellpeck.rockbottom.api.tile.state.EnumProp;
 import de.ellpeck.rockbottom.api.tile.state.IntProp;
 import de.ellpeck.rockbottom.api.tile.state.TileProp;
-import de.ellpeck.rockbottom.api.tile.TileTallPlant;
 
 /**
  * A list of static {@link TileProp} objects that are used for certain tiles
@@ -104,6 +104,7 @@ public final class StaticTileProps {
      * GameContent#TILE_PLATFORM}
      */
     public static final BoolProp HAS_LADDER = new BoolProp("has_ladder", false);
+    /**
      * Determines which corners of a tile have been chiseled.
      * The chiseled corner is represented by the bit of the 16 different values.
      * Bit 0 - Top Left

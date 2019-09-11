@@ -136,7 +136,7 @@ public class TilePlatform extends TileBasic {
     }
 
     @Override
-    public boolean canLiquidSpreadInto(IWorld world, int x, int y, TileLiquid liquid) {
+    public boolean canLiquidSpread(IWorld world, int x, int y, TileLiquid liquid, Direction dir) {
         return true;
     }
 
