@@ -38,6 +38,7 @@ import java.util.List;
 public final class InteractionEvent extends Event {
 
     public final AbstractEntityPlayer player;
+    public final boolean isDestroyKey;
     public List<Entity> entities;
     public TileLayer layer;
     public int x;
@@ -45,7 +46,7 @@ public final class InteractionEvent extends Event {
     public double mouseX;
     public double mouseY;
 
-    public InteractionEvent(AbstractEntityPlayer player, List<Entity> entities, TileLayer layer, int x, int y, double mouseX, double mouseY) {
+    public InteractionEvent(AbstractEntityPlayer player, List<Entity> entities, TileLayer layer, int x, int y, double mouseX, double mouseY, boolean isDestroyKey) {
         this.player = player;
         this.entities = entities;
         this.layer = layer;
@@ -53,5 +54,6 @@ public final class InteractionEvent extends Event {
         this.y = y;
         this.mouseX = mouseX;
         this.mouseY = mouseY;
+        this.isDestroyKey = isDestroyKey;
     }
 }

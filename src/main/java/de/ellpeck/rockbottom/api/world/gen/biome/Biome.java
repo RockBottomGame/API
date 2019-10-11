@@ -22,7 +22,11 @@
 package de.ellpeck.rockbottom.api.world.gen.biome;
 
 import de.ellpeck.rockbottom.api.GameContent;
+import de.ellpeck.rockbottom.api.IGameInstance;
+import de.ellpeck.rockbottom.api.IRenderer;
 import de.ellpeck.rockbottom.api.Registries;
+import de.ellpeck.rockbottom.api.assets.IAssetManager;
+import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.tile.state.TileState;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 import de.ellpeck.rockbottom.api.world.IChunk;
@@ -71,6 +75,45 @@ public abstract class Biome {
 
     public float getPebbleChance() {
         return 0F;
+    }
+
+    /**
+     * Renders the background of the biome. Called during the sky rendering of the world.
+     * Returning false will cause the default sky rendering to not happen.
+     * @param game The game instance.
+     * @param manager The asset manager.
+     * @param g The renderer.
+     * @param world The world.
+     * @param player The client player.
+     * @param width The width of the screen in the world {@link IRenderer#getWidthInWorld()}.
+     * @param height The height of the screen in the world {@link IRenderer#getHeightInWorld()}.
+     * @return false if you want the default sky rendering to not happen, true otherwise.
+     */
+    public boolean renderBackground(IGameInstance game, IAssetManager manager, IRenderer g, IWorld world, AbstractEntityPlayer player, double width, double height) {
+        return true;
+    }
+
+    /**
+     * Renders the foreground of the biome. This renders in front of all entities and tiles.
+     * @param game The game instance.
+     * @param manager The asset manager.
+     * @param g The renderer.
+     * @param world The world.
+     * @param player The client player.
+     * @param scale The world scale {@link IRenderer#getWorldScale()}.
+     */
+    public void renderForeground(IGameInstance game, IAssetManager manager, IRenderer g, IWorld world, AbstractEntityPlayer player, float scale) {
+
+    }
+
+    /**
+     * The sky color to render the background with.
+     * This is done before {@link Biome#renderBackground}.
+     * @param defaultColor The color which would be rendered by default.
+     * @return The new sky color to be renderer.
+     */
+    public int getSkyColor(int defaultColor) {
+        return defaultColor;
     }
 
     public boolean canTreeGrow(IWorld world, IChunk chunk, int x, int y) {
