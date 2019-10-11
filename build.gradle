@@ -6,8 +6,8 @@ apply plugin: 'idea'
 
 project.ext.lwjglVersion = "3.2.0"
 
-sourceCompatibility = 1.10
-targetCompatibility = 1.10
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 if (hasProperty('buildnumber')) {
     version = "${version}-${this.properties['buildnumber']}"
