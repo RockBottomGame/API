@@ -108,7 +108,7 @@ public abstract class Biome {
 
     /**
      * The sky color to render the background with.
-     * Note: This will not do anything on its own if you return false on {@link Biome#renderBackground}
+     * This is done before {@link Biome#renderBackground}.
      * @param defaultColor The color which would be rendered by default.
      * @return The new sky color to be renderer.
      */
