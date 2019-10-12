@@ -19,12 +19,11 @@
  * © 2018 Ellpeck
  */
 
-package de.ellpeck.rockbottom.api.construction.compendium.construction;
+package de.ellpeck.rockbottom.api.construction.compendium;
 
 import de.ellpeck.rockbottom.api.Registries;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.construction.ConstructionTool;
-import de.ellpeck.rockbottom.api.construction.compendium.PlayerCompendiumRecipe;
 import de.ellpeck.rockbottom.api.construction.resource.IUseInfo;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.gui.Gui;

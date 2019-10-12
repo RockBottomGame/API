@@ -25,9 +25,10 @@ import de.ellpeck.rockbottom.api.assets.IAssetLoader;
 import de.ellpeck.rockbottom.api.construction.compendium.CompendiumCategory;
 import de.ellpeck.rockbottom.api.construction.compendium.ICompendiumRecipe;
 import de.ellpeck.rockbottom.api.construction.compendium.ICriteria;
-import de.ellpeck.rockbottom.api.construction.compendium.construction.ConstructionRecipe;
-import de.ellpeck.rockbottom.api.construction.compendium.mortar.MortarRecipe;
-import de.ellpeck.rockbottom.api.construction.compendium.smithing.SmithingRecipe;
+import de.ellpeck.rockbottom.api.construction.compendium.ConstructionRecipe;
+import de.ellpeck.rockbottom.api.construction.compendium.MortarRecipe;
+import de.ellpeck.rockbottom.api.construction.compendium.SmithingRecipe;
+import de.ellpeck.rockbottom.api.construction.smelting.CombinerRecipe;
 import de.ellpeck.rockbottom.api.construction.smelting.FuelInput;
 import de.ellpeck.rockbottom.api.construction.smelting.SmeltingRecipe;
 import de.ellpeck.rockbottom.api.content.IContentLoader;
@@ -302,6 +303,13 @@ public final class Registries {
      */
     @ApiInternal
     public static final NameRegistry<SmeltingRecipe> SMELTING_REGISTRY = new NameRegistry<>(ResourceName.intern("smelting_registry"), true).register();
+    /**
+     * The registry for all {@link CombinerRecipe} objects that can be combined
+     * in any kind of combiner. To register something into this registry, please
+     * use {@link CombinerRecipe#register()}.
+     */
+    @ApiInternal
+    public static final NameRegistry<CombinerRecipe> COMBINER_REGISTRY = new NameRegistry<>(ResourceName.intern("combiner_registry"), true).register();
     /**
      * The registry for all {@link SpawnBehavior} objects that determine how and
      * where entities can randomly appear in the world. To register something
