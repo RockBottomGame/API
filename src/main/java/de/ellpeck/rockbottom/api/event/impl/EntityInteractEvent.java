@@ -37,11 +37,13 @@ public final class EntityInteractEvent extends Event {
     public final Entity entity;
     public final double x;
     public final double y;
+    public final boolean isDestroyKey;
 
-    public EntityInteractEvent(AbstractEntityPlayer player, Entity entity, double x, double y) {
+    public EntityInteractEvent(AbstractEntityPlayer player, Entity entity, double x, double y, boolean isDestroyKey) {
         this.player = player;
         this.entity = entity;
         this.x = x;
         this.y = y;
+        this.isDestroyKey = isDestroyKey;
     }
 }

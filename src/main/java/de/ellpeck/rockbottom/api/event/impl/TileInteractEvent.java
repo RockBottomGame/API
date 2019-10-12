@@ -43,8 +43,9 @@ public final class TileInteractEvent extends Event {
     public final int y;
     public final double mouseX;
     public final double mouseY;
+    public final boolean isDestroyKey;
 
-    public TileInteractEvent(AbstractEntityPlayer player, TileState state, TileLayer layer, int x, int y, double mouseX, double mouseY) {
+    public TileInteractEvent(AbstractEntityPlayer player, TileState state, TileLayer layer, int x, int y, double mouseX, double mouseY, boolean isDestroyKey) {
         this.player = player;
         this.state = state;
         this.layer = layer;
@@ -52,5 +53,6 @@ public final class TileInteractEvent extends Event {
         this.y = y;
         this.mouseX = mouseX;
         this.mouseY = mouseY;
+        this.isDestroyKey = isDestroyKey;
     }
 }

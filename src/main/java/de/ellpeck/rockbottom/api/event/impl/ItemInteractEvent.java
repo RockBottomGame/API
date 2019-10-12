@@ -40,11 +40,13 @@ public final class ItemInteractEvent extends Event {
     public final ItemInstance instance;
     public final double x;
     public final double y;
+    public final boolean isDestroyKey;
 
-    public ItemInteractEvent(AbstractEntityPlayer player, ItemInstance instance, double x, double y) {
+    public ItemInteractEvent(AbstractEntityPlayer player, ItemInstance instance, double x, double y, boolean isDestroyKey) {
         this.player = player;
         this.instance = instance;
         this.x = x;
         this.y = y;
+        this.isDestroyKey = isDestroyKey;
     }
 }
