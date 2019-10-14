@@ -41,6 +41,7 @@ import de.ellpeck.rockbottom.api.gui.component.ComponentInputField;
 import de.ellpeck.rockbottom.api.gui.component.ComponentMenu;
 import de.ellpeck.rockbottom.api.gui.component.ComponentSlot;
 import de.ellpeck.rockbottom.api.gui.component.ComponentStatistic;
+import de.ellpeck.rockbottom.api.gui.container.ContainerSlot;
 import de.ellpeck.rockbottom.api.gui.container.ItemContainer;
 import de.ellpeck.rockbottom.api.item.Item;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
@@ -70,6 +71,8 @@ public interface IInternalHooks {
     boolean doDefaultSlotMovement(IGameInstance game, int button, float x, float y, GuiContainer gui, ComponentSlot slot);
 
     boolean doDefaultShiftClicking(IGameInstance game, int button, GuiContainer gui, ComponentSlot slot);
+
+    boolean doDefaultSlotClick(IGameInstance game, int button, GuiContainer gui, ComponentSlot slot);
 
     // TODO: Move to IApiHandler
     boolean placeTile(int x, int y, TileLayer layer, AbstractEntityPlayer player, ItemInstance selected, Tile tile, boolean removeItem, boolean simulate);

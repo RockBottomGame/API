@@ -122,6 +122,7 @@ public final class GameContent {
     public static final Item ITEM_BRONZE_AXE = getItem("bronze_axe");
     public static final Item ITEM_BRONZE_SHOVEL = getItem("bronze_shovel");
     public static final Item ITEM_BRONZE_SWORD = getItem("bronze_sword");
+    public static final Item ITEM_BRONZE_CANISTER = getItem("bronze_canister");
     public static final Item ITEM_RECIPE_NOTE = getItem("recipe_note").setMaxAmount(1);
     public static final Item ITEM_BOWL = getItem("bowl").setMaxAmount(1);
     public static final Item ITEM_PESTLE = getItem("pestle").setMaxAmount(1);

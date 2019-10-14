@@ -30,11 +30,13 @@ import de.ellpeck.rockbottom.api.construction.compendium.PlayerCompendiumRecipe;
 import de.ellpeck.rockbottom.api.construction.resource.IUseInfo;
 import de.ellpeck.rockbottom.api.data.set.AbstractDataSet;
 import de.ellpeck.rockbottom.api.data.set.part.DataPart;
+import de.ellpeck.rockbottom.api.data.settings.Settings;
 import de.ellpeck.rockbottom.api.entity.MovableWorldObject;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.inventory.IInventory;
 import de.ellpeck.rockbottom.api.inventory.Inventory;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
+import de.ellpeck.rockbottom.api.item.ItemStorageContainer;
 import de.ellpeck.rockbottom.api.render.IPlayerDesign;
 import de.ellpeck.rockbottom.api.tile.entity.TileEntity;
 import de.ellpeck.rockbottom.api.tile.state.TileState;
@@ -53,6 +55,8 @@ import java.io.File;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.logging.Logger;
 
@@ -241,4 +245,19 @@ public interface IApiHandler {
     Biome getBiome(IWorld world, int x, int y, int height, Map<BiomeLevel, Integer> totalWeights, ListMultimap<BiomeLevel, Biome> biomesPerLevel, Random biomeRandom, int blobSize, long[] layerSeeds, INoiseGen levelHeightNoise, int levelTransition, int biomeTransition);
 
     BiomeLevel getSmoothedLevelForPos(IWorld world, int x, int y, int height, int levelTransition, ListMultimap<BiomeLevel, Biome> biomesPerLevel, INoiseGen levelHeightNoise);
+
+    /**
+     * Opens the players inventory the same as pressing {@link Settings#KEY_INVENTORY}.
+     * @param player The player to open the inventory for.
+     */
+    void openPlayerInventory(AbstractEntityPlayer player);
+
+    /**
+     * Opens the player inventory with an additional inventory on the top.
+     * @param player The player opening the container.
+     * @param inventory The extra inventory.
+     * @param containerWidth The amount of slots horizontally before wrapping to next line.
+     * @param onClosed The action to take when the container is closed.
+     */
+    void openExtendedPlayerInventory(AbstractEntityPlayer player, IInventory inventory, int containerWidth, Consumer<IInventory> onClosed);
 }

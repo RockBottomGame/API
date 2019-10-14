@@ -75,7 +75,7 @@ public interface INetHandler {
     boolean isServer();
 
     /**
-     * Returns true fi the game is currently either in server or client mode.
+     * Returns true if the game is currently either in server or client mode.
      *
      * @return If the net handler is active
      * @see #isClient()
