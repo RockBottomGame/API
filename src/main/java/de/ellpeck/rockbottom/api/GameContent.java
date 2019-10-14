@@ -71,8 +71,10 @@ public final class GameContent {
     public static final Tile TILE_REMAINS_GOO = getTile("remains_goo");
     public static final Tile TILE_GRASS_TORCH = getTile("torch_grass").setHardness(0F).setForceDrop().setMaxAmount(50);
     public static final Tile TILE_COPPER = getTile("copper").setHardness(10F).addEffectiveTool(ToolProperty.PICKAXE, 2).setMaxAmount(35);
+    public static final Tile TILE_TIN = getTile("tin").setHardness(8F).addEffectiveTool(ToolProperty.PICKAXE, 2).setMaxAmount(35);
     public static final Tile TILE_SPINNING_WHEEL = getTile("spinning_wheel").setHardness(7F).addEffectiveTool(ToolProperty.PICKAXE, 1).setMaxAmount(1);
     public static final Tile TILE_SIMPLE_FURNACE = getTile("simple_furnace").setHardness(15F).addEffectiveTool(ToolProperty.PICKAXE, 2).setMaxAmount(1);
+    public static final Tile TILE_COMBINER = getTile("combiner").setHardness(15F).addEffectiveTool(ToolProperty.PICKAXE, 2).setMaxAmount(1);
     public static final Tile TILE_CONSTRUCTION_TABLE = getTile("construction_table").setHardness(15F).addEffectiveTool(ToolProperty.PICKAXE, 2).setMaxAmount(1);
     public static final Tile TILE_SMITHING_TABLE = getTile("smithing_table").setHardness(15F).addEffectiveTool(ToolProperty.PICKAXE, 2).setMaxAmount(1);
     public static final Tile TILE_SNOW = getTile("snow").setHardness(0.75F).addEffectiveTool(ToolProperty.SHOVEL, 0).setMaxAmount(200);
@@ -109,11 +111,18 @@ public final class GameContent {
     public static final Item ITEM_STONE_SHOVEL = getItem("stone_shovel");
     public static final Item ITEM_STONE_SWORD = getItem("stone_sword");
     public static final Item ITEM_COPPER_CANISTER = getItem("copper_canister").setMaxAmount(15);
+    public static final Item ITEM_TIN_INGOT = getItem("tin_ingot").setMaxAmount(50);
     public static final Item ITEM_COPPER_INGOT = getItem("copper_ingot").setMaxAmount(50);
     public static final Item ITEM_COPPER_PICKAXE = getItem("copper_pickaxe");
     public static final Item ITEM_COPPER_AXE = getItem("copper_axe");
     public static final Item ITEM_COPPER_SHOVEL = getItem("copper_shovel");
     public static final Item ITEM_COPPER_SWORD = getItem("copper_sword");
+    public static final Item ITEM_BRONZE_INGOT = getItem("bronze_ingot").setMaxAmount(50);
+    public static final Item ITEM_BRONZE_PICKAXE = getItem("bronze_pickaxe");
+    public static final Item ITEM_BRONZE_AXE = getItem("bronze_axe");
+    public static final Item ITEM_BRONZE_SHOVEL = getItem("bronze_shovel");
+    public static final Item ITEM_BRONZE_SWORD = getItem("bronze_sword");
+    public static final Item ITEM_BRONZE_CANISTER = getItem("bronze_canister");
     public static final Item ITEM_RECIPE_NOTE = getItem("recipe_note").setMaxAmount(1);
     public static final Item ITEM_BOWL = getItem("bowl").setMaxAmount(1);
     public static final Item ITEM_PESTLE = getItem("pestle").setMaxAmount(1);
@@ -138,6 +147,9 @@ public final class GameContent {
     public static final String RES_STICK = res().addResources("stick", new ResInfo(ITEM_TWIG), new ResInfo(ITEM_STICK));
     public static final String RES_COPPER_RAW = res().addResources("copper_raw", TILE_COPPER);
     public static final String RES_COPPER_PROCESSED = res().addResources("copper_processed", ITEM_COPPER_INGOT);
+    public static final String RES_TIN_RAW = res().addResources("tin_raw", TILE_TIN);
+    public static final String RES_TIN_PROCESSED = res().addResources("tin_processed", ITEM_TIN_INGOT);
+    public static final String RES_BRONZE_PROCESSED = res().addResources("bronze_processed", ITEM_BRONZE_INGOT);
 
     /*
         ---BIOMES---

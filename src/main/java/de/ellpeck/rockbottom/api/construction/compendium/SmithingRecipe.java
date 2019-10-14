@@ -1,9 +1,8 @@
-package de.ellpeck.rockbottom.api.construction.compendium.smithing;
+package de.ellpeck.rockbottom.api.construction.compendium;
 
 import de.ellpeck.rockbottom.api.GameContent;
 import de.ellpeck.rockbottom.api.Registries;
 import de.ellpeck.rockbottom.api.construction.ConstructionTool;
-import de.ellpeck.rockbottom.api.construction.compendium.PlayerCompendiumRecipe;
 import de.ellpeck.rockbottom.api.construction.resource.IUseInfo;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.gui.Gui;
@@ -23,22 +22,18 @@ public class SmithingRecipe extends PlayerCompendiumRecipe {
 
 	private List<IUseInfo> inputs;
 	private List<ItemInstance> outputs;
-	private float difficulty;
-	private int hits;
 	private int usage;
 
 	private ConstructionTool tool;
 
 	public SmithingRecipe(ResourceName name, List<IUseInfo> inputs, List<ItemInstance> outputs, boolean isKnowledge, float skillReward) {
-	    this(name, inputs, outputs, isKnowledge, skillReward, 0, 0, 0);
+	    this(name, inputs, outputs, isKnowledge, skillReward, 1);
     }
 
-	public SmithingRecipe(ResourceName name, List<IUseInfo> inputs, List<ItemInstance> outputs, boolean isKnowledge, float skillReward, float difficulty, int hits, int usage) {
+	public SmithingRecipe(ResourceName name, List<IUseInfo> inputs, List<ItemInstance> outputs, boolean isKnowledge, float skillReward, int usage) {
 		super(name, isKnowledge, skillReward);
 		this.inputs = inputs;
 		this.outputs = outputs;
-		this.difficulty = difficulty;
-		this.hits = hits;
 		this.usage = usage;
 
 		this.tool = new ConstructionTool(GameContent.ITEM_HAMMER, usage);
@@ -85,18 +80,6 @@ public class SmithingRecipe extends PlayerCompendiumRecipe {
 		return this.outputs;
 	}
 
-	public int getUsage() {
-		return usage;
-	}
-
-	public int getHits() {
-		return hits;
-	}
-
-	public float getDifficulty() {
-		return difficulty;
-	}
-
 	@Override
 	public String toString() {
 		return "SmithingRecipe{" +
@@ -104,8 +87,6 @@ public class SmithingRecipe extends PlayerCompendiumRecipe {
 				", isKnowledge=" + isKnowledge +
 				", recipeInputs=" + inputs +
 				", outputs=" + outputs +
-				", difficulty=" + difficulty +
-				", hits=" + hits +
 				", skillReward=" + skillReward +
 				'}';
 	}
