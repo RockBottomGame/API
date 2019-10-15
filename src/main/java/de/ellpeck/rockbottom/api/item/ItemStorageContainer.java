@@ -5,7 +5,9 @@ import de.ellpeck.rockbottom.api.data.set.DataSet;
 import de.ellpeck.rockbottom.api.data.set.ModBasedDataSet;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
 import de.ellpeck.rockbottom.api.gui.container.ContainerSlot;
+import de.ellpeck.rockbottom.api.gui.container.ImmovableSlot;
 import de.ellpeck.rockbottom.api.gui.container.ItemContainer;
+import de.ellpeck.rockbottom.api.gui.container.RestrictedSlot;
 import de.ellpeck.rockbottom.api.inventory.Inventory;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 import de.ellpeck.rockbottom.api.world.IWorld;
@@ -34,23 +36,6 @@ public class ItemStorageContainer extends ItemBasic {
         return true;
     }
 
-    @Override
-    public boolean onClickInSlot(AbstractEntityPlayer player, ItemContainer container, ContainerSlot slot, ItemInstance instance, int button, ItemInstance holding) {
-        if (!player.world.isServer()) {
-            if ("rockbottom/extended_inventory".equals(container.getName().toString())) {
-                if (button == GLFW.GLFW_MOUSE_BUTTON_RIGHT) {
-                    RockBottomAPI.getApiHandler().openPlayerInventory(player);
-                }
-                return true;
-            } else if (button == GLFW.GLFW_MOUSE_BUTTON_RIGHT) {
-                this.openStorageContainer(player, instance);
-                return true;
-            }
-        }
-        return false;
-
-    }
-
     public int getMaxStorage() {
         return this.maxStorage;
     }
@@ -63,12 +48,22 @@ public class ItemStorageContainer extends ItemBasic {
         return 1 + this.getMaxStorage() / this.getContainerWidth();
     }
 
-    public void openStorageContainer(AbstractEntityPlayer player, ItemInstance instance) {
+    protected void openStorageContainer(AbstractEntityPlayer player, ItemInstance instance) {
+        Inventory itemInventory = getItemInventory(instance);
         RockBottomAPI.getApiHandler().openExtendedPlayerInventory(
                 player,
-                getItemInventory(instance),
+                itemInventory,
                 this.getContainerWidth(),
-                (inventory) -> setItemInventory(instance, (Inventory) inventory)
+                (inventory) -> setItemInventory(instance, (Inventory) inventory),
+                ((inventory, slot, x, y) -> {
+                    if (inventory == player.getInv() && slot == player.getSelectedSlot()) {
+                        return new ImmovableSlot(inventory, slot, x, y);
+                    }
+                    if (inventory == itemInventory) {
+                        return new RestrictedSlot(inventory, slot, x, y, inst -> !(inst.getItem() instanceof ItemStorageContainer));
+                    }
+                    return new ContainerSlot(inventory, slot, x, y);
+                })
         );
     }
 

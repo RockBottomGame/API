@@ -203,17 +203,4 @@ public class Item {
             return instance;
         }
     }
-
-    /**
-     * Performs an action when a slot is clicked in a {@link GuiContainer} with this item in it.
-     * @param player The player in the container.
-     * @param slot The slot clicked.
-     * @param instance The instance currently in this slot.
-     * @param button The mouse button pressed.
-     * @param holding Is true when the item is in the slot as it was clicked, false if it is being set into that slot.
-     * @return true if you want to cancel default interaction of the slot (shift move or pickup) , false otherwise.
-     */
-    public boolean onClickInSlot(AbstractEntityPlayer player, ItemContainer container, ContainerSlot slot, ItemInstance instance, int button, ItemInstance holding) {
-        return false;
-    }
 }

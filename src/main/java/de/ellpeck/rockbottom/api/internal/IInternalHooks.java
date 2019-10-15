@@ -72,8 +72,6 @@ public interface IInternalHooks {
 
     boolean doDefaultShiftClicking(IGameInstance game, int button, GuiContainer gui, ComponentSlot slot);
 
-    boolean doDefaultSlotClick(IGameInstance game, int button, GuiContainer gui, ComponentSlot slot);
-
     // TODO: Move to IApiHandler
     boolean placeTile(int x, int y, TileLayer layer, AbstractEntityPlayer player, ItemInstance selected, Tile tile, boolean removeItem, boolean simulate);
 

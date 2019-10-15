@@ -81,10 +81,14 @@ public abstract class ItemContainer implements Iterable<ContainerSlot> {
     }
 
     public void addSlotGrid(IInventory inventory, int start, int end, int xStart, int yStart, int width) {
+        this.addSlotGrid(inventory, start, end, xStart, yStart, width, ContainerSlot::new);
+    }
+
+    public void addSlotGrid(IInventory inventory, int start, int end, int xStart, int yStart, int width, ISlotCallback callback) {
         int x = xStart;
         int y = yStart;
         for (int i = start; i < end; i++) {
-            this.addSlot(new ContainerSlot(inventory, i, x, y));
+            this.addSlot(callback.getSlot(inventory, i, x, y));
 
             x += 17;
             if ((i + 1) % width == 0) {
@@ -95,8 +99,12 @@ public abstract class ItemContainer implements Iterable<ContainerSlot> {
     }
 
     public void addPlayerInventory(AbstractEntityPlayer player, int x, int y) {
-        this.addSlotGrid(player.getInv(), 0, 8, x, y, 8);
-        this.addSlotGrid(player.getInv(), 8, player.getInv().getSlotAmount(), x, y + 20, 8);
+        this.addPlayerInventory(player, x, y, ContainerSlot::new);
+    }
+
+    public void addPlayerInventory(AbstractEntityPlayer player, int x, int y, ISlotCallback callback) {
+        this.addSlotGrid(player.getInv(), 0, 8, x, y, 8, callback);
+        this.addSlotGrid(player.getInv(), 8, player.getInv().getSlotAmount(), x, y + 20, 8, callback);
     }
 
     public void onOpened() {
@@ -113,4 +121,10 @@ public abstract class ItemContainer implements Iterable<ContainerSlot> {
     }
 
     public abstract ResourceName getName();
+
+    public interface ISlotCallback {
+
+        ContainerSlot getSlot(IInventory inventory, int slot, int x, int y);
+
+    }
 }
