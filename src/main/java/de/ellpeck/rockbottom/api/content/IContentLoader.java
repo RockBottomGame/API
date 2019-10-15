@@ -65,16 +65,22 @@ public interface IContentLoader<T extends IContent> {
         return recipeElement.getAsJsonObject();
     }
 
-    default IUseInfo readUseInfo(JsonObject obj) {
+    default IUseInfo readUseInfo(JsonObject obj) throws Exception {
         String name = obj.get("name").getAsString();
         int amount = obj.has("amount") ? obj.get("amount").getAsInt() : 1;
+
         if (Util.isResourceName(name)) {
             int meta = obj.has("meta") ? obj.get("meta").getAsInt() : 0;
-            return new ItemUseInfo(Registries.ITEM_REGISTRY.get(new ResourceName(name)), amount, meta);
+            ItemInstance instance = new ItemInstance(Registries.ITEM_REGISTRY.get(new ResourceName(name)), amount, meta);
+            if (obj.has("data")) {
+                ModBasedDataSet set = instance.getOrCreateAdditionalData();
+                RockBottomAPI.getApiHandler().readDataSet(obj.get("data").getAsJsonObject(), set);
+            }
+            return new ItemUseInfo(instance);
         } else return new ResUseInfo(name, amount);
     }
 
-    default List<IUseInfo> readUseInfos(JsonArray array) {
+    default List<IUseInfo> readUseInfos(JsonArray array) throws Exception {
         List<IUseInfo> infos = new ArrayList<>();
         for (JsonElement input : array) {
             infos.add(readUseInfo(input.getAsJsonObject()));
