@@ -28,6 +28,7 @@ import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.data.settings.Settings;
 import de.ellpeck.rockbottom.api.gui.GuiContainer;
 import de.ellpeck.rockbottom.api.gui.container.ContainerSlot;
+import de.ellpeck.rockbottom.api.gui.container.ItemContainer;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 import org.lwjgl.glfw.GLFW;
