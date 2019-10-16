@@ -52,7 +52,6 @@ public abstract class GuiContainer extends Gui {
         super.onClosed(game);
 
         if (this.container.holdingInst != null) {
-            System.out.println("Dropping instance");
             RockBottomAPI.getInternalHooks().dropHeldItem(this.player, this.container);
         }
 
