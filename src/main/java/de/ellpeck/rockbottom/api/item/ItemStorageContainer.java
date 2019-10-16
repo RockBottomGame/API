@@ -36,6 +36,11 @@ public class ItemStorageContainer extends ItemBasic {
         return true;
     }
 
+    @Override
+    public double getMaxInteractionDistance(IWorld world, int x, int y, TileLayer layer, double mouseX, double mouseY, AbstractEntityPlayer player, ItemInstance instance) {
+        return Double.MAX_VALUE;
+    }
+
     public int getMaxStorage() {
         return this.maxStorage;
     }
