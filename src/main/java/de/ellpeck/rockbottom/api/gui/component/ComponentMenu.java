@@ -35,14 +35,20 @@ public class ComponentMenu extends ComponentScrollBar {
     private final int displayedComponentsY;
     private final int componentsOffsetX;
     private final int componentsOffsetY;
+    private final int componentGap;
     private final List<MenuComponent> contents = new ArrayList<>();
 
-    public ComponentMenu(Gui gui, int x, int y, int barWidth, int height, int displayedComponentsX, int displayedComponentsY, int componentsOffsetX, int componentsOffsetY, BoundBox hoverArea, ResourceName scrollTexture) {
+    public ComponentMenu(Gui gui, int x, int y, int barWidth, int height, int displayedComponentsX, int displayedComponentsY, int componentsOffsetX, int componentsOffsetY, BoundBox hoverArea, ResourceName scrollTexture, int componentGap) {
         super(gui, x, y, barWidth, height, hoverArea, 0, null, scrollTexture);
         this.displayedComponentsX = displayedComponentsX;
         this.displayedComponentsY = displayedComponentsY;
         this.componentsOffsetX = componentsOffsetX;
         this.componentsOffsetY = componentsOffsetY;
+        this.componentGap = componentGap;
+    }
+
+    public ComponentMenu(Gui gui, int x, int y, int barWidth, int height, int displayedComponentsX, int displayedComponentsY, int componentsOffsetX, int componentsOffsetY, BoundBox hoverArea, ResourceName scrollTexture) {
+        this(gui, x, y, barWidth, height, displayedComponentsX, displayedComponentsY, componentsOffsetX, componentsOffsetY, hoverArea, scrollTexture, 2);
     }
 
     public ComponentMenu(Gui gui, int x, int y, int height, int displayedComponentsX, int displayedComponentsY, BoundBox hoverArea) {
@@ -96,7 +102,7 @@ public class ComponentMenu extends ComponentScrollBar {
                     component.setActive(true);
                     component.setPos(showX, showY);
 
-                    showX += component.width + 2;
+                    showX += component.width + this.componentGap;
                     if (component.height > highestHeight) {
                         highestHeight = component.height;
                     }
