@@ -24,6 +24,7 @@ package de.ellpeck.rockbottom.api.util;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonParser;
+import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 import de.ellpeck.rockbottom.api.Constants;
 import de.ellpeck.rockbottom.api.Registries;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
@@ -106,6 +107,16 @@ public final class Util {
         return (dx * dx) + (dy * dy);
     }
 
+    /**
+     * Computes the Linear Interpolation between the two positions given the factor.
+     * For example: lerp(0.5, 1.0, 0.2); (1/5 of the distance between 0.5 and 1.0)
+     * Returns    : 0.6
+     *
+     * @param pos1 The first position.
+     * @param pos2 The seconds position.
+     * @param factor The factor between the first and second position as a decimal percentage
+     * @return The Linear Interpolation.
+     */
     public static double lerp(double pos1, double pos2, double factor) {
         return (1D - factor) * pos1 + factor * pos2;
     }
@@ -422,6 +433,15 @@ public final class Util {
             out[i] = ((input >> i) & 1) == 1;
         }
         return out;
+    }
+
+    /**
+     * Converts the amount of seconds into amount of ticks.
+     * @param seconds The amount of seconds
+     * @return The amount of ticks
+     */
+    public static int seconds(int seconds) {
+        return Constants.TARGET_TPS * seconds;
     }
 
     /**
