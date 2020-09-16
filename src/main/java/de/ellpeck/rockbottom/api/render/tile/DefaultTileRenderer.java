@@ -32,7 +32,7 @@ import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.item.ToolProperty;
 import de.ellpeck.rockbottom.api.tile.Tile;
 import de.ellpeck.rockbottom.api.tile.state.TileState;
-import de.ellpeck.rockbottom.api.util.BoundBox;
+import de.ellpeck.rockbottom.api.util.BoundingBox;
 import de.ellpeck.rockbottom.api.util.Colors;
 import de.ellpeck.rockbottom.api.util.Util;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
@@ -89,7 +89,7 @@ public class DefaultTileRenderer<T extends Tile> implements ITileRenderer<T> {
 
         for (int i = 0; i < Tile.CHISEL_BOUNDS.length; i++) {
             if (!chiseledCorners[i]) {
-                BoundBox box = Tile.CHISEL_BOUNDS[i];
+                BoundingBox box = Tile.CHISEL_BOUNDS[i];
                 float minX = (float) box.getMinX();
                 float minY = (float) box.getMinY();
                 float maxX = (float) box.getMaxX();
@@ -103,7 +103,7 @@ public class DefaultTileRenderer<T extends Tile> implements ITileRenderer<T> {
         }
     }
 
-    protected void renderChiselHighlight(IGameInstance game, IRenderer g, BoundBox box, int x, int y, float renderX, float renderY, float scale) {
+    protected void renderChiselHighlight(IGameInstance game, IRenderer g, BoundingBox box, int x, int y, float renderX, float renderY, float scale) {
         AbstractEntityPlayer player = game.getPlayer();
         int tileX = Util.floor(g.getMousedTileX());
         int tileY = Util.floor(g.getMousedTileY());

@@ -29,7 +29,7 @@ import de.ellpeck.rockbottom.api.render.tile.ITileRenderer;
 import de.ellpeck.rockbottom.api.render.tile.TileLiquidRenderer;
 import de.ellpeck.rockbottom.api.tile.state.IntProp;
 import de.ellpeck.rockbottom.api.tile.state.TileState;
-import de.ellpeck.rockbottom.api.util.BoundBox;
+import de.ellpeck.rockbottom.api.util.BoundingBox;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 import de.ellpeck.rockbottom.api.world.IWorld;
 import de.ellpeck.rockbottom.api.world.layer.TileLayer;
@@ -121,10 +121,10 @@ public abstract class TileLiquid extends TileBasic {
     }
 
     @Override
-    public void onIntersectWithEntity(IWorld world, int x, int y, TileLayer layer, TileState state, BoundBox entityBox, BoundBox entityBoxMotion, List<BoundBox> tileBoxes, Entity entity) {
+    public void onIntersectWithEntity(IWorld world, int x, int y, TileLayer layer, TileState state, BoundingBox entityBox, BoundingBox entityBoxMotion, List<BoundingBox> tileBoxes, Entity entity) {
         super.onIntersectWithEntity(world, x, y, layer, state, entityBox, entityBoxMotion, tileBoxes, entity);
 
-        for (BoundBox box : tileBoxes) {
+        for (BoundingBox box : tileBoxes) {
             if (box.intersects(entityBox)) {
                 entity.submergedLiquid = state;
                 if (box.contains(entity.getX(), entity.getOriginY() + entity.getEyeHeight())) {

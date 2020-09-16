@@ -23,9 +23,9 @@ package de.ellpeck.rockbottom.api.util;
 
 import java.util.List;
 
-public final class BoundBox {
+public final class BoundingBox {
 
-    public static final BoundBox NULL_BOUNDS = new BoundBox();
+    public static final BoundingBox NULL_BOUNDS = new BoundingBox();
 
     private double minX;
     private double minY;
@@ -33,23 +33,23 @@ public final class BoundBox {
     private double maxX;
     private double maxY;
 
-    public BoundBox() {
+    public BoundingBox() {
         this(0, 0, 0, 0);
     }
 
-    public BoundBox(double minX, double minY, double maxX, double maxY) {
+    public BoundingBox(double minX, double minY, double maxX, double maxY) {
         this.set(minX, minY, maxX, maxY);
     }
 
-    public static BoundBox getCombinedBoundBox(List<BoundBox> boxes) {
+    public static BoundingBox getCombinedBoundBox(List<BoundingBox> boxes) {
         if (boxes.isEmpty())
-            return BoundBox.NULL_BOUNDS;
+            return BoundingBox.NULL_BOUNDS;
         double minAreaX = Double.MAX_VALUE;
         double minAreaY = Double.MAX_VALUE;
         double maxAreaX = Double.MIN_VALUE;
         double maxAreaY = Double.MIN_VALUE;
 
-        for (BoundBox box : boxes) {
+        for (BoundingBox box : boxes) {
             if (box.minX < minAreaX)
                 minAreaX = box.minX;
             if (box.minY < minAreaY)
@@ -60,14 +60,14 @@ public final class BoundBox {
                 maxAreaY = box.maxY;
         }
 
-        return new BoundBox(minAreaX, minAreaY, maxAreaX, maxAreaY);
+        return new BoundingBox(minAreaX, minAreaY, maxAreaX, maxAreaY);
     }
 
-    public BoundBox set(BoundBox box) {
+    public BoundingBox set(BoundingBox box) {
         return this.set(box.minX, box.minY, box.maxX, box.maxY);
     }
 
-    public BoundBox set(double minX, double minY, double maxX, double maxY) {
+    public BoundingBox set(double minX, double minY, double maxX, double maxY) {
         this.minX = Math.min(minX, maxX);
         this.minY = Math.min(minY, maxY);
 
@@ -77,7 +77,7 @@ public final class BoundBox {
         return this;
     }
 
-    public BoundBox add(double x, double y) {
+    public BoundingBox add(double x, double y) {
         this.minX += x;
         this.minY += y;
 
@@ -87,7 +87,7 @@ public final class BoundBox {
         return this;
     }
 
-    public BoundBox expand(double x, double y) {
+    public BoundingBox expand(double x, double y) {
         this.minX -= x;
         this.maxX += x;
 
@@ -97,11 +97,11 @@ public final class BoundBox {
         return this;
     }
 
-    public BoundBox expand(double amount) {
+    public BoundingBox expand(double amount) {
         return this.expand(amount, amount);
     }
 
-    public boolean intersects(BoundBox other) {
+    public boolean intersects(BoundingBox other) {
         return this.intersects(other.minX, other.minY, other.maxX, other.maxY);
     }
 
@@ -113,20 +113,20 @@ public final class BoundBox {
         return this.minX <= x && this.minY <= y && this.maxX >= x && this.maxY >= y;
     }
 
-    public BoundBox getIntersection(BoundBox other) {
+    public BoundingBox getIntersection(BoundingBox other) {
         if (other == null)
             return NULL_BOUNDS;
-        return new BoundBox(
+        return new BoundingBox(
                 Math.max(this.getMinX(), other.getMinX()),
                 Math.max(this.getMinY(), other.getMinY()),
                 Math.min(this.getMaxX(), other.getMaxX()),
                 Math.min(this.getMaxY(), other.getMaxY()));
     }
 
-    public BoundBox getUnion(BoundBox other) {
+    public BoundingBox getUnion(BoundingBox other) {
         if (other == null)
             return this.copy();
-        return new BoundBox(
+        return new BoundingBox(
                 Math.min(this.getMinX(), other.getMinX()),
                 Math.min(this.getMinX(), other.getMinY()),
                 Math.max(this.getMaxX(), other.getMaxX()),
@@ -165,8 +165,8 @@ public final class BoundBox {
             return false;
         }
 
-        BoundBox boundBox = (BoundBox) o;
-        return Double.compare(boundBox.minX, this.minX) == 0 && Double.compare(boundBox.minY, this.minY) == 0 && Double.compare(boundBox.maxX, this.maxX) == 0 && Double.compare(boundBox.maxY, this.maxY) == 0;
+        BoundingBox boundingBox = (BoundingBox) o;
+        return Double.compare(boundingBox.minX, this.minX) == 0 && Double.compare(boundingBox.minY, this.minY) == 0 && Double.compare(boundingBox.maxX, this.maxX) == 0 && Double.compare(boundingBox.maxY, this.maxY) == 0;
     }
 
     @Override
@@ -225,7 +225,7 @@ public final class BoundBox {
         return this.minY + this.getHeight() / 2D;
     }
 
-    public BoundBox copy() {
-        return new BoundBox(this.minX, this.minY, this.maxX, this.maxY);
+    public BoundingBox copy() {
+        return new BoundingBox(this.minX, this.minY, this.maxX, this.maxY);
     }
 }

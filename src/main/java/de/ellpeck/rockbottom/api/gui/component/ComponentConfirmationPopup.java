@@ -29,7 +29,7 @@ import de.ellpeck.rockbottom.api.assets.texture.ITexture;
 import de.ellpeck.rockbottom.api.data.settings.Settings;
 import de.ellpeck.rockbottom.api.gui.Gui;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
-import de.ellpeck.rockbottom.api.util.BoundBox;
+import de.ellpeck.rockbottom.api.util.BoundingBox;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 import java.util.function.Consumer;
@@ -40,13 +40,13 @@ public class ComponentConfirmationPopup extends GuiComponent {
     private static final ResourceName RES = ResourceName.intern("gui.popup");
     private final Consumer<Boolean> consumer;
     private final boolean isUpsideDown;
-    private final BoundBox buttonArea;
+    private final BoundingBox buttonArea;
 
     public ComponentConfirmationPopup(Gui gui, int x, int y, Consumer<Boolean> consumer) {
         super(gui, x - 27, y - 42, 54, 42);
         this.consumer = consumer;
 
-        this.buttonArea = new BoundBox(0, 0, 40, 15);
+        this.buttonArea = new BoundingBox(0, 0, 40, 15);
 
         this.isUpsideDown = this.getRenderY() < 0;
         if (this.isUpsideDown) {

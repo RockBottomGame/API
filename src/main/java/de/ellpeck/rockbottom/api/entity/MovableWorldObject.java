@@ -24,7 +24,7 @@ package de.ellpeck.rockbottom.api.entity;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.tile.state.TileState;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
-import de.ellpeck.rockbottom.api.util.BoundBox;
+import de.ellpeck.rockbottom.api.util.BoundingBox;
 import de.ellpeck.rockbottom.api.util.Util;
 import de.ellpeck.rockbottom.api.world.IWorld;
 import de.ellpeck.rockbottom.api.world.layer.TileLayer;
@@ -33,7 +33,7 @@ import java.util.List;
 
 public abstract class MovableWorldObject {
 
-    public final BoundBox currentBounds = new BoundBox();
+    public final BoundingBox currentBounds = new BoundingBox();
     public IWorld world;
     public double motionX;
     public double motionY;
@@ -103,22 +103,22 @@ public abstract class MovableWorldObject {
     }
 
     @ApiInternal
-    public void onTileCollision(int x, int y, TileLayer layer, TileState state, BoundBox objBox, BoundBox objBoxMotion, List<BoundBox> boxes) {
+    public void onTileCollision(int x, int y, TileLayer layer, TileState state, BoundingBox objBox, BoundingBox objBoxMotion, List<BoundingBox> boxes) {
 
     }
 
     @ApiInternal
-    public void onEntityCollision(Entity entity, BoundBox thisBox, BoundBox thisBoxMotion, BoundBox otherBox, BoundBox otherBoxMotion) {
+    public void onEntityCollision(Entity entity, BoundingBox thisBox, BoundingBox thisBoxMotion, BoundingBox otherBox, BoundingBox otherBoxMotion) {
 
     }
 
     @ApiInternal
-    public void onTileIntersection(int x, int y, TileLayer layer, TileState state, BoundBox objBox, BoundBox objBoxMotion, List<BoundBox> boxes) {
+    public void onTileIntersection(int x, int y, TileLayer layer, TileState state, BoundingBox objBox, BoundingBox objBoxMotion, List<BoundingBox> boxes) {
 
     }
 
     @ApiInternal
-    public void onEntityIntersection(Entity entity, BoundBox thisBox, BoundBox thisBoxMotion, BoundBox otherBox, BoundBox otherBoxMotion) {
+    public void onEntityIntersection(Entity entity, BoundingBox thisBox, BoundingBox thisBoxMotion, BoundingBox otherBox, BoundingBox otherBoxMotion) {
 
     }
 

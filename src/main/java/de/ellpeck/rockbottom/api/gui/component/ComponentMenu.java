@@ -22,7 +22,7 @@
 package de.ellpeck.rockbottom.api.gui.component;
 
 import de.ellpeck.rockbottom.api.gui.Gui;
-import de.ellpeck.rockbottom.api.util.BoundBox;
+import de.ellpeck.rockbottom.api.util.BoundingBox;
 import de.ellpeck.rockbottom.api.util.Util;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
@@ -38,7 +38,7 @@ public class ComponentMenu extends ComponentScrollBar {
     private final int componentGap;
     private final List<MenuComponent> contents = new ArrayList<>();
 
-    public ComponentMenu(Gui gui, int x, int y, int barWidth, int height, int displayedComponentsX, int displayedComponentsY, int componentsOffsetX, int componentsOffsetY, BoundBox hoverArea, ResourceName scrollTexture, int componentGap) {
+    public ComponentMenu(Gui gui, int x, int y, int barWidth, int height, int displayedComponentsX, int displayedComponentsY, int componentsOffsetX, int componentsOffsetY, BoundingBox hoverArea, ResourceName scrollTexture, int componentGap) {
         super(gui, x, y, barWidth, height, hoverArea, 0, null, scrollTexture);
         this.displayedComponentsX = displayedComponentsX;
         this.displayedComponentsY = displayedComponentsY;
@@ -47,11 +47,11 @@ public class ComponentMenu extends ComponentScrollBar {
         this.componentGap = componentGap;
     }
 
-    public ComponentMenu(Gui gui, int x, int y, int barWidth, int height, int displayedComponentsX, int displayedComponentsY, int componentsOffsetX, int componentsOffsetY, BoundBox hoverArea, ResourceName scrollTexture) {
+    public ComponentMenu(Gui gui, int x, int y, int barWidth, int height, int displayedComponentsX, int displayedComponentsY, int componentsOffsetX, int componentsOffsetY, BoundingBox hoverArea, ResourceName scrollTexture) {
         this(gui, x, y, barWidth, height, displayedComponentsX, displayedComponentsY, componentsOffsetX, componentsOffsetY, hoverArea, scrollTexture, 2);
     }
 
-    public ComponentMenu(Gui gui, int x, int y, int height, int displayedComponentsX, int displayedComponentsY, BoundBox hoverArea) {
+    public ComponentMenu(Gui gui, int x, int y, int height, int displayedComponentsX, int displayedComponentsY, BoundingBox hoverArea) {
         this(gui, x, y, 6, height, displayedComponentsX, displayedComponentsY, 0, 0, hoverArea, null);
     }
 

@@ -40,7 +40,7 @@ import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.render.IPlayerDesign;
 import de.ellpeck.rockbottom.api.tile.entity.TileEntity;
 import de.ellpeck.rockbottom.api.tile.state.TileState;
-import de.ellpeck.rockbottom.api.util.BoundBox;
+import de.ellpeck.rockbottom.api.util.BoundingBox;
 import de.ellpeck.rockbottom.api.world.IChunk;
 import de.ellpeck.rockbottom.api.world.IWorld;
 import de.ellpeck.rockbottom.api.world.gen.BiomeGen;
@@ -55,7 +55,6 @@ import java.io.File;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.logging.Logger;
@@ -151,7 +150,7 @@ public interface IApiHandler {
      */
     int[] interpolateWorldColor(int[] interpolatedLight, TileLayer layer);
 
-    List<BoundBox> getDefaultPlatformBounds(IWorld world, int x, int y, TileLayer layer, double tileWidth, double tileHeight, TileState state, MovableWorldObject object, BoundBox objectBox);
+    List<BoundingBox> getDefaultPlatformBounds(IWorld world, int x, int y, TileLayer layer, double tileWidth, double tileHeight, TileState state, MovableWorldObject object, BoundingBox objectBox);
 
     /**
      * Searches the inventory for items as IUseInfo specified in the given parameters.

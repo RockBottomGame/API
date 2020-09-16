@@ -21,7 +21,7 @@
 
 package de.ellpeck.rockbottom.api.tile.state;
 
-public abstract class TileProp<T extends Comparable> implements Comparable<TileProp> {
+public abstract class TileProp<T extends Comparable<T>> implements Comparable<TileProp<T>> {
 
     protected final String name;
 

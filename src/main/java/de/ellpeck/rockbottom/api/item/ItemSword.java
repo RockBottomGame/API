@@ -23,7 +23,7 @@ package de.ellpeck.rockbottom.api.item;
 
 import de.ellpeck.rockbottom.api.entity.Entity;
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
-import de.ellpeck.rockbottom.api.util.BoundBox;
+import de.ellpeck.rockbottom.api.util.BoundingBox;
 import de.ellpeck.rockbottom.api.util.Direction;
 import de.ellpeck.rockbottom.api.util.Util;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
@@ -54,7 +54,7 @@ public class ItemSword extends ItemTool {
         double minX = x - (player.facing == Direction.LEFT ? this.attackDistance : 0);
         double maxX = x + (player.facing == Direction.RIGHT ? this.attackDistance : 0);
 
-        for (Entity entity : world.getEntities(new BoundBox(minX, y - this.attackDistance, maxX, y + this.attackDistance), entity -> entity != player)) {
+        for (Entity entity : world.getEntities(new BoundingBox(minX, y - this.attackDistance, maxX, y + this.attackDistance), entity -> entity != player)) {
             if (Util.distanceSq(entity.getX(), entity.getY(), x, y) <= this.attackDistance * this.attackDistance) {
                 entities.add(entity);
             }

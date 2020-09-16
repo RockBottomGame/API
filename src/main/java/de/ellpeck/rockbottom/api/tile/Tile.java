@@ -46,7 +46,7 @@ import de.ellpeck.rockbottom.api.tile.entity.TileEntity;
 import de.ellpeck.rockbottom.api.tile.state.IStateHandler;
 import de.ellpeck.rockbottom.api.tile.state.TileProp;
 import de.ellpeck.rockbottom.api.tile.state.TileState;
-import de.ellpeck.rockbottom.api.util.BoundBox;
+import de.ellpeck.rockbottom.api.util.BoundingBox;
 import de.ellpeck.rockbottom.api.util.Direction;
 import de.ellpeck.rockbottom.api.util.Util;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
@@ -57,14 +57,14 @@ import java.util.*;
 
 public class Tile {
 
-    public static final BoundBox DEFAULT_BOUNDS = new BoundBox(0, 0, 1, 1);
+    public static final BoundingBox DEFAULT_BOUNDS = new BoundingBox(0, 0, 1, 1);
 
-    public static final BoundBox TOP_LEFT = new BoundBox(0, 0.5d, 0.5d, 1);
-    public static final BoundBox TOP_RIGHT = new BoundBox(0.5d, 0.5d, 1, 1);
-    public static final BoundBox BOTTOM_LEFT = new BoundBox(0, 0, 0.5d, 0.5d);
-    public static final BoundBox BOTTOM_RIGHT = new BoundBox(0.5d, 0, 1, 0.5d);
+    public static final BoundingBox TOP_LEFT = new BoundingBox(0, 0.5d, 0.5d, 1);
+    public static final BoundingBox TOP_RIGHT = new BoundingBox(0.5d, 0.5d, 1, 1);
+    public static final BoundingBox BOTTOM_LEFT = new BoundingBox(0, 0, 0.5d, 0.5d);
+    public static final BoundingBox BOTTOM_RIGHT = new BoundingBox(0.5d, 0, 1, 0.5d);
 
-    public static final BoundBox[] CHISEL_BOUNDS = new BoundBox[]{
+    public static final BoundingBox[] CHISEL_BOUNDS = new BoundingBox[]{
             TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT
     };
 
@@ -87,31 +87,31 @@ public class Tile {
         return null;
     }
 
-    public BoundBox getActualBoundBox(IWorld world, TileState state, int x, int y, TileLayer layer) {
-    	BoundBox box = getBoundBox(world, state, x, y, layer);
+    public BoundingBox getActualBoundBox(IWorld world, TileState state, int x, int y, TileLayer layer) {
+    	BoundingBox box = getBoundBox(world, state, x, y, layer);
     	if (box == null) {
-    		box = BoundBox.NULL_BOUNDS;
+    		box = BoundingBox.NULL_BOUNDS;
 		}
 		return box;
 	}
 
-    public BoundBox getBoundBox(IWorld world, TileState state, int x, int y, TileLayer layer) {
+    public BoundingBox getBoundBox(IWorld world, TileState state, int x, int y, TileLayer layer) {
 		return DEFAULT_BOUNDS;
 	}
 
     @Deprecated
-    public BoundBox getBoundBox(IWorld world, int x, int y, TileLayer layer) {
+    public BoundingBox getBoundBox(IWorld world, int x, int y, TileLayer layer) {
         return this.getBoundBox(world, world.getState(x, y), x, y, layer);
     }
 
-	public List<BoundBox> getBoundBoxes(IWorld world, TileState state, int x, int y, TileLayer layer, MovableWorldObject object, BoundBox objectBox, BoundBox objectBoxMotion) {
+	public List<BoundingBox> getBoundBoxes(IWorld world, TileState state, int x, int y, TileLayer layer, MovableWorldObject object, BoundingBox objectBox, BoundingBox objectBoxMotion) {
         if (this.isPlatform())
             return this.getPlatformBounds(world, x, y, layer, state, object, objectBox, objectBoxMotion);
     
         if (layer == TileLayer.MAIN && this.isChiseled(world, x, y, layer, state))
             return getChiselBoundBoxes(world, x, y);
 
-		BoundBox box = this.getBoundBox(world, state, x, y, layer);
+		BoundingBox box = this.getBoundBox(world, state, x, y, layer);
 
 		if (box != null && !box.isEmpty()) {
 			return Collections.singletonList(box.copy().add(x, y));
@@ -121,8 +121,8 @@ public class Tile {
 	}
 
 	@Deprecated
-    public List<BoundBox> getBoundBoxes(IWorld world, int x, int y, TileLayer layer, MovableWorldObject object, BoundBox objectBox, BoundBox objectBoxMotion) {
-        BoundBox box = this.getBoundBox(world, x, y, layer);
+    public List<BoundingBox> getBoundBoxes(IWorld world, int x, int y, TileLayer layer, MovableWorldObject object, BoundingBox objectBox, BoundingBox objectBoxMotion) {
+        BoundingBox box = this.getBoundBox(world, x, y, layer);
 
         if (box != null && !box.isEmpty()) {
             return Collections.singletonList(box.copy().add(x, y));
@@ -135,14 +135,14 @@ public class Tile {
         return false;
     }
 
-    public List<BoundBox> getPlatformBounds(IWorld world, int x, int y, TileLayer layer, TileState state, MovableWorldObject object, BoundBox objectBox, BoundBox objectBoxMotion) {
+    public List<BoundingBox> getPlatformBounds(IWorld world, int x, int y, TileLayer layer, TileState state, MovableWorldObject object, BoundingBox objectBox, BoundingBox objectBoxMotion) {
         if (!(this instanceof MultiTile) || (state.get(((MultiTile) this).propSubY) == ((MultiTile) this).getHeight() - 1))
             return RockBottomAPI.getApiHandler().getDefaultPlatformBounds(world, x, y, layer, 1, 1, state, object, objectBox);
         return Collections.emptyList();
     }
   
-    protected List<BoundBox> getChiselBoundBoxes(IWorld world, int x, int y) {
-        List<BoundBox> boxes = new ArrayList<>();
+    protected List<BoundingBox> getChiselBoundBoxes(IWorld world, int x, int y) {
+        List<BoundingBox> boxes = new ArrayList<>();
         boolean[] chiseledCorners = Util.decodeBitVector(world.getState(x, y).get(StaticTileProps.CHISEL_STATE), 4);
         for (int i = 0; i < CHISEL_BOUNDS.length; i++) {
             if (!chiseledCorners[i]) {
@@ -434,15 +434,15 @@ public class Tile {
 
     }
 
-    public boolean canClimb(IWorld world, int x, int y, TileLayer layer, TileState state, BoundBox entityBox, BoundBox entityBoxMotion, List<BoundBox> tileBoxes, Entity entity) {
+    public boolean canClimb(IWorld world, int x, int y, TileLayer layer, TileState state, BoundingBox entityBox, BoundingBox entityBoxMotion, List<BoundingBox> tileBoxes, Entity entity) {
         return false;
     }
 
-    public void onCollideWithEntity(IWorld world, int x, int y, TileLayer layer, TileState state, BoundBox entityBox, BoundBox entityBoxMotion, List<BoundBox> tileBoxes, Entity entity) {
+    public void onCollideWithEntity(IWorld world, int x, int y, TileLayer layer, TileState state, BoundingBox entityBox, BoundingBox entityBoxMotion, List<BoundingBox> tileBoxes, Entity entity) {
 
     }
 
-    public void onIntersectWithEntity(IWorld world, int x, int y, TileLayer layer, TileState state, BoundBox entityBox, BoundBox entityBoxMotion, List<BoundBox> tileBoxes, Entity entity) {
+    public void onIntersectWithEntity(IWorld world, int x, int y, TileLayer layer, TileState state, BoundingBox entityBox, BoundingBox entityBoxMotion, List<BoundingBox> tileBoxes, Entity entity) {
 
     }
 

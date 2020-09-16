@@ -26,13 +26,13 @@ import de.ellpeck.rockbottom.api.entity.MovableWorldObject;
 import de.ellpeck.rockbottom.api.event.Event;
 import de.ellpeck.rockbottom.api.particle.Particle;
 import de.ellpeck.rockbottom.api.tile.Tile;
-import de.ellpeck.rockbottom.api.util.BoundBox;
+import de.ellpeck.rockbottom.api.util.BoundingBox;
 
 import java.util.List;
 
 /**
  * This event is fired when a {@link MovableWorldObject} collides with a set of
- * {@link BoundBox} objects in the world. Most likely, the object in question is
+ * {@link BoundingBox} objects in the world. Most likely, the object in question is
  * an {@link Entity} or a {@link Particle} and the list of bounding boxes comes
  * from the surrounding {@link Tile} objects in the world. This event cannot be
  * cancelled.
@@ -40,14 +40,14 @@ import java.util.List;
 public final class WorldObjectCollisionEvent extends Event {
 
     public final MovableWorldObject object;
-    public final BoundBox entityBoundBox;
-    public final BoundBox entityBoundBoxWithMotion;
-    public final List<BoundBox> boundBoxes;
+    public final BoundingBox entityBoundingBox;
+    public final BoundingBox entityBoundingBoxWithMotion;
+    public final List<BoundingBox> boundingBoxes;
 
-    public WorldObjectCollisionEvent(MovableWorldObject object, BoundBox entityBoundBox, BoundBox entityBoundBoxWithMotion, List<BoundBox> boundBoxes) {
+    public WorldObjectCollisionEvent(MovableWorldObject object, BoundingBox entityBoundingBox, BoundingBox entityBoundingBoxWithMotion, List<BoundingBox> boundingBoxes) {
         this.object = object;
-        this.entityBoundBox = entityBoundBox;
-        this.entityBoundBoxWithMotion = entityBoundBoxWithMotion;
-        this.boundBoxes = boundBoxes;
+        this.entityBoundingBox = entityBoundingBox;
+        this.entityBoundingBoxWithMotion = entityBoundingBoxWithMotion;
+        this.boundingBoxes = boundingBoxes;
     }
 }

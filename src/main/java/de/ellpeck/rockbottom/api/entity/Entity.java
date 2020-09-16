@@ -37,7 +37,7 @@ import de.ellpeck.rockbottom.api.event.impl.EntityDeathEvent;
 import de.ellpeck.rockbottom.api.render.entity.IEntityRenderer;
 import de.ellpeck.rockbottom.api.tile.Tile;
 import de.ellpeck.rockbottom.api.tile.state.TileState;
-import de.ellpeck.rockbottom.api.util.BoundBox;
+import de.ellpeck.rockbottom.api.util.BoundingBox;
 import de.ellpeck.rockbottom.api.util.Direction;
 import de.ellpeck.rockbottom.api.util.Util;
 import de.ellpeck.rockbottom.api.world.IChunk;
@@ -281,19 +281,19 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
         return true;
     }
 
-    public void onCollideWithTile(int x, int y, TileLayer layer, TileState state, BoundBox entityBox, BoundBox entityBoxMotion, List<BoundBox> tileBoxes) {
+    public void onCollideWithTile(int x, int y, TileLayer layer, TileState state, BoundingBox entityBox, BoundingBox entityBoxMotion, List<BoundingBox> tileBoxes) {
 
     }
 
-    public void onCollideWithEntity(Entity otherEntity, BoundBox thisBox, BoundBox thisBoxMotion, BoundBox otherBox, BoundBox otherBoxMotion) {
+    public void onCollideWithEntity(Entity otherEntity, BoundingBox thisBox, BoundingBox thisBoxMotion, BoundingBox otherBox, BoundingBox otherBoxMotion) {
 
     }
 
-    public void onIntersectWithTile(int x, int y, TileLayer layer, TileState state, BoundBox entityBox, BoundBox entityBoxMotion, List<BoundBox> tileBoxes) {
+    public void onIntersectWithTile(int x, int y, TileLayer layer, TileState state, BoundingBox entityBox, BoundingBox entityBoxMotion, List<BoundingBox> tileBoxes) {
 
     }
 
-    public void onIntersectWithEntity(Entity otherEntity, BoundBox thisBox, BoundBox thisBoxMotion, BoundBox otherBox, BoundBox otherBoxMotion) {
+    public void onIntersectWithEntity(Entity otherEntity, BoundingBox thisBox, BoundingBox thisBoxMotion, BoundingBox otherBox, BoundingBox otherBoxMotion) {
 
     }
 
@@ -313,11 +313,11 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
         return false;
     }
 
-    public boolean shouldStartClimbing(int x, int y, TileLayer layer, TileState state, BoundBox entityBox, BoundBox entityBoxMotion, List<BoundBox> tileBoxes) {
+    public boolean shouldStartClimbing(int x, int y, TileLayer layer, TileState state, BoundingBox entityBox, BoundingBox entityBoxMotion, List<BoundingBox> tileBoxes) {
         return false;
     }
 
-    public boolean canCollideWith(MovableWorldObject object, BoundBox entityBox, BoundBox entityBoxMotion) {
+    public boolean canCollideWith(MovableWorldObject object, BoundingBox entityBox, BoundingBox entityBoxMotion) {
         return false;
     }
 
@@ -326,20 +326,20 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
     }
 
     @Override
-    public final void onTileCollision(int x, int y, TileLayer layer, TileState state, BoundBox objBox, BoundBox objBoxMotion, List<BoundBox> boxes) {
+    public final void onTileCollision(int x, int y, TileLayer layer, TileState state, BoundingBox objBox, BoundingBox objBoxMotion, List<BoundingBox> boxes) {
         Tile tile = state.getTile();
         tile.onCollideWithEntity(this.world, x, y, layer, state, objBox, objBoxMotion, boxes, this);
         this.onCollideWithTile(x, y, layer, state, objBox, objBoxMotion, boxes);
     }
 
     @Override
-    public final void onEntityCollision(Entity entity, BoundBox thisBox, BoundBox thisBoxMotion, BoundBox otherBox, BoundBox otherBoxMotion) {
+    public final void onEntityCollision(Entity entity, BoundingBox thisBox, BoundingBox thisBoxMotion, BoundingBox otherBox, BoundingBox otherBoxMotion) {
         this.onCollideWithEntity(entity, thisBox, thisBoxMotion, otherBox, otherBoxMotion);
         entity.onCollideWithEntity(this, otherBox, otherBoxMotion, thisBox, thisBoxMotion);
     }
 
     @Override
-    public final void onTileIntersection(int x, int y, TileLayer layer, TileState state, BoundBox objBox, BoundBox objBoxMotion, List<BoundBox> boxes) {
+    public final void onTileIntersection(int x, int y, TileLayer layer, TileState state, BoundingBox objBox, BoundingBox objBoxMotion, List<BoundingBox> boxes) {
         Tile tile = state.getTile();
 
         if (!this.canClimb || !this.isClimbing) {
@@ -356,7 +356,7 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
 
         if (!this.canSwim) {
             if (tile.canSwim(this.world, x, y, layer, this)) {
-                for (BoundBox box : boxes) {
+                for (BoundingBox box : boxes) {
                     if (this.collidedHor ? box.intersects(objBox) : box.contains(this.getX(), this.getY())) {
                         this.canSwim = true;
                         break;
@@ -370,7 +370,7 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
     }
 
     @Override
-    public final void onEntityIntersection(Entity entity, BoundBox thisBox, BoundBox thisBoxMotion, BoundBox otherBox, BoundBox otherBoxMotion) {
+    public final void onEntityIntersection(Entity entity, BoundingBox thisBox, BoundingBox thisBoxMotion, BoundingBox otherBox, BoundingBox otherBoxMotion) {
         this.onIntersectWithEntity(entity, thisBox, thisBoxMotion, otherBox, otherBoxMotion);
         entity.onIntersectWithEntity(this, otherBox, otherBoxMotion, thisBox, thisBoxMotion);
     }

@@ -27,7 +27,7 @@ import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.assets.texture.ITexture;
 import de.ellpeck.rockbottom.api.data.settings.Settings;
 import de.ellpeck.rockbottom.api.gui.Gui;
-import de.ellpeck.rockbottom.api.util.BoundBox;
+import de.ellpeck.rockbottom.api.util.BoundingBox;
 import de.ellpeck.rockbottom.api.util.Colors;
 import de.ellpeck.rockbottom.api.util.Util;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
@@ -37,14 +37,14 @@ import java.util.function.Consumer;
 public class ComponentScrollBar extends GuiComponent {
 
     protected final Consumer<Integer> scrollConsumer;
-    protected final BoundBox hoverArea;
+    protected final BoundingBox hoverArea;
     protected final ResourceName scrollTexture;
     protected int number;
     protected int max;
     protected boolean wasMouseDown;
     protected boolean drawReversed;
 
-    public ComponentScrollBar(Gui gui, int x, int y, int width, int height, BoundBox hoverArea, int max, Consumer<Integer> scrollConsumer, ResourceName scrollTexture) {
+    public ComponentScrollBar(Gui gui, int x, int y, int width, int height, BoundingBox hoverArea, int max, Consumer<Integer> scrollConsumer, ResourceName scrollTexture) {
         super(gui, x, y, width, height);
         this.scrollConsumer = scrollConsumer;
         this.hoverArea = hoverArea;
@@ -52,7 +52,7 @@ public class ComponentScrollBar extends GuiComponent {
         this.scrollTexture = scrollTexture;
     }
 
-    public ComponentScrollBar(Gui gui, int x, int y, int height, BoundBox hoverArea, int max, Consumer<Integer> scrollConsumer) {
+    public ComponentScrollBar(Gui gui, int x, int y, int height, BoundingBox hoverArea, int max, Consumer<Integer> scrollConsumer) {
         this(gui, x, y, 6, height, hoverArea, max, scrollConsumer, null);
     }
 
@@ -61,7 +61,7 @@ public class ComponentScrollBar extends GuiComponent {
         return ResourceName.intern("scroll_bar");
     }
 
-    public BoundBox getHoverArea() {
+    public BoundingBox getHoverArea() {
         return this.hoverArea;
     }
 

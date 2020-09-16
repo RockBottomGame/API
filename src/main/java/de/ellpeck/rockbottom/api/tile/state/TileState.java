@@ -67,11 +67,11 @@ public final class TileState {
         return this.hasProp(prop.getName());
     }
 
-    public <T extends Comparable> TileState prop(TileProp<T> prop, T value) {
+    public <T extends Comparable<T>> TileState prop(TileProp<T> prop, T value) {
         return this.prop(prop.getName(), value);
     }
 
-    public <T extends Comparable> TileState cycleProp(TileProp<T> prop) {
+    public <T extends Comparable<T>> TileState cycleProp(TileProp<T> prop) {
         int index = prop.getIndex(this.get(prop)) + 1;
         if (index >= prop.getVariants()) {
             index = 0;
@@ -79,11 +79,11 @@ public final class TileState {
         return this.prop(prop, prop.getValue(index));
     }
 
-    public <T extends Comparable> T get(String prop) {
+    public <T extends Comparable<T>> T get(String prop) {
         return Preconditions.checkNotNull((T) this.properties.get(prop), "The tile " + this.tile.getName() + " does not support property " + prop);
     }
 
-    public <T extends Comparable> T get(TileProp<T> prop) {
+    public <T extends Comparable<T>> T get(TileProp<T> prop) {
         return this.get(prop.getName());
     }
 

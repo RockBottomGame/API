@@ -29,7 +29,7 @@ import de.ellpeck.rockbottom.api.tile.Tile;
 import de.ellpeck.rockbottom.api.tile.entity.TileEntity;
 import de.ellpeck.rockbottom.api.tile.state.TileState;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
-import de.ellpeck.rockbottom.api.util.BoundBox;
+import de.ellpeck.rockbottom.api.util.BoundingBox;
 import de.ellpeck.rockbottom.api.world.gen.INoiseGen;
 import de.ellpeck.rockbottom.api.world.gen.IWorldGenerator;
 import de.ellpeck.rockbottom.api.world.gen.biome.Biome;
@@ -275,16 +275,16 @@ public interface IChunkOrWorld extends IAdditionalDataProvider {
 
     /**
      * Gets a list of all of the {@link Entity} objects that are currently in
-     * the given {@link BoundBox}.
+     * the given {@link BoundingBox}.
      *
      * @param area The area to check for entities
      * @return All of the entities
      */
-    List<Entity> getEntities(BoundBox area);
+    List<Entity> getEntities(BoundingBox area);
 
     /**
      * Gets a list of all of the {@link Entity} objects that are currently in
-     * the given {@link BoundBox} and for which the given {@link Predicate}
+     * the given {@link BoundingBox} and for which the given {@link Predicate}
      * applies.
      *
      * @param area The area to check for entities
@@ -292,11 +292,11 @@ public interface IChunkOrWorld extends IAdditionalDataProvider {
      *             list
      * @return All of the entities
      */
-    List<Entity> getEntities(BoundBox area, Predicate<Entity> test);
+    List<Entity> getEntities(BoundingBox area, Predicate<Entity> test);
 
     /**
      * Gets a list of all of the {@link Entity} objects that are currently in
-     * the given {@link BoundBox} that also are objects of or whose classes
+     * the given {@link BoundingBox} that also are objects of or whose classes
      * extend the given {@link Class}.
      *
      * @param area The area to check for entities
@@ -305,11 +305,11 @@ public interface IChunkOrWorld extends IAdditionalDataProvider {
      *             being looked for
      * @return All of the entities
      */
-    <T extends Entity> List<T> getEntities(BoundBox area, Class<T> type);
+    <T extends Entity> List<T> getEntities(BoundingBox area, Class<T> type);
 
     /**
      * Gets a list of all of the {@link Entity} objects that are currently in
-     * the given {@link BoundBox} that also are objects of or whose classes
+     * the given {@link BoundingBox} that also are objects of or whose classes
      * extend the given {@link Class} and for which the given {@link Predicate}
      * applies.
      *
@@ -321,21 +321,21 @@ public interface IChunkOrWorld extends IAdditionalDataProvider {
      *             being looked for
      * @return All of the entities
      */
-    <T extends Entity> List<T> getEntities(BoundBox area, Class<T> type, Predicate<T> test);
+    <T extends Entity> List<T> getEntities(BoundingBox area, Class<T> type, Predicate<T> test);
 
 
     /**
      * Gets a list of all of the {@link Entity} objects that are currently in
-     * the given List of {@link BoundBox}.
+     * the given List of {@link BoundingBox}.
      *
      * @param area The area to check for entities
      * @return All of the entities
      */
-    List<Entity> getEntities(List<BoundBox> area);
+    List<Entity> getEntities(List<BoundingBox> area);
 
     /**
      * Gets a list of all of the {@link Entity} objects that are currently in
-     * the given List of {@link BoundBox} and for which the given {@link Predicate}
+     * the given List of {@link BoundingBox} and for which the given {@link Predicate}
      * applies.
      *
      * @param area The area to check for entities
@@ -343,11 +343,11 @@ public interface IChunkOrWorld extends IAdditionalDataProvider {
      *             list
      * @return All of the entities
      */
-    List<Entity> getEntities(List<BoundBox> area, Predicate<Entity> test);
+    List<Entity> getEntities(List<BoundingBox> area, Predicate<Entity> test);
 
     /**
      * Gets a list of all of the {@link Entity} objects that are currently in
-     * the given List of {@link BoundBox} that also are objects of or whose classes
+     * the given List of {@link BoundingBox} that also are objects of or whose classes
      * extend the given {@link Class}.
      *
      * @param area The area to check for entities
@@ -356,11 +356,11 @@ public interface IChunkOrWorld extends IAdditionalDataProvider {
      *             being looked for
      * @return All of the entities
      */
-    <T extends Entity> List<T> getEntities(List<BoundBox> area, Class<T> type);
+    <T extends Entity> List<T> getEntities(List<BoundingBox> area, Class<T> type);
 
     /**
      * Gets a list of all of the {@link Entity} objects that are currently in
-     * the given List of {@link BoundBox} that also are objects of or whose classes
+     * the given List of {@link BoundingBox} that also are objects of or whose classes
      * extend the given {@link Class} and for which the given {@link Predicate}
      * applies.
      *
@@ -372,7 +372,7 @@ public interface IChunkOrWorld extends IAdditionalDataProvider {
      *             being looked for
      * @return All of the entities
      */
-    <T extends Entity> List<T> getEntities(List<BoundBox> area, Class<T> type, Predicate<T> test);
+    <T extends Entity> List<T> getEntities(List<BoundingBox> area, Class<T> type, Predicate<T> test);
 
     /**
      * Gets the combined light at the given position in the world. The combined
