@@ -102,7 +102,7 @@ public final class Registries {
      * started, an {@link Entity} needs to have a constructor containing only an
      * {@link IWorld}.
      */
-    public static final NameRegistry<Class<? extends Entity>> ENTITY_REGISTRY = new NameRegistry<>(ResourceName.intern("entity_registry"), false).register();
+    public static final NameRegistry<Entity.IFactory> ENTITY_REGISTRY = new NameRegistry<>(ResourceName.intern("entity_registry"), false).register();
     /**
      * The registry for all {@link DataPart} types. Note that this registry
      * should not be registered into without caution, as the index should not be
@@ -188,7 +188,7 @@ public final class Registries {
      * that, to instantiate a world generator, it needs to contain a default
      * constructor.
      */
-    public static final NameRegistry<Class<? extends IWorldGenerator>> WORLD_GENERATORS = new NameRegistry<>(ResourceName.intern("world_generator_registry"), true).register();
+    public static final NameRegistry<IWorldGenerator.IFactory> WORLD_GENERATORS = new NameRegistry<>(ResourceName.intern("world_generator_registry"), true).register();
     /**
      * The registry for all {@link Biome} objects. Use {@link Biome#register()}
      * to register biomes into this registry.
@@ -254,7 +254,7 @@ public final class Registries {
      * that takes an {@link ResourceName} similar to the one that {@link
      * Information} provides.
      */
-    public static final NameRegistry<Class<? extends Information>> INFORMATION_REGISTRY = new NameRegistry<>(ResourceName.intern("information_registry"), false).register();
+    public static final NameRegistry<Information.IFactory> INFORMATION_REGISTRY = new NameRegistry<>(ResourceName.intern("information_registry"), false).register();
     /**
      * The registry for all {@link IAssetLoader} objects. To register one into
      * this registry, use {@link IAssetLoader#register()}.

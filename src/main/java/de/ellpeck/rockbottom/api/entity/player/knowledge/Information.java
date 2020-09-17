@@ -56,4 +56,10 @@ public class Information {
     public ResourceName getRegistryName() {
         return this.name;
     }
+
+    public interface IFactory {
+
+        Information create(ResourceName name);
+
+    }
 }

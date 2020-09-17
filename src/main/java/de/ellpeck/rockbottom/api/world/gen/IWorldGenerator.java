@@ -22,6 +22,7 @@
 package de.ellpeck.rockbottom.api.world.gen;
 
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
+import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 import de.ellpeck.rockbottom.api.world.IChunk;
 import de.ellpeck.rockbottom.api.world.IWorld;
 
@@ -55,5 +56,11 @@ public interface IWorldGenerator {
 
     default boolean shouldExistInWorld(IWorld world) {
         return true;
+    }
+
+    interface IFactory {
+
+        IWorldGenerator create();
+
     }
 }

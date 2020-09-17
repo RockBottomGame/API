@@ -25,6 +25,7 @@ import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ListMultimap;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.util.Util;
+import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 import de.ellpeck.rockbottom.api.world.IChunk;
 import de.ellpeck.rockbottom.api.world.IWorld;
 import de.ellpeck.rockbottom.api.world.gen.biome.Biome;
@@ -37,12 +38,17 @@ import java.util.Set;
 
 public abstract class BiomeGen implements IWorldGenerator {
 
+    protected ResourceName name;
     protected final Map<Biome, INoiseGen> biomeNoiseGens = new HashMap<>();
     protected final ListMultimap<BiomeLevel, Biome> biomesPerLevel = ArrayListMultimap.create();
     protected final Map<BiomeLevel, Integer> totalWeights = new HashMap<>();
     protected final Random biomeRandom = new Random();
     protected INoiseGen levelHeightNoise;
     protected long[] layerSeeds;
+
+    public BiomeGen(ResourceName name) {
+        this.name = name;
+    }
 
     public abstract int getLevelTransition(IWorld world);
 

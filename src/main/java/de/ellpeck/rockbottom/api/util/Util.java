@@ -235,10 +235,10 @@ public final class Util {
      * @see Registries#ENTITY_REGISTRY
      */
     public static Entity createEntity(ResourceName name, IWorld world) {
-        Class<? extends Entity> entityClass = Registries.ENTITY_REGISTRY.get(name);
+        Entity.IFactory entityFactory = Registries.ENTITY_REGISTRY.get(name);
 
         try {
-            return entityClass.getConstructor(IWorld.class).newInstance(world);
+            return entityFactory.create(world);
         } catch (Exception e) {
             RockBottomAPI.logger().log(Level.SEVERE, "Couldn't initialize entity with name " + name, e);
             return null;

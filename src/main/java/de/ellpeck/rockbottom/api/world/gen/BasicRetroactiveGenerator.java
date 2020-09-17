@@ -22,19 +22,26 @@
 package de.ellpeck.rockbottom.api.world.gen;
 
 import de.ellpeck.rockbottom.api.Registries;
+import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 import de.ellpeck.rockbottom.api.world.IChunk;
 import de.ellpeck.rockbottom.api.world.IWorld;
 
 public abstract class BasicRetroactiveGenerator implements IWorldGenerator {
 
+    protected final ResourceName name;
+
+    public BasicRetroactiveGenerator(ResourceName name) {
+        this.name = name;
+    }
+
     @Override
     public boolean shouldGenerate(IWorld world, IChunk chunk) {
-        return (!chunk.hasAdditionalData() || !chunk.getAdditionalData().getBoolean(Registries.WORLD_GENERATORS.getId(this.getClass()))) && this.shouldGenerateRetroactively(world, chunk);
+        return (!chunk.hasAdditionalData() || !chunk.getAdditionalData().getBoolean(name)) && this.shouldGenerateRetroactively(world, chunk);
     }
 
     @Override
     public void generate(IWorld world, IChunk chunk) {
-        chunk.getOrCreateAdditionalData().addBoolean(Registries.WORLD_GENERATORS.getId(this.getClass()), true);
+        chunk.getOrCreateAdditionalData().addBoolean(name, true);
         this.generateRetroactively(world, chunk);
     }
 

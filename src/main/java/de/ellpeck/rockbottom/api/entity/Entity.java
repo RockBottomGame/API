@@ -40,6 +40,7 @@ import de.ellpeck.rockbottom.api.tile.state.TileState;
 import de.ellpeck.rockbottom.api.util.BoundingBox;
 import de.ellpeck.rockbottom.api.util.Direction;
 import de.ellpeck.rockbottom.api.util.Util;
+import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 import de.ellpeck.rockbottom.api.world.IChunk;
 import de.ellpeck.rockbottom.api.world.IWorld;
 import de.ellpeck.rockbottom.api.world.layer.TileLayer;
@@ -47,7 +48,7 @@ import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 import java.util.*;
 import java.util.function.ToIntFunction;
 
-public class Entity extends MovableWorldObject implements IAdditionalDataProvider {
+public abstract class Entity extends MovableWorldObject implements IAdditionalDataProvider {
 
     private final List<ActiveEffect> effects = new ArrayList<>();
     private final List<AITask> aiTasks = new ArrayList<>();
@@ -76,6 +77,8 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
     public Entity(IWorld world) {
         super(world);
     }
+
+    public abstract ResourceName getRegistryName();
 
     public UUID getUniqueId() {
         return this.uniqueId;
@@ -472,5 +475,11 @@ public class Entity extends MovableWorldObject implements IAdditionalDataProvide
 
     public double getEyeHeight() {
         return this.getHeight() / 2D;
+    }
+
+    public interface IFactory {
+
+        Entity create(IWorld world);
+
     }
 }

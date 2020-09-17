@@ -26,6 +26,7 @@ import de.ellpeck.rockbottom.api.GameContent;
 import de.ellpeck.rockbottom.api.Registries;
 import de.ellpeck.rockbottom.api.tile.state.TileState;
 import de.ellpeck.rockbottom.api.util.Util;
+import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 import de.ellpeck.rockbottom.api.world.IChunk;
 import de.ellpeck.rockbottom.api.world.IWorld;
 import de.ellpeck.rockbottom.api.world.gen.biome.Biome;
@@ -37,12 +38,17 @@ import java.util.Set;
 
 public abstract class WorldGenOre implements IWorldGenerator {
 
+    protected final ResourceName name;
     protected final Random oreRandom = new Random();
     protected long oreSeed;
 
+    public WorldGenOre(ResourceName name) {
+        this.name = name;
+    }
+
     @Override
     public void initWorld(IWorld world) {
-        this.oreSeed = Util.scrambleSeed(Registries.WORLD_GENERATORS.getId(this.getClass()).hashCode(), world.getSeed());
+        this.oreSeed = Util.scrambleSeed(this.name.hashCode(), world.getSeed());
     }
 
     @Override
