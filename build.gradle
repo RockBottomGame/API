@@ -9,6 +9,7 @@ project.ext.lwjglVersion = "3.2.0"
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
+group = "de.ellpeck.rockbottomapi"
 archivesBaseName = "RockBottomApi"
 
 if (hasProperty('buildnumber')) {
@@ -68,6 +69,9 @@ apply plugin: 'maven-publish'
 publishing {
     publications {
         mavenJava(MavenPublication) {
+            groupId project.group
+            artifactId project.archivesBaseName
+            version project.version
             from components.java
             artifact sourcesJar
             artifact javadocJar
