@@ -24,7 +24,6 @@ package de.ellpeck.rockbottom.api.util;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonParser;
-import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 import de.ellpeck.rockbottom.api.Constants;
 import de.ellpeck.rockbottom.api.Registries;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
