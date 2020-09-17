@@ -52,6 +52,18 @@ public interface IWorld extends IChunkOrWorld {
 
     boolean isChunkLoaded(int x, int y, boolean checkGenerating);
 
+    int getWeatherHeight();
+
+    /**
+     * The lowest y position that the world will attempt to load to, to find the highest block in the world.
+     * @return the lower bound for initial weather tile checks
+     */
+    default int getMinimumWeatherHeight() {
+        return -1000;
+    }
+
+    int getHighestTilePos(int x);
+
     int getIdForState(TileState state);
 
     TileState getStateForId(int id);
