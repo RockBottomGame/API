@@ -24,7 +24,7 @@ package de.ellpeck.rockbottom.api.construction.compendium;
 import de.ellpeck.rockbottom.api.Registries;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.construction.resource.IUseInfo;
-import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
+import de.ellpeck.rockbottom.api.entity.player.AbstractPlayerEntity;
 import de.ellpeck.rockbottom.api.inventory.IInventory;
 import de.ellpeck.rockbottom.api.inventory.Inventory;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
@@ -66,7 +66,7 @@ public class MortarRecipe extends PlayerCompendiumRecipe {
     }
 
 	// TODO: implement handleRecipe instead of this to make it consistent with other recipes
-    public void construct(AbstractEntityPlayer player, Inventory inventory, TileEntity machine, int amount) {
+    public void construct(AbstractPlayerEntity player, Inventory inventory, TileEntity machine, int amount) {
 		RockBottomAPI.getApiHandler().construct(player, inventory, inventory, this, machine, amount, this.getActualInputs(inventory), null, items -> this.getActualOutputs(inventory, inventory, items), skillReward);
 	}
 

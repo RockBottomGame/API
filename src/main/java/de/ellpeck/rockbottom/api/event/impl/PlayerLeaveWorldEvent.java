@@ -21,20 +21,20 @@
 
 package de.ellpeck.rockbottom.api.event.impl;
 
-import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
+import de.ellpeck.rockbottom.api.entity.player.AbstractPlayerEntity;
 import de.ellpeck.rockbottom.api.event.Event;
 
 /**
- * This event is fired when an {@link AbstractEntityPlayer} disconnects from a
+ * This event is fired when an {@link AbstractPlayerEntity} disconnects from a
  * world. The isConnected variable determines if the player was part of a server
  * that they didn't host. The event cannot be cancelled.
  */
 public final class PlayerLeaveWorldEvent extends Event {
 
-    public final AbstractEntityPlayer player;
+    public final AbstractPlayerEntity player;
     public final boolean isConnected;
 
-    public PlayerLeaveWorldEvent(AbstractEntityPlayer player, boolean isConnected) {
+    public PlayerLeaveWorldEvent(AbstractPlayerEntity player, boolean isConnected) {
         this.player = player;
         this.isConnected = isConnected;
     }

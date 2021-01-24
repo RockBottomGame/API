@@ -21,7 +21,7 @@
 
 package de.ellpeck.rockbottom.api.event.impl;
 
-import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
+import de.ellpeck.rockbottom.api.entity.player.AbstractPlayerEntity;
 import de.ellpeck.rockbottom.api.event.Event;
 import de.ellpeck.rockbottom.api.tile.Tile;
 import de.ellpeck.rockbottom.api.tile.state.TileState;
@@ -31,12 +31,12 @@ import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 /**
  * This event is fired when an {@link Tile} is being interacted with, right
  * before its {@link Tile#onInteractWith(IWorld, int, int, TileLayer, double,
- * double, AbstractEntityPlayer)} method is called. Cancelling the event will
+ * double, AbstractPlayerEntity)} method is called. Cancelling the event will
  * make the interaction not take place.
  */
 public final class TileInteractEvent extends Event {
 
-    public final AbstractEntityPlayer player;
+    public final AbstractPlayerEntity player;
     public final TileState state;
     public final TileLayer layer;
     public final int x;
@@ -45,7 +45,7 @@ public final class TileInteractEvent extends Event {
     public final double mouseY;
     public final boolean isDestroyKey;
 
-    public TileInteractEvent(AbstractEntityPlayer player, TileState state, TileLayer layer, int x, int y, double mouseX, double mouseY, boolean isDestroyKey) {
+    public TileInteractEvent(AbstractPlayerEntity player, TileState state, TileLayer layer, int x, int y, double mouseX, double mouseY, boolean isDestroyKey) {
         this.player = player;
         this.state = state;
         this.layer = layer;

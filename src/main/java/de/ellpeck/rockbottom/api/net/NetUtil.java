@@ -23,6 +23,7 @@ package de.ellpeck.rockbottom.api.net;
 
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.data.set.AbstractDataSet;
+import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufInputStream;
 import io.netty.buffer.ByteBufOutputStream;
@@ -64,6 +65,14 @@ public final class NetUtil {
         }
 
         return new String(chars);
+    }
+
+    public static void writeResToBuffer(ResourceName name, ByteBuf buf) {
+        writeStringToBuffer(name.toString(), buf);
+    }
+
+    public static ResourceName readResFromBuffer(ByteBuf buf) {
+        return new ResourceName(readStringFromBuffer(buf));
     }
 
     public static void writeUUIDToBuffer(ByteBuf buf, UUID uuid) {

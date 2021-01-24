@@ -21,21 +21,21 @@
 
 package de.ellpeck.rockbottom.api.event.impl;
 
-import de.ellpeck.rockbottom.api.entity.EntityLiving;
+import de.ellpeck.rockbottom.api.entity.LivingEntity;
 import de.ellpeck.rockbottom.api.event.Event;
 
 /**
- * This event is fired when an {@link EntityLiving} takes damage using the
- * {@link EntityLiving#takeDamage(int)} method. Changing the amount will result
+ * This event is fired when an {@link LivingEntity} takes damage using the
+ * {@link LivingEntity#takeDamage(int)} method. Changing the amount will result
  * in the damage changing. Cancelling the event will result in the entity taking
  * no damage.
  */
 public final class EntityDamageEvent extends Event {
 
-    public final EntityLiving entity;
+    public final LivingEntity entity;
     public int amount;
 
-    public EntityDamageEvent(EntityLiving entity, int amount) {
+    public EntityDamageEvent(LivingEntity entity, int amount) {
         this.entity = entity;
         this.amount = amount;
     }

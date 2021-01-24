@@ -24,8 +24,8 @@ package de.ellpeck.rockbottom.api.entity.player.statistics;
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.Registries;
 import de.ellpeck.rockbottom.api.gui.AbstractStatGui;
-import de.ellpeck.rockbottom.api.gui.component.ComponentMenu;
-import de.ellpeck.rockbottom.api.gui.component.ComponentStatistic;
+import de.ellpeck.rockbottom.api.gui.component.MenuComponent;
+import de.ellpeck.rockbottom.api.gui.component.StatisticComponent;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 import java.util.List;
@@ -44,7 +44,7 @@ public abstract class StatisticInitializer<T extends Statistic> {
 
     public abstract T makeStatistic(IStatistics statistics);
 
-    public abstract List<ComponentStatistic> getDisplayComponents(IGameInstance game, T stat, AbstractStatGui gui, ComponentMenu menu);
+    public abstract List<StatisticComponent> getDisplayComponents(IGameInstance game, T stat, AbstractStatGui gui, MenuComponent menu);
 
     public StatisticInitializer<T> register() {
         Registries.STATISTICS_REGISTRY.register(this.getName(), this);

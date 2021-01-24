@@ -30,7 +30,7 @@ import de.ellpeck.rockbottom.api.data.set.part.PartDataSet;
 import de.ellpeck.rockbottom.api.effect.ActiveEffect;
 import de.ellpeck.rockbottom.api.effect.IEffect;
 import de.ellpeck.rockbottom.api.entity.ai.AITask;
-import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
+import de.ellpeck.rockbottom.api.entity.player.AbstractPlayerEntity;
 import de.ellpeck.rockbottom.api.entity.spawn.DespawnHandler;
 import de.ellpeck.rockbottom.api.event.EventResult;
 import de.ellpeck.rockbottom.api.event.impl.EntityDeathEvent;
@@ -300,19 +300,19 @@ public abstract class Entity extends MovableWorldObject implements IAdditionalDa
 
     }
 
-    public boolean onInteractWith(AbstractEntityPlayer player, double mouseX, double mouseY) {
+    public boolean onInteractWith(AbstractPlayerEntity player, double mouseX, double mouseY) {
         return false;
     }
 
-    public boolean onInteractWithBreakKey(AbstractEntityPlayer player, double mouseX, double mouseY) {
+    public boolean onInteractWithBreakKey(AbstractPlayerEntity player, double mouseX, double mouseY) {
         return false;
     }
 
-    public int getInteractionPriority(AbstractEntityPlayer player, double mouseX, double mouseY) {
+    public int getInteractionPriority(AbstractPlayerEntity player, double mouseX, double mouseY) {
         return -100;
     }
 
-    public boolean onAttack(AbstractEntityPlayer player, double mouseX, double mouseY, int intendedDamage) {
+    public boolean onAttack(AbstractPlayerEntity player, double mouseX, double mouseY, int intendedDamage) {
         return false;
     }
 
@@ -324,7 +324,7 @@ public abstract class Entity extends MovableWorldObject implements IAdditionalDa
         return false;
     }
 
-    public double getMaxInteractionDistance(IWorld world, double mouseX, double mouseY, AbstractEntityPlayer player) {
+    public double getMaxInteractionDistance(IWorld world, double mouseX, double mouseY, AbstractPlayerEntity player) {
         return player.getRange();
     }
 

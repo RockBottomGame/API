@@ -24,7 +24,7 @@ package de.ellpeck.rockbottom.api.event.impl;
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.IRenderer;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
-import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
+import de.ellpeck.rockbottom.api.entity.player.AbstractPlayerEntity;
 import de.ellpeck.rockbottom.api.event.Event;
 import de.ellpeck.rockbottom.api.world.IWorld;
 
@@ -41,11 +41,11 @@ public final class WorldRenderEvent extends Event {
     public final IAssetManager assetManager;
     public final IRenderer graphics;
     public final IWorld world;
-    public final AbstractEntityPlayer player;
+    public final AbstractPlayerEntity player;
     public final float translationX;
     public final float translationY;
 
-    public WorldRenderEvent(IGameInstance game, IAssetManager assetManager, IRenderer graphics, IWorld world, AbstractEntityPlayer player, float translationX, float translationY) {
+    public WorldRenderEvent(IGameInstance game, IAssetManager assetManager, IRenderer graphics, IWorld world, AbstractPlayerEntity player, float translationX, float translationY) {
         this.game = game;
         this.assetManager = assetManager;
         this.graphics = graphics;

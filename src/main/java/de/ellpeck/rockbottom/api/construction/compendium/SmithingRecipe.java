@@ -4,9 +4,9 @@ import de.ellpeck.rockbottom.api.GameContent;
 import de.ellpeck.rockbottom.api.Registries;
 import de.ellpeck.rockbottom.api.construction.ConstructionTool;
 import de.ellpeck.rockbottom.api.construction.resource.IUseInfo;
-import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
+import de.ellpeck.rockbottom.api.entity.player.AbstractPlayerEntity;
 import de.ellpeck.rockbottom.api.gui.Gui;
-import de.ellpeck.rockbottom.api.gui.component.construction.ComponentConstruct;
+import de.ellpeck.rockbottom.api.gui.component.construction.ConstructComponent;
 import de.ellpeck.rockbottom.api.inventory.Inventory;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.tile.entity.IToolStation;
@@ -46,8 +46,8 @@ public class SmithingRecipe extends PlayerCompendiumRecipe {
     }
 
 	@Override
-	public ComponentConstruct getConstructButton(Gui gui, AbstractEntityPlayer player, TileEntity machine, boolean canConstruct) {
-		return new ComponentConstruct(gui, this, hasTools(machine), canConstruct, machine == null ? null : () -> {
+	public ConstructComponent getConstructButton(Gui gui, AbstractPlayerEntity player, TileEntity machine, boolean canConstruct) {
+		return new ConstructComponent(gui, this, hasTools(machine), canConstruct, machine == null ? null : () -> {
 		    if (hasTools(machine) && canConstruct) {
                 this.playerConstruct(player, machine, 1);
                 return true;
@@ -57,7 +57,7 @@ public class SmithingRecipe extends PlayerCompendiumRecipe {
 	}
 
 	@Override
-	public boolean handleRecipe(AbstractEntityPlayer player, Inventory inputInventory, Inventory outputInventory, TileEntity machine, List<IUseInfo> recipeInputs, List<ItemInstance> actualInputs, Function<List<ItemInstance>, List<ItemInstance>> outputGetter, float skillReward) {
+	public boolean handleRecipe(AbstractPlayerEntity player, Inventory inputInventory, Inventory outputInventory, TileEntity machine, List<IUseInfo> recipeInputs, List<ItemInstance> actualInputs, Function<List<ItemInstance>, List<ItemInstance>> outputGetter, float skillReward) {
         IToolStation station = (IToolStation) machine;
         if (machine.getTileInventory().get(station.getToolSlot(tool.tool)) != null) {
             return ((IToolStation) machine).damageTool(this.tool, true) && ((IToolStation) machine).damageTool(this.tool, false);

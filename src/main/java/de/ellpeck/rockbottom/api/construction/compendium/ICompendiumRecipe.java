@@ -24,11 +24,11 @@ package de.ellpeck.rockbottom.api.construction.compendium;
 import de.ellpeck.rockbottom.api.Registries;
 import de.ellpeck.rockbottom.api.construction.resource.IUseInfo;
 import de.ellpeck.rockbottom.api.content.IContent;
-import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
+import de.ellpeck.rockbottom.api.entity.player.AbstractPlayerEntity;
 import de.ellpeck.rockbottom.api.gui.Gui;
-import de.ellpeck.rockbottom.api.gui.component.construction.ComponentConstruct;
-import de.ellpeck.rockbottom.api.gui.component.construction.ComponentIngredient;
-import de.ellpeck.rockbottom.api.gui.component.construction.ComponentPolaroid;
+import de.ellpeck.rockbottom.api.gui.component.construction.ConstructComponent;
+import de.ellpeck.rockbottom.api.gui.component.construction.IngredientComponent;
+import de.ellpeck.rockbottom.api.gui.component.construction.PolaroidComponent;
 import de.ellpeck.rockbottom.api.inventory.IInventory;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.tile.entity.TileEntity;
@@ -46,7 +46,7 @@ public interface ICompendiumRecipe extends IContent {
 
     List<ItemInstance> getOutputs();
 
-    default boolean isKnown(AbstractEntityPlayer player) {
+    default boolean isKnown(AbstractPlayerEntity player) {
         return true;
     }
 
@@ -75,19 +75,19 @@ public interface ICompendiumRecipe extends IContent {
         return this.getOutputs();
     }
 
-    default List<ComponentIngredient> getIngredientButtons(Gui gui, AbstractEntityPlayer player, ResourceName tex) {
-        List<ComponentIngredient> ingredients = new ArrayList<>();
+    default List<IngredientComponent> getIngredientButtons(Gui gui, AbstractPlayerEntity player, ResourceName tex) {
+        List<IngredientComponent> ingredients = new ArrayList<>();
 		for (IUseInfo info : this.getInputs()) {
-			ingredients.add(new ComponentIngredient(gui, player.getInv().containsResource(info), info.getItems(), tex));
+			ingredients.add(new IngredientComponent(gui, player.getInv().containsResource(info), info.getItems(), tex));
 		}
 		return ingredients;
     }
 
-    default ComponentConstruct getConstructButton(Gui gui, AbstractEntityPlayer player, TileEntity machine, boolean canConstruct) {
-        return new ComponentConstruct(gui, this, true, canConstruct, null);
+    default ConstructComponent getConstructButton(Gui gui, AbstractPlayerEntity player, TileEntity machine, boolean canConstruct) {
+        return new ConstructComponent(gui, this, true, canConstruct, null);
     }
 
-    default ComponentPolaroid getPolaroidButton(Gui gui, AbstractEntityPlayer player, boolean canConstruct, ResourceName tex) {
-        return new ComponentPolaroid(gui, this, canConstruct, tex);
+    default PolaroidComponent getPolaroidButton(Gui gui, AbstractPlayerEntity player, boolean canConstruct, ResourceName tex) {
+        return new PolaroidComponent(gui, this, canConstruct, tex);
     }
 }

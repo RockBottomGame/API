@@ -21,26 +21,26 @@
 
 package de.ellpeck.rockbottom.api.event.impl;
 
-import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
+import de.ellpeck.rockbottom.api.entity.player.AbstractPlayerEntity;
 import de.ellpeck.rockbottom.api.event.Event;
 import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 
 /**
- * This event is fired every tick when an {@link AbstractEntityPlayer} is in the
+ * This event is fired every tick when an {@link AbstractPlayerEntity} is in the
  * process of breaking a tile. Note that this event is only fired on the client.
  * Changing any of the non-final variables will result in the progress being
  * modified. This event cannot be cancelled.
  */
 public final class AddBreakProgressEvent extends Event {
 
-    public final AbstractEntityPlayer player;
+    public final AbstractPlayerEntity player;
     public final TileLayer layer;
     public final int x;
     public final int y;
     public float totalProgress;
     public float progressAdded;
 
-    public AddBreakProgressEvent(AbstractEntityPlayer player, TileLayer layer, int x, int y, float totalProgress, float progressAdded) {
+    public AddBreakProgressEvent(AbstractPlayerEntity player, TileLayer layer, int x, int y, float totalProgress, float progressAdded) {
         this.player = player;
         this.layer = layer;
         this.x = x;

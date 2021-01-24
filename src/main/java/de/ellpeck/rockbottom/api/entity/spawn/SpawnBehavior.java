@@ -23,7 +23,7 @@ package de.ellpeck.rockbottom.api.entity.spawn;
 
 import de.ellpeck.rockbottom.api.Registries;
 import de.ellpeck.rockbottom.api.entity.Entity;
-import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
+import de.ellpeck.rockbottom.api.entity.player.AbstractPlayerEntity;
 import de.ellpeck.rockbottom.api.util.Util;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 import de.ellpeck.rockbottom.api.world.IWorld;
@@ -38,9 +38,9 @@ public abstract class SpawnBehavior<T extends Entity> {
 
     public abstract T createEntity(IWorld world, double x, double y);
 
-    public abstract double getMinPlayerDistance(IWorld world, AbstractEntityPlayer player);
+    public abstract double getMinPlayerDistance(IWorld world, AbstractPlayerEntity player);
 
-    public abstract double getMaxPlayerDistance(IWorld world, AbstractEntityPlayer player);
+    public abstract double getMaxPlayerDistance(IWorld world, AbstractPlayerEntity player);
 
     public abstract int getSpawnTries(IWorld world);
 
@@ -48,7 +48,7 @@ public abstract class SpawnBehavior<T extends Entity> {
 
     public abstract boolean belongsToCap(Entity entity);
 
-    public abstract double getEntityCapArea(IWorld world, AbstractEntityPlayer player);
+    public abstract double getEntityCapArea(IWorld world, AbstractPlayerEntity player);
 
     public abstract int getEntityCap(IWorld world);
 

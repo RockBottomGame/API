@@ -21,26 +21,26 @@
 
 package de.ellpeck.rockbottom.api.event.impl;
 
-import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
+import de.ellpeck.rockbottom.api.entity.player.AbstractPlayerEntity;
 import de.ellpeck.rockbottom.api.event.Event;
 import de.ellpeck.rockbottom.api.tile.Tile;
 import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 
 /**
  * This event is fired when a {@link Tile} is broken by an {@link
- * AbstractEntityPlayer}. The effective variable determines if the tool being
+ * AbstractPlayerEntity}. The effective variable determines if the tool being
  * held by the player is effective in making the tile drop its result.
  * Cancelling the event will result in the tile not being broken.
  */
 public final class BreakEvent extends Event {
 
-    public final AbstractEntityPlayer player;
+    public final AbstractPlayerEntity player;
     public TileLayer layer;
     public int x;
     public int y;
     public boolean effective;
 
-    public BreakEvent(AbstractEntityPlayer player, TileLayer layer, int x, int y, boolean effective) {
+    public BreakEvent(AbstractPlayerEntity player, TileLayer layer, int x, int y, boolean effective) {
         this.player = player;
         this.layer = layer;
         this.x = x;

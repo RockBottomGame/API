@@ -25,12 +25,12 @@ import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.IRenderer;
 import de.ellpeck.rockbottom.api.Registries;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
-import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
+import de.ellpeck.rockbottom.api.entity.player.AbstractPlayerEntity;
 import de.ellpeck.rockbottom.api.gui.Gui;
-import de.ellpeck.rockbottom.api.gui.component.ComponentMenu;
-import de.ellpeck.rockbottom.api.gui.component.construction.ComponentConstruct;
-import de.ellpeck.rockbottom.api.gui.component.construction.ComponentIngredient;
-import de.ellpeck.rockbottom.api.gui.component.construction.ComponentPolaroid;
+import de.ellpeck.rockbottom.api.gui.component.MenuComponent;
+import de.ellpeck.rockbottom.api.gui.component.construction.ConstructComponent;
+import de.ellpeck.rockbottom.api.gui.component.construction.IngredientComponent;
+import de.ellpeck.rockbottom.api.gui.component.construction.PolaroidComponent;
 import de.ellpeck.rockbottom.api.util.Pos2;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
@@ -45,15 +45,15 @@ public abstract class CompendiumCategory {
         this.name = name;
     }
 
-    public void onGuiOrganized(Gui gui, ComponentMenu menu, List<ComponentPolaroid> polaroids, List<ComponentIngredient> ingredients, ComponentConstruct construct) {
+    public void onGuiOrganized(Gui gui, MenuComponent menu, List<PolaroidComponent> polaroids, List<IngredientComponent> ingredients, ConstructComponent construct) {
 
     }
 
-    public int getMaxIngredientAmount(Gui gui, List<ComponentIngredient> ingredients) {
+    public int getMaxIngredientAmount(Gui gui, List<IngredientComponent> ingredients) {
         return 8;
     }
 
-    public Pos2 getIngredientPosition(Gui gui, ComponentIngredient ingredient, int index) {
+    public Pos2 getIngredientPosition(Gui gui, IngredientComponent ingredient, int index) {
         return new Pos2(78 + (index % 4) * 16, 51 + (index / 4) * 19);
     }
 
@@ -61,7 +61,7 @@ public abstract class CompendiumCategory {
         return ResourceName.intern("gui.compendium.page_recipes");
     }
 
-    public boolean shouldDisplay(AbstractEntityPlayer player) {
+    public boolean shouldDisplay(AbstractPlayerEntity player) {
         return true;
     }
 

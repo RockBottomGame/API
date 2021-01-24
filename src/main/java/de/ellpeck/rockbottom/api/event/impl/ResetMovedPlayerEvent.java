@@ -21,12 +21,12 @@
 
 package de.ellpeck.rockbottom.api.event.impl;
 
-import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
+import de.ellpeck.rockbottom.api.entity.player.AbstractPlayerEntity;
 import de.ellpeck.rockbottom.api.event.Event;
 
 /**
  * This event is fired when a simple calculation in the server results in the
- * {@link AbstractEntityPlayer} in question having moved farther than they
+ * {@link AbstractPlayerEntity} in question having moved farther than they
  * should be able to. If this event is not cancelled, the player will be reset
  * to the last calculated coordinates if the moved distance is greater than the
  * allowed distance. You can change the moved distance (that is squared,
@@ -35,7 +35,7 @@ import de.ellpeck.rockbottom.api.event.Event;
  */
 public final class ResetMovedPlayerEvent extends Event {
 
-    public final AbstractEntityPlayer player;
+    public final AbstractPlayerEntity player;
     public final double lastCalcX;
     public final double lastCalcY;
     //The calculation of movement has changed - these values are now unused
@@ -48,7 +48,7 @@ public final class ResetMovedPlayerEvent extends Event {
     public double distanceSqMoved;
     public double allowedDefaultDistance;
 
-    public ResetMovedPlayerEvent(AbstractEntityPlayer player, double lastCalcX, double lastCalcY, double distanceSqMoved, double allowedDefaultDistance) {
+    public ResetMovedPlayerEvent(AbstractPlayerEntity player, double lastCalcX, double lastCalcY, double distanceSqMoved, double allowedDefaultDistance) {
         this.player = player;
         this.lastCalcX = lastCalcX;
         this.lastCalcY = lastCalcY;

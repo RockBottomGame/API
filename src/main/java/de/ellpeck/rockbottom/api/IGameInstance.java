@@ -27,7 +27,7 @@ import de.ellpeck.rockbottom.api.data.set.DataSet;
 import de.ellpeck.rockbottom.api.data.settings.IJsonSettings;
 import de.ellpeck.rockbottom.api.data.settings.Keybind;
 import de.ellpeck.rockbottom.api.data.settings.Settings;
-import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
+import de.ellpeck.rockbottom.api.entity.player.AbstractPlayerEntity;
 import de.ellpeck.rockbottom.api.entity.player.IInteractionManager;
 import de.ellpeck.rockbottom.api.gui.IGuiManager;
 import de.ellpeck.rockbottom.api.mod.IMod;
@@ -35,7 +35,7 @@ import de.ellpeck.rockbottom.api.net.chat.IChatLog;
 import de.ellpeck.rockbottom.api.particle.IParticleManager;
 import de.ellpeck.rockbottom.api.render.IPlayerDesign;
 import de.ellpeck.rockbottom.api.toast.IToaster;
-import de.ellpeck.rockbottom.api.toast.ToastBasic;
+import de.ellpeck.rockbottom.api.toast.BasicToast;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 import de.ellpeck.rockbottom.api.world.DynamicRegistryInfo;
@@ -109,13 +109,13 @@ public interface IGameInstance extends IMod {
     Settings getSettings();
 
     /**
-     * Gets the {@link AbstractEntityPlayer} of the current game instance. Note
+     * Gets the {@link AbstractPlayerEntity} of the current game instance. Note
      * that this is not implemented on the dedicated server.
      *
      * @return The player
      * @throws UnsupportedOperationException on the dedicated server
      */
-    AbstractEntityPlayer getPlayer();
+    AbstractPlayerEntity getPlayer();
 
     /**
      * Gets the {@link IGuiManager} of the current game instance. This can be
@@ -300,7 +300,7 @@ public interface IGameInstance extends IMod {
 
     /**
      * Gets the {@link IToaster} of the current game instance. This is the
-     * system that displays {@link ToastBasic} objects, which are the little pop-up
+     * system that displays {@link BasicToast} objects, which are the little pop-up
      * messages in the top left. Note that this is not implemented on the
      * dedicated server.
      *

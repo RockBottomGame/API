@@ -29,15 +29,15 @@ import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.assets.font.FormattingCode;
 import de.ellpeck.rockbottom.api.construction.compendium.PlayerCompendiumRecipe;
 import de.ellpeck.rockbottom.api.data.settings.Settings;
-import de.ellpeck.rockbottom.api.entity.AbstractEntityItem;
+import de.ellpeck.rockbottom.api.entity.AbstractItemEntity;
 import de.ellpeck.rockbottom.api.entity.Entity;
 import de.ellpeck.rockbottom.api.entity.MovableWorldObject;
-import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
+import de.ellpeck.rockbottom.api.entity.player.AbstractPlayerEntity;
 import de.ellpeck.rockbottom.api.event.EventResult;
 import de.ellpeck.rockbottom.api.event.impl.TileDropsEvent;
 import de.ellpeck.rockbottom.api.item.Item;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
-import de.ellpeck.rockbottom.api.item.ItemTile;
+import de.ellpeck.rockbottom.api.item.TileItem;
 import de.ellpeck.rockbottom.api.item.ToolProperty;
 import de.ellpeck.rockbottom.api.particle.IParticleManager;
 import de.ellpeck.rockbottom.api.render.tile.ITileRenderer;
@@ -90,7 +90,7 @@ public class Tile {
     public BoundingBox getActualBoundBox(IWorld world, TileState state, int x, int y, TileLayer layer) {
     	BoundingBox box = getBoundBox(world, state, x, y, layer);
     	if (box == null) {
-    		box = BoundingBox.NULL_BOUNDS;
+    		box = BoundingBox.empty();
 		}
 		return box;
 	}
@@ -152,11 +152,11 @@ public class Tile {
         return boxes;
     }
 
-    public boolean canBreak(IWorld world, int x, int y, TileLayer layer, AbstractEntityPlayer player, boolean isRightTool) {
+    public boolean canBreak(IWorld world, int x, int y, TileLayer layer, AbstractPlayerEntity player, boolean isRightTool) {
         return true;
     }
 
-    public boolean canPlace(IWorld world, int x, int y, TileLayer layer, AbstractEntityPlayer player) {
+    public boolean canPlace(IWorld world, int x, int y, TileLayer layer, AbstractPlayerEntity player) {
         return true;
     }
 
@@ -176,8 +176,8 @@ public class Tile {
         return this;
     }
 
-    protected ItemTile createItemTile() {
-        return new ItemTile(this.getName());
+    protected TileItem createItemTile() {
+        return new TileItem(this.getName());
     }
 
     protected boolean hasItem() {
@@ -208,15 +208,15 @@ public class Tile {
 
     }
 
-    public boolean onInteractWith(IWorld world, int x, int y, TileLayer layer, double mouseX, double mouseY, AbstractEntityPlayer player) {
+    public boolean onInteractWith(IWorld world, int x, int y, TileLayer layer, double mouseX, double mouseY, AbstractPlayerEntity player) {
         return false;
     }
 
-    public boolean onInteractWithBreakKey(IWorld world, int x, int y, TileLayer layer, double mouseX, double mouseY, AbstractEntityPlayer player) {
+    public boolean onInteractWithBreakKey(IWorld world, int x, int y, TileLayer layer, double mouseX, double mouseY, AbstractPlayerEntity player) {
         return false;
     }
 
-    public int getInteractionPriority(IWorld world, int x, int y, TileLayer layer, double mouseX, double mouseY, AbstractEntityPlayer player) {
+    public int getInteractionPriority(IWorld world, int x, int y, TileLayer layer, double mouseX, double mouseY, AbstractPlayerEntity player) {
         return 0;
     }
 
@@ -274,21 +274,21 @@ public class Tile {
         List<ItemInstance> drops = new ArrayList<>();
 
         if (shouldDrop && !world.isClient()) {
-            if (!(destroyer instanceof AbstractEntityPlayer && ((AbstractEntityPlayer) destroyer).getGameMode().isCreative()))
+            if (!(destroyer instanceof AbstractPlayerEntity && ((AbstractPlayerEntity) destroyer).getGameMode().isCreative()))
                 drops.addAll(this.getDrops(world, x, y, layer, destroyer));
         }
 
         if (RockBottomAPI.getEventHandler().fireEvent(new TileDropsEvent(this, drops, world, x, y, layer, destroyer)) != EventResult.CANCELLED) {
             if (!drops.isEmpty()) {
                 for (ItemInstance inst : drops) {
-                    AbstractEntityItem.spawn(world, inst, x + 0.5, y + 0.5, Util.RANDOM.nextGaussian() * 0.1, Util.RANDOM.nextGaussian() * 0.1);
+                    AbstractItemEntity.spawn(world, inst, x + 0.5, y + 0.5, Util.RANDOM.nextGaussian() * 0.1, Util.RANDOM.nextGaussian() * 0.1);
                 }
             }
         }
 
-        if (!world.isClient() && shouldDrop && destroyer instanceof AbstractEntityPlayer) {
+        if (!world.isClient() && shouldDrop && destroyer instanceof AbstractPlayerEntity) {
             List<PlayerCompendiumRecipe> recipes = RockBottomAPI.getInternalHooks().getRecipesToLearnFrom(this);
-            ((AbstractEntityPlayer)destroyer).getKnowledge().teachRecipes(recipes);
+            ((AbstractPlayerEntity)destroyer).getKnowledge().teachRecipes(recipes);
         }
     }
 
@@ -340,19 +340,19 @@ public class Tile {
 
     }
 
-    public void doBreak(IWorld world, int x, int y, TileLayer layer, AbstractEntityPlayer breaker, boolean isRightTool, boolean allowDrop) {
+    public void doBreak(IWorld world, int x, int y, TileLayer layer, AbstractPlayerEntity breaker, boolean isRightTool, boolean allowDrop) {
         if (!world.isClient()) {
             world.destroyTile(x, y, layer, breaker, allowDrop && (this.forceDrop || isRightTool));
         }
     }
 
-    public void doPlace(IWorld world, int x, int y, TileLayer layer, ItemInstance instance, AbstractEntityPlayer placer) {
+    public void doPlace(IWorld world, int x, int y, TileLayer layer, ItemInstance instance, AbstractPlayerEntity placer) {
         if (!world.isClient()) {
             world.setState(layer, x, y, this.getPlacementState(world, x, y, layer, instance, placer));
         }
     }
 
-    public TileState getPlacementState(IWorld world, int x, int y, TileLayer layer, ItemInstance instance, AbstractEntityPlayer placer) {
+    public TileState getPlacementState(IWorld world, int x, int y, TileLayer layer, ItemInstance instance, AbstractPlayerEntity placer) {
         return this.getDefState();
     }
 
@@ -385,7 +385,7 @@ public class Tile {
     }
 
     public boolean isChiseled(IWorld world, int x, int y, TileLayer layer, TileState state) {
-        if (layer == TileLayer.MAIN && state.getTile().isChiselable()) {
+        if (layer == TileLayer.MAIN && state != null && state.getTile().isChiselable()) {
             return state.get(StaticTileProps.CHISEL_STATE) > 0;
         }
         return false;
@@ -502,7 +502,7 @@ public class Tile {
         return SOUND_GENERIC_TILE;
     }
 
-    public double getMaxInteractionDistance(IWorld world, int x, int y, TileLayer layer, double mouseX, double mouseY, AbstractEntityPlayer player) {
+    public double getMaxInteractionDistance(IWorld world, int x, int y, TileLayer layer, double mouseX, double mouseY, AbstractPlayerEntity player) {
         return player.getRange();
     }
 
@@ -510,7 +510,7 @@ public class Tile {
         return this.isFullTile();
     }
 
-    public boolean canLiquidSpread(IWorld world, int x, int y, TileLiquid liquid, Direction dir) {
+    public boolean canLiquidSpread(IWorld world, int x, int y, LiquidTile liquid, Direction dir) {
         if (!this.isChiseled(world, x, y, TileLayer.MAIN, world.getState(x, y)))
             return !this.isFullTile();
 

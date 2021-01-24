@@ -25,9 +25,9 @@ import de.ellpeck.rockbottom.api.Registries;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.construction.ConstructionTool;
 import de.ellpeck.rockbottom.api.construction.resource.IUseInfo;
-import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
+import de.ellpeck.rockbottom.api.entity.player.AbstractPlayerEntity;
 import de.ellpeck.rockbottom.api.gui.Gui;
-import de.ellpeck.rockbottom.api.gui.component.construction.ComponentConstruct;
+import de.ellpeck.rockbottom.api.gui.component.construction.ConstructComponent;
 import de.ellpeck.rockbottom.api.inventory.Inventory;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.tile.entity.IToolStation;
@@ -99,15 +99,15 @@ public class ConstructionRecipe extends PlayerCompendiumRecipe {
     }
 
     @Override
-    public ComponentConstruct getConstructButton(Gui gui, AbstractEntityPlayer player, TileEntity machine, boolean canConstruct) {
-        return new ComponentConstruct(gui, this, canUseTools((IToolStation)machine), canConstruct, usesTools() && machine == null ? null : () -> {
+    public ConstructComponent getConstructButton(Gui gui, AbstractPlayerEntity player, TileEntity machine, boolean canConstruct) {
+        return new ConstructComponent(gui, this, canUseTools((IToolStation)machine), canConstruct, usesTools() && machine == null ? null : () -> {
             RockBottomAPI.getApiHandler().defaultConstruct(player, this, machine);
             return true;
         });
     }
 
     @Override
-    public boolean handleRecipe(AbstractEntityPlayer player, Inventory inputInventory, Inventory outputInventory, TileEntity machine, List<IUseInfo> recipeInputs, List<ItemInstance> actualInputs, Function<List<ItemInstance>, List<ItemInstance>> outputGetter, float skillReward) {
+    public boolean handleRecipe(AbstractPlayerEntity player, Inventory inputInventory, Inventory outputInventory, TileEntity machine, List<IUseInfo> recipeInputs, List<ItemInstance> actualInputs, Function<List<ItemInstance>, List<ItemInstance>> outputGetter, float skillReward) {
         if (usesTools()) {
             if (!canUseTools((IToolStation)machine)) {
                 return false;

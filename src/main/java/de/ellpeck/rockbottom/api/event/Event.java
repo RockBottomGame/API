@@ -21,7 +21,7 @@
 
 package de.ellpeck.rockbottom.api.event;
 
-import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
+import de.ellpeck.rockbottom.api.entity.player.AbstractPlayerEntity;
 import de.ellpeck.rockbottom.api.event.impl.BreakEvent;
 
 /**
@@ -32,7 +32,7 @@ import de.ellpeck.rockbottom.api.event.impl.BreakEvent;
  * final or non-final, based on if they should be modifyable or not.
  * <p>
  * As an example of this behavior, the {@link BreakEvent} has a final {@link
- * AbstractEntityPlayer} parameter, as the player that is breaking a tile should
+ * AbstractPlayerEntity} parameter, as the player that is breaking a tile should
  * not be changed. However, the positions and wether or not the breaking
  * operation was offective are non-final, meaning an event listener is able to
  * change which position a tile is being broken at and wether or not it should

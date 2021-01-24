@@ -22,24 +22,24 @@
 package de.ellpeck.rockbottom.api.event.impl;
 
 import de.ellpeck.rockbottom.api.entity.Entity;
-import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
+import de.ellpeck.rockbottom.api.entity.player.AbstractPlayerEntity;
 import de.ellpeck.rockbottom.api.event.Event;
 
 /**
  * This event is fired when an interaction with an {@link Entity} is taken,
- * right before its {@link Entity#onInteractWith(AbstractEntityPlayer, double,
+ * right before its {@link Entity#onInteractWith(AbstractPlayerEntity, double,
  * double)} method is called. Cancelling the event will make the interaction not
  * take place.
  */
 public final class EntityInteractEvent extends Event {
 
-    public final AbstractEntityPlayer player;
+    public final AbstractPlayerEntity player;
     public final Entity entity;
     public final double x;
     public final double y;
     public final boolean isDestroyKey;
 
-    public EntityInteractEvent(AbstractEntityPlayer player, Entity entity, double x, double y, boolean isDestroyKey) {
+    public EntityInteractEvent(AbstractPlayerEntity player, Entity entity, double x, double y, boolean isDestroyKey) {
         this.player = player;
         this.entity = entity;
         this.x = x;

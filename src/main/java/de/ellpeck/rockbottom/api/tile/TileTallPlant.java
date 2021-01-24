@@ -2,7 +2,7 @@ package de.ellpeck.rockbottom.api.tile;
 
 import de.ellpeck.rockbottom.api.StaticTileProps;
 import de.ellpeck.rockbottom.api.entity.Entity;
-import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
+import de.ellpeck.rockbottom.api.entity.player.AbstractPlayerEntity;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.tile.state.TileState;
 import de.ellpeck.rockbottom.api.util.BoundingBox;
@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * Used for two-high plants such as Corn and Cotton
  */
-public class TileTallPlant extends TileBasic {
+public class TileTallPlant extends BasicTile {
     public TileTallPlant(ResourceName name) {
         super(name);
         this.addProps(StaticTileProps.TOP_HALF, StaticTileProps.PLANT_GROWTH);
@@ -29,7 +29,7 @@ public class TileTallPlant extends TileBasic {
     }
 
     @Override
-    public boolean canPlace(IWorld world, int x, int y, TileLayer layer, AbstractEntityPlayer player) {
+    public boolean canPlace(IWorld world, int x, int y, TileLayer layer, AbstractPlayerEntity player) {
         return world.isPosLoaded(x, y - 1, false) && this.canBeHere(world, x, y, layer);
     }
 
@@ -71,7 +71,7 @@ public class TileTallPlant extends TileBasic {
     }
 
     @Override
-    public boolean onInteractWithBreakKey(IWorld world, int x, int y, TileLayer layer, double mouseX, double mouseY, AbstractEntityPlayer player) {
+    public boolean onInteractWithBreakKey(IWorld world, int x, int y, TileLayer layer, double mouseX, double mouseY, AbstractPlayerEntity player) {
         TileState state = world.getState(layer, x, y);
         if (state.get(StaticTileProps.TOP_HALF) && state.get(StaticTileProps.PLANT_GROWTH) >= 9) {
             this.onDestroyed(world, x, y, player, layer, true);
@@ -98,7 +98,7 @@ public class TileTallPlant extends TileBasic {
     }
 
     @Override
-    public void doBreak(IWorld world, int x, int y, TileLayer layer, AbstractEntityPlayer breaker, boolean isRightTool, boolean allowDrop) {
+    public void doBreak(IWorld world, int x, int y, TileLayer layer, AbstractPlayerEntity breaker, boolean isRightTool, boolean allowDrop) {
         if (!world.isClient()) {
             boolean drop = allowDrop && (this.forceDrop || isRightTool);
             boolean topHalf = world.getState(layer, x, y).get(StaticTileProps.TOP_HALF);

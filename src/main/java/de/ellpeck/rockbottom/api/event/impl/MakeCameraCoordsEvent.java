@@ -22,7 +22,7 @@
 package de.ellpeck.rockbottom.api.event.impl;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
-import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
+import de.ellpeck.rockbottom.api.entity.player.AbstractPlayerEntity;
 import de.ellpeck.rockbottom.api.event.Event;
 
 /**
@@ -33,11 +33,11 @@ import de.ellpeck.rockbottom.api.event.Event;
  */
 public final class MakeCameraCoordsEvent extends Event {
 
-    public final AbstractEntityPlayer player;
+    public final AbstractPlayerEntity player;
     public double cameraX;
     public double cameraY;
 
-    public MakeCameraCoordsEvent(AbstractEntityPlayer player, double cameraX, double cameraY) {
+    public MakeCameraCoordsEvent(AbstractPlayerEntity player, double cameraX, double cameraY) {
         this.player = player;
         this.cameraX = cameraX;
         this.cameraY = cameraY;

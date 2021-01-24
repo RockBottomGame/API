@@ -25,19 +25,19 @@ import com.google.gson.JsonElement;
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.IRenderer;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
-import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
+import de.ellpeck.rockbottom.api.entity.player.AbstractPlayerEntity;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
-import de.ellpeck.rockbottom.api.item.ItemMeta;
+import de.ellpeck.rockbottom.api.item.MetaItem;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
-public class ItemMetaRenderer extends DefaultItemRenderer<ItemMeta> {
+public class ItemMetaRenderer extends DefaultItemRenderer<MetaItem> {
 
     public ItemMetaRenderer(ResourceName texture) {
         super(texture);
     }
 
     @Override
-    public void render(IGameInstance game, IAssetManager manager, IRenderer g, ItemMeta item, ItemInstance instance, float x, float y, float scale, int filter) {
+    public void render(IGameInstance game, IAssetManager manager, IRenderer g, MetaItem item, ItemInstance instance, float x, float y, float scale, int filter) {
         int meta = instance.getMeta();
 
         if (meta >= 0 && item.subResourceNames.size() > meta) {
@@ -48,7 +48,7 @@ public class ItemMetaRenderer extends DefaultItemRenderer<ItemMeta> {
     }
 
     @Override
-    public JsonElement getAdditionalTextureData(IGameInstance game, IAssetManager manager, IRenderer g, ItemMeta item, ItemInstance instance, AbstractEntityPlayer player, String name) {
+    public JsonElement getAdditionalTextureData(IGameInstance game, IAssetManager manager, IRenderer g, MetaItem item, ItemInstance instance, AbstractPlayerEntity player, String name) {
         int meta = instance.getMeta();
         if (meta >= 0 && item.subResourceNames.size() > meta) {
             return manager.getTexture(item.subResourceNames.get(meta)).getAdditionalData(name);

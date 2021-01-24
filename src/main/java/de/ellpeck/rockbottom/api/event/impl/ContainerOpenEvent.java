@@ -21,7 +21,7 @@
 
 package de.ellpeck.rockbottom.api.event.impl;
 
-import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
+import de.ellpeck.rockbottom.api.entity.player.AbstractPlayerEntity;
 import de.ellpeck.rockbottom.api.event.Event;
 import de.ellpeck.rockbottom.api.gui.container.ItemContainer;
 
@@ -32,10 +32,10 @@ import de.ellpeck.rockbottom.api.gui.container.ItemContainer;
  */
 public final class ContainerOpenEvent extends Event {
 
-    public final AbstractEntityPlayer player;
+    public final AbstractPlayerEntity player;
     public ItemContainer container;
 
-    public ContainerOpenEvent(AbstractEntityPlayer player, ItemContainer container) {
+    public ContainerOpenEvent(AbstractPlayerEntity player, ItemContainer container) {
         this.player = player;
         this.container = container;
     }

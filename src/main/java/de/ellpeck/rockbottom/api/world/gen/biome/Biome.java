@@ -26,7 +26,7 @@ import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.IRenderer;
 import de.ellpeck.rockbottom.api.Registries;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
-import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
+import de.ellpeck.rockbottom.api.entity.player.AbstractPlayerEntity;
 import de.ellpeck.rockbottom.api.tile.state.TileState;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 import de.ellpeck.rockbottom.api.world.IChunk;
@@ -89,7 +89,7 @@ public abstract class Biome {
      * @param height The height of the screen in the world {@link IRenderer#getHeightInWorld()}.
      * @return false if you want the default sky rendering to not happen, true otherwise.
      */
-    public boolean renderBackground(IGameInstance game, IAssetManager manager, IRenderer g, IWorld world, AbstractEntityPlayer player, double width, double height) {
+    public boolean renderBackground(IGameInstance game, IAssetManager manager, IRenderer g, IWorld world, AbstractPlayerEntity player, double width, double height) {
         return true;
     }
 
@@ -102,7 +102,7 @@ public abstract class Biome {
      * @param player The client player.
      * @param scale The world scale {@link IRenderer#getWorldScale()}.
      */
-    public void renderForeground(IGameInstance game, IAssetManager manager, IRenderer g, IWorld world, AbstractEntityPlayer player, float scale) {
+    public void renderForeground(IGameInstance game, IAssetManager manager, IRenderer g, IWorld world, AbstractPlayerEntity player, float scale) {
 
     }
 

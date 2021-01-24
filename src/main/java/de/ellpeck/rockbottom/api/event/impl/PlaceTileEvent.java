@@ -21,7 +21,7 @@
 
 package de.ellpeck.rockbottom.api.event.impl;
 
-import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
+import de.ellpeck.rockbottom.api.entity.player.AbstractPlayerEntity;
 import de.ellpeck.rockbottom.api.event.Event;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.tile.Tile;
@@ -30,24 +30,24 @@ import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 
 /**
  * This event is fired when a {@link Tile} is placed into the world by an {@link
- * AbstractEntityPlayer}, before {@link Tile#doPlace(IWorld, int, int,
- * TileLayer, ItemInstance, AbstractEntityPlayer)} is called. Note that the
+ * AbstractPlayerEntity}, before {@link Tile#doPlace(IWorld, int, int,
+ * TileLayer, ItemInstance, AbstractPlayerEntity)} is called. Note that the
  * state that will be placed might either be received via {@link
  * Tile#getPlacementState(IWorld, int, int, TileLayer, ItemInstance,
- * AbstractEntityPlayer)} or by a custom method if it is a custom
+ * AbstractPlayerEntity)} or by a custom method if it is a custom
  * implementation. Cancelling the event will cause {@link Tile#doPlace(IWorld,
- * int, int, TileLayer, ItemInstance, AbstractEntityPlayer)} not to be called.
+ * int, int, TileLayer, ItemInstance, AbstractPlayerEntity)} not to be called.
  */
 public final class PlaceTileEvent extends Event {
 
-    public final AbstractEntityPlayer player;
+    public final AbstractPlayerEntity player;
     public ItemInstance instance;
     public boolean removeItem;
     public TileLayer layer;
     public int x;
     public int y;
 
-    public PlaceTileEvent(AbstractEntityPlayer player, ItemInstance instance, boolean removeItem, TileLayer layer, int x, int y) {
+    public PlaceTileEvent(AbstractPlayerEntity player, ItemInstance instance, boolean removeItem, TileLayer layer, int x, int y) {
         this.player = player;
         this.instance = instance;
         this.removeItem = removeItem;

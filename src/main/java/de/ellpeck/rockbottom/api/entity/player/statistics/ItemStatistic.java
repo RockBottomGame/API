@@ -26,8 +26,8 @@ import de.ellpeck.rockbottom.api.Registries;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.data.set.DataSet;
 import de.ellpeck.rockbottom.api.gui.AbstractStatGui;
-import de.ellpeck.rockbottom.api.gui.component.ComponentMenu;
-import de.ellpeck.rockbottom.api.gui.component.ComponentStatistic;
+import de.ellpeck.rockbottom.api.gui.component.MenuComponent;
+import de.ellpeck.rockbottom.api.gui.component.StatisticComponent;
 import de.ellpeck.rockbottom.api.item.Item;
 import de.ellpeck.rockbottom.api.util.Counter;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
@@ -51,7 +51,7 @@ public class ItemStatistic extends StatisticInitializer<ItemStatistic.Stat> {
     }
 
     @Override
-    public List<ComponentStatistic> getDisplayComponents(IGameInstance game, Stat stat, AbstractStatGui gui, ComponentMenu menu) {
+    public List<StatisticComponent> getDisplayComponents(IGameInstance game, Stat stat, AbstractStatGui gui, MenuComponent menu) {
         return RockBottomAPI.getInternalHooks().makeItemStatComponents(game, stat, stat.map, gui, menu, this.textureLocation);
     }
 

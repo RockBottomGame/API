@@ -3,7 +3,7 @@ package de.ellpeck.rockbottom.api.tile;
 import de.ellpeck.rockbottom.api.GameContent;
 import de.ellpeck.rockbottom.api.StaticTileProps;
 import de.ellpeck.rockbottom.api.entity.Entity;
-import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
+import de.ellpeck.rockbottom.api.entity.player.AbstractPlayerEntity;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.render.tile.ITileRenderer;
 import de.ellpeck.rockbottom.api.render.tile.TilePlatformRenderer;
@@ -16,7 +16,7 @@ import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 
 import java.util.List;
 
-public class TilePlatform extends TileBasic {
+public class TilePlatform extends BasicTile {
 
     public TilePlatform() {
         super(ResourceName.intern("platform"));
@@ -34,7 +34,7 @@ public class TilePlatform extends TileBasic {
     }
 
     @Override
-    public boolean onInteractWith(IWorld world, int x, int y, TileLayer layer, double mouseX, double mouseY, AbstractEntityPlayer player) {
+    public boolean onInteractWith(IWorld world, int x, int y, TileLayer layer, double mouseX, double mouseY, AbstractPlayerEntity player) {
         // Ladders can be placed on platforms
         if (!GameContent.TILE_LADDER.canPlace(world, x, y, layer, player))
             return false;
@@ -73,7 +73,7 @@ public class TilePlatform extends TileBasic {
     }
 
     @Override
-    public boolean canPlace(IWorld world, int x, int y, TileLayer layer, AbstractEntityPlayer player) {
+    public boolean canPlace(IWorld world, int x, int y, TileLayer layer, AbstractPlayerEntity player) {
         if (world.getState(TileLayer.BACKGROUND, x, y).getTile().isFullTile())
             return true;
 
@@ -136,7 +136,7 @@ public class TilePlatform extends TileBasic {
     }
 
     @Override
-    public boolean canLiquidSpread(IWorld world, int x, int y, TileLiquid liquid, Direction dir) {
+    public boolean canLiquidSpread(IWorld world, int x, int y, LiquidTile liquid, Direction dir) {
         return true;
     }
 

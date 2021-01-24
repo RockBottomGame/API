@@ -22,14 +22,14 @@
 package de.ellpeck.rockbottom.api.event.impl;
 
 import de.ellpeck.rockbottom.api.entity.Entity;
-import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
+import de.ellpeck.rockbottom.api.entity.player.AbstractPlayerEntity;
 import de.ellpeck.rockbottom.api.event.Event;
 import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 
 import java.util.List;
 
 /**
- * This event is fired when an {@link AbstractEntityPlayer} interacts with the
+ * This event is fired when an {@link AbstractPlayerEntity} interacts with the
  * world in any way. With the default keybinds, this happens when they click the
  * right mouse button. Changing any of the non-final values will result in the
  * point and information of interaction being changed. Cancelling the event will
@@ -37,7 +37,7 @@ import java.util.List;
  */
 public final class InteractionEvent extends Event {
 
-    public final AbstractEntityPlayer player;
+    public final AbstractPlayerEntity player;
     public final boolean isDestroyKey;
     public List<Entity> entities;
     public TileLayer layer;
@@ -46,7 +46,7 @@ public final class InteractionEvent extends Event {
     public double mouseX;
     public double mouseY;
 
-    public InteractionEvent(AbstractEntityPlayer player, List<Entity> entities, TileLayer layer, int x, int y, double mouseX, double mouseY, boolean isDestroyKey) {
+    public InteractionEvent(AbstractPlayerEntity player, List<Entity> entities, TileLayer layer, int x, int y, double mouseX, double mouseY, boolean isDestroyKey) {
         this.player = player;
         this.entities = entities;
         this.layer = layer;

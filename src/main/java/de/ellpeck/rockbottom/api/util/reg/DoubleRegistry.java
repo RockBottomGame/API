@@ -52,6 +52,19 @@ public class DoubleRegistry<T> extends IndexRegistry<T> {
         return this.nameRegistry.getId(this.getId(value));
     }
 
+    public int getId(ResourceName name) {
+        return this.nameRegistry.get(name);
+    }
+
+    public void registerNextFree(ResourceName name, T value) {
+        this.register(name, this.getNextFreeId(), value);
+    }
+
+    @Override
+    public void registerNextFree(T value) {
+        throw new UnsupportedOperationException("Can't register to double registry " + this + " using just the integer key. Use DoubleRegistry#registerNextFree(ResourceName) instead");
+    }
+
     @Override
     public void register(Integer id, T value) {
         throw new UnsupportedOperationException("Can't register to double registry " + this + " using just the integer key");

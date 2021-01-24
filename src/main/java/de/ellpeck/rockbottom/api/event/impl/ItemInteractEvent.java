@@ -21,7 +21,7 @@
 
 package de.ellpeck.rockbottom.api.event.impl;
 
-import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
+import de.ellpeck.rockbottom.api.entity.player.AbstractPlayerEntity;
 import de.ellpeck.rockbottom.api.event.Event;
 import de.ellpeck.rockbottom.api.item.Item;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
@@ -31,18 +31,18 @@ import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 /**
  * This event is fired when an interaction is taken using an {@link Item} before
  * its {@link Item#onInteractWith(IWorld, int, int, TileLayer, double, double,
- * AbstractEntityPlayer, ItemInstance)} method is called. Cancelling the event
+ * AbstractPlayerEntity, ItemInstance)} method is called. Cancelling the event
  * will make the interaction not take place.
  */
 public final class ItemInteractEvent extends Event {
 
-    public final AbstractEntityPlayer player;
+    public final AbstractPlayerEntity player;
     public final ItemInstance instance;
     public final double x;
     public final double y;
     public final boolean isDestroyKey;
 
-    public ItemInteractEvent(AbstractEntityPlayer player, ItemInstance instance, double x, double y, boolean isDestroyKey) {
+    public ItemInteractEvent(AbstractPlayerEntity player, ItemInstance instance, double x, double y, boolean isDestroyKey) {
         this.player = player;
         this.instance = instance;
         this.x = x;

@@ -29,24 +29,23 @@ import de.ellpeck.rockbottom.api.assets.font.FormattingCode;
 import de.ellpeck.rockbottom.api.construction.compendium.PlayerCompendiumRecipe;
 import de.ellpeck.rockbottom.api.construction.compendium.SmithingRecipe;
 import de.ellpeck.rockbottom.api.effect.ActiveEffect;
-import de.ellpeck.rockbottom.api.entity.AbstractEntityItem;
+import de.ellpeck.rockbottom.api.entity.AbstractItemEntity;
 import de.ellpeck.rockbottom.api.entity.Entity;
 import de.ellpeck.rockbottom.api.entity.MovableWorldObject;
 import de.ellpeck.rockbottom.api.entity.ai.AITask;
-import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
+import de.ellpeck.rockbottom.api.entity.player.AbstractPlayerEntity;
 import de.ellpeck.rockbottom.api.entity.player.statistics.ItemStatistic;
 import de.ellpeck.rockbottom.api.gui.AbstractStatGui;
-import de.ellpeck.rockbottom.api.gui.GuiContainer;
-import de.ellpeck.rockbottom.api.gui.component.ComponentInputField;
-import de.ellpeck.rockbottom.api.gui.component.ComponentMenu;
-import de.ellpeck.rockbottom.api.gui.component.ComponentSlot;
-import de.ellpeck.rockbottom.api.gui.component.ComponentStatistic;
-import de.ellpeck.rockbottom.api.gui.container.ContainerSlot;
+import de.ellpeck.rockbottom.api.gui.ContainerGui;
+import de.ellpeck.rockbottom.api.gui.component.InputFieldComponent;
+import de.ellpeck.rockbottom.api.gui.component.MenuComponent;
+import de.ellpeck.rockbottom.api.gui.component.SlotComponent;
+import de.ellpeck.rockbottom.api.gui.component.StatisticComponent;
 import de.ellpeck.rockbottom.api.gui.container.ItemContainer;
 import de.ellpeck.rockbottom.api.item.Item;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.tile.Tile;
-import de.ellpeck.rockbottom.api.tile.TileLiquid;
+import de.ellpeck.rockbottom.api.tile.LiquidTile;
 import de.ellpeck.rockbottom.api.tile.entity.TileEntity;
 import de.ellpeck.rockbottom.api.tile.state.IStateHandler;
 import de.ellpeck.rockbottom.api.tile.state.TileState;
@@ -68,12 +67,12 @@ public interface IInternalHooks {
 
     void doWorldObjectMovement(MovableWorldObject object);
 
-    boolean doDefaultSlotMovement(IGameInstance game, int button, float x, float y, GuiContainer gui, ComponentSlot slot);
+    boolean doDefaultSlotMovement(IGameInstance game, int button, float x, float y, ContainerGui gui, SlotComponent slot);
 
-    boolean doDefaultShiftClicking(IGameInstance game, int button, GuiContainer gui, ComponentSlot slot);
+    boolean doDefaultShiftClicking(IGameInstance game, int button, ContainerGui gui, SlotComponent slot);
 
     // TODO: Move to IApiHandler
-    boolean placeTile(int x, int y, TileLayer layer, AbstractEntityPlayer player, ItemInstance selected, Tile tile, boolean removeItem, boolean simulate);
+    boolean placeTile(int x, int y, TileLayer layer, AbstractPlayerEntity player, ItemInstance selected, Tile tile, boolean removeItem, boolean simulate);
 
     /**
      * Returns a list of compendium recipes that can be unlocked by breaking the specified tile
@@ -83,15 +82,15 @@ public interface IInternalHooks {
     List<PlayerCompendiumRecipe> getRecipesToLearnFrom(Tile tile);
 
     //Liquid behavior kindly provided by superaxander
-    void doDefaultLiquidBehavior(IWorld world, int x, int y, TileLayer layer, TileLiquid tile);
+    void doDefaultLiquidBehavior(IWorld world, int x, int y, TileLayer layer, LiquidTile tile);
 
     String getKeyOrMouseName(int key);
 
-    boolean doInputFieldKeyPress(IGameInstance game, int button, ComponentInputField field);
+    boolean doInputFieldKeyPress(IGameInstance game, int button, InputFieldComponent field);
 
-    boolean doInputFieldCharInput(IGameInstance game, char[] characters, ComponentInputField field);
+    boolean doInputFieldCharInput(IGameInstance game, char[] characters, InputFieldComponent field);
 
-    void doInputFieldRender(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y, ComponentInputField field);
+    void doInputFieldRender(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y, InputFieldComponent field);
 
     void doTileStateInit(TileState thisState, ResourceName name, Tile tile, Map<String, Comparable> properties, Table<String, Comparable, TileState> subStates);
 
@@ -99,15 +98,15 @@ public interface IInternalHooks {
 
     FormattingCode getFormattingCode(String s, int index, Map<Character, FormattingCode> defaults);
 
-    AbstractEntityItem makeItem(IWorld world, ItemInstance inst, double x, double y, double motionX, double motionY);
+    AbstractItemEntity makeItem(IWorld world, ItemInstance inst, double x, double y, double motionX, double motionY);
 
-    List<ComponentStatistic> makeItemStatComponents(IGameInstance game, ItemStatistic.Stat stat, Map<Item, Counter> statMap, AbstractStatGui gui, ComponentMenu menu, ResourceName textureLocation);
+    List<StatisticComponent> makeItemStatComponents(IGameInstance game, ItemStatistic.Stat stat, Map<Item, Counter> statMap, AbstractStatGui gui, MenuComponent menu, ResourceName textureLocation);
 
     Logger logger();
 
-    void onToolBroken(IWorld world, AbstractEntityPlayer player, ItemInstance instance);
+    void onToolBroken(IWorld world, AbstractPlayerEntity player, ItemInstance instance);
 
-    void dropHeldItem(AbstractEntityPlayer player, ItemContainer container);
+    void dropHeldItem(AbstractPlayerEntity player, ItemContainer container);
 
     void packetDamage(IWorld world, double x, double y, UUID entityId, int damage);
 
@@ -117,5 +116,5 @@ public interface IInternalHooks {
 
     void packetEntityData(Entity entity);
 
-    void smithingConstruct(AbstractEntityPlayer player, TileEntity tile, SmithingRecipe recipe, List<ItemInstance> actualInputs);
+    void smithingConstruct(AbstractPlayerEntity player, TileEntity tile, SmithingRecipe recipe, List<ItemInstance> actualInputs);
 }

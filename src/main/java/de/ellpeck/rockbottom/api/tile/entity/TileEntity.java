@@ -24,7 +24,7 @@ package de.ellpeck.rockbottom.api.tile.entity;
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.data.set.DataSet;
-import de.ellpeck.rockbottom.api.entity.AbstractEntityItem;
+import de.ellpeck.rockbottom.api.entity.AbstractItemEntity;
 import de.ellpeck.rockbottom.api.inventory.IInventory;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.util.Util;
@@ -92,7 +92,7 @@ public abstract class TileEntity {
     public void dropInventory(IInventory inventory) {
         for (ItemInstance inst : inventory) {
             if (inst != null) {
-                AbstractEntityItem.spawn(this.world, inst, this.x + 0.5, this.y + 0.5, Util.RANDOM.nextGaussian() * 0.1, Util.RANDOM.nextGaussian() * 0.1);
+                AbstractItemEntity.spawn(this.world, inst, this.x + 0.5, this.y + 0.5, Util.RANDOM.nextGaussian() * 0.1, Util.RANDOM.nextGaussian() * 0.1);
             }
         }
     }

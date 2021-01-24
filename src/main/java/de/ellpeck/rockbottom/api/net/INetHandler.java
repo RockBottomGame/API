@@ -25,7 +25,7 @@ import de.ellpeck.rockbottom.api.Constants;
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.entity.Entity;
-import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
+import de.ellpeck.rockbottom.api.entity.player.AbstractPlayerEntity;
 import de.ellpeck.rockbottom.api.net.packet.IPacket;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
 import de.ellpeck.rockbottom.api.world.IWorld;
@@ -212,24 +212,24 @@ public interface INetHandler {
      * @return The player's command level
      * @see Constants#ADMIN_PERMISSION
      */
-    int getCommandLevel(AbstractEntityPlayer player);
+    int getCommandLevel(AbstractPlayerEntity player);
 
     /**
      * Sets the command level of any player to a certain value.
      *
      * @param player The player
      * @param level  The command level
-     * @see #getCommandLevel(AbstractEntityPlayer)
+     * @see #getCommandLevel(AbstractPlayerEntity)
      * @see Constants#ADMIN_PERMISSION
      */
-    void setCommandLevel(AbstractEntityPlayer player, int level);
+    void setCommandLevel(AbstractPlayerEntity player, int level);
 
     /**
      * Sets the command level of any player's unique id to a certain value.
      *
      * @param id    The player's id
      * @param level The command level
-     * @see #getCommandLevel(AbstractEntityPlayer)
+     * @see #getCommandLevel(AbstractPlayerEntity)
      * @see Constants#ADMIN_PERMISSION
      */
     void setCommandLevel(UUID id, int level);

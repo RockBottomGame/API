@@ -32,7 +32,7 @@ import de.ellpeck.rockbottom.api.data.set.AbstractDataSet;
 import de.ellpeck.rockbottom.api.data.set.part.DataPart;
 import de.ellpeck.rockbottom.api.data.settings.Settings;
 import de.ellpeck.rockbottom.api.entity.MovableWorldObject;
-import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
+import de.ellpeck.rockbottom.api.entity.player.AbstractPlayerEntity;
 import de.ellpeck.rockbottom.api.gui.container.ItemContainer;
 import de.ellpeck.rockbottom.api.inventory.IInventory;
 import de.ellpeck.rockbottom.api.inventory.Inventory;
@@ -164,7 +164,7 @@ public interface IApiHandler {
     boolean collectItems(IInventory inventory, List<IUseInfo> inputs, boolean simulate, List<ItemInstance> out);
 
     /**
-     * Similar to {@link IApiHandler#construct(AbstractEntityPlayer, Inventory, Inventory, PlayerCompendiumRecipe, TileEntity, int, List, List, Function, float)}
+     * Similar to {@link IApiHandler#construct(AbstractPlayerEntity, Inventory, Inventory, PlayerCompendiumRecipe, TileEntity, int, List, List, Function, float)}
      * but safe to use on both client and server side (client side sends packet to server).
      *
      * @param player  The player doing this construction. Can be null if
@@ -173,7 +173,7 @@ public interface IApiHandler {
      * @param recipe  The recipe to construct
      * @param machine The tile entity doing the crafting
      */
-    void defaultConstruct(AbstractEntityPlayer player, PlayerCompendiumRecipe recipe, TileEntity machine);
+    void defaultConstruct(AbstractPlayerEntity player, PlayerCompendiumRecipe recipe, TileEntity machine);
 
     /**
      * This is a utility method that you can call for custom construction of
@@ -201,9 +201,9 @@ public interface IApiHandler {
      *                        constructing this recipe
      * @return A list of items that couldn't fit into the output inventory
      * specified
-     * @see IApiHandler#defaultConstruct(AbstractEntityPlayer, PlayerCompendiumRecipe, TileEntity)
+     * @see IApiHandler#defaultConstruct(AbstractPlayerEntity, PlayerCompendiumRecipe, TileEntity)
      */
-    List<ItemInstance> construct(AbstractEntityPlayer player, Inventory inputInventory, Inventory outputInventory, PlayerCompendiumRecipe recipe, TileEntity machine, int amount, List<IUseInfo> recipeInputs, List<ItemInstance> actualInputs, Function<List<ItemInstance>, List<ItemInstance>> outputGetter, float skillReward);
+    List<ItemInstance> construct(AbstractPlayerEntity player, Inventory inputInventory, Inventory outputInventory, PlayerCompendiumRecipe recipe, TileEntity machine, int amount, List<IUseInfo> recipeInputs, List<ItemInstance> actualInputs, Function<List<ItemInstance>, List<ItemInstance>> outputGetter, float skillReward);
 
     /**
      * Gets a color in the world based on a light value between 0 and {@link
@@ -233,7 +233,7 @@ public interface IApiHandler {
      */
     Logger createLogger(String name);
 
-    void renderPlayer(AbstractEntityPlayer player, IGameInstance game, IAssetManager manager, IRenderer g, IPlayerDesign design, float x, float y, float scale, int row, int light);
+    void renderPlayer(AbstractPlayerEntity player, IGameInstance game, IAssetManager manager, IRenderer g, IPlayerDesign design, float x, float y, float scale, int row, int light);
 
     int generateBasicHeight(IWorld world, TileLayer layer, int x, INoiseGen noiseGen, int minHeight, int maxHeight, int maxMountainHeight);
 
@@ -249,7 +249,7 @@ public interface IApiHandler {
      * Opens the players inventory the same as pressing {@link Settings#KEY_INVENTORY}.
      * @param player The player to open the inventory for.
      */
-    void openPlayerInventory(AbstractEntityPlayer player);
+    void openPlayerInventory(AbstractPlayerEntity player);
 
     /**
      * Opens the player inventory with an additional inventory on the top.
@@ -258,5 +258,5 @@ public interface IApiHandler {
      * @param containerWidth The amount of slots horizontally before wrapping to next line.
      * @param onClosed The action to take when the container is closed.
      */
-    void openExtendedPlayerInventory(AbstractEntityPlayer player, IInventory inventory, int containerWidth, Consumer<IInventory> onClosed, ItemContainer.ISlotCallback slotCallback);
+    void openExtendedPlayerInventory(AbstractPlayerEntity player, IInventory inventory, int containerWidth, Consumer<IInventory> onClosed, ItemContainer.ISlotCallback slotCallback);
 }

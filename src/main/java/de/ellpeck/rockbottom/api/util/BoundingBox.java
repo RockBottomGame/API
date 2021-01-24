@@ -25,13 +25,15 @@ import java.util.List;
 
 public final class BoundingBox {
 
-    public static final BoundingBox NULL_BOUNDS = new BoundingBox();
-
     private double minX;
     private double minY;
 
     private double maxX;
     private double maxY;
+
+    public static BoundingBox empty() {
+       return new BoundingBox();
+    }
 
     public BoundingBox() {
         this(0, 0, 0, 0);
@@ -43,7 +45,7 @@ public final class BoundingBox {
 
     public static BoundingBox getCombinedBoundBox(List<BoundingBox> boxes) {
         if (boxes.isEmpty())
-            return BoundingBox.NULL_BOUNDS;
+            return BoundingBox.empty();
         double minAreaX = Double.MAX_VALUE;
         double minAreaY = Double.MAX_VALUE;
         double maxAreaX = Double.MIN_VALUE;
@@ -115,7 +117,7 @@ public final class BoundingBox {
 
     public BoundingBox getIntersection(BoundingBox other) {
         if (other == null)
-            return NULL_BOUNDS;
+            return BoundingBox.empty();
         return new BoundingBox(
                 Math.max(this.getMinX(), other.getMinX()),
                 Math.max(this.getMinY(), other.getMinY()),

@@ -27,7 +27,7 @@ import de.ellpeck.rockbottom.api.Registries;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.data.settings.Settings;
 import de.ellpeck.rockbottom.api.entity.MovableWorldObject;
-import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
+import de.ellpeck.rockbottom.api.entity.player.AbstractPlayerEntity;
 import de.ellpeck.rockbottom.api.tile.Tile;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
@@ -108,7 +108,7 @@ public class TileLayer {
         return this.interactionPriority;
     }
 
-    public boolean canEditLayer(IGameInstance game, AbstractEntityPlayer player) {
+    public boolean canEditLayer(IGameInstance game, AbstractPlayerEntity player) {
         return Settings.KEY_BACKGROUND.isDown() ? this == BACKGROUND : (this == MAIN || this == LIQUIDS);
     }
 
@@ -120,7 +120,7 @@ public class TileLayer {
         return false;
     }
 
-    public boolean isVisible(IGameInstance game, AbstractEntityPlayer player, IChunk chunk, int x, int y, boolean isRenderingForeground) {
+    public boolean isVisible(IGameInstance game, AbstractPlayerEntity player, IChunk chunk, int x, int y, boolean isRenderingForeground) {
         return true;
     }
 

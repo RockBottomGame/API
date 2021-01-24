@@ -21,24 +21,24 @@
 
 package de.ellpeck.rockbottom.api.event.impl;
 
-import de.ellpeck.rockbottom.api.entity.AbstractEntityItem;
-import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
+import de.ellpeck.rockbottom.api.entity.AbstractItemEntity;
+import de.ellpeck.rockbottom.api.entity.player.AbstractPlayerEntity;
 import de.ellpeck.rockbottom.api.event.Event;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 
 /**
- * This event is fired when an {@link AbstractEntityItem} is being picked up by
- * an {@link AbstractEntityPlayer}. Note that this event is fired before a check
+ * This event is fired when an {@link AbstractItemEntity} is being picked up by
+ * an {@link AbstractPlayerEntity}. Note that this event is fired before a check
  * is done to see if there is enough space for the item. Cancelling the event
  * will make the item not be picked up.
  */
 public final class ItemPickupEvent extends Event {
 
-    public final AbstractEntityPlayer player;
-    public final AbstractEntityItem item;
+    public final AbstractPlayerEntity player;
+    public final AbstractItemEntity item;
     public ItemInstance instance;
 
-    public ItemPickupEvent(AbstractEntityPlayer player, AbstractEntityItem item, ItemInstance instance) {
+    public ItemPickupEvent(AbstractPlayerEntity player, AbstractItemEntity item, ItemInstance instance) {
         this.player = player;
         this.item = item;
         this.instance = instance;

@@ -22,6 +22,8 @@
 package de.ellpeck.rockbottom.api.net.packet;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
+import de.ellpeck.rockbottom.api.Registries;
+import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 
@@ -32,4 +34,11 @@ public interface IPacket {
     void fromBuffer(ByteBuf buf);
 
     void handle(IGameInstance game, ChannelHandlerContext context);
+
+    ResourceName getName();
+
+    interface IFactory {
+        IPacket create();
+    }
+
 }

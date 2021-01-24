@@ -22,7 +22,7 @@
 package de.ellpeck.rockbottom.api.event.impl;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
-import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
+import de.ellpeck.rockbottom.api.entity.player.AbstractPlayerEntity;
 import de.ellpeck.rockbottom.api.event.Event;
 import de.ellpeck.rockbottom.api.event.EventResult;
 import de.ellpeck.rockbottom.api.world.IWorld;
@@ -34,7 +34,7 @@ import de.ellpeck.rockbottom.api.world.layer.TileLayer;
  * it will make the interaction not happen on this layer, but instead, the code
  * will move on to layers with a lower priority. Setting the event result to
  * {@link EventResult#MODIFIED} will cause the layer's {@link
- * TileLayer#canEditLayer(IGameInstance, AbstractEntityPlayer)} method to be
+ * TileLayer#canEditLayer(IGameInstance, AbstractPlayerEntity)} method to be
  * ignored.
  */
 public final class LayerActionEvent extends Event {

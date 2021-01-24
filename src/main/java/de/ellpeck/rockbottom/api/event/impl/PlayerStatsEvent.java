@@ -21,24 +21,24 @@
 
 package de.ellpeck.rockbottom.api.event.impl;
 
-import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
+import de.ellpeck.rockbottom.api.entity.player.AbstractPlayerEntity;
 import de.ellpeck.rockbottom.api.event.Event;
 
 /**
  * This event is fired when any of the provided {@link #player}'s statistics is
- * required queried using {@link AbstractEntityPlayer#getRange()}, {@link
- * AbstractEntityPlayer#getMoveSpeed()} and similar methods. The type of
+ * required queried using {@link AbstractPlayerEntity#getRange()}, {@link
+ * AbstractPlayerEntity#getMoveSpeed()} and similar methods. The type of
  * statistic being queried is indicated by the {@link #statType}. Changing the
  * {@link #value} will cause the stat to be changed. The event cannot be
  * cancelled.
  */
 public final class PlayerStatsEvent extends Event {
 
-    public final AbstractEntityPlayer player;
+    public final AbstractPlayerEntity player;
     public final StatType statType;
     public double value;
 
-    public PlayerStatsEvent(AbstractEntityPlayer player, StatType statType, double value) {
+    public PlayerStatsEvent(AbstractPlayerEntity player, StatType statType, double value) {
         this.player = player;
         this.statType = statType;
         this.value = value;

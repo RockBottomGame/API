@@ -2,8 +2,8 @@ package de.ellpeck.rockbottom.api.construction.compendium;
 
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.construction.resource.IUseInfo;
-import de.ellpeck.rockbottom.api.entity.AbstractEntityItem;
-import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
+import de.ellpeck.rockbottom.api.entity.AbstractItemEntity;
+import de.ellpeck.rockbottom.api.entity.player.AbstractPlayerEntity;
 import de.ellpeck.rockbottom.api.inventory.Inventory;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.tile.entity.TileEntity;
@@ -36,15 +36,15 @@ public abstract class PlayerCompendiumRecipe extends BasicCompendiumRecipe {
 	 * @param skillReward the skill reward
 	 * @return True if the construction should continue
 	 */
-	public boolean handleRecipe(AbstractEntityPlayer player, Inventory inputInventory, Inventory outputInventory, TileEntity machine, List<IUseInfo> recipeInputs, List<ItemInstance> actualInputs, Function<List<ItemInstance>, List<ItemInstance>> outputGetter, float skillReward) {
+	public boolean handleRecipe(AbstractPlayerEntity player, Inventory inputInventory, Inventory outputInventory, TileEntity machine, List<IUseInfo> recipeInputs, List<ItemInstance> actualInputs, Function<List<ItemInstance>, List<ItemInstance>> outputGetter, float skillReward) {
 		return true;
 	}
 
-	public void playerConstruct(AbstractEntityPlayer player, TileEntity machine, int amount) {
+	public void playerConstruct(AbstractPlayerEntity player, TileEntity machine, int amount) {
 		Inventory inv = player.getInv();
 		List<ItemInstance> remains = RockBottomAPI.getApiHandler().construct(player, inv, inv, this, machine, amount, this.getActualInputs(inv), null, items -> this.getActualOutputs(inv, inv, items), this.getSkillReward());
 		for (ItemInstance instance : remains) {
-			AbstractEntityItem.spawn(player.world, instance, player.getX(), player.getY(), 0F, 0F);
+			AbstractItemEntity.spawn(player.world, instance, player.getX(), player.getY(), 0F, 0F);
 		}
 	}
 
@@ -57,7 +57,7 @@ public abstract class PlayerCompendiumRecipe extends BasicCompendiumRecipe {
 	}
 
 	@Override
-	public boolean isKnown(AbstractEntityPlayer player) {
+	public boolean isKnown(AbstractPlayerEntity player) {
 		return !isKnowledge || !player.world.isStoryMode() || player.getKnowledge().knowsRecipe(this);
 	}
 

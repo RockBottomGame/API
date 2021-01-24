@@ -22,7 +22,7 @@
 package de.ellpeck.rockbottom.api.world;
 
 import de.ellpeck.rockbottom.api.entity.Entity;
-import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
+import de.ellpeck.rockbottom.api.entity.player.AbstractPlayerEntity;
 import de.ellpeck.rockbottom.api.render.IPlayerDesign;
 import de.ellpeck.rockbottom.api.tile.state.TileState;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
@@ -96,11 +96,11 @@ public interface IWorld extends IChunkOrWorld {
 
     void notifyNeighborsOfChange(int x, int y, TileLayer layer);
 
-    AbstractEntityPlayer createPlayer(UUID id, IPlayerDesign design, Channel channel, boolean loadOrSwapLast);
+    AbstractPlayerEntity createPlayer(UUID id, IPlayerDesign design, Channel channel, boolean loadOrSwapLast);
 
-    AbstractEntityPlayer getPlayer(UUID id);
+    AbstractPlayerEntity getPlayer(UUID id);
 
-    AbstractEntityPlayer getPlayer(String name);
+    AbstractPlayerEntity getPlayer(String name);
 
     void destroyTile(int x, int y, TileLayer layer, Entity destroyer, boolean shouldDrop);
 
@@ -114,7 +114,7 @@ public interface IWorld extends IChunkOrWorld {
     void unloadChunk(IChunk chunk);
 
     @ApiInternal
-    void savePlayer(AbstractEntityPlayer player);
+    void savePlayer(AbstractPlayerEntity player);
 
     float getSkylightModifier(boolean doMinMax);
 
@@ -130,7 +130,7 @@ public interface IWorld extends IChunkOrWorld {
     @ApiInternal
     void save();
 
-    List<AbstractEntityPlayer> getAllPlayers();
+    List<AbstractPlayerEntity> getAllPlayers();
 
     void removeEntity(Entity entity, IChunk chunk);
 
@@ -146,13 +146,13 @@ public interface IWorld extends IChunkOrWorld {
 
     String getName();
 
-    void playSound(AbstractEntityPlayer player, ResourceName name, double x, double y, double z, float pitch, float volume);
+    void playSound(AbstractPlayerEntity player, ResourceName name, double x, double y, double z, float pitch, float volume);
 
-    void broadcastSound(AbstractEntityPlayer player, ResourceName name, float pitch, float volume);
+    void broadcastSound(AbstractPlayerEntity player, ResourceName name, float pitch, float volume);
 
-    void playSound(ResourceName name, double x, double y, double z, float pitch, float volume, AbstractEntityPlayer except);
+    void playSound(ResourceName name, double x, double y, double z, float pitch, float volume, AbstractPlayerEntity except);
 
-    void broadcastSound(ResourceName name, float pitch, float volume, AbstractEntityPlayer except);
+    void broadcastSound(ResourceName name, float pitch, float volume, AbstractPlayerEntity except);
 
     void playSound(ResourceName name, double x, double y, double z, float pitch, float volume);
 
@@ -162,15 +162,15 @@ public interface IWorld extends IChunkOrWorld {
 
     boolean isStoryMode();
 
-    AbstractEntityPlayer getClosestPlayer(double x, double y, AbstractEntityPlayer excluding);
+    AbstractPlayerEntity getClosestPlayer(double x, double y, AbstractPlayerEntity excluding);
 
-    AbstractEntityPlayer getClosestPlayer(double x, double y);
-
-    @ApiInternal
-    void addPlayer(AbstractEntityPlayer player);
+    AbstractPlayerEntity getClosestPlayer(double x, double y);
 
     @ApiInternal
-    void removePlayer(AbstractEntityPlayer player);
+    void addPlayer(AbstractPlayerEntity player);
+
+    @ApiInternal
+    void removePlayer(AbstractPlayerEntity player);
 
     void travelToSubWorld(Entity entity, ResourceName subWorld, double x, double y);
 

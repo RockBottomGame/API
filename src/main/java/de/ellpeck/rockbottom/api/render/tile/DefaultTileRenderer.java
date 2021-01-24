@@ -27,7 +27,7 @@ import de.ellpeck.rockbottom.api.IRenderer;
 import de.ellpeck.rockbottom.api.StaticTileProps;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.assets.texture.ITexture;
-import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
+import de.ellpeck.rockbottom.api.entity.player.AbstractPlayerEntity;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.item.ToolProperty;
 import de.ellpeck.rockbottom.api.tile.Tile;
@@ -104,7 +104,7 @@ public class DefaultTileRenderer<T extends Tile> implements ITileRenderer<T> {
     }
 
     protected void renderChiselHighlight(IGameInstance game, IRenderer g, BoundingBox box, int x, int y, float renderX, float renderY, float scale) {
-        AbstractEntityPlayer player = game.getPlayer();
+        AbstractPlayerEntity player = game.getPlayer();
         int tileX = Util.floor(g.getMousedTileX());
         int tileY = Util.floor(g.getMousedTileY());
         if (!player.isInRange(tileX, tileY, player.getMaxInteractionDistance(player.world, g.getMousedTileX(), g.getMousedTileY(), player)))
@@ -136,7 +136,7 @@ public class DefaultTileRenderer<T extends Tile> implements ITileRenderer<T> {
     }
 
     @Override
-    public JsonElement getAdditionalTextureData(IGameInstance game, IAssetManager manager, IRenderer g, T tile, ItemInstance instance, AbstractEntityPlayer player, String name) {
+    public JsonElement getAdditionalTextureData(IGameInstance game, IAssetManager manager, IRenderer g, T tile, ItemInstance instance, AbstractPlayerEntity player, String name) {
         return manager.getTexture(this.texture).getAdditionalData(name);
     }
 

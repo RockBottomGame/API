@@ -21,20 +21,20 @@
 
 package de.ellpeck.rockbottom.api.event.impl;
 
-import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
+import de.ellpeck.rockbottom.api.entity.player.AbstractPlayerEntity;
 import de.ellpeck.rockbottom.api.event.Event;
 
 /**
- * This event is fired when an {@link AbstractEntityPlayer} connects to a world.
+ * This event is fired when an {@link AbstractPlayerEntity} connects to a world.
  * The isConnected variable determines if the player is connecting to a server
  * that they aren't hosting themselves.
  */
 public final class PlayerJoinWorldEvent extends Event {
 
-    public final AbstractEntityPlayer player;
+    public final AbstractPlayerEntity player;
     public final boolean isConnected;
 
-    public PlayerJoinWorldEvent(AbstractEntityPlayer player, boolean isConnected) {
+    public PlayerJoinWorldEvent(AbstractPlayerEntity player, boolean isConnected) {
         this.player = player;
         this.isConnected = isConnected;
     }

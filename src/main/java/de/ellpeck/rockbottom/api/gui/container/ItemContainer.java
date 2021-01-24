@@ -23,29 +23,29 @@ package de.ellpeck.rockbottom.api.gui.container;
 
 import com.google.common.collect.Iterators;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
-import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
+import de.ellpeck.rockbottom.api.entity.player.AbstractPlayerEntity;
 import de.ellpeck.rockbottom.api.inventory.IInventory;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 import java.util.*;
 
-public abstract class ItemContainer implements Iterable<ContainerSlot> {
+public abstract class ItemContainer implements Iterable<SlotContainer> {
 
-    public final AbstractEntityPlayer player;
-    private final List<ContainerSlot> slots = new ArrayList<>();
+    public final AbstractPlayerEntity player;
+    private final List<SlotContainer> slots = new ArrayList<>();
     private final Set<IInventory> containedInventories = new HashSet<>();
     public ItemInstance holdingInst;
 
-    public ItemContainer(AbstractEntityPlayer player) {
+    public ItemContainer(AbstractPlayerEntity player) {
         this.player = player;
     }
 
-    public ContainerSlot getSlot(int id) {
+    public SlotContainer getSlot(int id) {
         return this.slots.get(id);
     }
 
-    public int getIdForSlot(ContainerSlot slot) {
+    public int getIdForSlot(SlotContainer slot) {
         return this.slots.indexOf(slot);
     }
 
@@ -57,7 +57,7 @@ public abstract class ItemContainer implements Iterable<ContainerSlot> {
         return this.slots.size();
     }
 
-    public void addSlot(ContainerSlot slot) {
+    public void addSlot(SlotContainer slot) {
         if (!this.containedInventories.contains(slot.inventory)) {
             this.containedInventories.add(slot.inventory);
 
@@ -66,13 +66,13 @@ public abstract class ItemContainer implements Iterable<ContainerSlot> {
         this.slots.add(slot);
     }
 
-    public boolean removeSlot(ContainerSlot slot) {
+    public boolean removeSlot(SlotContainer slot) {
         return this.slots.remove(slot);
     }
 
     public int getIndexForInvSlot(IInventory inv, int id) {
         for (int i = 0; i < this.slots.size(); i++) {
-            ContainerSlot slot = this.slots.get(i);
+            SlotContainer slot = this.slots.get(i);
             if (slot.inventory.containsInv(inv) && slot.slot == slot.inventory.getActualSlot(inv, id)) {
                 return i;
             }
@@ -81,7 +81,7 @@ public abstract class ItemContainer implements Iterable<ContainerSlot> {
     }
 
     public void addSlotGrid(IInventory inventory, int start, int end, int xStart, int yStart, int width) {
-        this.addSlotGrid(inventory, start, end, xStart, yStart, width, ContainerSlot::new);
+        this.addSlotGrid(inventory, start, end, xStart, yStart, width, SlotContainer::new);
     }
 
     public void addSlotGrid(IInventory inventory, int start, int end, int xStart, int yStart, int width, ISlotCallback callback) {
@@ -98,11 +98,11 @@ public abstract class ItemContainer implements Iterable<ContainerSlot> {
         }
     }
 
-    public void addPlayerInventory(AbstractEntityPlayer player, int x, int y) {
-        this.addPlayerInventory(player, x, y, ContainerSlot::new);
+    public void addPlayerInventory(AbstractPlayerEntity player, int x, int y) {
+        this.addPlayerInventory(player, x, y, SlotContainer::new);
     }
 
-    public void addPlayerInventory(AbstractEntityPlayer player, int x, int y, ISlotCallback callback) {
+    public void addPlayerInventory(AbstractPlayerEntity player, int x, int y, ISlotCallback callback) {
         this.addSlotGrid(player.getInv(), 0, 8, x, y, 8, callback);
         this.addSlotGrid(player.getInv(), 8, player.getInv().getSlotAmount(), x, y + 20, 8, callback);
     }
@@ -116,7 +116,7 @@ public abstract class ItemContainer implements Iterable<ContainerSlot> {
     }
 
     @Override
-    public Iterator<ContainerSlot> iterator() {
+    public Iterator<SlotContainer> iterator() {
         return Iterators.unmodifiableIterator(this.slots.iterator());
     }
 
@@ -124,7 +124,7 @@ public abstract class ItemContainer implements Iterable<ContainerSlot> {
 
     public interface ISlotCallback {
 
-        ContainerSlot getSlot(IInventory inventory, int slot, int x, int y);
+        SlotContainer getSlot(IInventory inventory, int slot, int x, int y);
 
     }
 }

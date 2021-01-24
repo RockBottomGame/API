@@ -1,5 +1,5 @@
 /*
- * This file ("MenuComponent.java") is part of the RockBottomAPI by Ellpeck.
+ * This file ("ComponentMenu.java") is part of the RockBottomAPI by Ellpeck.
  * View the source code at <https://github.com/RockBottomGame/>.
  * View information on the project at <https://rockbottom.ellpeck.de/>.
  *
@@ -22,52 +22,113 @@
 package de.ellpeck.rockbottom.api.gui.component;
 
 import de.ellpeck.rockbottom.api.gui.Gui;
-import de.ellpeck.rockbottom.api.util.Pos2;
+import de.ellpeck.rockbottom.api.util.BoundingBox;
+import de.ellpeck.rockbottom.api.util.Util;
+import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
-public class MenuComponent {
+public class MenuComponent extends ScrollBarComponent {
 
-    public final int width;
-    public final int height;
-    private final Map<Pos2, GuiComponent> components = new HashMap<>();
+    private final int displayedComponentsX;
+    private final int displayedComponentsY;
+    private final int componentsOffsetX;
+    private final int componentsOffsetY;
+    private final int componentGap;
+    private final List<MenuItemComponent> contents = new ArrayList<>();
 
-    public MenuComponent(int width, int height) {
-        this.width = width;
-        this.height = height;
+    public MenuComponent(Gui gui, int x, int y, int barWidth, int height, int displayedComponentsX, int displayedComponentsY, int componentsOffsetX, int componentsOffsetY, BoundingBox hoverArea, ResourceName scrollTexture, int componentGap) {
+        super(gui, x, y, barWidth, height, hoverArea, 0, null, scrollTexture);
+        this.displayedComponentsX = displayedComponentsX;
+        this.displayedComponentsY = displayedComponentsY;
+        this.componentsOffsetX = componentsOffsetX;
+        this.componentsOffsetY = componentsOffsetY;
+        this.componentGap = componentGap;
     }
 
-    public MenuComponent add(int x, int y, GuiComponent component) {
-        this.components.put(new Pos2(x, y), component);
-        return this;
+    public MenuComponent(Gui gui, int x, int y, int barWidth, int height, int displayedComponentsX, int displayedComponentsY, int componentsOffsetX, int componentsOffsetY, BoundingBox hoverArea, ResourceName scrollTexture) {
+        this(gui, x, y, barWidth, height, displayedComponentsX, displayedComponentsY, componentsOffsetX, componentsOffsetY, hoverArea, scrollTexture, 2);
     }
 
-    public void init(Gui gui) {
-        for (GuiComponent component : this.components.values()) {
-            gui.getComponents().add(component);
+    public MenuComponent(Gui gui, int x, int y, int height, int displayedComponentsX, int displayedComponentsY, BoundingBox hoverArea) {
+        this(gui, x, y, 6, height, displayedComponentsX, displayedComponentsY, 0, 0, hoverArea, null);
+    }
+
+    public void add(MenuItemComponent component) {
+        this.contents.add(component);
+        component.init(this.gui);
+    }
+
+    public void remove(MenuItemComponent component) {
+        this.contents.remove(component);
+        component.onRemoved(this.gui);
+    }
+
+    public void clear() {
+        if (!this.contents.isEmpty()) {
+            for (MenuItemComponent component : this.contents) {
+                component.onRemoved(this.gui);
+            }
+            this.contents.clear();
         }
     }
 
-    public void onRemoved(Gui gui) {
-        for (GuiComponent component : this.components.values()) {
-            gui.getComponents().remove(component);
+    public boolean isEmpty() {
+        return this.contents.isEmpty();
+    }
+
+    @Override
+    protected void onScroll() {
+        this.organize();
+    }
+
+    public void organize() {
+        this.number = Util.clamp(this.number, 0, this.getMax());
+
+        int index = 0;
+        while (index < this.contents.size() && index < this.number * this.displayedComponentsX) {
+            this.contents.get(index).setActive(false);
+            index++;
+        }
+
+        if (this.contents.size() > index) {
+            int showY = this.getY() + this.componentsOffsetY;
+            for (int y = 0; y < this.displayedComponentsY; y++) {
+                int showX = this.getX() + this.componentsOffsetX + 8;
+                int highestHeight = 0;
+                for (int x = 0; x < this.displayedComponentsX; x++) {
+                    MenuItemComponent component = this.contents.get(index);
+                    component.setActive(true);
+                    component.setPos(showX, showY);
+
+                    showX += component.width + this.componentGap;
+                    if (component.height > highestHeight) {
+                        highestHeight = component.height;
+                    }
+
+                    index++;
+                    if (index >= this.contents.size()) {
+                        return;
+                    }
+                }
+                showY += highestHeight + 2;
+            }
+
+            while (index < this.contents.size()) {
+                this.contents.get(index).setActive(false);
+                index++;
+            }
         }
     }
 
-    public void setActive(boolean active) {
-        for (GuiComponent component : this.components.values()) {
-            component.setActive(active);
-        }
+    @Override
+    public int getMax() {
+        return (Util.ceil((float) this.contents.size() / (float) this.displayedComponentsX)) - this.displayedComponentsY;
     }
 
-    public void setPos(int x, int y) {
-        for (Map.Entry<Pos2, GuiComponent> entry : this.components.entrySet()) {
-            GuiComponent component = entry.getValue();
-            Pos2 pos = entry.getKey();
-
-            component.x = pos.getX() + x;
-            component.y = pos.getY() + y;
-        }
+    @Override
+    public ResourceName getName() {
+        return ResourceName.intern("scroll_menu");
     }
 }

@@ -23,7 +23,7 @@ package de.ellpeck.rockbottom.api.world;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.data.set.DataSet;
-import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
+import de.ellpeck.rockbottom.api.entity.player.AbstractPlayerEntity;
 import de.ellpeck.rockbottom.api.tile.state.TileState;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
 import de.ellpeck.rockbottom.api.util.Counter;
@@ -36,13 +36,13 @@ import java.util.Map;
 public interface IChunk extends IChunkOrWorld {
 
     @ApiInternal
-    List<AbstractEntityPlayer> getPlayersInRange();
+    List<AbstractPlayerEntity> getPlayersInRange();
 
     @ApiInternal
-    List<AbstractEntityPlayer> getPlayersLeftRange();
+    List<AbstractPlayerEntity> getPlayersLeftRange();
 
     @ApiInternal
-    Map<AbstractEntityPlayer, Counter> getLeftPlayerTimers();
+    Map<AbstractPlayerEntity, Counter> getLeftPlayerTimers();
 
     int getGridX();
 

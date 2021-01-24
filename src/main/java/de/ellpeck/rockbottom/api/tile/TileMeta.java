@@ -22,9 +22,9 @@
 package de.ellpeck.rockbottom.api.tile;
 
 import de.ellpeck.rockbottom.api.entity.Entity;
-import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
+import de.ellpeck.rockbottom.api.entity.player.AbstractPlayerEntity;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
-import de.ellpeck.rockbottom.api.item.ItemTile;
+import de.ellpeck.rockbottom.api.item.TileItem;
 import de.ellpeck.rockbottom.api.render.tile.ITileRenderer;
 import de.ellpeck.rockbottom.api.render.tile.TileMetaRenderer;
 import de.ellpeck.rockbottom.api.tile.state.IntProp;
@@ -37,7 +37,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class TileMeta extends TileBasic {
+public class TileMeta extends BasicTile {
 
     public final List<ResourceName> subResourceNames = new ArrayList<>();
     public final List<ResourceName> subUnlocNames = new ArrayList<>();
@@ -75,8 +75,8 @@ public class TileMeta extends TileBasic {
     }
 
     @Override
-    protected ItemTile createItemTile() {
-        return new ItemTile(this.getName()) {
+    protected TileItem createItemTile() {
+        return new TileItem(this.getName()) {
             @Override
             public ResourceName getUnlocalizedName(ItemInstance instance) {
                 int meta = instance.getMeta();
@@ -96,7 +96,7 @@ public class TileMeta extends TileBasic {
     }
 
     @Override
-    public TileState getPlacementState(IWorld world, int x, int y, TileLayer layer, ItemInstance instance, AbstractEntityPlayer placer) {
+    public TileState getPlacementState(IWorld world, int x, int y, TileLayer layer, ItemInstance instance, AbstractPlayerEntity placer) {
         return this.getDefState().prop(this.metaProp, instance.getMeta());
     }
 

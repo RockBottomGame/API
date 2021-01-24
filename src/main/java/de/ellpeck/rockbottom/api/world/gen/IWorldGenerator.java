@@ -21,8 +21,7 @@
 
 package de.ellpeck.rockbottom.api.world.gen;
 
-import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
-import de.ellpeck.rockbottom.api.util.reg.ResourceName;
+import de.ellpeck.rockbottom.api.entity.player.AbstractPlayerEntity;
 import de.ellpeck.rockbottom.api.world.IChunk;
 import de.ellpeck.rockbottom.api.world.IWorld;
 
@@ -42,7 +41,7 @@ public interface IWorldGenerator {
         return false;
     }
 
-    default boolean doesPlayerAllowGeneration(IWorld world, IChunk chunk, AbstractEntityPlayer player) {
+    default boolean doesPlayerAllowGeneration(IWorld world, IChunk chunk, AbstractPlayerEntity player) {
         return true;
     }
 

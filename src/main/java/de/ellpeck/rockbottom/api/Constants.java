@@ -21,7 +21,7 @@
 
 package de.ellpeck.rockbottom.api;
 
-import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
+import de.ellpeck.rockbottom.api.entity.player.AbstractPlayerEntity;
 import de.ellpeck.rockbottom.api.net.INetHandler;
 import de.ellpeck.rockbottom.api.particle.IParticleManager;
 import de.ellpeck.rockbottom.api.tile.Tile;
@@ -112,7 +112,7 @@ public final class Constants {
      * The permission level that the server admin (the host of the local server)
      * should have by default.
      *
-     * @see INetHandler#getCommandLevel(AbstractEntityPlayer)
+     * @see INetHandler#getCommandLevel(AbstractPlayerEntity)
      * @see INetHandler#setCommandLevel(UUID, int)
      */
     public static final int ADMIN_PERMISSION = 10;

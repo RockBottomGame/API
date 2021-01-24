@@ -25,7 +25,7 @@ import com.google.common.base.Preconditions;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.assets.font.FormattingCode;
 import de.ellpeck.rockbottom.api.entity.Entity;
-import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
+import de.ellpeck.rockbottom.api.entity.player.AbstractPlayerEntity;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.render.tile.ITileRenderer;
 import de.ellpeck.rockbottom.api.render.tile.MultiTileRenderer;
@@ -38,7 +38,7 @@ import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 
 import java.util.List;
 
-public abstract class MultiTile extends TileBasic {
+public abstract class MultiTile extends BasicTile {
 
     public IntProp propSubX = new IntProp("subX", 0, this.getWidth());
     public IntProp propSubY = new IntProp("subY", 0, this.getHeight());
@@ -74,7 +74,7 @@ public abstract class MultiTile extends TileBasic {
     }
 
     @Override
-    public boolean canPlace(IWorld world, int x, int y, TileLayer layer, AbstractEntityPlayer player) {
+    public boolean canPlace(IWorld world, int x, int y, TileLayer layer, AbstractPlayerEntity player) {
         int startX = x - this.getMainX();
         int startY = y - this.getMainY();
 
@@ -94,7 +94,7 @@ public abstract class MultiTile extends TileBasic {
     }
 
     @Override
-    public void doPlace(IWorld world, int x, int y, TileLayer layer, ItemInstance instance, AbstractEntityPlayer placer) {
+    public void doPlace(IWorld world, int x, int y, TileLayer layer, ItemInstance instance, AbstractPlayerEntity placer) {
         if (!world.isClient()) {
             int startX = x - this.getMainX();
             int startY = y - this.getMainY();
@@ -111,7 +111,7 @@ public abstract class MultiTile extends TileBasic {
     }
 
     @Override
-    public void doBreak(IWorld world, int x, int y, TileLayer layer, AbstractEntityPlayer breaker, boolean isRightTool, boolean allowDrop) {
+    public void doBreak(IWorld world, int x, int y, TileLayer layer, AbstractPlayerEntity breaker, boolean isRightTool, boolean allowDrop) {
         if (!world.isClient()) {
             Pos2 start = this.getBottomLeft(x, y, world.getState(layer, x, y));
 

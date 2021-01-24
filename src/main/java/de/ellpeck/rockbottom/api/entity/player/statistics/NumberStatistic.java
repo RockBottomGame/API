@@ -26,8 +26,8 @@ import de.ellpeck.rockbottom.api.IRenderer;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.data.set.DataSet;
 import de.ellpeck.rockbottom.api.gui.AbstractStatGui;
-import de.ellpeck.rockbottom.api.gui.component.ComponentMenu;
-import de.ellpeck.rockbottom.api.gui.component.ComponentStatistic;
+import de.ellpeck.rockbottom.api.gui.component.MenuComponent;
+import de.ellpeck.rockbottom.api.gui.component.StatisticComponent;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 import java.util.Collections;
@@ -54,8 +54,8 @@ public class NumberStatistic extends StatisticInitializer<NumberStatistic.Stat> 
     }
 
     @Override
-    public List<ComponentStatistic> getDisplayComponents(IGameInstance game, Stat stat, AbstractStatGui gui, ComponentMenu menu) {
-        return Collections.singletonList(new ComponentStatistic(gui, () -> game.getAssetManager().localize(this.getName().addPrefix("stat.")), () -> String.valueOf(stat.getValue()), stat.getValue(), null) {
+    public List<StatisticComponent> getDisplayComponents(IGameInstance game, Stat stat, AbstractStatGui gui, MenuComponent menu) {
+        return Collections.singletonList(new StatisticComponent(gui, () -> game.getAssetManager().localize(this.getName().addPrefix("stat.")), () -> String.valueOf(stat.getValue()), stat.getValue(), null) {
             @Override
             public void renderStatGraphic(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y) {
                 manager.getTexture(NumberStatistic.this.textureLocation).draw(x + 1, y + 1, 12F, 12F);

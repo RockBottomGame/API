@@ -26,7 +26,7 @@ import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.IRenderer;
 import de.ellpeck.rockbottom.api.Registries;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
-import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
+import de.ellpeck.rockbottom.api.entity.player.AbstractPlayerEntity;
 import de.ellpeck.rockbottom.api.util.Pos2;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 import de.ellpeck.rockbottom.api.world.gen.BiomeGen;
@@ -71,7 +71,7 @@ public abstract class SubWorldInitializer {
         return generator.shouldExistInWorld(subWorld);
     }
 
-    public boolean renderSky(IWorld subWorld, IGameInstance game, IAssetManager manager, IRenderer g, IWorld world, AbstractEntityPlayer player, double width, double height) {
+    public boolean renderSky(IWorld subWorld, IGameInstance game, IAssetManager manager, IRenderer g, IWorld world, AbstractPlayerEntity player, double width, double height) {
         return true;
     }
 

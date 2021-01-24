@@ -33,7 +33,7 @@ import java.util.List;
 
 public abstract class MovableWorldObject {
 
-    public final BoundingBox currentBounds = new BoundingBox();
+    public final BoundingBox currentBounds = BoundingBox.empty();
     public IWorld world;
     public double motionX;
     public double motionY;

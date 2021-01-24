@@ -24,11 +24,11 @@ package de.ellpeck.rockbottom.api.event.impl;
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.IRenderer;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
-import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
+import de.ellpeck.rockbottom.api.entity.player.AbstractPlayerEntity;
 import de.ellpeck.rockbottom.api.event.Event;
 
 /**
- * This event is fired after an {@link AbstractEntityPlayer} is rendered. Note
+ * This event is fired after an {@link AbstractPlayerEntity} is rendered. Note
  * that during the firing of this event, the {@link IRenderer#getWorldScale()}
  * is applied to the GL context. This event cannot be cancelled. Use {@link Pre}
  * if you want to render something before the player is rendered, or if you want
@@ -39,11 +39,11 @@ public class PlayerRenderEvent extends Event {
     public final IGameInstance game;
     public final IAssetManager assetManager;
     public final IRenderer graphics;
-    public final AbstractEntityPlayer player;
+    public final AbstractPlayerEntity player;
     public final float x;
     public final float y;
 
-    public PlayerRenderEvent(IGameInstance game, IAssetManager assetManager, IRenderer graphics, AbstractEntityPlayer player, float x, float y) {
+    public PlayerRenderEvent(IGameInstance game, IAssetManager assetManager, IRenderer graphics, AbstractPlayerEntity player, float x, float y) {
         this.game = game;
         this.assetManager = assetManager;
         this.graphics = graphics;
@@ -53,12 +53,12 @@ public class PlayerRenderEvent extends Event {
     }
 
     /**
-     * This event is fired before na {@link AbstractEntityPlayer} is rendered.
+     * This event is fired before na {@link AbstractPlayerEntity} is rendered.
      * Cancelling the event will cause the player not to be rendered.
      */
     public static final class Pre extends PlayerRenderEvent {
 
-        public Pre(IGameInstance game, IAssetManager assetManager, IRenderer graphics, AbstractEntityPlayer player, float x, float y) {
+        public Pre(IGameInstance game, IAssetManager assetManager, IRenderer graphics, AbstractPlayerEntity player, float x, float y) {
             super(game, assetManager, graphics, player, x, y);
         }
     }

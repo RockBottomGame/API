@@ -39,7 +39,7 @@ import de.ellpeck.rockbottom.api.data.settings.Keybind;
 import de.ellpeck.rockbottom.api.data.settings.Settings;
 import de.ellpeck.rockbottom.api.effect.IEffect;
 import de.ellpeck.rockbottom.api.entity.Entity;
-import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
+import de.ellpeck.rockbottom.api.entity.player.AbstractPlayerEntity;
 import de.ellpeck.rockbottom.api.entity.player.knowledge.Information;
 import de.ellpeck.rockbottom.api.entity.player.statistics.IStatistics;
 import de.ellpeck.rockbottom.api.entity.player.statistics.StatisticInitializer;
@@ -117,9 +117,10 @@ public final class Registries {
      * The registry for all {@link IPacket} types. To register into this
      * registry, you can use {@link IndexRegistry#getNextFreeId()} to determine
      * an id for the packet, or directly register it using {@link
-     * IndexRegistry#registerNextFree(Object)}.
+     * DoubleRegistry#registerNextFree(ResourceName, Object)} )}.
      */
-    public static final IndexRegistry<Class<? extends IPacket>> PACKET_REGISTRY = new IndexRegistry<>(ResourceName.intern("packet_registry"), Byte.MAX_VALUE, false).register();
+    //public static final IndexRegistry<Class<? extends IPacket>> PACKET_REGISTRY = new IndexRegistry<>(ResourceName.intern("packet_registry"), Byte.MAX_VALUE, false).register();
+    public static final DoubleRegistry<IPacket.IFactory> PACKET_REGISTRY = new DoubleRegistry<>(ResourceName.intern("packet_registry"), Byte.MAX_VALUE, false).register();
     /**
      * The registry for all {@link Command} objects. Use {@link
      * Command#register()} to register it.
@@ -285,7 +286,7 @@ public final class Registries {
      * certain things in the game. To registry something into this registry, use
      * {@link StatisticInitializer#register()}. To get a statistic and/or modify
      * its value, use {@link IStatistics} which you can obtain from any {@link
-     * AbstractEntityPlayer}.
+     * AbstractPlayerEntity}.
      */
     @ApiInternal
     public static final NameRegistry<StatisticInitializer> STATISTICS_REGISTRY = new NameRegistry<>(ResourceName.intern("statistics_registry"), false).register();

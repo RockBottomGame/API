@@ -25,11 +25,7 @@ import de.ellpeck.rockbottom.api.Registries;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.entity.Entity;
-import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer;
-import de.ellpeck.rockbottom.api.gui.GuiContainer;
-import de.ellpeck.rockbottom.api.gui.component.ComponentSlot;
-import de.ellpeck.rockbottom.api.gui.container.ContainerSlot;
-import de.ellpeck.rockbottom.api.gui.container.ItemContainer;
+import de.ellpeck.rockbottom.api.entity.player.AbstractPlayerEntity;
 import de.ellpeck.rockbottom.api.render.item.IItemRenderer;
 import de.ellpeck.rockbottom.api.tile.Tile;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
@@ -95,15 +91,15 @@ public class Item {
         desc.add(instance.getDisplayName());
     }
 
-    public boolean onInteractWith(IWorld world, int x, int y, TileLayer layer, double mouseX, double mouseY, AbstractEntityPlayer player, ItemInstance instance) {
+    public boolean onInteractWith(IWorld world, int x, int y, TileLayer layer, double mouseX, double mouseY, AbstractPlayerEntity player, ItemInstance instance) {
         return false;
     }
 
-    public boolean onInteractWithDestKey(IWorld world, int x, int y, TileLayer layer, double mouseX, double mouseY, AbstractEntityPlayer player, ItemInstance instance) {
+    public boolean onInteractWithDestKey(IWorld world, int x, int y, TileLayer layer, double mouseX, double mouseY, AbstractPlayerEntity player, ItemInstance instance) {
         return false;
     }
 
-    public int getInteractionPriority(IWorld world, int x, int y, TileLayer layer, double mouseX, double mouseY, AbstractEntityPlayer player, ItemInstance instance) {
+    public int getInteractionPriority(IWorld world, int x, int y, TileLayer layer, double mouseX, double mouseY, AbstractPlayerEntity player, ItemInstance instance) {
         return 100;
     }
 
@@ -140,7 +136,7 @@ public class Item {
         return 1F;
     }
 
-    public void onTileBroken(IWorld world, int x, int y, TileLayer layer, AbstractEntityPlayer player, Tile tile, ItemInstance instance) {
+    public void onTileBroken(IWorld world, int x, int y, TileLayer layer, AbstractPlayerEntity player, Tile tile, ItemInstance instance) {
 
     }
 
@@ -148,31 +144,31 @@ public class Item {
         return 0;
     }
 
-    public double getMaxInteractionDistance(IWorld world, int x, int y, TileLayer layer, double mouseX, double mouseY, AbstractEntityPlayer player, ItemInstance instance) {
+    public double getMaxInteractionDistance(IWorld world, int x, int y, TileLayer layer, double mouseX, double mouseY, AbstractPlayerEntity player, ItemInstance instance) {
         return player.getRange();
     }
 
-    public boolean canHoldButtonToAttack(IWorld world, double mouseX, double mouseY, AbstractEntityPlayer player, ItemInstance instance) {
+    public boolean canHoldButtonToAttack(IWorld world, double mouseX, double mouseY, AbstractPlayerEntity player, ItemInstance instance) {
         return false;
     }
 
-    public List<Entity> getCustomAttackableEntities(IWorld world, double mouseX, double mouseY, AbstractEntityPlayer player, ItemInstance instance) {
+    public List<Entity> getCustomAttackableEntities(IWorld world, double mouseX, double mouseY, AbstractPlayerEntity player, ItemInstance instance) {
         return null;
     }
 
-    public boolean onEntityAttack(IWorld world, double mouseX, double mouseY, AbstractEntityPlayer player, Entity entity, ItemInstance instance) {
+    public boolean onEntityAttack(IWorld world, double mouseX, double mouseY, AbstractPlayerEntity player, Entity entity, ItemInstance instance) {
         return true;
     }
 
-    public int getAttackDamage(IWorld world, Entity entity, double mouseX, double mouseY, AbstractEntityPlayer player, ItemInstance instance) {
+    public int getAttackDamage(IWorld world, Entity entity, double mouseX, double mouseY, AbstractPlayerEntity player, ItemInstance instance) {
         return 5;
     }
 
-    public int getAttackCooldown(IWorld world, double mouseX, double mouseY, AbstractEntityPlayer player, ItemInstance instance) {
+    public int getAttackCooldown(IWorld world, double mouseX, double mouseY, AbstractPlayerEntity player, ItemInstance instance) {
         return 40;
     }
 
-    public boolean attacksMultipleEntities(IWorld world, double mouseX, double mouseY, AbstractEntityPlayer player, ItemInstance instance) {
+    public boolean attacksMultipleEntities(IWorld world, double mouseX, double mouseY, AbstractPlayerEntity player, ItemInstance instance) {
         return false;
     }
 
@@ -180,7 +176,7 @@ public class Item {
         return false;
     }
 
-    public void takeDamage(ItemInstance instance, AbstractEntityPlayer player, int amount) {
+    public void takeDamage(ItemInstance instance, AbstractPlayerEntity player, int amount) {
         if (this.useMetaAsDurability()) {
             ItemInstance left = this.takeDamage(instance, amount);
             player.getInv().set(player.getSelectedSlot(), left);
