@@ -38,6 +38,7 @@ import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 import java.util.UUID;
 import java.util.function.Predicate;
 
@@ -618,6 +619,8 @@ public interface IChunkOrWorld extends IAdditionalDataProvider {
      * @return The expected biome for that position
      */
     Biome getExpectedBiome(int x, int y);
+
+    Set<BiomeLevel> getExpectedBiomeLevels(int x, int y);
 
     BiomeLevel getExpectedBiomeLevel(int x, int y);
 

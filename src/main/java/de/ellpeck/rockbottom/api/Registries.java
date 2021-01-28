@@ -119,8 +119,7 @@ public final class Registries {
      * an id for the packet, or directly register it using {@link
      * DoubleRegistry#registerNextFree(ResourceName, Object)} )}.
      */
-    //public static final IndexRegistry<Class<? extends IPacket>> PACKET_REGISTRY = new IndexRegistry<>(ResourceName.intern("packet_registry"), Byte.MAX_VALUE, false).register();
-    public static final DoubleRegistry<IPacket.IFactory> PACKET_REGISTRY = new DoubleRegistry<>(ResourceName.intern("packet_registry"), Byte.MAX_VALUE, false).register();
+    public static final DoubleRegistry<IPacket.IFactory> PACKET_REGISTRY = new DoubleRegistry<>(ResourceName.intern("packet_registry"), Short.MAX_VALUE, false).register();
     /**
      * The registry for all {@link Command} objects. Use {@link
      * Command#register()} to register it.

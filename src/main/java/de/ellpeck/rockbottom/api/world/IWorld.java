@@ -52,6 +52,11 @@ public interface IWorld extends IChunkOrWorld {
 
     boolean isChunkLoaded(int x, int y, boolean checkGenerating);
 
+    /**
+     * @return The y height which is the sea level of this world.
+     */
+    int getSeaLevel();
+
     int getWeatherHeight();
 
     /**

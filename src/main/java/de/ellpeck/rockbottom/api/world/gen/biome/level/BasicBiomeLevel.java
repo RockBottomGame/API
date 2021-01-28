@@ -30,14 +30,14 @@ public class BasicBiomeLevel extends BiomeLevel {
     private final int minY;
     private final int maxY;
     private final boolean sideBySide;
-    private final int priority;
+    private final int weight;
 
-    public BasicBiomeLevel(ResourceName name, int minY, int maxY, boolean sideBySide, int priority) {
+    public BasicBiomeLevel(ResourceName name, int minY, int maxY, boolean sideBySide, int weight) {
         this.name = name;
         this.minY = minY;
         this.maxY = maxY;
         this.sideBySide = sideBySide;
-        this.priority = priority;
+        this.weight = weight;
     }
 
     @Override
@@ -56,8 +56,8 @@ public class BasicBiomeLevel extends BiomeLevel {
     }
 
     @Override
-    public int getPriority() {
-        return this.priority;
+    public int getWeight(IWorld world) {
+        return this.weight;
     }
 
     @Override

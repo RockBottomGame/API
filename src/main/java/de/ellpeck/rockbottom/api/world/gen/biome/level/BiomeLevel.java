@@ -37,7 +37,7 @@ public abstract class BiomeLevel {
 
     public abstract boolean isForcedSideBySide();
 
-    public abstract int getPriority();
+    public abstract int getWeight(IWorld world);
 
     public abstract ResourceName getName();
 

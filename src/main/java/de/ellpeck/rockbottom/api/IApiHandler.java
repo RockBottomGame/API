@@ -55,6 +55,7 @@ import java.io.File;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.logging.Logger;
@@ -242,6 +243,10 @@ public interface IApiHandler {
     void generateBiomeGen(IWorld world, IChunk chunk, BiomeGen gen, Map<Biome, INoiseGen> biomeNoiseGens);
 
     Biome getBiome(IWorld world, int x, int y, int height, Map<BiomeLevel, Integer> totalWeights, ListMultimap<BiomeLevel, Biome> biomesPerLevel, Random biomeRandom, int blobSize, long[] layerSeeds, INoiseGen levelHeightNoise, int levelTransition, int biomeTransition);
+
+    Biome getBiome(IWorld world, int x, int y, int height, Map<BiomeLevel, Integer> totalWeights, ListMultimap<BiomeLevel, Biome> biomesPerLevel, Random random, int blobSize, long[] layerSeeds, INoiseGen levelHeightNoise, INoiseGen levelBlobNoise, int levelTransition, int biomeTransition);
+
+    Set<BiomeLevel> getSmoothedLevelsForPos(IWorld world, int x, int y, int height, int levelTransition, ListMultimap<BiomeLevel, Biome> biomesPerLevel, INoiseGen levelHeightNoise);
 
     BiomeLevel getSmoothedLevelForPos(IWorld world, int x, int y, int height, int levelTransition, ListMultimap<BiomeLevel, Biome> biomesPerLevel, INoiseGen levelHeightNoise);
 

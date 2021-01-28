@@ -31,10 +31,7 @@ import de.ellpeck.rockbottom.api.world.IWorld;
 import de.ellpeck.rockbottom.api.world.gen.biome.Biome;
 import de.ellpeck.rockbottom.api.world.gen.biome.level.BiomeLevel;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 
 public abstract class BiomeGen implements IWorldGenerator {
 
@@ -44,6 +41,7 @@ public abstract class BiomeGen implements IWorldGenerator {
     protected final Map<BiomeLevel, Integer> totalWeights = new HashMap<>();
     protected final Random biomeRandom = new Random();
     protected INoiseGen levelHeightNoise;
+    protected INoiseGen levelBlobNoise;
     protected long[] layerSeeds;
 
     public BiomeGen(ResourceName name) {
@@ -67,6 +65,7 @@ public abstract class BiomeGen implements IWorldGenerator {
     @Override
     public void initWorld(IWorld world) {
         this.levelHeightNoise = RockBottomAPI.getApiHandler().makeSimplexNoise(Util.scrambleSeed(this.getNoiseSeedScramble(world), world.getSeed()));
+        this.levelBlobNoise = RockBottomAPI.getApiHandler().makeSimplexNoise(Util.scrambleSeed(this.getLayerSeedScramble(world), world.getSeed()));
         this.layerSeeds = new long[this.getBiomeBlobSize(world)];
 
         RockBottomAPI.getApiHandler().initBiomeGen(world, this.getLayerSeedScramble(world), this.getBiomeBlobSize(world), this.layerSeeds, this.biomesPerLevel, this.totalWeights, this);
@@ -88,10 +87,15 @@ public abstract class BiomeGen implements IWorldGenerator {
     }
 
     public Biome getBiome(IWorld world, int x, int y, int height) {
-        return RockBottomAPI.getApiHandler().getBiome(world, x, y, height, this.totalWeights, this.biomesPerLevel, this.biomeRandom, this.getBiomeBlobSize(world), this.layerSeeds, this.levelHeightNoise, this.getLevelTransition(world), this.getBiomeTransition(world));
+        return RockBottomAPI.getApiHandler().getBiome(world, x, y, height, this.totalWeights, this.biomesPerLevel, this.biomeRandom, this.getBiomeBlobSize(world), this.layerSeeds, this.levelHeightNoise, this.levelBlobNoise, this.getLevelTransition(world), this.getBiomeTransition(world));
+        //return RockBottomAPI.getApiHandler().getBiome(world, x, y, height, this.totalWeights, this.biomesPerLevel, this.biomeRandom, this.getBiomeBlobSize(world), this.layerSeeds, this.levelHeightNoise, this.getLevelTransition(world), this.getBiomeTransition(world));
     }
 
     public BiomeLevel getBiomeLevel(IWorld world, int x, int y, int height) {
         return RockBottomAPI.getApiHandler().getSmoothedLevelForPos(world, x, y, height, this.getLevelTransition(world), this.biomesPerLevel, this.levelHeightNoise);
+    }
+
+    public Set<BiomeLevel> getBiomeLevels(IWorld world, int x, int y, int height) {
+        return RockBottomAPI.getApiHandler().getSmoothedLevelsForPos(world, x, y, height, this.getLevelTransition(world), this.biomesPerLevel, this.levelHeightNoise);
     }
 }

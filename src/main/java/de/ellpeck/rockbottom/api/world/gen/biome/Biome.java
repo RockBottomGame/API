@@ -79,36 +79,36 @@ public abstract class Biome {
 
     /**
      * Renders the background of the biome. Called during the sky rendering of the world.
-     * Returning false will cause the default sky rendering to not happen.
+     * Returning true will cause the default sky rendering to not happen.
      * @param game The game instance.
      * @param manager The asset manager.
-     * @param g The renderer.
+     * @param renderer The renderer.
      * @param world The world.
      * @param player The client player.
      * @param width The width of the screen in the world {@link IRenderer#getWidthInWorld()}.
      * @param height The height of the screen in the world {@link IRenderer#getHeightInWorld()}.
-     * @return false if you want the default sky rendering to not happen, true otherwise.
+     * @return true if you want the default sky rendering to not happen, true otherwise.
      */
-    public boolean renderBackground(IGameInstance game, IAssetManager manager, IRenderer g, IWorld world, AbstractPlayerEntity player, double width, double height) {
-        return true;
+    public boolean renderSky(IGameInstance game, IAssetManager manager, IRenderer renderer, IWorld world, AbstractPlayerEntity player, double width, double height) {
+        return false;
     }
 
     /**
      * Renders the foreground of the biome. This renders in front of all entities and tiles.
      * @param game The game instance.
      * @param manager The asset manager.
-     * @param g The renderer.
+     * @param renderer The renderer.
      * @param world The world.
      * @param player The client player.
      * @param scale The world scale {@link IRenderer#getWorldScale()}.
      */
-    public void renderForeground(IGameInstance game, IAssetManager manager, IRenderer g, IWorld world, AbstractPlayerEntity player, float scale) {
+    public void renderForeground(IGameInstance game, IAssetManager manager, IRenderer renderer, IWorld world, AbstractPlayerEntity player, float scale) {
 
     }
 
     /**
      * The sky color to render the background with.
-     * This is done before {@link Biome#renderBackground}.
+     * This is done before {@link Biome#renderSky}.
      * @param defaultColor The color which would be rendered by default.
      * @return The new sky color to be renderer.
      */

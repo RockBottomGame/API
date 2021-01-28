@@ -159,12 +159,14 @@ public final class GameContent {
     public static final Biome BIOME_DESERT = getBiome("desert");
     public static final Biome BIOME_UNDERGROUND = getBiome("underground");
     public static final Biome BIOME_COLD_GRASSLAND = getBiome("cold_grassland");
+    public static final Biome SEA_BIOME = getBiome("sea");
 
     /*
         ---BIOME LEVELS---
      */
     public static final BiomeLevel BIOME_LEVEL_SKY = getBiomeLevel("sky");
     public static final BiomeLevel BIOME_LEVEL_SURFACE = getBiomeLevel("surface");
+    public static final BiomeLevel BIOME_LEVEL_SEA = getBiomeLevel("sea");
     public static final BiomeLevel BIOME_LEVEL_UNDERGROUND = getBiomeLevel("underground");
 
     /*
