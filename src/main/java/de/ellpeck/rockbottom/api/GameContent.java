@@ -175,6 +175,12 @@ public final class GameContent {
     public static final IEffect EFFECT_RANGE = getEffect("range");
     public static final IEffect EFFECT_PICKUP_RANGE = getEffect("pickup_range");
 
+    /*
+        ---EMOTIONS---
+    */
+
+    public static final ResourceName HAPPY_EMOTION = getEmotion("happy");
+
     @ApiInternal
     private static Biome getBiome(String name) {
         return get(name, Registries.BIOME_REGISTRY);
@@ -198,6 +204,11 @@ public final class GameContent {
     @ApiInternal
     private static BiomeLevel getBiomeLevel(String name) {
         return get(name, Registries.BIOME_LEVEL_REGISTRY);
+    }
+
+    @ApiInternal
+    private static ResourceName getEmotion(String name) {
+        return ResourceName.intern("emotions.").addSuffix(name);
     }
 
     @ApiInternal

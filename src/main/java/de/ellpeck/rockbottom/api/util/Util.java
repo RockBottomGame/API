@@ -146,6 +146,22 @@ public final class Util {
      * @param min The minimum
      * @param max The maximum
      * @return The clamped number
+     * @see #clamp(int, int, int)
+     */
+    public static float clampf(float num, float min, float max) {
+        return Math.max(min, Math.min(max, num));
+    }
+
+    /**
+     * Clamps a value between a minimum and a maximum value. If the given value
+     * is higher than the maximum, the maximum will be returned. If it is lower
+     * than the minimum, the minimum will be returned. Else, the actual value
+     * will be returned.
+     *
+     * @param num The number to clamp
+     * @param min The minimum
+     * @param max The maximum
+     * @return The clamped number
      * @see #clamp(double, double, double)
      */
     public static int clamp(int num, int min, int max) {
