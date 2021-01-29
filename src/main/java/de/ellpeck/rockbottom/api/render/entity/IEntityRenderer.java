@@ -30,9 +30,9 @@ import de.ellpeck.rockbottom.api.world.IWorld;
 
 public interface IEntityRenderer<T extends Entity> {
 
-    void render(IGameInstance game, IAssetManager manager, IRenderer g, IWorld world, T entity, float x, float y, int light);
+    void render(IGameInstance game, IAssetManager manager, IRenderer renderer, IWorld world, T entity, float x, float y, int light);
 
-    default ResourceName getRenderShader(IGameInstance game, IAssetManager manager, IRenderer g, IWorld world, T entity) {
+    default ResourceName getRenderShader(IGameInstance game, IAssetManager manager, IRenderer renderer, IWorld world, T entity) {
         return null;
     }
 }

@@ -24,7 +24,10 @@ package de.ellpeck.rockbottom.api.entity;
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.data.set.DataSet;
+import de.ellpeck.rockbottom.api.entity.emotion.Emotion;
+import de.ellpeck.rockbottom.api.entity.emotion.EmotionHandler;
 import de.ellpeck.rockbottom.api.entity.player.AbstractPlayerEntity;
+import de.ellpeck.rockbottom.api.entity.player.CameraMode;
 import de.ellpeck.rockbottom.api.event.EventResult;
 import de.ellpeck.rockbottom.api.event.impl.EntityDamageEvent;
 import de.ellpeck.rockbottom.api.event.impl.RegenEvent;
@@ -42,12 +45,14 @@ public abstract class LivingEntity extends Entity {
     protected int maxBreath = 10;
     protected int breath;
     protected int damageCooldown;
+    protected EmotionHandler emotionHandler;
 
     public LivingEntity(IWorld world) {
         super(world);
         this.maxHealth = this.getInitialMaxHealth();
         this.health = this.getMaxHealth();
         this.breath = this.maxBreath;
+        this.emotionHandler = new EmotionHandler();
     }
 
     @Override
@@ -72,6 +77,8 @@ public abstract class LivingEntity extends Entity {
         if (this.jumpTimeout > 0) {
             this.jumpTimeout--;
         }
+
+        this.emotionHandler.update();
 
         if (!this.world.isClient()) {
             if (this.health <= 0) {
@@ -239,5 +246,13 @@ public abstract class LivingEntity extends Entity {
             }
         }
         return true;
+    }
+
+    public EmotionHandler getEmotionHandler() {
+        return this.emotionHandler;
+    }
+
+    public Emotion getEmotion() {
+        return this.emotionHandler.getEmotion();
     }
 }

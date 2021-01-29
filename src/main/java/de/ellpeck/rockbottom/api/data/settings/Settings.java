@@ -53,6 +53,9 @@ public final class Settings implements IJsonSettings {
     public static final Keybind KEY_ADVANCED_INFO = new Keybind(ResourceName.intern("advanced_info"), GLFW.GLFW_KEY_LEFT_SHIFT).register();
     public static final Keybind KEY_SCREENSHOT = new Keybind(ResourceName.intern("screenshot"), GLFW.GLFW_KEY_F10).register();
     public static final Keybind KEY_PLAYER_LIST = new Keybind(ResourceName.intern("players"), GLFW.GLFW_KEY_TAB).register();
+    public static final Keybind KEY_TOGGLE_CAMERA_MODE = new Keybind(ResourceName.intern("camera_mode"), GLFW.GLFW_KEY_K).register();
+    public static final Keybind KEY_ZOOM_OUT = new Keybind(ResourceName.intern("camera_coom_out"), GLFW.GLFW_KEY_MINUS).register();
+    public static final Keybind KEY_ZOOM_IN = new Keybind(ResourceName.intern("camera_coom_in"), GLFW.GLFW_KEY_EQUAL).register();
     public static final Keybind[] KEYS_ITEM_SELECTION = new Keybind[8];
     public static final int DEFAULT_GUI_COLOR = 0xFF30704E;
 

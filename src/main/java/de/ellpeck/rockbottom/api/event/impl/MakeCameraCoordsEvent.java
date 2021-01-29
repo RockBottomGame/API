@@ -36,10 +36,12 @@ public final class MakeCameraCoordsEvent extends Event {
     public final AbstractPlayerEntity player;
     public double cameraX;
     public double cameraY;
+    public final boolean isCameraMode;
 
-    public MakeCameraCoordsEvent(AbstractPlayerEntity player, double cameraX, double cameraY) {
+    public MakeCameraCoordsEvent(AbstractPlayerEntity player, double cameraX, double cameraY, boolean isCameraMode) {
         this.player = player;
         this.cameraX = cameraX;
         this.cameraY = cameraY;
+        this.isCameraMode = isCameraMode;
     }
 }
