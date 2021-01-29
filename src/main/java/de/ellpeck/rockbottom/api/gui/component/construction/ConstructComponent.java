@@ -45,6 +45,7 @@ public class ConstructComponent extends GuiComponent {
     // TODO 0.4 Rename 'consumer' to something more resembling 'onClick' or 'onConstruct'
     private final Supplier<Boolean> consumer;
 
+    // TODO Provide which tools are missing to display to the user
     public ConstructComponent(Gui gui, ICompendiumRecipe recipe, boolean hasTool, boolean hasIngredients, Supplier<Boolean> consumer) {
         super(gui, 94, 17, 30, 30);
         this.recipe = recipe;

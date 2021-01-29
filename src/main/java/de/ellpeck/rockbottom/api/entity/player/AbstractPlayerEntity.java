@@ -128,4 +128,6 @@ public abstract class AbstractPlayerEntity extends LivingEntity implements IComm
 
     public abstract void setGameMode(GameMode gamemode);
 
+    public abstract CameraMode getCameraMode();
+
 }
