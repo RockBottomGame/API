@@ -130,4 +130,8 @@ public abstract class AbstractPlayerEntity extends LivingEntity implements IComm
 
     public abstract CameraMode getCameraMode();
 
+    public abstract boolean isNoClip();
+
+    public abstract void setNoClip(boolean noClip);
+
 }
