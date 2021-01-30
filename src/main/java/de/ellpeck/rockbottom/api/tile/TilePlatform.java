@@ -45,7 +45,7 @@ public class TilePlatform extends BasicTile {
         ItemInstance held = player.getInv().get(player.getSelectedSlot());
         TileState state = world.getState(x, y);
 
-        if (!world.isClient() && held.getItem() == GameContent.TILE_LADDER.getItem() && !state.get(StaticTileProps.HAS_LADDER)) {
+        if (!world.isClient() && held != null && held.getItem() == GameContent.TILE_LADDER.getItem() && !state.get(StaticTileProps.HAS_LADDER)) {
             world.setState(x, y, world.getState(x, y).cycleProp(StaticTileProps.HAS_LADDER));
             held.removeAmount(1);
             return true;
