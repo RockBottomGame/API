@@ -37,27 +37,27 @@ public final class StaticTileProps {
 
     /**
      * Determines if a tile is naturally generated or placed manually. Used by
-     * {@link GameContent#TILE_LEAVES}
+     * {@link GameContent.Tiles#LEAVES}
      */
     public static final BoolProp NATURAL = new BoolProp("natural", true);
     /**
      * Determines which direction a torch is facing. Used by {@link
-     * GameContent#TILE_TORCH} and {@link GameContent#TILE_GRASS_TORCH}
+     * GameContent.Tiles#TORCH} and {@link GameContent.Tiles#GRASS_TORCH}
      */
     public static final IntProp TORCH_FACING = new IntProp("facing", 0, 4);
     /**
      * Determines how long it will take for a torch to turn off. Used by {@link
-     * GameContent#TILE_GRASS_TORCH}
+     * GameContent.Tiles#GRASS_TORCH}
      */
     public static final IntProp TORCH_TIMER = new IntProp("timer", 0, 10);
     /**
      * Determines which type of variation a log tile is. Used by {@link
-     * GameContent#TILE_LOG}
+     * GameContent.Tiles#LOG}
      */
     public static final EnumProp<LogType> LOG_VARIANT = new EnumProp<>("variant", LogType.PLACED, LogType.class);
     /**
      * Determines how far grown a sapling is. Used by {@link
-     * GameContent#TILE_SAPLING}
+     * GameContent.Tiles#SAPLING}
      */
     public static final IntProp SAPLING_GROWTH = new IntProp("growth", 0, 5);
     /**
@@ -66,7 +66,7 @@ public final class StaticTileProps {
     public static final IntProp PLANT_GROWTH = new IntProp("growth", 0, 10);
     /**
      * Determines if a plant is considered alive.
-     * Used by {@link GameContent#TILE_COTTON}
+     * Used by {@link GameContent.Tiles#COTTON}
      */
     public static final BoolProp ALIVE = new BoolProp("alive", false);
     /**
@@ -75,33 +75,33 @@ public final class StaticTileProps {
     public static final IntProp SPINNING_STAGE = new IntProp("spinning_stage", 0, 8);
     /**
      * Determines if a tile is the top or bottom half of a door. Used by {@link
-     * GameContent#TILE_WOOD_DOOR}, {@link GameContent#TILE_WOOD_DOOR_OLD} and
-     * {@link GameContent#TILE_CORN}
+     * GameContent.Tiles#WOOD_DOOR}, {@link GameContent.Tiles#OLD_WOOD_DOOR} and
+     * {@link GameContent.Tiles#CORN}
      */
     public static final BoolProp TOP_HALF = new BoolProp("top_half", false);
     /**
-     * Determines if a tile is opened. Used by {@link GameContent#TILE_WOOD_DOOR}
-     * and {@link GameContent#TILE_WOOD_DOOR_OLD}
+     * Determines if a tile is opened. Used by {@link GameContent.Tiles#WOOD_DOOR}
+     * and {@link GameContent.Tiles#OLD_WOOD_DOOR}
      */
     public static final BoolProp OPEN = new BoolProp("open", false);
     /**
      * Determines if a tile is facing right (rather than left). Used by {@link
-     * GameContent#TILE_WOOD_DOOR} and {@link GameContent#TILE_WOOD_DOOR_OLD}
+     * GameContent.Tiles#WOOD_DOOR} and {@link GameContent.Tiles#OLD_WOOD_DOOR}
      */
     public static final BoolProp FACING_RIGHT = new BoolProp("facing_right", false);
     /**
      * Determines if a tile has a copper canister inside of it. Used by {@link
-     * GameContent#TILE_COPPER}
+     * GameContent.Tiles#COPPER}
      */
     public static final BoolProp HAS_CANISTER = new BoolProp("has_canister", false);
     /**
      * Determines how far grown a sapling is. Used by {@link
-     * GameContent#TILE_STARDROP}
+     * GameContent.Tiles#STARDROP}
      */
     public static final IntProp STARDROP_GROWTH = new IntProp("growth", 0, 3);
     /**
      * Determines if a tile has ladder inside of it. Used by {@link
-     * GameContent#TILE_PLATFORM}
+     * GameContent.Tiles#PLATFORM}
      */
     public static final BoolProp HAS_LADDER = new BoolProp("has_ladder", false);
     /**

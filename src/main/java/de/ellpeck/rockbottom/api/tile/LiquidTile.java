@@ -76,7 +76,7 @@ public abstract class LiquidTile extends BasicTile {
             if (changedLayer == TileLayer.MAIN && changedX == x && changedY == y) {
                 TileState state = world.getState(x, y);
                 if (state.getTile().isFullTile()) {
-                    world.setState(layer, x, y, GameContent.TILE_AIR.getDefState());
+                    world.setState(layer, x, y, GameContent.Tiles.AIR.getDefState());
                 }
             }
 

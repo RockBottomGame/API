@@ -95,7 +95,7 @@ public abstract class LiquidContainerItem extends BasicItem {
                             player.getInv().notifyChange(player.getSelectedSlot());
 
                             if (toStore >= tileAmount) {
-                                world.setState(TileLayer.LIQUIDS, x, y, GameContent.TILE_AIR.getDefState());
+                                world.setState(TileLayer.LIQUIDS, x, y, GameContent.Tiles.AIR.getDefState());
                             } else {
                                 world.setState(TileLayer.LIQUIDS, x, y, state.prop(amountProp, tileAmount - 1 - toStore));
                             }

@@ -30,7 +30,7 @@ public class CameraMode {
         this.motionY = 0;
         this.oldWorldScale = RockBottomAPI.getGame().getSettings().renderScale;
         this.zoomedWorldScale = oldWorldScale;
-        this.player.getEmotionHandler().setEmotion(new Emotion(Emotion.EmotionType.THOUGHT, GameContent.HAPPY_EMOTION), 0);
+        this.player.getEmotionHandler().setEmotion(new Emotion(Emotion.EmotionType.THOUGHT, GameContent.Emotions.HAPPY), 0);
         return true;
     }
 

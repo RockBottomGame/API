@@ -16,9 +16,9 @@ import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 
 import java.util.List;
 
-public class TilePlatform extends BasicTile {
+public class PlatformTile extends BasicTile {
 
-    public TilePlatform() {
+    public PlatformTile() {
         super(ResourceName.intern("platform"));
         this.addProps(StaticTileProps.HAS_LADDER);
     }
@@ -36,7 +36,7 @@ public class TilePlatform extends BasicTile {
     @Override
     public boolean onInteractWith(IWorld world, int x, int y, TileLayer layer, double mouseX, double mouseY, AbstractPlayerEntity player) {
         // Ladders can be placed on platforms
-        if (!GameContent.TILE_LADDER.canPlace(world, x, y, layer, player))
+        if (!GameContent.Tiles.LADDER.canPlace(world, x, y, layer, player))
             return false;
 
         if (layer != TileLayer.MAIN)
@@ -45,7 +45,7 @@ public class TilePlatform extends BasicTile {
         ItemInstance held = player.getInv().get(player.getSelectedSlot());
         TileState state = world.getState(x, y);
 
-        if (!world.isClient() && held != null && held.getItem() == GameContent.TILE_LADDER.getItem() && !state.get(StaticTileProps.HAS_LADDER)) {
+        if (!world.isClient() && held != null && held.getItem() == GameContent.Tiles.LADDER.getItem() && !state.get(StaticTileProps.HAS_LADDER)) {
             world.setState(x, y, world.getState(x, y).cycleProp(StaticTileProps.HAS_LADDER));
             held.removeAmount(1);
             return true;
@@ -57,7 +57,7 @@ public class TilePlatform extends BasicTile {
     public List<ItemInstance> getDrops(IWorld world, int x, int y, TileLayer layer, Entity destroyer) {
         List<ItemInstance> drops = super.getDrops(world, x, y, layer, destroyer);
         if (world.getState(x, y).get(StaticTileProps.HAS_LADDER))
-            drops.addAll(GameContent.TILE_LADDER.getDrops(world, x, y, layer, destroyer));
+            drops.addAll(GameContent.Tiles.LADDER.getDrops(world, x, y, layer, destroyer));
 
         return drops;
     }
@@ -78,11 +78,11 @@ public class TilePlatform extends BasicTile {
             return true;
 
         TileState left = world.getState(x - 1, y);
-        if (left.getTile().isFullTile() || left.getTile() instanceof TilePlatform)
+        if (left.getTile().isFullTile() || left.getTile() instanceof PlatformTile)
             return true;
 
         TileState right = world.getState(x + 1, y);
-        if (right.getTile().isFullTile() || right.getTile() instanceof TilePlatform)
+        if (right.getTile().isFullTile() || right.getTile() instanceof PlatformTile)
             return true;
 
         return false;
@@ -96,7 +96,7 @@ public class TilePlatform extends BasicTile {
     @Override
     public boolean canStay(IWorld world, int x, int y, TileLayer layer, int changedX, int changedY, TileLayer changedLayer) {
         if (world.getState(x, y).get(StaticTileProps.HAS_LADDER))
-            return GameContent.TILE_LADDER.canStay(world, x, y, layer, changedX, changedY, changedLayer);
+            return GameContent.Tiles.LADDER.canStay(world, x, y, layer, changedX, changedY, changedLayer);
 
         // If tile placed in background
         if (!world.getState(TileLayer.BACKGROUND, x, y).getTile().isAir())
@@ -128,7 +128,7 @@ public class TilePlatform extends BasicTile {
             TileState checkBackState = world.getState(TileLayer.BACKGROUND, checkX, y);
             if (checkState.getTile().isFullTile() || checkBackState.getTile().isFullTile())
                 return true;
-            else if (!(checkState.getTile() instanceof TilePlatform))
+            else if (!(checkState.getTile() instanceof PlatformTile))
                 return false;
             checkX += dir.x;
         }

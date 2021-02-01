@@ -87,7 +87,7 @@ public class ConstructionRecipe extends PlayerCompendiumRecipe {
     }
 
     public boolean canUseTools(IToolStation machine) {
-        if (usesTools()) {
+        if (this.usesTools()) {
         	if (machine == null) return false;
             for (ConstructionTool tool : tools) {
                 if (!machine.damageTool(tool, true)) {

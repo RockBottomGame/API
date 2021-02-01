@@ -7,24 +7,25 @@ import de.ellpeck.rockbottom.api.StaticTileProps;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.assets.texture.ITexture;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
+import de.ellpeck.rockbottom.api.tile.PlatformTile;
 import de.ellpeck.rockbottom.api.tile.Tile;
-import de.ellpeck.rockbottom.api.tile.TilePlatform;
 import de.ellpeck.rockbottom.api.tile.state.TileState;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 import de.ellpeck.rockbottom.api.world.IWorld;
 import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 
-public class TilePlatformRenderer extends DefaultTileRenderer<TilePlatform> {
+@SuppressWarnings("unchecked")
+public class TilePlatformRenderer extends DefaultTileRenderer<PlatformTile> {
 
     public TilePlatformRenderer(ResourceName texture) {
         super(texture);
     }
 
     @Override
-    public void render(IGameInstance game, IAssetManager manager, IRenderer g, IWorld world, TilePlatform tile, TileState state, int x, int y, TileLayer layer, float renderX, float renderY, float scale, int[] light) {
+    public void render(IGameInstance game, IAssetManager manager, IRenderer g, IWorld world, PlatformTile tile, TileState state, int x, int y, TileLayer layer, float renderX, float renderY, float scale, int[] light) {
 
         if (state.get(StaticTileProps.HAS_LADDER)) {
-            GameContent.TILE_LADDER.getRenderer().render(game, manager, g, world, GameContent.TILE_LADDER, GameContent.TILE_LADDER.getDefState(), x, y, layer, renderX, renderY, scale, light);
+            GameContent.Tiles.LADDER.getRenderer().render(game, manager, g, world, GameContent.Tiles.LADDER, GameContent.Tiles.LADDER.getDefState(), x, y, layer, renderX, renderY, scale, light);
         }
         ITexture texture = manager.getTexture(this.texture).getPositionalVariation(x, y);
 
@@ -33,8 +34,8 @@ public class TilePlatformRenderer extends DefaultTileRenderer<TilePlatform> {
 
         boolean leftFullTile = left.isFullTile();
         boolean rightFullTile = right.isFullTile();
-        boolean leftPlatform = left instanceof TilePlatform;
-        boolean rightPlatform = right instanceof TilePlatform;
+        boolean leftPlatform = left instanceof PlatformTile;
+        boolean rightPlatform = right instanceof PlatformTile;
 
         // The row and column to draw from the texture and whether to flip it in X.
         int row = 0;
@@ -70,7 +71,7 @@ public class TilePlatformRenderer extends DefaultTileRenderer<TilePlatform> {
     }
 
     @Override
-    public void renderItem(IGameInstance game, IAssetManager manager, IRenderer g, TilePlatform tile, ItemInstance instance, float x, float y, float scale, int filter) {
+    public void renderItem(IGameInstance game, IAssetManager manager, IRenderer g, PlatformTile tile, ItemInstance instance, float x, float y, float scale, int filter) {
         manager.getTexture(this.texture).draw(x, y + scale/2, x + scale, y + scale + scale/2, 24, 0, 36, 12, filter);
     }
 }

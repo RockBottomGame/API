@@ -103,7 +103,7 @@ public final class Settings implements IJsonSettings {
 
         this.textSpeed = this.get(object, "text_speed", 0.5F);
         this.guiScale = this.get(object, "scale_gui", 1F);
-        this.renderScale = this.get(object, "scale_world", 1F);
+        this.renderScale = this.get(object, "scale_world", 0.75F);
         this.guiColor = this.get(object, "gui_colors", DEFAULT_GUI_COLOR);
 
         this.hardwareCursor = this.get(object, "hardware_cursor", false);

@@ -121,7 +121,7 @@ public abstract class Biome {
     }
 
     public TileState getFillerTile(IWorld world, IChunk chunk, int x, int y) {
-        return GameContent.TILE_SOIL.getDefState();
+        return GameContent.Tiles.SOIL.getDefState();
     }
 
     public Biome getVariationToGenerate(IWorld world, int x, int y, int surfaceHeight, Random random) {

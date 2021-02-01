@@ -36,7 +36,7 @@ public class SmithingRecipe extends PlayerCompendiumRecipe {
 		this.outputs = outputs;
 		this.usage = usage;
 
-		this.tool = new ConstructionTool(GameContent.ITEM_HAMMER, usage);
+		this.tool = new ConstructionTool(GameContent.Items.HAMMER, usage);
 	}
 
 	private boolean hasTools(TileEntity machine) {

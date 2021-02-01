@@ -262,7 +262,7 @@ public class Tile {
         prop += 1 << corner;
         if (!world.isClient()) {
             if (prop == 0b1111) {
-                world.setState(x, y, GameContent.TILE_AIR.getDefState());
+                world.setState(x, y, GameContent.Tiles.AIR.getDefState());
             } else {
                 world.setState(x, y, state.prop(StaticTileProps.CHISEL_STATE, prop));
             }

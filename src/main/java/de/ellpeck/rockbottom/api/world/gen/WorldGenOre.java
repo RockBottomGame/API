@@ -110,6 +110,6 @@ public abstract class WorldGenOre implements IWorldGenerator {
     }
 
     protected Set<TileState> getAllwedTiles() {
-        return Collections.singleton(GameContent.TILE_STONE.getDefState());
+        return Collections.singleton(GameContent.Tiles.STONE.getDefState());
     }
 }

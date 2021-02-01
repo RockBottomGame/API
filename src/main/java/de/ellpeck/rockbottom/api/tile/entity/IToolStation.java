@@ -16,12 +16,15 @@ public interface IToolStation {
 	 */
 	default boolean damageTool(ConstructionTool tool, boolean simulate) {
 		if (tool == null || tool.tool == null) return true;
-		int toolSlot = getToolSlot(tool.tool);
+		int toolSlot = this.getToolSlot(tool.tool);
 		ItemInstance toolItem;
-		if (toolSlot != -1 && (toolItem = getTileInventory().get(toolSlot)) != null) {
+		if (toolSlot != -1 && (toolItem = this.getTileInventory().get(toolSlot)) != null) {
 			if (!simulate && !RockBottomAPI.getNet().isClient()) {
-				toolItem.getItem().takeDamage(toolItem, tool.usage);
-				getTileInventory().notifyChange(toolSlot);
+				ItemInstance damagedTool = toolItem.getItem().takeDamage(toolItem, tool.usage);
+				if (damagedTool == null || damagedTool.equals(toolItem)) {
+                    this.getTileInventory().set(toolSlot, damagedTool);
+                }
+                this.getTileInventory().notifyChange(toolSlot);
 			}
 			return true;
 		}
