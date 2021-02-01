@@ -22,6 +22,7 @@
 package de.ellpeck.rockbottom.api.construction.compendium;
 
 import de.ellpeck.rockbottom.api.Registries;
+import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.construction.resource.IUseInfo;
 import de.ellpeck.rockbottom.api.content.IContent;
 import de.ellpeck.rockbottom.api.entity.player.AbstractPlayerEntity;
@@ -37,7 +38,6 @@ import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 import java.util.ArrayList;
 import java.util.List;
 
-// TODO 0.4 Rename to IRecipe (There is no distinction between a Compendium and normal Recipe)
 public interface ICompendiumRecipe extends IContent {
 
     ResourceName getName();
@@ -55,12 +55,7 @@ public interface ICompendiumRecipe extends IContent {
     }
 
     default boolean canConstruct(IInventory inputInventory, IInventory outputInventory) {
-        for (IUseInfo info : this.getActualInputs(inputInventory)) {
-            if (!inputInventory.containsResource(info)) {
-                return false;
-            }
-        }
-        return true;
+        return RockBottomAPI.getApiHandler().hasItems(inputInventory, this.getActualInputs(inputInventory), 1, null, null);
     }
 
     static ICompendiumRecipe forName(ResourceName name) {

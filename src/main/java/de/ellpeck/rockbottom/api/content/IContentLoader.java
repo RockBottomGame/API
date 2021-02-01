@@ -28,7 +28,7 @@ import com.google.gson.JsonObject;
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.Registries;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
-import de.ellpeck.rockbottom.api.construction.compendium.ICriteria;
+import de.ellpeck.rockbottom.api.construction.compendium.ICriterion;
 import de.ellpeck.rockbottom.api.construction.compendium.PlayerCompendiumRecipe;
 import de.ellpeck.rockbottom.api.construction.resource.IUseInfo;
 import de.ellpeck.rockbottom.api.construction.resource.ItemUseInfo;
@@ -112,14 +112,14 @@ public interface IContentLoader<T extends IContent> {
         if (recipe.isKnowledge()) {
             for (JsonElement ce : ca) {
                 JsonObject criteria = ce.getAsJsonObject();
-                String cname = criteria.get("name").getAsString();
-                ICriteria icriteria = Registries.CRITERIA_REGISTRY.get(new ResourceName(cname));
+                String name = criteria.get("name").getAsString();
+                ICriterion icriteria = Registries.CRITERIA_REGISTRY.get(new ResourceName(name));
                 if (icriteria == null) {
-                    throw new IllegalArgumentException("Invalid criteria " + cname + " for recipe " + recipe.getName());
+                    throw new IllegalArgumentException("Invalid criteria " + name + " for recipe " + recipe.getName());
                 }
                 JsonObject params = criteria.getAsJsonObject("params");
                 if (!icriteria.deserialize(recipe, params)) {
-                    RockBottomAPI.logger().warning("Failed to deserialize criteria " + cname + " for recipe " + recipe.getName());
+                    RockBottomAPI.logger().warning("Failed to deserialize criteria " + name + " for recipe " + recipe.getName());
                 }
             }
         } else {

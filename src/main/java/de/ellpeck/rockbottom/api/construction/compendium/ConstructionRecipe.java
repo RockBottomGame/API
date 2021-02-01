@@ -79,17 +79,18 @@ public class ConstructionRecipe extends PlayerCompendiumRecipe {
     }
 
     public List<ConstructionTool> getTools() {
-        return tools;
+        return this.tools;
     }
 
     public boolean usesTools() {
-        return tools != null && tools.size() > 0;
+        return this.tools != null && this.tools.size() > 0;
     }
 
     public boolean canUseTools(IToolStation machine) {
         if (this.usesTools()) {
-        	if (machine == null) return false;
-            for (ConstructionTool tool : tools) {
+            if (machine == null)
+                return false;
+            for (ConstructionTool tool : this.tools) {
                 if (!machine.damageTool(tool, true)) {
                     return false;
                 }
@@ -100,20 +101,20 @@ public class ConstructionRecipe extends PlayerCompendiumRecipe {
 
     @Override
     public ConstructComponent getConstructButton(Gui gui, AbstractPlayerEntity player, TileEntity machine, boolean canConstruct) {
-        return new ConstructComponent(gui, this, canUseTools((IToolStation)machine), canConstruct, usesTools() && machine == null ? null : () -> {
+        return new ConstructComponent(gui, this, this.canUseTools((IToolStation) machine), canConstruct, this.usesTools() && machine == null ? null : () -> {
             RockBottomAPI.getApiHandler().defaultConstruct(player, this, machine);
             return true;
         });
     }
 
     @Override
-    public boolean handleRecipe(AbstractPlayerEntity player, Inventory inputInventory, Inventory outputInventory, TileEntity machine, List<IUseInfo> recipeInputs, List<ItemInstance> actualInputs, Function<List<ItemInstance>, List<ItemInstance>> outputGetter, float skillReward) {
-        if (usesTools()) {
-            if (!canUseTools((IToolStation)machine)) {
+    public boolean handleRecipe(AbstractPlayerEntity player, Inventory inputInventory, Inventory outputInventory, TileEntity machine, List<IUseInfo> recipeInputs, List<ItemInstance> ingredients, Function<List<ItemInstance>, List<ItemInstance>> outputGetter, float skillReward) {
+        if (this.usesTools()) {
+            if (!(machine instanceof IToolStation) || !this.canUseTools((IToolStation) machine)) {
                 return false;
             }
             for (ConstructionTool tool : tools) {
-				((IToolStation)machine).damageTool(tool, false);
+                ((IToolStation) machine).damageTool(tool, false);
             }
         }
         return true;
@@ -124,16 +125,16 @@ public class ConstructionRecipe extends PlayerCompendiumRecipe {
     }
 
     public ConstructionRecipe registerManual() {
-        if (tools != null && tools.size() > 0) {
-            RockBottomAPI.logger().warning("Registered manual recipe " + getName() + " with " + getTools().size() + "tools! This should be marked as a construction table recipe.");
+        if (this.tools != null && this.tools.size() > 0) {
+            RockBottomAPI.logger().warning("Registered manual recipe " + this.getName() + " with " + this.getTools().size() + "tools! This should be marked as a construction table recipe.");
         }
         Registries.MANUAL_CONSTRUCTION_RECIPES.register(this.getName(), this);
         return this;
     }
 
     public ConstructionRecipe registerConstructionTable() {
-        if (tools == null || tools.isEmpty()) {
-            RockBottomAPI.logger().warning("Registered construction table recipe " + getName() + " with no tools! This should be marked as a manual recipe.");
+        if (this.tools == null || this.tools.isEmpty()) {
+            RockBottomAPI.logger().warning("Registered construction table recipe " + this.getName() + " with no tools! This should be marked as a manual recipe.");
         }
         Registries.CONSTRUCTION_TABLE_RECIPES.register(this.getName(), this);
         return this;
@@ -142,12 +143,12 @@ public class ConstructionRecipe extends PlayerCompendiumRecipe {
     @Override
     public String toString() {
         return "ConstructionRecipe{" +
-                "infoName=" + infoName +
-                ", isKnowledge=" + isKnowledge +
-                ", tools=" + tools +
-                ", inputs=" + inputs +
-                ", outputs=" + outputs +
-                ", skillReward=" + skillReward +
+                "infoName=" + this.infoName +
+                ", isKnowledge=" + this.isKnowledge +
+                ", tools=" + this.tools +
+                ", inputs=" + this.inputs +
+                ", outputs=" + this.outputs +
+                ", skillReward=" + this.skillReward +
                 '}';
     }
 }

@@ -71,7 +71,7 @@ public final class ResUseInfo implements IUseInfo {
 
     @Override
     public boolean containsItem(ItemInstance instance) {
-        List<String> names = RockBottomAPI.getResourceRegistry().getNames(new ResInfo(instance));
+        List<String> names = RockBottomAPI.getResourceRegistry().getNames(instance);
         return names.contains(this.name);
     }
 

@@ -186,9 +186,13 @@ public abstract class AbstractInventory implements IInventory {
 
     @Override
     public boolean containsResource(IUseInfo info) {
-        for (ItemInstance inst : info.getItems()) {
-            if (this.containsItem(inst)) {
-                return true;
+        int neededAmount = info.getAmount();
+        for (ItemInstance item : this) {
+            if (item != null && info.containsItem(item)) {
+                neededAmount -= item.getAmount();
+                if (neededAmount <= 0) {
+                    return true;
+                }
             }
         }
         return false;

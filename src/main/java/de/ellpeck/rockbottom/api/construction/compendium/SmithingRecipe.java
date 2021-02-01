@@ -57,9 +57,8 @@ public class SmithingRecipe extends PlayerCompendiumRecipe {
 	}
 
 	@Override
-	public boolean handleRecipe(AbstractPlayerEntity player, Inventory inputInventory, Inventory outputInventory, TileEntity machine, List<IUseInfo> recipeInputs, List<ItemInstance> actualInputs, Function<List<ItemInstance>, List<ItemInstance>> outputGetter, float skillReward) {
-        IToolStation station = (IToolStation) machine;
-        if (machine.getTileInventory().get(station.getToolSlot(tool.tool)) != null) {
+	public boolean handleRecipe(AbstractPlayerEntity player, Inventory inputInventory, Inventory outputInventory, TileEntity machine, List<IUseInfo> recipeInputs, List<ItemInstance> ingredients, Function<List<ItemInstance>, List<ItemInstance>> outputGetter, float skillReward) {
+        if (machine instanceof IToolStation) {
             return ((IToolStation) machine).damageTool(this.tool, true) && ((IToolStation) machine).damageTool(this.tool, false);
         }
         return false;

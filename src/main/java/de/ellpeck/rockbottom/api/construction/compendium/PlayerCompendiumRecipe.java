@@ -31,12 +31,12 @@ public abstract class PlayerCompendiumRecipe extends BasicCompendiumRecipe {
 	 * @param outputInventory the output inventory
 	 * @param machine the machine
 	 * @param recipeInputs the inputs as dictated from the recipe
-     * @param actualInputs the actual item instance inputs provided from the inventory
+     * @param ingredients the actual item instances provided from the inventory slots
 	 * @param outputGetter the output
 	 * @param skillReward the skill reward
 	 * @return True if the construction should continue
 	 */
-	public boolean handleRecipe(AbstractPlayerEntity player, Inventory inputInventory, Inventory outputInventory, TileEntity machine, List<IUseInfo> recipeInputs, List<ItemInstance> actualInputs, Function<List<ItemInstance>, List<ItemInstance>> outputGetter, float skillReward) {
+	public boolean handleRecipe(AbstractPlayerEntity player, Inventory inputInventory, Inventory outputInventory, TileEntity machine, List<IUseInfo> recipeInputs, List<ItemInstance> ingredients, Function<List<ItemInstance>, List<ItemInstance>> outputGetter, float skillReward) {
 		return true;
 	}
 

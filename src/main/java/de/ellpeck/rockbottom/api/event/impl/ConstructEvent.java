@@ -47,11 +47,12 @@ public final class ConstructEvent extends Event {
     public TileEntity machine;
     public int amount;
     public List<IUseInfo> recipeInputs;
-	public List<ItemInstance> actualInputs;
+	public List<ItemInstance> ingredients;
 	public Function<List<ItemInstance>, List<ItemInstance>> outputGetter;
 	public float skillReward;
+	public final boolean hasEnoughItems;
 
-    public ConstructEvent(AbstractPlayerEntity player, Inventory inputInventory, Inventory outputInventory, PlayerCompendiumRecipe recipe, TileEntity machine, int amount, List<IUseInfo> recipeInputs, List<ItemInstance> actualInputs, Function<List<ItemInstance>, List<ItemInstance>> outputGetter, float skillReward) {
+    public ConstructEvent(AbstractPlayerEntity player, Inventory inputInventory, Inventory outputInventory, PlayerCompendiumRecipe recipe, TileEntity machine, int amount, List<IUseInfo> recipeInputs, List<ItemInstance> ingredients, Function<List<ItemInstance>, List<ItemInstance>> outputGetter, float skillReward, boolean hasEnoughItems) {
         this.player = player;
         this.inputInventory = inputInventory;
         this.outputInventory = outputInventory;
@@ -59,8 +60,9 @@ public final class ConstructEvent extends Event {
         this.machine = machine;
         this.amount = amount;
         this.recipeInputs = recipeInputs;
-        this.actualInputs = actualInputs;
+        this.ingredients = ingredients;
         this.outputGetter = outputGetter;
         this.skillReward = skillReward;
+        this.hasEnoughItems = hasEnoughItems;
     }
 }

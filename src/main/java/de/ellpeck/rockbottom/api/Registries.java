@@ -24,7 +24,7 @@ package de.ellpeck.rockbottom.api;
 import de.ellpeck.rockbottom.api.assets.IAssetLoader;
 import de.ellpeck.rockbottom.api.construction.compendium.CompendiumCategory;
 import de.ellpeck.rockbottom.api.construction.compendium.ICompendiumRecipe;
-import de.ellpeck.rockbottom.api.construction.compendium.ICriteria;
+import de.ellpeck.rockbottom.api.construction.compendium.ICriterion;
 import de.ellpeck.rockbottom.api.construction.compendium.ConstructionRecipe;
 import de.ellpeck.rockbottom.api.construction.compendium.MortarRecipe;
 import de.ellpeck.rockbottom.api.construction.compendium.SmithingRecipe;
@@ -127,11 +127,11 @@ public final class Registries {
      */
     public static final NameRegistry<Command> COMMAND_REGISTRY = new NameRegistry<>(ResourceName.intern("command_registry"), true).register();
     /**
-     * The registry for all {@link ICriteria} objects. Use
+     * The registry for all {@link ICriterion} objects. Use
      * {link ICriteria#register()} to register your criteria.
      * These can be used in recipe json files.
      */
-    public static final NameRegistry<ICriteria> CRITERIA_REGISTRY = new NameRegistry<>(ResourceName.intern("criteria_registry"), false).register();
+    public static final NameRegistry<ICriterion> CRITERIA_REGISTRY = new NameRegistry<>(ResourceName.intern("criteria_registry"), false).register();
     /**
      * The registry for all {@link ICompendiumRecipe} objects that are
      * in the game. If your mod includes its own registry for recipes,

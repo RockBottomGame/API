@@ -149,6 +149,7 @@ public final class GameContent {
         public static final String COAL = res().addResources("coal", Tiles.COAL);
         public static final String SAPLING = res().addResources("sapling", Tiles.SAPLING);
         public static final String WOOD_PROCESSED = res().addResources("processed_wood", Tiles.WOOD_BOARDS, 0, Tiles.WOOD_BOARDS.metaProp.getVariants() - 1);
+        public static final String GLASS = res().addResources("glass", Tiles.GLASS);
         public static final String PLANT_FIBER = res().addResources("plant_fiber", Items.PLANT_FIBER);
         public static final String STICK = res().addResources("stick", new ResInfo(Items.TWIG), new ResInfo(Items.STICK));
         public static final String COPPER_RAW = res().addResources("raw_copper", Tiles.COPPER);

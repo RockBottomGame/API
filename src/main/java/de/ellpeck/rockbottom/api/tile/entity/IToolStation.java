@@ -15,8 +15,8 @@ public interface IToolStation {
 	 * @return True if the tool exists
 	 */
 	default boolean damageTool(ConstructionTool tool, boolean simulate) {
-		if (tool == null || tool.tool == null) return true;
-		int toolSlot = this.getToolSlot(tool.tool);
+		if (tool == null || tool.item == null) return true;
+		int toolSlot = this.getToolSlot(tool.item);
 		ItemInstance toolItem;
 		if (toolSlot != -1 && (toolItem = this.getTileInventory().get(toolSlot)) != null) {
 			if (!simulate && !RockBottomAPI.getNet().isClient()) {

@@ -5,7 +5,7 @@ import de.ellpeck.rockbottom.api.Registries;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 // TODO 0.4 Rename to Criterion (singular form)
-public interface ICriteria {
+public interface ICriterion {
 
     ResourceName getName();
 

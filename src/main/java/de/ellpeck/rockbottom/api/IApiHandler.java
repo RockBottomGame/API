@@ -164,6 +164,18 @@ public interface IApiHandler {
     boolean collectItems(IInventory inventory, List<IUseInfo> inputs, boolean simulate, List<ItemInstance> out);
 
     /**
+     * Checks to see if the given input inventory has enough of the given items in the checklist list.
+     * Provide an out map which tell you the (slot, amount) map of slots and the amount of items to deduct from that slot.
+     * @param inventory The input inventory.
+     * @param checklist The item checklist.
+     * @param count The amount of times each item of the checklist needs to appear.
+     * @param outInputs The output list of item instances found in the inventory. Can be null.
+     * @param outSlotsToDeduct The output map of slot ids to amount of items to deduct from that slot. Can be null.
+     * @return True if the given inventory has enough items in the checklist. False otherwise.
+     */
+    boolean hasItems(IInventory inventory, List<IUseInfo> checklist, int count, List<ItemInstance> outInputs, Map<Integer, Integer> outSlotsToDeduct);
+
+    /**
      * Similar to {@link IApiHandler#construct(AbstractPlayerEntity, Inventory, Inventory, PlayerCompendiumRecipe, TileEntity, int, List, List, Function, float)}
      * but safe to use on both client and server side (client side sends packet to server).
      *

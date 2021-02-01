@@ -115,6 +115,4 @@ public interface IInternalHooks {
     void packetTileEntityData(TileEntity tile);
 
     void packetEntityData(Entity entity);
-
-    void smithingConstruct(AbstractPlayerEntity player, TileEntity tile, SmithingRecipe recipe, List<ItemInstance> actualInputs);
 }
