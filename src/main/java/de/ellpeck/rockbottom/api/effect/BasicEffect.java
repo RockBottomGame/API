@@ -24,6 +24,9 @@ package de.ellpeck.rockbottom.api.effect;
 import de.ellpeck.rockbottom.api.entity.Entity;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
+import java.util.function.BiConsumer;
+import java.util.function.Supplier;
+
 public class BasicEffect implements IEffect {
 
     private final ResourceName name;
@@ -35,7 +38,10 @@ public class BasicEffect implements IEffect {
     private final int maxDuration;
     private final int maxLevel;
 
-    public BasicEffect(ResourceName name, boolean isBad, boolean isInstant, int maxDuration, int maxLevel) {
+    private final BiConsumer<ActiveEffect, Entity> updateLasting;
+    private final BiConsumer<ActiveEffect, Entity> activateInstant;
+
+    public BasicEffect(ResourceName name, boolean isBad, boolean isInstant, int maxDuration, int maxLevel, BiConsumer<ActiveEffect, Entity> updateLasting, BiConsumer<ActiveEffect, Entity> activateInstant) {
         this.name = name;
         this.unlocName = this.name.addPrefix("effect.");
         this.iconName = this.unlocName.addPrefix("gui.");
@@ -43,10 +49,12 @@ public class BasicEffect implements IEffect {
         this.isInstant = isInstant;
         this.maxDuration = maxDuration;
         this.maxLevel = maxLevel;
+        this.updateLasting = updateLasting;
+        this.activateInstant = activateInstant;
     }
 
-    public BasicEffect(ResourceName name, boolean isBad, boolean isInstant, int maxDuration) {
-        this(name, isBad, isInstant, maxDuration, 1);
+    public BasicEffect(ResourceName name, boolean isBad, boolean isInstant, int maxDuration, int maxLevel) {
+        this(name, isBad, isInstant, maxDuration, maxLevel, null, null);
     }
 
     @Override
@@ -76,12 +84,16 @@ public class BasicEffect implements IEffect {
 
     @Override
     public void updateLasting(ActiveEffect effect, Entity entity) {
-
+        if (this.updateLasting != null) {
+            this.updateLasting.accept(effect, entity);
+        }
     }
 
     @Override
     public void activateInstant(ActiveEffect effect, Entity entity) {
-
+        if (this.activateInstant != null) {
+            this.activateInstant.accept(effect, entity);
+        }
     }
 
     @Override

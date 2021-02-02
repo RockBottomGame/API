@@ -43,9 +43,14 @@ public class ConstructionRecipe extends PlayerCompendiumRecipe {
 
     public static final ResourceName ID = ResourceName.intern("recipe");
 
+    public static ConstructionRecipe forName(ResourceName name) {
+        return Registries.CONSTRUCTION_RECIPES.get(name);
+    }
+
     protected final List<IUseInfo> inputs;
     protected final List<ItemInstance> outputs;
     protected final List<ConstructionTool> tools;
+
     protected final boolean manualOnly;
 
     public ConstructionRecipe(ResourceName name, List<ConstructionTool> tools, List<IUseInfo> inputs, List<ItemInstance> outputs, boolean manualOnly, boolean isKnowledge, float skillReward) {
@@ -64,8 +69,17 @@ public class ConstructionRecipe extends PlayerCompendiumRecipe {
         this(output.getItem().getName(), tools, isKnowledge, skillReward, output, inputs);
     }
 
-    public static ConstructionRecipe forName(ResourceName name) {
-        return Registries.CONSTRUCTION_RECIPES.get(name);
+    @Override
+    public boolean handleRecipe(AbstractPlayerEntity player, Inventory inputInventory, Inventory outputInventory, TileEntity machine, List<IUseInfo> recipeInputs, List<ItemInstance> ingredients, Function<List<ItemInstance>, List<ItemInstance>> outputGetter, float skillReward) {
+        if (this.usesTools()) {
+            if (!(machine instanceof IToolStation) || !this.canUseTools((IToolStation) machine)) {
+                return false;
+            }
+            for (ConstructionTool tool : tools) {
+                ((IToolStation) machine).damageTool(tool, false);
+            }
+        }
+        return true;
     }
 
     @Override
@@ -105,19 +119,6 @@ public class ConstructionRecipe extends PlayerCompendiumRecipe {
             RockBottomAPI.getApiHandler().defaultConstruct(player, this, machine);
             return true;
         });
-    }
-
-    @Override
-    public boolean handleRecipe(AbstractPlayerEntity player, Inventory inputInventory, Inventory outputInventory, TileEntity machine, List<IUseInfo> recipeInputs, List<ItemInstance> ingredients, Function<List<ItemInstance>, List<ItemInstance>> outputGetter, float skillReward) {
-        if (this.usesTools()) {
-            if (!(machine instanceof IToolStation) || !this.canUseTools((IToolStation) machine)) {
-                return false;
-            }
-            for (ConstructionTool tool : tools) {
-                ((IToolStation) machine).damageTool(tool, false);
-            }
-        }
-        return true;
     }
 
     public boolean showInConstructionTable() {

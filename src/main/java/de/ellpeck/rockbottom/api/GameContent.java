@@ -71,8 +71,8 @@ public final class GameContent {
         public static final Tile OLD_WOOD_DOOR = getTile("old_wood_door").setHardness(3.5F).addEffectiveTool(ToolProperty.AXE, 0).setForceDrop().setMaxAmount(5);
         public static final Tile GOO_REMAINS = getTile("goo_remains");
         public static final Tile GRASS_TORCH = getTile("grass_torch").setHardness(0F).setForceDrop().setMaxAmount(50);
-        public static final Tile COPPER = getTile("copper").setHardness(10F).addEffectiveTool(ToolProperty.PICKAXE, 2).setMaxAmount(35);
-        public static final Tile TIN = getTile("tin").setHardness(8F).addEffectiveTool(ToolProperty.PICKAXE, 2).setMaxAmount(35);
+        public static final Tile COPPER = getTile("copper").setHardness(10F).addEffectiveTool(ToolProperty.PICKAXE, 2).setMaxAmount(40);
+        public static final Tile TIN = getTile("tin").setHardness(8F).addEffectiveTool(ToolProperty.PICKAXE, 2).setMaxAmount(40);
         public static final Tile SPINNING_WHEEL = getTile("spinning_wheel").setHardness(7F).addEffectiveTool(ToolProperty.PICKAXE, 1).setMaxAmount(1);
         public static final Tile SIMPLE_FURNACE = getTile("simple_furnace").setHardness(15F).addEffectiveTool(ToolProperty.PICKAXE, 2).setMaxAmount(1);
         public static final Tile COMBINER = getTile("combiner").setHardness(15F).addEffectiveTool(ToolProperty.PICKAXE, 2).setMaxAmount(1);

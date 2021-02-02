@@ -5,7 +5,9 @@ import de.ellpeck.rockbottom.api.construction.ConstructionTool;
 import de.ellpeck.rockbottom.api.item.Item;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 
-// TODO 0.4 Write description for modders on how to use this.
+/**
+ * Implement this if you want your tile entity to contain and use construction tools similar to {@link de.ellpeck.rockbottom.api.GameContent.Tiles#CONSTRUCTION_TABLE} or {@link de.ellpeck.rockbottom.api.GameContent.Tiles#SMITHING_TABLE}
+ */
 public interface IToolStation {
 
 	/**
@@ -30,6 +32,8 @@ public interface IToolStation {
 		}
 		return false;
 	}
+
+
 
 	int getToolSlot(Item tool);
 

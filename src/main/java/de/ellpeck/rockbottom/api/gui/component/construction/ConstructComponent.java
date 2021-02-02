@@ -42,16 +42,15 @@ public class ConstructComponent extends GuiComponent {
     private final ICompendiumRecipe recipe;
     private final boolean hasTool;
     private final boolean hasIngredients;
-    // TODO 0.4 Rename 'consumer' to something more resembling 'onClick' or 'onConstruct'
-    private final Supplier<Boolean> consumer;
+    private final Supplier<Boolean> onConstruct;
 
     // TODO Provide which tools are missing to display to the user
-    public ConstructComponent(Gui gui, ICompendiumRecipe recipe, boolean hasTool, boolean hasIngredients, Supplier<Boolean> consumer) {
+    public ConstructComponent(Gui gui, ICompendiumRecipe recipe, boolean hasTool, boolean hasIngredients, Supplier<Boolean> onConstruct) {
         super(gui, 94, 17, 30, 30);
         this.recipe = recipe;
         this.hasTool = hasTool;
         this.hasIngredients = hasIngredients;
-        this.consumer = consumer;
+        this.onConstruct = onConstruct;
     }
 
     @Override
@@ -68,7 +67,7 @@ public class ConstructComponent extends GuiComponent {
 
             List<String> info = new ArrayList<>();
             instance.getItem().describeItem(manager, instance, info, Settings.KEY_ADVANCED_INFO.isDown(), false);
-            if (this.consumer != null) {
+            if (this.onConstruct != null) {
                 if (info.size() > 1) info.add("");
                 info.add(manager.localize(ResourceName.intern("info." + (this.hasIngredients ? (this.hasTool ? "click_to_construct" : "missing_tool") : "missing_items"))));
             }
@@ -79,7 +78,7 @@ public class ConstructComponent extends GuiComponent {
     @Override
     public boolean onMouseAction(IGameInstance game, int button, float x, float y) {
         if (Settings.KEY_GUI_ACTION_1.isKey(button) && this.isMouseOver(game)) {
-            if (this.consumer != null) this.consumer.get();
+            if (this.onConstruct != null) this.onConstruct.get();
             return true;
         }
         return false;
@@ -92,7 +91,7 @@ public class ConstructComponent extends GuiComponent {
 
     @Override
     public boolean shouldDoFingerCursor(IGameInstance game) {
-        return this.consumer != null;
+        return this.onConstruct != null;
     }
 
     @Override
