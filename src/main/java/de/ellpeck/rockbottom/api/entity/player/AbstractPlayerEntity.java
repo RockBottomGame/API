@@ -59,12 +59,6 @@ public abstract class AbstractPlayerEntity extends LivingEntity implements IComm
 
     public abstract void sendPacket(IPacket packet);
 
-    @Deprecated // use MoveType sensitive method instead
-    @ApiInternal
-    public boolean move(int type){
-        return type < MoveType.values().length && this.move(MoveType.values()[type]);
-    }
-
     @ApiInternal
     public abstract boolean move(MoveType type);
 
