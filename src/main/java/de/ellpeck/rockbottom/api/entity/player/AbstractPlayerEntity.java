@@ -60,7 +60,7 @@ public abstract class AbstractPlayerEntity extends LivingEntity implements IComm
     public abstract void sendPacket(IPacket packet);
 
     @ApiInternal
-    public abstract boolean move(int type);
+    public abstract boolean move(MoveType type);
 
     @ApiInternal
     public abstract void onChunkLoaded(IChunk chunk);
