@@ -47,7 +47,7 @@ public class TileInventory extends BasicFilteredInventory {
      * @param canInput if it can be inputted into the tile entity
      */
     public TileInventory(TileEntity tile, Function<ItemInstance, Boolean> canInput) {
-        this(tile, 1, inst -> canInput.apply(inst) ? Collections.singletonList(0) : Collections.emptyList(), Collections.emptyList());
+        this(tile, 1, (inst -> canInput.apply(inst) ? Collections.singletonList(0) : Collections.emptyList()), Collections.emptyList());
     }
 
     public TileInventory(TileEntity tile, int slotAmount, List<Integer> inputOutputSlots) {

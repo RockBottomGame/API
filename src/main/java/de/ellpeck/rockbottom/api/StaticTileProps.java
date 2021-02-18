@@ -65,14 +65,9 @@ public final class StaticTileProps {
      */
     public static final IntProp PLANT_GROWTH = new IntProp("growth", 0, 10);
     /**
-     * Determines if a plant is considered alive.
-     * Used by {@link GameContent.Tiles#COTTON}
-     */
-    public static final BoolProp ALIVE = new BoolProp("alive", false);
-    /**
      * Determines how much progress a spinning wheel has made.
      */
-    public static final IntProp SPINNING_STAGE = new IntProp("spinning_stage", 0, 8);
+    public static final IntProp SPINNING_STAGE = new IntProp("spinning_stage", 0, 6);
     /**
      * Determines if a tile is the top or bottom half of a door. Used by {@link
      * GameContent.Tiles#WOOD_DOOR}, {@link GameContent.Tiles#OLD_WOOD_DOOR} and

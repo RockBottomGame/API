@@ -85,7 +85,7 @@ public final class GameContent {
         public static final Tile MORTAR = getTile("mortar").setHardness(3F).addEffectiveTool(ToolProperty.PICKAXE, 0).setMaxAmount(5);
         public static final Tile TILLED_SOIL = getTile("tilled_soil").setHardness(0.8F).addEffectiveTool(ToolProperty.SHOVEL, 0).setForceDrop();
         public static final Tile CORN = getTile("corn").setHardness(2F).setForceDrop().setMaxAmount(25);
-        public static final Tile COTTON = getTile("cotton").setHardness(2F).setForceDrop().setMaxAmount(25);
+        public static final Tile COTTON = getTile("cotton").setHardness(2F).setForceDrop().setMaxAmount(30);
         public static final Tile GLASS = getTile("glass").setHardness(3F).setMaxAmount(75);
         public static final Tile PLATFORM = getTile("platform").setHardness(0.5F).addEffectiveTool(ToolProperty.AXE, 0).setForceDrop().setMaxAmount(150);
         public static final Tile PLANT_ROPE = getTile("plant_rope").setHardness(0).setMaxAmount(150);
@@ -142,21 +142,22 @@ public final class GameContent {
         public static final String SOIL = res().addResources("soil", Tiles.SOIL);
         public static final String GRASS = res().addResources("grass", Tiles.GRASS);
         public static final String STONE = res().addResources("stone", Tiles.STONE);
-        public static final String WOOD_RAW = res().addResources("raw_wood", Tiles.LOG);
+        public static final String RAW_WOOD = res().addResources("raw_wood", Tiles.LOG);
         public static final String LEAVES = res().addResources("leaves", Tiles.LEAVES);
         public static final String PEBBLES = res().addResources("pebbles", Tiles.PEBBLES);
         public static final String SAND = res().addResources("sand", Tiles.SAND);
         public static final String COAL = res().addResources("coal", Tiles.COAL);
         public static final String SAPLING = res().addResources("sapling", Tiles.SAPLING);
-        public static final String WOOD_PROCESSED = res().addResources("processed_wood", Tiles.WOOD_BOARDS, 0, Tiles.WOOD_BOARDS.metaProp.getVariants() - 1);
+        public static final String PROCESSED_WOOD = res().addResources("processed_wood", Tiles.WOOD_BOARDS, 0, Tiles.WOOD_BOARDS.metaProp.getVariants() - 1);
         public static final String GLASS = res().addResources("glass", Tiles.GLASS);
         public static final String PLANT_FIBER = res().addResources("plant_fiber", Items.PLANT_FIBER);
         public static final String STICK = res().addResources("stick", new ResInfo(Items.TWIG), new ResInfo(Items.STICK));
-        public static final String COPPER_RAW = res().addResources("raw_copper", Tiles.COPPER);
-        public static final String COPPER_PROCESSED = res().addResources("processed_copper", Items.COPPER_INGOT);
-        public static final String TIN_RAW = res().addResources("raw_tin", Tiles.TIN);
-        public static final String TIN_PROCESSED = res().addResources("processed_tin", Items.TIN_INGOT);
-        public static final String BRONZE_PROCESSED = res().addResources("processed_bronze", Items.BRONZE_INGOT);
+        public static final String RAW_COPPER = res().addResources("raw_copper", Tiles.COPPER);
+        public static final String PROCESSED_COPPEr = res().addResources("processed_copper", Items.COPPER_INGOT);
+        public static final String RAW_TIN = res().addResources("raw_tin", Tiles.TIN);
+        public static final String PROCESSED_TIN = res().addResources("processed_tin", Items.TIN_INGOT);
+        public static final String PROCESSED_BRONZE = res().addResources("processed_bronze", Items.BRONZE_INGOT);
+        public static final String STRING = res().addResources("string", Items.YARN);
     }
 
     /*

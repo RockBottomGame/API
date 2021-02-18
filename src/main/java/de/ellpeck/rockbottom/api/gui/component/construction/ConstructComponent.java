@@ -25,6 +25,7 @@ import de.ellpeck.rockbottom.api.Constants;
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.IRenderer;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
+import de.ellpeck.rockbottom.api.construction.ConstructionTool;
 import de.ellpeck.rockbottom.api.construction.compendium.ICompendiumRecipe;
 import de.ellpeck.rockbottom.api.data.settings.Settings;
 import de.ellpeck.rockbottom.api.gui.Gui;
@@ -40,17 +41,25 @@ import java.util.function.Supplier;
 public class ConstructComponent extends GuiComponent {
 
     private final ICompendiumRecipe recipe;
-    private final boolean hasTool;
+    public final List<ConstructionTool> missingTools;
     private final boolean hasIngredients;
-    private final Supplier<Boolean> onConstruct;
+    private final Supplier<Boolean> onClick;
 
     // TODO Provide which tools are missing to display to the user
-    public ConstructComponent(Gui gui, ICompendiumRecipe recipe, boolean hasTool, boolean hasIngredients, Supplier<Boolean> onConstruct) {
+    public ConstructComponent(Gui gui, ICompendiumRecipe recipe, boolean hasIngredients, Supplier<Boolean> onClick) {
         super(gui, 94, 17, 30, 30);
         this.recipe = recipe;
-        this.hasTool = hasTool;
+        this.missingTools = new ArrayList<>();
         this.hasIngredients = hasIngredients;
-        this.onConstruct = onConstruct;
+        this.onClick = onClick;
+    }
+
+    public ConstructComponent(Gui gui, ICompendiumRecipe recipe, List<ConstructionTool> missingTools, boolean hasIngredients, Supplier<Boolean> onClick) {
+        super(gui, 94, 17, 30, 30);
+        this.recipe = recipe;
+        this.missingTools = missingTools;
+        this.hasIngredients = hasIngredients;
+        this.onClick = onClick;
     }
 
     @Override
@@ -67,9 +76,22 @@ public class ConstructComponent extends GuiComponent {
 
             List<String> info = new ArrayList<>();
             instance.getItem().describeItem(manager, instance, info, Settings.KEY_ADVANCED_INFO.isDown(), false);
-            if (this.onConstruct != null) {
-                if (info.size() > 1) info.add("");
-                info.add(manager.localize(ResourceName.intern("info." + (this.hasIngredients ? (this.hasTool ? "click_to_construct" : "missing_tool") : "missing_items"))));
+            if (this.onClick != null) {
+                if (info.size() > 1) {
+                    info.add("");
+                }
+
+                if (this.hasIngredients && this.missingTools.isEmpty()) {
+                    info.add(manager.localize(ResourceName.intern("info.click_to_construct")));
+                } else {
+                    if (!this.hasIngredients) {
+                        info.add(manager.localize(ResourceName.intern("info.missing_items")));
+                    }
+
+                }
+
+                this.recipe.fillRecipeInfo(this.gui, game, manager, info, instance, this);
+
             }
             g.drawHoverInfoAtMouse(game, manager, true, 200, info);
         }
@@ -78,8 +100,9 @@ public class ConstructComponent extends GuiComponent {
     @Override
     public boolean onMouseAction(IGameInstance game, int button, float x, float y) {
         if (Settings.KEY_GUI_ACTION_1.isKey(button) && this.isMouseOver(game)) {
-            if (this.onConstruct != null) this.onConstruct.get();
-            return true;
+            if (this.onClick != null) {
+                return this.onClick.get();
+            }
         }
         return false;
     }
@@ -91,7 +114,7 @@ public class ConstructComponent extends GuiComponent {
 
     @Override
     public boolean shouldDoFingerCursor(IGameInstance game) {
-        return this.onConstruct != null;
+        return this.onClick != null;
     }
 
     @Override

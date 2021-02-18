@@ -76,6 +76,11 @@ public final class ResUseInfo implements IUseInfo {
     }
 
     @Override
+    public IUseInfo copy() {
+        return new ResUseInfo(this.name, this.amount);
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;

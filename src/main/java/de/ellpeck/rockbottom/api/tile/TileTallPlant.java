@@ -15,7 +15,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Used for two-high plants such as Corn and Cotton
+ * Used for two-high plants
  */
 public class TileTallPlant extends BasicTile {
     public TileTallPlant(ResourceName name) {

@@ -25,8 +25,8 @@ import de.ellpeck.rockbottom.api.Registries;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.construction.resource.IUseInfo;
 import de.ellpeck.rockbottom.api.entity.player.AbstractPlayerEntity;
+import de.ellpeck.rockbottom.api.helper.InventoryHelper;
 import de.ellpeck.rockbottom.api.inventory.IInventory;
-import de.ellpeck.rockbottom.api.inventory.Inventory;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.tile.entity.TileEntity;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
@@ -37,13 +37,13 @@ public class MortarRecipe extends PlayerCompendiumRecipe {
 
     public static final ResourceName ID = ResourceName.intern("mortar");
 
-    protected final List<IUseInfo> input;
+    protected final List<IUseInfo> inputs;
     protected final List<ItemInstance> output;
     protected final int time;
 
-    public MortarRecipe(ResourceName name, List<IUseInfo> input, List<ItemInstance> output, int time, boolean isKnowledge, float skillReward) {
+    public MortarRecipe(ResourceName name, List<IUseInfo> inputs, List<ItemInstance> output, int time, boolean isKnowledge, float skillReward) {
         super(name, isKnowledge, skillReward);
-        this.input = input;
+        this.inputs = inputs;
         this.output = output;
         this.time = time;
     }
@@ -52,9 +52,9 @@ public class MortarRecipe extends PlayerCompendiumRecipe {
         return Registries.MORTAR_RECIPES.get(name);
     }
 
-    public static MortarRecipe getRecipe(IInventory inv) {
+    public static MortarRecipe getRecipe(AbstractPlayerEntity player, IInventory inv, TileEntity mortar) {
         for (MortarRecipe recipe : Registries.MORTAR_RECIPES.values()) {
-            if (recipe.canConstruct(inv, inv)) {
+            if (recipe.canConstruct(player, inv, inv, mortar, InventoryHelper.collectItems(inv))) {
                 return recipe;
             }
         }
@@ -65,9 +65,9 @@ public class MortarRecipe extends PlayerCompendiumRecipe {
         return this.time;
     }
 
-	// TODO: implement handleRecipe instead of this to make it consistent with other recipes
-    public void construct(AbstractPlayerEntity player, Inventory inventory, TileEntity machine, int amount) {
-		RockBottomAPI.getApiHandler().construct(player, inventory, inventory, this, machine, amount, this.getActualInputs(inventory), null, items -> this.getActualOutputs(inventory, inventory, items), skillReward);
+    // TODO: implement handleRecipe instead of this to make it consistent with other recipes
+    public void construct(AbstractPlayerEntity player, IInventory inventory, TileEntity machine, int amount) {
+		RockBottomAPI.getApiHandler().construct(player, inventory, inventory, this, machine, amount, InventoryHelper.collectItems(inventory), skillReward);
 	}
 
 	public MortarRecipe register() {
@@ -77,7 +77,7 @@ public class MortarRecipe extends PlayerCompendiumRecipe {
 
     @Override
     public List<IUseInfo> getInputs() {
-        return this.input;
+        return this.inputs;
     }
 
     @Override

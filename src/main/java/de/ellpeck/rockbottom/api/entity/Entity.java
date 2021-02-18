@@ -400,7 +400,6 @@ public abstract class Entity extends MovableWorldObject implements IAdditionalDa
         IEffect underlying = effect.getEffect();
         if (underlying.isInstant(this)) {
             underlying.activateInstant(effect, this);
-            return 0;
         } else {
             for (ActiveEffect active : this.effects) {
                 if (active.getEffect() == underlying) {
@@ -418,8 +417,8 @@ public abstract class Entity extends MovableWorldObject implements IAdditionalDa
 
             this.effects.add(effect);
             underlying.onAddedOrLoaded(effect, this, false);
-            return 0;
         }
+        return 0;
     }
 
     public boolean removeEffect(IEffect effect) {

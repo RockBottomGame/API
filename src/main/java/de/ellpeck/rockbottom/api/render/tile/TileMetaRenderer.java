@@ -59,6 +59,12 @@ public class TileMetaRenderer<T extends TileMeta> extends DefaultTileRenderer<T>
     }
 
     @Override
+    public void renderInForeground(IGameInstance game, IAssetManager manager, IRenderer g, IWorld world, T tile, TileState state, int x, int y, TileLayer layer, float renderX, float renderY, float scale, int[] light) {
+        this.setTextureResource(tile, state.get(tile.metaProp));
+        super.renderInForeground(game, manager, g, world, tile, state, x, y, layer, renderX, renderY, scale, light);
+    }
+
+    @Override
     public ITexture getParticleTexture(IGameInstance game, IAssetManager manager, IRenderer g, T tile, TileState state) {
         this.setTextureResource(tile, state.get(tile.metaProp));
         return super.getParticleTexture(game, manager, g, tile, state);

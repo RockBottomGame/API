@@ -23,45 +23,38 @@ package de.ellpeck.rockbottom.api.event.impl;
 
 import de.ellpeck.rockbottom.api.IApiHandler;
 import de.ellpeck.rockbottom.api.construction.compendium.PlayerCompendiumRecipe;
-import de.ellpeck.rockbottom.api.construction.resource.IUseInfo;
 import de.ellpeck.rockbottom.api.entity.player.AbstractPlayerEntity;
 import de.ellpeck.rockbottom.api.event.Event;
-import de.ellpeck.rockbottom.api.inventory.Inventory;
+import de.ellpeck.rockbottom.api.inventory.IInventory;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.tile.entity.TileEntity;
 
 import java.util.List;
-import java.util.function.Function;
 
 /**
  * This event is fired when construction takes place in {@link
- * IApiHandler#construct(AbstractPlayerEntity, Inventory, Inventory,
- * PlayerCompendiumRecipe, TileEntity, int, List, List, Function, float)}. Cancelling the event will
+ * IApiHandler#construct(AbstractPlayerEntity, IInventory, IInventory, PlayerCompendiumRecipe, TileEntity, int, List, float)}. Cancelling the event will
  * cause the construction not to take place.
  */
 public final class ConstructEvent extends Event {
     public final AbstractPlayerEntity player;
-    public Inventory inputInventory;
-    public Inventory outputInventory;
+    public IInventory inputInventory;
+    public IInventory outputInventory;
     public PlayerCompendiumRecipe recipe;
     public TileEntity machine;
     public int amount;
-    public List<IUseInfo> recipeInputs;
-	public List<ItemInstance> ingredients;
-	public Function<List<ItemInstance>, List<ItemInstance>> outputGetter;
+	public List<ItemInstance> availableInputs;
 	public float skillReward;
 	public final boolean hasEnoughItems;
 
-    public ConstructEvent(AbstractPlayerEntity player, Inventory inputInventory, Inventory outputInventory, PlayerCompendiumRecipe recipe, TileEntity machine, int amount, List<IUseInfo> recipeInputs, List<ItemInstance> ingredients, Function<List<ItemInstance>, List<ItemInstance>> outputGetter, float skillReward, boolean hasEnoughItems) {
+    public ConstructEvent(AbstractPlayerEntity player, IInventory inputInventory, IInventory outputInventory, PlayerCompendiumRecipe recipe, TileEntity machine, int amount, List<ItemInstance> availableInputs, float skillReward, boolean hasEnoughItems) {
         this.player = player;
         this.inputInventory = inputInventory;
         this.outputInventory = outputInventory;
         this.recipe = recipe;
         this.machine = machine;
         this.amount = amount;
-        this.recipeInputs = recipeInputs;
-        this.ingredients = ingredients;
-        this.outputGetter = outputGetter;
+        this.availableInputs = availableInputs;
         this.skillReward = skillReward;
         this.hasEnoughItems = hasEnoughItems;
     }

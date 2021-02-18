@@ -25,6 +25,7 @@ import de.ellpeck.rockbottom.api.Registries;
 import de.ellpeck.rockbottom.api.construction.compendium.BasicCompendiumRecipe;
 import de.ellpeck.rockbottom.api.construction.resource.IUseInfo;
 import de.ellpeck.rockbottom.api.entity.player.AbstractPlayerEntity;
+import de.ellpeck.rockbottom.api.inventory.IInventory;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 

@@ -176,7 +176,7 @@ public interface IApiHandler {
     boolean hasItems(IInventory inventory, List<IUseInfo> checklist, int count, List<ItemInstance> outInputs, Map<Integer, Integer> outSlotsToDeduct);
 
     /**
-     * Similar to {@link IApiHandler#construct(AbstractPlayerEntity, Inventory, Inventory, PlayerCompendiumRecipe, TileEntity, int, List, List, Function, float)}
+     * Similar to {@link IApiHandler#construct(AbstractPlayerEntity, Inventory, Inventory, PlayerCompendiumRecipe, TileEntity, int, List, List, float)}
      * but safe to use on both client and server side (client side sends packet to server).
      *
      * @param player  The player doing this construction. Can be null if
@@ -203,19 +203,15 @@ public interface IApiHandler {
      * @param machine         The machine
      * @param amount          The amount of times this recipe should be
      *                        constructed
-     * @param recipeInputs    The items that are input into the recipe
-     * @param actualInputs    The actual {@link ItemInstance}s used in the construction of the recipe.
+     * @param availableInputs    The actual {@link ItemInstance}s used in the construction of the recipe.
      *                        Can be {@code null} if the inputs should be calculated by the method.
-     * @param outputGetter    A function that is called to get the outputs of
-     *                        the recipe based on the recipeInputs that were actually
-     *                        taken from the inventory
      * @param skillReward     The amount of skill points you get for
      *                        constructing this recipe
      * @return A list of items that couldn't fit into the output inventory
      * specified
      * @see IApiHandler#defaultConstruct(AbstractPlayerEntity, PlayerCompendiumRecipe, TileEntity)
      */
-    List<ItemInstance> construct(AbstractPlayerEntity player, Inventory inputInventory, Inventory outputInventory, PlayerCompendiumRecipe recipe, TileEntity machine, int amount, List<IUseInfo> recipeInputs, List<ItemInstance> actualInputs, Function<List<ItemInstance>, List<ItemInstance>> outputGetter, float skillReward);
+    List<ItemInstance> construct(AbstractPlayerEntity player, IInventory inputInventory, IInventory outputInventory, PlayerCompendiumRecipe recipe, TileEntity machine, int amount, List<ItemInstance> availableInputs, float skillReward);
 
     /**
      * Gets a color in the world based on a light value between 0 and {@link

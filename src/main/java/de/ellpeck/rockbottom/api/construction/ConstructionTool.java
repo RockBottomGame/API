@@ -1,13 +1,13 @@
 package de.ellpeck.rockbottom.api.construction;
 
-import de.ellpeck.rockbottom.api.item.Item;
+import de.ellpeck.rockbottom.api.item.ToolProperty;
 
 public class ConstructionTool {
-    public final Item item;
+    public final ToolProperty type;
     public final int usage;
 
-    public ConstructionTool(Item item, int usage) {
-        this.item = item;
+    public ConstructionTool(ToolProperty type, int usage) {
+        this.type = type;
         this.usage = usage;
     }
 }

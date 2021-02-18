@@ -21,11 +21,13 @@
 
 package de.ellpeck.rockbottom.api.inventory;
 
+import com.google.common.collect.ImmutableList;
 import de.ellpeck.rockbottom.api.data.set.DataSet;
 import de.ellpeck.rockbottom.api.data.set.part.PartDataSet;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Inventory extends AbstractInventory {

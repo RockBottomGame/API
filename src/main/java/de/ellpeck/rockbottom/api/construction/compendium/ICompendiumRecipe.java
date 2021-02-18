@@ -21,8 +21,10 @@
 
 package de.ellpeck.rockbottom.api.construction.compendium;
 
+import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.Registries;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
+import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.construction.resource.IUseInfo;
 import de.ellpeck.rockbottom.api.content.IContent;
 import de.ellpeck.rockbottom.api.entity.player.AbstractPlayerEntity;
@@ -40,11 +42,31 @@ import java.util.List;
 
 public interface ICompendiumRecipe extends IContent {
 
+    static ICompendiumRecipe forName(ResourceName name) {
+        return Registries.ALL_RECIPES.get(name);
+    }
+
     ResourceName getName();
 
     List<IUseInfo> getInputs();
 
     List<ItemInstance> getOutputs();
+
+    default boolean canConstruct(AbstractPlayerEntity player, IInventory inputInv, IInventory outputInv, TileEntity machine, List<ItemInstance> ingredients) {
+        return RockBottomAPI.getApiHandler().hasItems(inputInv, this.getInputs(), 1, null, null);
+    }
+
+    /**
+     * Called during construction with the machine used to construct the recipe.
+     * Provides the same parameters as the ConstructEvent directly to the recipe.
+     * @param player the player
+     * @param inputInventory the input inventory
+     * @param outputInventory the output inventory
+     * @param machine the machine
+     * @param ingredients the compacted list of items available as inputs
+     * @param skillReward the skill reward
+     */
+    default void onConstruct(AbstractPlayerEntity player, IInventory inputInventory, IInventory outputInventory, TileEntity machine, List<ItemInstance> ingredients, float skillReward) { }
 
     default boolean isKnown(AbstractPlayerEntity player) {
         return true;
@@ -54,14 +76,7 @@ public interface ICompendiumRecipe extends IContent {
         return false;
     }
 
-    default boolean canConstruct(IInventory inputInventory, IInventory outputInventory) {
-        return RockBottomAPI.getApiHandler().hasItems(inputInventory, this.getActualInputs(inputInventory), 1, null, null);
-    }
-
-    static ICompendiumRecipe forName(ResourceName name) {
-    	return Registries.ALL_RECIPES.get(name);
-	}
-
+    /*
     default List<IUseInfo> getActualInputs(IInventory inventory) {
         return this.getInputs();
     }
@@ -69,6 +84,7 @@ public interface ICompendiumRecipe extends IContent {
     default List<ItemInstance> getActualOutputs(IInventory inputInventory, IInventory outputInventory, List<ItemInstance> inputs) {
         return this.getOutputs();
     }
+     */
 
     default List<IngredientComponent> getIngredientButtons(Gui gui, AbstractPlayerEntity player, ResourceName tex) {
         List<IngredientComponent> ingredients = new ArrayList<>();
@@ -79,10 +95,14 @@ public interface ICompendiumRecipe extends IContent {
     }
 
     default ConstructComponent getConstructButton(Gui gui, AbstractPlayerEntity player, TileEntity machine, boolean canConstruct) {
-        return new ConstructComponent(gui, this, true, canConstruct, null);
+        return new ConstructComponent(gui, this, canConstruct, null);
     }
 
     default PolaroidComponent getPolaroidButton(Gui gui, AbstractPlayerEntity player, boolean canConstruct, ResourceName tex) {
         return new PolaroidComponent(gui, this, canConstruct, tex);
+    }
+
+    default void fillRecipeInfo(Gui gui, IGameInstance game, IAssetManager manager, List<String> info, ItemInstance currentItem, ConstructComponent component) {
+
     }
 }

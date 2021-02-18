@@ -23,21 +23,18 @@ package de.ellpeck.rockbottom.api.construction.compendium;
 
 import de.ellpeck.rockbottom.api.Registries;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
-import de.ellpeck.rockbottom.api.construction.ConstructionTool;
 import de.ellpeck.rockbottom.api.construction.resource.IUseInfo;
 import de.ellpeck.rockbottom.api.entity.player.AbstractPlayerEntity;
 import de.ellpeck.rockbottom.api.gui.Gui;
 import de.ellpeck.rockbottom.api.gui.component.construction.ConstructComponent;
 import de.ellpeck.rockbottom.api.inventory.Inventory;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
-import de.ellpeck.rockbottom.api.tile.entity.IToolStation;
 import de.ellpeck.rockbottom.api.tile.entity.TileEntity;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.function.Function;
 
 public class ConstructionRecipe extends PlayerCompendiumRecipe {
 
@@ -49,37 +46,21 @@ public class ConstructionRecipe extends PlayerCompendiumRecipe {
 
     protected final List<IUseInfo> inputs;
     protected final List<ItemInstance> outputs;
-    protected final List<ConstructionTool> tools;
-
     protected final boolean manualOnly;
 
-    public ConstructionRecipe(ResourceName name, List<ConstructionTool> tools, List<IUseInfo> inputs, List<ItemInstance> outputs, boolean manualOnly, boolean isKnowledge, float skillReward) {
+    public ConstructionRecipe(ResourceName name, List<IUseInfo> inputs, List<ItemInstance> outputs, boolean manualOnly, boolean isKnowledge, float skillReward) {
         super(name, isKnowledge, skillReward);
         this.inputs = inputs;
         this.outputs = outputs;
-        this.tools = tools;
         this.manualOnly = manualOnly;
     }
 
-    public ConstructionRecipe(ResourceName name, List<ConstructionTool> tools, boolean isKnowledge, float skillReward, ItemInstance output, IUseInfo... inputs) {
-        this(name, tools, Arrays.asList(inputs), Collections.singletonList(output), false, isKnowledge, skillReward);
+    public ConstructionRecipe(ResourceName name, boolean isKnowledge, float skillReward, ItemInstance output, IUseInfo... inputs) {
+        this(name, Arrays.asList(inputs), Collections.singletonList(output), false, isKnowledge, skillReward);
     }
 
-    public ConstructionRecipe(List<ConstructionTool> tools, boolean isKnowledge, float skillReward, ItemInstance output, IUseInfo... inputs) {
-        this(output.getItem().getName(), tools, isKnowledge, skillReward, output, inputs);
-    }
-
-    @Override
-    public boolean handleRecipe(AbstractPlayerEntity player, Inventory inputInventory, Inventory outputInventory, TileEntity machine, List<IUseInfo> recipeInputs, List<ItemInstance> ingredients, Function<List<ItemInstance>, List<ItemInstance>> outputGetter, float skillReward) {
-        if (this.usesTools()) {
-            if (!(machine instanceof IToolStation) || !this.canUseTools((IToolStation) machine)) {
-                return false;
-            }
-            for (ConstructionTool tool : tools) {
-                ((IToolStation) machine).damageTool(tool, false);
-            }
-        }
-        return true;
+    public ConstructionRecipe(boolean isKnowledge, float skillReward, ItemInstance output, IUseInfo... inputs) {
+        this(output.getItem().getName(), isKnowledge, skillReward, output, inputs);
     }
 
     @Override
@@ -92,30 +73,9 @@ public class ConstructionRecipe extends PlayerCompendiumRecipe {
         return this.outputs;
     }
 
-    public List<ConstructionTool> getTools() {
-        return this.tools;
-    }
-
-    public boolean usesTools() {
-        return this.tools != null && this.tools.size() > 0;
-    }
-
-    public boolean canUseTools(IToolStation machine) {
-        if (this.usesTools()) {
-            if (machine == null)
-                return false;
-            for (ConstructionTool tool : this.tools) {
-                if (!machine.damageTool(tool, true)) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
     @Override
     public ConstructComponent getConstructButton(Gui gui, AbstractPlayerEntity player, TileEntity machine, boolean canConstruct) {
-        return new ConstructComponent(gui, this, this.canUseTools((IToolStation) machine), canConstruct, this.usesTools() && machine == null ? null : () -> {
+        return new ConstructComponent(gui, this, canConstruct, () -> {
             RockBottomAPI.getApiHandler().defaultConstruct(player, this, machine);
             return true;
         });
@@ -126,17 +86,11 @@ public class ConstructionRecipe extends PlayerCompendiumRecipe {
     }
 
     public ConstructionRecipe registerManual() {
-        if (this.tools != null && this.tools.size() > 0) {
-            RockBottomAPI.logger().warning("Registered manual recipe " + this.getName() + " with " + this.getTools().size() + "tools! This should be marked as a construction table recipe.");
-        }
         Registries.MANUAL_CONSTRUCTION_RECIPES.register(this.getName(), this);
         return this;
     }
 
     public ConstructionRecipe registerConstructionTable() {
-        if (this.tools == null || this.tools.isEmpty()) {
-            RockBottomAPI.logger().warning("Registered construction table recipe " + this.getName() + " with no tools! This should be marked as a manual recipe.");
-        }
         Registries.CONSTRUCTION_TABLE_RECIPES.register(this.getName(), this);
         return this;
     }
@@ -146,7 +100,6 @@ public class ConstructionRecipe extends PlayerCompendiumRecipe {
         return "ConstructionRecipe{" +
                 "infoName=" + this.infoName +
                 ", isKnowledge=" + this.isKnowledge +
-                ", tools=" + this.tools +
                 ", inputs=" + this.inputs +
                 ", outputs=" + this.outputs +
                 ", skillReward=" + this.skillReward +

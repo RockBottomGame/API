@@ -34,6 +34,10 @@ public class ToolProperty {
     public static final ToolProperty BOOMERANG = new ToolProperty(ResourceName.intern("boomerang")).register();
     public static final ToolProperty HOE = new ToolProperty(ResourceName.intern("hoe")).register();
     public static final ToolProperty CHISEL = new ToolProperty(ResourceName.intern("chisel")).register();
+    public static final ToolProperty SAW = new ToolProperty(ResourceName.intern("saw")).register();
+    public static final ToolProperty HAMMER = new ToolProperty(ResourceName.intern("hammer")).register();
+    public static final ToolProperty MALLET = new ToolProperty(ResourceName.intern("mallet")).register();
+    public static final ToolProperty WRENCH = new ToolProperty(ResourceName.intern("wrench")).register();
 
     private final ResourceName name;
 

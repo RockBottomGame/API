@@ -78,7 +78,12 @@ public final class ItemUseInfo implements IUseInfo {
 
     @Override
     public boolean containsItem(ItemInstance instance) {
-        return this.instance.isEffectivelyEqual(instance);
+        return this.instance.isEffectivelyEqual(instance.copy());
+    }
+
+    @Override
+    public IUseInfo copy() {
+        return new ItemUseInfo(this.instance.getItem(), this.instance.getAmount(), this.instance.getMeta());
     }
 
     @Override
