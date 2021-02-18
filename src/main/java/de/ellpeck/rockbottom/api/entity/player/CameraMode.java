@@ -66,17 +66,24 @@ public class CameraMode {
         RockBottomAPI.getGame().getRenderer().calcScales();
     }
 
-    public boolean move(int type) {
-        if (type == 0) { // Move Left
-            this.motionX = -this.getCameraSpeed();
-        } else if (type == 1) { // Move Right
-            this.motionX = this.getCameraSpeed();
-        } else if (type == 2) { // Jump
-            // No-Op
-        } else if (type == 3) { // Move Up
-            this.motionY = this.getCameraSpeed();
-        } else if (type == 4) { // Move Down
-            this.motionY = -this.getCameraSpeed();
+    public boolean move(MoveType type) {
+        switch (type) {
+            case LEFT: {
+                this.motionX = -this.getCameraSpeed();
+                break;
+            }
+            case RIGHT: {
+                this.motionX = this.getCameraSpeed();
+                break;
+            }
+            case UP: {
+                this.motionY = this.getCameraSpeed();
+                break;
+            }
+            case DOWN: {
+                this.motionY = -this.getCameraSpeed();
+                break;
+            }
         }
         return false;
     }
