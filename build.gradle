@@ -12,8 +12,8 @@ targetCompatibility = 1.8
 group = "de.ellpeck.rockbottom"
 archivesBaseName = "RockBottomApi"
 
-if (hasProperty('buildnumber')) {
-    version = "${version}-${this.properties['buildnumber']}"
+if (System.getenv("BUILD_NUMBER") != null) {
+    version = "${version}-${System.getenv("BUILD_NUMBER")}"
 }
 
 repositories {
