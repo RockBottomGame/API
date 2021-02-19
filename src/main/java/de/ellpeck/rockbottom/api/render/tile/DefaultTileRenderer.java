@@ -50,37 +50,37 @@ public class DefaultTileRenderer<T extends Tile> implements ITileRenderer<T> {
     }
 
     @Override
-    public void render(IGameInstance game, IAssetManager manager, IRenderer g, IWorld world, T tile, TileState state, int x, int y, TileLayer layer, float renderX, float renderY, float scale, int[] light) {
+    public void render(IGameInstance game, IAssetManager manager, IRenderer renderer, IWorld world, T tile, TileState state, int x, int y, TileLayer layer, float renderX, float renderY, float scale, int[] light) {
         if (!tile.isChiseled(world, x, y, layer, state))
             manager.getTexture(this.texture).getPositionalVariation(x, y).draw(renderX, renderY, scale, scale, light);
 
     }
 
     @Override
-    public void renderInForeground(IGameInstance game, IAssetManager manager, IRenderer g, IWorld world, T tile, TileState state, int x, int y, TileLayer layer, float renderX, float renderY, float scale, int[] light) {
+    public void renderInForeground(IGameInstance game, IAssetManager manager, IRenderer renderer, IWorld world, T tile, TileState state, int x, int y, TileLayer layer, float renderX, float renderY, float scale, int[] light) {
         if (tile.isChiseled(world, x, y, layer, state))
-            this.renderChiseled(game, manager, g, world, tile, state, x, y, layer, renderX, renderY, scale, light);
+            this.renderChiseled(game, manager, renderer, world, tile, state, x, y, layer, renderX, renderY, scale, light);
         else if (tile.isChiselable() && layer == TileLayer.MAIN)
-            this.renderChiselHighlight(game, g, null, x, y, renderX, renderY, scale);
+            this.renderChiselHighlight(game, renderer, null, x, y, renderX, renderY, scale);
 
     }
 
     @Override
-    public void renderItem(IGameInstance game, IAssetManager manager, IRenderer g, T tile, ItemInstance instance, float x, float y, float scale, int filter) {
+    public void renderItem(IGameInstance game, IAssetManager manager, IRenderer renderer, T tile, ItemInstance instance, float x, float y, float scale, int filter) {
         manager.getTexture(this.texture).draw(x, y, scale, scale, filter);
     }
 
     @Override
-    public ITexture getParticleTexture(IGameInstance game, IAssetManager manager, IRenderer g, T tile, TileState state) {
+    public ITexture getParticleTexture(IGameInstance game, IAssetManager manager, IRenderer renderer, T tile, TileState state) {
         return manager.getTexture(this.texture);
     }
 
     @Override
-    public void renderInMainMenuBackground(IGameInstance game, IAssetManager manager, IRenderer g, T tile, TileState state, float x, float y, float scale) {
+    public void renderInMainMenuBackground(IGameInstance game, IAssetManager manager, IRenderer renderer, T tile, TileState state, float x, float y, float scale) {
         manager.getTexture(this.texture).getPositionalVariation((int) x, (int) y).draw(x, y, scale, scale);
     }
 
-    protected void renderChiseled(IGameInstance game, IAssetManager manager, IRenderer g, IWorld world, T tile, TileState state, int x, int y, TileLayer layer, float renderX, float renderY, float scale, int[] light) {
+    protected void renderChiseled(IGameInstance game, IAssetManager manager, IRenderer renderer, IWorld world, T tile, TileState state, int x, int y, TileLayer layer, float renderX, float renderY, float scale, int[] light) {
 
         ITexture texture = manager.getTexture(this.texture).getPositionalVariation(x, y);
         int prop = state.get(StaticTileProps.CHISEL_STATE);
@@ -98,20 +98,20 @@ public class DefaultTileRenderer<T extends Tile> implements ITileRenderer<T> {
                 int[] newLights = getChiseledLight(light, i);
 
                 texture.draw(renderX + minX * scale, renderY + (1 - minY) * scale, renderX + maxX * scale, renderY + (1 - maxY) * scale, minX * 12, (1 - minY) * 12, maxX * 12, (1 - maxY) * 12, newLights);
-                this.renderChiselHighlight(game, g, box, x, y, renderX, renderY, scale);
+                this.renderChiselHighlight(game, renderer, box, x, y, renderX, renderY, scale);
             }
         }
     }
 
-    protected void renderChiselHighlight(IGameInstance game, IRenderer g, BoundingBox box, int x, int y, float renderX, float renderY, float scale) {
+    protected void renderChiselHighlight(IGameInstance game, IRenderer renderer, BoundingBox box, int x, int y, float renderX, float renderY, float scale) {
         AbstractPlayerEntity player = game.getPlayer();
-        int tileX = Util.floor(g.getMousedTileX());
-        int tileY = Util.floor(g.getMousedTileY());
-        if (!player.isInRange(tileX, tileY, player.getMaxInteractionDistance(player.world, g.getMousedTileX(), g.getMousedTileY(), player)))
+        int tileX = Util.floor(renderer.getMousedTileX());
+        int tileY = Util.floor(renderer.getMousedTileY());
+        if (!player.isInRange(tileX, tileY, player.getMaxInteractionDistance(player.world, renderer.getMousedTileX(), renderer.getMousedTileY(), player)))
             return;
 
-        double mouseX = g.getMousedTileX() - x;
-        double mouseY = g.getMousedTileY() - y;
+        double mouseX = renderer.getMousedTileX() - x;
+        double mouseY = renderer.getMousedTileY() - y;
 
         if (mouseX < 0 || mouseX >= 1 || mouseY < 0 || mouseY >= 1)
             return;
@@ -121,8 +121,8 @@ public class DefaultTileRenderer<T extends Tile> implements ITileRenderer<T> {
             box = Tile.CHISEL_BOUNDS[corner];
         }
 
-        double tileMouseX = g.getMousedTileX();
-        double tileMouseY = g.getMousedTileY();
+        double tileMouseX = renderer.getMousedTileX();
+        double tileMouseY = renderer.getMousedTileY();
 
         float minX = (float) box.getMinX();
         float minY = (float) box.getMinY();
@@ -131,12 +131,12 @@ public class DefaultTileRenderer<T extends Tile> implements ITileRenderer<T> {
         if (held == null)
             return;
         if (held.getItem().hasToolProperty(held, ToolProperty.CHISEL) && box.copy().add(x, y).contains(tileMouseX, tileMouseY)) {
-            g.addEmptyRect(renderX + minX * scale, renderY + (0.5f - minY) * scale, 0.5f * scale, 0.5f * scale, Colors.WHITE);
+            renderer.addEmptyRect(renderX + minX * scale, renderY + (0.5f - minY) * scale, 0.5f * scale, 0.5f * scale, Colors.WHITE);
         }
     }
 
     @Override
-    public JsonElement getAdditionalTextureData(IGameInstance game, IAssetManager manager, IRenderer g, T tile, ItemInstance instance, AbstractPlayerEntity player, String name) {
+    public JsonElement getAdditionalTextureData(IGameInstance game, IAssetManager manager, IRenderer renderer, T tile, ItemInstance instance, AbstractPlayerEntity player, String name) {
         return manager.getTexture(this.texture).getAdditionalData(name);
     }
 

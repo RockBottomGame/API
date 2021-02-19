@@ -68,6 +68,11 @@ public class PlatformTile extends BasicTile {
     }
 
     @Override
+    public boolean hasSolidSurface(IWorld world, int x, int y, TileLayer layer) {
+        return true;
+    }
+
+    @Override
     public boolean canPlaceInLayer(TileLayer layer) {
         return layer == TileLayer.MAIN;
     }

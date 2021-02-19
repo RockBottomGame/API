@@ -89,6 +89,7 @@ public final class GameContent {
         public static final Tile GLASS = getTile("glass").setHardness(3F).setMaxAmount(75);
         public static final Tile PLATFORM = getTile("platform").setHardness(0.5F).addEffectiveTool(ToolProperty.AXE, 0).setForceDrop().setMaxAmount(150);
         public static final Tile PLANT_ROPE = getTile("plant_rope").setHardness(0).setMaxAmount(150);
+        public static final Tile POT = getTile("pot").setHardness(0.25F).setMaxAmount(10).setForceDrop();
     }
 
     /*
@@ -158,6 +159,7 @@ public final class GameContent {
         public static final String PROCESSED_TIN = res().addResources("processed_tin", Items.TIN_INGOT);
         public static final String PROCESSED_BRONZE = res().addResources("processed_bronze", Items.BRONZE_INGOT);
         public static final String STRING = res().addResources("string", Items.YARN);
+        public static final String FLOWER = res().addResources("flower", Tiles.FLOWER, 0, Tiles.FLOWER.metaProp.getVariants() - 1);
     }
 
     /*

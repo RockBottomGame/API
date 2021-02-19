@@ -57,24 +57,24 @@ public class MultiTileRenderer<T extends MultiTile> extends DefaultTileRenderer<
     }
 
     @Override
-    public void render(IGameInstance game, IAssetManager manager, IRenderer g, IWorld world, T tile, TileState state, int x, int y, TileLayer layer, float renderX, float renderY, float scale, int[] light) {
+    public void render(IGameInstance game, IAssetManager manager, IRenderer renderer, IWorld world, T tile, TileState state, int x, int y, TileLayer layer, float renderX, float renderY, float scale, int[] light) {
         Pos2 innerCoord = tile.getInnerCoord(state);
         manager.getTexture(this.textures.get(innerCoord)).getPositionalVariation(x, y).draw(renderX, renderY, scale, scale, light);
     }
 
     @Override
-    public ITexture getParticleTexture(IGameInstance game, IAssetManager manager, IRenderer g, T tile, TileState state) {
+    public ITexture getParticleTexture(IGameInstance game, IAssetManager manager, IRenderer renderer, T tile, TileState state) {
         Pos2 innerCoord = tile.getInnerCoord(state);
         return manager.getTexture(this.textures.get(innerCoord));
     }
 
     @Override
-    public void renderItem(IGameInstance game, IAssetManager manager, IRenderer g, T tile, ItemInstance instance, float x, float y, float scale, int filter) {
+    public void renderItem(IGameInstance game, IAssetManager manager, IRenderer renderer, T tile, ItemInstance instance, float x, float y, float scale, int filter) {
         manager.getTexture(this.texItem).draw(x, y, scale, scale, filter);
     }
 
     @Override
-    public JsonElement getAdditionalTextureData(IGameInstance game, IAssetManager manager, IRenderer g, T tile, ItemInstance instance, AbstractPlayerEntity player, String name) {
+    public JsonElement getAdditionalTextureData(IGameInstance game, IAssetManager manager, IRenderer renderer, T tile, ItemInstance instance, AbstractPlayerEntity player, String name) {
         return manager.getTexture(this.texItem).getAdditionalData(name);
     }
 }

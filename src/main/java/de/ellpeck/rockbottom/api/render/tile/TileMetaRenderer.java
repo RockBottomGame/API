@@ -41,33 +41,33 @@ public class TileMetaRenderer<T extends TileMeta> extends DefaultTileRenderer<T>
     }
 
     @Override
-    public void render(IGameInstance game, IAssetManager manager, IRenderer g, IWorld world, T tile, TileState state, int x, int y, TileLayer layer, float renderX, float renderY, float scale, int[] light) {
+    public void render(IGameInstance game, IAssetManager manager, IRenderer renderer, IWorld world, T tile, TileState state, int x, int y, TileLayer layer, float renderX, float renderY, float scale, int[] light) {
         this.setTextureResource(tile, state.get(tile.metaProp));
-        super.render(game, manager, g, world, tile, state, x, y, layer, renderX, renderY, scale, light);
+        super.render(game, manager, renderer, world, tile, state, x, y, layer, renderX, renderY, scale, light);
     }
 
     @Override
-    public void renderItem(IGameInstance game, IAssetManager manager, IRenderer g, T tile, ItemInstance instance, float x, float y, float scale, int filter) {
+    public void renderItem(IGameInstance game, IAssetManager manager, IRenderer renderer, T tile, ItemInstance instance, float x, float y, float scale, int filter) {
         this.setTextureResource(tile, instance.getMeta());
-        super.renderItem(game, manager, g, tile, instance, x, y, scale, filter);
+        super.renderItem(game, manager, renderer, tile, instance, x, y, scale, filter);
     }
 
     @Override
-    public void renderInMainMenuBackground(IGameInstance game, IAssetManager manager, IRenderer g, T tile, TileState state, float x, float y, float scale) {
+    public void renderInMainMenuBackground(IGameInstance game, IAssetManager manager, IRenderer renderer, T tile, TileState state, float x, float y, float scale) {
         this.setTextureResource(tile, state.get(tile.metaProp));
-        super.renderInMainMenuBackground(game, manager, g, tile, state, x, y, scale);
+        super.renderInMainMenuBackground(game, manager, renderer, tile, state, x, y, scale);
     }
 
     @Override
-    public void renderInForeground(IGameInstance game, IAssetManager manager, IRenderer g, IWorld world, T tile, TileState state, int x, int y, TileLayer layer, float renderX, float renderY, float scale, int[] light) {
+    public void renderInForeground(IGameInstance game, IAssetManager manager, IRenderer renderer, IWorld world, T tile, TileState state, int x, int y, TileLayer layer, float renderX, float renderY, float scale, int[] light) {
         this.setTextureResource(tile, state.get(tile.metaProp));
-        super.renderInForeground(game, manager, g, world, tile, state, x, y, layer, renderX, renderY, scale, light);
+        super.renderInForeground(game, manager, renderer, world, tile, state, x, y, layer, renderX, renderY, scale, light);
     }
 
     @Override
-    public ITexture getParticleTexture(IGameInstance game, IAssetManager manager, IRenderer g, T tile, TileState state) {
+    public ITexture getParticleTexture(IGameInstance game, IAssetManager manager, IRenderer renderer, T tile, TileState state) {
         this.setTextureResource(tile, state.get(tile.metaProp));
-        return super.getParticleTexture(game, manager, g, tile, state);
+        return super.getParticleTexture(game, manager, renderer, tile, state);
     }
 
     protected ResourceName getTextureResource(T tile, int meta) {
@@ -79,7 +79,7 @@ public class TileMetaRenderer<T extends TileMeta> extends DefaultTileRenderer<T>
     }
 
     @Override
-    public JsonElement getAdditionalTextureData(IGameInstance game, IAssetManager manager, IRenderer g, T tile, ItemInstance instance, AbstractPlayerEntity player, String name) {
+    public JsonElement getAdditionalTextureData(IGameInstance game, IAssetManager manager, IRenderer renderer, T tile, ItemInstance instance, AbstractPlayerEntity player, String name) {
         return manager.getTexture(this.getTextureResource(tile, instance.getMeta())).getAdditionalData(name);
     }
 

@@ -22,10 +22,10 @@ public class TilePlatformRenderer extends DefaultTileRenderer<PlatformTile> {
     }
 
     @Override
-    public void render(IGameInstance game, IAssetManager manager, IRenderer g, IWorld world, PlatformTile tile, TileState state, int x, int y, TileLayer layer, float renderX, float renderY, float scale, int[] light) {
+    public void render(IGameInstance game, IAssetManager manager, IRenderer renderer, IWorld world, PlatformTile tile, TileState state, int x, int y, TileLayer layer, float renderX, float renderY, float scale, int[] light) {
 
         if (state.get(StaticTileProps.HAS_LADDER)) {
-            GameContent.Tiles.LADDER.getRenderer().render(game, manager, g, world, GameContent.Tiles.LADDER, GameContent.Tiles.LADDER.getDefState(), x, y, layer, renderX, renderY, scale, light);
+            GameContent.Tiles.LADDER.getRenderer().render(game, manager, renderer, world, GameContent.Tiles.LADDER, GameContent.Tiles.LADDER.getDefState(), x, y, layer, renderX, renderY, scale, light);
         }
         ITexture texture = manager.getTexture(this.texture).getPositionalVariation(x, y);
 
@@ -71,7 +71,7 @@ public class TilePlatformRenderer extends DefaultTileRenderer<PlatformTile> {
     }
 
     @Override
-    public void renderItem(IGameInstance game, IAssetManager manager, IRenderer g, PlatformTile tile, ItemInstance instance, float x, float y, float scale, int filter) {
+    public void renderItem(IGameInstance game, IAssetManager manager, IRenderer renderer, PlatformTile tile, ItemInstance instance, float x, float y, float scale, int filter) {
         manager.getTexture(this.texture).draw(x, y + scale/2, x + scale, y + scale + scale/2, 24, 0, 36, 12, filter);
     }
 }

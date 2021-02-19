@@ -46,11 +46,11 @@ public class TileLiquidRenderer<T extends LiquidTile> extends DefaultTileRendere
     }
 
     @Override
-    public void render(IGameInstance game, IAssetManager manager, IRenderer g, IWorld world, T tile, TileState state, int x, int y, TileLayer layer, float renderX, float renderY, float scale, int[] light) {
+    public void render(IGameInstance game, IAssetManager manager, IRenderer renderer, IWorld world, T tile, TileState state, int x, int y, TileLayer layer, float renderX, float renderY, float scale, int[] light) {
     }
 
     @Override
-    public void renderInForeground(IGameInstance game, IAssetManager manager, IRenderer g, IWorld world, T tile, TileState state, int x, int y, TileLayer layer, float renderX, float renderY, float scale, int[] light) {
+    public void renderInForeground(IGameInstance game, IAssetManager manager, IRenderer renderer, IWorld world, T tile, TileState state, int x, int y, TileLayer layer, float renderX, float renderY, float scale, int[] light) {
         int level = state.get(tile.level);
         ResourceName texture = this.levelTextures.get(level);
         manager.getTexture(texture).getPositionalVariation(x, y).draw(renderX, renderY, scale, scale, light);
