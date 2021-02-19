@@ -112,7 +112,7 @@ public final class Registries {
      * only use existing {@link DataPart}s.
      */
     @ApiInternal
-    public static final IndexRegistry<IPartFactory> PART_REGISTRY = new IndexRegistry<>(ResourceName.intern("part_registry"), Byte.MAX_VALUE, false).register();
+    public static final IndexRegistry<IPartFactory<?>> PART_REGISTRY = new IndexRegistry<>(ResourceName.intern("part_registry"), Byte.MAX_VALUE, false).register();
     /**
      * The registry for all {@link IPacket} types. To register into this
      * registry, you can use {@link IndexRegistry#getNextFreeId()} to determine
