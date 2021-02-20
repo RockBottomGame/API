@@ -7,11 +7,15 @@ import de.ellpeck.rockbottom.api.world.IWorld;
 
 public interface IPotPlantable {
 
-    default float getXRenderOffset(IWorld world, TileState pot, int x, int y, ItemInstance item) {
+    default float getRenderXOffset(IWorld world, TileState pot, int x, int y, ItemInstance item) {
         return 0;
     }
 
     float getRenderYOffset(IWorld world, TileState pot, int x, int y, ItemInstance item);
+
+    default float getRenderScale() {
+        return 0.75f;
+    }
 
     static boolean isPotPlantable(ItemInstance item) {
         return item.getItem() instanceof IPotPlantable || item.getItem() instanceof TileItem && ((TileItem) item.getItem()).getTile() instanceof IPotPlantable;

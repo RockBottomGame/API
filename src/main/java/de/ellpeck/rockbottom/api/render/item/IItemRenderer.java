@@ -32,33 +32,33 @@ import de.ellpeck.rockbottom.api.item.ItemInstance;
 
 public interface IItemRenderer<T extends Item> {
 
-    void render(IGameInstance game, IAssetManager manager, IRenderer g, T item, ItemInstance instance, float x, float y, float scale, int filter);
+    void render(IGameInstance game, IAssetManager manager, IRenderer renderer, T item, ItemInstance instance, float x, float y, float scale, int filter);
 
-    default void renderOnMouseCursor(IGameInstance game, IAssetManager manager, IRenderer g, T item, ItemInstance instance, float x, float y, float scale, int filter, boolean isInPlayerRange) {
+    default void renderOnMouseCursor(IGameInstance game, IAssetManager manager, IRenderer renderer, T item, ItemInstance instance, float x, float y, float scale, int filter, boolean isInPlayerRange) {
 
     }
 
-    default void renderHolding(IGameInstance game, IAssetManager manager, IRenderer g, T item, ItemInstance instance, AbstractPlayerEntity player, float x, float y, float rotation, float scale, int filter, boolean mirrored) {
-        g.translate(x, y);
-        g.rotate(rotation);
+    default void renderHolding(IGameInstance game, IAssetManager manager, IRenderer renderer, T item, ItemInstance instance, AbstractPlayerEntity player, float x, float y, float rotation, float scale, int filter, boolean mirrored) {
+        renderer.translate(x, y);
+        renderer.rotate(rotation);
 
         if (mirrored) {
-            g.mirror(true, false);
+            renderer.mirror(true, false);
         }
 
-        this.render(game, manager, g, item, instance, 0F, 0F, scale * 0.5F, filter);
+        this.render(game, manager, renderer, item, instance, 0F, 0F, scale * 0.5F, filter);
 
         if (mirrored) {
-            g.mirror(true, false);
+            renderer.mirror(true, false);
         }
 
-        g.rotate(-rotation);
-        g.translate(-x, -y);
+        renderer.rotate(-rotation);
+        renderer.translate(-x, -y);
     }
 
-    default JsonElement getAdditionalTextureData(IGameInstance game, IAssetManager manager, IRenderer g, T item, ItemInstance instance, AbstractPlayerEntity player, String name) {
+    default JsonElement getAdditionalTextureData(IGameInstance game, IAssetManager manager, IRenderer renderer, T item, ItemInstance instance, AbstractPlayerEntity player, String name) {
         return null;
     }
 
-    ITexture getParticleTexture(IGameInstance game, IAssetManager manager, IRenderer g, T item, ItemInstance instance);
+    ITexture getParticleTexture(IGameInstance game, IAssetManager manager, IRenderer renderer, T item, ItemInstance instance);
 }

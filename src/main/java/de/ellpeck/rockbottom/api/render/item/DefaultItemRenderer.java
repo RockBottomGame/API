@@ -40,17 +40,17 @@ public class DefaultItemRenderer<T extends Item> implements IItemRenderer<T> {
     }
 
     @Override
-    public void render(IGameInstance game, IAssetManager manager, IRenderer g, T item, ItemInstance instance, float x, float y, float scale, int filter) {
+    public void render(IGameInstance game, IAssetManager manager, IRenderer renderer, T item, ItemInstance instance, float x, float y, float scale, int filter) {
         manager.getTexture(this.texture).draw(x, y, 1F * scale, 1F * scale, filter);
     }
 
     @Override
-    public JsonElement getAdditionalTextureData(IGameInstance game, IAssetManager manager, IRenderer g, T item, ItemInstance instance, AbstractPlayerEntity player, String name) {
+    public JsonElement getAdditionalTextureData(IGameInstance game, IAssetManager manager, IRenderer renderer, T item, ItemInstance instance, AbstractPlayerEntity player, String name) {
         return manager.getTexture(this.texture).getAdditionalData(name);
     }
 
     @Override
-    public ITexture getParticleTexture(IGameInstance game, IAssetManager manager, IRenderer g, T item, ItemInstance instance) {
+    public ITexture getParticleTexture(IGameInstance game, IAssetManager manager, IRenderer renderer, T item, ItemInstance instance) {
         return manager.getTexture(this.texture);
     }
 }
