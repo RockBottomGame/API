@@ -26,7 +26,7 @@ import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.entity.Entity;
 import de.ellpeck.rockbottom.api.entity.player.AbstractPlayerEntity;
 import de.ellpeck.rockbottom.api.render.tile.ITileRenderer;
-import de.ellpeck.rockbottom.api.render.tile.TileLiquidRenderer;
+import de.ellpeck.rockbottom.api.render.tile.LiquidTileRenderer;
 import de.ellpeck.rockbottom.api.tile.state.IntProp;
 import de.ellpeck.rockbottom.api.tile.state.TileState;
 import de.ellpeck.rockbottom.api.util.BoundingBox;
@@ -51,7 +51,7 @@ public abstract class LiquidTile extends BasicTile {
 
     @Override
     protected ITileRenderer createRenderer(ResourceName name) {
-        return new TileLiquidRenderer(name, this);
+        return new LiquidTileRenderer(name, this);
     }
 
     @Override

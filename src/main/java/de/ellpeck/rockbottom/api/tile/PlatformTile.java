@@ -6,7 +6,7 @@ import de.ellpeck.rockbottom.api.entity.Entity;
 import de.ellpeck.rockbottom.api.entity.player.AbstractPlayerEntity;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.render.tile.ITileRenderer;
-import de.ellpeck.rockbottom.api.render.tile.TilePlatformRenderer;
+import de.ellpeck.rockbottom.api.render.tile.PlatformTileRenderer;
 import de.ellpeck.rockbottom.api.tile.state.TileState;
 import de.ellpeck.rockbottom.api.util.BoundingBox;
 import de.ellpeck.rockbottom.api.util.Direction;
@@ -147,6 +147,6 @@ public class PlatformTile extends BasicTile {
 
     @Override
     protected ITileRenderer createRenderer(ResourceName name) {
-        return new TilePlatformRenderer(name.addPrefix("wood_"));
+        return new PlatformTileRenderer(name.addPrefix("wood_"));
     }
 }

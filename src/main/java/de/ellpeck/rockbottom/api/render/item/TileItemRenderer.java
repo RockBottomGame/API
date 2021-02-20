@@ -32,7 +32,7 @@ import de.ellpeck.rockbottom.api.item.TileItem;
 import de.ellpeck.rockbottom.api.render.tile.ITileRenderer;
 import de.ellpeck.rockbottom.api.tile.Tile;
 
-public class ItemTileRenderer implements IItemRenderer<TileItem> {
+public class TileItemRenderer implements IItemRenderer<TileItem> {
 
     @Override
     public void render(IGameInstance game, IAssetManager manager, IRenderer g, TileItem item, ItemInstance instance, float x, float y, float scale, int filter) {

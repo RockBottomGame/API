@@ -23,7 +23,7 @@ package de.ellpeck.rockbottom.api.item;
 
 import de.ellpeck.rockbottom.api.entity.player.AbstractPlayerEntity;
 import de.ellpeck.rockbottom.api.render.item.IItemRenderer;
-import de.ellpeck.rockbottom.api.render.item.ItemToolRenderer;
+import de.ellpeck.rockbottom.api.render.item.ToolItemRenderer;
 import de.ellpeck.rockbottom.api.tile.Tile;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 import de.ellpeck.rockbottom.api.world.IWorld;
@@ -45,7 +45,7 @@ public class ToolItem extends BasicItemTool {
 
     @Override
     protected IItemRenderer createRenderer(ResourceName name) {
-        return new ItemToolRenderer(name);
+        return new ToolItemRenderer(name);
     }
 
     public ToolItem addToolProperty(ToolProperty property, int level) {

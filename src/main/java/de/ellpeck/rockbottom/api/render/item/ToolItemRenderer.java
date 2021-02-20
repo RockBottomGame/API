@@ -28,9 +28,9 @@ import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.item.ToolItem;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
-public class ItemToolRenderer extends DefaultItemRenderer<ToolItem> {
+public class ToolItemRenderer extends DefaultItemRenderer<ToolItem> {
 
-    public ItemToolRenderer(ResourceName texture) {
+    public ToolItemRenderer(ResourceName texture) {
         super(texture);
     }
 

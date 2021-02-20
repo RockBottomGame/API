@@ -26,7 +26,7 @@ import de.ellpeck.rockbottom.api.entity.player.AbstractPlayerEntity;
 import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.item.TileItem;
 import de.ellpeck.rockbottom.api.render.tile.ITileRenderer;
-import de.ellpeck.rockbottom.api.render.tile.TileMetaRenderer;
+import de.ellpeck.rockbottom.api.render.tile.MetaTileRenderer;
 import de.ellpeck.rockbottom.api.tile.state.IntProp;
 import de.ellpeck.rockbottom.api.tile.state.TileState;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
@@ -57,7 +57,7 @@ public class TileMeta extends BasicTile {
 
     @Override
     protected ITileRenderer createRenderer(ResourceName name) {
-        return new TileMetaRenderer(name);
+        return new MetaTileRenderer(name);
     }
 
     @Override

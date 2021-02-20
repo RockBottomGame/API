@@ -33,11 +33,11 @@ import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TileLiquidRenderer<T extends LiquidTile> extends DefaultTileRenderer<T> {
+public class LiquidTileRenderer<T extends LiquidTile> extends DefaultTileRenderer<T> {
 
     private final List<ResourceName> levelTextures = new ArrayList<>();
 
-    public TileLiquidRenderer(ResourceName texture, T tile) {
+    public LiquidTileRenderer(ResourceName texture, T tile) {
         super(texture);
 
         for (int i = 0; i < tile.getLevels(); i++) {

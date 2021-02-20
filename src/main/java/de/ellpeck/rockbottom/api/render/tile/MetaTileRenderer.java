@@ -34,9 +34,9 @@ import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 import de.ellpeck.rockbottom.api.world.IWorld;
 import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 
-public class TileMetaRenderer<T extends TileMeta> extends DefaultTileRenderer<T> {
+public class MetaTileRenderer<T extends TileMeta> extends DefaultTileRenderer<T> {
 
-    public TileMetaRenderer(ResourceName texture) {
+    public MetaTileRenderer(ResourceName texture) {
         super(texture);
     }
 

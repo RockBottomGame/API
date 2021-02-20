@@ -15,9 +15,9 @@ import de.ellpeck.rockbottom.api.world.IWorld;
 import de.ellpeck.rockbottom.api.world.layer.TileLayer;
 
 @SuppressWarnings("unchecked")
-public class TilePlatformRenderer extends DefaultTileRenderer<PlatformTile> {
+public class PlatformTileRenderer extends DefaultTileRenderer<PlatformTile> {
 
-    public TilePlatformRenderer(ResourceName texture) {
+    public PlatformTileRenderer(ResourceName texture) {
         super(texture);
     }
 
@@ -29,8 +29,16 @@ public class TilePlatformRenderer extends DefaultTileRenderer<PlatformTile> {
         }
         ITexture texture = manager.getTexture(this.texture).getPositionalVariation(x, y);
 
-        Tile left = world.getState(x - 1, y).getTile();
-        Tile right = world.getState(x + 1, y).getTile();
+        Tile left = GameContent.Tiles.AIR;
+        Tile right = GameContent.Tiles.AIR;
+
+        if (world.isPosLoaded(x - 1, y)) {
+            left = world.getState(x - 1, y).getTile();
+        }
+
+        if (world.isPosLoaded(x + 1, y)) {
+            right = world.getState(x + 1, y).getTile();
+        }
 
         boolean leftFullTile = left.isFullTile();
         boolean rightFullTile = right.isFullTile();

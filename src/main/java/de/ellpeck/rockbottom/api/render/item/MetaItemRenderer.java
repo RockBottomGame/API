@@ -30,9 +30,9 @@ import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.item.MetaItem;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
-public class ItemMetaRenderer extends DefaultItemRenderer<MetaItem> {
+public class MetaItemRenderer extends DefaultItemRenderer<MetaItem> {
 
-    public ItemMetaRenderer(ResourceName texture) {
+    public MetaItemRenderer(ResourceName texture) {
         super(texture);
     }
 

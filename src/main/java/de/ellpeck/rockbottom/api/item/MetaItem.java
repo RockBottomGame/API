@@ -22,7 +22,7 @@
 package de.ellpeck.rockbottom.api.item;
 
 import de.ellpeck.rockbottom.api.render.item.IItemRenderer;
-import de.ellpeck.rockbottom.api.render.item.ItemMetaRenderer;
+import de.ellpeck.rockbottom.api.render.item.MetaItemRenderer;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 import java.util.ArrayList;
@@ -53,7 +53,7 @@ public class MetaItem extends BasicItem {
 
     @Override
     protected IItemRenderer createRenderer(ResourceName name) {
-        return new ItemMetaRenderer(name);
+        return new MetaItemRenderer(name);
     }
 
     @Override

@@ -26,7 +26,7 @@ import de.ellpeck.rockbottom.api.RockBottomAPI;
 import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.entity.player.AbstractPlayerEntity;
 import de.ellpeck.rockbottom.api.render.item.IItemRenderer;
-import de.ellpeck.rockbottom.api.render.item.ItemTileRenderer;
+import de.ellpeck.rockbottom.api.render.item.TileItemRenderer;
 import de.ellpeck.rockbottom.api.tile.Tile;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 import de.ellpeck.rockbottom.api.world.IWorld;
@@ -42,7 +42,7 @@ public class TileItem extends BasicItem {
 
     @Override
     protected IItemRenderer createRenderer(ResourceName name) {
-        return new ItemTileRenderer();
+        return new TileItemRenderer();
     }
 
     public Tile getTile() {
