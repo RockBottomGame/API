@@ -88,7 +88,7 @@ public abstract class Entity extends MovableWorldObject implements IAdditionalDa
         this.uniqueId = uniqueId;
     }
 
-    public IEntityRenderer getRenderer() {
+    public IEntityRenderer<? extends Entity> getRenderer() {
         return null;
     }
 
@@ -459,7 +459,7 @@ public abstract class Entity extends MovableWorldObject implements IAdditionalDa
         return this.aiTasks.indexOf(task);
     }
 
-    public DespawnHandler getDespawnHandler() {
+    public DespawnHandler<? extends Entity> getDespawnHandler() {
         return null;
     }
 
