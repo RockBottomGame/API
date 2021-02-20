@@ -42,12 +42,12 @@ public class PlatformTile extends BasicTile {
         if (layer != TileLayer.MAIN)
             return false;
 
-        ItemInstance held = player.getInv().get(player.getSelectedSlot());
+        ItemInstance held = player.getSelectedItem();
         TileState state = world.getState(x, y);
 
         if (!world.isClient() && held != null && held.getItem() == GameContent.Tiles.LADDER.getItem() && !state.get(StaticTileProps.HAS_LADDER)) {
             world.setState(x, y, world.getState(x, y).cycleProp(StaticTileProps.HAS_LADDER));
-            held.removeAmount(1);
+            player.getInv().set(player.getSelectedSlot(), held.removeAmount(1).nullIfEmpty());
             return true;
         }
         return false;
