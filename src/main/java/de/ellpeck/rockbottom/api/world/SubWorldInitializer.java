@@ -63,7 +63,7 @@ public abstract class SubWorldInitializer {
 
     public void updateLocalTime(IWorld subWorld) {
         if (!subWorld.isTimeFrozen()) {
-            subWorld.setCurrentTime((subWorld.getCurrentTime() + 1) % Constants.TIME_PER_DAY);
+            subWorld.setCurrentTime((subWorld.getCurrentTime() + 1 + (int) (10 * subWorld.getSleepingPercentage())) % Constants.TIME_PER_DAY);
         }
     }
 

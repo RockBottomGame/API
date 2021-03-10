@@ -180,6 +180,8 @@ public interface IWorld extends IChunkOrWorld {
 
     IWorld getMainWorld();
 
+    float getSleepingPercentage();
+
     ResourceName getSubName();
 
     @ApiInternal
