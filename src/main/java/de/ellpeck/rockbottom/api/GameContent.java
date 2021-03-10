@@ -90,6 +90,7 @@ public final class GameContent {
         public static final Tile PLATFORM = getTile("platform").setHardness(0.5F).addEffectiveTool(ToolProperty.AXE, 0).setForceDrop().setMaxAmount(150);
         public static final Tile PLANT_ROPE = getTile("plant_rope").setHardness(0).setMaxAmount(150);
         public static final Tile POT = getTile("pot").setHardness(0.25F).setMaxAmount(10).setForceDrop();
+        public static final Tile BED = getTile("bed").setHardness(0.75F).addEffectiveTool(ToolProperty.AXE, 0).setForceDrop().setMaxAmount(1);
     }
 
     /*

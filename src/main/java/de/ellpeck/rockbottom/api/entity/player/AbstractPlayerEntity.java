@@ -33,6 +33,7 @@ import de.ellpeck.rockbottom.api.net.chat.ICommandSender;
 import de.ellpeck.rockbottom.api.net.packet.IPacket;
 import de.ellpeck.rockbottom.api.render.IPlayerDesign;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
+import de.ellpeck.rockbottom.api.util.Pos2;
 import de.ellpeck.rockbottom.api.world.IChunk;
 import de.ellpeck.rockbottom.api.world.IWorld;
 
@@ -130,4 +131,13 @@ public abstract class AbstractPlayerEntity extends LivingEntity implements IComm
 
     public abstract CameraMode getCameraMode();
 
+    public abstract Pos2 getBedPosition();
+
+    public abstract boolean sleep(Pos2 pos, boolean saveSpawn, boolean faceRight);
+
+    public abstract boolean wake();
+
+    public abstract void removeBedSpawn();
+
+    public abstract boolean isSleeping();
 }
