@@ -43,6 +43,10 @@ public interface IAnimation extends IAsset {
 
     void drawRow(int row, float x, float y, float width, float height, int[] light, int filter);
 
+    void drawRow(int row, float x, float y, float width, float height, int filter, boolean mirrorHor, boolean mirrorVert);
+
+    void drawRow(int row, float x, float y, float width, float height, int[] light, int filter, boolean mirrorHor, boolean mirrorVert);
+
     void drawRow(int row, float x, float y, float scale, int filter);
 
     void drawRow(int row, float x, float y, float scale, int[] light, int filter);
@@ -52,6 +56,10 @@ public interface IAnimation extends IAsset {
     void drawRow(long startTimeMillis, int row, float x, float y, float width, float height, int filter);
 
     void drawRow(long startTimeMillis, int row, float x, float y, float width, float height, int[] light, int filter);
+
+    void drawRow(long startTimeMillis, int row, float x, float y, float width, float height, int filter, boolean mirrorHor, boolean mirrorVert);
+
+    void drawRow(long startTimeMillis, int row, float x, float y, float width, float height, int[] light, int filter, boolean mirrorHor, boolean mirrorVert);
 
     void drawRow(long startTimeMillis, int row, float x, float y, float scale, int filter);
 

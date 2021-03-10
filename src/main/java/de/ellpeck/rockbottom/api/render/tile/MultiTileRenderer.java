@@ -69,7 +69,7 @@ public class MultiTileRenderer<T extends MultiTile> extends DefaultTileRenderer<
     }
 
     @Override
-    public void renderItem(IGameInstance game, IAssetManager manager, IRenderer renderer, T tile, ItemInstance instance, float x, float y, float scale, int filter) {
+    public void renderItem(IGameInstance game, IAssetManager manager, IRenderer renderer, T tile, ItemInstance instance, float x, float y, float scale, int filter, boolean mirrored) {
         manager.getTexture(this.texItem).draw(x, y, scale, scale, filter);
     }
 

@@ -25,6 +25,7 @@ import com.google.common.base.Charsets;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import de.ellpeck.rockbottom.api.IGameInstance;
 import de.ellpeck.rockbottom.api.Registries;
 import de.ellpeck.rockbottom.api.RockBottomAPI;
@@ -60,7 +61,7 @@ public interface IContentLoader<T extends IContent> {
 
     default JsonObject getRecipeObject(IGameInstance game, String path) throws IOException {
         InputStreamReader reader = new InputStreamReader(game.getClassLoader().getResourceAsStream(path), Charsets.UTF_8);
-        JsonElement recipeElement = Util.JSON_PARSER.parse(reader);
+        JsonElement recipeElement = JsonParser.parseReader(reader);
         reader.close();
         return recipeElement.getAsJsonObject();
     }

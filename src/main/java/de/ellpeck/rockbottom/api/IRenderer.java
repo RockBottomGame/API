@@ -31,9 +31,12 @@ import de.ellpeck.rockbottom.api.item.ItemInstance;
 import de.ellpeck.rockbottom.api.render.engine.*;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
 import de.ellpeck.rockbottom.api.util.Util;
+import de.ellpeck.rockbottom.api.util.math.MatrixStack;
+import de.ellpeck.rockbottom.api.util.math.Vector2;
 import org.lwjgl.opengl.GL15;
 
 import java.nio.FloatBuffer;
+import java.util.Deque;
 import java.util.List;
 
 /**
@@ -156,6 +159,10 @@ public interface IRenderer extends IDisposable {
     @ApiInternal
     void flush();
 
+    void pushMatrix();
+
+    void popMatrix();
+
     /**
      * Rotates this renderer's rendering context by the given angle. This will
      * only affect any vertices that are added to this renderer after calling
@@ -164,25 +171,6 @@ public interface IRenderer extends IDisposable {
      * @param angle The angle
      */
     void rotate(float angle);
-
-    /**
-     * Sets the center of rotation for this renderer. This will only affect any
-     * vertices that are added to this renerer after calling this method.
-     *
-     * @param x The rotation center's x
-     * @param y The rotation center's y
-     */
-    void setRotationCenter(float x, float y);
-
-    /**
-     * @return This renderer's rotation center's x
-     */
-    float getRotationCenterX();
-
-    /**
-     * @return This renderer's rotation center's y
-     */
-    float getRotationCenterY();
 
     /**
      * Translates this renderer's origin by the given amount. This will only
@@ -195,14 +183,12 @@ public interface IRenderer extends IDisposable {
     void translate(float x, float y);
 
     /**
-     * Rather than translating by a certain amount (see {@link #translate(float,
-     * float)}), this method sets the translation of this renderer to the given
-     * x and y coordinates.
+     * Scales the renderer in both axes by the given amount. This will only affect any
+     * vertices that are added to this renderer after calling this method.
      *
-     * @param x The origin x
-     * @param y The origin y
+     * @param scale The scale
      */
-    void setTranslation(float x, float y);
+    void scale(float scale);
 
     /**
      * Scales the renderer by the given amount. This will only affect any
@@ -214,83 +200,10 @@ public interface IRenderer extends IDisposable {
     void scale(float x, float y);
 
     /**
-     * Rather than scaling by a given amount (see {@link #scale(float, float)}),
-     * this method sets the scale of the renderer directly.
-     *
-     * @param x The x scale
-     * @param y The y scale
-     */
-    void setScale(float x, float y);
-
-    /**
-     * Mirrors the renderer either horizontally or vertically. This will only
-     * affect any vertices that are added to this renderer after calling this
-     * method.
-     *
-     * @param hor  If the renderer should be mirrored horizontally
-     * @param vert If the renderer should be mirrored vertically
-     */
-    void mirror(boolean hor, boolean vert);
-
-    /**
-     * Rather than mirroring the renderer (see {@link #mirror(boolean,
-     * boolean)}), this method sets the mirrored states of this renderer to the
-     * given values.
-     *
-     * @param hor  If the renderer should be mirrored horizontally
-     * @param vert If the renderer should be mirrored vertically
-     */
-    void setMirrored(boolean hor, boolean vert);
-
-    /**
      * Resets this renderer's translation, rotation, scale, mirrored states and
      * texture origin back to their default values.
      */
     void resetTransformation();
-
-    /**
-     * @return This renderer's rotation
-     */
-    float getRotation();
-
-    /**
-     * Rather than rotating by a given angle (see {@link #rotate(float)}), this
-     * method merely sets the rotation of this renderer to the given rotation.
-     * You can use this to reset the rotation back to 0 or its original state.
-     *
-     * @param angle The angle
-     */
-    void setRotation(float angle);
-
-    /**
-     * @return This renderer's translation x
-     */
-    float getTranslationX();
-
-    /**
-     * @return This renderer's translation y
-     */
-    float getTranslationY();
-
-    /**
-     * @return This renderer's x scale
-     */
-    float getScaleX();
-
-    /**
-     * @return This renderer's y scale
-     */
-    float getScaleY();
-
-    /**
-     * @return Whether this renderer is mirrored horizontally
-     */
-    boolean isMirroredHor();
-
-    /**
-     * @return Whether this renderer is mirrored vertically
-     */
-    boolean isMirroredVert();
 
     /**
      * @return The renderer's current shader program, set using {@link
@@ -710,4 +623,6 @@ public interface IRenderer extends IDisposable {
     double getCameraX();
 
     double getCameraY();
+
+    MatrixStack getMatrixStack();
 }

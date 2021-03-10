@@ -37,13 +37,13 @@ public class MetaItemRenderer extends DefaultItemRenderer<MetaItem> {
     }
 
     @Override
-    public void render(IGameInstance game, IAssetManager manager, IRenderer renderer, MetaItem item, ItemInstance instance, float x, float y, float scale, int filter) {
+    public void render(IGameInstance game, IAssetManager manager, IRenderer renderer, MetaItem item, ItemInstance instance, float x, float y, float scale, int filter, boolean mirrored) {
         int meta = instance.getMeta();
 
         if (meta >= 0 && item.subResourceNames.size() > meta) {
-            manager.getTexture(item.subResourceNames.get(meta)).draw(x, y, 1F * scale, 1F * scale, filter);
+            manager.getTexture(item.subResourceNames.get(meta)).draw(x, y, scale, scale, filter, mirrored, false);
         } else {
-            super.render(game, manager, renderer, item, instance, x, y, scale, filter);
+            super.render(game, manager, renderer, item, instance, x, y, scale, filter, mirrored);
         }
     }
 

@@ -79,7 +79,7 @@ public class PlatformTileRenderer extends DefaultTileRenderer<PlatformTile> {
     }
 
     @Override
-    public void renderItem(IGameInstance game, IAssetManager manager, IRenderer renderer, PlatformTile tile, ItemInstance instance, float x, float y, float scale, int filter) {
+    public void renderItem(IGameInstance game, IAssetManager manager, IRenderer renderer, PlatformTile tile, ItemInstance instance, float x, float y, float scale, int filter, boolean mirrored) {
         manager.getTexture(this.texture).draw(x, y + scale/2, x + scale, y + scale + scale/2, 24, 0, 36, 12, filter);
     }
 }

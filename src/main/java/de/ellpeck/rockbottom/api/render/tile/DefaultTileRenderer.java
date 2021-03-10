@@ -66,7 +66,7 @@ public class DefaultTileRenderer<T extends Tile> implements ITileRenderer<T> {
     }
 
     @Override
-    public void renderItem(IGameInstance game, IAssetManager manager, IRenderer renderer, T tile, ItemInstance instance, float x, float y, float scale, int filter) {
+    public void renderItem(IGameInstance game, IAssetManager manager, IRenderer renderer, T tile, ItemInstance instance, float x, float y, float scale, int filter, boolean mirrored) {
         manager.getTexture(this.texture).draw(x, y, scale, scale, filter);
     }
 
@@ -105,6 +105,11 @@ public class DefaultTileRenderer<T extends Tile> implements ITileRenderer<T> {
 
     protected void renderChiselHighlight(IGameInstance game, IRenderer renderer, BoundingBox box, int x, int y, float renderX, float renderY, float scale) {
         AbstractPlayerEntity player = game.getPlayer();
+        ItemInstance held = game.getPlayer().getInv().get(game.getPlayer().getSelectedSlot());
+        if (held == null) {
+            return;
+        }
+
         int tileX = Util.floor(renderer.getMousedTileX());
         int tileY = Util.floor(renderer.getMousedTileY());
         if (!player.isInRange(tileX, tileY, player.getMaxInteractionDistance(player.world, renderer.getMousedTileX(), renderer.getMousedTileY(), player)))
@@ -127,9 +132,6 @@ public class DefaultTileRenderer<T extends Tile> implements ITileRenderer<T> {
         float minX = (float) box.getMinX();
         float minY = (float) box.getMinY();
 
-        ItemInstance held = game.getPlayer().getInv().get(game.getPlayer().getSelectedSlot());
-        if (held == null)
-            return;
         if (held.getItem().hasToolProperty(held, ToolProperty.CHISEL) && box.copy().add(x, y).contains(tileMouseX, tileMouseY)) {
             renderer.addEmptyRect(renderX + minX * scale, renderY + (0.5f - minY) * scale, 0.5f * scale, 0.5f * scale, Colors.WHITE);
         }

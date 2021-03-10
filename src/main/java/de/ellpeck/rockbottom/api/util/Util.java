@@ -66,11 +66,6 @@ public final class Util {
      * will not be a single line.
      */
     public static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
-    /**
-     * A global instance of google gson's json parser that can be used to parse
-     * jsons into easily modifyable and queryable json objects.
-     */
-    public static final JsonParser JSON_PARSER = new JsonParser();
 
     /**
      * Returns the absolute distance between two points using the Pythagorean

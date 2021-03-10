@@ -70,6 +70,10 @@ public interface ITexture extends IAsset {
 
     void draw(float x, float y, float width, float height, int[] light, int filter);
 
+    void draw(float x, float y, float width, float height, int filter, boolean mirrorHor, boolean mirrorVert);
+
+    void draw(float x, float y, float width, float height, int[] light, int filter, boolean mirrorHor, boolean mirrorVert);
+
     void draw(float x, float y, float x2, float y2, float srcX, float srcY, float srcX2, float srcY2);
 
     void draw(float x, float y, float x2, float y2, float srcX, float srcY, float srcX2, float srcY2, int[] light);

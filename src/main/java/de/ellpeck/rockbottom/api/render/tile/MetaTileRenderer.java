@@ -47,9 +47,9 @@ public class MetaTileRenderer<T extends TileMeta> extends DefaultTileRenderer<T>
     }
 
     @Override
-    public void renderItem(IGameInstance game, IAssetManager manager, IRenderer renderer, T tile, ItemInstance instance, float x, float y, float scale, int filter) {
+    public void renderItem(IGameInstance game, IAssetManager manager, IRenderer renderer, T tile, ItemInstance instance, float x, float y, float scale, int filter, boolean mirrored) {
         this.setTextureResource(tile, instance.getMeta());
-        super.renderItem(game, manager, renderer, tile, instance, x, y, scale, filter);
+        super.renderItem(game, manager, renderer, tile, instance, x, y, scale, filter, mirrored);
     }
 
     @Override

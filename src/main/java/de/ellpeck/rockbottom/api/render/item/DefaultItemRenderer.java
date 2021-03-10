@@ -40,8 +40,8 @@ public class DefaultItemRenderer<T extends Item> implements IItemRenderer<T> {
     }
 
     @Override
-    public void render(IGameInstance game, IAssetManager manager, IRenderer renderer, T item, ItemInstance instance, float x, float y, float scale, int filter) {
-        manager.getTexture(this.texture).draw(x, y, 1F * scale, 1F * scale, filter);
+    public void render(IGameInstance game, IAssetManager manager, IRenderer renderer, T item, ItemInstance instance, float x, float y, float scale, int filter, boolean mirrored) {
+        manager.getTexture(this.texture).draw(x, y, scale, scale, filter, mirrored, false);
     }
 
     @Override

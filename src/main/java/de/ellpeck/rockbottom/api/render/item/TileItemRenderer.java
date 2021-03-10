@@ -35,12 +35,12 @@ import de.ellpeck.rockbottom.api.tile.Tile;
 public class TileItemRenderer implements IItemRenderer<TileItem> {
 
     @Override
-    public void render(IGameInstance game, IAssetManager manager, IRenderer g, TileItem item, ItemInstance instance, float x, float y, float scale, int filter) {
+    public void render(IGameInstance game, IAssetManager manager, IRenderer g, TileItem item, ItemInstance instance, float x, float y, float scale, int filter, boolean mirrored) {
         Tile tile = item.getTile();
         if (tile != null) {
             ITileRenderer renderer = tile.getRenderer();
             if (renderer != null) {
-                renderer.renderItem(game, manager, g, tile, instance, x, y, scale, filter);
+                renderer.renderItem(game, manager, g, tile, instance, x, y, scale, filter, mirrored);
             }
         }
     }
@@ -48,7 +48,7 @@ public class TileItemRenderer implements IItemRenderer<TileItem> {
     @Override
     public void renderOnMouseCursor(IGameInstance game, IAssetManager manager, IRenderer renderer, TileItem item, ItemInstance instance, float x, float y, float scale, int filter, boolean isInPlayerRange) {
         if (isInPlayerRange) {
-            this.render(game, manager, renderer, item, instance, x + 0.1F * scale, y, scale * 0.75F, filter);
+            this.render(game, manager, renderer, item, instance, x + 0.1F * scale, y, scale * 0.75F, filter, false);
         }
     }
 

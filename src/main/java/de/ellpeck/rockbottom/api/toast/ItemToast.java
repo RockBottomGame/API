@@ -73,7 +73,7 @@ public class ItemToast extends BasicToast {
 
                 Item item = instance.getItem();
 
-                item.getRenderer().render(game, manager, g, item, instance, x + 1, y + 1, 12f / 12f * size, Colors.WHITE);
+                item.getRenderer().render(game, manager, g, item, instance, x + 1, y + 1, 12f / 12f * size, Colors.WHITE, false);
             }
 
             if (this.descriptions.size() != this.items.size()) id = 0;
