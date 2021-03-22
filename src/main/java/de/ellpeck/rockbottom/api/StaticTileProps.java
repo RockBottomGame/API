@@ -164,5 +164,4 @@ public final class StaticTileProps {
             return this != PLACED;
         }
     }
-
 }
