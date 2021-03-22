@@ -39,21 +39,19 @@ public interface IItemRenderer<T extends Item> {
     }
 
     default void renderHolding(IGameInstance game, IAssetManager manager, IRenderer renderer, T item, ItemInstance instance, AbstractPlayerEntity player, float x, float y, float rotation, float scale, int filter, boolean mirrored) {
-        renderer.translate(x, y);
         renderer.rotate(rotation);
 
         if (mirrored) {
             renderer.mirror(true, false);
         }
 
-        this.render(game, manager, renderer, item, instance, 0F, 0F, scale * 0.5F, filter);
+        this.render(game, manager, renderer, item, instance, x, y, scale * 0.5F, filter);
 
         if (mirrored) {
             renderer.mirror(true, false);
         }
 
         renderer.rotate(-rotation);
-        renderer.translate(-x, -y);
     }
 
     default JsonElement getAdditionalTextureData(IGameInstance game, IAssetManager manager, IRenderer renderer, T item, ItemInstance instance, AbstractPlayerEntity player, String name) {
