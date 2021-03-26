@@ -176,7 +176,7 @@ public interface IApiHandler {
     boolean hasItems(IInventory inventory, List<IUseInfo> checklist, int count, List<ItemInstance> outInputs, Map<Integer, Integer> outSlotsToDeduct);
 
     /**
-     * Similar to {@link IApiHandler#construct(AbstractPlayerEntity, Inventory, Inventory, PlayerCompendiumRecipe, TileEntity, int, List, List, float)}
+     * Similar to {@link IApiHandler#construct(AbstractPlayerEntity, IInventory, IInventory, PlayerCompendiumRecipe, TileEntity, int, List, float)}
      * but safe to use on both client and server side (client side sends packet to server).
      *
      * @param player  The player doing this construction. Can be null if

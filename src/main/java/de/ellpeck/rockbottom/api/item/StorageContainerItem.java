@@ -94,7 +94,6 @@ public class StorageContainerItem extends BasicItem {
     /**
      * @param instance  The item instance.
      * @param inventory The inventory to set
-     * @return The inventory with the items from the instance,
      * or null if instance is not instance of {@link StorageContainerItem}.
      */
     public static void setItemInventory(ItemInstance instance, Inventory inventory) {
