@@ -40,7 +40,7 @@ public interface IToolStation {
     /**
      * Attempts to insert the given {@link ItemInstance} into the station.
      * @param tool The item to try insert
-     * @return The remaining item after insertion, or {@param tool} if it couldn't be inserted.
+     * @return The remaining item after insertion, or the tool if it couldn't be inserted.
      */
     ItemInstance insertTool(ItemInstance tool);
 
