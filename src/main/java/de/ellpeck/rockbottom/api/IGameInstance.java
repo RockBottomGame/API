@@ -118,6 +118,14 @@ public interface IGameInstance extends IMod {
     AbstractPlayerEntity getPlayer();
 
     /**
+     * Gets the {@link IGameAccount} that is currently logged into this game
+     * instance. Note that this is not implemented on the dedicated server.
+     * @return The logged in account, or null if not logged in.
+     * @throws UnsupportedOperationException on the dedicated server
+     */
+    IGameAccount getAccount();
+
+    /**
      * Gets the {@link IGuiManager} of the current game instance. This can be
      * used to open Guis and fade the screen in and out. Note that this is not
      * implemented on the dedicated server.
@@ -272,6 +280,14 @@ public interface IGameInstance extends IMod {
      */
     IPlayerDesign getPlayerDesign();
 
+    /**
+     * Gets the displayed name of the player.
+     * Note that this is not implemented on the dedicated server.
+     * @return The player display name
+     * @throws UnsupportedOperationException on the dedicated server
+     */
+    String getPlayerName();
+
     @ApiInternal
     void setPlayerDesign(String jsonString);
 
@@ -353,4 +369,6 @@ public interface IGameInstance extends IMod {
      * more FPS than TPS.
      */
     float getTickDelta();
+
+    void setAccount(IGameAccount account);
 }

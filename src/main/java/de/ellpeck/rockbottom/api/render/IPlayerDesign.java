@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public interface IPlayerDesign {
+public interface IPlayerDesign extends Cloneable {
 
     @ApiInternal
     ResourceName EYES = ResourceName.intern("player.base.eyes");
@@ -143,11 +143,6 @@ public interface IPlayerDesign {
     @ApiInternal
     void setFavoriteColor(int color);
 
-    String getName();
-
-    @ApiInternal
-    void setName(String name);
-
     int getBase();
 
     @ApiInternal
@@ -242,4 +237,6 @@ public interface IPlayerDesign {
 
     @ApiInternal
     void setFemale(boolean female);
+
+    public IPlayerDesign clone();
 }

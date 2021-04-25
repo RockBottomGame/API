@@ -34,7 +34,7 @@ public class TextComponent extends GuiComponent {
 
     private final float scale;
     private final boolean fromRight;
-    private final String[] text;
+    private String[] text;
 
     public TextComponent(Gui gui, int x, int y, int width, int height, float scale, boolean fromRight, String... text) {
         super(gui, x, y, width, height);

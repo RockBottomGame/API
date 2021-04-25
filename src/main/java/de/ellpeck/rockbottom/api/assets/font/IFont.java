@@ -34,6 +34,8 @@ public interface IFont extends IAsset {
 
     void drawCenteredString(float x, float y, String s, float scale, boolean centeredOnY);
 
+    void drawCenteredString(float x, float y, String s, float scale, boolean centeredOnY, int color);
+
     void drawFadingString(float x, float y, String s, float scale, float fadeTotal, float fadeInEnd, float fadeOutStart);
 
     void drawString(float x, float y, String s, float scale);

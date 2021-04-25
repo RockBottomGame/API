@@ -130,4 +130,9 @@ public final class Constants {
      * This is a link to the website of the game
      */
     public static final String WEBSITE_LINK = "https://rockbottom.ellpeck.de";
+
+    /**
+     * This is a link to connect to the Rock Bottom Management servers used for authentication
+     */
+    public static final String MANAGEMENT_LINK = "https://rbm.canitzp.de";
 }

@@ -96,7 +96,7 @@ public interface IWorld extends IChunkOrWorld {
 
     void notifyNeighborsOfChange(int x, int y, TileLayer layer);
 
-    AbstractPlayerEntity createPlayer(UUID id, IPlayerDesign design, Channel channel, boolean loadOrSwapLast);
+    AbstractPlayerEntity createPlayer(String username, UUID id, IPlayerDesign design, Channel channel, boolean loadOrSwapLast);
 
     AbstractPlayerEntity getPlayer(UUID id);
 

@@ -65,6 +65,91 @@ public final class Colors {
         return rgb((int) (red * 255F), (int) (green * 255F), (int) (blue * 255F), (int) (alpha * 255F));
     }
 
+    public static int hsl(int hue, int saturation, int lightness) {
+        return hsl(hue, saturation / 255f, lightness / 255f);
+    }
+
+    public static int hsl(float hue, float saturation, float lightness) {
+        float c = (1 - Math.abs(2 * lightness - 1)) * saturation;
+        float x = c * (1 - Math.abs((hue / 60) % 2 - 1));
+        float m = lightness - c / 2;
+
+        float r, g, b;
+        if (hue < 60) {
+            r = c;
+            g = x;
+            b = 0;
+        } else if (hue < 120) {
+            r = x;
+            g = c;
+            b = 0;
+        } else if (hue < 180) {
+            r = 0;
+            g = c;
+            b = x;
+        } else if (hue < 240) {
+            r = 0;
+            g = x;
+            b = c;
+        } else if (hue < 300) {
+            r = x;
+            g = 0;
+            b = c;
+        } else {
+            r = c;
+            g = 0;
+            b = x;
+        }
+
+        return rgb(r + m, g + m, b + m);
+    }
+
+    public static float[] rgbToHslF(int color) {
+        float r = getR(color);
+        float g = getG(color);
+        float b = getB(color);
+        float min = Math.min(Math.min(r, g), b);
+        float max = Math.max(Math.max(r, g), b);
+        float delta = max - min;
+
+        // Hue
+        float hue = 0;
+        if (max == min) {
+            hue = 0;
+        } else if (r == max) {
+            hue = (g - b) / delta;
+        } else if (g == max) {
+            hue = 2 + (b - r) / delta;
+        } else if (b == max) {
+            hue = 4 + (r - g) / delta;
+        }
+        hue = Math.min(hue * 60, 360);
+
+        if (hue < 0) {
+            hue += 360;
+        }
+
+        // Lightness
+        float lightness = 0.5f * (max + min);
+
+        // Saturation
+        float saturation;
+        if (max == min) {
+            saturation = 0;
+        } else if (lightness < 0.5) {
+            saturation = delta / (max + min);
+        } else {
+            saturation = delta / (2 - max - min);
+        }
+
+        return new float[]{hue, saturation, lightness};
+    }
+
+    public static int[] rgbToHsl(int color) {
+        float[] hsl = rgbToHslF(color);
+        return new int[] {(int) hsl[0], (int)(hsl[1] * 255), (int)(hsl[2] * 255)};
+    }
+
     public static float getR(int color) {
         return (float) getRInt(color) / 255F;
     }

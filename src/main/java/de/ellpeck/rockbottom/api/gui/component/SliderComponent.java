@@ -78,6 +78,11 @@ public class SliderComponent extends ButtonComponent {
         return false;
     }
 
+    public void setNumber(int number) {
+        this.number = number;
+        //this.consumer.accept(number, false);
+    }
+
     @Override
     public void update(IGameInstance game) {
         if (this.wasMouseDown) {
