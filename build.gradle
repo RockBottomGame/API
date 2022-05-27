@@ -2,12 +2,12 @@ group 'de.ellpeck.rockbottom'
 version '0.5.0'
 
 apply plugin: 'java'
+apply plugin: 'java-library'
 apply plugin: 'idea'
 
 project.ext.lwjglVersion = "3.2.3"
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 group = "de.ellpeck.rockbottom"
 archivesBaseName = "RockBottomApi"
@@ -22,36 +22,36 @@ repositories {
 
 dependencies {
     // LWJGL
-    compile "org.lwjgl:lwjgl:$lwjglVersion"
-    compile "org.lwjgl:lwjgl-glfw:$lwjglVersion"
-    compile "org.lwjgl:lwjgl-openal:$lwjglVersion"
-    compile "org.lwjgl:lwjgl-opengl:$lwjglVersion"
-    compile "org.lwjgl:lwjgl-stb:$lwjglVersion"
-    compile "org.joml:joml:1.9.8"
+    api "org.lwjgl:lwjgl:$lwjglVersion"
+    api "org.lwjgl:lwjgl-glfw:$lwjglVersion"
+    api "org.lwjgl:lwjgl-openal:$lwjglVersion"
+    api "org.lwjgl:lwjgl-opengl:$lwjglVersion"
+    api "org.lwjgl:lwjgl-stb:$lwjglVersion"
+    api "org.joml:joml:1.9.8"
 
     // LWJGL Natives
-    compile "org.lwjgl:lwjgl:$lwjglVersion:natives-windows"
-    compile "org.lwjgl:lwjgl-glfw:$lwjglVersion:natives-windows"
-    compile "org.lwjgl:lwjgl-openal:$lwjglVersion:natives-windows"
-    compile "org.lwjgl:lwjgl-opengl:$lwjglVersion:natives-windows"
-    compile "org.lwjgl:lwjgl-stb:$lwjglVersion:natives-windows"
-    compile "org.lwjgl:lwjgl:$lwjglVersion:natives-linux"
-    compile "org.lwjgl:lwjgl-glfw:$lwjglVersion:natives-linux"
-    compile "org.lwjgl:lwjgl-openal:$lwjglVersion:natives-linux"
-    compile "org.lwjgl:lwjgl-opengl:$lwjglVersion:natives-linux"
-    compile "org.lwjgl:lwjgl-stb:$lwjglVersion:natives-linux"
-    compile "org.lwjgl:lwjgl:$lwjglVersion:natives-macos"
-    compile "org.lwjgl:lwjgl-glfw:$lwjglVersion:natives-macos"
-    compile "org.lwjgl:lwjgl-openal:$lwjglVersion:natives-macos"
-    compile "org.lwjgl:lwjgl-opengl:$lwjglVersion:natives-macos"
-    compile "org.lwjgl:lwjgl-stb:$lwjglVersion:natives-macos"
+    api "org.lwjgl:lwjgl:$lwjglVersion:natives-windows"
+    api "org.lwjgl:lwjgl-glfw:$lwjglVersion:natives-windows"
+    api "org.lwjgl:lwjgl-openal:$lwjglVersion:natives-windows"
+    api "org.lwjgl:lwjgl-opengl:$lwjglVersion:natives-windows"
+    api "org.lwjgl:lwjgl-stb:$lwjglVersion:natives-windows"
+    api "org.lwjgl:lwjgl:$lwjglVersion:natives-linux"
+    api "org.lwjgl:lwjgl-glfw:$lwjglVersion:natives-linux"
+    api "org.lwjgl:lwjgl-openal:$lwjglVersion:natives-linux"
+    api "org.lwjgl:lwjgl-opengl:$lwjglVersion:natives-linux"
+    api "org.lwjgl:lwjgl-stb:$lwjglVersion:natives-linux"
+    api "org.lwjgl:lwjgl:$lwjglVersion:natives-macos"
+    api "org.lwjgl:lwjgl-glfw:$lwjglVersion:natives-macos"
+    api "org.lwjgl:lwjgl-openal:$lwjglVersion:natives-macos"
+    api "org.lwjgl:lwjgl-opengl:$lwjglVersion:natives-macos"
+    api "org.lwjgl:lwjgl-stb:$lwjglVersion:natives-macos"
 
     // Netty
-    compile group: 'io.netty', name: 'netty-all', version: '4.1.59.Final'
+    api group: 'io.netty', name: 'netty-all', version: '4.1.59.Final'
 
     // Google Commons
-    compile group: 'com.google.guava', name: 'guava', version: '30.1-jre'
-    compile group: 'com.google.code.gson', name: 'gson', version: '2.8.6'
+    api group: 'com.google.guava', name: 'guava', version: '30.1-jre'
+    api group: 'com.google.code.gson', name: 'gson', version: '2.9.0'
 }
 
 task sourcesJar(type: Jar) {

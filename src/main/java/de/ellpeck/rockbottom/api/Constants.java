@@ -41,7 +41,7 @@ import java.util.UUID;
 public final class Constants {
 
     /**
-     * The seperator for any resources, game or mod based.
+     * The separator for any resources, game or mod based.
      *
      * @see ResourceName
      */
