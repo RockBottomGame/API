@@ -32,11 +32,9 @@ import de.ellpeck.rockbottom.api.render.engine.*;
 import de.ellpeck.rockbottom.api.util.ApiInternal;
 import de.ellpeck.rockbottom.api.util.Util;
 import de.ellpeck.rockbottom.api.util.math.MatrixStack;
-import de.ellpeck.rockbottom.api.util.math.Vector2;
 import org.lwjgl.opengl.GL15;
 
 import java.nio.FloatBuffer;
-import java.util.Deque;
 import java.util.List;
 
 /**
@@ -203,7 +201,7 @@ public interface IRenderer extends IDisposable {
      * Resets this renderer's translation, rotation, scale, mirrored states and
      * texture origin back to their default values.
      */
-    void resetTransformation();
+    void resetMatrix();
 
     /**
      * @return The renderer's current shader program, set using {@link

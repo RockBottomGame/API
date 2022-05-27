@@ -2,7 +2,7 @@ package de.ellpeck.rockbottom.api.util.math;
 
 public class Matrix3 {
 
-    public static Matrix3 createTranslation(float x, float y) {
+    public static Matrix3 translation(float x, float y) {
         return new Matrix3(
                 1, 0, x,
                 0, 1, y,
@@ -10,7 +10,7 @@ public class Matrix3 {
         );
     }
 
-    public static Matrix3 createRotation(float radians) {
+    public static Matrix3 rotation(float radians) {
         return new Matrix3(
                 (float) Math.cos(radians), (float) Math.sin(radians), 0,
                 -(float) Math.sin(radians), (float) Math.cos(radians), 0,
@@ -18,7 +18,7 @@ public class Matrix3 {
         );
     }
 
-    public static Matrix3 createScale(float scaleX, float scaleY) {
+    public static Matrix3 scale(float scaleX, float scaleY) {
         return new Matrix3(
                 scaleX, 0, 0,
                 0, scaleY, 0,
@@ -26,7 +26,7 @@ public class Matrix3 {
         );
     }
 
-    public static Matrix3 createHorizontalMirror() {
+    public static Matrix3 horizontalMirror() {
         return new Matrix3(
                 -1, 0, 0,
                 0, 1, 0,
@@ -34,7 +34,7 @@ public class Matrix3 {
         );
     }
 
-    public static Matrix3 createVerticalMirror() {
+    public static Matrix3 verticalMirror() {
         return new Matrix3(
                 1, 0, 0,
                 0, -1, 0,
@@ -42,7 +42,7 @@ public class Matrix3 {
         );
     }
 
-    public static Matrix3 createIdentity() {
+    public static Matrix3 identity() {
         return new Matrix3();
     }
 

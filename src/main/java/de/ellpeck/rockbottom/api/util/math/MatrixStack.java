@@ -9,11 +9,11 @@ import java.util.logging.Level;
 public class MatrixStack {
 
     private final Deque<Matrix3> stack = Queues.newArrayDeque();
-    private Matrix3 matrix = Matrix3.createIdentity();
+    private Matrix3 matrix = Matrix3.identity();
 
     public void push() {
         this.stack.push(this.matrix);
-        this.matrix = new Matrix3(this.matrix);
+        this.matrix = this.matrix.copy();
     }
 
     public void pop() {
@@ -29,7 +29,7 @@ public class MatrixStack {
     }
 
     public void translate(float x, float y) {
-        this.matrix.multiply(Matrix3.createTranslation(x, y));
+        this.matrix.multiply(Matrix3.translation(x, y));
     }
 
     public void rotate(float degrees) {
@@ -37,7 +37,7 @@ public class MatrixStack {
     }
 
     public void rotateRad(float radians) {
-        this.matrix.multiply(Matrix3.createRotation(radians));
+        this.matrix.multiply(Matrix3.rotation(radians));
     }
 
     public void scale(float scale) {
@@ -45,6 +45,11 @@ public class MatrixStack {
     }
 
     public void scale(float scaleX, float scaleY) {
-        this.matrix.multiply(Matrix3.createScale(scaleX, scaleY));
+        this.matrix.multiply(Matrix3.scale(scaleX, scaleY));
+    }
+
+    public void clear() {
+        this.stack.clear();
+        this.matrix = Matrix3.identity();
     }
 }
