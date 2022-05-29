@@ -34,15 +34,15 @@ import java.util.function.Supplier;
 public class ButtonComponent extends GuiComponent {
 
     private final String[] hover;
-    private final Supplier<Boolean> supplier;
+    private final Supplier<Boolean> onClicked;
     public boolean hasBackground = true;
     protected String text;
 
-    public ButtonComponent(Gui gui, int x, int y, int sizeX, int sizeY, Supplier<Boolean> supplier, String text, String... hover) {
+    public ButtonComponent(Gui gui, int x, int y, int sizeX, int sizeY, Supplier<Boolean> onClicked, String text, String... hover) {
         super(gui, x, y, sizeX, sizeY);
         this.text = text;
         this.hover = hover;
-        this.supplier = supplier;
+        this.onClicked = onClicked;
     }
 
     public ButtonComponent setHasBackground(boolean has) {
@@ -88,7 +88,7 @@ public class ButtonComponent extends GuiComponent {
     @Override
     public boolean onMouseAction(IGameInstance game, int button, float x, float y) {
         if (Settings.KEY_GUI_ACTION_1.isKey(button) && this.isMouseOver(game)) {
-            if (this.onPressed(game) || (this.supplier != null && this.supplier.get())) {
+            if (this.onPressed(game) || (this.onClicked != null && this.onClicked.get())) {
                 game.getAssetManager().getSound(ResourceName.intern("menu.click")).play();
                 return true;
             }
