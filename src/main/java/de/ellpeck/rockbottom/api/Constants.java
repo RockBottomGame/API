@@ -130,4 +130,24 @@ public final class Constants {
      * This is a link to the website of the game
      */
     public static final String WEBSITE_LINK = "https://rockbottom.ellpeck.de";
+
+    /**
+     * This is a link to the Twitter page for the game
+     */
+    public static final String TWITTER_LINK = "https://twitter.com/RockBottom_Game";
+
+    /**
+     * This is a link to the itch.io page for the game
+     */
+    public static final String ITCHIO_LINK = "https://rockbottomgame.itch.io";
+
+    /**
+     * This is a link to the github page for the game
+     */
+    public static final String GITHUB_LINK = "https://github.com/RockBottomGame";
+
+    /**
+     * This is a link to the official discord channel for the game
+     */
+    public static final String DISCORD_LINK = "https://discord.gg/vYm8TVxMtc";
 }

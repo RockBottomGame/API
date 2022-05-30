@@ -1,5 +1,5 @@
 /*
- * This file ("ComponentFancyToggleButton.java") is part of the RockBottomAPI by Ellpeck.
+ * This file ("ComponentFancyButton.java") is part of the RockBottomAPI by Ellpeck.
  * View the source code at <https://github.com/RockBottomGame/>.
  * View information on the project at <https://rockbottom.ellpeck.de/>.
  *
@@ -22,35 +22,35 @@
 package de.ellpeck.rockbottom.api.gui.component;
 
 import de.ellpeck.rockbottom.api.IGameInstance;
+import de.ellpeck.rockbottom.api.IRenderer;
+import de.ellpeck.rockbottom.api.assets.IAssetManager;
 import de.ellpeck.rockbottom.api.gui.Gui;
 import de.ellpeck.rockbottom.api.util.reg.ResourceName;
 
 import java.util.function.Supplier;
 
-public class FancyToggleButtonComponent extends FancyButtonComponent {
+public class ImageButtonComponent extends ButtonComponent {
 
-    private final ResourceName texToggled;
-    private boolean isToggled;
+    protected final ResourceName texture;
 
-    public FancyToggleButtonComponent(Gui gui, int x, int y, int sizeX, int sizeY, boolean defaultState, Supplier<Boolean> supplier, ResourceName texture, String... hover) {
-        super(gui, x, y, sizeX, sizeY, supplier, texture, hover);
-        this.isToggled = defaultState;
-        this.texToggled = this.texture.addSuffix("_toggled");
+    public ImageButtonComponent(Gui gui, int x, int y, int sizeX, int sizeY, Supplier<Boolean> supplier, ResourceName texture, String... hover) {
+        super(gui, x, y, sizeX, sizeY, supplier, null, hover);
+        this.texture = texture;
     }
 
-    @Override
     protected ResourceName getTexture() {
-        return this.isToggled ? this.texToggled : this.texture;
+        return this.texture;
     }
 
     @Override
-    public boolean onPressed(IGameInstance game) {
-        this.isToggled = !this.isToggled;
-        return false;
+    public void render(IGameInstance game, IAssetManager manager, IRenderer g, int x, int y) {
+        super.render(game, manager, g, x, y);
+
+        manager.getTexture(this.getTexture()).draw(x, y, this.width, this.height);
     }
 
     @Override
     public ResourceName getName() {
-        return ResourceName.intern("fancy_toggle_button");
+        return ResourceName.intern("fancy_button");
     }
 }
