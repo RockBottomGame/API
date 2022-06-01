@@ -56,6 +56,7 @@ public final class Settings implements IJsonSettings {
     public static final Keybind KEY_TOGGLE_CAMERA_MODE = new Keybind(ResourceName.intern("camera_mode"), GLFW.GLFW_KEY_K).register();
     public static final Keybind KEY_ZOOM_OUT = new Keybind(ResourceName.intern("camera_zoom_out"), GLFW.GLFW_KEY_MINUS).register();
     public static final Keybind KEY_ZOOM_IN = new Keybind(ResourceName.intern("camera_zoom_in"), GLFW.GLFW_KEY_EQUAL).register();
+    public static final Keybind KEY_DELETE = new Keybind(ResourceName.intern("delete"), GLFW.GLFW_KEY_DELETE).register();
     public static final Keybind[] KEYS_ITEM_SELECTION = new Keybind[8];
     public static final int DEFAULT_GUI_COLOR = 0xFF30704E;
 

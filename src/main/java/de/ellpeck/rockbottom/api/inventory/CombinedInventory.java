@@ -214,6 +214,13 @@ public class CombinedInventory implements IFilteredInventory {
     }
 
     @Override
+    public void clear() {
+        for (IInventory inventory : this.inventories) {
+            inventory.clear();
+        }
+    }
+
+    @Override
     public Iterator<ItemInstance> iterator() {
         Iterator<ItemInstance>[] its = new Iterator[this.inventories.length];
         for (int i = 0; i < its.length; i++) {

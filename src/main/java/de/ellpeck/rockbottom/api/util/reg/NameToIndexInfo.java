@@ -81,7 +81,7 @@ public final class NameToIndexInfo implements IJsonSettings {
 
         for (Map.Entry<Integer, ResourceName> entry : this.reg.map.entrySet()) {
             buf.writeInt(entry.getKey());
-            NetUtil.writeStringToBuffer(entry.getValue().toString(), buf);
+            NetUtil.writeStringToBuffer(buf, entry.getValue().toString());
         }
     }
 

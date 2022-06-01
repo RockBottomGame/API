@@ -52,7 +52,7 @@ import java.util.function.BiConsumer;
 
 /**
  * The game instance that can be used to interact with various game-related
- * values and acces things like {@link IRenderer} and {@link IAssetManager}.
+ * values and access things like {@link IRenderer} and {@link IAssetManager}.
  * Notice that this instance represents both the server and the client, however
  * some methods that are not implemented on the dedicated server (like graphics
  * and rendering methods) will throw an {@link UnsupportedOperationException}.

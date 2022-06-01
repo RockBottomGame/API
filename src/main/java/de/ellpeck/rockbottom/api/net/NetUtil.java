@@ -49,7 +49,7 @@ public final class NetUtil {
         }
     }
 
-    public static void writeStringToBuffer(String s, ByteBuf buf) {
+    public static void writeStringToBuffer(ByteBuf buf, String s) {
         buf.writeInt(s.length());
 
         for (char c : s.toCharArray()) {
@@ -67,8 +67,8 @@ public final class NetUtil {
         return new String(chars);
     }
 
-    public static void writeResToBuffer(ResourceName name, ByteBuf buf) {
-        writeStringToBuffer(name.toString(), buf);
+    public static void writeResToBuffer(ByteBuf buf, ResourceName name) {
+        writeStringToBuffer(buf, name.toString());
     }
 
     public static ResourceName readResFromBuffer(ByteBuf buf) {

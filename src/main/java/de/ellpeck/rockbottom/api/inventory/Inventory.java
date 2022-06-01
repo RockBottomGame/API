@@ -77,4 +77,9 @@ public class Inventory extends AbstractInventory {
             }
         }
     }
+
+    @Override
+    public void clear() {
+        Arrays.fill(this.slots, null);
+    }
 }

@@ -69,4 +69,6 @@ public interface IInventory extends Iterable<ItemInstance> {
     ItemInstance addExistingFirst(ItemInstance instance, boolean simulate);
 
     void fillRandomly(Random random, List<ItemInstance> items);
+
+    void clear();
 }
