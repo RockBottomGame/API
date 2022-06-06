@@ -143,6 +143,13 @@ public final class StaticTileProps {
     public static final EnumProp<DyeColor> PILLOW_COLOR = new EnumProp<>("pillow_color", DyeColor.WHITE, DyeColor.class);
 
     /**
+     * Determines whether the state is an ending of a tile or not.
+     * Used by:
+     * {@link GameContent.Tiles#PLANT_ROPE}
+     */
+    public static final BoolProp IS_ENDING = new BoolProp("is_ending", false);
+
+    /**
      * An enum of log types that are used for the {@link #LOG_VARIANT}
      * property.
      */

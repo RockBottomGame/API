@@ -44,15 +44,21 @@ import static de.ellpeck.rockbottom.api.assets.texture.ITexture.*;
 public class DefaultTileRenderer<T extends Tile> implements ITileRenderer<T> {
 
     public ResourceName texture;
+    public ResourceName itemTexture;
 
     public DefaultTileRenderer(ResourceName texture) {
+        this(texture, false);
+    }
+
+    public DefaultTileRenderer(ResourceName texture, boolean hasCustomItemTexture) {
         this.texture = texture.addPrefix("tiles.");
+        this.itemTexture = hasCustomItemTexture ? this.texture.addSuffix(".item") : this.texture;
     }
 
     @Override
     public void render(IGameInstance game, IAssetManager manager, IRenderer renderer, IWorld world, T tile, TileState state, int x, int y, TileLayer layer, float renderX, float renderY, float scale, int[] light) {
         if (!tile.isChiseled(world, x, y, layer, state))
-            manager.getTexture(this.texture).getPositionalVariation(x, y).draw(renderX, renderY, scale, scale, light);
+            manager.getTexture(this.getTextureForState(world, layer, x, y, state)).getPositionalVariation(x, y).draw(renderX, renderY, scale, scale, light);
 
     }
 
@@ -67,22 +73,22 @@ public class DefaultTileRenderer<T extends Tile> implements ITileRenderer<T> {
 
     @Override
     public void renderItem(IGameInstance game, IAssetManager manager, IRenderer renderer, T tile, ItemInstance instance, float x, float y, float scale, int filter, boolean mirrored) {
-        manager.getTexture(this.texture).draw(x, y, scale, scale, filter);
+        manager.getTexture(this.getTextureForItem(tile, instance)).draw(x, y, scale, scale, filter);
     }
 
     @Override
     public ITexture getParticleTexture(IGameInstance game, IAssetManager manager, IRenderer renderer, T tile, TileState state) {
-        return manager.getTexture(this.texture);
+        return manager.getTexture(this.getTextureForState(null, TileLayer.MAIN, 0, 0, state));
     }
 
     @Override
     public void renderInMainMenuBackground(IGameInstance game, IAssetManager manager, IRenderer renderer, T tile, TileState state, float x, float y, float scale) {
-        manager.getTexture(this.texture).getPositionalVariation((int) x, (int) y).draw(x, y, scale, scale);
+        manager.getTexture(this.getTextureForState(null, TileLayer.MAIN, (int) x, (int) y, state)).getPositionalVariation((int) x, (int) y).draw(x, y, scale, scale);
     }
 
     protected void renderChiseled(IGameInstance game, IAssetManager manager, IRenderer renderer, IWorld world, T tile, TileState state, int x, int y, TileLayer layer, float renderX, float renderY, float scale, int[] light) {
 
-        ITexture texture = manager.getTexture(this.texture).getPositionalVariation(x, y);
+        ITexture texture = manager.getTexture(this.getTextureForState(world, layer, x, y, state)).getPositionalVariation(x, y);
         int prop = state.get(StaticTileProps.CHISEL_STATE);
 
         boolean[] chiseledCorners = Util.decodeBitVector(prop, 4);
@@ -95,7 +101,7 @@ public class DefaultTileRenderer<T extends Tile> implements ITileRenderer<T> {
                 float maxX = (float) box.getMaxX();
                 float maxY = (float) box.getMaxY();
 
-                int[] newLights = getChiseledLight(light, i);
+                int[] newLights = this.getChiseledLight(light, i);
 
                 texture.draw(renderX + minX * scale, renderY + (1 - minY) * scale, renderX + maxX * scale, renderY + (1 - maxY) * scale, minX * 12, (1 - minY) * 12, maxX * 12, (1 - maxY) * 12, newLights);
                 this.renderChiselHighlight(game, renderer, box, x, y, renderX, renderY, scale);
@@ -139,7 +145,15 @@ public class DefaultTileRenderer<T extends Tile> implements ITileRenderer<T> {
 
     @Override
     public JsonElement getAdditionalTextureData(IGameInstance game, IAssetManager manager, IRenderer renderer, T tile, ItemInstance instance, AbstractPlayerEntity player, String name) {
-        return manager.getTexture(this.texture).getAdditionalData(name);
+        return manager.getTexture(this.getTextureForItem(tile, instance)).getAdditionalData(name);
+    }
+
+    public ResourceName getTextureForState(IWorld world, TileLayer layer, int x, int y, TileState state) {
+        return this.texture;
+    }
+
+    public ResourceName getTextureForItem(T tile, ItemInstance item) {
+        return this.itemTexture;
     }
 
     protected int[] getChiseledLight(int[] light, int corner) {

@@ -135,6 +135,7 @@ public final class GameContent {
         public static final Item MUSH = getItem("mush").setMaxAmount(20);
         public static final Item WOOD_BOOMERANG = getItem("wood_boomerang");
         public static final Item SIMPLE_HOE = getItem("simple_hoe");
+        public static final Item PLANT_ROPE = getItem("plant_rope");
     }
 
     /*
